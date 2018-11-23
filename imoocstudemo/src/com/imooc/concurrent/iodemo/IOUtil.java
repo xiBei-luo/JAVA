@@ -1,8 +1,6 @@
 package com.imooc.concurrent.iodemo;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by Luowenlv on 2018/11/23,11:32
@@ -40,4 +38,48 @@ public class IOUtil {
             }
         }
     }
+
+    public  static void copyFile(File srcFile,File destFile)throws IOException{
+        if (!srcFile.exists()){
+            throw new IllegalArgumentException("源文件不存在");
+        }
+
+        if (!srcFile.isFile()){
+            throw new IllegalArgumentException(srcFile+"不是文件");
+        }
+
+        FileInputStream in = new FileInputStream(srcFile);
+        FileOutputStream out = new FileOutputStream(destFile);
+
+        byte[] buf = new byte[8*1024];
+        int b;
+        while ((b=in.read(buf,0,buf.length))!=-1){
+            out.write(buf,0,b);
+            out.flush();
+        }
+        in.close();
+        out.close();
+    }
+    public static void copyFileByBuffer(File srcFile,File destFile)throws IOException{
+        if (!srcFile.exists()){
+            throw new IllegalArgumentException("源文件不存在");
+        }
+
+        if (!srcFile.isFile()){
+            throw new IllegalArgumentException(srcFile+"不是文件");
+        }
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(srcFile));
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(destFile));
+        int c;
+        while ((c=bis.read())!=-1){
+            bos.write(c);
+            bos.flush();
+        }
+        bis.close();
+        bos.close();
+
+    }
+
+
+
 }

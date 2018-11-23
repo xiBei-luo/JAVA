@@ -11,4 +11,7 @@ public class IOUtilTest01 {
         //IOUtil.printHex("F:\\iotest\\SongController.java");
         IOUtil.printHexByByteArrays("F:\\iotest\\SongController.java");
     }
+    public static void show(){
+        System.out.println("111");
+    }
 }
