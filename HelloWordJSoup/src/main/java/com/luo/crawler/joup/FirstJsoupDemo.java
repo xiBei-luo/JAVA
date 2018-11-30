@@ -1,4 +1,4 @@
-package com.luo.crawler;
+package com.luo.crawler.joup;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
