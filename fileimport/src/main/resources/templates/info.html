@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,21 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-<!--<th:block th:if="${not #lists.isEmpty(userList)}">
-<table class="table">
-    <tr th:each="userList">
-        <td th:text="${userList.get('docNumber')}" ></td>
-        <td th:text="${userList.get('account')}" ></td>
-        <td th:text="${userList.get('time')}" ></td>
-        <td th:text="${userList.get('flag')}" ></td>
-        <td th:text="${userList.get('unit')}" ></td>
-        <td th:text="${userList.get('remark')}" ></td>
-        <td th:text="${userList.get('info')}" ></td>
-        <td th:text="${userList.get('moneyOut')}" ></td>
-        <td th:text="${userList.get('moneyIn')}" ></td>
-        <td th:text="${userList.get('Timestamp')}" ></td>
-    </tr>
-</table>-->
-<h1>success</h1>
+<span th:text="${retInfo}"></span>
 </body>
 </html>

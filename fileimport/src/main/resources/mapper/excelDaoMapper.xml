@@ -1,47 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.luo.dao.ExcelDao">
-    <sql id="BASE_TABLE">
-        banktb
-    </sql>
-
-    <sql id="BASE_COLUMN">
-        id,docNumber,account,firstTime,flag,unit,remark,info,moneyOut,moneyIn,timeEnd
-    </sql>
-
-    <insert id="addUser" parameterType="java.util.ArrayList">
-        INSERT INTO
-        <include refid="BASE_TABLE"/>
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            docNumber,account,firstTime,flag,unit,remark,info,moneyOut,moneyIn,timeEnd
-        </trim>
-        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-            #{docNumber, jdbcType=VARCHAR},#{account, jdbcType=VARCHAR},#{firstTime, jdbcType=VARCHAR},#{flag, jdbcType=VARCHAR},#{unit, jdbcType=VARCHAR},#{remark, jdbcType=VARCHAR},#{info, jdbcType=VARCHAR},#{moneOut, jdbcType=VARCHAR},#{moneyIn, jdbcType=VARCHAR},#{timeEnd, jdbcType=VARCHAR}
-        </trim>
-    </insert>
-
-    <insert id="addUser" parameterType="java.util.ArrayList">
-        insert into
-        <include refid="BASE_TABLE"/>
-        (
-        id,
-        rentalInfoId,
-        itemName,
-        number,
-        remark
-        )
-        values
+    <!--<insert id="addUser" parameterType="java.util.List">
+        insert into banktb(docNumber,account,firstTime,flag,unit,remark,info,moneyOut,moneyIn,timeEnd) values
         <foreach collection="list" item="item" index="index" separator=",">
-            (
-            #{item.id},
-            #{item.rentalInfoId},
-            #{item.itemName},
-            #{item.number},
-            #{item.remark}
-            )
+            (#{item.docNumber, jdbcType=VARCHAR},#{item.account, jdbcType=VARCHAR},#{item.firstTime, jdbcType=VARCHAR},#{item.flag, jdbcType=VARCHAR},#{item.unit, jdbcType=VARCHAR},#{item.remark, jdbcType=VARCHAR},#{item.info, jdbcType=VARCHAR},#{item.moneyOut, jdbcType=VARCHAR},#{item.moneyIn, jdbcType=VARCHAR}, #{item.timeEnd, jdbcType=VARCHAR})
         </foreach>
-
+    </insert>全部插入-->
+    <insert id="addUser" parameterType="java.util.List">
+        insert into banktb(docNumber,flag,unit) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.docNumber, jdbcType=VARCHAR},#{item.flag, jdbcType=VARCHAR},#{item.unit, jdbcType=VARCHAR})
+        </foreach>
     </insert>
+
+    <!--<insert id="addUser" parameterType="java.util.List">-->
+        <!--insert into banktb(docNumber,account,firstTime,flag,unit,remark,info,moneyOut,moneyIn,timeEnd) values-->
+        <!--<foreach collection="list" item="item" index="index" separator=",">-->
+            <!--<if test="#{item.docNumber}!=null">-->
+                <!--(#{item.docNumber, jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="#{item.account}!=null">-->
+                <!--#{item.account, jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="#{item.firstTime}!=null">-->
+                <!--#{item.firstTime, jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="#{item.firstTime}!=null">-->
+                <!--#{item.flag, jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="#{item.firstTime}!=null">-->
+                <!--#{item.unit, jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="#{item.firstTime}!=null">-->
+                <!--#{item.remark, jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="#{item.firstTime}!=null">-->
+                <!--#{item.info, jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="#{item.firstTime}!=null">-->
+                <!--#{item.moneyOut, jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="#{item.firstTime}!=null">-->
+                <!--#{item.moneyIn, jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="#{item.timeEnd}!=null">-->
+                <!--#{item.moneyIn, jdbcType=VARCHAR})-->
+            <!--</if>-->
+        <!--</foreach>-->
+    <!--</insert>-->
+
+
 
 
 </mapper>
