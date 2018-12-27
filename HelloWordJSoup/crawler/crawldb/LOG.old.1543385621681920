@@ -1,0 +1,183 @@
+2018/11/28-14:13:41.397306 e07c RocksDB version: 5.14.2
+2018/11/28-14:13:41.397437 e07c Git sha rocksdb_build_git_sha:@5089e121166c46956a8a21c8ef967f1896c239de@
+2018/11/28-14:13:41.397482 e07c Compile date Jul  6 2018
+2018/11/28-14:13:41.397544 e07c DB SUMMARY
+2018/11/28-14:13:41.397840 e07c SST files in F:\IDEAspace\HelloWordJSoup\crawler\crawldb dir, Total Num: 0, files: 
+2018/11/28-14:13:41.397948 e07c Write Ahead Log file in F:\IDEAspace\HelloWordJSoup\crawler\crawldb: 
+2018/11/28-14:13:41.398059 e07c                         Options.error_if_exists: 0
+2018/11/28-14:13:41.398114 e07c                       Options.create_if_missing: 1
+2018/11/28-14:13:41.398140 e07c                         Options.paranoid_checks: 1
+2018/11/28-14:13:41.398169 e07c                                     Options.env: 0000000000943650
+2018/11/28-14:13:41.400010 e07c                                Options.info_log: 000000001A4F7150
+2018/11/28-14:13:41.400030 e07c                Options.max_file_opening_threads: 16
+2018/11/28-14:13:41.400039 e07c                              Options.statistics: 0000000000000000
+2018/11/28-14:13:41.400047 e07c                               Options.use_fsync: 0
+2018/11/28-14:13:41.400055 e07c                       Options.max_log_file_size: 0
+2018/11/28-14:13:41.400064 e07c                  Options.max_manifest_file_size: 18446744073709551615
+2018/11/28-14:13:41.400071 e07c                   Options.log_file_time_to_roll: 0
+2018/11/28-14:13:41.400078 e07c                       Options.keep_log_file_num: 1000
+2018/11/28-14:13:41.400085 e07c                    Options.recycle_log_file_num: 0
+2018/11/28-14:13:41.400093 e07c                         Options.allow_fallocate: 1
+2018/11/28-14:13:41.400101 e07c                        Options.allow_mmap_reads: 0
+2018/11/28-14:13:41.400109 e07c                       Options.allow_mmap_writes: 0
+2018/11/28-14:13:41.400117 e07c                        Options.use_direct_reads: 0
+2018/11/28-14:13:41.400124 e07c                        Options.use_direct_io_for_flush_and_compaction: 0
+2018/11/28-14:13:41.400131 e07c          Options.create_missing_column_families: 0
+2018/11/28-14:13:41.400138 e07c                              Options.db_log_dir: 
+2018/11/28-14:13:41.400147 e07c                                 Options.wal_dir: F:\IDEAspace\HelloWordJSoup\crawler\crawldb
+2018/11/28-14:13:41.400155 e07c                Options.table_cache_numshardbits: 6
+2018/11/28-14:13:41.400162 e07c                      Options.max_subcompactions: 1
+2018/11/28-14:13:41.400170 e07c                  Options.max_background_flushes: -1
+2018/11/28-14:13:41.400176 e07c                         Options.WAL_ttl_seconds: 0
+2018/11/28-14:13:41.400184 e07c                       Options.WAL_size_limit_MB: 0
+2018/11/28-14:13:41.400191 e07c             Options.manifest_preallocation_size: 4194304
+2018/11/28-14:13:41.400199 e07c                     Options.is_fd_close_on_exec: 1
+2018/11/28-14:13:41.400206 e07c                   Options.advise_random_on_open: 1
+2018/11/28-14:13:41.400214 e07c                    Options.db_write_buffer_size: 0
+2018/11/28-14:13:41.400221 e07c                    Options.write_buffer_manager: 000000001A53B060
+2018/11/28-14:13:41.400229 e07c         Options.access_hint_on_compaction_start: 1
+2018/11/28-14:13:41.400236 e07c  Options.new_table_reader_for_compaction_inputs: 0
+2018/11/28-14:13:41.400244 e07c           Options.random_access_max_buffer_size: 1048576
+2018/11/28-14:13:41.400252 e07c                      Options.use_adaptive_mutex: 0
+2018/11/28-14:13:41.400260 e07c                            Options.rate_limiter: 0000000000000000
+2018/11/28-14:13:41.400268 e07c     Options.sst_file_manager.rate_bytes_per_sec: 0
+2018/11/28-14:13:41.400275 e07c                       Options.wal_recovery_mode: 2
+2018/11/28-14:13:41.400283 e07c                  Options.enable_thread_tracking: 0
+2018/11/28-14:13:41.400290 e07c                  Options.enable_pipelined_write: 0
+2018/11/28-14:13:41.400298 e07c         Options.allow_concurrent_memtable_write: 1
+2018/11/28-14:13:41.400305 e07c      Options.enable_write_thread_adaptive_yield: 1
+2018/11/28-14:13:41.400374 e07c             Options.write_thread_max_yield_usec: 100
+2018/11/28-14:13:41.400389 e07c            Options.write_thread_slow_yield_usec: 3
+2018/11/28-14:13:41.400397 e07c                               Options.row_cache: None
+2018/11/28-14:13:41.400405 e07c                              Options.wal_filter: None
+2018/11/28-14:13:41.400412 e07c             Options.avoid_flush_during_recovery: 0
+2018/11/28-14:13:41.400419 e07c             Options.allow_ingest_behind: 0
+2018/11/28-14:13:41.400425 e07c             Options.preserve_deletes: 0
+2018/11/28-14:13:41.400432 e07c             Options.two_write_queues: 0
+2018/11/28-14:13:41.400439 e07c             Options.manual_wal_flush: 0
+2018/11/28-14:13:41.400446 e07c             Options.max_background_jobs: 2
+2018/11/28-14:13:41.400452 e07c             Options.max_background_compactions: -1
+2018/11/28-14:13:41.400459 e07c             Options.avoid_flush_during_shutdown: 0
+2018/11/28-14:13:41.400467 e07c           Options.writable_file_max_buffer_size: 1048576
+2018/11/28-14:13:41.400474 e07c             Options.delayed_write_rate : 16777216
+2018/11/28-14:13:41.400481 e07c             Options.max_total_wal_size: 0
+2018/11/28-14:13:41.400489 e07c             Options.delete_obsolete_files_period_micros: 21600000000
+2018/11/28-14:13:41.400497 e07c                   Options.stats_dump_period_sec: 600
+2018/11/28-14:13:41.400504 e07c                          Options.max_open_files: -1
+2018/11/28-14:13:41.400511 e07c                          Options.bytes_per_sync: 0
+2018/11/28-14:13:41.400519 e07c                      Options.wal_bytes_per_sync: 0
+2018/11/28-14:13:41.400526 e07c       Options.compaction_readahead_size: 0
+2018/11/28-14:13:41.400534 e07c Compression algorithms supported:
+2018/11/28-14:13:41.400585 e07c 	kZSTD supported: 0
+2018/11/28-14:13:41.400594 e07c 	kSnappyCompression supported: 0
+2018/11/28-14:13:41.400600 e07c 	kBZip2Compression supported: 0
+2018/11/28-14:13:41.400608 e07c 	kZlibCompression supported: 0
+2018/11/28-14:13:41.400616 e07c 	kLZ4Compression supported: 0
+2018/11/28-14:13:41.400623 e07c 	kXpressCompression supported: 0
+2018/11/28-14:13:41.400630 e07c 	kLZ4HCCompression supported: 0
+2018/11/28-14:13:41.400636 e07c 	kZSTDNotFinalCompression supported: 0
+2018/11/28-14:13:41.400665 e07c Fast CRC32 supported: Supported on x86
+2018/11/28-14:13:41.402084 e07c [c:\users\aretter\code\rocksdb\db\db_impl_open.cc:222] Creating manifest 1 
+2018/11/28-14:13:41.513204 e07c [c:\users\aretter\code\rocksdb\db\version_set.cc:3085] Recovering from manifest file: MANIFEST-000001
+2018/11/28-14:13:41.513395 e07c [c:\users\aretter\code\rocksdb\db\column_family.cc:475] --------------- Options for column family [default]:
+2018/11/28-14:13:41.513426 e07c               Options.comparator: leveldb.BytewiseComparator
+2018/11/28-14:13:41.513435 e07c           Options.merge_operator: None
+2018/11/28-14:13:41.513442 e07c        Options.compaction_filter: None
+2018/11/28-14:13:41.513449 e07c        Options.compaction_filter_factory: None
+2018/11/28-14:13:41.513456 e07c         Options.memtable_factory: SkipListFactory
+2018/11/28-14:13:41.513465 e07c            Options.table_factory: BlockBasedTable
+2018/11/28-14:13:41.513526 e07c            table_factory options:   flush_block_policy_factory: FlushBlockBySizePolicyFactory (0000000000902B20)
+  cache_index_and_filter_blocks: 0
+  cache_index_and_filter_blocks_with_high_priority: 0
+  pin_l0_filter_and_index_blocks_in_cache: 0
+  index_type: 0
+  hash_index_allow_collision: 1
+  checksum: 1
+  no_block_cache: 0
+  block_cache: 00000000009238E0
+  block_cache_name: LRUCache
+  block_cache_options:
+    capacity : 8388608
+    num_shard_bits : 4
+    strict_capacity_limit : 0
+    high_pri_pool_ratio: 0.000
+  block_cache_compressed: 0000000000000000
+  persistent_cache: 0000000000000000
+  block_size: 4096
+  block_size_deviation: 10
+  block_restart_interval: 16
+  index_block_restart_interval: 1
+  metadata_block_size: 4096
+  partition_filters: 0
+  use_delta_encoding: 1
+  filter_policy: nullptr
+  whole_key_filtering: 1
+  verify_compression: 0
+  read_amp_bytes_per_bit: 0
+  format_version: 2
+  enable_index_compression: 1
+  block_align: 0
+2018/11/28-14:13:41.513599 e07c        Options.write_buffer_size: 67108864
+2018/11/28-14:13:41.513610 e07c  Options.max_write_buffer_number: 2
+2018/11/28-14:13:41.513617 e07c          Options.compression: NoCompression
+2018/11/28-14:13:41.513624 e07c                  Options.bottommost_compression: Disabled
+2018/11/28-14:13:41.513631 e07c       Options.prefix_extractor: nullptr
+2018/11/28-14:13:41.513638 e07c   Options.memtable_insert_with_hint_prefix_extractor: nullptr
+2018/11/28-14:13:41.513645 e07c             Options.num_levels: 7
+2018/11/28-14:13:41.513652 e07c        Options.min_write_buffer_number_to_merge: 1
+2018/11/28-14:13:41.513660 e07c     Options.max_write_buffer_number_to_maintain: 0
+2018/11/28-14:13:41.513668 e07c            Options.compression_opts.window_bits: -14
+2018/11/28-14:13:41.513675 e07c                  Options.compression_opts.level: -1
+2018/11/28-14:13:41.513682 e07c               Options.compression_opts.strategy: 0
+2018/11/28-14:13:41.513689 e07c         Options.compression_opts.max_dict_bytes: 0
+2018/11/28-14:13:41.513697 e07c         Options.compression_opts.zstd_max_train_bytes: 0
+2018/11/28-14:13:41.513704 e07c      Options.level0_file_num_compaction_trigger: 4
+2018/11/28-14:13:41.513711 e07c          Options.level0_slowdown_writes_trigger: 20
+2018/11/28-14:13:41.513718 e07c              Options.level0_stop_writes_trigger: 36
+2018/11/28-14:13:41.513725 e07c                   Options.target_file_size_base: 67108864
+2018/11/28-14:13:41.513732 e07c             Options.target_file_size_multiplier: 1
+2018/11/28-14:13:41.513739 e07c                Options.max_bytes_for_level_base: 268435456
+2018/11/28-14:13:41.513745 e07c Options.level_compaction_dynamic_level_bytes: 0
+2018/11/28-14:13:41.513752 e07c          Options.max_bytes_for_level_multiplier: 10.000000
+2018/11/28-14:13:41.513774 e07c Options.max_bytes_for_level_multiplier_addtl[0]: 1
+2018/11/28-14:13:41.513780 e07c Options.max_bytes_for_level_multiplier_addtl[1]: 1
+2018/11/28-14:13:41.513788 e07c Options.max_bytes_for_level_multiplier_addtl[2]: 1
+2018/11/28-14:13:41.513794 e07c Options.max_bytes_for_level_multiplier_addtl[3]: 1
+2018/11/28-14:13:41.513802 e07c Options.max_bytes_for_level_multiplier_addtl[4]: 1
+2018/11/28-14:13:41.513810 e07c Options.max_bytes_for_level_multiplier_addtl[5]: 1
+2018/11/28-14:13:41.513818 e07c Options.max_bytes_for_level_multiplier_addtl[6]: 1
+2018/11/28-14:13:41.513826 e07c       Options.max_sequential_skip_in_iterations: 8
+2018/11/28-14:13:41.513834 e07c                    Options.max_compaction_bytes: 1677721600
+2018/11/28-14:13:41.513842 e07c                        Options.arena_block_size: 8388608
+2018/11/28-14:13:41.513849 e07c   Options.soft_pending_compaction_bytes_limit: 68719476736
+2018/11/28-14:13:41.513857 e07c   Options.hard_pending_compaction_bytes_limit: 274877906944
+2018/11/28-14:13:41.513863 e07c       Options.rate_limit_delay_max_milliseconds: 100
+2018/11/28-14:13:41.513871 e07c                Options.disable_auto_compactions: 0
+2018/11/28-14:13:41.513882 e07c                        Options.compaction_style: kCompactionStyleLevel
+2018/11/28-14:13:41.513891 e07c                          Options.compaction_pri: kByCompensatedSize
+2018/11/28-14:13:41.513900 e07c Options.compaction_options_universal.size_ratio: 1
+2018/11/28-14:13:41.513908 e07c Options.compaction_options_universal.min_merge_width: 2
+2018/11/28-14:13:41.513916 e07c Options.compaction_options_universal.max_merge_width: 4294967295
+2018/11/28-14:13:41.513923 e07c Options.compaction_options_universal.max_size_amplification_percent: 200
+2018/11/28-14:13:41.513930 e07c Options.compaction_options_universal.compression_size_percent: -1
+2018/11/28-14:13:41.513938 e07c Options.compaction_options_universal.stop_style: kCompactionStopStyleTotalSize
+2018/11/28-14:13:41.513945 e07c Options.compaction_options_fifo.max_table_files_size: 1073741824
+2018/11/28-14:13:41.513954 e07c Options.compaction_options_fifo.allow_compaction: 0
+2018/11/28-14:13:41.513966 e07c Options.compaction_options_fifo.ttl: 0
+2018/11/28-14:13:41.513976 e07c                   Options.table_properties_collectors: 
+2018/11/28-14:13:41.513984 e07c                   Options.inplace_update_support: 0
+2018/11/28-14:13:41.513992 e07c                 Options.inplace_update_num_locks: 10000
+2018/11/28-14:13:41.514000 e07c               Options.memtable_prefix_bloom_size_ratio: 0.000000
+2018/11/28-14:13:41.514010 e07c   Options.memtable_huge_page_size: 0
+2018/11/28-14:13:41.514018 e07c                           Options.bloom_locality: 0
+2018/11/28-14:13:41.514026 e07c                    Options.max_successive_merges: 0
+2018/11/28-14:13:41.514034 e07c                Options.optimize_filters_for_hits: 0
+2018/11/28-14:13:41.514041 e07c                Options.paranoid_file_checks: 0
+2018/11/28-14:13:41.514047 e07c                Options.force_consistency_checks: 0
+2018/11/28-14:13:41.514054 e07c                Options.report_bg_io_stats: 0
+2018/11/28-14:13:41.514061 e07c                               Options.ttl: 0
+2018/11/28-14:13:41.518135 e07c [c:\users\aretter\code\rocksdb\db\version_set.cc:3361] Recovered from manifest file:F:\IDEAspace\HelloWordJSoup\crawler\crawldb/MANIFEST-000001 succeeded,manifest_file_number is 1, next_file_number is 3, last_sequence is 0, log_number is 0,prev_log_number is 0,max_column_family is 0,min_log_number_to_keep is 0
+2018/11/28-14:13:41.518178 e07c [c:\users\aretter\code\rocksdb\db\version_set.cc:3369] Column family [default] (ID 0), log number is 0
+2018/11/28-14:13:41.557963 e07c [c:\users\aretter\code\rocksdb\db\db_impl_open.cc:1219] DB pointer 000000001A541080
+2018/11/28-14:13:41.610110 e07c [c:\users\aretter\code\rocksdb\db\db_impl.cc:252] Shutdown: canceling all background work
+2018/11/28-14:13:41.645344 e07c [c:\users\aretter\code\rocksdb\db\db_impl.cc:398] Shutdown complete
