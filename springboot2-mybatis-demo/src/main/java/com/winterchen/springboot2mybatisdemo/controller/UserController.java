@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Luowenlv on 2018/9/10,10:02
+ * 可连接数据库查询
  */
 @Controller
 @RequestMapping(value = "/user")
