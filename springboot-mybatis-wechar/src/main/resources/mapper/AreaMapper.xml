@@ -15,7 +15,7 @@
         INSERT INTO tb_area (area_name,priority,create_time,edit_last_time)
         VALUES (#{area_name},#{priority},#{create_time},#{edit_last_time})
     </insert>
-    
+
     <delete id="delAreaById" parameterType="java.lang.Integer">
         DELETE FROM tb_area WHERE area_id=#{area_id}
     </delete>

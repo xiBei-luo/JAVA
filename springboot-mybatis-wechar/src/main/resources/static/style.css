@@ -1,50 +1,71 @@
-*{
-    margin:0;
+* {
+    margin: 0;
     padding: 0;
     list-style: none;
     text-decoration: none;
 }
-.areaTable{
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+.areaTable {
     border-top: 1px solid #ccc;
     border-left: 1px solid #ccc;
     border-collapse: collapse;
-    margin:30px auto 0;
+    margin: 30px auto 0;
 }
-.areaTable tr{
+
+.areaTable tr {
     border-top: 1px solid #ccc;
     border-left: 1px solid #ccc;
 }
-.areaTable td,th{
+
+.areaTable td, th {
     border-bottom: 1px solid #ccc;
     border-right: 1px solid #ccc;
-    padding:5px 10px;
+    padding: 5px 10px;
     text-align: center;
 }
-.primaryForm{
+
+.primaryForm {
     width: 80%;
-    margin:30px auto 10px;
+    margin: 30px auto 10px;
     text-align: center;
 }
-.primaryBtn{
+
+.primaryBtn {
     border-radius: 5px;
     text-align: center;
     padding: 5px 10px;
     background-color: #8FBC8F;
     border: none;
-    color:#333;
+    color: #333;
 }
-.editBtn{
+
+.editBtn {
     background-color: #B0C4DE;
 }
-.delBtn{
+
+.delBtn {
     background-color: #FA8072;
 }
-input[type="text"]{
-    border:none;
-    width:260px;
-    height:35px;
+
+input[type="text"] {
+    border: none;
+    width: 260px;
+    height: 35px;
     border-radius: 5px;
-    border:1px solid #ccc;
-    margin:10px auto;
+    border: 1px solid #ccc;
+    margin: 10px auto;
     padding-left: 8px;
+}
+
+.container-fluid{
+    height: 600px;
+    background: url("publicImg/login.jpg") no-repeat center;
+    background-size:100% 100%;
+}
+.row{
+    background-color: red;
 }

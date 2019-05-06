@@ -57,7 +57,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>springloaded</artifactId>
-            <version>1.2.8.RELEASE</version>
+            <version>1.2.6.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -66,6 +66,7 @@
             <optional>true</optional>
         </dependency>
 
+
     </dependencies>
 
     <build>
@@ -73,6 +74,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+                </configuration>
             </plugin>
         </plugins>
     </build>

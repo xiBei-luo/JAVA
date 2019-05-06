@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by Luowenlv on 2018/9/29,9:32
+ * 可整合mybatis进行数据库操作
  */
 @Controller
 public class TestController {
@@ -23,43 +24,44 @@ public class TestController {
     private AreaService areaService;
 
     //@ResponseBody
-    @RequestMapping(value = "/loadPage",method = RequestMethod.GET)
-    public String loadPage(Model model){
-        model.addAttribute("areaList",areaService.getAllArea());
-        return "index";
+    @RequestMapping(value = "/loadPage", method = RequestMethod.GET)
+    public String loadPage(Model model) {
+        model.addAttribute("areaList", areaService.getAllArea());
+        return "plate/login";
         //List areaList = new ArrayList();
         //areaList = areaService.getAllArea();
         //System.out.println(areaList);
         //return areaList;
     }
 
-    @RequestMapping(value = "/addAreaPage",method = RequestMethod.GET)
-    public String addAreaPage(){
+    @RequestMapping(value = "/addAreaPage", method = RequestMethod.GET)
+    public String addAreaPage() {
         return "addAreaPage";
     }
-    @RequestMapping(value = "/addArea",method = RequestMethod.POST)
-    public String addArea(AreaModel areaModel,Model model){
+
+    @RequestMapping(value = "/addArea", method = RequestMethod.POST)
+    public String addArea(AreaModel areaModel, Model model) {
         areaService.addArea(areaModel);
-        model.addAttribute("areaList",areaService.getAllArea());
+        model.addAttribute("areaList", areaService.getAllArea());
         return "index";
     }
 
-    @RequestMapping(value = "/delAreaById/{area_id}",method = RequestMethod.GET)
-    public String delAreaById(@PathVariable String area_id,Model model){
+    @RequestMapping(value = "/delAreaById/{area_id}", method = RequestMethod.GET)
+    public String delAreaById(@PathVariable String area_id, Model model) {
         System.out.println(area_id);
         areaService.delAreaById(Integer.parseInt(area_id));
-        model.addAttribute("areaList",areaService.getAllArea());
+        model.addAttribute("areaList", areaService.getAllArea());
         return "redirect:index";
     }
 
-    @RequestMapping(value = "/updateAreaById/{area_id}",method = RequestMethod.POST)
-    public String updateAreaById(){
+    @RequestMapping(value = "/updateAreaById/{area_id}", method = RequestMethod.GET)
+    public String updateAreaById() {
 
-        return null;
+        return "udpAreaPage";
     }
 
-    @RequestMapping(value = "/doUpdateArea",method = RequestMethod.POST)
-    public String doUpdateArea(){
+    @RequestMapping(value = "/doUpdateArea", method = RequestMethod.POST)
+    public String doUpdateArea() {
 
         return null;
     }

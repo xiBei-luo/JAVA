@@ -6,9 +6,15 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="publicFrame/jquery/jquery-3.4.0.min.js"></script>
+    <script src="publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
+    <h1>区域列表</h1>
     <table class="areaTable">
         <tr>
             <th>区域ID</th>
@@ -25,7 +31,7 @@
             <td th:text=${areaList.create_time}></td>
             <td th:text=${areaList.edit_last_time}></td>
             <td>
-                <a href="/updateAreaById/${areaList.area_id}" class="primaryBtn editBtn">编辑</a>
+                <a th:href="@{'/updateAreaById/'+${areaList.area_id}}" class="primaryBtn editBtn">编辑</a>
                 <a th:href="@{'/delAreaById/'+${areaList.area_id}}" class="primaryBtn delBtn">删除</a>
             </td>
         </tr>
