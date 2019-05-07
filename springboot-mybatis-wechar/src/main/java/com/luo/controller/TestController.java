@@ -66,5 +66,13 @@ public class TestController {
         return null;
     }
 
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public String login(String username,String password){
+        String username1 = username;
+        String password1 = password;
+        System.out.print(username1+"---"+password1);
+        return "plate/index";
+    }
+
 
 }

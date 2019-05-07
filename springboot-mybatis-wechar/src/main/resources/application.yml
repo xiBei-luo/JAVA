@@ -1,4 +1,12 @@
 spring:
+  resources:
+    static-locations: classpath:/static/
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    mode: HTML5
+    encoding: utf-8
   datasource:
     url: jdbc:mysql://localhost:3306/luotest?useSSL=false
     username: luowenlv
