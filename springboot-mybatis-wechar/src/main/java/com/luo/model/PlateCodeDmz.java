@@ -1,10 +1,13 @@
-package com.luo.model.plate;
+package com.luo.model;
 
 
-public class PlateCodeDmlb {
+public class PlateCodeDmz {
 
   private String cDmlb;
-  private String cDmlbmc;
+  private String cDm;
+  private String cDmmc;
+  private String nSort;
+  private String cBz;
   private String cZt;
   private long nCjuser;
   private java.sql.Timestamp dCjsj;
@@ -21,12 +24,39 @@ public class PlateCodeDmlb {
   }
 
 
-  public String getCDmlbmc() {
-    return cDmlbmc;
+  public String getCDm() {
+    return cDm;
   }
 
-  public void setCDmlbmc(String cDmlbmc) {
-    this.cDmlbmc = cDmlbmc;
+  public void setCDm(String cDm) {
+    this.cDm = cDm;
+  }
+
+
+  public String getCDmmc() {
+    return cDmmc;
+  }
+
+  public void setCDmmc(String cDmmc) {
+    this.cDmmc = cDmmc;
+  }
+
+
+  public String getNSort() {
+    return nSort;
+  }
+
+  public void setNSort(String nSort) {
+    this.nSort = nSort;
+  }
+
+
+  public String getCBz() {
+    return cBz;
+  }
+
+  public void setCBz(String cBz) {
+    this.cBz = cBz;
   }
 
 

@@ -1,4 +1,4 @@
-package com.luo.model.plate;
+package com.luo.model;
 
 
 public class PlateUser {

@@ -1,5 +1,8 @@
-package com.luo.controller.plate;
+package com.luo.controller;
 
+import com.luo.model.PlateUser;
+import com.luo.service.PlateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,17 +13,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "/plate")
 public class PlateController {
+    /*@Autowired
+    ReturnModel returnModel;*/
+
+    @Autowired
+    PlateService plateService;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
         return "plate/login";
     }
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(String loginname,String password){
-        return "plate/index";
-    }
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String login1(){
+    public String login(PlateUser plateUser){
+        System.out.println(plateUser);
+        PlateUser plateUser1 = plateService.checkLogin(plateUser);
+        System.out.println(plateUser1);
         return "plate/index";
     }
 }
