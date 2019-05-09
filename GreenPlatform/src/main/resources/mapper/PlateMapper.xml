@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenplatform.dao.PlateDao">
+    <select id="checkLogin" parameterType="com.greenplatform.model.PlateUser" resultType="com.greenplatform.model.PlateUser">
+        SELECT * FROM plate_user T WHERE T.C_LOGINNAME = #{cLoginname} AND T.C_PASSWORD = #{cPassword}
+    </select>
+
+    <select id="selectUserByEmail" parameterType="com.greenplatform.model.PlateUser" resultType="com.greenplatform.model.PlateUser">
+        SELECT * FROM plate_user T WHERE T.C_EMAIL = #{cEmail}
+    </select>
+
+    <select id="selectUserByLoginname" parameterType="com.greenplatform.model.PlateUser" resultType="com.greenplatform.model.PlateUser">
+        SELECT * FROM plate_user T WHERE T.C_LOGINNAME = #{cLoginname}
+    </select>
+
+    <insert id="insertUser" parameterType="com.greenplatform.model.PlateUser">
+        INSERT INTO plate_user (C_USERID,C_LOGINNAME,C_USERNAME,C_PASSWORD,C_RYLB,
+                               C_RYZT,C_ZCFS,C_ZJLX,C_ZJHM,C_SEX,
+                               C_JTZZ,C_PHONE,C_WXHM,C_QQ,C_EMAIL,
+                               C_BZ,C_ZT,C_CJUSER,D_CJSJ,C_XJUSER
+                               ,D_XGSJ)
+        VALUES(#{cUserid},#{cLoginname},#{cUsername},#{cPassword},#{cRylb},
+               #{cRyzt},#{cZcfs},#{cZjlx},#{cZjhm},#{cSex},
+               #{cJtzz},#{cPhone},#{cWxhm},#{cQq},#{cEmail},
+               #{cBz},#{cZt},#{cCjuser},#{dCjsj},#{cXjuser},
+               #{dXgsj})
+    </insert>
+
+
+</mapper>

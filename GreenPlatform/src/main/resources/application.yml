@@ -1,0 +1,26 @@
+spring:
+  resources:
+    static-locations: classpath:/static/
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    mode: HTML5
+    encoding: utf-8
+  datasource:
+    url: jdbc:mysql://localhost:3306/greenplatform?useSSL=false
+    username: appuser
+    password: luo820
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.greenplatform.model
+server:
+  port: 8081
+logging:
+  level:
+    com:
+      luo:
+        dao:
+          mapper: debug
+
