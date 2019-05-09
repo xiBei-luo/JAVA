@@ -6,9 +6,9 @@ public class PlateCodeDmlb {
   private String cDmlb;
   private String cDmlbmc;
   private String cZt;
-  private long nCjuser;
+  private String cCjuser;
   private java.sql.Timestamp dCjsj;
-  private long nXjuser;
+  private String cXjuser;
   private java.sql.Timestamp dXgsj;
 
 
@@ -39,12 +39,12 @@ public class PlateCodeDmlb {
   }
 
 
-  public long getNCjuser() {
-    return nCjuser;
+  public String getCCjuser() {
+    return cCjuser;
   }
 
-  public void setNCjuser(long nCjuser) {
-    this.nCjuser = nCjuser;
+  public void setCCjuser(String cCjuser) {
+    this.cCjuser = cCjuser;
   }
 
 
@@ -57,12 +57,12 @@ public class PlateCodeDmlb {
   }
 
 
-  public long getNXjuser() {
-    return nXjuser;
+  public String getCXjuser() {
+    return cXjuser;
   }
 
-  public void setNXjuser(long nXjuser) {
-    this.nXjuser = nXjuser;
+  public void setCXjuser(String cXjuser) {
+    this.cXjuser = cXjuser;
   }
 
 
@@ -74,4 +74,16 @@ public class PlateCodeDmlb {
     this.dXgsj = dXgsj;
   }
 
+  @Override
+  public String toString() {
+    return "PlateCodeDmlb{" +
+            "cDmlb='" + cDmlb + '\'' +
+            ", cDmlbmc='" + cDmlbmc + '\'' +
+            ", cZt='" + cZt + '\'' +
+            ", cCjuser='" + cCjuser + '\'' +
+            ", dCjsj=" + dCjsj +
+            ", cXjuser='" + cXjuser + '\'' +
+            ", dXgsj=" + dXgsj +
+            '}';
+  }
 }

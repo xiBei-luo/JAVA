@@ -3,7 +3,7 @@ package com.luo.model;
 
 public class PlateLog {
 
-  private long nCzrzbh;
+  private String cCzrzbh;
   private String cTable;
   private String cTablekey;
   private String cKeyvalue;
@@ -12,21 +12,21 @@ public class PlateLog {
   private String cCzfs;
   private String cOldvalues;
   private String cNewvalues;
-  private long nBgr;
+  private String cBgr;
   private String cBgrxm;
   private java.sql.Timestamp dBgsj;
-  private long nCjuser;
+  private String cCjuser;
   private java.sql.Timestamp dCjsj;
-  private long nXguser;
+  private String cXjuser;
   private java.sql.Timestamp dXgsj;
 
 
-  public long getNCzrzbh() {
-    return nCzrzbh;
+  public String getCCzrzbh() {
+    return cCzrzbh;
   }
 
-  public void setNCzrzbh(long nCzrzbh) {
-    this.nCzrzbh = nCzrzbh;
+  public void setCCzrzbh(String cCzrzbh) {
+    this.cCzrzbh = cCzrzbh;
   }
 
 
@@ -102,12 +102,12 @@ public class PlateLog {
   }
 
 
-  public long getNBgr() {
-    return nBgr;
+  public String getCBgr() {
+    return cBgr;
   }
 
-  public void setNBgr(long nBgr) {
-    this.nBgr = nBgr;
+  public void setCBgr(String cBgr) {
+    this.cBgr = cBgr;
   }
 
 
@@ -129,12 +129,12 @@ public class PlateLog {
   }
 
 
-  public long getNCjuser() {
-    return nCjuser;
+  public String getCCjuser() {
+    return cCjuser;
   }
 
-  public void setNCjuser(long nCjuser) {
-    this.nCjuser = nCjuser;
+  public void setCCjuser(String cCjuser) {
+    this.cCjuser = cCjuser;
   }
 
 
@@ -147,12 +147,12 @@ public class PlateLog {
   }
 
 
-  public long getNXguser() {
-    return nXguser;
+  public String getCXjuser() {
+    return cXjuser;
   }
 
-  public void setNXguser(long nXguser) {
-    this.nXguser = nXguser;
+  public void setCXjuser(String cXjuser) {
+    this.cXjuser = cXjuser;
   }
 
 
@@ -164,4 +164,25 @@ public class PlateLog {
     this.dXgsj = dXgsj;
   }
 
+  @Override
+  public String toString() {
+    return "PlateLog{" +
+            "cCzrzbh='" + cCzrzbh + '\'' +
+            ", cTable='" + cTable + '\'' +
+            ", cTablekey='" + cTablekey + '\'' +
+            ", cKeyvalue='" + cKeyvalue + '\'' +
+            ", cColumn='" + cColumn + '\'' +
+            ", cColumnname='" + cColumnname + '\'' +
+            ", cCzfs='" + cCzfs + '\'' +
+            ", cOldvalues='" + cOldvalues + '\'' +
+            ", cNewvalues='" + cNewvalues + '\'' +
+            ", cBgr='" + cBgr + '\'' +
+            ", cBgrxm='" + cBgrxm + '\'' +
+            ", dBgsj=" + dBgsj +
+            ", cCjuser='" + cCjuser + '\'' +
+            ", dCjsj=" + dCjsj +
+            ", cXjuser='" + cXjuser + '\'' +
+            ", dXgsj=" + dXgsj +
+            '}';
+  }
 }

@@ -6,12 +6,12 @@ public class PlateCodeDmz {
   private String cDmlb;
   private String cDm;
   private String cDmmc;
-  private String nSort;
+  private String cSort;
   private String cBz;
   private String cZt;
-  private long nCjuser;
+  private String cCjuser;
   private java.sql.Timestamp dCjsj;
-  private long nXjuser;
+  private String cXjuser;
   private java.sql.Timestamp dXgsj;
 
 
@@ -42,12 +42,12 @@ public class PlateCodeDmz {
   }
 
 
-  public String getNSort() {
-    return nSort;
+  public String getCSort() {
+    return cSort;
   }
 
-  public void setNSort(String nSort) {
-    this.nSort = nSort;
+  public void setCSort(String cSort) {
+    this.cSort = cSort;
   }
 
 
@@ -69,12 +69,12 @@ public class PlateCodeDmz {
   }
 
 
-  public long getNCjuser() {
-    return nCjuser;
+  public String getCCjuser() {
+    return cCjuser;
   }
 
-  public void setNCjuser(long nCjuser) {
-    this.nCjuser = nCjuser;
+  public void setCCjuser(String cCjuser) {
+    this.cCjuser = cCjuser;
   }
 
 
@@ -87,12 +87,12 @@ public class PlateCodeDmz {
   }
 
 
-  public long getNXjuser() {
-    return nXjuser;
+  public String getCXjuser() {
+    return cXjuser;
   }
 
-  public void setNXjuser(long nXjuser) {
-    this.nXjuser = nXjuser;
+  public void setCXjuser(String cXjuser) {
+    this.cXjuser = cXjuser;
   }
 
 
@@ -104,4 +104,19 @@ public class PlateCodeDmz {
     this.dXgsj = dXgsj;
   }
 
+  @Override
+  public String toString() {
+    return "PlateCodeDmz{" +
+            "cDmlb='" + cDmlb + '\'' +
+            ", cDm='" + cDm + '\'' +
+            ", cDmmc='" + cDmmc + '\'' +
+            ", cSort='" + cSort + '\'' +
+            ", cBz='" + cBz + '\'' +
+            ", cZt='" + cZt + '\'' +
+            ", cCjuser='" + cCjuser + '\'' +
+            ", dCjsj=" + dCjsj +
+            ", cXjuser='" + cXjuser + '\'' +
+            ", dXgsj=" + dXgsj +
+            '}';
+  }
 }

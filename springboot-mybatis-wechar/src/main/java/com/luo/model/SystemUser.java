@@ -3,7 +3,7 @@ package com.luo.model;
 
 public class SystemUser {
 
-  private long nUserid;
+  private String cUserid;
   private String cLoginname;
   private String cUsername;
   private String cPassword;
@@ -17,20 +17,21 @@ public class SystemUser {
   private String cPhone;
   private String cWxhm;
   private String cQq;
+  private String cEmail;
   private String cBz;
   private String cZt;
-  private long nCjuser;
+  private String cCjuser;
   private java.sql.Timestamp dCjsj;
-  private long nXjuser;
+  private String cXjuser;
   private java.sql.Timestamp dXgsj;
 
 
-  public long getNUserid() {
-    return nUserid;
+  public String getCUserid() {
+    return cUserid;
   }
 
-  public void setNUserid(long nUserid) {
-    this.nUserid = nUserid;
+  public void setCUserid(String cUserid) {
+    this.cUserid = cUserid;
   }
 
 
@@ -151,6 +152,15 @@ public class SystemUser {
   }
 
 
+  public String getCEmail() {
+    return cEmail;
+  }
+
+  public void setCEmail(String cEmail) {
+    this.cEmail = cEmail;
+  }
+
+
   public String getCBz() {
     return cBz;
   }
@@ -169,12 +179,12 @@ public class SystemUser {
   }
 
 
-  public long getNCjuser() {
-    return nCjuser;
+  public String getCCjuser() {
+    return cCjuser;
   }
 
-  public void setNCjuser(long nCjuser) {
-    this.nCjuser = nCjuser;
+  public void setCCjuser(String cCjuser) {
+    this.cCjuser = cCjuser;
   }
 
 
@@ -187,12 +197,12 @@ public class SystemUser {
   }
 
 
-  public long getNXjuser() {
-    return nXjuser;
+  public String getCXjuser() {
+    return cXjuser;
   }
 
-  public void setNXjuser(long nXjuser) {
-    this.nXjuser = nXjuser;
+  public void setCXjuser(String cXjuser) {
+    this.cXjuser = cXjuser;
   }
 
 
@@ -204,4 +214,30 @@ public class SystemUser {
     this.dXgsj = dXgsj;
   }
 
+  @Override
+  public String toString() {
+    return "SystemUser{" +
+            "cUserid='" + cUserid + '\'' +
+            ", cLoginname='" + cLoginname + '\'' +
+            ", cUsername='" + cUsername + '\'' +
+            ", cPassword='" + cPassword + '\'' +
+            ", cRylb='" + cRylb + '\'' +
+            ", cRyzt='" + cRyzt + '\'' +
+            ", cZcfs='" + cZcfs + '\'' +
+            ", cZjlx='" + cZjlx + '\'' +
+            ", cZjhm='" + cZjhm + '\'' +
+            ", cSex='" + cSex + '\'' +
+            ", cJtzz='" + cJtzz + '\'' +
+            ", cPhone='" + cPhone + '\'' +
+            ", cWxhm='" + cWxhm + '\'' +
+            ", cQq='" + cQq + '\'' +
+            ", cEmail='" + cEmail + '\'' +
+            ", cBz='" + cBz + '\'' +
+            ", cZt='" + cZt + '\'' +
+            ", cCjuser='" + cCjuser + '\'' +
+            ", dCjsj=" + dCjsj +
+            ", cXjuser='" + cXjuser + '\'' +
+            ", dXgsj=" + dXgsj +
+            '}';
+  }
 }

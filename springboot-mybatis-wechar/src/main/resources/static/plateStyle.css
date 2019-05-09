@@ -6,6 +6,6 @@ html,body{
 .mr-top-100{
     margin-top: 100px;
 }
-#cPassword::placeholder,#cPassword::placeholder{
+input::placeholder{
     font-size: 14px;
 }

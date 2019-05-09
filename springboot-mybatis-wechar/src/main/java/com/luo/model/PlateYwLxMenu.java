@@ -8,9 +8,9 @@ public class PlateYwLxMenu {
   private String cMenumc;
   private String cZt;
   private String cBz;
-  private long nCjuser;
+  private String cCjuser;
   private java.sql.Timestamp dCjsj;
-  private long nXjuser;
+  private String cXjuser;
   private java.sql.Timestamp dXgsj;
 
 
@@ -59,12 +59,12 @@ public class PlateYwLxMenu {
   }
 
 
-  public long getNCjuser() {
-    return nCjuser;
+  public String getCCjuser() {
+    return cCjuser;
   }
 
-  public void setNCjuser(long nCjuser) {
-    this.nCjuser = nCjuser;
+  public void setCCjuser(String cCjuser) {
+    this.cCjuser = cCjuser;
   }
 
 
@@ -77,12 +77,12 @@ public class PlateYwLxMenu {
   }
 
 
-  public long getNXjuser() {
-    return nXjuser;
+  public String getCXjuser() {
+    return cXjuser;
   }
 
-  public void setNXjuser(long nXjuser) {
-    this.nXjuser = nXjuser;
+  public void setCXjuser(String cXjuser) {
+    this.cXjuser = cXjuser;
   }
 
 
@@ -94,4 +94,18 @@ public class PlateYwLxMenu {
     this.dXgsj = dXgsj;
   }
 
+  @Override
+  public String toString() {
+    return "PlateYwLxMenu{" +
+            "cYwlxdm='" + cYwlxdm + '\'' +
+            ", cMenudm='" + cMenudm + '\'' +
+            ", cMenumc='" + cMenumc + '\'' +
+            ", cZt='" + cZt + '\'' +
+            ", cBz='" + cBz + '\'' +
+            ", cCjuser='" + cCjuser + '\'' +
+            ", dCjsj=" + dCjsj +
+            ", cXjuser='" + cXjuser + '\'' +
+            ", dXgsj=" + dXgsj +
+            '}';
+  }
 }

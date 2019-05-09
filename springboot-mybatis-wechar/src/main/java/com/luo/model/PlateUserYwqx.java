@@ -3,21 +3,21 @@ package com.luo.model;
 
 public class PlateUserYwqx {
 
-  private long nUserid;
+  private String cUserid;
   private String cYwlxdm;
-  private long nSquserid;
-  private long nCjuser;
+  private String cSquserid;
+  private String cCjuser;
   private java.sql.Timestamp dCjsj;
-  private long nXjuser;
+  private String cXjuser;
   private java.sql.Timestamp dXgsj;
 
 
-  public long getNUserid() {
-    return nUserid;
+  public String getCUserid() {
+    return cUserid;
   }
 
-  public void setNUserid(long nUserid) {
-    this.nUserid = nUserid;
+  public void setCUserid(String cUserid) {
+    this.cUserid = cUserid;
   }
 
 
@@ -30,21 +30,21 @@ public class PlateUserYwqx {
   }
 
 
-  public long getNSquserid() {
-    return nSquserid;
+  public String getCSquserid() {
+    return cSquserid;
   }
 
-  public void setNSquserid(long nSquserid) {
-    this.nSquserid = nSquserid;
+  public void setCSquserid(String cSquserid) {
+    this.cSquserid = cSquserid;
   }
 
 
-  public long getNCjuser() {
-    return nCjuser;
+  public String getCCjuser() {
+    return cCjuser;
   }
 
-  public void setNCjuser(long nCjuser) {
-    this.nCjuser = nCjuser;
+  public void setCCjuser(String cCjuser) {
+    this.cCjuser = cCjuser;
   }
 
 
@@ -57,12 +57,12 @@ public class PlateUserYwqx {
   }
 
 
-  public long getNXjuser() {
-    return nXjuser;
+  public String getCXjuser() {
+    return cXjuser;
   }
 
-  public void setNXjuser(long nXjuser) {
-    this.nXjuser = nXjuser;
+  public void setCXjuser(String cXjuser) {
+    this.cXjuser = cXjuser;
   }
 
 
@@ -74,4 +74,16 @@ public class PlateUserYwqx {
     this.dXgsj = dXgsj;
   }
 
+  @Override
+  public String toString() {
+    return "PlateUserYwqx{" +
+            "cUserid='" + cUserid + '\'' +
+            ", cYwlxdm='" + cYwlxdm + '\'' +
+            ", cSquserid='" + cSquserid + '\'' +
+            ", cCjuser='" + cCjuser + '\'' +
+            ", dCjsj=" + dCjsj +
+            ", cXjuser='" + cXjuser + '\'' +
+            ", dXgsj=" + dXgsj +
+            '}';
+  }
 }
