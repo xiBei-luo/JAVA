@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.greenplatform.model.PlateCodeDmlb">
+        <table name="plate_code_dmlb" schema="greenplatform" catalog=""/>
+        <attributes>
+            <id name="cDmlb">
+                <column name="cDmlb"/>
+            </id>
+            <basic name="cDmlbmc">
+                <column name="cDmlbmc" nullable="false"/>
+            </basic>
+            <basic name="cZt">
+                <column name="cZt" nullable="false" length="1"/>
+            </basic>
+            <basic name="cCjuser">
+                <column name="cCjuser" nullable="false" length="11"/>
+            </basic>
+            <basic name="dCjsj">
+                <column name="dCjsj" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="cXguser">
+                <column name="cXguser" nullable="false" length="11"/>
+            </basic>
+            <basic name="dXgsj">
+                <column name="dXgsj" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

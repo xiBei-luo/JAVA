@@ -22,11 +22,9 @@ public class PlateServiceImpl implements PlateService {
 
     @Override
     public ReturnModel checkLogin(PlateUser plateUser) {
-
         PlateUser plateUser1 = plateDao.checkLogin(plateUser);
         System.out.println(plateUser1);
-
-        if (null != plateUser1 && "" != plateUser1.getCUserid()){
+        if (null != plateUser1 && "" != plateUser1.getcUserid()){
             returnModel.setFlag(0);
             returnModel.setMsg("登陆成功");
             returnModel.setObject(plateUser1);

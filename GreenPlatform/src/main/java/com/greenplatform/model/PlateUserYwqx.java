@@ -1,89 +1,122 @@
 package com.greenplatform.model;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.sql.Timestamp;
+import java.util.Objects;
 
+@Entity
+@Table(name = "plate_user_ywqx", schema = "greenplatform", catalog = "")
 public class PlateUserYwqx {
+    private String cUserid;
+    private String cYwlxdm;
+    private String cSquser;
+    private String cCjuser;
+    private Timestamp dCjsj;
+    private String cXguser;
+    private Timestamp dXgsj;
 
-  private String cUserid;
-  private String cYwlxdm;
-  private String cSquserid;
-  private String cCjuser;
-  private java.sql.Timestamp dCjsj;
-  private String cXjuser;
-  private java.sql.Timestamp dXgsj;
+    @Basic
+    @Column(name = "cUserid", nullable = false, length = 11)
+    public String getcUserid() {
+        return cUserid;
+    }
 
+    public void setcUserid(String cUserid) {
+        this.cUserid = cUserid;
+    }
 
-  public String getCUserid() {
-    return cUserid;
-  }
+    @Basic
+    @Column(name = "cYwlxdm", nullable = true, length = 255)
+    public String getcYwlxdm() {
+        return cYwlxdm;
+    }
 
-  public void setCUserid(String cUserid) {
-    this.cUserid = cUserid;
-  }
+    public void setcYwlxdm(String cYwlxdm) {
+        this.cYwlxdm = cYwlxdm;
+    }
 
+    @Basic
+    @Column(name = "cSquser", nullable = true, length = 11)
+    public String getcSquser() {
+        return cSquser;
+    }
 
-  public String getCYwlxdm() {
-    return cYwlxdm;
-  }
+    public void setcSquser(String cSquser) {
+        this.cSquser = cSquser;
+    }
 
-  public void setCYwlxdm(String cYwlxdm) {
-    this.cYwlxdm = cYwlxdm;
-  }
+    @Basic
+    @Column(name = "cCjuser", nullable = true, length = 11)
+    public String getcCjuser() {
+        return cCjuser;
+    }
 
+    public void setcCjuser(String cCjuser) {
+        this.cCjuser = cCjuser;
+    }
 
-  public String getCSquserid() {
-    return cSquserid;
-  }
+    @Basic
+    @Column(name = "dCjsj", nullable = true)
+    public Timestamp getdCjsj() {
+        return dCjsj;
+    }
 
-  public void setCSquserid(String cSquserid) {
-    this.cSquserid = cSquserid;
-  }
+    public void setdCjsj(Timestamp dCjsj) {
+        this.dCjsj = dCjsj;
+    }
 
+    @Basic
+    @Column(name = "cXguser", nullable = true, length = 11)
+    public String getcXguser() {
+        return cXguser;
+    }
 
-  public String getCCjuser() {
-    return cCjuser;
-  }
+    public void setcXguser(String cXguser) {
+        this.cXguser = cXguser;
+    }
 
-  public void setCCjuser(String cCjuser) {
-    this.cCjuser = cCjuser;
-  }
+    @Basic
+    @Column(name = "dXgsj", nullable = true)
+    public Timestamp getdXgsj() {
+        return dXgsj;
+    }
 
+    public void setdXgsj(Timestamp dXgsj) {
+        this.dXgsj = dXgsj;
+    }
 
-  public java.sql.Timestamp getDCjsj() {
-    return dCjsj;
-  }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlateUserYwqx that = (PlateUserYwqx) o;
+        return Objects.equals(cUserid, that.cUserid) &&
+                Objects.equals(cYwlxdm, that.cYwlxdm) &&
+                Objects.equals(cSquser, that.cSquser) &&
+                Objects.equals(cCjuser, that.cCjuser) &&
+                Objects.equals(dCjsj, that.dCjsj) &&
+                Objects.equals(cXguser, that.cXguser) &&
+                Objects.equals(dXgsj, that.dXgsj);
+    }
 
-  public void setDCjsj(java.sql.Timestamp dCjsj) {
-    this.dCjsj = dCjsj;
-  }
+    @Override
+    public int hashCode() {
+        return Objects.hash(cUserid, cYwlxdm, cSquser, cCjuser, dCjsj, cXguser, dXgsj);
+    }
 
-
-  public String getCXjuser() {
-    return cXjuser;
-  }
-
-  public void setCXjuser(String cXjuser) {
-    this.cXjuser = cXjuser;
-  }
-
-
-  public java.sql.Timestamp getDXgsj() {
-    return dXgsj;
-  }
-
-  public void setDXgsj(java.sql.Timestamp dXgsj) {
-    this.dXgsj = dXgsj;
-  }
-
-  @Override
-  public String toString() {
-    return "PlateUserYwqx{" +
-            "cUserid='" + cUserid + '\'' +
-            ", cYwlxdm='" + cYwlxdm + '\'' +
-            ", cSquserid='" + cSquserid + '\'' +
-            ", cCjuser='" + cCjuser + '\'' +
-            ", dCjsj=" + dCjsj +
-            ", cXjuser='" + cXjuser + '\'' +
-            ", dXgsj=" + dXgsj +
-            '}';
-  }
+    @Override
+    public String toString() {
+        return "PlateUserYwqx{" +
+                "cUserid='" + cUserid + '\'' +
+                ", cYwlxdm='" + cYwlxdm + '\'' +
+                ", cSquser='" + cSquser + '\'' +
+                ", cCjuser='" + cCjuser + '\'' +
+                ", dCjsj=" + dCjsj +
+                ", cXguser='" + cXguser + '\'' +
+                ", dXgsj=" + dXgsj +
+                '}';
+    }
 }

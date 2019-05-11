@@ -1,89 +1,119 @@
 package com.greenplatform.model;
 
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Objects;
 
+@Entity
+@Table(name = "plate_code_dmlb", schema = "greenplatform", catalog = "")
 public class PlateCodeDmlb {
+    private String cDmlb;
+    private String cDmlbmc;
+    private String cZt;
+    private String cCjuser;
+    private Timestamp dCjsj;
+    private String cXguser;
+    private Timestamp dXgsj;
 
-  private String cDmlb;
-  private String cDmlbmc;
-  private String cZt;
-  private String cCjuser;
-  private java.sql.Timestamp dCjsj;
-  private String cXjuser;
-  private java.sql.Timestamp dXgsj;
+    @Id
+    @Column(name = "cDmlb", nullable = false, length = 255)
+    public String getcDmlb() {
+        return cDmlb;
+    }
 
+    public void setcDmlb(String cDmlb) {
+        this.cDmlb = cDmlb;
+    }
 
-  public String getCDmlb() {
-    return cDmlb;
-  }
+    @Basic
+    @Column(name = "cDmlbmc", nullable = true, length = 255)
+    public String getcDmlbmc() {
+        return cDmlbmc;
+    }
 
-  public void setCDmlb(String cDmlb) {
-    this.cDmlb = cDmlb;
-  }
+    public void setcDmlbmc(String cDmlbmc) {
+        this.cDmlbmc = cDmlbmc;
+    }
 
+    @Basic
+    @Column(name = "cZt", nullable = true, length = 1)
+    public String getcZt() {
+        return cZt;
+    }
 
-  public String getCDmlbmc() {
-    return cDmlbmc;
-  }
+    public void setcZt(String cZt) {
+        this.cZt = cZt;
+    }
 
-  public void setCDmlbmc(String cDmlbmc) {
-    this.cDmlbmc = cDmlbmc;
-  }
+    @Basic
+    @Column(name = "cCjuser", nullable = true, length = 11)
+    public String getcCjuser() {
+        return cCjuser;
+    }
 
+    public void setcCjuser(String cCjuser) {
+        this.cCjuser = cCjuser;
+    }
 
-  public String getCZt() {
-    return cZt;
-  }
+    @Basic
+    @Column(name = "dCjsj", nullable = true)
+    public Timestamp getdCjsj() {
+        return dCjsj;
+    }
 
-  public void setCZt(String cZt) {
-    this.cZt = cZt;
-  }
+    public void setdCjsj(Timestamp dCjsj) {
+        this.dCjsj = dCjsj;
+    }
 
+    @Basic
+    @Column(name = "cXguser", nullable = true, length = 11)
+    public String getcXguser() {
+        return cXguser;
+    }
 
-  public String getCCjuser() {
-    return cCjuser;
-  }
+    public void setcXguser(String cXguser) {
+        this.cXguser = cXguser;
+    }
 
-  public void setCCjuser(String cCjuser) {
-    this.cCjuser = cCjuser;
-  }
+    @Basic
+    @Column(name = "dXgsj", nullable = true)
+    public Timestamp getdXgsj() {
+        return dXgsj;
+    }
 
+    public void setdXgsj(Timestamp dXgsj) {
+        this.dXgsj = dXgsj;
+    }
 
-  public java.sql.Timestamp getDCjsj() {
-    return dCjsj;
-  }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlateCodeDmlb that = (PlateCodeDmlb) o;
+        return Objects.equals(cDmlb, that.cDmlb) &&
+                Objects.equals(cDmlbmc, that.cDmlbmc) &&
+                Objects.equals(cZt, that.cZt) &&
+                Objects.equals(cCjuser, that.cCjuser) &&
+                Objects.equals(dCjsj, that.dCjsj) &&
+                Objects.equals(cXguser, that.cXguser) &&
+                Objects.equals(dXgsj, that.dXgsj);
+    }
 
-  public void setDCjsj(java.sql.Timestamp dCjsj) {
-    this.dCjsj = dCjsj;
-  }
+    @Override
+    public int hashCode() {
+        return Objects.hash(cDmlb, cDmlbmc, cZt, cCjuser, dCjsj, cXguser, dXgsj);
+    }
 
-
-  public String getCXjuser() {
-    return cXjuser;
-  }
-
-  public void setCXjuser(String cXjuser) {
-    this.cXjuser = cXjuser;
-  }
-
-
-  public java.sql.Timestamp getDXgsj() {
-    return dXgsj;
-  }
-
-  public void setDXgsj(java.sql.Timestamp dXgsj) {
-    this.dXgsj = dXgsj;
-  }
-
-  @Override
-  public String toString() {
-    return "PlateCodeDmlb{" +
-            "cDmlb='" + cDmlb + '\'' +
-            ", cDmlbmc='" + cDmlbmc + '\'' +
-            ", cZt='" + cZt + '\'' +
-            ", cCjuser='" + cCjuser + '\'' +
-            ", dCjsj=" + dCjsj +
-            ", cXjuser='" + cXjuser + '\'' +
-            ", dXgsj=" + dXgsj +
-            '}';
-  }
+    @Override
+    public String toString() {
+        return "PlateCodeDmlb{" +
+                "cDmlb='" + cDmlb + '\'' +
+                ", cDmlbmc='" + cDmlbmc + '\'' +
+                ", cZt='" + cZt + '\'' +
+                ", cCjuser='" + cCjuser + '\'' +
+                ", dCjsj=" + dCjsj +
+                ", cXguser='" + cXguser + '\'' +
+                ", dXgsj=" + dXgsj +
+                '}';
+    }
 }

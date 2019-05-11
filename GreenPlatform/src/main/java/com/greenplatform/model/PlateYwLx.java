@@ -1,111 +1,148 @@
 package com.greenplatform.model;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.sql.Timestamp;
+import java.util.Objects;
 
+@Entity
+@Table(name = "plate_yw_lx", schema = "greenplatform", catalog = "")
 public class PlateYwLx {
+    private String cYwlxdm;
+    private String cYwlxmc;
+    private String cYwlxmcjc;
+    private String cBz;
+    private String cZt;
+    private String cCjuser;
+    private Timestamp dCjsj;
+    private String cXguser;
+    private Timestamp dXgsj;
 
-  private String cYwlxdm;
-  private String cYwlxmc;
-  private String cYwlxmcjc;
-  private String cBz;
-  private String cZt;
-  private String cCjuser;
-  private java.sql.Timestamp dCjsj;
-  private String cXjuser;
-  private java.sql.Timestamp dXgsj;
+    @Basic
+    @Column(name = "cYwlxdm", nullable = true, length = 255)
+    public String getcYwlxdm() {
+        return cYwlxdm;
+    }
 
+    public void setcYwlxdm(String cYwlxdm) {
+        this.cYwlxdm = cYwlxdm;
+    }
 
-  public String getCYwlxdm() {
-    return cYwlxdm;
-  }
+    @Basic
+    @Column(name = "cYwlxmc", nullable = true, length = 255)
+    public String getcYwlxmc() {
+        return cYwlxmc;
+    }
 
-  public void setCYwlxdm(String cYwlxdm) {
-    this.cYwlxdm = cYwlxdm;
-  }
+    public void setcYwlxmc(String cYwlxmc) {
+        this.cYwlxmc = cYwlxmc;
+    }
 
+    @Basic
+    @Column(name = "cYwlxmcjc", nullable = true, length = 255)
+    public String getcYwlxmcjc() {
+        return cYwlxmcjc;
+    }
 
-  public String getCYwlxmc() {
-    return cYwlxmc;
-  }
+    public void setcYwlxmcjc(String cYwlxmcjc) {
+        this.cYwlxmcjc = cYwlxmcjc;
+    }
 
-  public void setCYwlxmc(String cYwlxmc) {
-    this.cYwlxmc = cYwlxmc;
-  }
+    @Basic
+    @Column(name = "cBz", nullable = true, length = 255)
+    public String getcBz() {
+        return cBz;
+    }
 
+    public void setcBz(String cBz) {
+        this.cBz = cBz;
+    }
 
-  public String getCYwlxmcjc() {
-    return cYwlxmcjc;
-  }
+    @Basic
+    @Column(name = "cZt", nullable = true, length = 255)
+    public String getcZt() {
+        return cZt;
+    }
 
-  public void setCYwlxmcjc(String cYwlxmcjc) {
-    this.cYwlxmcjc = cYwlxmcjc;
-  }
+    public void setcZt(String cZt) {
+        this.cZt = cZt;
+    }
 
+    @Basic
+    @Column(name = "cCjuser", nullable = true, length = 11)
+    public String getcCjuser() {
+        return cCjuser;
+    }
 
-  public String getCBz() {
-    return cBz;
-  }
+    public void setcCjuser(String cCjuser) {
+        this.cCjuser = cCjuser;
+    }
 
-  public void setCBz(String cBz) {
-    this.cBz = cBz;
-  }
+    @Basic
+    @Column(name = "dCjsj", nullable = true)
+    public Timestamp getdCjsj() {
+        return dCjsj;
+    }
 
+    public void setdCjsj(Timestamp dCjsj) {
+        this.dCjsj = dCjsj;
+    }
 
-  public String getCZt() {
-    return cZt;
-  }
+    @Basic
+    @Column(name = "cXguser", nullable = true, length = 11)
+    public String getcXguser() {
+        return cXguser;
+    }
 
-  public void setCZt(String cZt) {
-    this.cZt = cZt;
-  }
+    public void setcXguser(String cXguser) {
+        this.cXguser = cXguser;
+    }
 
+    @Basic
+    @Column(name = "dXgsj", nullable = true)
+    public Timestamp getdXgsj() {
+        return dXgsj;
+    }
 
-  public String getCCjuser() {
-    return cCjuser;
-  }
+    public void setdXgsj(Timestamp dXgsj) {
+        this.dXgsj = dXgsj;
+    }
 
-  public void setCCjuser(String cCjuser) {
-    this.cCjuser = cCjuser;
-  }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlateYwLx plateYwLx = (PlateYwLx) o;
+        return Objects.equals(cYwlxdm, plateYwLx.cYwlxdm) &&
+                Objects.equals(cYwlxmc, plateYwLx.cYwlxmc) &&
+                Objects.equals(cYwlxmcjc, plateYwLx.cYwlxmcjc) &&
+                Objects.equals(cBz, plateYwLx.cBz) &&
+                Objects.equals(cZt, plateYwLx.cZt) &&
+                Objects.equals(cCjuser, plateYwLx.cCjuser) &&
+                Objects.equals(dCjsj, plateYwLx.dCjsj) &&
+                Objects.equals(cXguser, plateYwLx.cXguser) &&
+                Objects.equals(dXgsj, plateYwLx.dXgsj);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(cYwlxdm, cYwlxmc, cYwlxmcjc, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
+    }
 
-  public java.sql.Timestamp getDCjsj() {
-    return dCjsj;
-  }
-
-  public void setDCjsj(java.sql.Timestamp dCjsj) {
-    this.dCjsj = dCjsj;
-  }
-
-
-  public String getCXjuser() {
-    return cXjuser;
-  }
-
-  public void setCXjuser(String cXjuser) {
-    this.cXjuser = cXjuser;
-  }
-
-
-  public java.sql.Timestamp getDXgsj() {
-    return dXgsj;
-  }
-
-  public void setDXgsj(java.sql.Timestamp dXgsj) {
-    this.dXgsj = dXgsj;
-  }
-
-  @Override
-  public String toString() {
-    return "PlateYwLx{" +
-            "cYwlxdm='" + cYwlxdm + '\'' +
-            ", cYwlxmc='" + cYwlxmc + '\'' +
-            ", cYwlxmcjc='" + cYwlxmcjc + '\'' +
-            ", cBz='" + cBz + '\'' +
-            ", cZt='" + cZt + '\'' +
-            ", cCjuser='" + cCjuser + '\'' +
-            ", dCjsj=" + dCjsj +
-            ", cXjuser='" + cXjuser + '\'' +
-            ", dXgsj=" + dXgsj +
-            '}';
-  }
+    @Override
+    public String toString() {
+        return "PlateYwLx{" +
+                "cYwlxdm='" + cYwlxdm + '\'' +
+                ", cYwlxmc='" + cYwlxmc + '\'' +
+                ", cYwlxmcjc='" + cYwlxmcjc + '\'' +
+                ", cBz='" + cBz + '\'' +
+                ", cZt='" + cZt + '\'' +
+                ", cCjuser='" + cCjuser + '\'' +
+                ", dCjsj=" + dCjsj +
+                ", cXguser='" + cXguser + '\'' +
+                ", dXgsj=" + dXgsj +
+                '}';
+    }
 }

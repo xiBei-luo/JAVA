@@ -1,122 +1,159 @@
 package com.greenplatform.model;
 
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Objects;
 
+@Entity
+@Table(name = "plate_code_dmz", schema = "greenplatform", catalog = "")
+@IdClass(PlateCodeDmzPK.class)
 public class PlateCodeDmz {
+    private String cDmlb;
+    private String cDm;
+    private String cDmmc;
+    private String cSort;
+    private String cBz;
+    private String cZt;
+    private String cCjuser;
+    private Timestamp dCjsj;
+    private String cXguser;
+    private Timestamp dXgsj;
 
-  private String cDmlb;
-  private String cDm;
-  private String cDmmc;
-  private String cSort;
-  private String cBz;
-  private String cZt;
-  private String cCjuser;
-  private java.sql.Timestamp dCjsj;
-  private String cXjuser;
-  private java.sql.Timestamp dXgsj;
+    @Id
+    @Column(name = "cDmlb", nullable = false, length = 255)
+    public String getcDmlb() {
+        return cDmlb;
+    }
 
+    public void setcDmlb(String cDmlb) {
+        this.cDmlb = cDmlb;
+    }
 
-  public String getCDmlb() {
-    return cDmlb;
-  }
+    @Id
+    @Column(name = "cDm", nullable = false, length = 255)
+    public String getcDm() {
+        return cDm;
+    }
 
-  public void setCDmlb(String cDmlb) {
-    this.cDmlb = cDmlb;
-  }
+    public void setcDm(String cDm) {
+        this.cDm = cDm;
+    }
 
+    @Basic
+    @Column(name = "cDmmc", nullable = true, length = 255)
+    public String getcDmmc() {
+        return cDmmc;
+    }
 
-  public String getCDm() {
-    return cDm;
-  }
+    public void setcDmmc(String cDmmc) {
+        this.cDmmc = cDmmc;
+    }
 
-  public void setCDm(String cDm) {
-    this.cDm = cDm;
-  }
+    @Basic
+    @Column(name = "cSort", nullable = true, length = 255)
+    public String getcSort() {
+        return cSort;
+    }
 
+    public void setcSort(String cSort) {
+        this.cSort = cSort;
+    }
 
-  public String getCDmmc() {
-    return cDmmc;
-  }
+    @Basic
+    @Column(name = "cBz", nullable = true, length = 255)
+    public String getcBz() {
+        return cBz;
+    }
 
-  public void setCDmmc(String cDmmc) {
-    this.cDmmc = cDmmc;
-  }
+    public void setcBz(String cBz) {
+        this.cBz = cBz;
+    }
 
+    @Basic
+    @Column(name = "cZt", nullable = true, length = 255)
+    public String getcZt() {
+        return cZt;
+    }
 
-  public String getCSort() {
-    return cSort;
-  }
+    public void setcZt(String cZt) {
+        this.cZt = cZt;
+    }
 
-  public void setCSort(String cSort) {
-    this.cSort = cSort;
-  }
+    @Basic
+    @Column(name = "cCjuser", nullable = true, length = 11)
+    public String getcCjuser() {
+        return cCjuser;
+    }
 
+    public void setcCjuser(String cCjuser) {
+        this.cCjuser = cCjuser;
+    }
 
-  public String getCBz() {
-    return cBz;
-  }
+    @Basic
+    @Column(name = "dCjsj", nullable = true)
+    public Timestamp getdCjsj() {
+        return dCjsj;
+    }
 
-  public void setCBz(String cBz) {
-    this.cBz = cBz;
-  }
+    public void setdCjsj(Timestamp dCjsj) {
+        this.dCjsj = dCjsj;
+    }
 
+    @Basic
+    @Column(name = "cXguser", nullable = true, length = 11)
+    public String getcXguser() {
+        return cXguser;
+    }
 
-  public String getCZt() {
-    return cZt;
-  }
+    public void setcXguser(String cXguser) {
+        this.cXguser = cXguser;
+    }
 
-  public void setCZt(String cZt) {
-    this.cZt = cZt;
-  }
+    @Basic
+    @Column(name = "dXgsj", nullable = true)
+    public Timestamp getdXgsj() {
+        return dXgsj;
+    }
 
+    public void setdXgsj(Timestamp dXgsj) {
+        this.dXgsj = dXgsj;
+    }
 
-  public String getCCjuser() {
-    return cCjuser;
-  }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlateCodeDmz that = (PlateCodeDmz) o;
+        return Objects.equals(cDmlb, that.cDmlb) &&
+                Objects.equals(cDm, that.cDm) &&
+                Objects.equals(cDmmc, that.cDmmc) &&
+                Objects.equals(cSort, that.cSort) &&
+                Objects.equals(cBz, that.cBz) &&
+                Objects.equals(cZt, that.cZt) &&
+                Objects.equals(cCjuser, that.cCjuser) &&
+                Objects.equals(dCjsj, that.dCjsj) &&
+                Objects.equals(cXguser, that.cXguser) &&
+                Objects.equals(dXgsj, that.dXgsj);
+    }
 
-  public void setCCjuser(String cCjuser) {
-    this.cCjuser = cCjuser;
-  }
+    @Override
+    public int hashCode() {
+        return Objects.hash(cDmlb, cDm, cDmmc, cSort, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
+    }
 
-
-  public java.sql.Timestamp getDCjsj() {
-    return dCjsj;
-  }
-
-  public void setDCjsj(java.sql.Timestamp dCjsj) {
-    this.dCjsj = dCjsj;
-  }
-
-
-  public String getCXjuser() {
-    return cXjuser;
-  }
-
-  public void setCXjuser(String cXjuser) {
-    this.cXjuser = cXjuser;
-  }
-
-
-  public java.sql.Timestamp getDXgsj() {
-    return dXgsj;
-  }
-
-  public void setDXgsj(java.sql.Timestamp dXgsj) {
-    this.dXgsj = dXgsj;
-  }
-
-  @Override
-  public String toString() {
-    return "PlateCodeDmz{" +
-            "cDmlb='" + cDmlb + '\'' +
-            ", cDm='" + cDm + '\'' +
-            ", cDmmc='" + cDmmc + '\'' +
-            ", cSort='" + cSort + '\'' +
-            ", cBz='" + cBz + '\'' +
-            ", cZt='" + cZt + '\'' +
-            ", cCjuser='" + cCjuser + '\'' +
-            ", dCjsj=" + dCjsj +
-            ", cXjuser='" + cXjuser + '\'' +
-            ", dXgsj=" + dXgsj +
-            '}';
-  }
+    @Override
+    public String toString() {
+        return "PlateCodeDmz{" +
+                "cDmlb='" + cDmlb + '\'' +
+                ", cDm='" + cDm + '\'' +
+                ", cDmmc='" + cDmmc + '\'' +
+                ", cSort='" + cSort + '\'' +
+                ", cBz='" + cBz + '\'' +
+                ", cZt='" + cZt + '\'' +
+                ", cCjuser='" + cCjuser + '\'' +
+                ", dCjsj=" + dCjsj +
+                ", cXguser='" + cXguser + '\'' +
+                ", dXgsj=" + dXgsj +
+                '}';
+    }
 }

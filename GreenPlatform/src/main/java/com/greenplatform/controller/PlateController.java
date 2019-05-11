@@ -21,20 +21,27 @@ public class PlateController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index() {
+        return "plate/index";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
         return "plate/login";
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(PlateUser plateUser){
-        System.out.println(plateUser);
+    @ResponseBody
+    public ReturnModel login(PlateUser plateUser){
         ReturnModel returnModel = plateService.checkLogin(plateUser);
-        return "plate/index";
+        return returnModel;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(){
         return "plate/register";
     }
+
+
     @RequestMapping(value = "/selectUserByEmail", method = RequestMethod.POST)
     @ResponseBody
     public String selectUserByEmail(PlateUser plateUser){
@@ -42,6 +49,7 @@ public class PlateController {
         ReturnModel returnModel = plateService.selectUserByEmail(plateUser);
         return "returnModel";
     }
+
     @RequestMapping(value = "/selectUserByLoginname", method = RequestMethod.POST)
     @ResponseBody
     public String selectUserByLoginname(PlateUser plateUser){

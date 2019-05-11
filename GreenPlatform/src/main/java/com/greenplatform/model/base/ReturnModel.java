@@ -1,7 +1,7 @@
 package com.greenplatform.model.base;
 
 public class ReturnModel {
-    private int flag;
+    private int flag;//1 success 0  error
     private String msg;
     private Object object;
 

@@ -20,7 +20,8 @@ server:
 logging:
   level:
     com:
-      luo:
-        dao:
-          mapper: debug
+      greenplatform:
+        dao: debug
+
+
 

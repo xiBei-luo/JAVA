@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.greenplatform.model.PlateUserYwqx">
+        <table name="plate_user_ywqx" schema="greenplatform" catalog=""/>
+        <attributes>
+            <basic name="cUserid">
+                <column name="cUserid" length="11"/>
+            </basic>
+            <basic name="cYwlxdm">
+                <column name="cYwlxdm" nullable="false"/>
+            </basic>
+            <basic name="cSquser">
+                <column name="cSquser" nullable="false" length="11"/>
+            </basic>
+            <basic name="cCjuser">
+                <column name="cCjuser" nullable="false" length="11"/>
+            </basic>
+            <basic name="dCjsj">
+                <column name="dCjsj" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="cXguser">
+                <column name="cXguser" nullable="false" length="11"/>
+            </basic>
+            <basic name="dXgsj">
+                <column name="dXgsj" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

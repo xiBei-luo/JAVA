@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.greenplatform.model.PlateLog">
+        <table name="plate_log" schema="greenplatform" catalog=""/>
+        <attributes>
+            <id name="cCzrzbh">
+                <column name="cCzrzbh"/>
+            </id>
+            <basic name="cTable">
+                <column name="cTable" nullable="false"/>
+            </basic>
+            <basic name="cTablekey">
+                <column name="cTablekey" nullable="false"/>
+            </basic>
+            <basic name="cKeyvalue">
+                <column name="cKeyvalue" nullable="false"/>
+            </basic>
+            <basic name="cColumn">
+                <column name="cColumn" nullable="false"/>
+            </basic>
+            <basic name="cColumnname">
+                <column name="cColumnname" nullable="false"/>
+            </basic>
+            <basic name="cCzfs">
+                <column name="cCzfs" nullable="false" length="1"/>
+            </basic>
+            <basic name="cOldvalue">
+                <column name="cOldvalue" nullable="false"/>
+            </basic>
+            <basic name="cNewvalue">
+                <column name="cNewvalue" nullable="false"/>
+            </basic>
+            <basic name="cBgr">
+                <column name="cBgr" nullable="false"/>
+            </basic>
+            <basic name="cBgrxm">
+                <column name="cBgrxm" nullable="false"/>
+            </basic>
+            <basic name="dBgsj">
+                <column name="dBgsj" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="cCjuser">
+                <column name="cCjuser" nullable="false" length="11"/>
+            </basic>
+            <basic name="dCjsj">
+                <column name="dCjsj" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="cXguser">
+                <column name="cXguser" nullable="false" length="11"/>
+            </basic>
+            <basic name="dXgsj">
+                <column name="dXgsj" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
