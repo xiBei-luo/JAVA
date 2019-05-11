@@ -11,5 +11,5 @@ public interface PlateDao {
 
     public PlateUser selectUserByLoginname(PlateUser plateUser);//验证注册用户会员名
 
-    public PlateUser insertUser(PlateUser plateUser);//注册用户
+    public int insertUser(PlateUser plateUser);//注册用户
 }

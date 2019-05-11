@@ -59,9 +59,10 @@ public class PlateController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(PlateUser plateUser){
-        System.out.println(plateUser);
-        plateService.insertUser(plateUser);
-        return "plate/index";
+    @ResponseBody
+    public ReturnModel register(PlateUser plateUser){
+        ReturnModel returnModel = new ReturnModel();
+        returnModel = plateService.insertUser(plateUser);
+        return returnModel;
     }
 }

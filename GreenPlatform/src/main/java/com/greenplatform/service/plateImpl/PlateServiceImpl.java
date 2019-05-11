@@ -69,35 +69,19 @@ public class PlateServiceImpl implements PlateService {
 
     @Override
     public ReturnModel insertUser(PlateUser plateUser) {
+        String majorKey = UUID.randomUUID().toString().replaceAll("-", "");
+        plateUser.setcUserid(majorKey);
+        plateUser.setdCjsj(timestamp);
 
-        PlateUser plateUser1 = plateDao.insertUser(plateUser);
-        if (null != plateUser1){
+        try{
+            plateDao.insertUser(plateUser);
+        }catch( Exception e){
             returnModel.setFlag(1);
-            returnModel.setMsg("用户名已存在，请更换!");
+            returnModel.setMsg("注册失败，系统错误!");
             returnModel.setObject(null);
-        }/*else{
-            PlateUser plateUser2 = plateDao.register(plateUser);
-            String majorKey = getUUID();
-            plateUser2.setCUserid(majorKey);
-            plateUser2.setDCjsj(timestamp);
-            PlateUser plateUser3 = plateDao.checkRegister(plateUser2);
-            if (null != plateUser3 && ("" != plateUser3.getCUserid())){
-                returnModel.setFlag(0);
-                returnModel.setMsg("注册成功!");
-                returnModel.setObject(plateUser3);
-            }else{
-                returnModel.setFlag(1);
-                returnModel.setMsg("注册失败!");
-                returnModel.setObject(null);
-            }
-        }*/
+        }
+
         return returnModel;
     }
 
-
-    public String getUUID(){
-        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-        System.out.println(uuid);
-        return uuid;
-    }
 }
