@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ch">
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -18,46 +18,61 @@
         </div>
         <div class="row">
             <div class="col-md-2 plateIndexMenu">
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active" role="presentation"><a href="">用户管理</a></li>
-                    <li role="presentation"><a href="">任务管理</a></li>
-                    <li role="presentation"><a href="">能量管理</a></li>
-                    <li role="presentation"><a href="">商品管理</a></li>
-                    <li role="presentation"><a href="">收徒管理</a></li>
-                    <li role="presentation"><a href="">账户升级管理</a></li>
+                <ul class="nav nav-pills nav-stacked navList">
+                    <li class="active" role="presentation"><a href="/plate/index">用户管理</a></li>
+                    <li role="presentation"><a href="/plate/rwgl">任务管理</a></li>
+                    <li role="presentation"><a href="/plate/nlgl">能量管理</a></li>
+                    <li role="presentation"><a href="/plate/spgl">商品管理</a></li>
+                    <li role="presentation"><a href="/plate/stgl">收徒管理</a></li>
+                    <li role="presentation"><a href="/plate/zhsjgl">账户升级管理</a></li>
                 </ul>
             </div>
             <div class="col-md-10">
                 <table class="table table-bordered table-hover">
                     <tr>
-                        <td>姓名</td>
-                        <td>性别</td>
-                        <td>年龄</td>
-                        <td>身份证号</td>
-                        <td>状态</td>
+                        <th>操作</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>证件号码</th>
+                        <th>人员状态</th>
+                        <th>电话号码</th>
+                        <th>微信号码</th>
+                        <th>QQ号码</th>
+                        <th>状态</th>
                     </tr>
-                    <tr>
-                        <td>姓名</td>
-                        <td>性别</td>
-                        <td>年龄</td>
-                        <td>身份证号</td>
-                        <td>状态</td>
-                    </tr>
-                    <tr>
-                        <td>姓名</td>
-                        <td>性别</td>
-                        <td>年龄</td>
-                        <td>身份证号</td>
-                        <td>状态</td>
-                    </tr>
-                    <tr>
-                        <td>姓名</td>
-                        <td>性别</td>
-                        <td>年龄</td>
-                        <td>身份证号</td>
-                        <td>状态</td>
+                    <tr th:each="plateUserList: ${plateUserList}">
+                        <td>
+                            <a th:href="@{'/updateAreaById/'+${plateUserList.cUserid}}" class="btn btn-sm btn-primary">编辑</a>
+                            <a th:href="@{'/delAreaById/'+${plateUserList.cUserid}}" class="btn btn-sm btn-warning">删除</a>
+                        </td>
+                        <td th:text=${plateUserList.cUsername}></td>
+                        <td th:text=${plateUserList.cSex}></td>
+                        <td th:text=${plateUserList.cZjhm}></td>
+                        <td th:text=${plateUserList.cRyzt}></td>
+                        <td th:text=${plateUserList.cPhone}></td>
+                        <td th:text=${plateUserList.cWxhm}></td>
+                        <td th:text=${plateUserList.cQq}></td>
+                        <td th:text=${plateUserList.cZt}></td>
                     </tr>
                 </table>
+                <nav aria-label="Page navigation" class="navbar-left">
+                    <ul class="pagination">
+                        <li>
+                            <a th:href="'?page='+${pageInfo.prePage}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li th:each="nav:${pageInfo.navigatepageNums}">
+                            <a th:href="'?page='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}"></a>
+                            <span style="font-weight: bold" th:if="${nav == pageInfo.pageNum}" th:text="${nav}"></span>
+                        </li>
+                        <li>
+                            <a th:href="'?page='+${pageInfo.nextPage}"aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
@@ -66,5 +81,6 @@
 
     <script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
     <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="/plate/js/index.js"></script>
 </body>
 </html>
