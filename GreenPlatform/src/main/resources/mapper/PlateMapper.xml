@@ -3,19 +3,53 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.greenplatform.dao.PlateDao">
-    <select id="checkLogin" parameterType="com.greenplatform.model.PlateUser" resultType="com.greenplatform.model.PlateUser">
-        SELECT * FROM plate_user T WHERE T.cLoginname = #{cLoginname} AND T.cPassword = #{cPassword}
+    <!--plateuser crud-->
+    <select id="selectPlateuser" parameterType="com.greenplatform.model.PlateUser" resultType="com.greenplatform.model.PlateUser">
+        SELECT T.* FROM plate_user T WHERE 1=1
+        <if test="cUserid!=null">
+            AND T.cUserid = #{cUserid}
+        </if>
+        <if test="cLoginname!=null">
+            AND T.cLoginname = #{cLoginname}
+        </if>
+        <if test="cUsername!=null">
+            AND T.cUsername = #{cUsername}
+        </if>
+        <if test="cPassword!=null">
+            AND T.cPassword = #{cPassword}
+        </if>
+        <if test="cRylb!=null">
+            AND T.cRylb = #{cRylb}
+        </if>
+        <if test="cRyzt!=null">
+            AND T.cRyzt = #{cRyzt}
+        </if>
+        <if test="cZcfs!=null">
+            AND T.cZcfs = #{cZcfs}
+        </if>
+        <if test="cZjhm!=null">
+            AND T.cZjhm = #{cZjhm}
+        </if>
+        <if test="cSex!=null">
+            AND T.cSex = #{cSex}
+        </if>
+        <if test="cPhone!=null">
+            AND T.cPhone = #{cPhone}
+        </if>
+        <if test="cWxhm!=null">
+            AND T.cWxhm = #{cWxhm}
+        </if>
+        <if test="cQq!=null">
+            AND T.cQq = #{cQq}
+        </if>
+        <if test="cEmail!=null">
+            AND T.cEmail = #{cEmail}
+        </if>
+        <if test="cZt!=null">
+            AND T.cZt = #{cZt}
+        </if>
     </select>
-
-    <select id="selectUserByEmail" parameterType="com.greenplatform.model.PlateUser" resultType="com.greenplatform.model.PlateUser">
-        SELECT * FROM plate_user T WHERE T.cEmail = #{cEmail}
-    </select>
-
-    <select id="selectUserByLoginname" parameterType="com.greenplatform.model.PlateUser" resultType="com.greenplatform.model.PlateUser">
-        SELECT * FROM plate_user T WHERE T.cLoginname = #{cLoginname}
-    </select>
-
-    <insert id="insertUser" parameterType="com.greenplatform.model.PlateUser">
+    <insert id="insertPlateuser" parameterType="com.greenplatform.model.PlateUser">
         INSERT INTO plate_user (cUserid,cLoginname,cUsername,cPassword,cRylb,
                                cRyzt,cZcfs,cZjlx,cZjhm,cSex,
                                cJtzz,cPhone,cWxhm,cQq,cEmail,
@@ -27,6 +61,104 @@
                #{cBz},#{cZt},#{cCjuser},#{dCjsj},#{cXguser},
                #{dXgsj})
     </insert>
+    <delete id="delPlateuser" parameterType="com.greenplatform.model.PlateUser">
+        DELETE FROM plate_user WHERE cUserid = #{cUserid}
+    </delete>
+    <update id="updPlateuser" parameterType="com.greenplatform.model.PlateUser">
+        UPDATE plate_user
+        <set>
+            <if test="cUsername != null">cUsername = #{cUsername},</if>
+            <if test="cPassword != null">cPassword = #{cPassword},</if>
+            <if test="cZjlx != null">cZjlx = #{cZjlx},</if>
+            <if test="cZjhm != null">cZjhm = #{cZjhm},</if>
+            <if test="cSex != null">cSex = #{cSex},</if>
+            <if test="cJtzz != null">cJtzz = #{cJtzz},</if>
+            <if test="cPhone != null">cPhone = #{cPhone},</if>
+            <if test="cWxhm != null">cWxhm = #{cWxhm},</if>
+            <if test="cQq != null">cQq = #{cQq},</if>
+            <if test="cXguser != null">cXguser = #{cXguser},</if>
+            <if test="dXgsj != null">dXgsj = #{dXgsj},</if>
+        </set>
+        WHERE cUserid = #{cUserid}
+    </update>
+
+    <!--systemUser crud
+    <select id="selectSystemuser" resultType="java.util.List" parameterType="com.greenplatform.model.system_user">
+        SELECT T.* FROM system_user T WHERE 1=1
+        <if test="cUserid!=null">
+            AND T.cUserid = #{cUserid}
+        </if>
+        <if test="cLoginname!=null">
+            AND T.cLoginname = #{cLoginname}
+        </if>
+        <if test="cUsername!=null">
+            AND T.cUsername = #{cUsername}
+        </if>
+        <if test="cRylb!=null">
+            AND T.cRylb = #{cRylb}
+        </if>
+        <if test="cRyzt!=null">
+            AND T.cRyzt = #{cRyzt}
+        </if>
+        <if test="cZcfs!=null">
+            AND T.cZcfs = #{cZcfs}
+        </if>
+        <if test="cZjhm!=null">
+            AND T.cZjhm = #{cZjhm}
+        </if>
+        <if test="cSex!=null">
+            AND T.cSex = #{cSex}
+        </if>
+        <if test="cPhone!=null">
+            AND T.cPhone = #{cPhone}
+        </if>
+        <if test="cWxhm!=null">
+            AND T.cWxhm = #{cWxhm}
+        </if>
+        <if test="cQq!=null">
+            AND T.cQq = #{cQq}
+        </if>
+        <if test="cEmail!=null">
+            AND T.cEmail = #{cEmail}
+        </if>
+        <if test="cZt!=null">
+            AND T.cZt = #{cZt}
+        </if>
+    </select>
+    <insert id="insertSystemUser" parameterType="com.greenplatform.model.SystemUser">
+        INSERT INTO system_user (cUserid,cLoginname,cUsername,cPassword,cRylb,
+                               cRyzt,cZcfs,cZjlx,cZjhm,cSex,
+                               cJtzz,cPhone,cWxhm,cQq,cEmail,
+                               cBz,cZt,cCjuser,dCjsj,cXguser
+                               ,dXgsj)
+        VALUES(#{cUserid},#{cLoginname},#{cUsername},#{cPassword},#{cRylb},
+               #{cRyzt},#{cZcfs},#{cZjlx},#{cZjhm},#{cSex},
+               #{cJtzz},#{cPhone},#{cWxhm},#{cQq},#{cEmail},
+               #{cBz},#{cZt},#{cCjuser},#{dCjsj},#{cXguser},
+               #{dXgsj})
+    </insert>
+    <delete id="delSystemuser" parameterType="com.greenplatform.model.SystemUser">
+        DELETE FROM system_user WHERE cUserid = #{cUserid}
+    </delete>
+    <update id="updSystemuser" parameterType="com.greenplatform.model.SystemUser">
+        UPDATE system_user
+        <set>
+            <if test="cUsername != null">cUsername = #{cUsername},</if>
+            <if test="cPassword != null">cPassword = #{cPassword},</if>
+            <if test="cZjlx != null">cZjlx = #{cZjlx},</if>
+            <if test="cZjhm != null">cZjhm = #{cZjhm},</if>
+            <if test="cSex != null">cSex = #{cSex},</if>
+            <if test="cJtzz != null">cJtzz = #{cJtzz},</if>
+            <if test="cPhone != null">cPhone = #{cPhone},</if>
+            <if test="cWxhm != null">cWxhm = #{cWxhm},</if>
+            <if test="cQq != null">cQq = #{cQq},</if>
+            <if test="cXguser != null">cXguser = #{cXguser},</if>
+            <if test="dXgsj != null">dXgsj = #{dXgsj},</if>
+        </set>
+        WHERE cUserid = #{cUserid}
+    </update>-->
+
+
 
 
 </mapper>

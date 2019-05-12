@@ -82,7 +82,7 @@ function f_submitData(){
         "cPassword":$("#cPassword").val()
     };
     var options = {
-        url:"/plate/register",
+        url:"/system/register",
         type:"POST",
         data:paramObj,
         success:function(ret){
@@ -98,12 +98,13 @@ function f_submitData(){
                     buttonLabel: "确定"
                 });
             }else{
-                window.location.href="/plate/index";
+                window.location.href="/system/index";
             }
         },
         error:function(){
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,
+                size: BootstrapDialog.SIZE_SMALL,
                 title: '提示',
                 message: "系统错误！",
                 closeable: true,

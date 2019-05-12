@@ -30,7 +30,7 @@ public class SystemUser {
     private Timestamp dXgsj;
 
     @Id
-    @Column(name = "cUserid", nullable = false, length = 11)
+    @Column(name = "cUserid", nullable = false, length = 255)
     public String getcUserid() {
         return cUserid;
     }

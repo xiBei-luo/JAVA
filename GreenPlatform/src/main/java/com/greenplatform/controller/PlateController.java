@@ -20,7 +20,8 @@ public class PlateController {
     PlateService plateService;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index() {
+    public String index(PlateUser plateUser) {
+        System.out.println(plateService.selectPlateuser(plateUser));
         return "plate/index";
     }
 
@@ -32,37 +33,7 @@ public class PlateController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public ReturnModel login(PlateUser plateUser){
-        ReturnModel returnModel = plateService.checkLogin(plateUser);
-        return returnModel;
-    }
-
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String register(){
-        return "plate/register";
-    }
-
-
-    @RequestMapping(value = "/selectUserByEmail", method = RequestMethod.POST)
-    @ResponseBody
-    public String selectUserByEmail(PlateUser plateUser){
-        System.out.println(plateUser);
-        ReturnModel returnModel = plateService.selectUserByEmail(plateUser);
-        return "returnModel";
-    }
-
-    @RequestMapping(value = "/selectUserByLoginname", method = RequestMethod.POST)
-    @ResponseBody
-    public String selectUserByLoginname(PlateUser plateUser){
-        System.out.println(plateUser);
-        ReturnModel returnModel = plateService.selectUserByLoginname(plateUser);
-        return "returnModel";
-    }
-
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    @ResponseBody
-    public ReturnModel register(PlateUser plateUser){
-        ReturnModel returnModel = new ReturnModel();
-        returnModel = plateService.insertUser(plateUser);
+        ReturnModel returnModel = plateService.selectPlateuser(plateUser);
         return returnModel;
     }
 }

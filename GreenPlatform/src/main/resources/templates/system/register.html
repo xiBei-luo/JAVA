@@ -5,12 +5,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>请登录!</title>
+    <title>请注册!</title>
 
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrapValidator.min.css">
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
-    <link rel="stylesheet" href="/plate/css/login.css">
+    <link rel="stylesheet" href="/system/css/systemStyle.css">
 </head>
 <body>
 <div class="container-fluid">
@@ -19,25 +19,42 @@
         <div class="col-md-4 col-xs-10">
             <div class="panel panel-success">
                 <div class="panel-heading text-center">
-                    <b>密码登陆</b>
+                    <b>用户注册</b>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" id="loginForm">
+                    <form class="form-horizontal"  id="registerForm">
+                        <div class="form-group">
+                            <label for="cEmail" class="control-label"></label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control input-lg" id="cEmail" name="cEmail" placeholder="请输入邮箱">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="cLoginname" class="control-label"></label>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control input-lg" id="cLoginname" name="cLoginname" placeholder="登录名/手机号码">
+                                <input type="text" class="form-control input-lg" id="cLoginname" name="cLoginname" placeholder="设置会员名">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="cPassword" class="control-label"></label>
                             <div class="col-sm-12">
-                                <input type="password" class="form-control input-lg" id="cPassword" name="cPassword" placeholder="请输入登陆密码">
+                                <input type="password" class="form-control input-lg" id="cPassword" name="cPassword" placeholder="设置你的登陆密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cPassword1" class="control-label"></label>
+                            <div class="col-sm-12">
+                                <input type="password" class="form-control input-lg" id="cPassword1" name="cPassword1" placeholder="请再次输入你的密码">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <button type="submit" class="btn btn-block btn-lg btn-primary" id="btnLogin">登陆</button>
+                                <button type="submit" id="btnRegister" class="btn btn-block btn-lg btn-primary">注册</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <a href="./login">已有账号?立即登陆</a>
                             </div>
                         </div>
                     </form>
@@ -53,6 +70,6 @@
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrapValidator.min.js"></script>
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
-<script src="/plate/js/login.js"></script>
+<script src="/system/js/register.js"></script>
 </body>
 </html>

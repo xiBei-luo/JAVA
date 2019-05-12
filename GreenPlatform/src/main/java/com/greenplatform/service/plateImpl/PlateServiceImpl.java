@@ -1,7 +1,7 @@
 package com.greenplatform.service.plateImpl;
 
 import com.greenplatform.dao.PlateDao;
-import com.greenplatform.model.PlateUser;
+import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +9,12 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Service
 public class PlateServiceImpl implements PlateService {
-    ReturnModel returnModel = new ReturnModel();;
+    ReturnModel returnModel = new ReturnModel();
     @Autowired
     PlateDao plateDao;
     Date date = new Date();
@@ -21,60 +22,28 @@ public class PlateServiceImpl implements PlateService {
 
 
     @Override
-    public ReturnModel checkLogin(PlateUser plateUser) {
-        PlateUser plateUser1 = plateDao.checkLogin(plateUser);
-        System.out.println(plateUser1);
-        if (null != plateUser1 && "" != plateUser1.getcUserid()){
+    public ReturnModel selectPlateuser(PlateUser plateUser) {
+        List plateUserList = plateDao.selectPlateuser(plateUser);
+        if (!plateUserList.isEmpty()){
             returnModel.setFlag(0);
             returnModel.setMsg("登陆成功");
-            returnModel.setObject(plateUser1);
-        }else if(null == plateUser1){
+            returnModel.setObject(plateUserList);
+        }else{
             returnModel.setFlag(1);
             returnModel.setMsg("登录名或密码错误");
             returnModel.setObject(null);
         }
-        System.out.println( returnModel);
         return returnModel;
     }
 
     @Override
-    public ReturnModel selectUserByEmail(PlateUser plateUser) {
-        PlateUser plateUser1 = plateDao.selectUserByEmail(plateUser);
-        if (null != plateUser1){
-            returnModel.setFlag(1);
-            returnModel.setMsg("邮箱已经被注册!");
-            returnModel.setObject(null);
-        }else{
-            returnModel.setFlag(0);
-            returnModel.setMsg("");
-            returnModel.setObject(null);
-        }
-        return returnModel;
-    }
-
-    @Override
-    public ReturnModel selectUserByLoginname(PlateUser plateUser) {
-        PlateUser plateUser1 = plateDao.selectUserByLoginname(plateUser);
-        if (null != plateUser1){
-            returnModel.setFlag(1);
-            returnModel.setMsg("会员名已经被注册!");
-            returnModel.setObject(null);
-        }else{
-            returnModel.setFlag(0);
-            returnModel.setMsg("");
-            returnModel.setObject(null);
-        }
-        return returnModel;
-    }
-
-    @Override
-    public ReturnModel insertUser(PlateUser plateUser) {
+    public ReturnModel insertPlateuser(PlateUser plateUser) {
         String majorKey = UUID.randomUUID().toString().replaceAll("-", "");
         plateUser.setcUserid(majorKey);
         plateUser.setdCjsj(timestamp);
 
         try{
-            plateDao.insertUser(plateUser);
+            plateDao.insertPlateuser(plateUser);
         }catch( Exception e){
             returnModel.setFlag(1);
             returnModel.setMsg("注册失败，系统错误!");
@@ -83,5 +52,66 @@ public class PlateServiceImpl implements PlateService {
 
         return returnModel;
     }
+
+    @Override
+    public ReturnModel delPlateuser(PlateUser plateUser) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel updPlateuser(PlateUser plateUser) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel selectPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel insertPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel delPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel updPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel selectPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel insertPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel delPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel updPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel selectPlateLog(PlateLog plateLog) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel insertPlateLog(PlateLog plateLog) {
+        return null;
+    }
+
 
 }
