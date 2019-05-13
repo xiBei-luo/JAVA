@@ -16,6 +16,8 @@ public interface PlateService {
     public ReturnModel insertUser(PlateUser plateUser);*/
 
     /*平台用户操作brgin*/
+    public ReturnModel selectPlateuser(PlateUser plateUser,String type);//查询平台用户信息
+
     public ReturnModel selectPlateuser(PlateUser plateUser);//查询平台用户信息
 
     public ReturnModel insertPlateuser(PlateUser plateUser);//插入平台用户信息

@@ -6,13 +6,13 @@
     <!--plateuser crud-->
     <select id="selectPlateuser" parameterType="com.greenplatform.model.PlateUser" resultType="com.greenplatform.model.PlateUser">
         SELECT T.* FROM plate_user T WHERE 1=1
-        <if test="cUserid!=null">
+        <if test='cUserid!=null and cUserid!=""'>
             AND T.cUserid = #{cUserid}
         </if>
         <if test="cLoginname!=null">
             AND T.cLoginname = #{cLoginname}
         </if>
-        <if test="cUsername!=null">
+        <if test='cUsername!=null and cUsername!=""'>
             AND T.cUsername = #{cUsername}
         </if>
         <if test="cPassword!=null">
@@ -33,7 +33,7 @@
         <if test="cSex!=null">
             AND T.cSex = #{cSex}
         </if>
-        <if test="cPhone!=null">
+        <if test='cPhone!=null and cPhone!=""'>
             AND T.cPhone = #{cPhone}
         </if>
         <if test="cWxhm!=null">

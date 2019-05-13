@@ -1,0 +1,34 @@
+.plateIndexTitle{
+    background: #1b6d85;
+    margin-bottom: 5px;
+    color: #ebebeb;
+}
+.plateIndexMenu{
+    background: #ebebeb;
+}
+.searchForm{
+    height:50px;
+    line-height: 50px;
+}
+.contentBox{
+    width: 100%;
+    height: 500px;
+}
+#gridbox{
+    width: 100%;
+    height: 500px;
+}
+#commonInfo{
+    z-index: 999;
+    width: 98%;
+    height: auto;
+    position: absolute;
+    top:50%;
+    text-align: center;
+    font-size: 18px;
+    color: #C6C6C6;
+}
+
+
+
+

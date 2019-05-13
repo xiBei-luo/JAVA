@@ -22,7 +22,7 @@ public class PlateServiceImpl implements PlateService {
 
 
     @Override
-    public ReturnModel selectPlateuser(PlateUser plateUser) {
+    public ReturnModel selectPlateuser(PlateUser plateUser,String type) {
         List plateUserList = plateDao.selectPlateuser(plateUser);
         if (!plateUserList.isEmpty()){
             returnModel.setFlag(0);
@@ -31,6 +31,23 @@ public class PlateServiceImpl implements PlateService {
         }else{
             returnModel.setFlag(1);
             returnModel.setMsg("登录名或密码错误");
+            returnModel.setObject(null);
+        }
+        return returnModel;
+    }
+
+    @Override
+    public ReturnModel selectPlateuser(PlateUser plateUser) {
+        List plateUserList;
+        try{
+            plateUserList = plateDao.selectPlateuser(plateUser);
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(plateUserList);
+        }catch(Exception e){
+            System.out.println(e);
+            returnModel.setFlag(1);
+            returnModel.setMsg("系统错误");
             returnModel.setObject(null);
         }
         return returnModel;

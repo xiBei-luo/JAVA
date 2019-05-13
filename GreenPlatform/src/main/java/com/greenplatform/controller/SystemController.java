@@ -1,9 +1,7 @@
 package com.greenplatform.controller;
 
-import com.greenplatform.model.PlateUser;
 import com.greenplatform.model.SystemUser;
 import com.greenplatform.model.base.ReturnModel;
-import com.greenplatform.service.PlateService;
 import com.greenplatform.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +21,7 @@ public class SystemController {
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String login(){
-        return "system/login";
+        return "system/login/login";
     }
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index() {
@@ -32,7 +30,7 @@ public class SystemController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(){
-        return "system/register";
+        return "system/register/register";
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)

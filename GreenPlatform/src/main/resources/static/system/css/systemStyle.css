@@ -1,11 +1,39 @@
 html,body{
-    width:100%;
-    height:100%;
-    background: url("../../publicImg/systemBg.jpeg");
+    width: 100%;
+    background: url("../../publicImg/systemBg.jpg") repeat-x;
+    overflow-x: hidden;
 }
-.navBox{
-    height:30%;
+.mr-top-100{
+    margin-top: 100px;
 }
-.row{
-    margin-top: 20px;
+.contentBox img{
+    width: 100%;
+    height: 100%;
+    background-position: center ;
+    border:2px solid;
+    border-radius: 50%;
+    padding:10px;
+    margin-top: 10%;
 }
+#js{
+    border-color: #2b542c;
+    background: #5cb85c;
+}
+#sf{
+    border-color: #8a6d3b;
+    background: #c0a16b;
+}
+#yg{
+    border-color: #e38d13;
+    background: #f5e79e;
+}
+#returnTop{
+    position: fixed;
+    right:0;
+    bottom:0;
+    width: 50px;
+    height: 50px;
+    background: #b92c28;
+}
+
+
