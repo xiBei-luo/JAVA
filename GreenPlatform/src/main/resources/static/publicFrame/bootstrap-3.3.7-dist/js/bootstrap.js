@@ -1288,7 +1288,7 @@ if (typeof jQuery === 'undefined') {
 
   Tooltip.DEFAULTS = {
     animation: true,
-    placement: 'top',
+    placement: 'header.html',
     selector: false,
     template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
     trigger: 'hover focus',
@@ -1452,7 +1452,7 @@ if (typeof jQuery === 'undefined') {
 
       var autoToken = /\s?auto?\s?/i
       var autoPlace = autoToken.test(placement)
-      if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
+      if (autoPlace) placement = placement.replace(autoToken, '') || 'header.html'
 
       $tip
         .detach()
@@ -1471,8 +1471,8 @@ if (typeof jQuery === 'undefined') {
         var orgPlacement = placement
         var viewportDim = this.getPosition(this.$viewport)
 
-        placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top'    :
-                    placement == 'top'    && pos.top    - actualHeight < viewportDim.top    ? 'bottom' :
+        placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'header.html'    :
+                    placement == 'header.html'    && pos.header    - actualHeight < viewportDim.header    ? 'bottom' :
                     placement == 'right'  && pos.right  + actualWidth  > viewportDim.width  ? 'left'   :
                     placement == 'left'   && pos.left   - actualWidth  < viewportDim.left   ? 'right'  :
                     placement
@@ -1523,7 +1523,7 @@ if (typeof jQuery === 'undefined') {
     $.offset.setOffset($tip[0], $.extend({
       using: function (props) {
         $tip.css({
-          top: Math.round(props.top),
+          top: Math.round(props.header),
           left: Math.round(props.left)
         })
       }
@@ -1535,7 +1535,7 @@ if (typeof jQuery === 'undefined') {
     var actualWidth  = $tip[0].offsetWidth
     var actualHeight = $tip[0].offsetHeight
 
-    if (placement == 'top' && actualHeight != height) {
+    if (placement == 'header.html' && actualHeight != height) {
       offset.top = offset.top + height - actualHeight
     }
 
@@ -1554,8 +1554,8 @@ if (typeof jQuery === 'undefined') {
 
   Tooltip.prototype.replaceArrow = function (delta, dimension, isVertical) {
     this.arrow()
-      .css(isVertical ? 'left' : 'top', 50 * (1 - delta / dimension) + '%')
-      .css(isVertical ? 'top' : 'left', '')
+      .css(isVertical ? 'left' : 'header.html', 50 * (1 - delta / dimension) + '%')
+      .css(isVertical ? 'header.html' : 'left', '')
   }
 
   Tooltip.prototype.setContent = function () {
@@ -1631,10 +1631,10 @@ if (typeof jQuery === 'undefined') {
   }
 
   Tooltip.prototype.getCalculatedOffset = function (placement, pos, actualWidth, actualHeight) {
-    return placement == 'bottom' ? { top: pos.top + pos.height,   left: pos.left + pos.width / 2 - actualWidth / 2 } :
-           placement == 'top'    ? { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2 } :
-           placement == 'left'   ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
-        /* placement == 'right' */ { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width }
+    return placement == 'bottom' ? { top: pos.header + pos.height,   left: pos.left + pos.width / 2 - actualWidth / 2 } :
+           placement == 'header.html'    ? { top: pos.header - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2 } :
+           placement == 'left'   ? { top: pos.header + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
+        /* placement == 'right' */ { top: pos.header + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width }
 
   }
 
@@ -1646,12 +1646,12 @@ if (typeof jQuery === 'undefined') {
     var viewportDimensions = this.getPosition(this.$viewport)
 
     if (/right|left/.test(placement)) {
-      var topEdgeOffset    = pos.top - viewportPadding - viewportDimensions.scroll
-      var bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight
-      if (topEdgeOffset < viewportDimensions.top) { // top overflow
-        delta.top = viewportDimensions.top - topEdgeOffset
-      } else if (bottomEdgeOffset > viewportDimensions.top + viewportDimensions.height) { // bottom overflow
-        delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset
+      var topEdgeOffset    = pos.header - viewportPadding - viewportDimensions.scroll
+      var bottomEdgeOffset = pos.header + viewportPadding - viewportDimensions.scroll + actualHeight
+      if (topEdgeOffset < viewportDimensions.header) { // top overflow
+        delta.top = viewportDimensions.header - topEdgeOffset
+      } else if (bottomEdgeOffset > viewportDimensions.header + viewportDimensions.height) { // bottom overflow
+        delta.top = viewportDimensions.header + viewportDimensions.height - bottomEdgeOffset
       }
     } else {
       var leftEdgeOffset  = pos.left - viewportPadding
@@ -1948,7 +1948,7 @@ if (typeof jQuery === 'undefined') {
         return ($href
           && $href.length
           && $href.is(':visible')
-          && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+          && [[$href[offsetMethod]().header + offsetBase, href]]) || null
       })
       .sort(function (a, b) { return a[0] - b[0] })
       .each(function () {
@@ -2257,18 +2257,18 @@ if (typeof jQuery === 'undefined') {
     var position     = this.$element.offset()
     var targetHeight = this.$target.height()
 
-    if (offsetTop != null && this.affixed == 'top') return scrollTop < offsetTop ? 'top' : false
+    if (offsetTop != null && this.affixed == 'header.html') return scrollTop < offsetTop ? 'header.html' : false
 
     if (this.affixed == 'bottom') {
-      if (offsetTop != null) return (scrollTop + this.unpin <= position.top) ? false : 'bottom'
+      if (offsetTop != null) return (scrollTop + this.unpin <= position.header) ? false : 'bottom'
       return (scrollTop + targetHeight <= scrollHeight - offsetBottom) ? false : 'bottom'
     }
 
     var initializing   = this.affixed == null
-    var colliderTop    = initializing ? scrollTop : position.top
+    var colliderTop    = initializing ? scrollTop : position.header
     var colliderHeight = initializing ? targetHeight : height
 
-    if (offsetTop != null && scrollTop <= offsetTop) return 'top'
+    if (offsetTop != null && scrollTop <= offsetTop) return 'header.html'
     if (offsetBottom != null && (colliderTop + colliderHeight >= scrollHeight - offsetBottom)) return 'bottom'
 
     return false
@@ -2279,7 +2279,7 @@ if (typeof jQuery === 'undefined') {
     this.$element.removeClass(Affix.RESET).addClass('affix')
     var scrollTop = this.$target.scrollTop()
     var position  = this.$element.offset()
-    return (this.pinnedOffset = position.top - scrollTop)
+    return (this.pinnedOffset = position.header - scrollTop)
   }
 
   Affix.prototype.checkPositionWithEventLoop = function () {
@@ -2291,18 +2291,18 @@ if (typeof jQuery === 'undefined') {
 
     var height       = this.$element.height()
     var offset       = this.options.offset
-    var offsetTop    = offset.top
+    var offsetTop    = offset.header
     var offsetBottom = offset.bottom
     var scrollHeight = Math.max($(document).height(), $(document.body).height())
 
     if (typeof offset != 'object')         offsetBottom = offsetTop = offset
-    if (typeof offsetTop == 'function')    offsetTop    = offset.top(this.$element)
+    if (typeof offsetTop == 'function')    offsetTop    = offset.header(this.$element)
     if (typeof offsetBottom == 'function') offsetBottom = offset.bottom(this.$element)
 
     var affix = this.getState(scrollHeight, height, offsetTop, offsetBottom)
 
     if (this.affixed != affix) {
-      if (this.unpin != null) this.$element.css('top', '')
+      if (this.unpin != null) this.$element.css('header.html', '')
 
       var affixType = 'affix' + (affix ? '-' + affix : '')
       var e         = $.Event(affixType + '.bs.affix')

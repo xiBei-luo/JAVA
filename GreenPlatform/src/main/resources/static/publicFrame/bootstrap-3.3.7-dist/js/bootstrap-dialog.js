@@ -1115,7 +1115,7 @@
                     dialog.draggableData.isMouseDown = true;
                     var dialogOffset = dialog.getModalDialog().offset();
                     dialog.draggableData.mouseOffset = {
-                        top: event.clientY - dialogOffset.top,
+                        top: event.clientY - dialogOffset.header,
                         left: event.clientX - dialogOffset.left
                     };
                 });

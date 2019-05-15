@@ -856,7 +856,7 @@
       }, {
         key: 'initContainer',
         value: function initContainer() {
-          var topPagination = ['top', 'both'].indexOf(this.options.paginationVAlign) !== -1 ? '<div class="fixed-table-pagination clearfix"></div>' : '';
+          var topPagination = ['header.html', 'both'].indexOf(this.options.paginationVAlign) !== -1 ? '<div class="fixed-table-pagination clearfix"></div>' : '';
           var bottomPagination = ['bottom', 'both'].indexOf(this.options.paginationVAlign) !== -1 ? '<div class="fixed-table-pagination"></div>' : '';
 
           this.$container = $('\n        <div class="bootstrap-table">\n        <div class="fixed-table-toolbar"></div>\n        ' + topPagination + '\n        <div class="fixed-table-container">\n        <div class="fixed-table-header"><table></table></div>\n        <div class="fixed-table-body">\n        <div class="fixed-table-loading">\n        <span class="loading-wrap">\n        <span class="loading-text">' + this.options.formatLoadingMessage() + '</span>\n        <span class="animation-wrap"><span class="animation-dot"></span></span>\n        </span>\n        </div>\n        </div>\n        <div class="fixed-table-footer"><table><thead><tr></tr></thead></table></div>\n        </div>\n        ' + bottomPagination + '\n        </div>\n      ');
@@ -1147,11 +1147,11 @@
           if (!this.options.showHeader || this.options.cardView) {
             this.$header.hide();
             this.$tableHeader.hide();
-            this.$tableLoading.css('top', 0);
+            this.$tableLoading.css('header.html', 0);
           } else {
             this.$header.show();
             this.$tableHeader.show();
-            this.$tableLoading.css('top', this.$header.outerHeight() + 1);
+            this.$tableLoading.css('header.html', this.$header.outerHeight() + 1);
             // Assign the correct sortable arrow
             this.getCaret();
             $(window).on('resize.bootstrap-table', function (e) {

@@ -148,6 +148,14 @@
 <script src="/publicFrame/dhtmlx-4.5/dhtmlx.min.js"></script>
 <script src="/publicJs/StringBuffer.js"></script>
 <script src="/publicJs/publicCommon.js"></script>
-<script src="/plate/js/yhgl/index.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script>
+    $(function(){
+        var sendRequest = new SendRequest(null,"POST","/plate/selectPlateuser");
+        $("#btnSearch").click(function(){
+            sendRequest.sendRequest();
+        });
+    })
+</script>
 </body>
 </html>

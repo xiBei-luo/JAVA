@@ -2,6 +2,8 @@ package com.greenplatform.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.greenplatform.model.PlateCodeDmlb;
+import com.greenplatform.model.PlateCodeDmz;
 import com.greenplatform.model.PlateUser;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
@@ -28,18 +30,6 @@ public class PlateController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(PlateUser plateUser) {
-        /*Integer limit = 30;
-        if ("".equals(page) || null == page){
-            page = 1;
-        }
-        PageHelper.startPage(page, limit);
-        List plateUserList = (List) (plateService.selectPlateuser(plateUser)).getObject();
-        PageInfo pageInfo=new PageInfo<>(plateUserList);
-        System.out.println(pageInfo);
-        model.addAttribute("plateUserList",plateUserList);
-        model.addAttribute("pageInfo",pageInfo);
-
-*/
         return "plate/yhgl/index";
     }
 
@@ -61,4 +51,34 @@ public class PlateController {
         ReturnModel returnModel = plateService.selectPlateuser(plateUser);
         return returnModel;
     }
+
+    @RequestMapping(value = "/insertPlateuser",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel insertPlateuser(PlateUser plateUser){
+        ReturnModel returnModel = plateService.insertPlateuser(plateUser);
+        return returnModel;
+    }
+
+    @RequestMapping(value = "/updPlateuser",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel updPlateuser(PlateUser plateUser){
+        ReturnModel returnModel = plateService.updPlateuser(plateUser);
+        return returnModel;
+    }
+
+    @RequestMapping(value = "/delPlateuser",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel delPlateuser(PlateUser plateUser){
+        ReturnModel returnModel = plateService.delPlateuser(plateUser);
+        return returnModel;
+    }
+    @RequestMapping(value = "/selectPlateCodeDmz",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel selectPlateCodeDmz(PlateCodeDmz plateCodeDmz){
+        System.out.println(plateCodeDmz);
+        ReturnModel returnModel = plateService.selectPlateCodeDmz(plateCodeDmz);
+        return returnModel;
+    }
+
+
 }

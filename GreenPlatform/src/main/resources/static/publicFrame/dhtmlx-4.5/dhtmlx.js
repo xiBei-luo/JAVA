@@ -89,7 +89,7 @@ if (typeof(window.dhx4) == "undefined") {
             if (typeof(a) == "string") {
                 a = document.getElementById(a)
             }
-            return this.getOffset(a).top
+            return this.getOffset(a).header
         },
         _aOfs: function(a) {
             var e = 0,
@@ -6620,7 +6620,7 @@ function dhtmlXCalendarObject(l, s) {
     this._showTooltipPopup = function(A, a, C, u, v) {
         if (!h._tipPopup) {
             h._tipPopup = new dhtmlXPopup({
-                mode: "top"
+                mode: "header.html"
             })
         }
         h._tipPopup.attachHTML(h._tipText);
@@ -11177,13 +11177,13 @@ dhtmlXSlider.prototype._indexOf = function(a, g) {
 };
 dhtmlXSlider.prototype._refreshRunner = function(h) {
     var g = (this.conf.vertical == true ? {
-        x: "top",
+        x: "header.html",
         y: "left",
         ofs_w: "offsetHeight",
         ofs_h: "offsetWidth"
     }: {
         x: "left",
-        y: "top",
+        y: "header.html",
         ofs_w: "offsetWidth",
         ofs_h: "offsetHeight"
     });
@@ -11256,7 +11256,7 @@ dhtmlXSlider.prototype._refreshBG = function() {
     var e = this._nodes.runner;
     var a = e.nextSibling;
     var c = (this.conf.vertical == true ? {
-        x: "top",
+        x: "header.html",
         w: "height",
         ofs: "offsetHeight"
     }: {
@@ -11686,7 +11686,7 @@ function dhtmlXPopup(e) {
     };
     this._setPos = function(J, n) {
         var A = J.left;
-        var u = J.top;
+        var u = J.header;
         var D = J.width;
         var M = J.height;
         this._posData = {
@@ -11713,7 +11713,7 @@ function dhtmlXPopup(e) {
                 return
             }
         }
-        if (H == "top" || H == "bottom") {
+        if (H == "header.html" || H == "bottom") {
             var E = this.skinParams[this.conf.skin].t2;
             var C = this.skinParams[this.conf.skin].t3;
             var s = Math.round(this.p.offsetWidth / 2);
@@ -11738,10 +11738,10 @@ function dhtmlXPopup(e) {
                 }
             }
             this.p.style.left = m + "px";
-            this.p.style.top = (H == "top" ? u - this.p.offsetHeight: u + M) + "px";
+            this.p.style.top = (H == "header.html" ? u - this.p.offsetHeight: u + M) + "px";
             v = v - m - a;
             this.p.lastChild.className = "dhx_popup_arrow dhx_popup_arrow_" + H;
-            this.p.lastChild.style.top = (H == "top" ? this.p.offsetHeight - this.p.lastChild.offsetHeight: 0) + "px";
+            this.p.lastChild.style.top = (H == "header.html" ? this.p.offsetHeight - this.p.lastChild.offsetHeight: 0) + "px";
             this.p.lastChild.style.left = v + "px"
         }
         if (H == "left" || H == "right") {
@@ -11790,9 +11790,9 @@ function dhtmlXPopup(e) {
     this._getAvailPos = function(r, o) {
         var l = {
             top: ["bottom", "right", "left"],
-            bottom: ["top", "right", "left"],
-            left: ["right", "bottom", "top"],
-            right: ["left", "bottom", "top"]
+            bottom: ["header.html", "right", "left"],
+            left: ["right", "bottom", "header.html"],
+            right: ["left", "bottom", "header.html"]
         };
         var m = null;
         for (var n = 0; n < l[r].length; n++) {
@@ -12322,7 +12322,7 @@ function dhtmlXPopup(e) {
     }
     if (typeof(window.dhtmlXSlider) != "undefined" && this.conf.slider != null && this.conf.slider instanceof window.dhtmlXSlider) {
         if (!this.conf.mode) {
-            this.mode = "top"
+            this.mode = "header.html"
         }
         this.conf.slider_tm = null;
         this._sliderShow = function() {
@@ -12931,7 +12931,7 @@ function dhtmlXMenuObject(h, l) {
                 v = a - this.idPull[J].offsetWidth + 2;
                 u = O + 2
             }
-            if (n == "top") {
+            if (n == "header.html") {
                 v = a - 1;
                 u = O - L + 2
             }
@@ -16190,7 +16190,7 @@ dhtmlXRibbon.prototype._addBlock = function(h, g) {
     m.base.appendChild(m.contForItems);
     if (m.conf.text) {
         m.contForText.innerHTML = m.conf.text;
-        if (m.conf.text_pos == "top") {
+        if (m.conf.text_pos == "header.html") {
             m.base.insertBefore(m.contForText, m.contForItems)
         } else {
             m.base.appendChild(m.contForText)
@@ -17457,7 +17457,7 @@ dhtmlXRibbon.prototype._setBlockText = function(a, c) {
         a.contForText.parentNode.removeChild(a.contForText)
     } else {
         if (!a.contForText.parentNode) {
-            if (a.conf.text_pos == "top") {
+            if (a.conf.text_pos == "header.html") {
                 a.base.insertBefore(a.contForText, a.contForItems)
             } else {
                 a.base.appendChild(a.contForText)
@@ -25232,7 +25232,7 @@ dhtmlXChart.prototype = {
                 }
             }
             if (s.margin && s.valign != "middle") {
-                n += (s.valign == "top" ? 1 : -1) * s.margin
+                n += (s.valign == "header.html" ? 1 : -1) * s.margin
             }
         }
         C.style.left = o + "px";
@@ -25350,7 +25350,7 @@ dhtmlXChart.prototype = {
     _getChartBounds: function(a, m) {
         var o, e, n, c;
         o = this._settings.padding.left;
-        e = this._settings.padding.top;
+        e = this._settings.padding.header;
         n = a - this._settings.padding.right;
         c = m - this._settings.padding.bottom;
         if (this._settings.legend) {
@@ -27976,7 +27976,7 @@ dhtmlXTreeObject.prototype._parseItem = function(l, r, h, n) {
     if (m.select) {
         u.push("SELECT")
     }
-    if (m.top) {
+    if (m.header) {
         u.push("TOP")
     }
     if (m.call) {
@@ -34617,7 +34617,7 @@ function dhtmlXGridObject(id) {
     this.getPosition = function(oNode, pNode) {
         if (!pNode) {
             var pos = dhx4.getOffset(oNode);
-            return [pos.left, pos.top]
+            return [pos.left, pos.header]
         }
         pNode = pNode || document.body;
         var oCurrentNode = oNode;
@@ -35817,7 +35817,7 @@ dhtmlXGridObject.prototype = {
                             _locator: this._get_xml_data
                         };
                         var c = this.rowsBuffer.length;
-                        if (this._refresh_mode[1] == "top") {
+                        if (this._refresh_mode[1] == "header.html") {
                             this.rowsBuffer.unshift(m);
                             c = 0
                         } else {
@@ -43619,7 +43619,7 @@ dhtmlXGridObject.prototype._refreshFromJSON = function(e) {
                         _locator: this._get_json_data
                     };
                     var c = this.rowsBuffer.length;
-                    if (this._refresh_mode[1] == "top") {
+                    if (this._refresh_mode[1] == "header.html") {
                         this.rowsBuffer.unshift(l);
                         c = 0
                     } else {
@@ -47493,7 +47493,7 @@ dhtmlXGridObject.prototype._expandMonolite = function(a, u, l) {
                         return
                     }
                     var w = this.cells(x, n).cell;
-                    w.style.verticalAlign = "top"
+                    w.style.verticalAlign = "header.html"
                 });
                 o._flow = []
             }
@@ -47504,12 +47504,12 @@ dhtmlXGridObject.prototype._expandMonolite = function(a, u, l) {
                 m = 0
             }
             for (var h = 0; h < v.cells.length; h++) {
-                v.cells[h].style.verticalAlign = "top"
+                v.cells[h].style.verticalAlign = "header.html"
             }
             if (o._fake) {
                 var g = o._fake.rowsAr[v.idd];
                 for (var h = 0; h < g.cells.length; h++) {
-                    g.cells[h].style.verticalAlign = "top"
+                    g.cells[h].style.verticalAlign = "header.html"
                 }
             }
             v._expanded = r
@@ -48771,7 +48771,7 @@ eXcell_tree.prototype.setValue = function(a) {
     this.cell.parentNode.imgTag = this.cell.childNodes[0].childNodes[m.level];
     this.cell.parentNode.valTag = this.cell.childNodes[0].childNodes[m.level + 2];
     if (_isKHTML) {
-        this.cell.vAlign = "top"
+        this.cell.vAlign = "header.html"
     }
     if (m.parent.id != 0 && m.parent.state == "plus") {
         this.grid._updateTGRState(m.parent, false);
@@ -56895,7 +56895,7 @@ dhtmlXAccordion.prototype.enableDND = function() {
         if (a.stopPropagation) {
             a.stopPropagation()
         }
-        if (a.propertyName == "top") {
+        if (a.propertyName == "header.html") {
             if (e._dnd.tr_items[this._accId] == true) {
                 e._dnd.tr_count--;
                 e._dnd.tr_items[this._accId] = false
@@ -60638,7 +60638,7 @@ function dhtmlXTabBar(g, m) {
         lastActive: null,
         closeButton: false,
         align: "left",
-        tabsMode: (m == "bottom" ? "bottom": "top"),
+        tabsMode: (m == "bottom" ? "bottom": "header.html"),
         tabsContCss: "",
         contZone: true,
         transSpeed: "0.15s",
@@ -60665,7 +60665,7 @@ function dhtmlXTabBar(g, m) {
             this.conf.skin = g.skin
         }
         if (typeof(g.mode) != "undefined") {
-            this.conf.tabsMode = (g.mode == "bottom" ? "bottom": "top")
+            this.conf.tabsMode = (g.mode == "bottom" ? "bottom": "header.html")
         }
         if (typeof(g.align) != "undefined") {
             this.conf.align = (g.align == "right" ? "right": "left")
@@ -60704,7 +60704,7 @@ function dhtmlXTabBar(g, m) {
     this.tabsArea = document.createElement("DIV");
     this.tabsArea.className = "dhxtabbar_tabs dhxtabbar_tabs_" + this.conf.tabsMode;
     this.tabsArea.innerHTML = "<div class='dhxtabbar_tabs_ar_left'><div class='dhxtabbar_arrow_img'></div></div><div class='dhxtabbar_tabs_base'><div class='dhxtabbar_tabs_cont_" + this.conf.align + this.conf.tabsContCss + "'><div class='dhxtabbar_tabs_line'></div></div></div><div class='dhxtabbar_tabs_ar_right'><div class='dhxtabbar_arrow_img'></div></div>";
-    this.tabsArea.style.top = (this.conf.tabsMode == "top" ? this.conf.tabsTop + "px": "auto");
+    this.tabsArea.style.top = (this.conf.tabsMode == "header.html" ? this.conf.tabsTop + "px": "auto");
     this.tabsMode.appendChild(this.tabsArea);
     this.tabsArea.childNodes[1].childNodes[0].style[this.conf.align] = "0px";
     this.tabsArea.childNodes[0].onclick = function() {
@@ -60830,11 +60830,11 @@ function dhtmlXTabBar(g, m) {
         if (!this.conf.contZone || r == null) {
             return
         }
-        var o = (this.conf.tabsMode == "top" ? this.tabsArea.offsetHeight: 0) + this.conf.tabsTop;
+        var o = (this.conf.tabsMode == "header.html" ? this.tabsArea.offsetHeight: 0) + this.conf.tabsTop;
         var n = this.cont.offsetHeight - this.tabsArea.offsetHeight - this.conf.tabsTop;
         var a = this.t[r].cell.dataType;
         if (this.conf.skin == "dhx_skyblue" && (a == "layout" || a == "tabbar" || a == "acc")) {
-            if (this.conf.tabsMode == "top") {
+            if (this.conf.tabsMode == "header.html") {
                 o = o - 1
             }
             n = n + 1
@@ -60847,10 +60847,10 @@ function dhtmlXTabBar(g, m) {
         this.t[r].cell._setSize(0, o, this.cont.offsetWidth, n)
     };
     this.setTabsMode = function(a) {
-        this.conf.tabsMode = (a == "bottom" ? "bottom": "top");
+        this.conf.tabsMode = (a == "bottom" ? "bottom": "header.html");
         this.tabsMode.className = "dhxtabbar_tabs_" + this.conf.tabsMode;
         this.tabsArea.className = "dhxtabbar_tabs dhxtabbar_tabs_" + this.conf.tabsMode;
-        this.tabsArea.style.top = (this.conf.tabsMode == "top" ? this.conf.tabsTop + "px": "auto");
+        this.tabsArea.style.top = (this.conf.tabsMode == "header.html" ? this.conf.tabsTop + "px": "auto");
         this.setSizes()
     };
     this._tabCss = function(u, r) {
@@ -61990,7 +61990,7 @@ function dhtmlXSideBar(c) {
         e._scrollSide(h / Math.abs(h) * 3)
     };
     this._scrollSide = function(g) {
-        var h = parseInt(this.side.firstChild.style.top || 0) - g * this.conf.scroll_mult;
+        var h = parseInt(this.side.firstChild.style.header || 0) - g * this.conf.scroll_mult;
         if (h + this.side.firstChild.offsetHeight < this.side.clientHeight) {
             h = this.side.clientHeight - this.side.firstChild.offsetHeight
         }
@@ -63114,7 +63114,7 @@ function dhtmlXCarousel(g, l, n) {
         if (this.conf.autoheight != true) {
             this.conf.top = Math.max(0, Math.floor(this.area.offsetHeight - this.conf.height) / 2);
             for (var r in v) {
-                v[r].y = this.conf.top
+                v[r].y = this.conf.header
             }
         }
         for (var r in v) {
@@ -63123,7 +63123,7 @@ function dhtmlXCarousel(g, l, n) {
         this.callEvent("_onSetSizes", [])
     };
     this._adjustCell = function(a) {
-        this.cdata[a].cell._setSize(this[this.conf.anim_f.detect_x](a), this.conf.top, this.conf.width, this.conf.height)
+        this.cdata[a].cell._setSize(this[this.conf.anim_f.detect_x](a), this.conf.header, this.conf.width, this.conf.height)
     };
     this._animateStart = function(o, a) {
         if ((this.conf.selected <= 0 && o < 0) || (this.conf.selected >= this.conf.items_count - 1 && o > 0)) {
@@ -66301,8 +66301,8 @@ if (!window.dhtmlx) {
         }
         document.body.appendChild(E);
         var A = C.left || Math.abs(Math.floor(((window.innerWidth || document.documentElement.offsetWidth) - E.offsetWidth) / 2));
-        var H = C.top || Math.abs(Math.floor(((window.innerHeight || document.documentElement.offsetHeight) - E.offsetHeight) / 2));
-        if (C.position == "top") {
+        var H = C.header || Math.abs(Math.floor(((window.innerHeight || document.documentElement.offsetHeight) - E.offsetHeight) / 2));
+        if (C.position == "header.html") {
             E.style.top = "-3px"
         } else {
             E.style.top = H + "px"
@@ -66398,7 +66398,7 @@ if (!window.dhtmlx) {
     };
     v.expire = 4000;
     v.keyboard = true;
-    v.position = "top";
+    v.position = "header.html";
     v.pull = {};
     v.timers = {};
     v.hideAll = function() {

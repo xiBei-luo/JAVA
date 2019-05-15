@@ -9,43 +9,43 @@
         <if test='cUserid!=null and cUserid!=""'>
             AND T.cUserid = #{cUserid}
         </if>
-        <if test="cLoginname!=null">
+        <if test='cLoginname!=null and cLoginname!=""'>
             AND T.cLoginname = #{cLoginname}
         </if>
         <if test='cUsername!=null and cUsername!=""'>
             AND T.cUsername = #{cUsername}
         </if>
-        <if test="cPassword!=null">
+        <if test='cPassword!=null and cPassword!=""'>
             AND T.cPassword = #{cPassword}
         </if>
-        <if test="cRylb!=null">
+        <if test='cRylb!=null and cRylb!=""'>
             AND T.cRylb = #{cRylb}
         </if>
-        <if test="cRyzt!=null">
+        <if test='cRyzt!=null and cRyzt!=""'>
             AND T.cRyzt = #{cRyzt}
         </if>
-        <if test="cZcfs!=null">
+        <if test='cZcfs!=null and cZcfs!=""'>
             AND T.cZcfs = #{cZcfs}
         </if>
-        <if test="cZjhm!=null">
+        <if test='cZjhm!=null and cZjhm!=""'>
             AND T.cZjhm = #{cZjhm}
         </if>
-        <if test="cSex!=null">
+        <if test='cSex!=null and cSex!=""'>
             AND T.cSex = #{cSex}
         </if>
         <if test='cPhone!=null and cPhone!=""'>
             AND T.cPhone = #{cPhone}
         </if>
-        <if test="cWxhm!=null">
+        <if test='cWxhm!=null and cWxhm!=""'>
             AND T.cWxhm = #{cWxhm}
         </if>
-        <if test="cQq!=null">
+        <if test='cQq!=null and cQq!=""'>
             AND T.cQq = #{cQq}
         </if>
-        <if test="cEmail!=null">
+        <if test='cEmail!=null and cEmail!=""'>
             AND T.cEmail = #{cEmail}
         </if>
-        <if test="cZt!=null">
+        <if test='cZt!=null and cZt!=""'>
             AND T.cZt = #{cZt}
         </if>
     </select>
@@ -77,86 +77,54 @@
             <if test="cWxhm != null">cWxhm = #{cWxhm},</if>
             <if test="cQq != null">cQq = #{cQq},</if>
             <if test="cXguser != null">cXguser = #{cXguser},</if>
-            <if test="dXgsj != null">dXgsj = #{dXgsj},</if>
+            <if test="dXgsj != null">dXgsj = #{dXgsj}</if>
         </set>
         WHERE cUserid = #{cUserid}
     </update>
 
-    <!--systemUser crud
-    <select id="selectSystemuser" resultType="java.util.List" parameterType="com.greenplatform.model.system_user">
-        SELECT T.* FROM system_user T WHERE 1=1
-        <if test="cUserid!=null">
-            AND T.cUserid = #{cUserid}
+    <!--PlateCodeDmz crud-->
+    <select id="selectPlateCodeDmz" parameterType="com.greenplatform.model.PlateCodeDmz" resultType="com.greenplatform.model.PlateCodeDmz">
+        SELECT T.* FROM plate_code_dmz T WHERE 1=1
+        <if test='cDmlb!=null and cDmlb!=""'>
+            AND T.cDmlb = #{cDmlb}
         </if>
-        <if test="cLoginname!=null">
-            AND T.cLoginname = #{cLoginname}
+        <if test='cDm!=null and cDm!=""'>
+            AND T.cDm = #{cDm}
         </if>
-        <if test="cUsername!=null">
-            AND T.cUsername = #{cUsername}
+        <if test='cDmmc!=null and cDmmc!=""'>
+            AND T.cDmmc = #{cDmmc}
         </if>
-        <if test="cRylb!=null">
-            AND T.cRylb = #{cRylb}
+        <if test='cSort!=null and cSort!=""'>
+            AND T.cSort = #{cSort}
         </if>
-        <if test="cRyzt!=null">
-            AND T.cRyzt = #{cRyzt}
-        </if>
-        <if test="cZcfs!=null">
-            AND T.cZcfs = #{cZcfs}
-        </if>
-        <if test="cZjhm!=null">
-            AND T.cZjhm = #{cZjhm}
-        </if>
-        <if test="cSex!=null">
-            AND T.cSex = #{cSex}
-        </if>
-        <if test="cPhone!=null">
-            AND T.cPhone = #{cPhone}
-        </if>
-        <if test="cWxhm!=null">
-            AND T.cWxhm = #{cWxhm}
-        </if>
-        <if test="cQq!=null">
-            AND T.cQq = #{cQq}
-        </if>
-        <if test="cEmail!=null">
-            AND T.cEmail = #{cEmail}
-        </if>
-        <if test="cZt!=null">
+        <if test='cZt!=null and cZt!=""'>
             AND T.cZt = #{cZt}
         </if>
     </select>
-    <insert id="insertSystemUser" parameterType="com.greenplatform.model.SystemUser">
-        INSERT INTO system_user (cUserid,cLoginname,cUsername,cPassword,cRylb,
-                               cRyzt,cZcfs,cZjlx,cZjhm,cSex,
-                               cJtzz,cPhone,cWxhm,cQq,cEmail,
-                               cBz,cZt,cCjuser,dCjsj,cXguser
-                               ,dXgsj)
-        VALUES(#{cUserid},#{cLoginname},#{cUsername},#{cPassword},#{cRylb},
-               #{cRyzt},#{cZcfs},#{cZjlx},#{cZjhm},#{cSex},
-               #{cJtzz},#{cPhone},#{cWxhm},#{cQq},#{cEmail},
-               #{cBz},#{cZt},#{cCjuser},#{dCjsj},#{cXguser},
-               #{dXgsj})
+    <insert id="insertPlateCodeDmz" parameterType="com.greenplatform.model.PlateCodeDmz">
+        INSERT INTO plate_code_dmz (cDmlb,cDm,cDmmc,cSort,cBz,
+                               cZt,cCjuser,dCjsj,cXguser,dXgsj)
+        VALUES(#{cDmlb},#{cDm},#{cDmmc},#{cSort},#{cBz},
+               #{cZt},#{cCjuser},#{dCjsj},#{cXguser},#{dXgsj})
     </insert>
-    <delete id="delSystemuser" parameterType="com.greenplatform.model.SystemUser">
-        DELETE FROM system_user WHERE cUserid = #{cUserid}
+    <delete id="delPlateCodeDmz" parameterType="com.greenplatform.model.PlateCodeDmz">
+        DELETE FROM plate_code_dmz WHERE cDmlb = #{cDmlb}
+        <if test='cDm!=null and cDm!=""'>
+            AND T.cDm = #{cDm}
+        </if>
     </delete>
-    <update id="updSystemuser" parameterType="com.greenplatform.model.SystemUser">
-        UPDATE system_user
+    <update id="updPlateCodeDmz" parameterType="com.greenplatform.model.PlateCodeDmz">
+        UPDATE plate_code_dmz
         <set>
-            <if test="cUsername != null">cUsername = #{cUsername},</if>
-            <if test="cPassword != null">cPassword = #{cPassword},</if>
-            <if test="cZjlx != null">cZjlx = #{cZjlx},</if>
-            <if test="cZjhm != null">cZjhm = #{cZjhm},</if>
-            <if test="cSex != null">cSex = #{cSex},</if>
-            <if test="cJtzz != null">cJtzz = #{cJtzz},</if>
-            <if test="cPhone != null">cPhone = #{cPhone},</if>
-            <if test="cWxhm != null">cWxhm = #{cWxhm},</if>
-            <if test="cQq != null">cQq = #{cQq},</if>
-            <if test="cXguser != null">cXguser = #{cXguser},</if>
-            <if test="dXgsj != null">dXgsj = #{dXgsj},</if>
+            <if test='cDmmc!=null and cDmmc!=""'>cDmmc = #{cDmmc},</if>
+            <if test='cSort!=null and cSort!=""'>cSort = #{cSort},</if>
+            <if test='cBz!=null and cBz!=""'>cBz = #{cBz},</if>
+            <if test='cZt!=null and cZt!=""'>cZt = #{cZt},</if>
+            <if test='cXguser!=null and cXguser!=""'>cXguser = #{cXguser},</if>
+            <if test='dXgsj!=null and dXgsj!=""'>dXgsj = #{dXgsj}</if>
         </set>
-        WHERE cUserid = #{cUserid}
-    </update>-->
+        WHERE cDmlb = #{cDmlb} AND cDm = #{cDm}
+    </update>
 
 
 

@@ -1,22 +1,32 @@
-.plateIndexTitle{
+html,body{
+    width: 100%;
+    height: 100%;
+}
+.top_title{
     background: #1b6d85;
     margin-bottom: 5px;
     color: #ebebeb;
 }
-.plateIndexMenu{
+.center_main{
+    height: 80%;
+}
+.center_main_left{
     background: #ebebeb;
+    height: 100%;
+}
+.center_main_right{
+    height: 100%;
 }
 .searchForm{
-    height:50px;
-    line-height: 50px;
+    padding:10px 15px;
 }
-.contentBox{
+.center_right_main{
     width: 100%;
-    height: 500px;
+    height: 550px;
 }
 #gridbox{
     width: 100%;
-    height: 500px;
+    height: 96%;
 }
 #commonInfo{
     z-index: 999;
@@ -27,6 +37,13 @@
     text-align: center;
     font-size: 18px;
     color: #C6C6C6;
+}
+footer{
+    width: 100%;
+    height: 5%;
+    background: #1b6d85;
+    position: fixed;
+    bottom: 0;
 }
 
 
