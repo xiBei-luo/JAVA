@@ -8,39 +8,50 @@ $(function(){
  * 初始化事件
  */
 function initEvent(){
+    initSelect();
+    initMenu();
     $("#btnReset").click(function(){
         $("#insertPlateUserForm input").val("");
+        $("#insertPlateUserForm select").val("");
     });
     $("#btnAdd").click(function(){
+        $("#myModalLabel").html("新增系统用户");
+        $("#btnReset").click();
         $("#cUserid").val("");
         $("#addUserModel").modal('show');
-        checkRegister();
     });
 
-    $(".center_main_left").find("li").each(function () {
-        var a = $(this).find("a:first")[0];
-        if ($(a).attr("href") === location.pathname) {
-            $(this).addClass("active");
-        } else {
-            $(this).removeClass("active");
-        }
-    });
     $("#btnSearch").click(function(){
         loadGridData();
     });
     $("#btnSave").click(function(){
-        if($("#cUserid").val()){
-            f_submitData("1","/plate/updPlateuser");
-        }else{
-            f_submitData("0","/plate/insertPlateuser");
-        }
+        checkRegister();
+        $("#insertPlateUserForm").bootstrapValidator('validate');//提交验证
 
+        if ($("#insertPlateUserForm").data('bootstrapValidator').isValid()) {
+            if($("#cUserid").val()){
+                f_submitData("1","/plate/updPlateuser");
+            }else{
+                f_submitData("0","/plate/insertPlateuser");
+            }
+        }
     });
 
     $("#cUsername,#cPhone").keyup(function(){
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){// 回车触发查询
             $("#btnSearch").triggerHandler("click");
+        }
+    });
+}
+
+function initMenu(){
+    $(".center_main_left").find("li").each(function () {
+        var a = $(this).find("a:first")[0];
+        if ($(a).attr("href") === location.pathname) {
+            $(this).addClass("active");
+        } else {
+            $(this).removeClass("active");
         }
     });
 }
@@ -64,26 +75,23 @@ function initGrid(){
  */
 function loadGridData(){
     grid.clearAll();
-    var paramObj = {
+    var sendRequest = new SendRequest("/plate/selectPlateuser","POST");//构造对象
+    sendRequest.addParamObj({
         "cUsername":$("#cUsernameSearch").val(),
         "cPhone":$("#cPhoneSearch").val()
-    };
+    });//构造请求参数
 
-    var options = {
-        url:"/plate/selectPlateuser",
-        type:"POST",
-        data:paramObj,
-        success:function(ret){
-            if (ret.flag!=0){
-                BootstrapDialog.alert({
-                    type: BootstrapDialog.TYPE_WARNING,
-                    size: BootstrapDialog.SIZE_SMALL,
-                    title: '提示',
-                    message: ret.msg,
-                    closeable: true,
-                    buttonLabel: "确定"
-                });
-            }
+    sendRequest.sendRequest(function(ret){
+        if(ret.flag != "0"){
+            BootstrapDialog.alert({
+                type: BootstrapDialog.TYPE_WARNING,
+                size: BootstrapDialog.SIZE_SMALL,
+                title: '提示',
+                message: "查询出错,系统错误！",
+                closeable: true,
+                buttonLabel: "确定"
+            });
+        }else{
             if(ret.object.length > 0){
                 $("#commonInfo").hide();
                 initData(ret.object);
@@ -92,10 +100,7 @@ function loadGridData(){
                 $("#commonInfo").text("没有查询结果！");
             }
         }
-    };
-
-    $.ajax(options);
-
+    });//发送请求并获取返回结果
 }
 
 /**
@@ -129,8 +134,11 @@ function initData(data){
 function checkRegister(){
     $('#insertPlateUserForm').bootstrapValidator({
         excluded: [':disabled'],
+        message: '表单验证有误',
         feedbackIcons: {
-            validating: 'glyphicon glyphicon-refresh'
+            valid: 'glyphicon glyphicon-ok',
+            /*invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'*/
         },
         fields: {
             cEmail: {
@@ -187,11 +195,13 @@ function checkRegister(){
 /**
  * 发送请求保存数据
  * type:操作类型，0新增/1修改/2删除
+ * reqURL：服务地址
  */
 function f_submitData(type,reqURL){
-    var paramObj;
+    var sendRequest = new SendRequest(reqURL,"POST");//构造对象
+
     if ("0" === type) {
-        paramObj = {
+        sendRequest.addParamObj({
             "cUsername":$("#cUsername").val(),
             "cSex":$("#cSex").val(),
             "cEmail":$("#cEmail").val(),
@@ -202,9 +212,9 @@ function f_submitData(type,reqURL){
             "cRylb":$("#cRylb").val(),
             "cPassword":$("#cPassword").val(),
             "cZt":'1',
-        };
+        });//构造请求参数
     }else if("1" === type){
-        paramObj = {
+        sendRequest.addParamObj({
             "cUserid":$("#cUserid").val(),
             "cUsername":$("#cUsername").val(),
             "cSex":$("#cSex").val(),
@@ -215,67 +225,47 @@ function f_submitData(type,reqURL){
             "cLoginname":$("#cLoginname").val(),
             "cRylb":$("#cRylb").val(),
             "cPassword":$("#cPassword").val(),
-            "cZt":'1',
-        };
+            "cZt":'1'
+        });//构造请求参数
     }else if("2" === type){
-        paramObj = {
+        sendRequest.addParamObj({
             "cUserid":$("#cUserid").val()
-        };
+        });//构造请求参数
     }
-    var options = {
-        url:reqURL,
-        type:"POST",
-        data:paramObj,
-        success:function(ret){
-            console.log(ret);
-            if("0" != ret.flag){
-                $("#btnSave").attr("disabled",false);
-                BootstrapDialog.alert({
-                    type: BootstrapDialog.TYPE_WARNING,
-                    size: BootstrapDialog.SIZE_SMALL,
-                    title: '提示',
-                    message: "操作失败！"+ret.msg,
-                    closeable: true,
-                    buttonLabel: "确定"
-                });
-            }else{
-                BootstrapDialog.alert({
-                    type: BootstrapDialog.TYPE_WARNING,
-                    size: BootstrapDialog.SIZE_SMALL,
-                    title: '提示',
-                    message: "操作成功",
-                    closeable: true,
-                    buttonLabel: "确定"
-                });
-                $("#btnRet,#btnReset").click();
-                loadGridData();
-            }
-        },
-        error:function(){
+
+    sendRequest.sendRequest(function(ret){
+        $("#btnSave").attr("disabled",false);
+        if("0" != ret.flag){
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,
                 size: BootstrapDialog.SIZE_SMALL,
                 title: '提示',
-                message: "系统错误！",
+                message: "操作失败！"+ret.msg,
                 closeable: true,
                 buttonLabel: "确定"
             });
+        }else{
+            BootstrapDialog.alert({
+                type: BootstrapDialog.TYPE_WARNING,
+                size: BootstrapDialog.SIZE_SMALL,
+                title: '提示',
+                message: "操作成功",
+                closeable: true,
+                buttonLabel: "确定"
+            });
+            $("#btnRet,#btnReset").click();
+            loadGridData();
         }
-    };
-
-    $("#insertPlateUserForm").bootstrapValidator('validate');//提交验证
-
-    if ($("#insertPlateUserForm").data('bootstrapValidator').isValid()) {
-        $.ajax(options);
-    }
+    });//发送请求并获取返回结果
 }
 
 /*
 修改用户,页面赋值
  */
 function f_upd(id){
-    $("#btnAdd").click();
     var data = grid.getUserData(id,"data");
+    $("#btnAdd").click();//触发新增按钮点击事件（设置人员id为空，清空输入框，打开模态框，初始化下拉框）
+    $("#myModalLabel").html("修改系统用户");
     setInputArea(nullToEmptyForObject(data));
     $("#cPassword,#cPassword1").hide();
 }
@@ -305,102 +295,9 @@ function f_del(id){
  * 初始化下拉框
  */
 function initSelect(){
-    console.log(initBaseCodeSelect($("#cSex"),{C_DMFL:"C_USER_SEX"},null,null));
+    initBaseCodeSelect($("#cSex"),{cDmlb:"C_USER_SEX"},null,"---请选择性别---")
+    initBaseCodeSelect($("#cRylb"),{cDmlb:"C_USER_RYLB"},null,"---请选择人员类别---")
+    initBaseCodeSelect($("#cZjlx"),{cDmlb:"C_USER_ZJLX"},null,"---请选择证件类型---")
 }
 
 
-
-/**
- * 1、初始化基础代码下拉列表：同步
- * @param $container 下拉列表
- * @param args 调用过程参数
- * @param defVal 默认选中值
- * @param allFlag 显示全部时的字符
- */
-function initBaseCodeSelect($container, args, defVal, allFlag){
-    if($container){
-        $container.empty();
-    }
-
-    var option_data = [];
-    var ajax = new AjaxProxy();
-    ajax.setCacheData(false);
-
-    ajax.addParm("PC_DMFL", args.C_DMFL);  //代码分类
-    ajax.addParm("PC_DM", args.C_DM ? args.C_DM : "");  //代码值 （空值则全部该代码分类的全部数据）
-    ajax.addParm("PC_DWDM", args.C_DWDM ? args.C_DWDM : "");  //单位代码（空值则查询全部）
-    ajax.addParm("PC_CS1", args.C_CS1 ? args.C_CS1 : ""); //参数，eg 为1时：工序过滤掉“成品退库”和“对外加工”序
-    ajax.invokeProc("APPUSER.CTRI_PUB.PW_CTRI_PUB_DM", false);
-
-    var row=ajax.getRowCount("P_RESULT");
-
-    if($container){
-        try{
-            $container.combobox("loadData",[[null,null]]);
-        }catch(e){
-
-        }
-    }
-    if(row>0){
-        if($container){
-            if(allFlag){
-                $container.append("<option value=''>"+allFlag+"</option>");
-            }else if("" == allFlag){
-                $container.append("<option value=''>&nbsp;</option>");
-            }
-        }
-
-        for(var i=1;i<=row;i++){
-
-            var data={
-                C_DM    : ajax.getString("P_RESULT",i,"C_DM"),
-                C_MC    : ajax.getString("P_RESULT",i,"C_MC"),
-                N_SORT	: ajax.getString("P_RESULT",i,"N_SORT")
-            };
-            //预留两个字段
-            var sSm1 = ajax.getString("P_RESULT",i,"C_SM1");
-            if(typeof sSm1 == "undefined" ){
-                sSm1 = "";
-            }
-            data.C_SM1 = sSm1;
-
-            var sSm2 = ajax.getString("P_RESULT",i,"C_SM2");
-            if(typeof sSm2 == "undefined" ){
-                sSm2 = "";
-            }
-            data.C_SM2 = sSm2;
-
-            //2019-04-03 增加：约定,如果js没有设置默认选中值时，将N_SORT = 0设为默认选中值
-            if(defVal == null && typeof data.N_SORT != "undefined" && data.N_SORT == "0"){
-                defVal = data.C_DM;
-            }
-
-            if("SCGX" == args.C_DMFL){//工序下拉框，产品状态 、是否涂层检验
-                var cpzt = ajax.getString("P_RESULT",i,"C_CPZT");
-                var sftcjy = ajax.getString("P_RESULT",i,"C_SFTCJY"); //是否涂层检验【0：否，1：是】
-                data.C_CPZT	  = cpzt;
-                data.C_SFTCJY = sftcjy;
-                if($container){
-                    $container.append("<option sx1='"+cpzt+"' value='"+data.C_DM+"' text='"+data.C_MC+"'>"+data.C_MC+"</option>");
-                }
-
-            }else if("SL" == args.C_DMFL){
-                if($container){
-                    $container.append("<option value='"+data.C_DM+"'>"+data.C_MC+"&nbsp;"+data.C_DM+"</option>");
-                }
-            }else{
-                if($container){
-                    $container.append("<option value='"+data.C_DM+"' text='"+data.C_MC+"'>"+data.C_MC+"</option>");
-                }
-            }
-            option_data.push(data);
-        }
-
-        if(defVal && $container){
-            $("option[value='"+defVal+"']", $container).attr({selected: true});
-        }
-    }
-
-
-    return option_data;
-}

@@ -67,15 +67,23 @@
     <update id="updPlateuser" parameterType="com.greenplatform.model.PlateUser">
         UPDATE plate_user
         <set>
+            <if test="cUsername != null">cLoginname = #{cLoginname},</if>
             <if test="cUsername != null">cUsername = #{cUsername},</if>
+            <if test="cSex != null">cSex = #{cSex},</if>
             <if test="cPassword != null">cPassword = #{cPassword},</if>
+            <if test="cPassword != null">cRydj = #{cRydj},</if>
+            <if test="cPassword != null">cRylb = #{cRylb},</if>
+            <if test="cPassword != null">cRyzt = #{cRyzt},</if>
+            <if test="cPassword != null">cZcfs = #{cZcfs},</if>
             <if test="cZjlx != null">cZjlx = #{cZjlx},</if>
             <if test="cZjhm != null">cZjhm = #{cZjhm},</if>
-            <if test="cSex != null">cSex = #{cSex},</if>
             <if test="cJtzz != null">cJtzz = #{cJtzz},</if>
             <if test="cPhone != null">cPhone = #{cPhone},</if>
             <if test="cWxhm != null">cWxhm = #{cWxhm},</if>
             <if test="cQq != null">cQq = #{cQq},</if>
+            <if test="cEmail != null">cEmail = #{cEmail},</if>
+            <if test="cEmail != null">cBz = #{cBz},</if>
+            <if test="cEmail != null">cZt = #{cZt},</if>
             <if test="cXguser != null">cXguser = #{cXguser},</if>
             <if test="dXgsj != null">dXgsj = #{dXgsj}</if>
         </set>

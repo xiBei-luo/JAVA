@@ -70,59 +70,65 @@
                     <h4 class="modal-title" id="myModalLabel">新增系统用户</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="insertPlateUserForm">
+                    <form id="insertPlateUserForm" class="">
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="cUsername" class="control-label"></label>
+                                <label for="cUsername" class="sr-only"></label>
                                 <input type="text" class="form-control" id="cUsername" name="cUsername" placeholder="请输入姓名">
                                 <input type="hidden" class="form-control" id="cUserid" name="cUserid">
                             </div>
                             <div class="col-sm-6">
-                                <label for="cSex" class="control-label"></label>
-                                <select class="form-control" id="cSex">
-                                    <option value="">---请选择性别---</option>
-                                    <option value="1">男</option>
-                                    <option value="2">女</option>
-                                </select>
+                                <label for="cSex" class="sr-only"></label>
+                                <select class="form-control" id="cSex"></select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="cEmail" class="control-label"></label>
+                                <label for="cRylb" class="sr-only"></label>
+                                <select class="form-control" id="cRylb"></select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="cLoginname" class="sr-only"></label>
+                                <input type="text" class="form-control" id="cLoginname" name="cLoginname" placeholder="设置登录名">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="cEmail" class="sr-only"></label>
                                 <input type="text" class="form-control" id="cEmail" name="cEmail" placeholder="请输入邮箱">
                             </div>
                             <div class="col-sm-6">
-                                <label for="cPhone" class="control-label"></label>
+                                <label for="cPhone" class="sr-only"></label>
                                 <input type="text" class="form-control" id="cPhone" name="cPhone" placeholder="请输入电话号码">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="cWxhm" class="control-label"></label>
+                                <label for="cWxhm" class="sr-only"></label>
                                 <input type="text" class="form-control" id="cWxhm" name="cWxhm" placeholder="请输入微信号码">
                             </div>
                             <div class="col-sm-6">
-                                <label for="cZjhm" class="control-label"></label>
+                                <label for="cZjlx" class="sr-only"></label>
+                                <select class="form-control" id="cZjlx"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="cZjhm" class="sr-only"></label>
                                 <input type="text" class="form-control" id="cZjhm" name="cZjhm" placeholder="请输入证件号码">
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm-6">
-                                <label for="cLoginname" class="control-label"></label>
-                                <input type="text" class="form-control" id="cLoginname" name="cLoginname" placeholder="设置登录名">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="cRylb" class="control-label"></label>
-                                <input type="text" class="form-control" id="cRylb" name="cRylb" placeholder="设置人员类别">
+                                <label for="cJtzz" class="sr-only"></label>
+                                <input type="text" class="form-control" id="cJtzz" name="cJtzz" placeholder="请输入家庭住址">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="cPassword" class="control-label"></label>
+                                <label for="cPassword" class="sr-only"></label>
                                 <input type="password" class="form-control" id="cPassword" name="cPassword" placeholder="设置初始登陆密码">
                             </div>
                             <div class="col-sm-6">
-                                <label for="cPassword1" class="control-label"></label>
+                                <label for="cPassword1" class="sr-only"></label>
                                 <input type="cPassword1" class="form-control" id="cPassword1" name="cPassword" placeholder="请再次输入初始密码">
                             </div>
                         </div>
@@ -148,6 +154,8 @@
 <script src="/publicFrame/dhtmlx-4.5/dhtmlx.min.js"></script>
 <script src="/publicJs/StringBuffer.js"></script>
 <script src="/publicJs/publicCommon.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
 <script src="/plate/js/yhgl/index.js"></script>
 </body>
 </html>

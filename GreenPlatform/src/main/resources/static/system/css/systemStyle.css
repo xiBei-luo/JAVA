@@ -1,10 +1,22 @@
-html,body{
+header{
     width: 100%;
     background: url("../../publicImg/systemBg.jpg") repeat-x;
     overflow-x: hidden;
 }
+.indexHeader{
+    height:500px;
+}
+.loginHeader{
+    height:100%;
+}
 .mr-top-100{
-    margin-top: 100px;
+    margin-top:100px;
+}
+.mr-top-50{
+    margin-top: 50px;
+}
+.contentBox{
+    margin-top:100px;
 }
 .contentBox img{
     width: 100%;
@@ -15,6 +27,7 @@ html,body{
     padding:10px;
     margin-top: 10%;
 }
+
 #js{
     border-color: #2b542c;
     background: #5cb85c;
@@ -27,6 +40,20 @@ html,body{
     border-color: #e38d13;
     background: #f5e79e;
 }
+#rankList .row .rankListBg{
+    background: #3e8f3e;
+    margin-top: 10px;
+    height:50px;
+    line-height: 50px;
+    font-size: 18px;
+    color: #ffffff;
+    border-radius: 10px;
+    position: relative;
+}
+#rankList .row .rankListBg span:nth-child(2){
+    position: absolute;
+    right: 20px;
+}
 #returnTop{
     position: fixed;
     right:0;
@@ -34,6 +61,11 @@ html,body{
     width: 50px;
     height: 50px;
     background: #b92c28;
+}
+.indexFooter{
+    height: 300px;
+    background: #737373;
+    color: #ffffff;
 }
 
 

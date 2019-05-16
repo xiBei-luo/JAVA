@@ -8,7 +8,12 @@ $(function(){
 
 function initEvent(){
     $("#btnLogin").click(function(){
-        f_submitData();
+        checkLogin();
+        $("#loginForm").bootstrapValidator('validate');//提交验证
+
+        if ($("#loginForm").data('bootstrapValidator').isValid()) {
+            f_submitData();
+        }
     });
     $("#btnLogin").keyup(function(){
         var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -54,43 +59,25 @@ function checkLogin(){
 }
 
 function f_submitData(){
-    var paramObj = {
+    var sendRequest = new SendRequest("/system/login","POST");//构造对象
+    sendRequest.addParamObj({
         "cLoginname":$("#cLoginname").val(),
         "cPassword":$("#cPassword").val()
-    };
-    var options = {
-        url:"/system/login",
-        type:"POST",
-        data:paramObj,
-        success:function(ret){
-            if("0" != ret.flag){
-                $("#btnLogin").attr("disabled",false);
-                BootstrapDialog.alert({
-                    type: BootstrapDialog.TYPE_WARNING,
-                    size: BootstrapDialog.SIZE_SMALL,
-                    title: '登陆失败',
-                    message: ret.msg,
-                    closeable: true,
-                    buttonLabel: "确定"
-                });
-            }else{
-                window.location.href="/system/index";
-            }
-        },
-        error:function(){
+    });//构造请求参数
+    sendRequest.sendRequest(function(ret){
+        $("#btnLogin").attr("disabled",false);
+        if("0" != ret.flag){
+            $("#btnLogin").attr("disabled",false);
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,
-                title: '提示',
-                message: "系统错误！",
+                size: BootstrapDialog.SIZE_SMALL,
+                title: '登陆失败',
+                message: ret.msg,
                 closeable: true,
                 buttonLabel: "确定"
             });
+        }else{
+            window.location.href="/system/index";
         }
-    };
-
-    $("#loginForm").bootstrapValidator('validate');//提交验证
-
-    if ($("#loginForm").data('bootstrapValidator').isValid()) {
-        $.ajax(options);
-    }
+    });//发送请求并获取返回结果
 }

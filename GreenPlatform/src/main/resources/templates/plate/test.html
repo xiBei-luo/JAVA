@@ -151,9 +151,16 @@
 <script src="/publicJs/SendRequest.js"></script>
 <script>
     $(function(){
-        var sendRequest = new SendRequest(null,"POST","/plate/selectPlateuser");
+        var sendRequest = new SendRequest("/plate/delPlateuser","POST");
+
+        sendRequest.addParamObj({
+            "cUserid":"9ab7e0a31da4420c83a21efcdd88bfa9"
+        });
+
         $("#btnSearch").click(function(){
-            sendRequest.sendRequest();
+            sendRequest.sendRequest(function(val){
+                console.log(val);
+            });
         });
     })
 </script>

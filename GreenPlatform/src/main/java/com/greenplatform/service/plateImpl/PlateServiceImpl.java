@@ -73,10 +73,10 @@ public class PlateServiceImpl implements PlateService {
 
     @Override
     public ReturnModel delPlateuser(PlateUser plateUser) {
-        System.out.println(plateUser);
         try{
             plateDao.delPlateuser(plateUser);
         }catch (Exception e){
+            System.out.println(e);
             returnModel.setFlag(1);
             returnModel.setMsg("删除失败，系统错误!");
             returnModel.setObject(null);
@@ -86,11 +86,11 @@ public class PlateServiceImpl implements PlateService {
 
     @Override
     public ReturnModel updPlateuser(PlateUser plateUser) {
-        System.out.println(plateUser);
         try{
             plateUser.setdXgsj(timestamp);
             plateDao.updPlateuser(plateUser);
         }catch (Exception e){
+            System.out.println(e);
             returnModel.setFlag(1);
             returnModel.setMsg("修改用户失败，系统错误!");
             returnModel.setObject(null);
@@ -123,7 +123,6 @@ public class PlateServiceImpl implements PlateService {
         List plateCodeDmzList;
         try{
             plateCodeDmzList = plateDao.selectPlateCodeDmz(plateCodeDmz);
-            System.out.println(plateCodeDmzList);
             returnModel.setFlag(0);
             returnModel.setMsg("操作成功!");
             returnModel.setObject(plateCodeDmzList);

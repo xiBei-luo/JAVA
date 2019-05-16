@@ -75,7 +75,6 @@ public class PlateController {
     @RequestMapping(value = "/selectPlateCodeDmz",method = RequestMethod.POST)
     @ResponseBody
     public ReturnModel selectPlateCodeDmz(PlateCodeDmz plateCodeDmz){
-        System.out.println(plateCodeDmz);
         ReturnModel returnModel = plateService.selectPlateCodeDmz(plateCodeDmz);
         return returnModel;
     }
