@@ -4,6 +4,7 @@ import com.greenplatform.dao.PlateDao;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
+import com.greenplatform.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class PlateServiceImpl implements PlateService {
 
     @Override
     public ReturnModel selectPlateuser(PlateUser plateUser,String type) {
+        plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
         List plateUserList = plateDao.selectPlateuser(plateUser);
         if (!plateUserList.isEmpty()){
             returnModel.setFlag(0);
@@ -38,6 +40,7 @@ public class PlateServiceImpl implements PlateService {
 
     @Override
     public ReturnModel selectPlateuser(PlateUser plateUser) {
+        System.out.println(plateUser);
         List plateUserList;
         try{
             plateUserList = plateDao.selectPlateuser(plateUser);
@@ -56,6 +59,7 @@ public class PlateServiceImpl implements PlateService {
     @Override
     public ReturnModel insertPlateuser(PlateUser plateUser) {
         String majorKey = UUID.randomUUID().toString().replaceAll("-", "");
+        plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
         plateUser.setcUserid(majorKey);
         plateUser.setdCjsj(timestamp);
 
@@ -158,6 +162,72 @@ public class PlateServiceImpl implements PlateService {
     @Override
     public ReturnModel insertPlateLog(PlateLog plateLog) {
         return null;
+    }
+
+    @Override
+    public ReturnModel selectTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
+        List tGreenSpmxList;
+        try {
+            tGreenSpmxList = plateDao.selectTGreenSpSpmx(tGreenSpSpmx);
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(tGreenSpmxList);
+        }catch (Exception e){
+            returnModel.setFlag(1);
+            returnModel.setMsg("查询出错，系统错误！");
+            returnModel.setObject(null);
+        }
+        return returnModel;
+    }
+
+    @Override
+    public ReturnModel insertTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
+        tGreenSpSpmx.setcSpbh(UUID.randomUUID().toString().replaceAll("-", ""));
+        tGreenSpSpmx.setdCjsj(timestamp);
+        try {
+            plateDao.insertTGreenSpSpmx(tGreenSpSpmx);
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(null);
+        }catch (Exception e){
+            returnModel.setFlag(1);
+            returnModel.setMsg("新增出错，系统错误！");
+            returnModel.setObject(null);
+        }
+        return returnModel;
+    }
+
+    @Override
+    public ReturnModel delTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
+        try {
+            plateDao.delTGreenSpSpmx(tGreenSpSpmx);
+            returnModel.setFlag(0);
+            returnModel.setMsg("操作成功！");
+            returnModel.setObject(null);
+        }catch (Exception e){
+            System.out.println(e);
+            returnModel.setFlag(1);
+            returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setObject(null);
+        }
+        return returnModel;
+    }
+
+    @Override
+    public ReturnModel updTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
+        tGreenSpSpmx.setdXgsj(timestamp);
+        try {
+            plateDao.updTGreenSpSpmx(tGreenSpSpmx);
+            returnModel.setFlag(0);
+            returnModel.setMsg("操作成功！");
+            returnModel.setObject(null);
+        }catch (Exception e){
+            System.out.println(e);
+            returnModel.setFlag(1);
+            returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setObject(null);
+        }
+        return returnModel;
     }
 
 

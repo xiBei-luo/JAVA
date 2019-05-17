@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>欢迎你,系统管理员</title>
+    <title>商品管理</title>
 
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrapValidator.min.css">
     <link rel="stylesheet" href="/publicFrame/dhtmlx-4.5/skins/web/dhtmlx.css">
     <link rel="stylesheet" href="/publicFrame/dhtmlx-4.5/skins/dhtmlxgrid.css">
-    <link rel="stylesheet" href="/plate/css/yhgl/index.css">
+    <link rel="stylesheet" href="/plate/css/spgl/index.css">
 </head>
 <body>
 <div class="container-fluid plateIndexContainer">
@@ -36,12 +36,8 @@
                 <div class="col-md-12 searchForm">
                     <form class="form-inline">
                         <div class="form-group">
-                            <label for="cUsernameSearch">姓名：</label>
-                            <input type="text" class="form-control" id="cUsernameSearch" placeholder="请输入姓名">
-                        </div>
-                        <div class="form-group">
-                            <label for="cPhoneSearch">电话号码：</label>
-                            <input type="text" class="form-control" id="cPhoneSearch" placeholder="请输入电话号码">
+                            <label for="cSpmcSearch">商品名称：</label>
+                            <input type="text" class="form-control" id="cSpmcSearch" placeholder="请输入商品名称">
                         </div>
                         <button type="button" class="btn btn-info" id="btnSearch">搜索</button>
                         <button type="button" class="btn btn-primary" id="btnAdd">新增</button>
@@ -67,69 +63,25 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">新增系统用户</h4>
+                    <h4 class="modal-title" id="myModalLabel">新增商品</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="insertPlateUserForm" class="">
+                    <form id="insertForm" class="">
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="cUsername" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cUsername" name="cUsername" placeholder="请输入姓名">
-                                <input type="hidden" class="form-control" id="cUserid" name="cUserid">
+                                <label for="cSpmc" class="sr-only"></label>
+                                <input type="text" class="form-control" id="cSpmc" name="cSpmc" placeholder="请输入商品名称">
+                                <input type="hidden" class="form-control" id="cSpbh" name="cSpbh">
                             </div>
                             <div class="col-sm-6">
-                                <label for="cSex" class="sr-only"></label>
-                                <select class="form-control" id="cSex"></select>
+                                <label for="cSpjg" class="sr-only"></label>
+                                <input type="text" class="form-control" id="cSpjg" name="cSpjg" placeholder="请输入商品价格">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
-                                <label for="cRylb" class="sr-only"></label>
-                                <select class="form-control" id="cRylb"></select>
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="cLoginname" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cLoginname" name="cLoginname" placeholder="设置登录名">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="cEmail" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cEmail" name="cEmail" placeholder="请输入邮箱">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="cPhone" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cPhone" name="cPhone" placeholder="请输入电话号码">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="cWxhm" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cWxhm" name="cWxhm" placeholder="请输入微信号码">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="cZjlx" class="sr-only"></label>
-                                <select class="form-control" id="cZjlx"></select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="cZjhm" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cZjhm" name="cZjhm" placeholder="请输入证件号码">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="cJtzz" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cJtzz" name="cJtzz" placeholder="请输入家庭住址">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="cPassword" class="sr-only"></label>
-                                <input type="password" class="form-control" id="cPassword" name="cPassword" placeholder="设置初始登陆密码">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="cPassword1" class="sr-only"></label>
-                                <input type="cPassword1" class="form-control" id="cPassword1" name="cPassword" placeholder="请再次输入初始密码">
+                            <div class="col-sm-12">
+                                <label for="cSpms" class="sr-only"></label>
+                                <textarea name="cSpms" id="cSpms"class="form-control" rows="2" placeholder="请输入商品描述"></textarea>
                             </div>
                         </div>
                     </form>
@@ -156,6 +108,6 @@
 <script src="/publicJs/publicCommon.js"></script>
 <script src="/publicJs/publicyw.js"></script>
 <script src="/publicJs/SendRequest.js"></script>
-<script src="/plate/js/yhgl/index.js"></script>
+<script src="/plate/js/spgl/index.js"></script>
 </body>
 </html>

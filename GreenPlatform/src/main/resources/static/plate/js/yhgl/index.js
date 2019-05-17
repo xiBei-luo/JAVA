@@ -77,6 +77,7 @@ function loadGridData(){
     grid.clearAll();
     var sendRequest = new SendRequest("/plate/selectPlateuser","POST");//构造对象
     sendRequest.addParamObj({
+        "cRylb":$("#cRylbSearch").val(),
         "cUsername":$("#cUsernameSearch").val(),
         "cPhone":$("#cPhoneSearch").val()
     });//构造请求参数
@@ -297,6 +298,7 @@ function f_del(id){
 function initSelect(){
     initBaseCodeSelect($("#cSex"),{cDmlb:"C_USER_SEX"},null,"---请选择性别---")
     initBaseCodeSelect($("#cRylb"),{cDmlb:"C_USER_RYLB"},null,"---请选择人员类别---")
+    initBaseCodeSelect($("#cRylbSearch"),{cDmlb:"C_USER_RYLB"},null,"全部")
     initBaseCodeSelect($("#cZjlx"),{cDmlb:"C_USER_ZJLX"},null,"---请选择证件类型---")
 }
 

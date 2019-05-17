@@ -28,6 +28,7 @@ public class PlateUser {
     private Timestamp dCjsj;
     private String cXguser;
     private Timestamp dXgsj;
+    private String cRydj;
 
     @Id
     @Column(name = "cUserid", nullable = false, length = 255)
@@ -100,7 +101,7 @@ public class PlateUser {
     }
 
     @Basic
-    @Column(name = "cZjlx", nullable = true, length = 2)
+    @Column(name = "cZjlx", nullable = true, length = 1)
     public String getcZjlx() {
         return cZjlx;
     }
@@ -297,5 +298,15 @@ public class PlateUser {
                 ", cXguser='" + cXguser + '\'' +
                 ", dXgsj=" + dXgsj +
                 '}';
+    }
+
+    @Basic
+    @Column(name = "cRydj", nullable = true, length = 1)
+    public String getcRydj() {
+        return cRydj;
+    }
+
+    public void setcRydj(String cRydj) {
+        this.cRydj = cRydj;
     }
 }

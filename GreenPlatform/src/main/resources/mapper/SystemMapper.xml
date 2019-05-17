@@ -84,6 +84,57 @@
     </update>
 
 
+    <!--TGreenSpSpmx crud-->
+    <select id="selectTGreenSpSpmx" parameterType="com.greenplatform.model.TGreenSpSpmx" resultType="com.greenplatform.model.TGreenSpSpmx">
+        SELECT T.* FROM t_green_sp_spmx T WHERE 1=1
+        <if test='cSpbh!=null and cSpbh!=""'>
+            AND T.cSpbh = #{cSpbh}
+        </if>
+        <if test='cSpmc!=null and cSpmc!=""'>
+            AND T.cSpmc = #{cSpmc}
+        </if>
+        <if test='cSpms!=null and cSpms!=""'>
+            AND T.cSpms = #{cSpms}
+        </if>
+        <if test='cSpjg!=null and cSpjg!=""'>
+            AND T.cSpjg = #{cSpjg}
+        </if>
+        <if test='cSpdw!=null and cSpdw!=""'>
+            AND T.cSpdw = #{cSpdw}
+        </if>
+        <if test='cZt!=null and cZt!=""'>
+            AND T.cZt = #{cZt}
+        </if>
+        <if test='cCjuser!=null and cCjuser!=""'>
+            AND T.cCjuser = #{cCjuser}
+        </if>
+        ORDER BY T.cSpjg DESC
+    </select>
+    <insert id="insertTGreenSpSpmx" parameterType="com.greenplatform.model.TGreenSpSpmx">
+        INSERT INTO t_green_sp_spmx (cSpbh,cSpmc,cSpms,cSpjg,cSpdw,
+                                     cBz,cZt,cCjuser,dCjsj,cXguser,dXgsj)
+        VALUES(#{cSpbh},#{cSpmc},#{cSpms},#{cSpjg},#{cSpdw},
+               #{cBz},#{cZt},#{cCjuser},#{dCjsj},#{cXguser},#{dXgsj})
+    </insert>
+    <delete id="delTGreenSpSpmx" parameterType="com.greenplatform.model.TGreenSpSpmx">
+        DELETE FROM t_green_sp_spmx WHERE cSpbh = #{cSpbh}
+    </delete>
+    <update id="updTGreenSpSpmx" parameterType="com.greenplatform.model.TGreenSpSpmx">
+        UPDATE t_green_sp_spmx
+        <set>
+            <if test='cSpmc!=null and cSpmc!=""'>cSpmc = #{cSpmc},</if>
+            <if test='cSpms!=null and cSpms!=""'>cSpms = #{cSpms},</if>
+            <if test='cSpjg!=null and cSpjg!=""'>cSpjg = #{cSpjg},</if>
+            <if test='cSpdw!=null and cSpdw!=""'>cSpdw = #{cSpdw},</if>
+            <if test='cBz!=null and cBz!=""'>cBz = #{cBz},</if>
+            <if test='cZt!=null and cZt!=""'>cZt = #{cZt},</if>
+            <if test='cXguser!=null and cXguser!=""'>cXguser = #{cXguser},</if>
+            <if test='dXgsj!=null and dXgsj!=""'>dXgsj = #{dXgsj}</if>
+        </set>
+        WHERE cSpbh = #{cSpbh}
+    </update>
+
+
 
 
 </mapper>

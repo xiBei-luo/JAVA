@@ -6,7 +6,7 @@
         <table name="system_user" schema="greenplatform" catalog=""/>
         <attributes>
             <id name="cUserid">
-                <column name="cUserid" length="11"/>
+                <column name="cUserid"/>
             </id>
             <basic name="cLoginname">
                 <column name="cLoginname" nullable="false" length="30"/>

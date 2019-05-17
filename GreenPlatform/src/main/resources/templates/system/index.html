@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ch">
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -30,16 +30,22 @@
                         <li class="active"><a href="#home">首页 <span class="sr-only">(current)</span></a></li>
                         <li><a href="#rankList">能量排行榜</a></li>
                         <li><a href="#market">种子商店</a></li>
-                        <li><a href="#apprentice">收徒</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="./login">登陆</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">我的账户</a></li>
+                                <li><a href="#">收徒</a></li>
+                            </ul>
+                        </li>
                         <li><a href="#"></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <div class="container-fluid contentBox">
+        <div class="container-fluid mission">
             <div class="row"></div>
             <div class="row">
                 <div class="col-md-11 col-sm-11 col-xs-9"></div>
@@ -68,7 +74,7 @@
         </div>
     </header>
 
-    <div id="rankList" class="container-fluid">
+    <div id="rankList" class="container-fluid mr-top-50">
         <div class="row">
             <div class="col-md-offset-4 col-md-4">
                 <h3 class="text-center">能量排行榜</h3>
@@ -138,194 +144,36 @@
         </div>
     </div>
 
-    <div id="market" class="container-fluid">
-        <section class="popular-packages">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="section-title">
-                            <h2 class="text-center">种子商店</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Etiam at ipsum at ligula vestibulum sodales Sed luctus orci vel nibh aliquam laoreet Aenean accumsan </p>
+    <section id="market" class="popular-packages">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="single-package">
+                        <h2 class="text-center">种子商店</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4" th:each="tGreenSpSpmxList : ${tGreenSpSpmxList}">
+                    <div class="single-package">
+                        <div class="package-image">
+                            <a href="#"><img src="/publicImg/system/1.jpg" alt=""></a>
+                        </div>
+                        <div class="package-content">
+                            <h3><a href="" title="" id="cSpmc" th:text=${tGreenSpSpmxList.cSpmc}></a></h3>
+                            <p id="cSpms" th:text=${tGreenSpSpmxList.cSpms}> </p>
+                            <span id="cSpjg" th:text="'$'+${tGreenSpSpmxList.cSpjg}"></span>
+                        </div>
+                        <div class="package-calto-action">
+                            <ul class="ct-action">
+                                <li><a href="#" class="travel-booking-btn hvr-shutter-out-horizontal">立即兑换</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="single-package">
-                            <div class="package-image">
-                                <a href="#"><img src="/publicImg/packages/1.jpg" alt=""></a>
-                            </div>
-                            <div class="package-content">
-                                <h3><a href="" title="">仙人掌 – All Stunning Places</a></h3>
-                                <p>4 Days, 5 Nights Start From <span>$500</span>
-                                </p>
-                            </div>
-                            <div class="package-calto-action">
-                                <ul class="ct-action">
-                                    <li><a href="#" class="travel-booking-btn hvr-shutter-out-horizontal">Book Now</a></li>
-                                    <li>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> <!-- single package end -->
-
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="single-package">
-                            <div class="package-image">
-                                <a href="#"><img src="/publicImg/packages/2.jpg" alt=""></a>
-                            </div>
-                            <div class="package-content">
-                                <h3><a href="" title="">白刺 – All Stunning Places</a></h3>
-                                <p>4 Days, 5 Nights Start From <span>$500</span>
-                                </p>
-                            </div>
-                            <div class="package-calto-action">
-                                <ul class="ct-action">
-                                    <li><a href="#" class="travel-booking-btn hvr-shutter-out-horizontal">Book Now</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> <!-- single package end -->
-
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="single-package">
-                            <div class="package-image">
-                                <a href="#"><img src="/publicImg/images/packages/3.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="package-content">
-                                <h3><a href="" title="">肉苁蓉 – All Stunning Places</a></h3>
-                                <p>4 Days, 5 Nights Start From <span>$500</span>
-                                </p>
-                            </div>
-                            <div class="package-calto-action">
-                                <ul class="ct-action">
-                                    <li><a href="#" class="travel-booking-btn hvr-shutter-out-horizontal">Book Now</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> <!-- single package end -->
-
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="single-package">
-                            <div class="package-image">
-                                <a href="#"><img src="/publicImg/packages/4.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="package-content">
-                                <h3><a href="" title="">芦荟 – All Stunning Places</a></h3>
-                                <p>4 Days, 5 Nights Start From <span>$500</span>
-                                </p>
-                            </div>
-                            <div class="package-calto-action">
-                                <ul class="ct-action">
-                                    <li><a href="#" class="travel-booking-btn hvr-shutter-out-horizontal">Book Now</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> <!-- single package end -->
-
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="single-package">
-                            <div class="package-image">
-                                <a href="#"><img src="/publicImg/packages/5.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="package-content">
-                                <h3><a href="" title="">大犀角 – All Stunning Places</a></h3>
-                                <p>4 Days, 5 Nights Start From <span>$500</span>
-                                </p>
-                            </div>
-                            <div class="package-calto-action">
-                                <ul class="ct-action">
-                                    <li><a href="#" class="travel-booking-btn hvr-shutter-out-horizontal">Book Now</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> <!-- single package end -->
-
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="single-package">
-                            <div class="package-image">
-                                <a href="#"><img src="/publicImg/packages/6.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="package-content">
-                                <h3><a href="" title="">绿之玲 – All Stunning Places</a></h3>
-                                <p>4 Days, 5 Nights Start From <span>$500</span>
-                                </p>
-                            </div>
-                            <div class="package-calto-action">
-                                <ul class="ct-action">
-                                    <li><a href="#" class="travel-booking-btn hvr-shutter-out-horizontal">Book Now</a>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> <!-- single package end -->
-                </div>
             </div>
-        </section> <!--end  popular packajge -->
-    </div>
-    <div id="apprentice" class="container-fluid">
-        <ul>
-            <li><a href="">1</a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">1</a></li>
-        </ul>
-    </div>
+        </div>
+    </section> <!--end  popular packajge -->
     <footer class="container-fluid indexFooter">
         <ul>
             <li><a href="">12</a></li>
@@ -341,6 +189,7 @@
         </ul>
     </footer>
     <div id="returnTop">
+        <span class="glyphicon glyphicon-chevron-up"></span>
     </div>
 
 

@@ -61,5 +61,15 @@ public interface PlateDao {
     public int updPlateCodeDmz (PlateCodeDmz plateCodeDmz);//修改代码值
     /*代码值操作end*/
 
+    /*种子商店操作begin*/
+    public List selectTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//查询商品明细
+
+    public int insertTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//插入商品明细
+
+    public int delTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//删除商品明细
+
+    public int updTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//修改商品明细
+    /*种子商店操作end*/
+
 
 }

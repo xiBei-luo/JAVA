@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.greenplatform.model.TGreenNlJsnlmx">
+        <table name="t_green_nl_jsnlmx" schema="greenplatform" catalog=""/>
+        <attributes>
+            <id name="cLsh">
+                <column name="cLsh"/>
+            </id>
+            <basic name="cUserid">
+                <column name="cUserid"/>
+            </basic>
+            <basic name="cJssl">
+                <column name="cJssl" nullable="false"/>
+            </basic>
+            <basic name="dJssj">
+                <column name="dJssj" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="cJsyy">
+                <column name="cJsyy" nullable="false"/>
+            </basic>
+            <basic name="cBz">
+                <column name="cBz" nullable="false" length="2000"/>
+            </basic>
+            <basic name="cZt">
+                <column name="cZt" nullable="false" length="1"/>
+            </basic>
+            <basic name="cCjuser">
+                <column name="cCjuser" nullable="false" length="11"/>
+            </basic>
+            <basic name="dCjsj">
+                <column name="dCjsj" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="cXguser">
+                <column name="cXguser" nullable="false" length="11"/>
+            </basic>
+            <basic name="dXgsj">
+                <column name="dXgsj" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

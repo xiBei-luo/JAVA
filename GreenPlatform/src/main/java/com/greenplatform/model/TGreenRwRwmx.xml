@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="com.greenplatform.model.TGreenRwRwmx">
+        <table name="t_green_rw_rwmx" schema="greenplatform" catalog=""/>
+        <id-class class="com.greenplatform.model.TGreenRwRwmxPK"/>
+        <attributes>
+            <id name="cUserid">
+                <column name="cUserid"/>
+            </id>
+            <id name="cRwlb">
+                <column name="cRwlb" length="1"/>
+            </id>
+            <id name="cRwsj">
+                <column name="cRwsj"/>
+            </id>
+            <basic name="cYwzt">
+                <column name="cYwzt" nullable="false" length="1"/>
+            </basic>
+            <basic name="cBz">
+                <column name="cBz" nullable="false" length="2000"/>
+            </basic>
+            <basic name="cCjuser">
+                <column name="cCjuser" nullable="false" length="11"/>
+            </basic>
+            <basic name="dCjsj">
+                <column name="dCjsj" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="cXguser">
+                <column name="cXguser" nullable="false" length="11"/>
+            </basic>
+            <basic name="dXgsj">
+                <column name="dXgsj" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.greenplatform.model.PlateCodeDmlb;
 import com.greenplatform.model.PlateCodeDmz;
 import com.greenplatform.model.PlateUser;
+import com.greenplatform.model.TGreenSpSpmx;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
 import net.sf.json.JSONObject;
@@ -76,6 +77,34 @@ public class PlateController {
     @ResponseBody
     public ReturnModel selectPlateCodeDmz(PlateCodeDmz plateCodeDmz){
         ReturnModel returnModel = plateService.selectPlateCodeDmz(plateCodeDmz);
+        return returnModel;
+    }
+
+    @RequestMapping(value = "/selectTGreenSpSpmx",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel selectTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx){
+        ReturnModel returnModel = plateService.selectTGreenSpSpmx(tGreenSpSpmx);
+        return returnModel;
+    }
+
+    @RequestMapping(value = "/insertTGreenSpSpmx",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel insertTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx){
+        ReturnModel returnModel = plateService.insertTGreenSpSpmx(tGreenSpSpmx);
+        return returnModel;
+    }
+
+    @RequestMapping(value = "/delTGreenSpSpmx",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel delTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx){
+        ReturnModel returnModel = plateService.delTGreenSpSpmx(tGreenSpSpmx);
+        return returnModel;
+    }
+
+    @RequestMapping(value = "/updTGreenSpSpmx",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel updTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx){
+        ReturnModel returnModel = plateService.updTGreenSpSpmx(tGreenSpSpmx);
         return returnModel;
     }
 

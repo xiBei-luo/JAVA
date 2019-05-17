@@ -1,13 +1,8 @@
+/*公共begin*/
 header{
     width: 100%;
     background: url("../../publicImg/systemBg.jpg") repeat-x;
     overflow-x: hidden;
-}
-.indexHeader{
-    height:500px;
-}
-.loginHeader{
-    height:100%;
 }
 .mr-top-100{
     margin-top:100px;
@@ -15,10 +10,20 @@ header{
 .mr-top-50{
     margin-top: 50px;
 }
-.contentBox{
+/*公共end*/
+
+.indexHeader{
+    height:500px;
+}
+.loginHeader{
+    height:100%;
+}
+
+/*banner下的三个任务begin*/
+.mission{
     margin-top:100px;
 }
-.contentBox img{
+.mission img{
     width: 100%;
     height: 100%;
     background-position: center ;
@@ -27,7 +32,6 @@ header{
     padding:10px;
     margin-top: 10%;
 }
-
 #js{
     border-color: #2b542c;
     background: #5cb85c;
@@ -40,6 +44,9 @@ header{
     border-color: #e38d13;
     background: #f5e79e;
 }
+/*banner下的三个任务end*/
+
+/*能量排行榜begin*/
 #rankList .row .rankListBg{
     background: #3e8f3e;
     margin-top: 10px;
@@ -54,18 +61,123 @@ header{
     position: absolute;
     right: 20px;
 }
+/*能量排行榜end*/
+
 #returnTop{
     position: fixed;
     right:0;
     bottom:0;
     width: 50px;
     height: 50px;
-    background: #b92c28;
+    background: #5cb85c;
+}
+#returnTop span{
+    font-size: 22px;
+    color: #ffffff;
+    line-height: 50px;
+    padding-left: 13px;
 }
 .indexFooter{
     height: 300px;
     background: #737373;
     color: #ffffff;
 }
+
+/*种子商店begin*/
+.popular-packages {
+    background: #ffffff;
+    padding: 100px 0 50px;
+}
+.popular-packages .single-package {
+    margin-bottom: 30px;
+    -webkit-transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.5s;
+    overflow: hidden;
+    position: relative;
+    -webkit-box-shadow: 0 0 20px 0 rgba(47, 47, 47, 0.05);
+    box-shadow: 0 0 20px 0 rgba(47, 47, 47, 0.05);
+    transition: all ease-in-out 0.5s;
+}
+.popular-packages .single-package:hover {
+    -webkit-box-shadow: 0 0 60px 0 rgba(47, 47, 47, 0.1);
+    box-shadow: 0 0 60px 0 rgba(47, 47, 47, 0.1);
+}
+.popular-packages .single-package:hover .package-image a img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.popular-packages .single-package:hover .package-calto-action {
+    padding: 0 20px 25px 0px;
+}
+.popular-packages .single-package:hover .package-calto-action .ct-action li:first-child a {
+    background: #f15b5c;
+}
+.popular-packages .single-package .package-image {
+    overflow: hidden;
+}
+.popular-packages .single-package .package-image a img {
+    display: block;
+    width: 100%;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: all ease-in-out 0.3s;
+    transition: all ease-in-out 0.3s;
+}
+.popular-packages .single-package .package-content {
+    padding: 20px;
+}
+.popular-packages .single-package .package-content h3 a {
+    font-weight: 600;
+    color: #2f2f2f;
+    font-size: 20px;
+    -webkit-transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.5s;
+}
+.popular-packages .single-package .package-content h3 a:hover {
+    color: #f15b5c;
+}
+.popular-packages .single-package .package-content p {
+    color: #727272;
+    font-size: 15px;
+    font-weight: 500;
+    display: inline;
+}
+.popular-packages .single-package .package-content #cSpjg {
+    color: #37b721;
+    font-weight: 600;
+    display: inline-block;
+    float: right;
+}
+.popular-packages .single-package .package-calto-action {
+    padding: 0 20px 25px 0px;
+}
+.popular-packages .single-package .package-calto-action .ct-action {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.popular-packages .single-package .package-calto-action .ct-action li:first-child a {
+    -webkit-transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.5s;
+    overflow: hidden;
+}
+.travel-booking-btn {
+    display: inline-block;
+    background: #37b721;
+    padding: 9px 22px;
+    color: #fefefe;
+    font-weight: 500;
+    font-size: 15px;
+}
+.package-calto-action li{
+    list-style: none;
+}
+/*种子商店end*/
 
 

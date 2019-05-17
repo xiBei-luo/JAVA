@@ -53,4 +53,14 @@ public interface PlateService {
     public ReturnModel insertPlateLog (PlateLog plateLog);//插入代码值
     /*日志表操作end*/
 
+    /*种子商店操作begin*/
+    public ReturnModel selectTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//查询商品明细
+
+    public ReturnModel insertTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//插入商品明细
+
+    public ReturnModel delTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//删除商品明细
+
+    public ReturnModel updTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//修改商品明细
+    /*种子商店操作end*/
+
 }

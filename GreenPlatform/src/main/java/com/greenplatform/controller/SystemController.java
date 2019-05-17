@@ -1,10 +1,13 @@
 package com.greenplatform.controller;
 
 import com.greenplatform.model.SystemUser;
+import com.greenplatform.model.TGreenSpSpmx;
 import com.greenplatform.model.base.ReturnModel;
+import com.greenplatform.service.PlateService;
 import com.greenplatform.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +27,10 @@ public class SystemController {
         return "system/login/login";
     }
     @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String index() {
+    public String index(Model model) {
+        ReturnModel returnModel = systemService.selectTGreenSpSpmx(new TGreenSpSpmx());
+        System.out.println("返回值---"+returnModel);
+        model.addAttribute("tGreenSpSpmxList", returnModel.getObject());
         return "system/index";
     }
 
