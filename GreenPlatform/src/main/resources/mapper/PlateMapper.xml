@@ -90,6 +90,40 @@
         WHERE cUserid = #{cUserid}
     </update>
 
+    <!--PlateCodeDmlb crud-->
+    <select id="selectPlateCodeDmlb" parameterType="com.greenplatform.model.PlateCodeDmlb" resultType="com.greenplatform.model.PlateCodeDmlb">
+        SELECT T.* FROM plate_code_dmlb T WHERE 1=1
+        <if test='cDmlb!=null and cDmlb!=""'>
+            AND T.cDmlb = #{cDmlb}
+        </if>
+        <if test='cDmlbmc!=null and cDmlbmc!=""'>
+            AND T.cDmlbmc = #{cDmlbmc}
+        </if>
+        <if test='cZt!=null and cZt!=""'>
+            AND T.cZt = #{cZt}
+        </if>
+        <if test='cCjuser!=null and cCjuser!=""'>
+            AND T.cCjuser = #{cCjuser}
+        </if>
+    </select>
+    <insert id="insertPlateCodeDmlb" parameterType="com.greenplatform.model.PlateCodeDmlb">
+        INSERT INTO plate_code_dmlb (cDmlb,cDmlbmc,cZt,cCjuser,dCjsj)
+        VALUES(#{cDmlb},#{cDmlbmc},#{cZt},#{cCjuser},#{dCjsj})
+    </insert>
+    <delete id="delPlateCodeDmlb" parameterType="com.greenplatform.model.PlateCodeDmlb">
+        DELETE FROM plate_code_dmlb WHERE cDmlb = #{cDmlb}
+    </delete>
+    <update id="updPlateCodeDmlb" parameterType="com.greenplatform.model.PlateCodeDmlb">
+        UPDATE plate_code_dmlb
+        <set>
+            <if test='cDmlbmc!=null and cDmlbmc!=""'>cDmlbmc = #{cDmlbmc},</if>
+            <if test='cZt!=null and cZt!=""'>cZt = #{cZt},</if>
+            <if test='cXguser!=null and cXguser!=""'>cXguser = #{cXguser},</if>
+            <if test='dXgsj!=null and dXgsj!=""'>dXgsj = #{dXgsj}</if>
+        </set>
+        WHERE cDmlb = #{cDmlb}
+    </update>
+
     <!--PlateCodeDmz crud-->
     <select id="selectPlateCodeDmz" parameterType="com.greenplatform.model.PlateCodeDmz" resultType="com.greenplatform.model.PlateCodeDmz">
         SELECT T.* FROM plate_code_dmz T WHERE 1=1
@@ -108,6 +142,7 @@
         <if test='cZt!=null and cZt!=""'>
             AND T.cZt = #{cZt}
         </if>
+        ORDER BY T.cDmlb,T.cZt
     </select>
     <insert id="insertPlateCodeDmz" parameterType="com.greenplatform.model.PlateCodeDmz">
         INSERT INTO plate_code_dmz (cDmlb,cDm,cDmmc,cSort,cBz,
@@ -183,6 +218,25 @@
         </set>
         WHERE cSpbh = #{cSpbh}
     </update>
+
+
+    <!--查询任务完成量-->
+    <select id="selectTGreenRwRwmx" parameterType="com.greenplatform.model.TGreenRwRwmx" resultType="com.greenplatform.model.TGreenRwRwmx">
+        SELECT T.* FROM t_green_rw_rwmx T WHERE 1=1
+        <if test='cUserid!=null and cUserid!=""'>
+            AND T.cUserid = #{cUserid}
+        </if>
+        <if test='cRwlb!=null and cRwlb!=""'>
+            AND T.cRwlb = #{cRwlb}
+        </if>
+        <if test='cRwsj!=null and cRwsj!=""'>
+            AND T.cRwsj = #{cRwsj}
+        </if>
+        <if test='cCjuser!=null and cCjuser!=""'>
+            AND T.cCjuser = #{cCjuser}
+        </if>
+        ORDER BY T.cUserid DESC
+    </select>
 
 
 

@@ -8,6 +8,7 @@ import com.greenplatform.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -23,17 +24,21 @@ public class PlateServiceImpl implements PlateService {
 
 
     @Override
-    public ReturnModel selectPlateuser(PlateUser plateUser,String type) {
+    public ReturnModel selectPlateuser(PlateUser plateUser, HttpSession session) {
         plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
         List plateUserList = plateDao.selectPlateuser(plateUser);
-        if (!plateUserList.isEmpty()){
-            returnModel.setFlag(0);
-            returnModel.setMsg("登陆成功");
-            returnModel.setObject(plateUserList);
-        }else{
+
+        if (plateUserList.isEmpty()){
             returnModel.setFlag(1);
             returnModel.setMsg("登录名或密码错误");
             returnModel.setObject(null);
+        }else{
+            returnModel.setFlag(0);
+            returnModel.setMsg("登陆成功");
+            returnModel.setObject(plateUserList);
+            PlateUser plateUser1 = (PlateUser) plateUserList.get(0);
+            System.out.println(plateUser1.getcLoginname());
+            session.setAttribute("cLoginname",plateUser1.getcLoginname());
         }
         return returnModel;
     }
@@ -104,22 +109,67 @@ public class PlateServiceImpl implements PlateService {
 
     @Override
     public ReturnModel selectPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
-        return null;
+        List plateCodeDmlbList;
+        try {
+            plateCodeDmlbList = plateDao.selectPlateCodeDmlb(plateCodeDmlb);
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(plateCodeDmlbList);
+        }catch (Exception e){
+            returnModel.setFlag(1);
+            returnModel.setMsg("查询出错，系统错误！");
+            returnModel.setObject(null);
+        }
+        return returnModel;
     }
 
     @Override
     public ReturnModel insertPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
-        return null;
+        plateCodeDmlb.setdCjsj(timestamp);
+        try {
+            plateDao.insertPlateCodeDmlb(plateCodeDmlb);
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(null);
+        }catch (Exception e){
+            returnModel.setFlag(1);
+            returnModel.setMsg("新增出错，系统错误！");
+            returnModel.setObject(null);
+        }
+        return returnModel;
     }
 
     @Override
     public ReturnModel delPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
-        return null;
+        try {
+            plateDao.delPlateCodeDmlb(plateCodeDmlb);
+            returnModel.setFlag(0);
+            returnModel.setMsg("操作成功！");
+            returnModel.setObject(null);
+        }catch (Exception e){
+            System.out.println(e);
+            returnModel.setFlag(1);
+            returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setObject(null);
+        }
+        return returnModel;
     }
 
     @Override
     public ReturnModel updPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
-        return null;
+        plateCodeDmlb.setdXgsj(timestamp);
+        try {
+            plateDao.updPlateCodeDmlb(plateCodeDmlb);
+            returnModel.setFlag(0);
+            returnModel.setMsg("操作成功！");
+            returnModel.setObject(null);
+        }catch (Exception e){
+            System.out.println(e);
+            returnModel.setFlag(1);
+            returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setObject(null);
+        }
+        return returnModel;
     }
 
     @Override
@@ -225,6 +275,23 @@ public class PlateServiceImpl implements PlateService {
             System.out.println(e);
             returnModel.setFlag(1);
             returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setObject(null);
+        }
+        return returnModel;
+    }
+
+    @Override
+    public ReturnModel selectTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
+        List tGreenRwRwmxList;
+        try {
+            tGreenRwRwmxList = plateDao.selectTGreenRwRwmx(tGreenRwRwmx);
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(tGreenRwRwmxList);
+        }catch (Exception e){
+            System.out.println(e);
+            returnModel.setFlag(1);
+            returnModel.setMsg("查询出错，系统错误！");
             returnModel.setObject(null);
         }
         return returnModel;

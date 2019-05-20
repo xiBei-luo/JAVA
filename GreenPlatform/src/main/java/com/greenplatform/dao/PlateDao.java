@@ -35,7 +35,7 @@ public interface PlateDao {
     public int updSystemuser (SystemUser systemUser);//修改系统用户*/
     /*系统用户操作end*/
 
-    /*代码类别操作begin*//*
+    /*代码类别操作begin*/
     public List selectPlateCodeDmlb (PlateCodeDmlb plateCodeDmlb);//查询代码类别
 
     public int insertPlateCodeDmlb (PlateCodeDmlb plateCodeDmlb);//插入代码类别
@@ -43,7 +43,7 @@ public interface PlateDao {
     public int delPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb);//删除代码类别
 
     public int updPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb);//修改代码类别
-    *//*代码类别操作end*//*
+    /*代码类别操作end*//*
 
     *//*日志表操作begin*//*
     public List selectPlateLog (PlateLog plateLog);//查询代码值
@@ -70,6 +70,8 @@ public interface PlateDao {
 
     public int updTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//修改商品明细
     /*种子商店操作end*/
+
+    public List selectTGreenRwRwmx (TGreenRwRwmx tGreenRwRwmx);//查询任务完成量
 
 
 }

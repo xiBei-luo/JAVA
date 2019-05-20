@@ -4,6 +4,7 @@ package com.greenplatform.service;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface PlateService {
@@ -16,7 +17,7 @@ public interface PlateService {
     public ReturnModel insertUser(PlateUser plateUser);*/
 
     /*平台用户操作brgin*/
-    public ReturnModel selectPlateuser(PlateUser plateUser,String type);//查询平台用户信息
+    public ReturnModel selectPlateuser(PlateUser plateUser, HttpSession session);//查询平台用户信息(登陆验证)
 
     public ReturnModel selectPlateuser(PlateUser plateUser);//查询平台用户信息
 
@@ -62,5 +63,7 @@ public interface PlateService {
 
     public ReturnModel updTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//修改商品明细
     /*种子商店操作end*/
+
+    public ReturnModel selectTGreenRwRwmx (TGreenRwRwmx tGreenRwRwmx);//查询任务完成量（查询指定时间已完成任务的人员）
 
 }

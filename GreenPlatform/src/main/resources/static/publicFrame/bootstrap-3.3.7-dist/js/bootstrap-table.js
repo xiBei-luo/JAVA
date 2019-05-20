@@ -1973,7 +1973,7 @@
                   v = _ref25[1];
 
               // ignore data-index
-              if (k === 'static.system.js.index.index') {
+              if (k === 'static.systemStatic.js.index.index') {
                 return;
               }
               data_ += ' data-' + k + '="' + v + '"';
@@ -2105,7 +2105,7 @@
                     _v = _ref31[1];
 
                 // ignore data-index
-                if (_k2 === 'static.system.js.index.index') {
+                if (_k2 === 'static.systemStatic.js.index.index') {
                   return;
                 }
                 data_ += ' data-' + _k2 + '="' + _v + '"';
@@ -2202,7 +2202,7 @@
             var $tr = $td.parent();
             var $cardviewArr = $(target).parents('.card-views').children();
             var $cardviewTarget = $(target).parents('.card-view');
-            var item = _this8.data[$tr.data('static.system.js.index.index')];
+            var item = _this8.data[$tr.data('static.systemStatic.js.index.index')];
             var index = _this8.options.cardView ? $cardviewArr.index($cardviewTarget) : $td[0].cellIndex;
             var fields = _this8.getVisibleFields();
             var field = fields[_this8.options.detailView && !_this8.options.cardView ? index - 1 : index];
@@ -2230,7 +2230,7 @@
 
             var $this = $(e.currentTarget); // Fix #980 Detail view, when searching, returns wrong row
             var $tr = $this.parent().parent();
-            var index = $tr.data('static.system.js.index.index');
+            var index = $tr.data('static.systemStatic.js.index.index');
             var row = data[index];
 
             // remove and update
@@ -2257,7 +2257,7 @@
             e.stopImmediatePropagation();
 
             var $this = $(e.currentTarget);
-            _this8.check_($this.prop('checked'), $this.data('static.system.js.index.index'));
+            _this8.check_($this.prop('checked'), $this.data('static.systemStatic.js.index.index'));
           });
 
           this.header.events.forEach(function (_events, i) {
@@ -2304,7 +2304,7 @@
                 var el = key.substring(index + 1);
 
                 $td.find(el).off(name).on(name, function (e) {
-                  var index = $tr.data('static.system.js.index.index');
+                  var index = $tr.data('static.systemStatic.js.index.index');
                   var row = _this8.data[index];
                   var value = row[field];
 
@@ -2468,7 +2468,7 @@
           var _this11 = this;
 
           this.$selectItem.each(function (i, el) {
-            _this11.data[$(el).data('static.system.js.index.index')][_this11.header.stateField] = $(el).prop('checked');
+            _this11.data[$(el).data('static.systemStatic.js.index.index')][_this11.header.stateField] = $(el).prop('checked');
           });
         }
       }, {
@@ -3087,7 +3087,7 @@
       }, {
         key: 'insertRow',
         value: function insertRow(params) {
-          if (!params.hasOwnProperty('static.system.js.index.index') || !params.hasOwnProperty('row')) {
+          if (!params.hasOwnProperty('static.systemStatic.js.index.index') || !params.hasOwnProperty('row')) {
             return;
           }
           this.options.data.splice(params.index, 0, params.row);
@@ -3115,7 +3115,7 @@
 
             var _params2 = _ref44;
 
-            if (!_params2.hasOwnProperty('static.system.js.index.index') || !_params2.hasOwnProperty('row')) {
+            if (!_params2.hasOwnProperty('static.systemStatic.js.index.index') || !_params2.hasOwnProperty('row')) {
               continue;
             }
             $.extend(this.options.data[_params2.index], _params2.row);
@@ -3146,7 +3146,7 @@
         value: function toggleRow(params, visible) {
           var row = void 0;
 
-          if (params.hasOwnProperty('static.system.js.index.index')) {
+          if (params.hasOwnProperty('static.systemStatic.js.index.index')) {
             row = this.getData()[params.index];
           } else if (params.hasOwnProperty('uniqueId')) {
             row = this.getRowByUniqueId(params.uniqueId);
@@ -3229,7 +3229,7 @@
       }, {
         key: 'updateCell',
         value: function updateCell(params) {
-          if (!params.hasOwnProperty('static.system.js.index.index') || !params.hasOwnProperty('field') || !params.hasOwnProperty('value')) {
+          if (!params.hasOwnProperty('static.systemStatic.js.index.index') || !params.hasOwnProperty('field') || !params.hasOwnProperty('value')) {
             return;
           }
           this.data[params.index][params.field] = params.value;
@@ -3668,7 +3668,7 @@
           } else {
             var trs = this.$body.children();
             for (var i = 0; i < trs.length; i++) {
-              this.expandRow_(true, $(trs[i]).data('static.system.js.index.index'));
+              this.expandRow_(true, $(trs[i]).data('static.systemStatic.js.index.index'));
             }
           }
         }
@@ -3680,7 +3680,7 @@
           } else {
             var trs = this.$body.children();
             for (var i = 0; i < trs.length; i++) {
-              this.expandRow_(false, $(trs[i]).data('static.system.js.index.index'));
+              this.expandRow_(false, $(trs[i]).data('static.systemStatic.js.index.index'));
             }
           }
         }

@@ -74,7 +74,7 @@ function f_submitData(){
                     buttonLabel: "确定"
                 });
             }else{
-                window.location.href="/plate/index";
+                window.location.href="/base/index";
             }
         },
         error:function(){

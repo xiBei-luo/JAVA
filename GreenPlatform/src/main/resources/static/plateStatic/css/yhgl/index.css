@@ -1,0 +1,54 @@
+html,body{
+    width: 100%;
+    height: 100%;
+}
+#insertPlateUserForm .row{
+    margin-bottom: 10px;
+}
+.top_title{
+    background: #1b6d85;
+    margin-bottom: 5px;
+    color: #ebebeb;
+}
+.center_main{
+    height: 80%;
+}
+.center_main_left{
+    background: #ebebeb;
+    height: 100%;
+}
+.center_main_right{
+    height: 100%;
+}
+.searchForm{
+    padding:10px 15px;
+}
+.center_right_main{
+    width: 100%;
+    height: 550px;
+}
+#gridbox{
+    width: 100%;
+    height: 96%;
+}
+#commonInfo{
+    z-index: 999;
+    width: 98%;
+    height: auto;
+    position: absolute;
+    top:50%;
+    text-align: center;
+    font-size: 18px;
+    color: #C6C6C6;
+}
+footer{
+    width: 100%;
+    height: 5%;
+    background: #1b6d85;
+    position: fixed;
+    bottom: 0;
+}
+
+
+
+

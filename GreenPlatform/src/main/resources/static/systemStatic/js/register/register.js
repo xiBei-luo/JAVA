@@ -82,7 +82,7 @@ function f_submitData(){
         "cPassword":$("#cPassword").val()
     };
     var options = {
-        url:"/system/register",
+        url:"/systemStatic/register",
         type:"POST",
         data:paramObj,
         success:function(ret){
@@ -98,7 +98,7 @@ function f_submitData(){
                     buttonLabel: "确定"
                 });
             }else{
-                window.location.href="/system/index";
+                window.location.href="/systemStatic/index";
             }
         },
         error:function(){

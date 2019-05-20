@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>商品管理</title>
+    <title>欢迎你,系统管理员</title>
 
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrapValidator.min.css">
     <link rel="stylesheet" href="/publicFrame/dhtmlx-4.5/skins/web/dhtmlx.css">
     <link rel="stylesheet" href="/publicFrame/dhtmlx-4.5/skins/dhtmlxgrid.css">
-    <link rel="stylesheet" href="/plateStatic/css/spgl/index.css">
+    <link rel="stylesheet" href="/plateStatic/css/jcdm/index.css">
 </head>
 <body>
 <div class="container-fluid plateIndexContainer">
@@ -37,8 +37,12 @@
                 <div class="col-md-12 searchForm">
                     <form class="form-inline">
                         <div class="form-group">
-                            <label for="cSpmcSearch">商品名称：</label>
-                            <input type="text" class="form-control" id="cSpmcSearch" placeholder="请输入商品名称">
+                            <label for="cDmlbSeatch">代码类别：</label>
+                            <input type="text" class="form-control" id="cDmlbSeatch" placeholder="请输入代码类别">
+                        </div>
+                        <div class="form-group">
+                            <label for="cDmSearch">代码值：</label>
+                            <input type="text" class="form-control" id="cDmSearch" placeholder="请输入代码值">
                         </div>
                         <button type="button" class="btn btn-info" id="btnSearch">搜索</button>
                         <button type="button" class="btn btn-primary" id="btnAdd">新增</button>
@@ -64,25 +68,38 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">新增商品</h4>
+                    <h4 class="modal-title" id="myModalLabel">新增基础代码</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="insertForm" class="">
+                    <form id="insertPlateUserForm" class="">
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="cSpmc" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cSpmc" name="cSpmc" placeholder="请输入商品名称">
-                                <input type="hidden" class="form-control" id="cSpbh" name="cSpbh">
+                                <label for="cDmlb" class="sr-only"></label>
+                                <input type="text" class="form-control" id="cDmlb" name="cDmlb" placeholder="请输入代码类别">
                             </div>
                             <div class="col-sm-6">
-                                <label for="cSpjg" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cSpjg" name="cSpjg" placeholder="请输入商品价格">
+                                <label for="cDmlbmc" class="sr-only"></label>
+                                <input type="text" class="form-control" id="cDmlbmc" name="cDmlbmc" placeholder="请输入代码类别名称">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-12">
-                                <label for="cSpms" class="sr-only"></label>
-                                <textarea name="cSpms" id="cSpms"class="form-control" rows="2" placeholder="请输入商品描述"></textarea>
+                            <div class="col-sm-6">
+                                <label for="cDm" class="sr-only"></label>
+                                <input type="text" class="form-control" id="cDm" name="cLoginname" placeholder="请输入代码">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="cDmmc" class="sr-only"></label>
+                                <input type="text" class="form-control" id="cDmmc" name="cDmmc" placeholder="请输入代码名称">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="cSort" class="sr-only"></label>
+                                <input type="text" class="form-control" id="cSort" name="cSort" placeholder="请输入排序号">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="cZt" class="sr-only"></label>
+                                <select class="form-control" id="cZt"></select>
                             </div>
                         </div>
                     </form>
@@ -109,6 +126,6 @@
 <script src="/publicJs/publicCommon.js"></script>
 <script src="/publicJs/publicyw.js"></script>
 <script src="/publicJs/SendRequest.js"></script>
-<script src="/plateStatic/js/spgl/index.js"></script>
+<script src="/plateStatic/js/jcdm/index.js"></script>
 </body>
 </html>

@@ -59,7 +59,7 @@ function checkLogin(){
 }
 
 function f_submitData(){
-    var sendRequest = new SendRequest("/system/login","POST");//构造对象
+    var sendRequest = new SendRequest("/systemStatic/login","POST");//构造对象
     sendRequest.addParamObj({
         "cLoginname":$("#cLoginname").val(),
         "cPassword":$("#cPassword").val()
@@ -77,7 +77,7 @@ function f_submitData(){
                 buttonLabel: "确定"
             });
         }else{
-            window.location.href="/system/index";
+            window.location.href="/systemStatic/index";
         }
     });//发送请求并获取返回结果
 }
