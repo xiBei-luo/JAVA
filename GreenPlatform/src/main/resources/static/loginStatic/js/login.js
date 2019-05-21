@@ -83,7 +83,6 @@ function f_submitData(){
             } else{
                 window.location.href="/system/index";
             }
-
         }
     });//发送请求并获取返回结果
 }

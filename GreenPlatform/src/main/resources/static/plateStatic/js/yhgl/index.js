@@ -12,11 +12,6 @@ function initEvent(){
     initMenu();
     $("#btnReset").click(function(){
         $("#insertPlateUserForm input").val("");
-        $("#insertPlateUserForm select").val("");
-    });
-
-    $("#loginout").click(function(){
-        f_loginout();
     });
 
     $("#btnAdd").click(function(){
@@ -215,7 +210,7 @@ function f_submitData(type,reqURL){
             "cWxhm":$("#cWxhm").val(),
             "cZjhm":$("#cZjhm").val(),
             "cLoginname":$("#cLoginname").val(),
-            "cRylb":$("#cRylb").val(),
+            "cRylb":'1',
             "cPassword":$("#cPassword").val(),
             "cZt":'1',
         });//构造请求参数
@@ -229,7 +224,7 @@ function f_submitData(type,reqURL){
             "cWxhm":$("#cWxhm").val(),
             "cZjhm":$("#cZjhm").val(),
             "cLoginname":$("#cLoginname").val(),
-            "cRylb":$("#cRylb").val(),
+            "cRylb":'1',
             "cPassword":$("#cPassword").val(),
             "cZt":'1'
         });//构造请求参数
@@ -252,7 +247,7 @@ function f_submitData(type,reqURL){
             });
         }else{
             BootstrapDialog.alert({
-                type: BootstrapDialog.TYPE_WARNING,
+                type: BootstrapDialog.TYPE_PRIMARY,
                 size: BootstrapDialog.SIZE_SMALL,
                 title: '提示',
                 message: "操作成功",
@@ -302,17 +297,8 @@ function f_del(id){
  */
 function initSelect(){
     initBaseCodeSelect($("#cSex"),{cDmlb:"C_USER_SEX"},null,"---请选择性别---")
-    initBaseCodeSelect($("#cRylb"),{cDmlb:"C_USER_RYLB"},null,"---请选择人员类别---")
-    initBaseCodeSelect($("#cRylbSearch"),{cDmlb:"C_USER_RYLB"},null,"全部")
+    initBaseCodeSelect($("#cRylbSearch"),{cDmlb:"C_USER_RYLB"},null,null)
     initBaseCodeSelect($("#cZjlx"),{cDmlb:"C_USER_ZJLX"},null,"---请选择证件类型---")
-}
-
-
-function f_loginout(){
-    var sendRequest = new SendRequest("/base/loginout","GET");//构造对象
-    sendRequest.sendRequest(function(ret){
-        console.log(ret);
-    });//发送请求并获取返回结果
 }
 
 

@@ -32,3 +32,14 @@ function initBaseCodeSelect($container, args, defVal, allFlag){
     });//发送请求并获取返回结果
 
 }
+
+
+/**
+ *获取登陆用户的信息
+ */
+function getLoginUser(){
+    var sendRequest = new SendRequest("/plate/getLoginUser","POST");//构造对象
+    sendRequest.sendRequest(function(ret){
+        console.log(ret);
+    });//发送请求并获取返回结果
+}

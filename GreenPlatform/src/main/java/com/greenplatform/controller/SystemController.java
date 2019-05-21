@@ -21,22 +21,11 @@ public class SystemController {
     @Autowired
     SystemService systemService;
 
-
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String login(){
-        return "system/login/login";
-    }
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(Model model) {
         ReturnModel returnModel = systemService.selectTGreenSpSpmx(new TGreenSpSpmx());
-        System.out.println("返回值---"+returnModel);
         model.addAttribute("tGreenSpSpmxList", returnModel.getObject());
         return "system/index";
-    }
-
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String register(){
-        return "system/register/register";
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)

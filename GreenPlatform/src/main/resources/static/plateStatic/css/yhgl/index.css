@@ -48,6 +48,13 @@ footer{
     position: fixed;
     bottom: 0;
 }
+#loginout{
+    color: #ebebeb;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 40px;
+    cursor: pointer;
+}
 
 
 

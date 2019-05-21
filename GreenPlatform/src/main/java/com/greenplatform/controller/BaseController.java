@@ -21,16 +21,26 @@ public class BaseController {
         return "plate/yhgl/index";
     }
 
+    @GetMapping(value = "/register")
+    public String register() {
+        return "login/register";
+    }
+
     @GetMapping(value = "/login")
     public String login() {
-        return "plate/login/login";
+        return "login/login";
     }
 
     @GetMapping(value = "/loginout")
     public String loginout(HttpSession session){
         // 移除session
-        session.removeAttribute("cLoginname");
-        return "plate/login/login";
+        session.removeAttribute("loginUser");
+        return "login/login";
+    }
+
+    @GetMapping(value = "/account")
+    public String account(){
+        return "system/account";
     }
 
     @GetMapping(value = "/rwgl")

@@ -6,11 +6,17 @@ import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
 import com.greenplatform.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
+import java.net.URI;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +25,7 @@ public class PlateServiceImpl implements PlateService {
     ReturnModel returnModel = new ReturnModel();
     @Autowired
     PlateDao plateDao;
+
     Date date = new Date();
     Timestamp timestamp = new Timestamp(date.getTime());
 
@@ -37,8 +44,8 @@ public class PlateServiceImpl implements PlateService {
             returnModel.setMsg("登陆成功");
             returnModel.setObject(plateUserList);
             PlateUser plateUser1 = (PlateUser) plateUserList.get(0);
-            System.out.println(plateUser1.getcLoginname());
-            session.setAttribute("cLoginname",plateUser1.getcLoginname());
+
+            session.setAttribute("loginUser",plateUser1);
         }
         return returnModel;
     }
@@ -62,26 +69,69 @@ public class PlateServiceImpl implements PlateService {
     }
 
     @Override
-    public ReturnModel insertPlateuser(PlateUser plateUser) {
-        String majorKey = UUID.randomUUID().toString().replaceAll("-", "");
-        plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
-        plateUser.setcUserid(majorKey);
-        plateUser.setdCjsj(timestamp);
+    public ReturnModel insertPlateuser(PlateUser plateUser, HttpSession session) {
+        List plateUserList;
 
+        PlateUser plateUser1 = new PlateUser();
+        //1.判断邮箱或用户名是否被注册
         try{
+            plateUser1.setcRylb(plateUser.getcRylb());
+
+            plateUser1.setcEmail(plateUser.getcEmail());
+            plateUserList = plateDao.selectPlateuser(plateUser1);
+            if (!(plateUserList.isEmpty())){
+                returnModel.setFlag(1);
+                returnModel.setObject(null);
+                if ("1".equals(plateUser.getcRylb())){
+                    returnModel.setMsg("新增用户失败，邮箱已经被注册!");
+                }else {
+                    returnModel.setMsg("注册失败，邮箱已经被注册!");
+                }
+                return returnModel;
+            }
+            plateUser1.setcEmail("");
+            plateUser1.setcLoginname(plateUser.getcLoginname());
+            plateUserList = plateDao.selectPlateuser(plateUser1);
+            if (!(plateUserList.isEmpty())){
+                returnModel.setFlag(1);
+                returnModel.setObject(null);
+                if ("1".equals(plateUser.getcRylb())){
+                    returnModel.setMsg("新增用户失败，用户名已经被注册!");
+                }else {
+                    returnModel.setMsg("注册失败，用户名已经被注册!");
+                }
+                return returnModel;
+            }
+            String majorKey = UUID.randomUUID().toString().replaceAll("-", "");
+            plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
+            plateUser.setcUserid(majorKey);
+            plateUser.setdCjsj(timestamp);
             plateDao.insertPlateuser(plateUser);
+            returnModel.setFlag(0);
+            returnModel.setObject(null);
+            if ("1".equals(plateUser.getcRylb())){
+                returnModel.setMsg("新增用户成功!");
+            }else {
+                session.setAttribute("loginUser",plateUser);
+                returnModel.setMsg("注册成功!");
+            }
         }catch( Exception e){
             System.out.println(e);
             returnModel.setFlag(1);
-            returnModel.setMsg("新增用户失败，系统错误!");
             returnModel.setObject(null);
+            if ("1".equals(plateUser.getcRylb())){
+                returnModel.setMsg("新增用户失败!");
+            }else {
+                returnModel.setMsg("注册失败!");
+            }
         }
 
         return returnModel;
     }
 
     @Override
-    public ReturnModel delPlateuser(PlateUser plateUser) {
+    public ReturnModel delPlateuser(PlateUser plateUser, HttpSession session) {
+        System.out.println("---"+getLoginUser(session));
         try{
             plateDao.delPlateuser(plateUser);
         }catch (Exception e){
@@ -295,6 +345,10 @@ public class PlateServiceImpl implements PlateService {
             returnModel.setObject(null);
         }
         return returnModel;
+    }
+
+    public PlateUser getLoginUser(HttpSession session){
+        return (PlateUser) session.getAttribute("loginUser");
     }
 
 

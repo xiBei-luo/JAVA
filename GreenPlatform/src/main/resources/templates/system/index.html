@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>绿沙平台</title>
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="/system/css/systemStyle.css">
+    <link rel="stylesheet" href="/systemStatic/css/systemStyle.css">
 
 </head>
 <body>
@@ -32,15 +32,17 @@
                         <li><a href="#market">种子商店</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="./login">登陆</a></li>
+                        <li><a href="../base/login">登陆</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">我的账户</a></li>
+                                <!--<li><a href="/base/account" target="_blank" id="myAccount">我的账户</a></li>-->
+                                <li><a href="#" id="myAccount">我的账户</a></li>
                                 <li><a href="#">收徒</a></li>
+                                <li><a href="/base/loginout">退出</a></li>
                             </ul>
                         </li>
-                        <li><a href="#"></a></li>
+                        <!--<li th:text="${session.loginUser.cLoginname}"></li>-->
                     </ul>
                 </div>
             </div>
@@ -192,10 +194,70 @@
         <span class="glyphicon glyphicon-chevron-up"></span>
     </div>
 
+    <!-- myAccountModel -->
+    <div class="modal fade" id="myAccountModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">我的账户</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span class="badge">L0</span>张三
+                            <a href="#" class="btn-link">实名认证</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge">14000</span>我的能量
+                        </li>
+                        <li class="list-group-item">
+                            <button class="btn btn-primary btn-sm">充值</button>
+                            <button class="btn btn-info btn-sm">提现</button>
+                        </li>
+                        <li class="list-group-item">
+                            我的植物
+                            <button class="btn btn-primary btn-sm float-right">捐赠</button>
+                        </li>
+                        <li class="list-group-item">
+                            今日任务
+                        </li>
+                        <li class="list-group-item">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge">已完成</span>浇水
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge badge-warning">未完成</span>施肥
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">已完成</span>沐浴阳光
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="">捐赠记录</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="">充值历史</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="">提现历史</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--<div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnRet">关闭</button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+
 
     <script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
     <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="/publicJs/SendRequest.js"></script>
-    <script src="/system/js/index/index.js"></script>
+    <script src="/publicJs/publicyw.js"></script>
+    <script src="/systemStatic/js/index/index.js"></script>
 </body>
 </html>

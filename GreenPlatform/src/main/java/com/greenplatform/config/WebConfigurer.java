@@ -14,20 +14,28 @@ import java.util.List;
 
 @Configuration
 public class WebConfigurer implements WebMvcConfigurer {
+    @Autowired
+    LoginInterceptor loginInterceptor;
     /**
      * 注册拦截器
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        System.out.println("register--"+registry);
         List exclude = new ArrayList();//不拦截的列表
-        exclude.add("/base/login");
+        //静态资源
         exclude.add("/publicFrame/**");
         exclude.add("/publicJs/**");
-        exclude.add("/plateStatic/**");
         exclude.add("/publicImg/**");
+        exclude.add("/plateStatic/**");
         exclude.add("/systemStatic/**");
+        exclude.add("/loginStatic/**");
+
+        //登录页与注册页
+        exclude.add("/base/login");
+        exclude.add("/base/register");
         exclude.add("/plate/login");
-        exclude.add("/system/register");
+        exclude.add("/plate/insertPlateuser");
 
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(exclude);
     }

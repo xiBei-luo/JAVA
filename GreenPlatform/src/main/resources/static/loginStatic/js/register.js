@@ -7,7 +7,11 @@ $(function () {
 
 function initEvent(){
     $("#btnRegister").click(function(){
-        f_submitData();
+        checkRegister();
+        $("#registerForm").bootstrapValidator('validate');//提交验证
+        if ($("#registerForm").data('bootstrapValidator').isValid()) {
+            f_submitData();
+        }
     });
     $("#btnRegister").keyup(function(){
         var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -76,46 +80,41 @@ function checkRegister(){
 }
 
 function f_submitData(){
-    var paramObj = {
+    var sendRequest = new SendRequest("/plate/insertPlateuser","POST");//构造对象
+    sendRequest.addParamObj({
         "cEmail":$("#cEmail").val(),
         "cLoginname":$("#cLoginname").val(),
-        "cPassword":$("#cPassword").val()
-    };
-    var options = {
-        url:"/system/register",
-        type:"POST",
-        data:paramObj,
-        success:function(ret){
-            console.log(ret);
-            if("0" != ret.flag){
-                $("#btnRegister").attr("disabled",false);
-                BootstrapDialog.alert({
-                    type: BootstrapDialog.TYPE_WARNING,
-                    size: BootstrapDialog.SIZE_SMALL,
-                    title: '注册失败',
-                    message: ret.msg,
-                    closeable: true,
-                    buttonLabel: "确定"
-                });
-            }else{
-                window.location.href="/system/index";
-            }
-        },
-        error:function(){
+        "cPassword":$("#cPassword").val(),
+        "cRylb":'2'
+    });
+
+    sendRequest.sendRequest(function(ret){
+        $("#btnRegister").attr("disabled",false);
+        if("0" != ret.flag){
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,
                 size: BootstrapDialog.SIZE_SMALL,
                 title: '提示',
-                message: "系统错误！",
+                message: "操作失败！"+ret.msg,
                 closeable: true,
                 buttonLabel: "确定"
             });
+        }else{
+            BootstrapDialog.confirm({
+                type: BootstrapDialog.TYPE_PRIMARY,
+                size: BootstrapDialog.SIZE_SMALL,
+                title: '提示',
+                message: "操作成功！"+ret.msg,
+                closeable: true,
+                btnOKLabel: "确定",
+                btnCancelLabel: "留在当前页面",
+                callback: function (ret) {
+                    if(ret){
+                        window.location.href="/system/index";
+                    }
+                }
+            });
         }
-    };
+    });//发送请求并获取返回结果
 
-    $("#registerForm").bootstrapValidator('validate');//提交验证
-
-    if ($("#registerForm").data('bootstrapValidator').isValid()) {
-        $.ajax(options);
-    }
 }

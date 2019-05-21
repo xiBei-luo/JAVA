@@ -18,11 +18,11 @@ SendRequest.prototype.sendRequest = function (callbackMethod) {
         url:this._requestURL,
         type:this._RequestMethod,
         data:this._paramObj,
-        success:function(ret){
+        success:function(ret,textStatus){
             callbackMethod(ret);
         },
-        error:function(ret){
-            callbackMethod(ret);
+        error:function(XMLHttpRequest,textStatus,errorThrown){
+            //callbackMethod(ret);
         }
     };
     $.ajax(options);
