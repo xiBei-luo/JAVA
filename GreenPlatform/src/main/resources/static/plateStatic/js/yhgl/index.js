@@ -19,6 +19,7 @@ function initEvent(){
         $("#btnReset").click();
         $("#cUserid").val("");
         $("#addUserModel").modal('show');
+        $("#cPassword,#cPassword1").show();
     });
 
     $("#btnSearch").click(function(){

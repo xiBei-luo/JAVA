@@ -8,17 +8,12 @@ import java.util.Objects;
 @Table(name = "plate_log", schema = "greenplatform", catalog = "")
 public class PlateLog {
     private String cCzrzbh;
-    private String cTable;
-    private String cTablekey;
-    private String cKeyvalue;
-    private String cColumn;
-    private String cColumnname;
+    private String cCzr;
+    private Timestamp dCzsj;
     private String cCzfs;
-    private String cOldvalue;
-    private String cNewvalue;
-    private String cBgr;
-    private String cBgrxm;
-    private Timestamp dBgsj;
+    private String cMethod;
+    private String cParams;
+    private String cIp;
     private String cCjuser;
     private Timestamp dCjsj;
     private String cXguser;
@@ -35,53 +30,23 @@ public class PlateLog {
     }
 
     @Basic
-    @Column(name = "cTable", nullable = true, length = 255)
-    public String getcTable() {
-        return cTable;
+    @Column(name = "cCzr", nullable = true, length = 255)
+    public String getcCzr() {
+        return cCzr;
     }
 
-    public void setcTable(String cTable) {
-        this.cTable = cTable;
-    }
-
-    @Basic
-    @Column(name = "cTablekey", nullable = true, length = 255)
-    public String getcTablekey() {
-        return cTablekey;
-    }
-
-    public void setcTablekey(String cTablekey) {
-        this.cTablekey = cTablekey;
+    public void setcCzr(String cCzr) {
+        this.cCzr = cCzr;
     }
 
     @Basic
-    @Column(name = "cKeyvalue", nullable = true, length = 255)
-    public String getcKeyvalue() {
-        return cKeyvalue;
+    @Column(name = "dCzsj", nullable = true)
+    public Timestamp getdCzsj() {
+        return dCzsj;
     }
 
-    public void setcKeyvalue(String cKeyvalue) {
-        this.cKeyvalue = cKeyvalue;
-    }
-
-    @Basic
-    @Column(name = "cColumn", nullable = true, length = 255)
-    public String getcColumn() {
-        return cColumn;
-    }
-
-    public void setcColumn(String cColumn) {
-        this.cColumn = cColumn;
-    }
-
-    @Basic
-    @Column(name = "cColumnname", nullable = true, length = 255)
-    public String getcColumnname() {
-        return cColumnname;
-    }
-
-    public void setcColumnname(String cColumnname) {
-        this.cColumnname = cColumnname;
+    public void setdCzsj(Timestamp dCzsj) {
+        this.dCzsj = dCzsj;
     }
 
     @Basic
@@ -95,57 +60,37 @@ public class PlateLog {
     }
 
     @Basic
-    @Column(name = "cOldvalue", nullable = true, length = 255)
-    public String getcOldvalue() {
-        return cOldvalue;
+    @Column(name = "cMethod", nullable = true, length = 255)
+    public String getcMethod() {
+        return cMethod;
     }
 
-    public void setcOldvalue(String cOldvalue) {
-        this.cOldvalue = cOldvalue;
-    }
-
-    @Basic
-    @Column(name = "cNewvalue", nullable = true, length = 255)
-    public String getcNewvalue() {
-        return cNewvalue;
-    }
-
-    public void setcNewvalue(String cNewvalue) {
-        this.cNewvalue = cNewvalue;
+    public void setcMethod(String cMethod) {
+        this.cMethod = cMethod;
     }
 
     @Basic
-    @Column(name = "cBgr", nullable = true, length = 255)
-    public String getcBgr() {
-        return cBgr;
+    @Column(name = "cParams", nullable = true, length = 4000)
+    public String getcParams() {
+        return cParams;
     }
 
-    public void setcBgr(String cBgr) {
-        this.cBgr = cBgr;
-    }
-
-    @Basic
-    @Column(name = "cBgrxm", nullable = true, length = 255)
-    public String getcBgrxm() {
-        return cBgrxm;
-    }
-
-    public void setcBgrxm(String cBgrxm) {
-        this.cBgrxm = cBgrxm;
+    public void setcParams(String cParams) {
+        this.cParams = cParams;
     }
 
     @Basic
-    @Column(name = "dBgsj", nullable = true)
-    public Timestamp getdBgsj() {
-        return dBgsj;
+    @Column(name = "cIp", nullable = true, length = 255)
+    public String getcIp() {
+        return cIp;
     }
 
-    public void setdBgsj(Timestamp dBgsj) {
-        this.dBgsj = dBgsj;
+    public void setcIp(String cIp) {
+        this.cIp = cIp;
     }
 
     @Basic
-    @Column(name = "cCjuser", nullable = true, length = 11)
+    @Column(name = "cCjuser", nullable = true, length = 255)
     public String getcCjuser() {
         return cCjuser;
     }
@@ -165,7 +110,7 @@ public class PlateLog {
     }
 
     @Basic
-    @Column(name = "cXguser", nullable = true, length = 11)
+    @Column(name = "cXguser", nullable = true, length = 255)
     public String getcXguser() {
         return cXguser;
     }
@@ -190,17 +135,12 @@ public class PlateLog {
         if (o == null || getClass() != o.getClass()) return false;
         PlateLog plateLog = (PlateLog) o;
         return Objects.equals(cCzrzbh, plateLog.cCzrzbh) &&
-                Objects.equals(cTable, plateLog.cTable) &&
-                Objects.equals(cTablekey, plateLog.cTablekey) &&
-                Objects.equals(cKeyvalue, plateLog.cKeyvalue) &&
-                Objects.equals(cColumn, plateLog.cColumn) &&
-                Objects.equals(cColumnname, plateLog.cColumnname) &&
+                Objects.equals(cCzr, plateLog.cCzr) &&
+                Objects.equals(dCzsj, plateLog.dCzsj) &&
                 Objects.equals(cCzfs, plateLog.cCzfs) &&
-                Objects.equals(cOldvalue, plateLog.cOldvalue) &&
-                Objects.equals(cNewvalue, plateLog.cNewvalue) &&
-                Objects.equals(cBgr, plateLog.cBgr) &&
-                Objects.equals(cBgrxm, plateLog.cBgrxm) &&
-                Objects.equals(dBgsj, plateLog.dBgsj) &&
+                Objects.equals(cMethod, plateLog.cMethod) &&
+                Objects.equals(cParams, plateLog.cParams) &&
+                Objects.equals(cIp, plateLog.cIp) &&
                 Objects.equals(cCjuser, plateLog.cCjuser) &&
                 Objects.equals(dCjsj, plateLog.dCjsj) &&
                 Objects.equals(cXguser, plateLog.cXguser) &&
@@ -209,24 +149,19 @@ public class PlateLog {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cCzrzbh, cTable, cTablekey, cKeyvalue, cColumn, cColumnname, cCzfs, cOldvalue, cNewvalue, cBgr, cBgrxm, dBgsj, cCjuser, dCjsj, cXguser, dXgsj);
+        return Objects.hash(cCzrzbh, cCzr, dCzsj, cCzfs, cMethod, cParams, cIp, cCjuser, dCjsj, cXguser, dXgsj);
     }
 
     @Override
     public String toString() {
         return "PlateLog{" +
                 "cCzrzbh='" + cCzrzbh + '\'' +
-                ", cTable='" + cTable + '\'' +
-                ", cTablekey='" + cTablekey + '\'' +
-                ", cKeyvalue='" + cKeyvalue + '\'' +
-                ", cColumn='" + cColumn + '\'' +
-                ", cColumnname='" + cColumnname + '\'' +
+                ", cCzr='" + cCzr + '\'' +
+                ", dCzsj=" + dCzsj +
                 ", cCzfs='" + cCzfs + '\'' +
-                ", cOldvalue='" + cOldvalue + '\'' +
-                ", cNewvalue='" + cNewvalue + '\'' +
-                ", cBgr='" + cBgr + '\'' +
-                ", cBgrxm='" + cBgrxm + '\'' +
-                ", dBgsj=" + dBgsj +
+                ", cMethod='" + cMethod + '\'' +
+                ", cParams='" + cParams + '\'' +
+                ", cIp='" + cIp + '\'' +
                 ", cCjuser='" + cCjuser + '\'' +
                 ", dCjsj=" + dCjsj +
                 ", cXguser='" + cXguser + '\'' +

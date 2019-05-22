@@ -38,9 +38,10 @@ public class BaseController {
         return "login/login";
     }
 
-    @GetMapping(value = "/account")
-    public String account(){
-        return "system/account";
+    @GetMapping(value = "/history")
+    public String history(String type){
+
+        return "system/history";
     }
 
     @GetMapping(value = "/rwgl")

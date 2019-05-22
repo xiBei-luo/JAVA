@@ -45,12 +45,6 @@ public interface PlateDao {
     public int updPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb);//修改代码类别
     /*代码类别操作end*//*
 
-    *//*日志表操作begin*//*
-    public List selectPlateLog (PlateLog plateLog);//查询代码值
-
-    public int insertPlateLog (PlateLog plateLog);//插入代码值
-    *//*日志表操作end*/
-
     /*代码值操作begin*/
     public List selectPlateCodeDmz (PlateCodeDmz plateCodeDmz);//查询代码值
 
@@ -72,6 +66,12 @@ public interface PlateDao {
     /*种子商店操作end*/
 
     public List selectTGreenRwRwmx (TGreenRwRwmx tGreenRwRwmx);//查询任务完成量
+
+    /*日志表操作begin*/
+    /*public List selectPlateLog (PlateLog plateLog);//查询日志*/
+
+    public int insertPlateLog (PlateLog plateLog);//插入日志
+    /*日志表操作end*/
 
 
 }

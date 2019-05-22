@@ -12,6 +12,8 @@ spring:
     username: appuser
     password: luo820
     driver-class-name: com.mysql.jdbc.Driver
+  aop:
+    auto: true
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.greenplatform.model

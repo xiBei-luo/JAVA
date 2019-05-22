@@ -69,8 +69,8 @@ public class PlateController {
     }
 
     @PostMapping(value = "/delPlateuser")
-    public ReturnModel delPlateuser(PlateUser plateUser, HttpSession session){
-        ReturnModel returnModel = plateService.delPlateuser(plateUser,session);
+    public ReturnModel delPlateuser(PlateUser plateUser){
+        ReturnModel returnModel = plateService.delPlateuser(plateUser);
         return returnModel;
     }
     @PostMapping(value = "/selectPlateCodeDmz")

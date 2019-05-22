@@ -21,7 +21,6 @@ public class WebConfigurer implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        System.out.println("register--"+registry);
         List exclude = new ArrayList();//不拦截的列表
         //静态资源
         exclude.add("/publicFrame/**");

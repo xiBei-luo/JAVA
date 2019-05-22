@@ -1,0 +1,15 @@
+.historyHeader{
+    height: 50px;
+}
+.tableSection{
+    margin:0px auto;
+    height: 550px;
+}
+.gridbox{
+    width: 100%;
+    height: 100%;
+}
+.searchForm{
+    height: 50px;
+    line-height: 50px;
+}

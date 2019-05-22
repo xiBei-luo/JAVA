@@ -22,7 +22,7 @@ SendRequest.prototype.sendRequest = function (callbackMethod) {
             callbackMethod(ret);
         },
         error:function(XMLHttpRequest,textStatus,errorThrown){
-            //callbackMethod(ret);
+            callbackMethod({"flag":"1","msg":"服务器端出错","object":""});
         }
     };
     $.ajax(options);

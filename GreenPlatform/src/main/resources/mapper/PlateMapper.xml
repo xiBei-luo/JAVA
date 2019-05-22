@@ -238,7 +238,15 @@
         ORDER BY T.cUserid DESC
     </select>
 
-
+    <!--操作日志CRUD-->
+    <insert id="insertPlateLog" parameterType="com.greenplatform.model.PlateLog">
+        INSERT INTO plate_log (cCzrzbh,cCzr,dCzsj,cCzfs,cMethod,
+                               cParams,cIp,cCjuser,dCjsj,cXguser,
+                               dXgsj)
+        VALUES(#{cCzrzbh},#{cCzr},#{dCzsj},#{cCzfs},#{cMethod},
+               #{cParams},#{cIp},#{cCjuser},#{dCjsj},#{cXguser},
+               #{dXgsj})
+    </insert>
 
 
 

@@ -23,7 +23,7 @@ public interface PlateService {
 
     public ReturnModel insertPlateuser(PlateUser plateUser, HttpSession session);//插入平台用户信息
 
-    public ReturnModel delPlateuser(PlateUser plateUser, HttpSession session);//删除平台用户信息
+    public ReturnModel delPlateuser(PlateUser plateUser);//删除平台用户信息
 
     public ReturnModel updPlateuser(PlateUser plateUser);//修改平台用户
     /*平台用户操作end*/
