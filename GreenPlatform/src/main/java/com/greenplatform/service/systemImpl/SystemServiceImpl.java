@@ -1,10 +1,10 @@
 package com.greenplatform.service.systemImpl;
 
+import com.greenplatform.dao.PlateDao;
 import com.greenplatform.dao.SystemDao;
-import com.greenplatform.model.PlateUser;
-import com.greenplatform.model.SystemUser;
-import com.greenplatform.model.TGreenSpSpmx;
+import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
+import com.greenplatform.model.ywModel.TUserAccount;
 import com.greenplatform.service.SystemService;
 import com.greenplatform.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,7 @@ import java.util.UUID;
 public class SystemServiceImpl implements SystemService {
     @Autowired
     SystemDao systemDao;
+
     ReturnModel returnModel = new ReturnModel();
     Date date = new Date();
     Timestamp timestamp = new Timestamp(date.getTime());
@@ -158,5 +159,65 @@ public class SystemServiceImpl implements SystemService {
             returnModel.setObject(null);
         }
         return returnModel;
+    }
+
+    @Override
+    public ReturnModel selectTGreenNlHz(TGreenNlHz tGreenNlHz) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel insertTGreenNlHz(TGreenNlHz tGreenNlHz) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel delTGreenNlHz(TGreenNlHz tGreenNlHz) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel updTGreenNlHz(TGreenNlHz tGreenNlHz) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel selectTGreenNlZjnlmx(TGreenNlZjnlmx tGreenNlZjnlmx) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel insertTGreenNlZjnlmx(TGreenNlZjnlmx tGreenNlZjnlmx) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel delTGreenNlZjnlmx(TGreenNlZjnlmx tGreenNlZjnlmx) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel updTGreenNlZjnlmx(TGreenNlZjnlmx tGreenNlZjnlmx) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel selectTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel insertTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel delTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
+        return null;
+    }
+
+    @Override
+    public ReturnModel updTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
+        return null;
     }
 }

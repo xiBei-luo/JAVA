@@ -23,11 +23,14 @@ public class LoginInterceptor implements HandlerInterceptor {
         }else{
             //已登陆，判断用户权限
 
-            //判断是否是是前端用户访问后台管理页面,权限控制
+            //判断是否是是前端用户访问后台管理页面或后台用户访问前端页面,权限控制
             String requestURI = request.getRequestURI();
             //System.out.println(requestURI);
             if(user.getcRylb().equals("2")&&requestURI.contains("plate")) {
                 //response.getWriter().print("<a href= \" http://localhost:8080/Interceptor_2/user/toLoginPage.do\" >当前用户无权限访问该页面</a>");
+                response.sendRedirect(request.getContextPath()+"/base/login");  //没有权限返回登陆页面
+                return false;
+            }else if(user.getcRylb().equals("1")&&requestURI.contains("system")){
                 response.sendRedirect(request.getContextPath()+"/base/login");  //没有权限返回登陆页面
                 return false;
             }else {

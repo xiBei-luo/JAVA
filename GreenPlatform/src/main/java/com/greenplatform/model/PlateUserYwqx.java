@@ -49,7 +49,7 @@ public class PlateUserYwqx {
     }
 
     @Basic
-    @Column(name = "cCjuser", nullable = true, length = 11)
+    @Column(name = "cCjuser", nullable = true, length = 255)
     public String getcCjuser() {
         return cCjuser;
     }
@@ -69,7 +69,7 @@ public class PlateUserYwqx {
     }
 
     @Basic
-    @Column(name = "cXguser", nullable = true, length = 11)
+    @Column(name = "cXguser", nullable = true, length = 255)
     public String getcXguser() {
         return cXguser;
     }
@@ -105,18 +105,5 @@ public class PlateUserYwqx {
     @Override
     public int hashCode() {
         return Objects.hash(cUserid, cYwlxdm, cSquser, cCjuser, dCjsj, cXguser, dXgsj);
-    }
-
-    @Override
-    public String toString() {
-        return "PlateUserYwqx{" +
-                "cUserid='" + cUserid + '\'' +
-                ", cYwlxdm='" + cYwlxdm + '\'' +
-                ", cSquser='" + cSquser + '\'' +
-                ", cCjuser='" + cCjuser + '\'' +
-                ", dCjsj=" + dCjsj +
-                ", cXguser='" + cXguser + '\'' +
-                ", dXgsj=" + dXgsj +
-                '}';
     }
 }

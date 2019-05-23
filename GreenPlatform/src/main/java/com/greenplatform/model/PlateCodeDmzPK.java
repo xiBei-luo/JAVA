@@ -42,12 +42,4 @@ public class PlateCodeDmzPK implements Serializable {
     public int hashCode() {
         return Objects.hash(cDmlb, cDm);
     }
-
-    @Override
-    public String toString() {
-        return "PlateCodeDmzPK{" +
-                "cDmlb='" + cDmlb + '\'' +
-                ", cDm='" + cDm + '\'' +
-                '}';
-    }
 }

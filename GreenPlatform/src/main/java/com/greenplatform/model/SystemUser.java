@@ -271,31 +271,4 @@ public class SystemUser {
     public int hashCode() {
         return Objects.hash(cUserid, cLoginname, cUsername, cPassword, cRylb, cRyzt, cZcfs, cZjlx, cZjhm, cSex, cJtzz, cPhone, cWxhm, cQq, cEmail, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
     }
-
-    @Override
-    public String toString() {
-        return "SystemUser{" +
-                "cUserid='" + cUserid + '\'' +
-                ", cLoginname='" + cLoginname + '\'' +
-                ", cUsername='" + cUsername + '\'' +
-                ", cPassword='" + cPassword + '\'' +
-                ", cRylb='" + cRylb + '\'' +
-                ", cRyzt='" + cRyzt + '\'' +
-                ", cZcfs='" + cZcfs + '\'' +
-                ", cZjlx='" + cZjlx + '\'' +
-                ", cZjhm='" + cZjhm + '\'' +
-                ", cSex='" + cSex + '\'' +
-                ", cJtzz='" + cJtzz + '\'' +
-                ", cPhone='" + cPhone + '\'' +
-                ", cWxhm='" + cWxhm + '\'' +
-                ", cQq='" + cQq + '\'' +
-                ", cEmail='" + cEmail + '\'' +
-                ", cBz='" + cBz + '\'' +
-                ", cZt='" + cZt + '\'' +
-                ", cCjuser='" + cCjuser + '\'' +
-                ", dCjsj=" + dCjsj +
-                ", cXguser='" + cXguser + '\'' +
-                ", dXgsj=" + dXgsj +
-                '}';
-    }
 }

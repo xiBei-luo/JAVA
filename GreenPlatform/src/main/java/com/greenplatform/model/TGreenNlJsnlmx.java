@@ -90,7 +90,7 @@ public class TGreenNlJsnlmx {
     }
 
     @Basic
-    @Column(name = "cCjuser", nullable = true, length = 11)
+    @Column(name = "cCjuser", nullable = true, length = 255)
     public String getcCjuser() {
         return cCjuser;
     }
@@ -110,7 +110,7 @@ public class TGreenNlJsnlmx {
     }
 
     @Basic
-    @Column(name = "cXguser", nullable = true, length = 11)
+    @Column(name = "cXguser", nullable = true, length = 255)
     public String getcXguser() {
         return cXguser;
     }

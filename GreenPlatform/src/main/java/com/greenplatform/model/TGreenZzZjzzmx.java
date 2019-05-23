@@ -5,13 +5,16 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "t_green_nl_zjnlmx", schema = "greenplatform", catalog = "")
-public class TGreenNlZjnlmx {
+@Table(name = "t_green_zz_zjzzmx", schema = "greenplatform", catalog = "")
+public class TGreenZzZjzzmx {
     private String cLsh;
     private String cUserid;
-    private String cZjsl;
-    private Timestamp dZjsj;
+    private String cSpbm;
     private String cZjyy;
+    private Timestamp dZjsj;
+    private String cKjz;
+    private String cSfjz;
+    private Timestamp dJzsj;
     private String cBz;
     private String cZt;
     private String cCjuser;
@@ -40,13 +43,23 @@ public class TGreenNlZjnlmx {
     }
 
     @Basic
-    @Column(name = "cZjsl", nullable = true, length = 255)
-    public String getcZjsl() {
-        return cZjsl;
+    @Column(name = "cSpbm", nullable = false, length = 255)
+    public String getcSpbm() {
+        return cSpbm;
     }
 
-    public void setcZjsl(String cZjsl) {
-        this.cZjsl = cZjsl;
+    public void setcSpbm(String cSpbm) {
+        this.cSpbm = cSpbm;
+    }
+
+    @Basic
+    @Column(name = "cZjyy", nullable = true, length = 1)
+    public String getcZjyy() {
+        return cZjyy;
+    }
+
+    public void setcZjyy(String cZjyy) {
+        this.cZjyy = cZjyy;
     }
 
     @Basic
@@ -60,13 +73,33 @@ public class TGreenNlZjnlmx {
     }
 
     @Basic
-    @Column(name = "cZjyy", nullable = true, length = 255)
-    public String getcZjyy() {
-        return cZjyy;
+    @Column(name = "cKjz", nullable = true, length = 1)
+    public String getcKjz() {
+        return cKjz;
     }
 
-    public void setcZjyy(String cZjyy) {
-        this.cZjyy = cZjyy;
+    public void setcKjz(String cKjz) {
+        this.cKjz = cKjz;
+    }
+
+    @Basic
+    @Column(name = "cSfjz", nullable = true, length = 1)
+    public String getcSfjz() {
+        return cSfjz;
+    }
+
+    public void setcSfjz(String cSfjz) {
+        this.cSfjz = cSfjz;
+    }
+
+    @Basic
+    @Column(name = "dJzsj", nullable = true)
+    public Timestamp getdJzsj() {
+        return dJzsj;
+    }
+
+    public void setdJzsj(Timestamp dJzsj) {
+        this.dJzsj = dJzsj;
     }
 
     @Basic
@@ -133,12 +166,15 @@ public class TGreenNlZjnlmx {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TGreenNlZjnlmx that = (TGreenNlZjnlmx) o;
+        TGreenZzZjzzmx that = (TGreenZzZjzzmx) o;
         return Objects.equals(cLsh, that.cLsh) &&
                 Objects.equals(cUserid, that.cUserid) &&
-                Objects.equals(cZjsl, that.cZjsl) &&
-                Objects.equals(dZjsj, that.dZjsj) &&
+                Objects.equals(cSpbm, that.cSpbm) &&
                 Objects.equals(cZjyy, that.cZjyy) &&
+                Objects.equals(dZjsj, that.dZjsj) &&
+                Objects.equals(cKjz, that.cKjz) &&
+                Objects.equals(cSfjz, that.cSfjz) &&
+                Objects.equals(dJzsj, that.dJzsj) &&
                 Objects.equals(cBz, that.cBz) &&
                 Objects.equals(cZt, that.cZt) &&
                 Objects.equals(cCjuser, that.cCjuser) &&
@@ -149,6 +185,6 @@ public class TGreenNlZjnlmx {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cLsh, cUserid, cZjsl, dZjsj, cZjyy, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
+        return Objects.hash(cLsh, cUserid, cSpbm, cZjyy, dZjsj, cKjz, cSfjz, dJzsj, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
     }
 }

@@ -10,13 +10,14 @@ public class PlateUser {
     private String cUserid;
     private String cLoginname;
     private String cUsername;
+    private String cSex;
     private String cPassword;
+    private String cRydj;
     private String cRylb;
     private String cRyzt;
     private String cZcfs;
     private String cZjlx;
     private String cZjhm;
-    private String cSex;
     private String cJtzz;
     private String cPhone;
     private String cWxhm;
@@ -28,7 +29,6 @@ public class PlateUser {
     private Timestamp dCjsj;
     private String cXguser;
     private Timestamp dXgsj;
-    private String cRydj;
 
     @Id
     @Column(name = "cUserid", nullable = false, length = 255)
@@ -61,6 +61,16 @@ public class PlateUser {
     }
 
     @Basic
+    @Column(name = "cSex", nullable = true, length = 1)
+    public String getcSex() {
+        return cSex;
+    }
+
+    public void setcSex(String cSex) {
+        this.cSex = cSex;
+    }
+
+    @Basic
     @Column(name = "cPassword", nullable = true, length = 80)
     public String getcPassword() {
         return cPassword;
@@ -68,6 +78,16 @@ public class PlateUser {
 
     public void setcPassword(String cPassword) {
         this.cPassword = cPassword;
+    }
+
+    @Basic
+    @Column(name = "cRydj", nullable = true, length = 1)
+    public String getcRydj() {
+        return cRydj;
+    }
+
+    public void setcRydj(String cRydj) {
+        this.cRydj = cRydj;
     }
 
     @Basic
@@ -118,16 +138,6 @@ public class PlateUser {
 
     public void setcZjhm(String cZjhm) {
         this.cZjhm = cZjhm;
-    }
-
-    @Basic
-    @Column(name = "cSex", nullable = true, length = 1)
-    public String getcSex() {
-        return cSex;
-    }
-
-    public void setcSex(String cSex) {
-        this.cSex = cSex;
     }
 
     @Basic
@@ -201,7 +211,7 @@ public class PlateUser {
     }
 
     @Basic
-    @Column(name = "cCjuser", nullable = true, length = 11)
+    @Column(name = "cCjuser", nullable = true, length = 255)
     public String getcCjuser() {
         return cCjuser;
     }
@@ -221,7 +231,7 @@ public class PlateUser {
     }
 
     @Basic
-    @Column(name = "cXguser", nullable = true, length = 11)
+    @Column(name = "cXguser", nullable = true, length = 255)
     public String getcXguser() {
         return cXguser;
     }
@@ -248,13 +258,14 @@ public class PlateUser {
         return Objects.equals(cUserid, plateUser.cUserid) &&
                 Objects.equals(cLoginname, plateUser.cLoginname) &&
                 Objects.equals(cUsername, plateUser.cUsername) &&
+                Objects.equals(cSex, plateUser.cSex) &&
                 Objects.equals(cPassword, plateUser.cPassword) &&
+                Objects.equals(cRydj, plateUser.cRydj) &&
                 Objects.equals(cRylb, plateUser.cRylb) &&
                 Objects.equals(cRyzt, plateUser.cRyzt) &&
                 Objects.equals(cZcfs, plateUser.cZcfs) &&
                 Objects.equals(cZjlx, plateUser.cZjlx) &&
                 Objects.equals(cZjhm, plateUser.cZjhm) &&
-                Objects.equals(cSex, plateUser.cSex) &&
                 Objects.equals(cJtzz, plateUser.cJtzz) &&
                 Objects.equals(cPhone, plateUser.cPhone) &&
                 Objects.equals(cWxhm, plateUser.cWxhm) &&
@@ -270,43 +281,6 @@ public class PlateUser {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cUserid, cLoginname, cUsername, cPassword, cRylb, cRyzt, cZcfs, cZjlx, cZjhm, cSex, cJtzz, cPhone, cWxhm, cQq, cEmail, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
-    }
-
-    @Override
-    public String toString() {
-        return "PlateUser{" +
-                "cUserid='" + cUserid + '\'' +
-                ", cLoginname='" + cLoginname + '\'' +
-                ", cUsername='" + cUsername + '\'' +
-                ", cPassword='" + cPassword + '\'' +
-                ", cRylb='" + cRylb + '\'' +
-                ", cRyzt='" + cRyzt + '\'' +
-                ", cZcfs='" + cZcfs + '\'' +
-                ", cZjlx='" + cZjlx + '\'' +
-                ", cZjhm='" + cZjhm + '\'' +
-                ", cSex='" + cSex + '\'' +
-                ", cJtzz='" + cJtzz + '\'' +
-                ", cPhone='" + cPhone + '\'' +
-                ", cWxhm='" + cWxhm + '\'' +
-                ", cQq='" + cQq + '\'' +
-                ", cEmail='" + cEmail + '\'' +
-                ", cBz='" + cBz + '\'' +
-                ", cZt='" + cZt + '\'' +
-                ", cCjuser='" + cCjuser + '\'' +
-                ", dCjsj=" + dCjsj +
-                ", cXguser='" + cXguser + '\'' +
-                ", dXgsj=" + dXgsj +
-                '}';
-    }
-
-    @Basic
-    @Column(name = "cRydj", nullable = true, length = 1)
-    public String getcRydj() {
-        return cRydj;
-    }
-
-    public void setcRydj(String cRydj) {
-        this.cRydj = cRydj;
+        return Objects.hash(cUserid, cLoginname, cUsername, cSex, cPassword, cRydj, cRylb, cRyzt, cZcfs, cZjlx, cZjhm, cJtzz, cPhone, cWxhm, cQq, cEmail, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
     }
 }

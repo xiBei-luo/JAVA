@@ -11,7 +11,7 @@ public class TGreenRwRwmx {
     private String cUserid;
     private String cRwlb;
     private String cRwsj;
-    private String cYwzt;
+    private String cLjrwcs;
     private String cBz;
     private String cCjuser;
     private Timestamp dCjsj;
@@ -49,13 +49,13 @@ public class TGreenRwRwmx {
     }
 
     @Basic
-    @Column(name = "cYwzt", nullable = true, length = 1)
-    public String getcYwzt() {
-        return cYwzt;
+    @Column(name = "cLjrwcs", nullable = true, length = 255)
+    public String getcLjrwcs() {
+        return cLjrwcs;
     }
 
-    public void setcYwzt(String cYwzt) {
-        this.cYwzt = cYwzt;
+    public void setcLjrwcs(String cLjrwcs) {
+        this.cLjrwcs = cLjrwcs;
     }
 
     @Basic
@@ -69,7 +69,7 @@ public class TGreenRwRwmx {
     }
 
     @Basic
-    @Column(name = "cCjuser", nullable = true, length = 11)
+    @Column(name = "cCjuser", nullable = true, length = 255)
     public String getcCjuser() {
         return cCjuser;
     }
@@ -89,7 +89,7 @@ public class TGreenRwRwmx {
     }
 
     @Basic
-    @Column(name = "cXguser", nullable = true, length = 11)
+    @Column(name = "cXguser", nullable = true, length = 255)
     public String getcXguser() {
         return cXguser;
     }
@@ -116,7 +116,7 @@ public class TGreenRwRwmx {
         return Objects.equals(cUserid, that.cUserid) &&
                 Objects.equals(cRwlb, that.cRwlb) &&
                 Objects.equals(cRwsj, that.cRwsj) &&
-                Objects.equals(cYwzt, that.cYwzt) &&
+                Objects.equals(cLjrwcs, that.cLjrwcs) &&
                 Objects.equals(cBz, that.cBz) &&
                 Objects.equals(cCjuser, that.cCjuser) &&
                 Objects.equals(dCjsj, that.dCjsj) &&
@@ -126,6 +126,6 @@ public class TGreenRwRwmx {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cUserid, cRwlb, cRwsj, cYwzt, cBz, cCjuser, dCjsj, cXguser, dXgsj);
+        return Objects.hash(cUserid, cRwlb, cRwsj, cLjrwcs, cBz, cCjuser, dCjsj, cXguser, dXgsj);
     }
 }

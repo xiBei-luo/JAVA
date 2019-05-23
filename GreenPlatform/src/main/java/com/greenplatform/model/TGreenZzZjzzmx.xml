@@ -2,8 +2,8 @@
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
         version="2.0">
 
-    <entity class="com.greenplatform.model.TGreenNlZjnlmx">
-        <table name="t_green_nl_zjnlmx" schema="greenplatform" catalog=""/>
+    <entity class="com.greenplatform.model.TGreenZzZjzzmx">
+        <table name="t_green_zz_zjzzmx" schema="greenplatform" catalog=""/>
         <attributes>
             <id name="cLsh">
                 <column name="cLsh"/>
@@ -11,14 +11,23 @@
             <basic name="cUserid">
                 <column name="cUserid"/>
             </basic>
-            <basic name="cZjsl">
-                <column name="cZjsl" nullable="false"/>
+            <basic name="cSpbm">
+                <column name="cSpbm"/>
+            </basic>
+            <basic name="cZjyy">
+                <column name="cZjyy" nullable="false" length="1"/>
             </basic>
             <basic name="dZjsj">
                 <column name="dZjsj" nullable="false" precision="-1"/>
             </basic>
-            <basic name="cZjyy">
-                <column name="cZjyy" nullable="false"/>
+            <basic name="cKjz">
+                <column name="cKjz" nullable="false" length="1"/>
+            </basic>
+            <basic name="cSfjz">
+                <column name="cSfjz" nullable="false" length="1"/>
+            </basic>
+            <basic name="dJzsj">
+                <column name="dJzsj" nullable="false" precision="-1"/>
             </basic>
             <basic name="cBz">
                 <column name="cBz" nullable="false" length="2000"/>

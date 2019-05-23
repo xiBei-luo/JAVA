@@ -3,7 +3,6 @@ package com.greenplatform.controller;
 import com.greenplatform.model.SystemUser;
 import com.greenplatform.model.TGreenSpSpmx;
 import com.greenplatform.model.base.ReturnModel;
-import com.greenplatform.service.PlateService;
 import com.greenplatform.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

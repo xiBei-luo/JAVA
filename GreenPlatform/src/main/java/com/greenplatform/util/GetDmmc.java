@@ -6,8 +6,6 @@ import com.greenplatform.service.PlateService;
 import com.greenplatform.service.plateImpl.PlateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
 public class GetDmmc {
     @Autowired
     PlateService plateService;

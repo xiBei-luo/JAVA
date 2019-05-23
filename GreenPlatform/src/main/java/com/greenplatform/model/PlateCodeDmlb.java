@@ -46,7 +46,7 @@ public class PlateCodeDmlb {
     }
 
     @Basic
-    @Column(name = "cCjuser", nullable = true, length = 11)
+    @Column(name = "cCjuser", nullable = true, length = 255)
     public String getcCjuser() {
         return cCjuser;
     }
@@ -66,7 +66,7 @@ public class PlateCodeDmlb {
     }
 
     @Basic
-    @Column(name = "cXguser", nullable = true, length = 11)
+    @Column(name = "cXguser", nullable = true, length = 255)
     public String getcXguser() {
         return cXguser;
     }
@@ -102,18 +102,5 @@ public class PlateCodeDmlb {
     @Override
     public int hashCode() {
         return Objects.hash(cDmlb, cDmlbmc, cZt, cCjuser, dCjsj, cXguser, dXgsj);
-    }
-
-    @Override
-    public String toString() {
-        return "PlateCodeDmlb{" +
-                "cDmlb='" + cDmlb + '\'' +
-                ", cDmlbmc='" + cDmlbmc + '\'' +
-                ", cZt='" + cZt + '\'' +
-                ", cCjuser='" + cCjuser + '\'' +
-                ", dCjsj=" + dCjsj +
-                ", cXguser='" + cXguser + '\'' +
-                ", dXgsj=" + dXgsj +
-                '}';
     }
 }

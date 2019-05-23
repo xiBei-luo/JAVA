@@ -1,0 +1,27 @@
+C_NL_ZJYY:
+#注册赠送能量值
+  register: 100
+#完成一个月基础任务赠送能量
+  finishMission:
+    XRZ: 112
+    BC: 113
+    RCR: 114
+    LH: 115
+    DXJ: 116
+    LZL: 117
+    SSH: 118
+    GGS: 119
+    JRZ: 110
+    JH: 111
+#徒弟完成任务师傅获得奖励
+  apprentice:
+    fixed: 100
+    extra: 5%
+#账户等级额外奖励
+  grade:
+    2:
+      2%
+    3:
+      3%
+    4:
+      4%

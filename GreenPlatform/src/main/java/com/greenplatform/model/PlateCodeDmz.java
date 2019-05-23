@@ -80,7 +80,7 @@ public class PlateCodeDmz {
     }
 
     @Basic
-    @Column(name = "cCjuser", nullable = true, length = 11)
+    @Column(name = "cCjuser", nullable = true, length = 255)
     public String getcCjuser() {
         return cCjuser;
     }
@@ -100,7 +100,7 @@ public class PlateCodeDmz {
     }
 
     @Basic
-    @Column(name = "cXguser", nullable = true, length = 11)
+    @Column(name = "cXguser", nullable = true, length = 255)
     public String getcXguser() {
         return cXguser;
     }
@@ -139,21 +139,5 @@ public class PlateCodeDmz {
     @Override
     public int hashCode() {
         return Objects.hash(cDmlb, cDm, cDmmc, cSort, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
-    }
-
-    @Override
-    public String toString() {
-        return "PlateCodeDmz{" +
-                "cDmlb='" + cDmlb + '\'' +
-                ", cDm='" + cDm + '\'' +
-                ", cDmmc='" + cDmmc + '\'' +
-                ", cSort='" + cSort + '\'' +
-                ", cBz='" + cBz + '\'' +
-                ", cZt='" + cZt + '\'' +
-                ", cCjuser='" + cCjuser + '\'' +
-                ", dCjsj=" + dCjsj +
-                ", cXguser='" + cXguser + '\'' +
-                ", dXgsj=" + dXgsj +
-                '}';
     }
 }

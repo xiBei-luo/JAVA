@@ -2,23 +2,32 @@
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
         version="2.0">
 
-    <entity class="com.greenplatform.model.TGreenNlZjnlmx">
-        <table name="t_green_nl_zjnlmx" schema="greenplatform" catalog=""/>
+    <entity class="com.greenplatform.model.TGreenNlCzjl">
+        <table name="t_green_nl_czjl" schema="greenplatform" catalog=""/>
         <attributes>
             <id name="cLsh">
                 <column name="cLsh"/>
             </id>
-            <basic name="cUserid">
-                <column name="cUserid"/>
+            <basic name="cCzje">
+                <column name="cCzje" nullable="false"/>
             </basic>
-            <basic name="cZjsl">
-                <column name="cZjsl" nullable="false"/>
+            <basic name="cCznl">
+                <column name="cCznl" nullable="false"/>
             </basic>
-            <basic name="dZjsj">
-                <column name="dZjsj" nullable="false" precision="-1"/>
+            <basic name="dCzsj">
+                <column name="dCzsj" nullable="false" precision="-1"/>
             </basic>
-            <basic name="cZjyy">
-                <column name="cZjyy" nullable="false"/>
+            <basic name="cSfcg">
+                <column name="cSfcg" nullable="false" length="1"/>
+            </basic>
+            <basic name="cCzfs">
+                <column name="cCzfs" nullable="false" length="1"/>
+            </basic>
+            <basic name="cCzzh">
+                <column name="cCzzh" nullable="false"/>
+            </basic>
+            <basic name="cDzzh">
+                <column name="cDzzh" nullable="false"/>
             </basic>
             <basic name="cBz">
                 <column name="cBz" nullable="false" length="2000"/>

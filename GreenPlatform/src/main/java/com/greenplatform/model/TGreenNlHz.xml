@@ -18,13 +18,13 @@
                 <column name="cZt" nullable="false" length="1"/>
             </basic>
             <basic name="cCjuser">
-                <column name="cCjuser" nullable="false" length="11"/>
+                <column name="cCjuser" nullable="false"/>
             </basic>
             <basic name="dCjsj">
                 <column name="dCjsj" nullable="false" precision="-1"/>
             </basic>
             <basic name="cXguser">
-                <column name="cXguser" nullable="false" length="11"/>
+                <column name="cXguser" nullable="false"/>
             </basic>
             <basic name="dXgsj">
                 <column name="dXgsj" nullable="false" precision="-1"/>

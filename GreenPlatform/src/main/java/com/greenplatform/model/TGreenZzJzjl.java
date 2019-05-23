@@ -5,13 +5,14 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "t_green_sp_spmx", schema = "greenplatform", catalog = "")
-public class TGreenSpSpmx {
+@Table(name = "t_green_zz_jzjl", schema = "greenplatform", catalog = "")
+@IdClass(TGreenZzJzjlPK.class)
+public class TGreenZzJzjl {
+    private String cLsh;
+    private String cZzzjlsh;
+    private String cUserid;
+    private Timestamp cJzsj;
     private String cSpbh;
-    private String cSpmc;
-    private String cSpms;
-    private String cSpjg;
-    private String cSpdw;
     private String cBz;
     private String cZt;
     private String cCjuser;
@@ -20,53 +21,53 @@ public class TGreenSpSpmx {
     private Timestamp dXgsj;
 
     @Id
-    @Column(name = "cSpbh", nullable = false, length = 255)
+    @Column(name = "cLsh", nullable = false, length = 255)
+    public String getcLsh() {
+        return cLsh;
+    }
+
+    public void setcLsh(String cLsh) {
+        this.cLsh = cLsh;
+    }
+
+    @Id
+    @Column(name = "cZzzjlsh", nullable = false, length = 255)
+    public String getcZzzjlsh() {
+        return cZzzjlsh;
+    }
+
+    public void setcZzzjlsh(String cZzzjlsh) {
+        this.cZzzjlsh = cZzzjlsh;
+    }
+
+    @Basic
+    @Column(name = "cUserid", nullable = false, length = 255)
+    public String getcUserid() {
+        return cUserid;
+    }
+
+    public void setcUserid(String cUserid) {
+        this.cUserid = cUserid;
+    }
+
+    @Basic
+    @Column(name = "cJzsj", nullable = true)
+    public Timestamp getcJzsj() {
+        return cJzsj;
+    }
+
+    public void setcJzsj(Timestamp cJzsj) {
+        this.cJzsj = cJzsj;
+    }
+
+    @Basic
+    @Column(name = "cSpbh", nullable = true, length = 255)
     public String getcSpbh() {
         return cSpbh;
     }
 
     public void setcSpbh(String cSpbh) {
         this.cSpbh = cSpbh;
-    }
-
-    @Basic
-    @Column(name = "cSpmc", nullable = true, length = 255)
-    public String getcSpmc() {
-        return cSpmc;
-    }
-
-    public void setcSpmc(String cSpmc) {
-        this.cSpmc = cSpmc;
-    }
-
-    @Basic
-    @Column(name = "cSpms", nullable = true, length = 255)
-    public String getcSpms() {
-        return cSpms;
-    }
-
-    public void setcSpms(String cSpms) {
-        this.cSpms = cSpms;
-    }
-
-    @Basic
-    @Column(name = "cSpjg", nullable = true, length = 255)
-    public String getcSpjg() {
-        return cSpjg;
-    }
-
-    public void setcSpjg(String cSpjg) {
-        this.cSpjg = cSpjg;
-    }
-
-    @Basic
-    @Column(name = "cSpdw", nullable = true, length = 255)
-    public String getcSpdw() {
-        return cSpdw;
-    }
-
-    public void setcSpdw(String cSpdw) {
-        this.cSpdw = cSpdw;
     }
 
     @Basic
@@ -133,12 +134,12 @@ public class TGreenSpSpmx {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TGreenSpSpmx that = (TGreenSpSpmx) o;
-        return Objects.equals(cSpbh, that.cSpbh) &&
-                Objects.equals(cSpmc, that.cSpmc) &&
-                Objects.equals(cSpms, that.cSpms) &&
-                Objects.equals(cSpjg, that.cSpjg) &&
-                Objects.equals(cSpdw, that.cSpdw) &&
+        TGreenZzJzjl that = (TGreenZzJzjl) o;
+        return Objects.equals(cLsh, that.cLsh) &&
+                Objects.equals(cZzzjlsh, that.cZzzjlsh) &&
+                Objects.equals(cUserid, that.cUserid) &&
+                Objects.equals(cJzsj, that.cJzsj) &&
+                Objects.equals(cSpbh, that.cSpbh) &&
                 Objects.equals(cBz, that.cBz) &&
                 Objects.equals(cZt, that.cZt) &&
                 Objects.equals(cCjuser, that.cCjuser) &&
@@ -149,6 +150,6 @@ public class TGreenSpSpmx {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cSpbh, cSpmc, cSpms, cSpjg, cSpdw, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
+        return Objects.hash(cLsh, cZzzjlsh, cUserid, cJzsj, cSpbh, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
     }
 }

@@ -2,23 +2,24 @@
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
         version="2.0">
 
-    <entity class="com.greenplatform.model.TGreenNlZjnlmx">
-        <table name="t_green_nl_zjnlmx" schema="greenplatform" catalog=""/>
+    <entity class="com.greenplatform.model.TGreenZzJzjl">
+        <table name="t_green_zz_jzjl" schema="greenplatform" catalog=""/>
+        <id-class class="com.greenplatform.model.TGreenZzJzjlPK"/>
         <attributes>
             <id name="cLsh">
                 <column name="cLsh"/>
             </id>
+            <id name="cZzzjlsh">
+                <column name="cZzzjlsh"/>
+            </id>
             <basic name="cUserid">
                 <column name="cUserid"/>
             </basic>
-            <basic name="cZjsl">
-                <column name="cZjsl" nullable="false"/>
+            <basic name="cJzsj">
+                <column name="cJzsj" nullable="false" precision="-1"/>
             </basic>
-            <basic name="dZjsj">
-                <column name="dZjsj" nullable="false" precision="-1"/>
-            </basic>
-            <basic name="cZjyy">
-                <column name="cZjyy" nullable="false"/>
+            <basic name="cSpbh">
+                <column name="cSpbh" nullable="false"/>
             </basic>
             <basic name="cBz">
                 <column name="cBz" nullable="false" length="2000"/>

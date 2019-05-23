@@ -151,21 +151,4 @@ public class PlateLog {
     public int hashCode() {
         return Objects.hash(cCzrzbh, cCzr, dCzsj, cCzfs, cMethod, cParams, cIp, cCjuser, dCjsj, cXguser, dXgsj);
     }
-
-    @Override
-    public String toString() {
-        return "PlateLog{" +
-                "cCzrzbh='" + cCzrzbh + '\'' +
-                ", cCzr='" + cCzr + '\'' +
-                ", dCzsj=" + dCzsj +
-                ", cCzfs='" + cCzfs + '\'' +
-                ", cMethod='" + cMethod + '\'' +
-                ", cParams='" + cParams + '\'' +
-                ", cIp='" + cIp + '\'' +
-                ", cCjuser='" + cCjuser + '\'' +
-                ", dCjsj=" + dCjsj +
-                ", cXguser='" + cXguser + '\'' +
-                ", dXgsj=" + dXgsj +
-                '}';
-    }
 }
