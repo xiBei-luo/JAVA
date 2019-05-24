@@ -115,4 +115,18 @@ public class TGreenNlHz {
     public int hashCode() {
         return Objects.hash(cUserid, cNlzl, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
     }
+
+    @Override
+    public String toString() {
+        return "TGreenNlHz{" +
+                "cUserid='" + cUserid + '\'' +
+                ", cNlzl='" + cNlzl + '\'' +
+                ", cBz='" + cBz + '\'' +
+                ", cZt='" + cZt + '\'' +
+                ", cCjuser='" + cCjuser + '\'' +
+                ", dCjsj=" + dCjsj +
+                ", cXguser='" + cXguser + '\'' +
+                ", dXgsj=" + dXgsj +
+                '}';
+    }
 }

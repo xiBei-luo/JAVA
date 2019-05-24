@@ -10,8 +10,9 @@ import java.util.Objects;
 public class TGreenRwRwmx {
     private String cUserid;
     private String cRwlb;
-    private String cRwsj;
-    private String cLjrwcs;
+    private String cRwday;
+    private String cRwmonth;
+    private Timestamp dRwsj;
     private String cBz;
     private String cCjuser;
     private Timestamp dCjsj;
@@ -39,23 +40,33 @@ public class TGreenRwRwmx {
     }
 
     @Id
-    @Column(name = "cRwsj", nullable = false, length = 255)
-    public String getcRwsj() {
-        return cRwsj;
+    @Column(name = "cRwday", nullable = false, length = 255)
+    public String getcRwday() {
+        return cRwday;
     }
 
-    public void setcRwsj(String cRwsj) {
-        this.cRwsj = cRwsj;
+    public void setcRwday(String cRwday) {
+        this.cRwday = cRwday;
     }
 
     @Basic
-    @Column(name = "cLjrwcs", nullable = true, length = 255)
-    public String getcLjrwcs() {
-        return cLjrwcs;
+    @Column(name = "cRwmonth", nullable = true, length = 255)
+    public String getcRwmonth() {
+        return cRwmonth;
     }
 
-    public void setcLjrwcs(String cLjrwcs) {
-        this.cLjrwcs = cLjrwcs;
+    public void setcRwmonth(String cRwmonth) {
+        this.cRwmonth = cRwmonth;
+    }
+
+    @Basic
+    @Column(name = "dRwsj", nullable = true)
+    public Timestamp getdRwsj() {
+        return dRwsj;
+    }
+
+    public void setdRwsj(Timestamp dRwsj) {
+        this.dRwsj = dRwsj;
     }
 
     @Basic
@@ -115,8 +126,9 @@ public class TGreenRwRwmx {
         TGreenRwRwmx that = (TGreenRwRwmx) o;
         return Objects.equals(cUserid, that.cUserid) &&
                 Objects.equals(cRwlb, that.cRwlb) &&
-                Objects.equals(cRwsj, that.cRwsj) &&
-                Objects.equals(cLjrwcs, that.cLjrwcs) &&
+                Objects.equals(cRwday, that.cRwday) &&
+                Objects.equals(cRwmonth, that.cRwmonth) &&
+                Objects.equals(dRwsj, that.dRwsj) &&
                 Objects.equals(cBz, that.cBz) &&
                 Objects.equals(cCjuser, that.cCjuser) &&
                 Objects.equals(dCjsj, that.dCjsj) &&
@@ -126,6 +138,6 @@ public class TGreenRwRwmx {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cUserid, cRwlb, cRwsj, cLjrwcs, cBz, cCjuser, dCjsj, cXguser, dXgsj);
+        return Objects.hash(cUserid, cRwlb, cRwday, cRwmonth, dRwsj, cBz, cCjuser, dCjsj, cXguser, dXgsj);
     }
 }

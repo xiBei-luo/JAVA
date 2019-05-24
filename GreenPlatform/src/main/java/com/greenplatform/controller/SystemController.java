@@ -1,7 +1,8 @@
 package com.greenplatform.controller;
 
-import com.greenplatform.model.SystemUser;
+import com.greenplatform.model.TGreenRwRwmx;
 import com.greenplatform.model.TGreenSpSpmx;
+import com.greenplatform.model.TGreenZzZjzzmx;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +28,30 @@ public class SystemController {
         return "system/index";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/selectLoginuserAccount",method = RequestMethod.POST)
     @ResponseBody
-    public ReturnModel login(SystemUser systemUser){
-        System.out.println(systemUser);
-        ReturnModel returnModel = systemService.selectSystemuser(systemUser);
+    public ReturnModel selectLoginuserAccount(){
+        ReturnModel returnModel = new ReturnModel();
+        returnModel = systemService.selectLoginuserAccount();
         return returnModel;
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    //种子商店兑换种子
+    @RequestMapping(value = "/insertTGreenZzZjzzmx",method = RequestMethod.POST)
     @ResponseBody
-    public ReturnModel register(SystemUser systemUser){
+    public ReturnModel insertTGreenZzZjzzmx(TGreenZzZjzzmx tGreenZzZjzzmx){
         ReturnModel returnModel = new ReturnModel();
-        returnModel = systemService.insertSystemUser(systemUser);
+        returnModel = systemService.insertTGreenZzZjzzmx(tGreenZzZjzzmx);
+        return returnModel;
+    }
+
+    //完成每日基础任务
+    @RequestMapping(value = "/insertTGreenRwRwmx",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel insertTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx){
+        System.out.println(tGreenRwRwmx);
+        ReturnModel returnModel = new ReturnModel();
+        returnModel = systemService.insertTGreenRwRwmx(tGreenRwRwmx);
         return returnModel;
     }
 

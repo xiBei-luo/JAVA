@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>绿沙平台</title>
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
     <link rel="stylesheet" href="/systemStatic/css/systemStyle.css">
 
 </head>
@@ -37,7 +38,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#" id="myAccount">我的账户</a></li>
-                                <li><a href="#">收徒</a></li>
+                                <li><a href="#">邀请好友</a></li>
                                 <li><a href="/base/loginout">退出</a></li>
                             </ul>
                         </li>
@@ -46,20 +47,12 @@
                 </div>
             </div>
         </nav>
-        <div class="container-fluid mission">
+        <div class="container-fluid mission" id="mission">
             <div class="row"></div>
             <div class="row">
                 <div class="col-md-11 col-sm-11 col-xs-9"></div>
                 <div class="col-md-1 col-sm-1 col-xs-3">
-                    <a href="">
-                        <img src="/publicImg/icon/js.png" id="js" class="center-block" alt="">
-                    </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-11 col-sm-11 col-xs-9"></div>
-                <div class="col-md-1 col-sm-1 col-xs-3">
-                    <a href="">
+                    <a id="finishMisson_sf" value="1">
                         <img src="/publicImg/icon/sf.png" id="sf" class="center-block" alt="">
                     </a>
                 </div>
@@ -67,7 +60,15 @@
             <div class="row">
                 <div class="col-md-11 col-sm-11 col-xs-9"></div>
                 <div class="col-md-1 col-sm-1 col-xs-3">
-                    <a href="">
+                    <a id="finishMisson_js" value="2">
+                        <img src="/publicImg/icon/js.png" id="js" class="center-block" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-11 col-sm-11 col-xs-9"></div>
+                <div class="col-md-1 col-sm-1 col-xs-3">
+                    <a id="finishMisson_yg" value="3">
                         <img src="/publicImg/icon/yg.png" id="yg" class="center-block" alt="">
                     </a>
                 </div>
@@ -167,7 +168,7 @@
                         </div>
                         <div class="package-calto-action">
                             <ul class="ct-action">
-                                <li><a href="#" class="travel-booking-btn hvr-shutter-out-horizontal">立即兑换</a></li>
+                                <li><a th:value="${tGreenSpSpmxList.cSpbh}" class="travel-booking-btn hvr-shutter-out-horizontal">立即兑换</a></li>
                             </ul>
                         </div>
                     </div>
@@ -255,6 +256,7 @@
 
     <script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
     <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
     <script src="/publicJs/SendRequest.js"></script>
     <script src="/publicJs/publicyw.js"></script>
     <script src="/systemStatic/js/index.js"></script>

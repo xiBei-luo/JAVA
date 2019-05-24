@@ -140,4 +140,21 @@ public class PlateCodeDmz {
     public int hashCode() {
         return Objects.hash(cDmlb, cDm, cDmmc, cSort, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
     }
+
+
+    @Override
+    public String toString() {
+        return "PlateCodeDmz{" +
+                "cDmlb='" + cDmlb + '\'' +
+                ", cDm='" + cDm + '\'' +
+                ", cDmmc='" + cDmmc + '\'' +
+                ", cSort='" + cSort + '\'' +
+                ", cBz='" + cBz + '\'' +
+                ", cZt='" + cZt + '\'' +
+                ", cCjuser='" + cCjuser + '\'' +
+                ", dCjsj=" + dCjsj +
+                ", cXguser='" + cXguser + '\'' +
+                ", dXgsj=" + dXgsj +
+                '}';
+    }
 }

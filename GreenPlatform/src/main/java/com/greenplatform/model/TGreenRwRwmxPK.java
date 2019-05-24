@@ -8,7 +8,7 @@ import java.util.Objects;
 public class TGreenRwRwmxPK implements Serializable {
     private String cUserid;
     private String cRwlb;
-    private String cRwsj;
+    private String cRwday;
 
     @Column(name = "cUserid", nullable = false, length = 255)
     @Id
@@ -30,14 +30,14 @@ public class TGreenRwRwmxPK implements Serializable {
         this.cRwlb = cRwlb;
     }
 
-    @Column(name = "cRwsj", nullable = false, length = 255)
+    @Column(name = "cRwday", nullable = false, length = 255)
     @Id
-    public String getcRwsj() {
-        return cRwsj;
+    public String getcRwday() {
+        return cRwday;
     }
 
-    public void setcRwsj(String cRwsj) {
-        this.cRwsj = cRwsj;
+    public void setcRwday(String cRwday) {
+        this.cRwday = cRwday;
     }
 
     @Override
@@ -47,11 +47,11 @@ public class TGreenRwRwmxPK implements Serializable {
         TGreenRwRwmxPK that = (TGreenRwRwmxPK) o;
         return Objects.equals(cUserid, that.cUserid) &&
                 Objects.equals(cRwlb, that.cRwlb) &&
-                Objects.equals(cRwsj, that.cRwsj);
+                Objects.equals(cRwday, that.cRwday);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cUserid, cRwlb, cRwsj);
+        return Objects.hash(cUserid, cRwlb, cRwday);
     }
 }

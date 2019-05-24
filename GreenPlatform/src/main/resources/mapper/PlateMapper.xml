@@ -116,10 +116,10 @@
     <update id="updPlateCodeDmlb" parameterType="com.greenplatform.model.PlateCodeDmlb">
         UPDATE plate_code_dmlb
         <set>
-            <if test='cDmlbmc!=null and cDmlbmc!=""'>cDmlbmc = #{cDmlbmc},</if>
-            <if test='cZt!=null and cZt!=""'>cZt = #{cZt},</if>
-            <if test='cXguser!=null and cXguser!=""'>cXguser = #{cXguser},</if>
-            <if test='dXgsj!=null and dXgsj!=""'>dXgsj = #{dXgsj}</if>
+            <if test='cDmlbmc!=null'>cDmlbmc = #{cDmlbmc},</if>
+            <if test='cZt!=null'>cZt = #{cZt},</if>
+            <if test='cXguser!=null'>cXguser = #{cXguser},</if>
+            <if test='dXgsj!=null'>dXgsj = #{dXgsj}</if>
         </set>
         WHERE cDmlb = #{cDmlb}
     </update>
@@ -142,7 +142,7 @@
         <if test='cZt!=null and cZt!=""'>
             AND T.cZt = #{cZt}
         </if>
-        ORDER BY T.cDmlb,T.cZt
+        ORDER BY T.cDmlb
     </select>
     <insert id="insertPlateCodeDmz" parameterType="com.greenplatform.model.PlateCodeDmz">
         INSERT INTO plate_code_dmz (cDmlb,cDm,cDmmc,cSort,cBz,
@@ -159,12 +159,12 @@
     <update id="updPlateCodeDmz" parameterType="com.greenplatform.model.PlateCodeDmz">
         UPDATE plate_code_dmz
         <set>
-            <if test='cDmmc!=null and cDmmc!=""'>cDmmc = #{cDmmc},</if>
-            <if test='cSort!=null and cSort!=""'>cSort = #{cSort},</if>
-            <if test='cBz!=null and cBz!=""'>cBz = #{cBz},</if>
-            <if test='cZt!=null and cZt!=""'>cZt = #{cZt},</if>
-            <if test='cXguser!=null and cXguser!=""'>cXguser = #{cXguser},</if>
-            <if test='dXgsj!=null and dXgsj!=""'>dXgsj = #{dXgsj}</if>
+            <if test='cDmmc!=null'>cDmmc = #{cDmmc},</if>
+            <if test='cSort!=null'>cSort = #{cSort},</if>
+            <if test='cBz!=null'>cBz = #{cBz},</if>
+            <if test='cZt!=null'>cZt = #{cZt},</if>
+            <if test='cXguser!=null'>cXguser = #{cXguser},</if>
+            <if test='dXgsj!=null'>dXgsj = #{dXgsj}</if>
         </set>
         WHERE cDmlb = #{cDmlb} AND cDm = #{cDm}
     </update>
@@ -207,14 +207,14 @@
     <update id="updTGreenSpSpmx" parameterType="com.greenplatform.model.TGreenSpSpmx">
         UPDATE t_green_sp_spmx
         <set>
-            <if test='cSpmc!=null and cSpmc!=""'>cSpmc = #{cSpmc},</if>
-            <if test='cSpms!=null and cSpms!=""'>cSpms = #{cSpms},</if>
-            <if test='cSpjg!=null and cSpjg!=""'>cSpjg = #{cSpjg},</if>
-            <if test='cSpdw!=null and cSpdw!=""'>cSpdw = #{cSpdw},</if>
-            <if test='cBz!=null and cBz!=""'>cBz = #{cBz},</if>
-            <if test='cZt!=null and cZt!=""'>cZt = #{cZt},</if>
-            <if test='cXguser!=null and cXguser!=""'>cXguser = #{cXguser},</if>
-            <if test='dXgsj!=null and dXgsj!=""'>dXgsj = #{dXgsj}</if>
+            <if test='cSpmc!=null'>cSpmc = #{cSpmc},</if>
+            <if test='cSpms!=null'>cSpms = #{cSpms},</if>
+            <if test='cSpjg!=null'>cSpjg = #{cSpjg},</if>
+            <if test='cSpdw!=null'>cSpdw = #{cSpdw},</if>
+            <if test='cBz!=null'>cBz = #{cBz},</if>
+            <if test='cZt!=null'>cZt = #{cZt},</if>
+            <if test='cXguser!=null'>cXguser = #{cXguser},</if>
+            <if test='dXgsj!=null'>dXgsj = #{dXgsj}</if>
         </set>
         WHERE cSpbh = #{cSpbh}
     </update>
@@ -274,11 +274,11 @@
     <update id="updTGreenNlHz" parameterType="com.greenplatform.model.TGreenNlHz">
         UPDATE t_green_nl_hz
         <set>
-            <if test='cNlzl!=null and cNlzl!=""'>cNlzl = #{cNlzl},</if>
-            <if test='cBz!=null and cBz!=""'>cBz = #{cBz},</if>
-            <if test='cZt!=null and cZt!=""'>cZt = #{cZt},</if>
-            <if test='cXguser!=null and cXguser!=""'>cXguser = #{cXguser},</if>
-            <if test='dXgsj!=null and dXgsj!=""'>dXgsj = #{dXgsj}</if>
+            <if test='cNlzl!=null'>cNlzl = #{cNlzl},</if>
+            <if test='cBz!=null'>cBz = #{cBz},</if>
+            <if test='cZt!=null'>cZt = #{cZt},</if>
+            <if test='cXguser != null'>cXguser = #{cXguser},</if>
+            <if test='dXgsj != null'>dXgsj = #{dXgsj}</if>
         </set>
         WHERE cUserid = #{cUserid}
     </update>

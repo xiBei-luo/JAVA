@@ -12,11 +12,14 @@
             <id name="cRwlb">
                 <column name="cRwlb" length="1"/>
             </id>
-            <id name="cRwsj">
-                <column name="cRwsj"/>
+            <id name="cRwday">
+                <column name="cRwday"/>
             </id>
-            <basic name="cLjrwcs">
-                <column name="cLjrwcs" nullable="false"/>
+            <basic name="cRwmonth">
+                <column name="cRwmonth" nullable="false"/>
+            </basic>
+            <basic name="dRwsj">
+                <column name="dRwsj" nullable="false" precision="-1"/>
             </basic>
             <basic name="cBz">
                 <column name="cBz" nullable="false" length="2000"/>

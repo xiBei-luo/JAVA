@@ -187,4 +187,24 @@ public class TGreenZzZjzzmx {
     public int hashCode() {
         return Objects.hash(cLsh, cUserid, cSpbm, cZjyy, dZjsj, cKjz, cSfjz, dJzsj, cBz, cZt, cCjuser, dCjsj, cXguser, dXgsj);
     }
+
+    @Override
+    public String toString() {
+        return "TGreenZzZjzzmx{" +
+                "cLsh='" + cLsh + '\'' +
+                ", cUserid='" + cUserid + '\'' +
+                ", cSpbm='" + cSpbm + '\'' +
+                ", cZjyy='" + cZjyy + '\'' +
+                ", dZjsj=" + dZjsj +
+                ", cKjz='" + cKjz + '\'' +
+                ", cSfjz='" + cSfjz + '\'' +
+                ", dJzsj=" + dJzsj +
+                ", cBz='" + cBz + '\'' +
+                ", cZt='" + cZt + '\'' +
+                ", cCjuser='" + cCjuser + '\'' +
+                ", dCjsj=" + dCjsj +
+                ", cXguser='" + cXguser + '\'' +
+                ", dXgsj=" + dXgsj +
+                '}';
+    }
 }

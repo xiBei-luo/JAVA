@@ -4,54 +4,54 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.greenplatform.dao.SystemDao">
 
-    <!--systemUser crud-->
-    <select id="selectSystemuser" resultType="com.greenplatform.model.SystemUser" parameterType="com.greenplatform.model.SystemUser">
-        SELECT T.* FROM system_user T WHERE 1=1
-        <if test="cUserid!=null">
+    <!--plateuser crud-->
+    <select id="selectPlateuser" parameterType="com.greenplatform.model.PlateUser" resultType="com.greenplatform.model.PlateUser">
+        SELECT T.* FROM plate_user T WHERE 1=1
+        <if test='cUserid!=null and cUserid!=""'>
             AND T.cUserid = #{cUserid}
         </if>
-        <if test="cLoginname!=null">
+        <if test='cLoginname!=null and cLoginname!=""'>
             AND T.cLoginname = #{cLoginname}
         </if>
-        <if test="cUsername!=null">
+        <if test='cUsername!=null and cUsername!=""'>
             AND T.cUsername = #{cUsername}
         </if>
-        <if test="cPassword!=null">
+        <if test='cPassword!=null and cPassword!=""'>
             AND T.cPassword = #{cPassword}
         </if>
-        <if test="cRylb!=null">
+        <if test='cRylb!=null and cRylb!=""'>
             AND T.cRylb = #{cRylb}
         </if>
-        <if test="cRyzt!=null">
+        <if test='cRyzt!=null and cRyzt!=""'>
             AND T.cRyzt = #{cRyzt}
         </if>
-        <if test="cZcfs!=null">
+        <if test='cZcfs!=null and cZcfs!=""'>
             AND T.cZcfs = #{cZcfs}
         </if>
-        <if test="cZjhm!=null">
+        <if test='cZjhm!=null and cZjhm!=""'>
             AND T.cZjhm = #{cZjhm}
         </if>
-        <if test="cSex!=null">
+        <if test='cSex!=null and cSex!=""'>
             AND T.cSex = #{cSex}
         </if>
-        <if test="cPhone!=null">
+        <if test='cPhone!=null and cPhone!=""'>
             AND T.cPhone = #{cPhone}
         </if>
-        <if test="cWxhm!=null">
+        <if test='cWxhm!=null and cWxhm!=""'>
             AND T.cWxhm = #{cWxhm}
         </if>
-        <if test="cQq!=null">
+        <if test='cQq!=null and cQq!=""'>
             AND T.cQq = #{cQq}
         </if>
-        <if test="cEmail!=null">
+        <if test='cEmail!=null and cEmail!=""'>
             AND T.cEmail = #{cEmail}
         </if>
-        <if test="cZt!=null">
+        <if test='cZt!=null and cZt!=""'>
             AND T.cZt = #{cZt}
         </if>
     </select>
-    <insert id="insertSystemUser" parameterType="com.greenplatform.model.SystemUser">
-        INSERT INTO system_user (cUserid,cLoginname,cUsername,cPassword,cRylb,
+    <insert id="insertPlateuser" parameterType="com.greenplatform.model.PlateUser">
+        INSERT INTO plate_user (cUserid,cLoginname,cUsername,cPassword,cRylb,
                                cRyzt,cZcfs,cZjlx,cZjhm,cSex,
                                cJtzz,cPhone,cWxhm,cQq,cEmail,
                                cBz,cZt,cCjuser,dCjsj,cXguser
@@ -62,23 +62,31 @@
                #{cBz},#{cZt},#{cCjuser},#{dCjsj},#{cXguser},
                #{dXgsj})
     </insert>
-    <delete id="delSystemuser" parameterType="com.greenplatform.model.SystemUser">
-        DELETE FROM system_user WHERE cUserid = #{cUserid}
+    <delete id="delPlateuser" parameterType="com.greenplatform.model.PlateUser">
+        DELETE FROM plate_user WHERE cUserid = #{cUserid}
     </delete>
-    <update id="updSystemuser" parameterType="com.greenplatform.model.SystemUser">
-        UPDATE system_user
+    <update id="updPlateuser" parameterType="com.greenplatform.model.PlateUser">
+        UPDATE plate_user
         <set>
+            <if test="cUsername != null">cLoginname = #{cLoginname},</if>
             <if test="cUsername != null">cUsername = #{cUsername},</if>
+            <if test="cSex != null">cSex = #{cSex},</if>
             <if test="cPassword != null">cPassword = #{cPassword},</if>
+            <if test="cPassword != null">cRydj = #{cRydj},</if>
+            <if test="cPassword != null">cRylb = #{cRylb},</if>
+            <if test="cPassword != null">cRyzt = #{cRyzt},</if>
+            <if test="cPassword != null">cZcfs = #{cZcfs},</if>
             <if test="cZjlx != null">cZjlx = #{cZjlx},</if>
             <if test="cZjhm != null">cZjhm = #{cZjhm},</if>
-            <if test="cSex != null">cSex = #{cSex},</if>
             <if test="cJtzz != null">cJtzz = #{cJtzz},</if>
             <if test="cPhone != null">cPhone = #{cPhone},</if>
             <if test="cWxhm != null">cWxhm = #{cWxhm},</if>
             <if test="cQq != null">cQq = #{cQq},</if>
+            <if test="cEmail != null">cEmail = #{cEmail},</if>
+            <if test="cEmail != null">cBz = #{cBz},</if>
+            <if test="cEmail != null">cZt = #{cZt},</if>
             <if test="cXguser != null">cXguser = #{cXguser},</if>
-            <if test="dXgsj != null">dXgsj = #{dXgsj},</if>
+            <if test="dXgsj != null">dXgsj = #{dXgsj}</if>
         </set>
         WHERE cUserid = #{cUserid}
     </update>
@@ -161,11 +169,11 @@
     <update id="updTGreenNlHz" parameterType="com.greenplatform.model.TGreenNlHz">
         UPDATE t_green_nl_hz
         <set>
-            <if test='cNlzl!=null and cNlzl!=""'>cNlzl = #{cNlzl},</if>
-            <if test='cBz!=null and cBz!=""'>cBz = #{cBz},</if>
-            <if test='cZt!=null and cZt!=""'>cZt = #{cZt},</if>
-            <if test='cXguser!=null and cXguser!=""'>cXguser = #{cXguser},</if>
-            <if test='dXgsj!=null and dXgsj!=""'>dXgsj = #{dXgsj}</if>
+            <if test='cNlzl!=null'>cNlzl = #{cNlzl},</if>
+            <if test='cBz!=null'>cBz = #{cBz},</if>
+            <if test='cZt!=null'>cZt = #{cZt},</if>
+            <if test='cXguser!=null'>cXguser = #{cXguser},</if>
+            <if test='dXgsj!=null'>dXgsj = #{dXgsj}</if>
         </set>
         WHERE cUserid = #{cUserid}
     </update>
@@ -203,13 +211,60 @@
     <update id="updTGreenNlZjnlmx" parameterType="com.greenplatform.model.TGreenNlZjnlmx">
         UPDATE t_green_nl_zjnlmx
         <set>
-            <if test='cZjsl!=null and cZjsl!=""'>cZjsl = #{cZjsl},</if>
-            <if test='dZjsj!=null and dZjsj!=""'>dZjsj = #{dZjsj},</if>
-            <if test='cZjyy!=null and cZjyy!=""'>cZjyy = #{cZjyy},</if>
-            <if test='cBz!=null and cBz!=""'>cBz = #{cBz},</if>
-            <if test='cZt!=null and cZt!=""'>cZt = #{cZt},</if>
-            <if test='cXguser!=null and cXguser!=""'>cXguser = #{cXguser},</if>
-            <if test='dXgsj!=null and dXgsj!=""'>dXgsj = #{dXgsj}</if>
+            <if test='cZjsl!=null'>cZjsl = #{cZjsl},</if>
+            <if test='dZjsj!=null'>dZjsj = #{dZjsj},</if>
+            <if test='cZjyy!=null'>cZjyy = #{cZjyy},</if>
+            <if test='cBz!=null'>cBz = #{cBz},</if>
+            <if test='cZt!=null'>cZt = #{cZt},</if>
+            <if test='cXguser!=null'>cXguser = #{cXguser},</if>
+            <if test='dXgsj!=null'>dXgsj = #{dXgsj}</if>
+        </set>
+        WHERE cLsh = #{cLsh}
+    </update>
+
+    <!--TGreenNlJsnlmx crud-->
+    <select id="selectTGreenNlJsnlmx" parameterType="com.greenplatform.model.TGreenNlJsnlmx" resultType="com.greenplatform.model.TGreenNlJsnlmx">
+        SELECT T.* FROM t_green_nl_jsnlmx T WHERE 1=1
+        <if test='cLsh!=null and cLsh!=""'>
+            AND T.cLsh = #{cLsh}
+        </if>
+        <if test='cUserid!=null and cUserid!=""'>
+            AND T.cUserid = #{cUserid}
+        </if>
+        <if test='cJssl!=null and cJssl!=""'>
+            AND T.cJssl = #{cJssl}
+        </if>
+        <if test='dJssj!=null and dJssj!=""'>
+            AND T.dJssj = #{dJssj}
+        </if>
+        <if test='cJsyy!=null and cJsyy!=""'>
+            AND T.cJsyy = #{cJsyy}
+        </if>
+        <if test='cZt!=null and cZt!=""'>
+            AND T.cZt = #{cZt}
+        </if>
+        <if test='cCjuser!=null and cCjuser!=""'>
+            AND T.cCjuser = #{cCjuser}
+        </if>
+        ORDER BY T.cCjuser DESC
+    </select>
+    <insert id="insertTGreenNlJsnlmx" parameterType="com.greenplatform.model.TGreenNlJsnlmx">
+        INSERT INTO t_green_nl_jsnlmx (cLsh,cUserid,cJssl,dJssj,cJsyy,cBz,cZt,cCjuser,dCjsj,cXguser,dXgsj)
+        VALUES(#{cLsh},#{cUserid},#{cJssl},#{dJssj},#{cJsyy},#{cBz},#{cZt},#{cCjuser},#{dCjsj},#{cXguser},#{dXgsj})
+    </insert>
+    <delete id="delTGreenNlJsnlmx" parameterType="com.greenplatform.model.TGreenNlJsnlmx">
+        DELETE FROM t_green_nl_jsnlmx WHERE cLsh = #{cLsh}
+    </delete>
+    <update id="t_green_nl_jsnlmx" parameterType="com.greenplatform.model.TGreenNlJsnlmx">
+        UPDATE t_green_nl_zjnlmx
+        <set>
+            <if test='cJssl!=null'>cJssl = #{cJssl},</if>
+            <if test='dJssj!=null'>dJssj = #{dJssj},</if>
+            <if test='cJsyy!=null'>cJsyy = #{cJsyy},</if>
+            <if test='cBz!=null'>cBz = #{cBz},</if>
+            <if test='cZt!=null'>cZt = #{cZt},</if>
+            <if test='cXguser!=null'>cXguser = #{cXguser},</if>
+            <if test='dXgsj!=null'>dXgsj = #{dXgsj}</if>
         </set>
         WHERE cLsh = #{cLsh}
     </update>
@@ -223,20 +278,26 @@
         <if test='cRwlb!=null and cRwlb!=""'>
             AND T.cRwlb = #{cRwlb}
         </if>
-        <if test='cRwsj!=null and cRwsj!=""'>
-            AND T.cRwsj = #{cRwsj}
+        <if test='cRwday!=null and cRwday!=""'>
+            AND T.cRwday = #{cRwday}
         </if>
-        <if test='cLjrwcs!=null and cLjrwcs!=""'>
-            AND T.cLjrwcs = #{cLjrwcs}
+        <if test='cRwmonth!=null and cRwmonth!=""'>
+            AND T.cRwmonth = #{cRwmonth}
+        </if>
+        <if test='dRwsj!=null and dRwsj!=""'>
+            AND T.dRwsj = #{dRwsj}
         </if>
         <if test='cCjuser!=null and cCjuser!=""'>
             AND T.cCjuser = #{cCjuser}
         </if>
+        <if test='dCjsj!=null and dCjsj!=""'>
+            AND T.dCjsj = #{dCjsj}
+        </if>
         ORDER BY T.cRwlb DESC
     </select>
     <insert id="insertTGreenRwRwmx" parameterType="com.greenplatform.model.TGreenRwRwmx">
-        INSERT INTO t_green_rw_rwmx (cUserid,cRwlb,cRwsj,cLjrwcs,cBz,cCjuser,dCjsj,cXguser,dXgsj)
-        VALUES(#{cUserid},#{cRwlb},#{cRwsj},#{cLjrwcs},#{cBz},#{cCjuser},#{dCjsj},#{cXguser},#{dXgsj})
+        INSERT INTO t_green_rw_rwmx (cUserid,cRwlb,cRwday,cRwmonth,dRwsj,cBz,cCjuser,dCjsj,cXguser,dXgsj)
+        VALUES(#{cUserid},#{cRwlb},#{cRwday},#{cRwmonth},#{dRwsj},#{cBz},#{cCjuser},#{dCjsj},#{cXguser},#{dXgsj})
     </insert>
     <delete id="delTGreenRwRwmx" parameterType="com.greenplatform.model.TGreenRwRwmx">
         DELETE FROM t_green_rw_rwmx WHERE cUserid = #{cUserid}
@@ -244,14 +305,75 @@
     <update id="updTGreenRwRwmx" parameterType="com.greenplatform.model.TGreenRwRwmx">
         UPDATE t_green_rw_rwmx
         <set>
-            <if test='cRwlb!=null and cRwlb!=""'>cRwlb = #{cRwlb},</if>
-            <if test='cRwsj!=null and cRwsj!=""'>cRwsj = #{cRwsj},</if>
-            <if test='cLjrwcs!=null and cLjrwcs!=""'>cLjrwcs = #{cLjrwcs},</if>
-            <if test='cBz!=null and cBz!=""'>cBz = #{cBz},</if>
-            <if test='cXguser!=null and cXguser!=""'>cXguser = #{cXguser},</if>
-            <if test='dXgsj!=null and dXgsj!=""'>dXgsj = #{dXgsj}</if>
+            <if test='cRwlb!=null'>cRwlb = #{cRwlb},</if>
+            <if test='cRwday!=null'>cRwday = #{cRwday},</if>
+            <if test='cRwmonth!=null'>cRwmonth = #{cRwmonth},</if>
+            <if test='dRwsj!=null'>dRwsj = #{dRwsj},</if>
+            <if test='cBz!=null'>cBz = #{cBz},</if>
+            <if test='cXguser!=null'>cXguser = #{cXguser},</if>
+            <if test='dXgsj!=null'>dXgsj = #{dXgsj}</if>
         </set>
         WHERE cUserid = #{cUserid}
+    </update>
+
+    <!--TGreenZzZjzzmx crud-->
+    <select id="selectTGreenZzZjzzmx" parameterType="com.greenplatform.model.TGreenZzZjzzmx" resultType="com.greenplatform.model.TGreenZzZjzzmx">
+        SELECT T.* FROM t_green_zz_zjzzmx T WHERE 1=1
+        <if test='cLsh!=null and cLsh!=""'>
+            AND T.cLsh = #{cLsh}
+        </if>
+        <if test='cUserid!=null and cUserid!=""'>
+            AND T.cUserid = #{cUserid}
+        </if>
+        <if test='cSpbm!=null and cSpbm!=""'>
+            AND T.cSpbm = #{cSpbm}
+        </if>
+        <if test='cZjyy!=null and cZjyy!=""'>
+            AND T.cZjyy = #{cZjyy}
+        </if>
+        <if test='dZjsj!=null and dZjsj!=""'>
+            AND T.dZjsj = #{dZjsj}
+        </if>
+        <if test='cKjz!=null and cKjz!=""'>
+            AND T.cKjz = #{cKjz}
+        </if>
+        <if test='cSfjz!=null and cSfjz!=""'>
+            AND T.cSfjz = #{cSfjz}
+        </if>
+        <if test='dJzsj!=null and dJzsj!=""'>
+            AND T.dJzsj = #{dJzsj}
+        </if>
+        <if test='cZt!=null and cZt!=""'>
+            AND T.cZt = #{cZt}
+        </if>
+        <if test='cCjuser!=null and cCjuser!=""'>
+            AND T.cCjuser = #{cCjuser}
+        </if>
+        ORDER BY T.dZjsj DESC
+    </select>
+    <insert id="insertTGreenZzZjzzmx" parameterType="com.greenplatform.model.TGreenZzZjzzmx">
+        INSERT INTO t_green_zz_zjzzmx (cLsh,cUserid,cSpbm,cZjyy,dZjsj,cKjz,cSfjz,dJzsj,cBz,cZt,cCjuser,dCjsj,cXguser,dXgsj)
+        VALUES(#{cLsh},#{cUserid},#{cSpbm},#{cZjyy},#{dZjsj},#{cKjz},#{cSfjz},#{dJzsj},#{cBz},#{cZt},#{cCjuser},#{dCjsj},#{cXguser},#{dXgsj})
+    </insert>
+    <delete id="delTGreenZzZjzzmx" parameterType="com.greenplatform.model.TGreenZzZjzzmx">
+        DELETE FROM t_green_zz_zjzzmx WHERE cLsh = #{cLsh}
+    </delete>
+    <update id="updTGreenZzZjzzmx" parameterType="com.greenplatform.model.TGreenZzZjzzmx">
+        UPDATE t_green_zz_zjzzmx
+        <set>
+            <if test='cRwlb!=null'>cRwlb = #{cRwlb},</if>
+            <if test='cSpbm!=null'>cSpbm = #{cSpbm},</if>
+            <if test='cZjyy!=null'>cZjyy = #{cZjyy},</if>
+            <if test='dZjsj!=null'>dZjsj = #{dZjsj},</if>
+            <if test='cKjz!=null'>cKjz = #{cKjz},</if>
+            <if test='cSfjz!=null'>cSfjz = #{cSfjz},</if>
+            <if test='dJzsj!=null'>dJzsj = #{dJzsj},</if>
+            <if test='cBz!=null'>cBz = #{cBz},</if>
+            <if test='cZt!=null'>cZt = #{cZt},</if>
+            <if test='cXguser!=null'>cXguser = #{cXguser},</if>
+            <if test='dXgsj!=null'>dXgsj = #{dXgsj}</if>
+        </set>
+        WHERE cLsh = #{cLsh}
     </update>
 
 

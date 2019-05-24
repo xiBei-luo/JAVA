@@ -14,6 +14,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -26,9 +27,6 @@ public class PlateServiceImpl implements PlateService {
     ReturnModel returnModel = new ReturnModel();
     @Autowired
     PlateDao plateDao;
-
-    Date date = new Date();
-    Timestamp timestamp = new Timestamp(date.getTime());
 
     @Override
     public ReturnModel selectPlateuser(PlateUser plateUser, HttpSession session) {
@@ -103,10 +101,14 @@ public class PlateServiceImpl implements PlateService {
             //3.新增用户（注册用户）
             String majorKey = UUID.randomUUID().toString().replaceAll("-", "");
             plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
+            plateUser.setcRyzt("1");
             plateUser.setcUserid(majorKey);
-            plateUser.setdCjsj(timestamp);
+            plateUser.setdCjsj(getTimestamp(new Date()));
             if("1".equals(plateUser.getcRylb())){
                 plateUser.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+            }else{
+                plateUser.setcCjuser(majorKey);
+                plateUser.setcRydj("1");
             }
             plateDao.insertPlateuser(plateUser);
             //4.查询数据库查看是否新增成功
@@ -127,18 +129,18 @@ public class PlateServiceImpl implements PlateService {
                     tGreenNlZjnlmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
                     tGreenNlZjnlmx.setcUserid(plateUser.getcUserid());
                     tGreenNlZjnlmx.setcZjsl("100");
-                    tGreenNlZjnlmx.setdZjsj(timestamp);
+                    tGreenNlZjnlmx.setdZjsj(getTimestamp(new Date()));
                     tGreenNlZjnlmx.setcZjyy("1");
                     tGreenNlZjnlmx.setcZt("1");
                     tGreenNlZjnlmx.setcCjuser(plateUser.getcUserid());
-                    tGreenNlZjnlmx.setdCjsj(timestamp);
+                    tGreenNlZjnlmx.setdCjsj(getTimestamp(new Date()));
 
                     TGreenNlHz tGreenNlHz = new TGreenNlHz();
                     tGreenNlHz.setcUserid(plateUser.getcUserid());
                     tGreenNlHz.setcNlzl("100");
                     tGreenNlHz.setcZt("1");
                     tGreenNlHz.setcCjuser(plateUser.getcUserid());
-                    tGreenNlHz.setdCjsj(timestamp);
+                    tGreenNlHz.setdCjsj(getTimestamp(new Date()));
 
                     plateDao.insertTGreenNlZjnlmx(tGreenNlZjnlmx);
                     plateDao.insertTGreenNlHz(tGreenNlHz);
@@ -209,7 +211,7 @@ public class PlateServiceImpl implements PlateService {
                 returnModel.setObject(null);
                 return returnModel;
             }else{
-                plateUser.setdXgsj(timestamp);
+                plateUser.setdXgsj(getTimestamp(new Date()));
                 plateUser.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 plateDao.updPlateuser(plateUser);
                 returnModel.setFlag(0);
@@ -257,7 +259,7 @@ public class PlateServiceImpl implements PlateService {
                 return returnModel;
             }else{
                 //2.插入值
-                plateCodeDmlb.setdCjsj(timestamp);
+                plateCodeDmlb.setdCjsj(getTimestamp(new Date()));
                 plateCodeDmlb.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 plateDao.insertPlateCodeDmlb(plateCodeDmlb);
                 returnModel.setFlag(0);
@@ -318,7 +320,7 @@ public class PlateServiceImpl implements PlateService {
                 returnModel.setObject(null);
                 return returnModel;
             }else{
-                plateCodeDmlb.setdXgsj(timestamp);
+                plateCodeDmlb.setdXgsj(getTimestamp(new Date()));
                 plateCodeDmlb.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 plateDao.updPlateCodeDmlb(plateCodeDmlb);
                 returnModel.setFlag(0);
@@ -338,13 +340,13 @@ public class PlateServiceImpl implements PlateService {
 
     @Override
     public ReturnModel selectPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
-        List plateCodeDmzList;
         try{
-            plateCodeDmzList = plateDao.selectPlateCodeDmz(plateCodeDmz);
+            List plateCodeDmzList = plateDao.selectPlateCodeDmz(plateCodeDmz);
             returnModel.setFlag(0);
             returnModel.setMsg("操作成功!");
             returnModel.setObject(plateCodeDmzList);
         }catch (Exception e){
+            e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("操作失败，系统错误!");
             returnModel.setObject(null);
@@ -369,7 +371,7 @@ public class PlateServiceImpl implements PlateService {
             }else{
 
                 plateCodeDmz.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                plateCodeDmz.setdCjsj(timestamp);
+                plateCodeDmz.setdCjsj(getTimestamp(new Date()));
                 plateDao.insertPlateCodeDmz(plateCodeDmz);
                 returnModel.setFlag(0);
                 returnModel.setMsg("新增成功！");
@@ -431,7 +433,7 @@ public class PlateServiceImpl implements PlateService {
             }else{
                 //2.执行修改
                 plateCodeDmz.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                plateCodeDmz.setdXgsj(timestamp);
+                plateCodeDmz.setdXgsj(getTimestamp(new Date()));
                 plateDao.updPlateCodeDmz(plateCodeDmz);
                 returnModel.setFlag(0);
                 returnModel.setMsg("修改成功");
@@ -480,7 +482,7 @@ public class PlateServiceImpl implements PlateService {
         try{
             tGreenSpSpmx.setcSpbh(UUID.randomUUID().toString().replaceAll("-", ""));
             tGreenSpSpmx.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-            tGreenSpSpmx.setdCjsj(timestamp);
+            tGreenSpSpmx.setdCjsj(getTimestamp(new Date()));
             plateDao.insertTGreenSpSpmx(tGreenSpSpmx);
             returnModel.setFlag(0);
             returnModel.setMsg("操作成功");
@@ -538,7 +540,7 @@ public class PlateServiceImpl implements PlateService {
                 returnModel.setObject(null);
                 return returnModel;
             }else{
-                tGreenSpSpmx.setdXgsj(timestamp);
+                tGreenSpSpmx.setdXgsj(getTimestamp(new Date()));
                 plateDao.updTGreenSpSpmx(tGreenSpSpmx);
                 returnModel.setFlag(0);
                 returnModel.setMsg("操作成功！");
@@ -602,6 +604,25 @@ public class PlateServiceImpl implements PlateService {
     @Override
     public ReturnModel updTGreenNlHz(TGreenNlHz tGreenNlHz) {
         return null;
+    }
+
+
+    //获取当前系统时间timestamp
+    public Timestamp getTimestamp(Date date){
+        if (null == date){
+            date = new Date();
+        }
+        Timestamp timestamp = new Timestamp(date.getTime());
+        return timestamp;
+    }
+    //获取系统当前时间   2019-05-22 16:35:01
+    public String getLocalDate(Date date){
+        if (null == date){
+            date = new Date();
+        }
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String localDate = df.format(date);
+        return localDate;
     }
 
 }

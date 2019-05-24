@@ -7,14 +7,14 @@ import com.greenplatform.model.ywModel.TUserAccount;
 import java.util.List;
 
 public interface SystemService {
-    /*系统用户操作begin*/
+    /*系统用户操作begin
     public ReturnModel selectSystemuser(SystemUser systemUser);//查询系统用户
 
     public ReturnModel insertSystemUser (SystemUser systemUser);//插入系统用户信息
 
     public ReturnModel delSystemuser(SystemUser systemUser);//删除系统用户信息
 
-    public ReturnModel updSystemuser(SystemUser systemUser);//修改系统用户
+    public ReturnModel updSystemuser(SystemUser systemUser);//修改系统用户*/
 
     /*种子商店操作begin*/
     public ReturnModel selectTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//查询商品明细
@@ -51,5 +51,17 @@ public interface SystemService {
     public ReturnModel delTGreenRwRwmx (TGreenRwRwmx tGreenRwRwmx);//删除任务明细
 
     public ReturnModel updTGreenRwRwmx (TGreenRwRwmx tGreenRwRwmx);//修改任务明细
+
+    //增加种子
+    public ReturnModel selectTGreenZzZjzzmx (TGreenZzZjzzmx tGreenZzZjzzmx);//查询增加种子明细
+
+    public ReturnModel insertTGreenZzZjzzmx (TGreenZzZjzzmx tGreenZzZjzzmx);//插入增加种子明细
+
+    public ReturnModel delTGreenZzZjzzmx (TGreenZzZjzzmx tGreenZzZjzzmx);//删除增加种子明细
+
+    public ReturnModel updTGreenZzZjzzmx (TGreenZzZjzzmx tGreenZzZjzzmx);//修改增加种子明细
+
+    //查询我的账户信息（人员姓名，人员等级，能量总量，种子汇总，今日任务）
+    public ReturnModel selectLoginuserAccount();
 
 }
