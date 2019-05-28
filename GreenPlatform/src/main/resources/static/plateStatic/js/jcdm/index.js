@@ -54,6 +54,7 @@ function initMenu(){
  * 初始化表格
  */
 function initGrid(){
+    $("#gridbox").attr({width:"100%",height:"100%"});
     grid = new dhtmlXGridObject('gridbox');
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
     grid.setHeader("操作,代码类别,代码类别名称,代码值,代码值名称,排序号,状态");

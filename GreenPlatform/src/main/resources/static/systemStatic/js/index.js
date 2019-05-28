@@ -3,6 +3,10 @@ $(function(){
 });
 
 function initEvent() {
+    $(".close").click(function(){
+        window.location.reload()
+    });
+
     $("#myAccount").click(function(){
         f_selectLoginuserAccount();
         $("#myAccountModel").modal('show');
@@ -33,6 +37,35 @@ function f_selectLoginuserAccount(){
 
     sendRequest.sendRequest(function(ret){
         console.log(ret);
+        var oPlateuser = ret.object.plateUser[0];//登陆账户信息（获取人员姓名与人员等级）
+        var oTGreenNlHz = ret.object.tGreenNlHz[0];//登陆用户能量汇总信息（获取能量总量）
+        var aTGreenRwRwmx = ret.object.tGreenRwRwmx;//登陆用户任务完成信息（今日任务是否完成）
+        var atGreenZzZjzzmx = ret.object.tGreenZzZjzzmx;//登陆用户种子信息（查询用户有几种未捐赠的种子）
+        $("#cUsername").text(oPlateuser.cUsername);
+        $("#cRydj").text("L"+oPlateuser.cRydj);
+        $("#cNlzl").text(oTGreenNlHz.cNlzl);
+
+
+        var aRwlbArr = [];
+        $(aTGreenRwRwmx).each(function(i){
+            aRwlbArr.push(aTGreenRwRwmx[i].cRwlb);
+        });
+        if (aRwlbArr.length < 3){
+            for(var i=1;i<4;i++){
+                if($.inArray(i.toString(),aRwlbArr)<0){
+                    $("#cRwlb_"+i).addClass( "badge-warning");
+                    $("#cRwlb_"+i).text( "未完成");
+                }
+            }
+        }
+        $(atGreenZzZjzzmx).each(function(i,v){
+            $("#mySeed ul").append("<li class=\"list-group-item\">\n" +
+                                        "<span id=\"cRwlb_4\">"+v.cSpbm+"</span>\n" +
+                                        "<button class=\"btn btn-primary btn-sm float-right\">捐赠</button>\n" +
+                                  "</li>");
+        });
+
+
     });//发送请求并获取返回结果
 }
 

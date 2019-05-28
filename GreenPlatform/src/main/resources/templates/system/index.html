@@ -28,7 +28,7 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#home">首页 <span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="#home" id="btnHome">首页 <span class="sr-only">(current)</span></a></li>
                         <li><a href="#rankList">能量排行榜</a></li>
                         <li><a href="#market">种子商店</a></li>
                     </ul>
@@ -205,11 +205,12 @@
                 <div class="modal-body">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <span class="badge">L0</span>张三
-                            <a href="#" class="btn-link">实名认证</a>
+                            <span id="cUsername"></span>
+                            <span class="badge" id="cRydj"></span>
+                            <a href="/base/certification" class="btn-link">实名认证</a>
                         </li>
                         <li class="list-group-item">
-                            <span class="badge">14000</span>我的能量
+                            <span class="badge" id="cNlzl">14000</span>我的能量
                         </li>
                         <li class="list-group-item">
                             <button class="btn btn-primary btn-sm">充值</button>
@@ -217,7 +218,22 @@
                         </li>
                         <li class="list-group-item">
                             我的植物
-                            <button class="btn btn-primary btn-sm float-right">捐赠</button>
+                        </li>
+                        <li class="list-group-item" id = "mySeed">
+                            <ul class="list-group">
+                                <!--<li class="list-group-item">
+                                    <span id="cRwlb_4">仙人掌</span>
+                                    <button class="btn btn-primary btn-sm float-right">捐赠</button>
+                                </li>
+                                <li class="list-group-item">
+                                    <span id="cRwlb_5">光棍树</span>
+                                    <button class="btn btn-primary btn-sm float-right">捐赠</button>
+                                </li>
+                                <li class="list-group-item">
+                                    <span id="cRwlb_6">肉苁蓉</span>
+                                    <button class="btn btn-primary btn-sm float-right">捐赠</button>
+                                </li>-->
+                            </ul>
                         </li>
                         <li class="list-group-item">
                             今日任务
@@ -225,13 +241,16 @@
                         <li class="list-group-item">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <span class="badge">已完成</span>浇水
+                                    <span>施肥</span>
+                                    <span id="cRwlb_1" class="badge">已完成</span>
                                 </li>
                                 <li class="list-group-item">
-                                    <span class="badge badge-warning">未完成</span>施肥
+                                    <span>浇水</span>
+                                    <span id="cRwlb_2" class="badge">已完成</span>
                                 </li>
                                 <li class="list-group-item">
-                                    <span class="badge">已完成</span>沐浴阳光
+                                    <span>沐浴阳光</span>
+                                    <span id="cRwlb_3" class="badge">已完成</span>
                                 </li>
                             </ul>
                         </li>

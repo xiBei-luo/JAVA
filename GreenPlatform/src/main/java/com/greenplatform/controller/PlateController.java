@@ -1,18 +1,14 @@
 package com.greenplatform.controller;
 
+import com.greenplatform.dao.PlateUserMapper;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
-import org.apache.catalina.Manager;
-import org.apache.catalina.Session;
-import org.apache.catalina.SessionListener;
+import com.greenplatform.util.GetcurrentLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
-import java.util.Iterator;
 
 
 /**
@@ -23,20 +19,21 @@ import java.util.Iterator;
 public class PlateController {
 
     @Autowired
+    PlateUserMapper plateUserMapper;
+
+    @Autowired
     PlateService plateService;
 
     @PostMapping(value = "/getLoginUser")
-    public ReturnModel getLoginUser(HttpSession session){
-        System.out.println("1");
+    public ReturnModel getLoginUser(){
         ReturnModel returnModel = new ReturnModel();
         try{
-            PlateUser plateUser = (PlateUser) session.getAttribute("loginUser");
-            System.out.println(plateUser);
+            PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(plateUser);
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("获取登录用户信息失败，"+e);
             returnModel.setObject(null);
@@ -44,8 +41,16 @@ public class PlateController {
         return returnModel;
     }
 
+    @PostMapping(value = "/getDmmc")
+    public ReturnModel getDmmc(String cDmlb,String cDm){
+        System.out.println(cDmlb+"==="+cDm);
+        ReturnModel returnModel = new ReturnModel();
+        return returnModel;
+    }
+
     @PostMapping(value = "/login")
     public ReturnModel login(PlateUser plateUser,HttpSession session){
+        System.out.println(plateUserMapper.selectAll());
         ReturnModel returnModel = plateService.selectPlateuser(plateUser,session);
         return returnModel;
     }
@@ -59,6 +64,12 @@ public class PlateController {
     @PostMapping(value = "/insertPlateuser")
     public ReturnModel insertPlateuser(PlateUser plateUser,HttpSession session){
         ReturnModel returnModel = plateService.insertPlateuser(plateUser,session);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/retsetPass")
+    public ReturnModel retPass(PlateUser plateUser){
+        ReturnModel returnModel = plateService.retsetPass(plateUser);
         return returnModel;
     }
 

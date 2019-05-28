@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,6 +53,7 @@ public class PlateServiceImpl implements PlateService {
         List plateUserList;
         try{
             plateUserList = plateDao.selectPlateuser(plateUser);
+            Iterator iterator = plateUserList.iterator();
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(plateUserList);
@@ -98,7 +100,7 @@ public class PlateServiceImpl implements PlateService {
                 }
                 return returnModel;
             }
-            //3.新增用户（注册用户）
+            //3.新增用户（注册用户 1平台用户  2前端用户）
             String majorKey = UUID.randomUUID().toString().replaceAll("-", "");
             plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
             plateUser.setcRyzt("1");
@@ -128,7 +130,7 @@ public class PlateServiceImpl implements PlateService {
                     TGreenNlZjnlmx tGreenNlZjnlmx = new TGreenNlZjnlmx();
                     tGreenNlZjnlmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
                     tGreenNlZjnlmx.setcUserid(plateUser.getcUserid());
-                    tGreenNlZjnlmx.setcZjsl("100");
+                    tGreenNlZjnlmx.setcZjnl("100");
                     tGreenNlZjnlmx.setdZjsj(getTimestamp(new Date()));
                     tGreenNlZjnlmx.setcZjyy("1");
                     tGreenNlZjnlmx.setcZt("1");
@@ -137,7 +139,7 @@ public class PlateServiceImpl implements PlateService {
 
                     TGreenNlHz tGreenNlHz = new TGreenNlHz();
                     tGreenNlHz.setcUserid(plateUser.getcUserid());
-                    tGreenNlHz.setcNlzl("100");
+                    tGreenNlHz.setcNlhz("100");
                     tGreenNlHz.setcZt("1");
                     tGreenNlHz.setcCjuser(plateUser.getcUserid());
                     tGreenNlHz.setdCjsj(getTimestamp(new Date()));
@@ -199,18 +201,60 @@ public class PlateServiceImpl implements PlateService {
     }
 
     @OperationLog(cCzfs = "U")
-    @Override
-    public ReturnModel updPlateuser(PlateUser plateUser) {
+    @Override//重置密码
+    public ReturnModel retsetPass(PlateUser plateUser) {
         try{
             PlateUser plateUser1 = new PlateUser();
             plateUser1.setcUserid(plateUser.getcUserid());
             List plateUserList = plateDao.selectPlateuser(plateUser1);
+
             if (plateUserList.isEmpty()){
                 returnModel.setFlag(1);
                 returnModel.setMsg("修改用户失败，没有找到待修改的数据!");
                 returnModel.setObject(null);
                 return returnModel;
             }else{
+                PlateUser plateUser2 = (PlateUser) plateUserList.get(0);
+                plateUser2.setcPassword(MD5.md5("aaaaaa"));
+                plateUser2.setdXgsj(getTimestamp(new Date()));
+                plateUser2.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+
+                System.out.println("resetPass=="+plateUser2);
+
+                plateDao.updPlateuser(plateUser2);
+                returnModel.setFlag(0);
+                returnModel.setMsg("重置成功!");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+        }catch (Exception e){
+            returnModel.setFlag(1);
+            returnModel.setMsg("修改用户失败，服务器端错误!");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+    @OperationLog(cCzfs = "U")
+    @Override
+    public ReturnModel updPlateuser(PlateUser plateUser) {
+        try{
+            List plateUserList = plateDao.selectPlateuser(plateUser);
+            if (plateUserList.isEmpty()){
+                returnModel.setFlag(1);
+                returnModel.setMsg("修改用户失败，没有找到待修改的数据!");
+                returnModel.setObject(null);
+                return returnModel;
+            }else{
+                PlateUser plateUser1 = (PlateUser) plateUserList.get(0);
+
+                plateUser.setcUsername(plateUser1.getcUsername());
+                plateUser.setcLoginname(plateUser1.getcLoginname());
+                plateUser.setcPhone(plateUser1.getcPhone());//姓名，登录名，电话号码不能修改
+                plateUser.setcRyzt(plateUser1.getcRyzt());
+                plateUser.setcRylb(plateUser1.getcRylb());
+
                 plateUser.setdXgsj(getTimestamp(new Date()));
                 plateUser.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 plateDao.updPlateuser(plateUser);
@@ -624,5 +668,42 @@ public class PlateServiceImpl implements PlateService {
         String localDate = df.format(date);
         return localDate;
     }
-
+    //根据代码值获取代码名称
+    public String getDmmc(String cDmlb,String cDm){
+        /**
+         * cDmlb
+         * cSpbh===根据商品编号获取商品名称
+         * cUserid===根据人员ID获取人员姓名
+         * 其他===从基础代码表中获取
+         */
+        System.out.println("in");
+        if ("cSpbh".equals(cDmlb)){
+            TGreenSpSpmx tGreenSpSpmx = new TGreenSpSpmx();
+            tGreenSpSpmx.setcSpbh(cDm);
+            List tGreenSpSpmxList = plateDao.selectTGreenSpSpmx(tGreenSpSpmx);
+            TGreenSpSpmx tGreenSpSpmx1;
+            if (!(tGreenSpSpmxList.isEmpty())){
+                tGreenSpSpmx1 = (TGreenSpSpmx) tGreenSpSpmxList.get(0);
+            }else{
+                tGreenSpSpmx1 = new TGreenSpSpmx();
+            }
+            System.out.println(tGreenSpSpmx1.getcSpmc());
+            return tGreenSpSpmx1.getcSpmc();
+        }else if ("cUsername".equals(cDmlb)){
+            return null;
+        }else{
+            PlateCodeDmz plateCodeDmz = new PlateCodeDmz();
+            plateCodeDmz.setcDmlb(cDmlb);
+            plateCodeDmz.setcDm(cDm);
+            List plateCodeDmzList = plateDao.selectPlateCodeDmz(plateCodeDmz);
+            PlateCodeDmz plateCodeDmz1;
+            if (!(plateCodeDmzList.isEmpty())){
+                plateCodeDmz1 = (PlateCodeDmz) plateCodeDmzList.get(0);
+            }else{
+                plateCodeDmz1 = new PlateCodeDmz();
+            }
+            System.out.println(plateCodeDmz1.getcDmmc());
+            return plateCodeDmz1.getcDmmc();
+        }
+    }
 }

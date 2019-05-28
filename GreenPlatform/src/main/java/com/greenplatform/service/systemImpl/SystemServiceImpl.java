@@ -231,7 +231,7 @@ public class SystemServiceImpl implements SystemService {
             }else{
                 tGreenRwRwmx.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 tGreenRwRwmx.setdCjsj(getTimestamp(new Date()));
-                tGreenRwRwmx.setcRwmonth(localDateMonth);
+                tGreenRwRwmx.setcRwmouth(localDateMonth);
                 tGreenRwRwmx.setdRwsj(getTimestamp(new Date()));
 
                 System.out.println("任务明细对象--"+tGreenRwRwmx);
@@ -270,7 +270,7 @@ public class SystemServiceImpl implements SystemService {
     @Override
     public ReturnModel insertTGreenZzZjzzmx(TGreenZzZjzzmx tGreenZzZjzzmx) {
         //tGreenZzZjzzmx  商品编号必传
-        if (null == tGreenZzZjzzmx.getcSpbm() || "".equals(tGreenZzZjzzmx)){
+        if (null == tGreenZzZjzzmx.getcSpbh() || "".equals(tGreenZzZjzzmx)){
             returnModel.setFlag(1);
             returnModel.setMsg("兑换种子编号不能为空！");
             returnModel.setObject(null);
@@ -294,10 +294,10 @@ public class SystemServiceImpl implements SystemService {
                 TGreenNlHz tGreenNlHz = new TGreenNlHz();//获取指定用户的能量总量
                 tGreenNlHz.setcUserid(plateUser.getcUserid());
                 List tGreenNlHzList = systemDao.selectTGreenNlHz(tGreenNlHz);
-                Integer userNlzl = Integer.parseInt(((TGreenNlHz) tGreenNlHzList.get(0)).getcNlzl());//获取指定账户的能量总量
+                Integer userNlzl = Integer.parseInt(((TGreenNlHz) tGreenNlHzList.get(0)).getcNlhz());//获取指定账户的能量总量
 
                 TGreenSpSpmx tGreenSpSpmx = new TGreenSpSpmx();//获取用户点击兑换种子的价格
-                tGreenSpSpmx.setcSpbh(tGreenZzZjzzmx.getcSpbm());
+                tGreenSpSpmx.setcSpbh(tGreenZzZjzzmx.getcSpbh());
                 List tGreenSpSpmxList = systemDao.selectTGreenSpSpmx(tGreenSpSpmx);
                 Integer zzPrice = Integer.parseInt(((TGreenSpSpmx) tGreenSpSpmxList.get(0)).getcSpjg());//获取种子的价格
 
@@ -322,7 +322,7 @@ public class SystemServiceImpl implements SystemService {
                     tGreenNlJsnlmx.setdCjsj(getTimestamp(new Date()));
                     systemDao.insertTGreenNlJsnlmx(tGreenNlJsnlmx);
 
-                    tGreenNlHz.setcNlzl(String.valueOf((userNlzl-zzPrice)));
+                    tGreenNlHz.setcNlhz(String.valueOf((userNlzl-zzPrice)));
                     tGreenNlHz.setcXguser(plateUser.getcUserid());
                     tGreenNlHz.setdXgsj(getTimestamp(new Date()));
                     System.out.println("修改能量汇总表"+tGreenNlHz);

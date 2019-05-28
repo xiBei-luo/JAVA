@@ -18,6 +18,8 @@ public interface PlateService {
 
     public ReturnModel delPlateuser(PlateUser plateUser);//删除平台用户信息
 
+    public ReturnModel retsetPass(PlateUser plateUser);//修改平台用户（重置密码）
+
     public ReturnModel updPlateuser(PlateUser plateUser);//修改平台用户
 
     /*代码类别操作begin*/

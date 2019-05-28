@@ -53,6 +53,7 @@ function initMenu(){
  * 初始化表格
  */
 function initGrid(){
+    $("#gridbox").attr({width:"100%",height:"100%"});
     grid = new dhtmlXGridObject('gridbox');
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
     grid.setHeader("操作,商品名称,商品描述,商品价格,商品单位,状态");

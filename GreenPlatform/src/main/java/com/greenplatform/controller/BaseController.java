@@ -38,8 +38,12 @@ public class BaseController {
 
     @GetMapping(value = "/history")
     public String history(String type){
-
         return "system/history";
+    }
+
+    @GetMapping(value = "/certification")
+    public String certification(String type){
+        return "system/certification";
     }
 
     @GetMapping(value = "/rwgl")

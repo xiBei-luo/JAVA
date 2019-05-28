@@ -7,6 +7,7 @@
  * @param allFlag 显示全部时的字符
  */
 function initBaseCodeSelect($container, args, defVal, allFlag){
+    console.log(args);
     if($container){
         $container.empty();
     }
@@ -23,6 +24,7 @@ function initBaseCodeSelect($container, args, defVal, allFlag){
             }
 
             for(var i=0; i<ret.object.length; i++){
+                console.log(ret.object[i].cDmmc);
                 $container.append("<option value='"+ret.object[i].cDm+"' text='"+ret.object[i].cDmmc+"'>"+ret.object[i].cDmmc+"</option>");
             }
         }
@@ -35,10 +37,14 @@ function initBaseCodeSelect($container, args, defVal, allFlag){
 
 
 /**
- *获取登陆用户的信息
+ *根据代码类别和代码值获取代码名称
  */
-function getLoginUser(){
-    var sendRequest = new SendRequest("/plate/getLoginUser","POST");//构造对象
+function f_getDmmc(cmlb,cDm){
+    var sendRequest = new SendRequest("/plate/selectPlateCodeDmz","POST");//构造对象
+    sendRequest.addParamObj({
+        cDmlb:cmlb,
+        cDm:cDm
+    });
     sendRequest.sendRequest(function(ret){
         console.log(ret);
     });//发送请求并获取返回结果

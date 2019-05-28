@@ -8,18 +8,19 @@ $(function(){
  * 初始化事件
  */
 function initEvent(){
-    initSelect();
     initMenu();
     $("#btnReset").click(function(){
         $("#insertPlateUserForm input").val("");
     });
 
+    initBaseCodeSelect($("#cRylbSearch"),{cDmlb:"C_USER_RYLB"},null,null);
+
     $("#btnAdd").click(function(){
-        $("#myModalLabel").html("新增系统用户");
+        initBaseCodeSelect($("#cSex"),{cDmlb:"C_USER_SEX"},null,"---请选择性别---");
+        initBaseCodeSelect($("#cZjlx"),{cDmlb:"C_USER_ZJLX"},null,"---请选择证件类型---");
         $("#btnReset").click();
         $("#cUserid").val("");
         $("#addUserModel").modal('show');
-        $("#cPassword,#cPassword1").show();
     });
 
     $("#btnSearch").click(function(){
@@ -61,6 +62,7 @@ function initMenu(){
  * 初始化表格
  */
 function initGrid(){
+    $("#gridbox").attr({width:"100%",height:"100%"});
     grid = new dhtmlXGridObject('gridbox');
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
     grid.setHeader("操作,姓名,性别,证件号码,人员状态,电话号码,微信号码,QQ号码,状态");
@@ -112,8 +114,10 @@ function loadGridData(){
 function initData(data){
     for (var i=0; i<data.length; i++){
         var opLinkBuff = new StringBuffer();
-        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-primary \" onclick=\"f_upd(\'"+data[i].cUserid+"\');\" id=\"xg_link_"+data[i].cUserid+"\" >修改</button>")
-        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-warning \" onclick=\"f_del(\'"+data[i].cUserid+"\');\" id=\"del_link_"+data[i].cUserid+"\" >删除</button>")
+        if ("1" == data[i].cRylb){
+            opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-primary \" onclick=\"f_upd(\'"+data[i].cUserid+"\');\" id=\"xg_link_"+data[i].cUserid+"\" >重置密码</button>")
+            opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-warning \" onclick=\"f_del(\'"+data[i].cUserid+"\');\" id=\"del_link_"+data[i].cUserid+"\" >删除</button>")
+        }
 
         grid.addRow(data[i].cUserid,[
             opLinkBuff.toString(),
@@ -143,6 +147,43 @@ function checkRegister(){
             validating: 'glyphicon glyphicon-refresh'*/
         },
         fields: {
+            cUsername: {
+                message: '用户姓名验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '用户姓名不能为空'
+                    },
+                    regexp: {
+                        regexp: /^[\u4e00-\u9fa5]+$/,
+                        message: '用户姓名只能为汉字'
+                    }
+                }
+            },
+            cSex: {
+                message: '性别验证失败',
+                validators: {
+                    notChoice: {
+                        message: '性别不能为空'
+                    }
+                }
+            },
+            cLoginname: {
+                message: '用户名验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '用户名不能为空'
+                    },
+                    stringLength: {
+                        min: 5,
+                        max: 18,
+                        message: '用户名长度必须在5到18位之间'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: '用户名只能包含大写、小写、数字和下划线'
+                    }
+                }
+            },
             cEmail: {
                 message: '邮箱验证失败',
                 validators: {
@@ -154,24 +195,18 @@ function checkRegister(){
                     }
                 }
             },
-            cLoginname: {
-                message: '用户名验证失败',
+            cPhone: {
+                message: '电话号码验证失败',
                 validators: {
                     notEmpty: {
-                        message: '用户名不能为空'
-                    },
-                    stringLength: {
-                        min: 3,
-                        max: 18,
-                        message: '用户名长度必须在3到18位之间'
+                        message: '电话号码不能为空'
                     },
                     regexp: {
-                        regexp: /^[a-zA-Z0-9_]+$/,
-                        message: '用户名只能包含大写、小写、数字和下划线'
+                        regexp: /^1[34578]\d{9}$/,
+                        message: '电话号码格式有误'
                     }
                 }
-            }/*,
-            cPassword: {
+            },cPassword: {
                 validators: {
                     notEmpty: {
                         message: '密码不能为空'
@@ -188,7 +223,8 @@ function checkRegister(){
                         message: '两次密码不一致'
                     },
                 }
-            }*/
+            }
+
         }
     });
 }
@@ -265,11 +301,21 @@ function f_submitData(type,reqURL){
 修改用户,页面赋值
  */
 function f_upd(id){
-    var data = grid.getUserData(id,"data");
-    $("#btnAdd").click();//触发新增按钮点击事件（设置人员id为空，清空输入框，打开模态框，初始化下拉框）
-    $("#myModalLabel").html("修改系统用户");
-    setInputArea(nullToEmptyForObject(data));
-    $("#cPassword,#cPassword1").hide();
+    $("#cUserid").val(id);
+    BootstrapDialog.confirm({
+        type: BootstrapDialog.TYPE_DANGER,
+        size: BootstrapDialog.SIZE_SMALL,
+        title: '提示',
+        message: "确认重置用户密码吗！",
+        closeable: true,
+        btnOKLabel: "确定",
+        btnCancelLabel: "取消",
+        callback: function (ret) {
+            if(ret){
+                f_submitData('1',"/plate/retsetPass");
+            }
+        }
+    });
 }
 /*
 删除用户
@@ -292,14 +338,18 @@ function f_del(id){
     });
 }
 
-/**
- *
- * 初始化下拉框
- */
-function initSelect(){
-    initBaseCodeSelect($("#cSex"),{cDmlb:"C_USER_SEX"},null,"---请选择性别---")
-    initBaseCodeSelect($("#cRylbSearch"),{cDmlb:"C_USER_RYLB"},null,null)
-    initBaseCodeSelect($("#cZjlx"),{cDmlb:"C_USER_ZJLX"},null,"---请选择证件类型---")
-}
 
+/**
+ *根据代码类别和代码值获取代码名称
+ */
+function f_getDmmc(cmlb,cDm){
+    var sendRequest = new SendRequest("/plate/selectPlateCodeDmz","POST");//构造对象
+    sendRequest.addParamObj({
+        cDmlb:cmlb,
+        cDm:cDm
+    });
+    sendRequest.sendRequest(function(ret){
+        console.log(ret);
+    });//发送请求并获取返回结果
+}
 

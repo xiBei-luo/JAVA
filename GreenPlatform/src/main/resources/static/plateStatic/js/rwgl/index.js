@@ -31,6 +31,7 @@ function initMenu(){
  * 初始化表格
  */
 function initGrid(){
+    $("#gridbox").attr({width:"100%",height:"100%"});
     grid = new dhtmlXGridObject('gridbox');
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
     grid.setHeader("序号,姓名,任务类别,任务完成时间,备注");
@@ -85,7 +86,7 @@ function initData(data){
             (i+1),
             data[i].cUserid,
             data[i].cRwlb,
-            data[i].cRwsj,
+            data[i].dRwsj,
             data[i].cBz
         ]);
         grid.setUserData((i+1),'data',data[i]);
