@@ -1,5 +1,10 @@
 var grid;
 $(function(){
+    load("#headerNav","/base/header");
+    load("#footer","/base/footer");
+    load("#center_main_left","/base/menu");
+    load("#addJcdmModel","/base/addJcdmModel");
+
     initEvent();
     initGrid();
 });
@@ -9,44 +14,12 @@ $(function(){
  */
 function initEvent(){
     initSelect();
-    initMenu();
-    $("#btnReset").click(function(){
-        $("#insertPlateUserForm input").val("");
-        $("#insertPlateUserForm select").val("");
-    });
     $("#btnAdd").click(function(){
-        $("#myModalLabel").html("新增基础代码");
-        $("#btnReset").click();
-        $("#cUserid").val("");
-        $("#addUserModel").modal('show');
+        $("#addJcdmModel").modal('show');
     });
 
     $("#btnSearch").click(function(){
         loadGridData();
-    });
-    $("#btnSave").click(function(){
-        checkRegister();
-        $("#insertPlateUserForm").bootstrapValidator('validate');//提交验证
-
-        if ($("#insertPlateUserForm").data('bootstrapValidator').isValid()) {
-            if($("#cUserid").val()){
-                f_submitData("1","/plate/updPlateuser");
-            }else{
-                f_submitData("0","/plate/insertPlateuser");
-            }
-        }
-    });
-
-}
-
-function initMenu(){
-    $(".center_main_left").find("li").each(function () {
-        var a = $(this).find("a:first")[0];
-        if ($(a).attr("href") === location.pathname) {
-            $(this).addClass("active");
-        } else {
-            $(this).removeClass("active");
-        }
     });
 }
 
@@ -121,136 +94,6 @@ function initData(data){
     }
 }
 
-/**
- * 验证新增用户表单
- */
-function checkRegister(){
-    $('#insertPlateUserForm').bootstrapValidator({
-        excluded: [':disabled'],
-        message: '表单验证有误',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            /*invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'*/
-        },
-        fields: {
-            cEmail: {
-                message: '邮箱验证失败',
-                validators: {
-                    notEmpty: {
-                        message: '邮箱不能为空'
-                    },
-                    emailAddress: {
-                        message: '邮箱地址格式有误'
-                    }
-                }
-            },
-            cLoginname: {
-                message: '用户名验证失败',
-                validators: {
-                    notEmpty: {
-                        message: '用户名不能为空'
-                    },
-                    stringLength: {
-                        min: 3,
-                        max: 18,
-                        message: '用户名长度必须在3到18位之间'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_]+$/,
-                        message: '用户名只能包含大写、小写、数字和下划线'
-                    }
-                }
-            }/*,
-            cPassword: {
-                validators: {
-                    notEmpty: {
-                        message: '密码不能为空'
-                    }
-                }
-            },
-            cPassword1: {
-                validators: {
-                    notEmpty: {
-                        message: '密码不能为空'
-                    },
-                    identical: {
-                        field: 'cPassword',
-                        message: '两次密码不一致'
-                    },
-                }
-            }*/
-        }
-    });
-}
-
-
-/**
- * 发送请求保存数据
- * type:操作类型，0新增/1修改/2删除
- * reqURL：服务地址
- */
-function f_submitData(type,reqURL){
-    var sendRequest = new SendRequest(reqURL,"POST");//构造对象
-
-    if ("0" === type) {
-        sendRequest.addParamObj({
-            "cUsername":$("#cUsername").val(),
-            "cSex":$("#cSex").val(),
-            "cEmail":$("#cEmail").val(),
-            "cPhone":$("#cPhone").val(),
-            "cWxhm":$("#cWxhm").val(),
-            "cZjhm":$("#cZjhm").val(),
-            "cLoginname":$("#cLoginname").val(),
-            "cRylb":$("#cRylb").val(),
-            "cPassword":$("#cPassword").val(),
-            "cZt":'1',
-        });//构造请求参数
-    }else if("1" === type){
-        sendRequest.addParamObj({
-            "cUserid":$("#cUserid").val(),
-            "cUsername":$("#cUsername").val(),
-            "cSex":$("#cSex").val(),
-            "cEmail":$("#cEmail").val(),
-            "cPhone":$("#cPhone").val(),
-            "cWxhm":$("#cWxhm").val(),
-            "cZjhm":$("#cZjhm").val(),
-            "cLoginname":$("#cLoginname").val(),
-            "cRylb":$("#cRylb").val(),
-            "cPassword":$("#cPassword").val(),
-            "cZt":'1'
-        });//构造请求参数
-    }else if("2" === type){
-        sendRequest.addParamObj({
-            "cUserid":$("#cUserid").val()
-        });//构造请求参数
-    }
-
-    sendRequest.sendRequest(function(ret){
-        $("#btnSave").attr("disabled",false);
-        if("0" != ret.flag){
-            BootstrapDialog.alert({
-                type: BootstrapDialog.TYPE_WARNING,
-                size: BootstrapDialog.SIZE_SMALL,
-                title: '提示',
-                message: "操作失败！"+ret.msg,
-                closeable: true,
-                buttonLabel: "确定"
-            });
-        }else{
-            BootstrapDialog.alert({
-                type: BootstrapDialog.TYPE_WARNING,
-                size: BootstrapDialog.SIZE_SMALL,
-                title: '提示',
-                message: "操作成功",
-                closeable: true,
-                buttonLabel: "确定"
-            });
-            $("#btnRet,#btnReset").click();
-            loadGridData();
-        }
-    });//发送请求并获取返回结果
-}
 
 /*
 修改用户,页面赋值

@@ -4,7 +4,7 @@ package com.imooc.concurrent.suiShow;
  * Created by Luowenlv on 2018/11/21,9:57  大戏舞台线程
  */
 public class Stage extends Thread {
-    public void run(){
+    public void run() {
         System.out.println("欢迎观看隋唐演义,请将手机调为振动或者静音");
 
         try {
@@ -23,17 +23,17 @@ public class Stage extends Thread {
         ArmyRunnable armyTaskOfSuiDynasty = new ArmyRunnable();//作战任务
         ArmyRunnable armyTaskOfRevolt = new ArmyRunnable();
 
-        Thread armyOfSuiDynasty = new Thread(armyTaskOfSuiDynasty,"隋军");//军队
-        Thread armyOfRevolt = new Thread(armyTaskOfRevolt,"农名起义军");
+        Thread armyOfSuiDynasty = new Thread(armyTaskOfSuiDynasty, "隋军");//军队
+        Thread armyOfRevolt = new Thread(armyTaskOfRevolt, "农名起义军");
 
         armyOfSuiDynasty.start();
         armyOfRevolt.start();
 
         try {
             Thread.sleep(50);//Stage线程中嵌套了armyOfSuiDynasty和armyOfRevolt线程，当Stage线程在执行时占用了CPU
-                                    //因而其他两个线程得不到资源无法执行，当Stage线程休眠时其他两个线程获取到了资源因此则
-                                    //一直在执行（一直在打架），当Stage休眠时间结束之后，程序向下执行，将双方的keepRunning
-                                    //属性设置为false双方的循环结束
+            //因而其他两个线程得不到资源无法执行，当Stage线程休眠时其他两个线程获取到了资源因此则
+            //一直在执行（一直在打架），当Stage休眠时间结束之后，程序向下执行，将双方的keepRunning
+            //属性设置为false双方的循环结束
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -70,6 +70,7 @@ public class Stage extends Thread {
         }*/
 
     }
+
     public static void main(String[] args) {
         new Stage().start();
     }

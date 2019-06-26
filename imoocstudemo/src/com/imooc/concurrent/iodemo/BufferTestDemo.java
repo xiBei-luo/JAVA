@@ -8,6 +8,6 @@ import java.io.IOException;
  */
 public class BufferTestDemo {
     public static void main(String[] args) throws IOException {
-        IOUtil.copyFileByBuffer(new File("f:\\iotest\\srcFile1.txt"),new File("f:\\iotest\\destFile1.txt"));
+        IOUtil.copyFileByBuffer(new File("f:\\iotest\\srcFile1.txt"), new File("f:\\iotest\\destFile1.txt"));
     }
 }

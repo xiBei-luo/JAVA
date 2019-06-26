@@ -1,6 +1,7 @@
 package com.greenplatform.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -63,16 +64,46 @@ public class BaseController {
 
     @GetMapping(value = "/stgl")
     public String stgl(){
-        return "plate/stgl/index";
+        return "plate/stgl/main";
     }
 
     @GetMapping(value = "/zhsjgl")
     public String zhsjgl(){
-        return "plate/zhsjgl/index";
+        return "plate/zhsjgl/main";
     }
 
     @GetMapping(value = "/jcdm")
-    public String test(){
+    public String jcdm(){
         return "plate/jcdm/index";
+    }
+
+    @GetMapping(value = "/header")
+    public String header(){
+        return "plate/iFrame/header";
+    }
+
+    @GetMapping(value = "/footer")
+    public String footer(){
+        return "plate/iFrame/footer";
+    }
+
+    @GetMapping(value = "/menu")
+    public String menu(){
+        return "plate/iFrame/menu";
+    }
+
+    @GetMapping(value = "/addUserModel")
+    public String addUserModel(){
+        return "plate/yhgl/addUserModel";
+    }
+
+    @GetMapping(value = "/addSpmxModel")
+    public String addSpmxModel(){
+        return "plate/spgl/addSpmxModel";
+    }
+
+    @GetMapping(value = "/addJcdmModel")
+    public String addJcdmModel(){
+        return "plate/jcdm/addJcdmModel";
     }
 }

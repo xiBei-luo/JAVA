@@ -1,5 +1,9 @@
 var grid;
 $(function(){
+    load("#headerNav","/base/header");
+    load("#footer","/base/footer");
+    load("#center_main_left","/base/menu");
+
     initEvent();
     initGrid();
 });

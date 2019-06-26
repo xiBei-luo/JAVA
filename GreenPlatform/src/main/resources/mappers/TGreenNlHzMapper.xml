@@ -67,4 +67,22 @@
     select c_userid, c_nlhz, c_bz, c_zt, c_cjuser, d_cjsj, c_xguser, d_xgsj
     from t_green_nl_hz
   </select>
+
+  <select id="selectTGreenNlHz" parameterType="com.greenplatform.model.TGreenNlHz" resultMap="BaseResultMap">
+    SELECT T.* FROM t_green_nl_hz T WHERE 1=1
+    <if test='cUserid!=null and cUserid!=""'>
+      AND T.c_userid = #{cUserid}
+    </if>
+    <if test='cNlhz!=null and cNlhz!=""'>
+      AND T.c_nlhz = #{cNlhz}
+    </if>
+    <if test='cZt!=null and cZt!=""'>
+      AND T.c_zt = #{cZt}
+    </if>
+    <if test='cCjuser!=null and cCjuser!=""'>
+      AND T.c_cjuser = #{cCjuser}
+    </if>
+    ORDER BY T.c_nlhz DESC
+  </select>
+
 </mapper>

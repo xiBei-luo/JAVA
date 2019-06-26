@@ -9,12 +9,12 @@ import java.io.IOException;
  */
 public class FIleUtil {
     public static void listDirectory(File dir) throws IOException {
-        if(!dir.exists()){
-            throw new IllegalArgumentException("目录"+dir+"不存在");
+        if (!dir.exists()) {
+            throw new IllegalArgumentException("目录" + dir + "不存在");
         }
 
-        if (!dir.isDirectory()){
-            throw new IllegalArgumentException(dir+"不是目录");
+        if (!dir.isDirectory()) {
+            throw new IllegalArgumentException(dir + "不是目录");
         }
 
         /*String[] fileNames = dir.list();//返回直接子目录的名称，对于子目录下的文件不适用
@@ -28,11 +28,11 @@ public class FIleUtil {
 
         }*/
 
-        if (files!=null && files.length>0){
-            for(File file:files){
-                if(file.isDirectory()){
+        if (files != null && files.length > 0) {
+            for (File file : files) {
+                if (file.isDirectory()) {
                     listDirectory(file);
-                }else {
+                } else {
                     System.out.println(file);
                 }
             }

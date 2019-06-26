@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
+/*
+* 只能解析并打印，不能连接数据库操作*/
 @Controller
 public class TestController {
 

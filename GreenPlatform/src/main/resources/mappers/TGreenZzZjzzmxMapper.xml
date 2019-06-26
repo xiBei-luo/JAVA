@@ -85,4 +85,40 @@
     c_cjuser, d_cjsj, c_xguser, d_xgsj
     from t_green_zz_zjzzmx
   </select>
+
+
+  <select id="selectTGreenZzZjzzmx" parameterType="com.greenplatform.model.TGreenZzZjzzmx" resultMap="BaseResultMap">
+    SELECT T.* FROM t_green_zz_zjzzmx T WHERE 1=1
+    <if test='cLsh!=null and cLsh!=""'>
+      AND T.c_lsh = #{cLsh}
+    </if>
+    <if test='cUserid!=null and cUserid!=""'>
+      AND T.c_userid = #{cUserid}
+    </if>
+    <if test='cSpbh!=null and cSpbh!=""'>
+      AND T.c_spbh = #{cSpbh}
+    </if>
+    <if test='cZjyy!=null and cZjyy!=""'>
+      AND T.c_zjyy = #{cZjyy}
+    </if>
+    <if test='dZjsj!=null and dZjsj!=""'>
+      AND T.d_zjsj = #{dZjsj}
+    </if>
+    <if test='cKjz!=null and cKjz!=""'>
+      AND T.c_kjz = #{cKjz}
+    </if>
+    <if test='cSfjz!=null and cSfjz!=""'>
+      AND T.c_sfjz = #{cSfjz}
+    </if>
+    <if test='dJzsj!=null and dJzsj!=""'>
+      AND T.d_jzsj = #{dJzsj}
+    </if>
+    <if test='cZt!=null and cZt!=""'>
+      AND T.c_zt = #{cZt}
+    </if>
+    <if test='cCjuser!=null and cCjuser!=""'>
+      AND T.c_cjuser = #{cCjuser}
+    </if>
+    ORDER BY T.d_zjsj DESC
+  </select>
 </mapper>

@@ -12,16 +12,16 @@ public class Server {
     public static void main(String[] args) throws IOException {
         DatagramSocket socket = new DatagramSocket(8800);
         byte[] data = new byte[1024];
-        int count =0;
+        int count = 0;
         System.out.println("服务器端已经启动，等待客户端发送数据");
 
-        while (true){
-            DatagramPacket packet = new DatagramPacket(data,data.length);
+        while (true) {
+            DatagramPacket packet = new DatagramPacket(data, data.length);
             socket.receive(packet);
-            ServerThread serverThread = new ServerThread(packet,socket,data);
+            ServerThread serverThread = new ServerThread(packet, socket, data);
             serverThread.start();
             count++;
-            System.out.println("客户端的数量："+count);
+            System.out.println("客户端的数量：" + count);
         }
 
 

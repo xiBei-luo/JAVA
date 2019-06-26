@@ -10,113 +10,114 @@ import com.yc.model.Province;
 import com.yc.model.Town;
 
 
-
 public class Data {
-	public static List<Province> backProvince(){
-		Province pro=new Province();
-		pro.setId(1);
-		pro.setProvince("ºÓÄÏ");
-		Set cities=new HashSet();
-		cities.add("Ö£ÖÝ");
-		cities.add("ÐÂÏç");
-		pro.setCities(cities);
-		List<Province> list=new ArrayList<Province>();
-		//pro.setCities(cities);
-		list.add(pro);
-		return list;
-	}
-	public static List<City> backCity(int province_id){
-		//Ê¡¶ÔÏó
-				Province pro=new Province();
-				pro.setId(1);
-				pro.setProvince("ºÓÄÏ");
-				Set cities=new HashSet();
-				cities.add("Ö£ÖÝ");
-				cities.add("ÐÂÏç");
-				pro.setCities(cities);
-		//ÊÐ¶ÔÏó		
-		City city=new City();
-		city.setProvince(pro);
-		city.setId(11);
-		city.setCity("Ö£ÖÝ");
-		Set towns=new HashSet();
-		towns.add("½ðË®Çø");
-		towns.add("¶þÆßÇø");
-		city.setTowns(towns);
-		
-		City city1=new City();
-		city1.setProvince(pro);
-		city1.setId(12);
-		city1.setCity("ÐÂÏç");
-		Set towns1=new HashSet();
-		towns1.add("Æ½Ô­Çø");
-		towns1.add("ÄÁÒ°Çø");
-		city1.setTowns(towns1);
-		List<City> list=new ArrayList<City>();
-		list.add(city);
-		list.add(city1);
-		if(1==province_id) {
-			return list;
-		}
-		return null;
-	}
-	public static List<Town> backTown(int id){
-		//Ê¡¶ÔÏó
-		Province pro=new Province();
-		pro.setId(1);
-		pro.setProvince("ºÓÄÏ");
-		Set cities=new HashSet();
-		cities.add("Ö£ÖÝ");
-		cities.add("ÐÂÏç");
-		pro.setCities(cities);
-		//ÊÐ¶ÔÏó		
-		City city=new City();
-		city.setProvince(pro);
-		city.setId(11);
-		city.setCity("Ö£ÖÝ");
-		Set towns=new HashSet();
-		towns.add("½ðË®Çø");
-		towns.add("¶þÆßÇø");
-		city.setTowns(towns);
-		
-		City city1=new City();
-		city1.setProvince(pro);
-		city1.setId(12);
-		city1.setCity("ÐÂÏç");
-		Set towns1=new HashSet();
-		towns1.add("Æ½Ô­Çø");
-		towns1.add("ÄÁÒ°Çø");
-		city1.setTowns(towns1);
-		//Çø¶ÔÏó
-		List<Town> list =new ArrayList<Town>();
-		Town town=new Town();
-		town.setId(111);
-		town.setCity(city);
-		town.setTown("¶þÆßÇø");
-		Town town1=new Town();
-		town1.setId(111);
-		town1.setCity(city);
-		town1.setTown("½ðË®Çø");
-		Town town2=new Town();
-		town2.setId(112);
-		town2.setCity(city);
-		town2.setTown("Æ½Ô­Çø");
-		Town town3=new Town();
-		town3.setId(112);
-		town3.setCity(city);
-		town3.setTown("ÄÁÒ°Çø");
-		
-		if(11==id) {
-			list.add(town);
-			list.add(town1);
-			return list;
-		}
-		if(12==id) {
-			list.add(town2);
-			list.add(town3);
-			return list;
-		}
-		return null;
-	}
-	
+    public static List<Province> backProvince() {
+        Province pro = new Province();
+        pro.setId(1);
+        pro.setProvince("ï¿½ï¿½ï¿½ï¿½");
+        Set cities = new HashSet();
+        cities.add("Ö£ï¿½ï¿½");
+        cities.add("ï¿½ï¿½ï¿½ï¿½");
+        pro.setCities(cities);
+        List<Province> list = new ArrayList<Province>();
+        //pro.setCities(cities);
+        list.add(pro);
+        return list;
+    }
+
+    public static List<City> backCity(int province_id) {
+        //Ê¡ï¿½ï¿½ï¿½ï¿½
+        Province pro = new Province();
+        pro.setId(1);
+        pro.setProvince("ï¿½ï¿½ï¿½ï¿½");
+        Set cities = new HashSet();
+        cities.add("Ö£ï¿½ï¿½");
+        cities.add("ï¿½ï¿½ï¿½ï¿½");
+        pro.setCities(cities);
+        //ï¿½Ð¶ï¿½ï¿½ï¿½
+        City city = new City();
+        city.setProvince(pro);
+        city.setId(11);
+        city.setCity("Ö£ï¿½ï¿½");
+        Set towns = new HashSet();
+        towns.add("ï¿½ï¿½Ë®ï¿½ï¿½");
+        towns.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        city.setTowns(towns);
+
+        City city1 = new City();
+        city1.setProvince(pro);
+        city1.setId(12);
+        city1.setCity("ï¿½ï¿½ï¿½ï¿½");
+        Set towns1 = new HashSet();
+        towns1.add("Æ½Ô­ï¿½ï¿½");
+        towns1.add("ï¿½ï¿½Ò°ï¿½ï¿½");
+        city1.setTowns(towns1);
+        List<City> list = new ArrayList<City>();
+        list.add(city);
+        list.add(city1);
+        if (1 == province_id) {
+            return list;
+        }
+        return null;
+    }
+
+    public static List<Town> backTown(int id) {
+        //Ê¡ï¿½ï¿½ï¿½ï¿½
+        Province pro = new Province();
+        pro.setId(1);
+        pro.setProvince("ï¿½ï¿½ï¿½ï¿½");
+        Set cities = new HashSet();
+        cities.add("Ö£ï¿½ï¿½");
+        cities.add("ï¿½ï¿½ï¿½ï¿½");
+        pro.setCities(cities);
+        //ï¿½Ð¶ï¿½ï¿½ï¿½
+        City city = new City();
+        city.setProvince(pro);
+        city.setId(11);
+        city.setCity("Ö£ï¿½ï¿½");
+        Set towns = new HashSet();
+        towns.add("ï¿½ï¿½Ë®ï¿½ï¿½");
+        towns.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        city.setTowns(towns);
+
+        City city1 = new City();
+        city1.setProvince(pro);
+        city1.setId(12);
+        city1.setCity("ï¿½ï¿½ï¿½ï¿½");
+        Set towns1 = new HashSet();
+        towns1.add("Æ½Ô­ï¿½ï¿½");
+        towns1.add("ï¿½ï¿½Ò°ï¿½ï¿½");
+        city1.setTowns(towns1);
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        List<Town> list = new ArrayList<Town>();
+        Town town = new Town();
+        town.setId(111);
+        town.setCity(city);
+        town.setTown("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        Town town1 = new Town();
+        town1.setId(111);
+        town1.setCity(city);
+        town1.setTown("ï¿½ï¿½Ë®ï¿½ï¿½");
+        Town town2 = new Town();
+        town2.setId(112);
+        town2.setCity(city);
+        town2.setTown("Æ½Ô­ï¿½ï¿½");
+        Town town3 = new Town();
+        town3.setId(112);
+        town3.setCity(city);
+        town3.setTown("ï¿½ï¿½Ò°ï¿½ï¿½");
+
+        if (11 == id) {
+            list.add(town);
+            list.add(town1);
+            return list;
+        }
+        if (12 == id) {
+            list.add(town2);
+            list.add(town3);
+            return list;
+        }
+        return null;
+    }
+
 }

@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/luotest?useSSL=false
+    username: luowenlv
+    password: luo820
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.luo.model.AreaModel
+server:
+  port: 8081
+

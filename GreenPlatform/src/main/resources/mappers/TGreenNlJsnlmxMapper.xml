@@ -77,4 +77,31 @@
     d_xgsj
     from t_green_nl_jsnlmx
   </select>
+
+
+  <select id="selectTGreenNlJsnlmx" parameterType="com.greenplatform.model.TGreenNlJsnlmx" resultType="com.greenplatform.model.TGreenNlJsnlmx">
+    SELECT T.* FROM t_green_nl_jsnlmx T WHERE 1=1
+    <if test='cLsh!=null and cLsh!=""'>
+      AND T.c_lsh = #{cLsh}
+    </if>
+    <if test='cUserid!=null and cUserid!=""'>
+      AND T.c_userid = #{cUserid}
+    </if>
+    <if test='cJssl!=null and cJssl!=""'>
+      AND T.c_jssl = #{cJssl}
+    </if>
+    <if test='dJssj!=null and dJssj!=""'>
+      AND T.d_jssj = #{dJssj}
+    </if>
+    <if test='cJsyy!=null and cJsyy!=""'>
+      AND T.c_jsyy = #{cJsyy}
+    </if>
+    <if test='cZt!=null and cZt!=""'>
+      AND T.c_zt = #{cZt}
+    </if>
+    <if test='cCjuser!=null and cCjuser!=""'>
+      AND T.c_cjuser = #{cCjuser}
+    </if>
+    ORDER BY T.d_jssj DESC
+  </select>
 </mapper>

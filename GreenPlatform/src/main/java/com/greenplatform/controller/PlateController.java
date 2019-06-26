@@ -19,9 +19,6 @@ import javax.servlet.http.HttpSession;
 public class PlateController {
 
     @Autowired
-    PlateUserMapper plateUserMapper;
-
-    @Autowired
     PlateService plateService;
 
     @PostMapping(value = "/getLoginUser")
@@ -50,7 +47,6 @@ public class PlateController {
 
     @PostMapping(value = "/login")
     public ReturnModel login(PlateUser plateUser,HttpSession session){
-        System.out.println(plateUserMapper.selectAll());
         ReturnModel returnModel = plateService.selectPlateuser(plateUser,session);
         return returnModel;
     }

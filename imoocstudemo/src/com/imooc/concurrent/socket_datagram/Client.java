@@ -12,16 +12,17 @@ public class Client {
         InetAddress address = InetAddress.getByName("localhost");
         int port = 8800;
         byte[] data = "用户名：tom；密码：1234".getBytes();
-        DatagramPacket packet = new DatagramPacket(data,data.length,address,port);
+        DatagramPacket packet = new DatagramPacket(data, data.length, address, port);
         DatagramSocket socket = new DatagramSocket();
         socket.send(packet);
 
         //接受服务器端的响应信息
-        byte[] data2=new byte[1024];
-        DatagramPacket packet2 = new DatagramPacket(data2,data2.length);
+        byte[] data2 = new byte[1024];
+        DatagramPacket packet2 = new DatagramPacket(data2, data2.length);
         socket.receive(packet2);
-        String reply = new String(data2,0,packet2.getLength());
-        System.out.println("我是客户端，服务器端说："+reply);;
+        String reply = new String(data2, 0, packet2.getLength());
+        System.out.println("我是客户端，服务器端说：" + reply);
+        ;
         socket.close();
 
     }

@@ -8,10 +8,11 @@ import com.imooc.concurrent.ssodemo.model.User;
 public class LoginCheck {
     public static final String USERNAME = "admin";
     public static final String PASSWORD = "123456";
-    public static boolean LoginCheck(User user){
-        if (user.getUsername().equals(USERNAME) && user.getPassword().equals(PASSWORD)){
+
+    public static boolean LoginCheck(User user) {
+        if (user.getUsername().equals(USERNAME) && user.getPassword().equals(PASSWORD)) {
             return true;
-        }else{
+        } else {
             return false;
         }
 

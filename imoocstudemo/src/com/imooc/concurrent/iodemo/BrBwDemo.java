@@ -6,9 +6,9 @@ import java.io.*;
  * Created by Luowenlv on 2018/11/26,14:44
  */
 public class BrBwDemo {
-    public static void main(String[] args)throws IOException {
+    public static void main(String[] args) throws IOException {
         //对一个文件进行读写操作
-        BufferedReader br=new BufferedReader(
+        BufferedReader br = new BufferedReader(
                 new InputStreamReader(
                         new FileInputStream("f:\\iotest\\bufferedreader.txt")
                 )
@@ -24,7 +24,7 @@ public class BrBwDemo {
 
 
         String line;
-        while ((line = br.readLine())!=null){
+        while ((line = br.readLine()) != null) {
             System.out.print(line);//一次读一行无法识别换行符
             /*bw.write(line);
             bw.newLine();

@@ -67,4 +67,21 @@
     select c_dmlb, c_dmlbmc, c_bz, c_zt, c_cjuser, d_cjsj, c_xguser, d_xgsj
     from plate_code_dmlb
   </select>
+
+  <select id="selectPlateCodeDmlb" parameterType="com.greenplatform.model.PlateCodeDmlb" resultMap="BaseResultMap">
+    SELECT T.* FROM plate_code_dmlb T WHERE 1=1
+    <if test='cDmlb!=null and cDmlb!=""'>
+      AND T.c_dmlb = #{cDmlb}
+    </if>
+    <if test='cDmlbmc!=null and cDmlbmc!=""'>
+      AND T.c_dmlbmc = #{cDmlbmc}
+    </if>
+    <if test='cZt!=null and cZt!=""'>
+      AND T.c_zt = #{cZt}
+    </if>
+    <if test='cCjuser!=null and cCjuser!=""'>
+      AND T.c_cjuser = #{cCjuser}
+    </if>
+  </select>
+
 </mapper>

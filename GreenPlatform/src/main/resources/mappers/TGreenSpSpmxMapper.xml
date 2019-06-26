@@ -77,4 +77,32 @@
     d_xgsj
     from t_green_sp_spmx
   </select>
+
+
+  <select id="selectTGreenSpSpmx" parameterType="com.greenplatform.model.TGreenSpSpmx" resultMap="BaseResultMap">
+    SELECT T.* FROM t_green_sp_spmx T WHERE 1=1
+    <if test='cSpbh!=null and cSpbh!=""'>
+      AND T.c_spbh = #{cSpbh}
+    </if>
+    <if test='cSpmc!=null and cSpmc!=""'>
+      AND T.c_spmc = #{cSpmc}
+    </if>
+    <if test='cSpms!=null and cSpms!=""'>
+      AND T.c_spms = #{cSpms}
+    </if>
+    <if test='cSpjg!=null and cSpjg!=""'>
+      AND T.c_spjg = #{cSpjg}
+    </if>
+    <if test='cSpdw!=null and cSpdw!=""'>
+      AND T.c_spdw = #{cSpdw}
+    </if>
+    <if test='cZt!=null and cZt!=""'>
+      AND T.c_zt = #{cZt}
+    </if>
+    <if test='cCjuser!=null and cCjuser!=""'>
+      AND T.c_cjuser = #{cCjuser}
+    </if>
+    ORDER BY T.c_spjg DESC
+  </select>
+
 </mapper>

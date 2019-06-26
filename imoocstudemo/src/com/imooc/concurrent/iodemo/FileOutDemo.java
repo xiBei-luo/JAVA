@@ -15,9 +15,9 @@ public class FileOutDemo {
         out.write('A');//写入了A的低八位
         out.write('B');
         int a = 10;//整数需要写4次，每次8位
-        out.write(a>>>24);
-        out.write(a>>>16);
-        out.write(a>>>8);
+        out.write(a >>> 24);
+        out.write(a >>> 16);
+        out.write(a >>> 8);
         out.write(a);
         byte[] gbk = "中国".getBytes("gbk");
         out.write(gbk);

@@ -9,7 +9,7 @@ import java.io.IOException;
 public class FIleDemo {
     public static void main(String[] args) throws IOException {
         File file = new File("F:\\iotest");
-        if(!file.exists()){
+        if (!file.exists()) {
             file.mkdir();
         }/*else{
             file.delete();

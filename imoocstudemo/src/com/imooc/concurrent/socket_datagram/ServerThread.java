@@ -15,20 +15,20 @@ public class ServerThread extends Thread {
     int port = 0;
 
 
-    public  ServerThread(DatagramPacket packet,DatagramSocket socket,byte[] data){
+    public ServerThread(DatagramPacket packet, DatagramSocket socket, byte[] data) {
         this.socket = socket;
-        this.data = new String(data,0,packet.getLength());
+        this.data = new String(data, 0, packet.getLength());
         this.port = packet.getPort();
         this.address = packet.getAddress();
     }
 
 
-    public void run(){
-        System.out.println("我是服务器，客户端说"+data);
+    public void run() {
+        System.out.println("我是服务器，客户端说" + data);
 
         //服务器端相应客户端
         byte[] data2 = "欢迎你！".getBytes();
-        DatagramPacket packet2 = new DatagramPacket(data2,data2.length,address,port);
+        DatagramPacket packet2 = new DatagramPacket(data2, data2.length, address, port);
         try {
             socket.send(packet2);
         } catch (IOException e) {

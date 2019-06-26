@@ -1,5 +1,11 @@
 var grid;
 $(function(){
+
+    load("#headerNav","/base/header");
+    load("#footer","/base/footer");
+    load("#center_main_left","/base/menu");
+    load("#addSpmxModel","/base/addSpmxModel");
+
     initEvent();
     initGrid();
 });
@@ -8,44 +14,13 @@ $(function(){
  * 初始化事件
  */
 function initEvent(){
-    initMenu();
-    $("#btnReset").click(function(){
-        $("#insertForm input").val("");
-        $("#insertForm textarea").val("");
-        $("#insertForm select").val("");
-    });
+
     $("#btnAdd").click(function(){
-        $("#myModalLabel").html("新增商品");
-        $("#btnReset").click();
-        $("#cSpbh").val("");
-        $("#addUserModel").modal('show');
+        $("#addSpmxModel").modal('show');
     });
 
     $("#btnSearch").click(function(){
         loadGridData();
-    });
-    $("#btnSave").click(function(){
-        checkRequire();
-        $("#insertForm").bootstrapValidator('validate');//提交验证
-
-        if ($("#insertForm").data('bootstrapValidator').isValid()) {
-            if($("#cSpbh").val()){
-                f_submitData("1","/plate/updTGreenSpSpmx");
-            }else{
-                f_submitData("0","/plate/insertTGreenSpSpmx");
-            }
-        }
-    });
-}
-
-function initMenu(){
-    $(".center_main_left").find("li").each(function () {
-        var a = $(this).find("a:first")[0];
-        if ($(a).attr("href") === location.pathname) {
-            $(this).addClass("active");
-        } else {
-            $(this).removeClass("active");
-        }
     });
 }
 
@@ -119,98 +94,6 @@ function initData(data){
     }
 }
 
-/**
- * 验证表单
- */
-function checkRequire(){
-    $('#insertForm').bootstrapValidator({
-        excluded: [':disabled'],
-        message: '表单验证有误',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            /*invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'*/
-        },
-        fields: {
-            cSpmc: {
-                message: '商品名称验证失败',
-                validators: {
-                    notEmpty: {
-                        message: '商品名称不能为空'
-                    }
-                }
-            },
-            cSpjg: {
-                message: '商品价格验证失败',
-                validators: {
-                    notEmpty: {
-                        message: '商品价格不能为空'
-                    },
-                    regexp: {
-                        regexp: /^[0-9]+$/,
-                        message: '商品价格只能是数字'
-                    }
-                }
-            }
-        }
-    });
-}
-
-
-/**
- * 发送请求保存数据
- * type:操作类型，0新增/1修改/2删除
- * reqURL：服务地址
- */
-function f_submitData(type,reqURL){
-    var sendRequest = new SendRequest(reqURL,"POST");//构造对象
-
-    if ("0" === type) {
-        sendRequest.addParamObj({
-            "cSpmc":$("#cSpmc").val(),
-            "cSpjg":$("#cSpjg").val(),
-            "cSpms":$("#cSpms").val(),
-            "cZt":'1'
-        });//构造请求参数
-    }else if("1" === type){
-        sendRequest.addParamObj({
-            "cSpbh":$("#cSpbh").val(),
-            "cSpmc":$("#cSpmc").val(),
-            "cSpjg":$("#cSpjg").val(),
-            "cSpms":$("#cSpms").val(),
-            "cZt":'1'
-        });//构造请求参数
-    }else if("2" === type){
-        sendRequest.addParamObj({
-            "cSpbh":$("#cSpbh").val()
-        });//构造请求参数
-    }
-
-    sendRequest.sendRequest(function(ret){
-        $("#btnSave").attr("disabled",false);
-        if("0" != ret.flag){
-            BootstrapDialog.alert({
-                type: BootstrapDialog.TYPE_WARNING,
-                size: BootstrapDialog.SIZE_SMALL,
-                title: '提示',
-                message: "操作失败！"+ret.msg,
-                closeable: true,
-                buttonLabel: "确定"
-            });
-        }else{
-            BootstrapDialog.alert({
-                type: BootstrapDialog.TYPE_WARNING,
-                size: BootstrapDialog.SIZE_SMALL,
-                title: '提示',
-                message: "操作成功",
-                closeable: true,
-                buttonLabel: "确定"
-            });
-            $("#btnRet,#btnReset").click();
-            loadGridData();
-        }
-    });//发送请求并获取返回结果
-}
 
 /*
 修改用户,页面赋值

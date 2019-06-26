@@ -16,32 +16,35 @@ import com.yc.util.JsonConvert;
 
 
 //@WebServlet("/province")
-public class TestServletProvince extends HttpServlet{
-	HttpServletResponse resp;
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(req, resp);
-	}
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		List list=Data.backProvince();
-		String returnJson;
-		try {
-			returnJson = JsonConvert.returnJson(list);
-			resp.setCharacterEncoding("UTF-8");
-			resp.getWriter().println(returnJson);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	private void jsonUtil(Object accountList) throws Exception{
-		//HttpServletResponse response=ServiceContext.getResponse();
-		//log.info("JSON¸ñÊ½:"+accountList.toString());
-		String returnJson=JsonConvert.returnJson(accountList);
-		resp.setCharacterEncoding("UTF-8");
-		resp.getWriter().println(returnJson);
-	}
+public class TestServletProvince extends HttpServlet {
+    HttpServletResponse resp;
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doPost(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        List list = Data.backProvince();
+        String returnJson;
+        try {
+            returnJson = JsonConvert.returnJson(list);
+            resp.setCharacterEncoding("UTF-8");
+            resp.getWriter().println(returnJson);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private void jsonUtil(Object accountList) throws Exception {
+        //HttpServletResponse response=ServiceContext.getResponse();
+        //log.info("JSONï¿½ï¿½Ê½:"+accountList.toString());
+        String returnJson = JsonConvert.returnJson(accountList);
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().println(returnJson);
+    }
 }

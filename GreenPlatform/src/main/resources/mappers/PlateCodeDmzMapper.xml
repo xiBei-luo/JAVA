@@ -75,4 +75,26 @@
     select c_dm, c_dmlb, c_dmmc, c_sort, c_bz, c_zt, c_cjuser, d_cjsj, c_xguser, d_xgsj
     from plate_code_dmz
   </select>
+
+
+  <select id="selectPlateCodeDmz" parameterType="com.greenplatform.model.PlateCodeDmz" resultMap="BaseResultMap">
+    SELECT T.* FROM plate_code_dmz T WHERE 1=1
+    <if test='cDmlb!=null and cDmlb!=""'>
+      AND T.c_dmlb = #{cDmlb}
+    </if>
+    <if test='cDm!=null and cDm!=""'>
+      AND T.c_dm = #{cDm}
+    </if>
+    <if test='cDmmc!=null and cDmmc!=""'>
+      AND T.c_dmmc = #{cDmmc}
+    </if>
+    <if test='cSort!=null and cSort!=""'>
+      AND T.c_sort = #{cSort}
+    </if>
+    <if test='cZt!=null and cZt!=""'>
+      AND T.c_zt = #{cZt}
+    </if>
+    ORDER BY T.c_dmlb
+  </select>
+
 </mapper>

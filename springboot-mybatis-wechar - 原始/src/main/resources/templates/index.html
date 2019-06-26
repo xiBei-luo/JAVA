@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="publicFrame/jquery/jquery-3.4.0.min.js"></script>
+    <script src="publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <h1>区域列表</h1>
+    <table class="areaTable">
+        <tr>
+            <th>区域ID</th>
+            <th>区域名称</th>
+            <th>区域优先级</th>
+            <th>创建时间</th>
+            <th>最后编辑时间</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="areaList : ${areaList}">
+            <td th:text=${areaList.area_id}></td>
+            <td th:text=${areaList.area_name}></td>
+            <td th:text=${areaList.priority}></td>
+            <td th:text=${areaList.create_time}></td>
+            <td th:text=${areaList.edit_last_time}></td>
+            <td>
+                <a th:href="@{'/updateAreaById/'+${areaList.area_id}}" class="primaryBtn editBtn">编辑</a>
+                <a th:href="@{'/delAreaById/'+${areaList.area_id}}" class="primaryBtn delBtn">删除</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <a href="/addAreaPage" class="primaryBtn">添加区域信息</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

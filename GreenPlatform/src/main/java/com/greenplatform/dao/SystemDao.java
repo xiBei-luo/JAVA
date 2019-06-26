@@ -1,3 +1,4 @@
+/*
 package com.greenplatform.dao;
 
 import com.greenplatform.model.*;
@@ -15,7 +16,9 @@ public interface SystemDao {
 
     public int updPlateuser (PlateUser plateUser);//修改平台用户
 
-    /*种子商店操作begin*/
+    */
+/*种子商店操作begin*//*
+
     public List selectTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//查询商品明细
 
     public int insertTGreenSpSpmx (TGreenSpSpmx tGreenSpSpmx);//插入商品明细
@@ -72,3 +75,4 @@ public interface SystemDao {
     public int selectCountTGreenZzZjzzmx(TGreenZzZjzzmx tGreenZzZjzzmx);
 
 }
+*/

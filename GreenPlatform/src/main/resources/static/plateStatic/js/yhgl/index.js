@@ -1,5 +1,11 @@
 var grid;
 $(function(){
+
+    load("#headerNav","/base/header");
+    load("#footer","/base/footer");
+    load("#center_main_left","/base/menu");
+    load("#addUserModel","/base/addUserModel");
+
     initEvent();
     initGrid();
 });
@@ -8,53 +14,14 @@ $(function(){
  * 初始化事件
  */
 function initEvent(){
-    initMenu();
-    $("#btnReset").click(function(){
-        $("#insertPlateUserForm input").val("");
-    });
-
     initBaseCodeSelect($("#cRylbSearch"),{cDmlb:"C_USER_RYLB"},null,null);
 
     $("#btnAdd").click(function(){
-        initBaseCodeSelect($("#cSex"),{cDmlb:"C_USER_SEX"},null,"---请选择性别---");
-        initBaseCodeSelect($("#cZjlx"),{cDmlb:"C_USER_ZJLX"},null,"---请选择证件类型---");
-        $("#btnReset").click();
-        $("#cUserid").val("");
         $("#addUserModel").modal('show');
     });
 
     $("#btnSearch").click(function(){
         loadGridData();
-    });
-    $("#btnSave").click(function(){
-        checkRegister();
-        $("#insertPlateUserForm").bootstrapValidator('validate');//提交验证
-
-        if ($("#insertPlateUserForm").data('bootstrapValidator').isValid()) {
-            if($("#cUserid").val()){
-                f_submitData("1","/plate/updPlateuser");
-            }else{
-                f_submitData("0","/plate/insertPlateuser");
-            }
-        }
-    });
-
-    $("#cUsername,#cPhone").keyup(function(){
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if(keycode == '13'){// 回车触发查询
-            $("#btnSearch").triggerHandler("click");
-        }
-    });
-}
-
-function initMenu(){
-    $(".center_main_left").find("li").each(function () {
-        var a = $(this).find("a:first")[0];
-        if ($(a).attr("href") === location.pathname) {
-            $(this).addClass("active");
-        } else {
-            $(this).removeClass("active");
-        }
     });
 }
 
@@ -133,172 +100,8 @@ function initData(data){
         grid.setUserData(data[i].cUserid,'data',data[i]);
     }
 }
-
-/**
- * 验证新增用户表单
- */
-function checkRegister(){
-    $('#insertPlateUserForm').bootstrapValidator({
-        excluded: [':disabled'],
-        message: '表单验证有误',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            /*invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'*/
-        },
-        fields: {
-            cUsername: {
-                message: '用户姓名验证失败',
-                validators: {
-                    notEmpty: {
-                        message: '用户姓名不能为空'
-                    },
-                    regexp: {
-                        regexp: /^[\u4e00-\u9fa5]+$/,
-                        message: '用户姓名只能为汉字'
-                    }
-                }
-            },
-            cSex: {
-                message: '性别验证失败',
-                validators: {
-                    notChoice: {
-                        message: '性别不能为空'
-                    }
-                }
-            },
-            cLoginname: {
-                message: '用户名验证失败',
-                validators: {
-                    notEmpty: {
-                        message: '用户名不能为空'
-                    },
-                    stringLength: {
-                        min: 5,
-                        max: 18,
-                        message: '用户名长度必须在5到18位之间'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_]+$/,
-                        message: '用户名只能包含大写、小写、数字和下划线'
-                    }
-                }
-            },
-            cEmail: {
-                message: '邮箱验证失败',
-                validators: {
-                    notEmpty: {
-                        message: '邮箱不能为空'
-                    },
-                    emailAddress: {
-                        message: '邮箱地址格式有误'
-                    }
-                }
-            },
-            cPhone: {
-                message: '电话号码验证失败',
-                validators: {
-                    notEmpty: {
-                        message: '电话号码不能为空'
-                    },
-                    regexp: {
-                        regexp: /^1[34578]\d{9}$/,
-                        message: '电话号码格式有误'
-                    }
-                }
-            },cPassword: {
-                validators: {
-                    notEmpty: {
-                        message: '密码不能为空'
-                    }
-                }
-            },
-            cPassword1: {
-                validators: {
-                    notEmpty: {
-                        message: '密码不能为空'
-                    },
-                    identical: {
-                        field: 'cPassword',
-                        message: '两次密码不一致'
-                    },
-                }
-            }
-
-        }
-    });
-}
-
-
-/**
- * 发送请求保存数据
- * type:操作类型，0新增/1修改/2删除
- * reqURL：服务地址
- */
-function f_submitData(type,reqURL){
-    var sendRequest = new SendRequest(reqURL,"POST");//构造对象
-
-    if ("0" === type) {
-        sendRequest.addParamObj({
-            "cUsername":$("#cUsername").val(),
-            "cSex":$("#cSex").val(),
-            "cEmail":$("#cEmail").val(),
-            "cPhone":$("#cPhone").val(),
-            "cWxhm":$("#cWxhm").val(),
-            "cZjhm":$("#cZjhm").val(),
-            "cLoginname":$("#cLoginname").val(),
-            "cRylb":'1',
-            "cPassword":$("#cPassword").val(),
-            "cZt":'1',
-        });//构造请求参数
-    }else if("1" === type){
-        sendRequest.addParamObj({
-            "cUserid":$("#cUserid").val(),
-            "cUsername":$("#cUsername").val(),
-            "cSex":$("#cSex").val(),
-            "cEmail":$("#cEmail").val(),
-            "cPhone":$("#cPhone").val(),
-            "cWxhm":$("#cWxhm").val(),
-            "cZjhm":$("#cZjhm").val(),
-            "cLoginname":$("#cLoginname").val(),
-            "cRylb":'1',
-            "cPassword":$("#cPassword").val(),
-            "cZt":'1'
-        });//构造请求参数
-    }else if("2" === type){
-        sendRequest.addParamObj({
-            "cUserid":$("#cUserid").val()
-        });//构造请求参数
-    }
-
-    sendRequest.sendRequest(function(ret){
-        $("#btnSave").attr("disabled",false);
-        if("0" != ret.flag){
-            BootstrapDialog.alert({
-                type: BootstrapDialog.TYPE_WARNING,
-                size: BootstrapDialog.SIZE_SMALL,
-                title: '提示',
-                message: "操作失败！"+ret.msg,
-                closeable: true,
-                buttonLabel: "确定"
-            });
-        }else{
-            BootstrapDialog.alert({
-                type: BootstrapDialog.TYPE_PRIMARY,
-                size: BootstrapDialog.SIZE_SMALL,
-                title: '提示',
-                message: "操作成功",
-                closeable: true,
-                buttonLabel: "确定"
-            });
-            $("#btnRet,#btnReset").click();
-            loadGridData();
-        }
-    });//发送请求并获取返回结果
-}
-
 /*
-修改用户,页面赋值
+重置密码
  */
 function f_upd(id){
     $("#cUserid").val(id);
@@ -312,7 +115,7 @@ function f_upd(id){
         btnCancelLabel: "取消",
         callback: function (ret) {
             if(ret){
-                f_submitData('1',"/plate/retsetPass");
+                f_submitData('1',"/plate/retsetPass");//此方法定义在addUserModel中
             }
         }
     });
@@ -337,19 +140,17 @@ function f_del(id){
         }
     });
 }
-
-
-/**
- *根据代码类别和代码值获取代码名称
- */
-function f_getDmmc(cmlb,cDm){
-    var sendRequest = new SendRequest("/plate/selectPlateCodeDmz","POST");//构造对象
-    sendRequest.addParamObj({
-        cDmlb:cmlb,
-        cDm:cDm
+/*
+/!**
+ * 加载公共页面
+ * @param obj
+ * @param url
+ *!/
+function load(obj, url){
+    //alert($(url).attr("href"));
+    $.ajaxSetup({cache: false });
+    $(obj).load(url, function(result){
+        $result = $(result);
+        $result.find("script").appendTo(obj);
     });
-    sendRequest.sendRequest(function(ret){
-        console.log(ret);
-    });//发送请求并获取返回结果
-}
-
+}*/

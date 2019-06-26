@@ -1,0 +1,86 @@
+/**
+顶部导航
+ */
+body,html{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.header-nav{
+    height: 50px;
+    background: #1b6d85;
+}
+.header-nav-title{
+    color:#ffffff;
+    font-size: 20px;
+    line-height: 50px;
+}
+.dropdown-link{
+    color: #ffffff;
+}
+/**
+左侧菜单栏
+ */
+.center-content{
+    height: 92.5%;
+}
+.center-content-row{
+    height: 100%;
+}
+.center-left{
+    height: 100%;
+    margin:0;
+    padding: 0;
+    font-size: 12px;
+    background: #2f363f;
+}
+#side-menu .nav-second-level{
+    display: none;
+    background: #1f242b;
+}
+#side-menu .nav-second-level li a{
+    padding-left: 50px;
+}
+#side-menu .nav-second-level li a:hover{
+    background: #3e8f3e;
+}
+#side-menu>li{
+    border-bottom: 1px solid #1f262d;
+    border-top: 1px solid #37414b;
+    background: #2f363f;
+}
+#side-menu>li a{
+    color: #939da8;
+    position: relative;
+}
+#side-menu>li a span{
+    position: absolute;
+    right: 10px;
+}
+#side-menu>li a:hover{
+    background: #27a9e3;
+    color: #ffffff;
+}
+#side-menu .active{
+    background: #27a9e3;
+    color: #ffffff;
+}
+.nav_icon{
+    margin-right: 10px;
+}
+/**
+右侧主体
+ */
+.cneter-right{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+#main-content-data{
+    height: 100%;
+    padding: 20px;
+    overflow-y: scroll;
+}
+

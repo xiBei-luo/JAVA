@@ -12,7 +12,7 @@ public class DataIODemo2 {
         String file = "F:\\iotest/dos.dat";
         IOUtil.printHex(file);
         DataInputStream dis = new DataInputStream(new FileInputStream(file));
-        int i=dis.readInt();
+        int i = dis.readInt();
         System.out.println(i);
         String s = dis.readUTF();
         System.out.println(s);

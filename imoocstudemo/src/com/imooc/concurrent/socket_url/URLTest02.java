@@ -17,7 +17,7 @@ public class URLTest02 {
         InputStreamReader isr = new InputStreamReader(is);
         BufferedReader br = new BufferedReader(isr);
         String data = br.readLine();
-        while (data != null){
+        while (data != null) {
             System.out.println(data);
             data = br.readLine();
         }

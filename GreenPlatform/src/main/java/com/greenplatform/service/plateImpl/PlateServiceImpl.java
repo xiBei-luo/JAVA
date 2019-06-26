@@ -1,7 +1,7 @@
 package com.greenplatform.service.plateImpl;
 
 import com.greenplatform.aop.OperationLog;
-import com.greenplatform.dao.PlateDao;
+import com.greenplatform.dao.*;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
@@ -23,17 +23,40 @@ import java.util.UUID;
 @Transactional
 @Service
 public class PlateServiceImpl implements PlateService {
-    //TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+
+    /*ReturnModel returnModel = new ReturnModel();*/
+    /*@Autowired
+    PlateDao plateDao;*/
+    @Autowired
+    PlateUserMapper plateUserMapper;
+    @Autowired
+    TGreenNlZjnlmxMapper tGreenNlZjnlmxMapper;
+    @Autowired
+    TGreenNlHzMapper tGreenNlHzMapper;
+    @Autowired
+    PlateCodeDmlbMapper plateCodeDmlbMapper;
+    @Autowired
+    PlateCodeDmzMapper plateCodeDmzMapper;
+    @Autowired
+    PlateLogMapper plateLogMapper;
+    @Autowired
+    TGreenSpSpmxMapper tGreenSpSpmxMapper;
+    @Autowired
+    TGreenRwRwmxMapper tGreenRwRwmxMapper;
 
     ReturnModel returnModel = new ReturnModel();
-    @Autowired
-    PlateDao plateDao;
 
+
+    /**
+     * 登陆
+     * @param plateUser
+     * @param session
+     * @return
+     */
     @Override
     public ReturnModel selectPlateuser(PlateUser plateUser, HttpSession session) {
         plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
-        List plateUserList = plateDao.selectPlateuser(plateUser);
-
+        List plateUserList = plateUserMapper.selectPlateuser(plateUser);
         if (plateUserList.isEmpty()){
             returnModel.setFlag(1);
             returnModel.setMsg("登录名或密码错误");
@@ -48,17 +71,22 @@ public class PlateServiceImpl implements PlateService {
         return returnModel;
     }
 
+    /**
+     * 查询
+     * @param plateUser
+     * @return
+     */
     @Override
     public ReturnModel selectPlateuser(PlateUser plateUser) {
         List plateUserList;
         try{
-            plateUserList = plateDao.selectPlateuser(plateUser);
+            plateUserList = plateUserMapper.selectPlateuser(plateUser);
             Iterator iterator = plateUserList.iterator();
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(plateUserList);
         }catch(Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("系统错误");
             returnModel.setObject(null);
@@ -66,6 +94,12 @@ public class PlateServiceImpl implements PlateService {
         return returnModel;
     }
 
+    /**
+     * 新增
+     * @param plateUser
+     * @param session
+     * @return
+     */
     @OperationLog(cCzfs = "I")
     @Override
     public ReturnModel insertPlateuser(PlateUser plateUser, HttpSession session) {
@@ -75,7 +109,7 @@ public class PlateServiceImpl implements PlateService {
             //1.判断邮箱或用户名是否被注册
             plateUser1.setcRylb(plateUser.getcRylb());
             plateUser1.setcEmail(plateUser.getcEmail());
-            plateUserList = plateDao.selectPlateuser(plateUser1);
+            plateUserList = plateUserMapper.selectPlateuser(plateUser1);
             if (!(plateUserList.isEmpty())){
                 returnModel.setFlag(1);
                 returnModel.setObject(null);
@@ -89,7 +123,7 @@ public class PlateServiceImpl implements PlateService {
             //2.判断用户名是否被注册
             plateUser1.setcEmail("");
             plateUser1.setcLoginname(plateUser.getcLoginname());
-            plateUserList = plateDao.selectPlateuser(plateUser1);
+            plateUserList = plateUserMapper.selectPlateuser(plateUser1);
             if (!(plateUserList.isEmpty())){
                 returnModel.setFlag(1);
                 returnModel.setObject(null);
@@ -112,9 +146,9 @@ public class PlateServiceImpl implements PlateService {
                 plateUser.setcCjuser(majorKey);
                 plateUser.setcRydj("1");
             }
-            plateDao.insertPlateuser(plateUser);
+            plateUserMapper.insert(plateUser);
             //4.查询数据库查看是否新增成功
-            plateUserList = plateDao.selectPlateuser(plateUser);
+            plateUserList = plateUserMapper.selectPlateuser(plateUser);
             if (plateUserList.isEmpty()){
                 returnModel.setFlag(1);
                 returnModel.setObject(null);
@@ -144,8 +178,8 @@ public class PlateServiceImpl implements PlateService {
                     tGreenNlHz.setcCjuser(plateUser.getcUserid());
                     tGreenNlHz.setdCjsj(getTimestamp(new Date()));
 
-                    plateDao.insertTGreenNlZjnlmx(tGreenNlZjnlmx);
-                    plateDao.insertTGreenNlHz(tGreenNlHz);
+                    tGreenNlZjnlmxMapper.insert(tGreenNlZjnlmx);
+                    tGreenNlHzMapper.insert(tGreenNlHz);
                     session.setAttribute("loginUser",plateUser);//前端用户注册成功后写入session
                     returnModel.setFlag(0);
                     returnModel.setObject(null);
@@ -175,17 +209,21 @@ public class PlateServiceImpl implements PlateService {
     @Override
     public ReturnModel delPlateuser(PlateUser plateUser) {
         try{
-            PlateUser plateUser1 = new PlateUser();
-            plateUser1.setcUserid(plateUser.getcUserid());
-            List plateUserList = plateDao.selectPlateuser(plateUser1);
-            if (plateUserList.isEmpty()){
+            if ("".equals(plateUser.getcUserid())){
+                returnModel.setFlag(1);
+                returnModel.setMsg("删除用户失败，用户编号不能为空!");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+            PlateUser plateUser1 = plateUserMapper.selectByPrimaryKey(plateUser.getcUserid());
+            if (null == plateUser1 || "".equals(plateUser1.getcUserid())){
                 returnModel.setFlag(1);
                 returnModel.setMsg("删除用户失败，没有找到待删除的数据!");
                 returnModel.setObject(null);
                 return returnModel;
             }else{
-                plateDao.delPlateuser(plateUser);
-                returnModel.setFlag(1);
+                plateUserMapper.deleteByPrimaryKey(plateUser.getcUserid());
+                returnModel.setFlag(0);
                 returnModel.setMsg("删除成功!");
                 returnModel.setObject(null);
                 return returnModel;
@@ -204,24 +242,20 @@ public class PlateServiceImpl implements PlateService {
     @Override//重置密码
     public ReturnModel retsetPass(PlateUser plateUser) {
         try{
-            PlateUser plateUser1 = new PlateUser();
-            plateUser1.setcUserid(plateUser.getcUserid());
-            List plateUserList = plateDao.selectPlateuser(plateUser1);
-
-            if (plateUserList.isEmpty()){
+            PlateUser plateUser1 = plateUserMapper.selectByPrimaryKey(plateUser.getcUserid());
+            if (null == plateUser1){
                 returnModel.setFlag(1);
-                returnModel.setMsg("修改用户失败，没有找到待修改的数据!");
+                returnModel.setMsg("重置失败，没有找到待修改的数据!");
                 returnModel.setObject(null);
                 return returnModel;
             }else{
-                PlateUser plateUser2 = (PlateUser) plateUserList.get(0);
-                plateUser2.setcPassword(MD5.md5("aaaaaa"));
-                plateUser2.setdXgsj(getTimestamp(new Date()));
-                plateUser2.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+                plateUser1.setcPassword(MD5.md5("aaaaaa"));
+                plateUser1.setdXgsj(getTimestamp(new Date()));
+                plateUser1.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
 
-                System.out.println("resetPass=="+plateUser2);
+                System.out.println("resetPass=="+plateUser1);
 
-                plateDao.updPlateuser(plateUser2);
+                plateUserMapper.updateByPrimaryKey(plateUser1);
                 returnModel.setFlag(0);
                 returnModel.setMsg("重置成功!");
                 returnModel.setObject(null);
@@ -229,7 +263,7 @@ public class PlateServiceImpl implements PlateService {
             }
         }catch (Exception e){
             returnModel.setFlag(1);
-            returnModel.setMsg("修改用户失败，服务器端错误!");
+            returnModel.setMsg("重置失败，服务器端错误!");
             returnModel.setObject(null);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return returnModel;
@@ -240,15 +274,13 @@ public class PlateServiceImpl implements PlateService {
     @Override
     public ReturnModel updPlateuser(PlateUser plateUser) {
         try{
-            List plateUserList = plateDao.selectPlateuser(plateUser);
-            if (plateUserList.isEmpty()){
+            PlateUser plateUser1 = plateUserMapper.selectByPrimaryKey(plateUser.getcUserid());
+            if (null == plateUser1){
                 returnModel.setFlag(1);
                 returnModel.setMsg("修改用户失败，没有找到待修改的数据!");
                 returnModel.setObject(null);
                 return returnModel;
             }else{
-                PlateUser plateUser1 = (PlateUser) plateUserList.get(0);
-
                 plateUser.setcUsername(plateUser1.getcUsername());
                 plateUser.setcLoginname(plateUser1.getcLoginname());
                 plateUser.setcPhone(plateUser1.getcPhone());//姓名，登录名，电话号码不能修改
@@ -257,7 +289,7 @@ public class PlateServiceImpl implements PlateService {
 
                 plateUser.setdXgsj(getTimestamp(new Date()));
                 plateUser.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                plateDao.updPlateuser(plateUser);
+                plateUserMapper.updateByPrimaryKey(plateUser);
                 returnModel.setFlag(0);
                 returnModel.setMsg("修改用户成功!");
                 returnModel.setObject(null);
@@ -276,7 +308,7 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel selectPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
         List plateCodeDmlbList;
         try {
-            plateCodeDmlbList = plateDao.selectPlateCodeDmlb(plateCodeDmlb);
+            plateCodeDmlbList = plateCodeDmlbMapper.selectPlateCodeDmlb(plateCodeDmlb);
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(plateCodeDmlbList);
@@ -293,10 +325,8 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel insertPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
         try{
             //1.判断代码类别是否已存在
-            PlateCodeDmlb plateCodeDmlb1 = new PlateCodeDmlb();
-            plateCodeDmlb1.setcDmlb(plateCodeDmlb.getcDmlb());
-            List plateCodeDmlbList = plateDao.selectPlateCodeDmlb(plateCodeDmlb1);
-            if(!(plateCodeDmlbList.isEmpty())){
+            PlateCodeDmlb plateCodeDmlb1 = plateCodeDmlbMapper.selectByPrimaryKey(plateCodeDmlb.getcDmlb());
+            if(!(null == plateCodeDmlb1 || "".equals(plateCodeDmlb1))){
                 returnModel.setFlag(1);
                 returnModel.setMsg("新增出错，代码类别已存在！");
                 returnModel.setObject(null);
@@ -305,7 +335,7 @@ public class PlateServiceImpl implements PlateService {
                 //2.插入值
                 plateCodeDmlb.setdCjsj(getTimestamp(new Date()));
                 plateCodeDmlb.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                plateDao.insertPlateCodeDmlb(plateCodeDmlb);
+                plateCodeDmlbMapper.insert(plateCodeDmlb);
                 returnModel.setFlag(0);
                 returnModel.setMsg("新增成功！");
                 returnModel.setObject(null);
@@ -326,15 +356,15 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel delPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
         try{
             //1.判断数据是否存在
-            List plateCodeDmlbList = plateDao.selectPlateCodeDmlb(plateCodeDmlb);
-            if (plateCodeDmlbList.isEmpty()){
+            PlateCodeDmlb plateCodeDmlb1 = plateCodeDmlbMapper.selectByPrimaryKey(plateCodeDmlb.getcDmlb());
+            if (null == plateCodeDmlb1 || "".equals(plateCodeDmlb1)){
                 returnModel.setFlag(1);
                 returnModel.setMsg("操作失败，待删除的数据不存在！");
                 returnModel.setObject(null);
                 return returnModel;
             }else{
                 //2.执行删除
-                plateDao.delPlateCodeDmlb(plateCodeDmlb);
+                plateCodeDmlbMapper.deleteByPrimaryKey(plateCodeDmlb.getcDmlb());
                 returnModel.setFlag(0);
                 returnModel.setMsg("操作成功！");
                 returnModel.setObject(null);
@@ -355,10 +385,8 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel updPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
         try{
             //1.判断数据是否存在
-            PlateCodeDmlb plateCodeDmlb1 = new PlateCodeDmlb();
-            plateCodeDmlb1.setcDmlb(plateCodeDmlb.getcDmlb());
-            List plateCodeDmlbList = plateDao.selectPlateCodeDmlb(plateCodeDmlb1);
-            if (!(plateCodeDmlbList.isEmpty())){
+            PlateCodeDmlb plateCodeDmlb1 = plateCodeDmlbMapper.selectByPrimaryKey(plateCodeDmlb.getcDmlb());
+            if (null == plateCodeDmlb1 || "".equals(plateCodeDmlb1)){
                 returnModel.setFlag(1);
                 returnModel.setMsg("操作失败，待修改的数据不存在！");
                 returnModel.setObject(null);
@@ -366,7 +394,7 @@ public class PlateServiceImpl implements PlateService {
             }else{
                 plateCodeDmlb.setdXgsj(getTimestamp(new Date()));
                 plateCodeDmlb.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                plateDao.updPlateCodeDmlb(plateCodeDmlb);
+                plateCodeDmlbMapper.updateByPrimaryKey(plateCodeDmlb);
                 returnModel.setFlag(0);
                 returnModel.setMsg("操作成功！");
                 returnModel.setObject(null);
@@ -385,7 +413,7 @@ public class PlateServiceImpl implements PlateService {
     @Override
     public ReturnModel selectPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
         try{
-            List plateCodeDmzList = plateDao.selectPlateCodeDmz(plateCodeDmz);
+            List plateCodeDmzList = plateCodeDmzMapper.selectPlateCodeDmz(plateCodeDmz);
             returnModel.setFlag(0);
             returnModel.setMsg("操作成功!");
             returnModel.setObject(plateCodeDmzList);
@@ -402,21 +430,17 @@ public class PlateServiceImpl implements PlateService {
     @Override
     public ReturnModel insertPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
         try{
-            PlateCodeDmz plateCodeDmz1 = new PlateCodeDmz();
-            plateCodeDmz1.setcDmlb(plateCodeDmz.getcDmlb());
-            plateCodeDmz1.setcDm(plateCodeDmz.getcDm());
             //1.判断插入的数据是否有重复
-            List plateCodeDmzList = plateDao.selectPlateCodeDmz(plateCodeDmz1);
-            if (!(plateCodeDmzList.isEmpty())){
+            PlateCodeDmz plateCodeDmz1 = plateCodeDmzMapper.selectByPrimaryKey(plateCodeDmz.getcDm(),plateCodeDmz.getcDmlb());
+            if (!(null == plateCodeDmz1 || "".equals(plateCodeDmz1))){
                 returnModel.setFlag(1);
                 returnModel.setMsg("新增出错，该代码类别下的代码值已存在！");
                 returnModel.setObject(null);
                 return returnModel;
             }else{
-
                 plateCodeDmz.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 plateCodeDmz.setdCjsj(getTimestamp(new Date()));
-                plateDao.insertPlateCodeDmz(plateCodeDmz);
+                plateCodeDmzMapper.insert(plateCodeDmz);
                 returnModel.setFlag(0);
                 returnModel.setMsg("新增成功！");
                 returnModel.setObject(plateCodeDmz);
@@ -437,14 +461,14 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel delPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
         try{
             //1.判断数据是否存在
-            List plateCodeDmzList = plateDao.selectPlateCodeDmz(plateCodeDmz);
-            if (plateCodeDmzList.isEmpty()){
+            PlateCodeDmz plateCodeDmz1 = plateCodeDmzMapper.selectByPrimaryKey(plateCodeDmz.getcDm(),plateCodeDmz.getcDmlb());
+            if (null == plateCodeDmz1 || "".equals(plateCodeDmz1)){
                 returnModel.setFlag(1);
                 returnModel.setMsg("删除失败，没有找到待删除的数据！");
                 returnModel.setObject(null);
                 return returnModel;
             }else{
-                plateDao.delPlateCodeDmz(plateCodeDmz);
+                plateCodeDmzMapper.deleteByPrimaryKey(plateCodeDmz.getcDm(),plateCodeDmz.getcDmlb());
                 returnModel.setFlag(0);
                 returnModel.setMsg("删除成功");
                 returnModel.setObject(null);
@@ -465,11 +489,8 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel updPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
         try{
             //1.判断数据是否存在
-            PlateCodeDmz plateCodeDmz1 = new PlateCodeDmz();
-            plateCodeDmz1.setcDmlb(plateCodeDmz.getcDmlb());
-            plateCodeDmz1.setcDm(plateCodeDmz.getcDm());
-            List plateCodeDmzList = plateDao.selectPlateCodeDmz(plateCodeDmz1);
-            if (plateCodeDmzList.isEmpty()){
+            PlateCodeDmz plateCodeDmz1 = plateCodeDmzMapper.selectByPrimaryKey(plateCodeDmz.getcDm(),plateCodeDmz.getcDmlb());
+            if (null == plateCodeDmz1 || "".equals(plateCodeDmz1)){
                 returnModel.setFlag(1);
                 returnModel.setMsg("修改失败，没有找到待修改的数据！");
                 returnModel.setObject(null);
@@ -478,7 +499,7 @@ public class PlateServiceImpl implements PlateService {
                 //2.执行修改
                 plateCodeDmz.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 plateCodeDmz.setdXgsj(getTimestamp(new Date()));
-                plateDao.updPlateCodeDmz(plateCodeDmz);
+                plateCodeDmzMapper.updateByPrimaryKey(plateCodeDmz);
                 returnModel.setFlag(0);
                 returnModel.setMsg("修改成功");
                 returnModel.setObject(plateCodeDmz);
@@ -497,7 +518,7 @@ public class PlateServiceImpl implements PlateService {
     @Override
     public ReturnModel insertPlateLog(PlateLog plateLog) {
         try{
-            plateDao.insertPlateLog(plateLog);
+            plateLogMapper.insert(plateLog);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -508,7 +529,7 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel selectTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
         List tGreenSpmxList;
         try {
-            tGreenSpmxList = plateDao.selectTGreenSpSpmx(tGreenSpSpmx);
+            tGreenSpmxList = tGreenSpSpmxMapper.selectTGreenSpSpmx(tGreenSpSpmx);
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(tGreenSpmxList);
@@ -527,7 +548,7 @@ public class PlateServiceImpl implements PlateService {
             tGreenSpSpmx.setcSpbh(UUID.randomUUID().toString().replaceAll("-", ""));
             tGreenSpSpmx.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
             tGreenSpSpmx.setdCjsj(getTimestamp(new Date()));
-            plateDao.insertTGreenSpSpmx(tGreenSpSpmx);
+            tGreenSpSpmxMapper.insert(tGreenSpSpmx);
             returnModel.setFlag(0);
             returnModel.setMsg("操作成功");
             returnModel.setObject(tGreenSpSpmx);
@@ -546,14 +567,14 @@ public class PlateServiceImpl implements PlateService {
     @Override
     public ReturnModel delTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
         try{
-            List tGreenSpSpmxList = plateDao.selectTGreenSpSpmx(tGreenSpSpmx);
-            if (tGreenSpSpmxList.isEmpty()){
+            TGreenSpSpmx tGreenSpSpmx1 = tGreenSpSpmxMapper.selectByPrimaryKey(tGreenSpSpmx.getcSpbh());
+            if (null == tGreenSpSpmx1 || "".equals(tGreenSpSpmx1)){
                 returnModel.setFlag(1);
                 returnModel.setMsg("操作失败，没有找到待删除的数据！");
                 returnModel.setObject(null);
                 return returnModel;
             }else{
-                plateDao.delTGreenSpSpmx(tGreenSpSpmx);
+                tGreenSpSpmxMapper.deleteByPrimaryKey(tGreenSpSpmx.getcSpbh());
                 returnModel.setFlag(0);
                 returnModel.setMsg("操作成功！");
                 returnModel.setObject(null);
@@ -575,17 +596,19 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel updTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
         try {
             //1.判断修改数据是否存在
-            TGreenSpSpmx tGreenSpSpmx1 = new TGreenSpSpmx();
-            tGreenSpSpmx.setcSpbh(tGreenSpSpmx.getcSpbh());
-            List tGreenSpSpmxList = plateDao.selectTGreenSpSpmx(tGreenSpSpmx1);
-            if (tGreenSpSpmxList.isEmpty()){
+            TGreenSpSpmx tGreenSpSpmx1 = tGreenSpSpmxMapper.selectByPrimaryKey(tGreenSpSpmx.getcSpbh());
+            if (null == tGreenSpSpmx1 || "".equals(tGreenSpSpmx1)){
                 returnModel.setFlag(1);
                 returnModel.setMsg("操作失败，没有找到待删除的数据！");
                 returnModel.setObject(null);
                 return returnModel;
             }else{
-                tGreenSpSpmx.setdXgsj(getTimestamp(new Date()));
-                plateDao.updTGreenSpSpmx(tGreenSpSpmx);
+                tGreenSpSpmx1.setcSpmc(tGreenSpSpmx.getcSpmc());
+                tGreenSpSpmx1.setcSpjg(tGreenSpSpmx.getcSpjg());
+                tGreenSpSpmx1.setcSpms(tGreenSpSpmx.getcSpms());
+                tGreenSpSpmx1.setdXgsj(getTimestamp(new Date()));
+                tGreenSpSpmx1.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+                tGreenSpSpmxMapper.updateByPrimaryKey(tGreenSpSpmx1);
                 returnModel.setFlag(0);
                 returnModel.setMsg("操作成功！");
                 returnModel.setObject(null);
@@ -605,7 +628,7 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel selectTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
         List tGreenRwRwmxList;
         try {
-            tGreenRwRwmxList = plateDao.selectTGreenRwRwmx(tGreenRwRwmx);
+            tGreenRwRwmxList = tGreenRwRwmxMapper.selectTGreenRwRwmx(tGreenRwRwmx);
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(tGreenRwRwmxList);
@@ -622,7 +645,7 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel selectTGreenNlHz(TGreenNlHz tGreenNlHz) {
         List tGreenNlHzList;
         try{
-            tGreenNlHzList = plateDao.selectTGreenNlHz(tGreenNlHz);
+            tGreenNlHzList = tGreenNlHzMapper.selectTGreenNlHz(tGreenNlHz);
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(tGreenNlHzList);
@@ -680,7 +703,7 @@ public class PlateServiceImpl implements PlateService {
         if ("cSpbh".equals(cDmlb)){
             TGreenSpSpmx tGreenSpSpmx = new TGreenSpSpmx();
             tGreenSpSpmx.setcSpbh(cDm);
-            List tGreenSpSpmxList = plateDao.selectTGreenSpSpmx(tGreenSpSpmx);
+            List tGreenSpSpmxList = tGreenSpSpmxMapper.selectTGreenSpSpmx(tGreenSpSpmx);
             TGreenSpSpmx tGreenSpSpmx1;
             if (!(tGreenSpSpmxList.isEmpty())){
                 tGreenSpSpmx1 = (TGreenSpSpmx) tGreenSpSpmxList.get(0);
@@ -695,7 +718,7 @@ public class PlateServiceImpl implements PlateService {
             PlateCodeDmz plateCodeDmz = new PlateCodeDmz();
             plateCodeDmz.setcDmlb(cDmlb);
             plateCodeDmz.setcDm(cDm);
-            List plateCodeDmzList = plateDao.selectPlateCodeDmz(plateCodeDmz);
+            List plateCodeDmzList = plateCodeDmzMapper.selectPlateCodeDmz(plateCodeDmz);
             PlateCodeDmz plateCodeDmz1;
             if (!(plateCodeDmzList.isEmpty())){
                 plateCodeDmz1 = (PlateCodeDmz) plateCodeDmzList.get(0);

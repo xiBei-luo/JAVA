@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by Luowenlv on 2018/12/26,16:21
  */
 @SpringBootApplication
-@EnableEurekaClient
 @RestController
 public class EurekaClientApplication {
 
@@ -21,11 +20,11 @@ public class EurekaClientApplication {
         SpringApplication.run(EurekaClientApplication.class, args);
     }
 
-    @Value("${server.port}")
-    String port;
-    @RequestMapping("/")
+    @Value("${hello}")
+    String hello;
+    @RequestMapping("/hello")
     public String home() {
-        return "hello world from port " + port;
+        return  hello;
     }
 
 }

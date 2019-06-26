@@ -12,6 +12,14 @@ function initEvent() {
         $("#gridbox_"+this.id).show();
     });
 
+    $("#perInfo").click(function () {
+        $("#perInfoModel").modal('show');
+    });
+
+    $("#btnReset").click(function(){
+        $("#perInfoForm input,#perInfoForm textarea").val("");
+    });
+
     $("#btnSearch").click(function(){
         loadGridData();
     });

@@ -1,0 +1,22 @@
+int start = 16;
+		int curWeek = 2;//星期几
+		
+		int length = 5;
+		
+		int curDay = 22;//几号
+		
+		if(curWeek == 1) {//星期一
+			length = length;
+		}else if(curWeek == 7) {//星期天
+			length = length+1;
+		}else {//其他
+			length = length+2;
+		}
+		System.out.println("可申请天数"+length);
+		if(curDay<start) {
+			System.out.println("当前日期不在可申请时间范围内"+curDay);
+		}else if(curDay>=start+length) {
+			System.out.println("当前日期超出了可申请时间范围"+curDay);
+		}else {
+			System.out.println("可以申请，今天是"+curDay+"号，星期"+curWeek);
+		}

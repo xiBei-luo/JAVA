@@ -1,5 +1,10 @@
 var grid;
 $(function(){
+
+    load("#headerNav","/base/header");
+    load("#footer","/base/footer");
+    load("#center_main_left","/base/menu");
+
     initEvent();
     initGrid();
 });
@@ -9,21 +14,9 @@ $(function(){
  */
 function initEvent(){
     initSelect();
-    initMenu();
 
     $("#btnSearch").click(function(){
         loadGridData();
-    });
-}
-
-function initMenu(){
-    $(".center_main_left").find("li").each(function () {
-        var a = $(this).find("a:first")[0];
-        if ($(a).attr("href") === location.pathname) {
-            $(this).addClass("active");
-        } else {
-            $(this).removeClass("active");
-        }
     });
 }
 

@@ -15,24 +15,14 @@
 </head>
 <body>
 <div class="container-fluid plateIndexContainer">
-    <div class="row top_title">
-        <div class="col-md-12">
-            <h4>欢迎你，系统管理员！</h4>
-        </div>
+    <div class="row top_title" id="headerNav">
+        <!--js引入公公页面 header.html-->
     </div>
     <div class="row center_main">
-        <div class="col-md-2 center_main_left">
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active" role="presentation"><a href="/base/index">用户管理</a></li>
-                <li role="presentation"><a href="/base/rwgl">任务管理</a></li>
-                <li role="presentation"><a href="/base/nlgl">能量管理</a></li>
-                <li role="presentation"><a href="/base/spgl">商品管理</a></li>
-                <li role="presentation"><a href="/base/stgl">收徒管理</a></li>
-                <li role="presentation"><a href="/base/zhsjgl">账户升级管理</a></li>
-                <li role="presentation"><a href="/base/jcdm">基础代码维护</a></li>
-            </ul>
+        <div class="col-md-2 col-sm-4 col-xs-4 center_main_left" id="center_main_left">
+            <!--js引入公公页面 menu.html-->
         </div>
-        <div class="col-md-10 center_main_right">
+        <div class="col-md-10 col-sm-8 col-xs-8 center_main_right">
             <div class="row">
                 <div class="col-md-12 searchForm">
                     <form class="form-inline">
@@ -58,59 +48,13 @@
 
         </div>
     </div>
-    <footer class="row">
-        版权所有
+    <footer class="row" id="footer">
+        <!--js引入公公页面 footer.html-->
     </footer>
 
-    <!-- addUserModel -->
-    <div class="modal fade" id="addUserModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">新增基础代码</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="insertPlateUserForm" class="">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="cDmlb" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cDmlb" name="cDmlb" placeholder="请输入代码类别">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="cDmlbmc" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cDmlbmc" name="cDmlbmc" placeholder="请输入代码类别名称">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="cDm" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cDm" name="cLoginname" placeholder="请输入代码">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="cDmmc" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cDmmc" name="cDmmc" placeholder="请输入代码名称">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label for="cSort" class="sr-only"></label>
-                                <input type="text" class="form-control" id="cSort" name="cSort" placeholder="请输入排序号">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="cZt" class="sr-only"></label>
-                                <select class="form-control" id="cZt"></select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btnSave">保存</button>
-                    <button type="button" class="btn btn-warning" id="btnReset">重置</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnRet">关闭</button>
-                </div>
-            </div>
-        </div>
+    <!-- addJcdmModel -->
+    <div class="modal fade" id="addJcdmModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
     </div>
 
 </div>

@@ -8,6 +8,6 @@ import java.io.IOException;
  */
 public class FileCopyDemo {
     public static void main(String[] args) throws IOException {
-        IOUtil.copyFile(new File("F:\\iotest\\srcFile.txt"),new File("F:\\iotest\\destFile.txt"));
+        IOUtil.copyFile(new File("F:\\iotest\\srcFile.txt"), new File("F:\\iotest\\destFile.txt"));
     }
 }

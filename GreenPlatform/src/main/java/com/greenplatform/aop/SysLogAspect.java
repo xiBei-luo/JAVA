@@ -1,6 +1,7 @@
 package com.greenplatform.aop;
 
 import com.alibaba.fastjson.JSON;
+import com.greenplatform.dao.PlateLogMapper;
 import com.greenplatform.model.PlateLog;
 import com.greenplatform.service.PlateService;
 import com.greenplatform.util.CusAccessObjectUtil;
@@ -29,7 +30,7 @@ import java.util.UUID;
 public class SysLogAspect {
 
     @Autowired
-    private PlateService plateService;
+    private PlateLogMapper plateLogMapper;
     //定义切点 @Pointcut
     //在注解的位置切入代码
     @Pointcut("@annotation( com.greenplatform.aop.OperationLog)")
@@ -77,7 +78,7 @@ public class SysLogAspect {
 
 
         //调用service保存plateLog实体类到数据库
-        plateService.insertPlateLog(plateLog);
+        plateLogMapper.insert(plateLog);
     }
 
 

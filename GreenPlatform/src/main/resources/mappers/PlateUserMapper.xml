@@ -111,4 +111,51 @@
     c_cjuser, d_cjsj, c_xguser, d_xgsj
     from plate_user
   </select>
+
+  <select id="selectPlateuser" parameterType="com.greenplatform.model.PlateUser" resultMap="BaseResultMap">
+    SELECT T.* FROM plate_user T WHERE 1=1
+    <if test='cUserid!=null and cUserid!=""'>
+      AND T.c_userid = #{cUserid}
+    </if>
+    <if test='cLoginname!=null and cLoginname!=""'>
+      AND T.c_loginname = #{cLoginname}
+    </if>
+    <if test='cUsername!=null and cUsername!=""'>
+      AND T.c_username = #{cUsername}
+    </if>
+    <if test='cPassword!=null and cPassword!=""'>
+      AND T.c_password = #{cPassword}
+    </if>
+    <if test='cRylb!=null and cRylb!=""'>
+      AND T.c_rylb = #{cRylb}
+    </if>
+    <if test='cRyzt!=null and cRyzt!=""'>
+      AND T.c_ryzt = #{cRyzt}
+    </if>
+    <if test='cZcfs!=null and cZcfs!=""'>
+      AND T.c_zcfs = #{cZcfs}
+    </if>
+    <if test='cZjhm!=null and cZjhm!=""'>
+      AND T.c_zjhm = #{cZjhm}
+    </if>
+    <if test='cSex!=null and cSex!=""'>
+      AND T.c_sex = #{cSex}
+    </if>
+    <if test='cPhone!=null and cPhone!=""'>
+      AND T.c_phone = #{cPhone}
+    </if>
+    <if test='cWxhm!=null and cWxhm!=""'>
+      AND T.c_wxhm = #{cWxhm}
+    </if>
+    <if test='cQq!=null and cQq!=""'>
+      AND T.c_qq = #{cQq}
+    </if>
+    <if test='cEmail!=null and cEmail!=""'>
+      AND T.c_email = #{cEmail}
+    </if>
+    <if test='cZt!=null and cZt!=""'>
+      AND T.c_zt = #{cZt}
+    </if>
+  </select>
+
 </mapper>

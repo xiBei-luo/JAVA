@@ -15,24 +15,14 @@
 </head>
 <body>
 <div class="container-fluid plateIndexContainer">
-    <div class="row top_title">
-        <div class="col-md-12">
-            <h4>欢迎你，系统管理员！</h4>
-        </div>
+    <div class="row top_title" id="headerNav">
+        <!--js引入公公页面 header.html-->
     </div>
     <div class="row center_main">
-        <div class="col-md-2 center_main_left">
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active" role="presentation"><a href="/base/index">用户管理</a></li>
-                <li role="presentation"><a href="/base/rwgl">任务管理</a></li>
-                <li role="presentation"><a href="/base/nlgl">能量管理</a></li>
-                <li role="presentation"><a href="/base/spgl">商品管理</a></li>
-                <li role="presentation"><a href="/base/stgl">收徒管理</a></li>
-                <li role="presentation"><a href="/base/zhsjgl">账户升级管理</a></li>
-                <li role="presentation"><a href="/base/jcdm">基础代码维护</a></li>
-            </ul>
+        <div class="col-md-2 col-sm-4 col-xs-4 center_main_left" id="center_main_left">
+            <!--js引入公公页面 menu.html-->
         </div>
-        <div class="col-md-10 center_main_right">
+        <div class="col-md-10 col-sm-8 col-xs-8 center_main_right">
             <div class="row">
                 <div class="col-md-12 searchForm">
                     <form class="form-inline">
@@ -53,8 +43,8 @@
 
         </div>
     </div>
-    <footer class="row">
-        版权所有
+    <footer class="row" id="footer">
+        <!--js引入公公页面 footer.html-->
     </footer>
 
 </div>

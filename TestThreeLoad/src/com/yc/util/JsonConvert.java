@@ -2,20 +2,22 @@ package com.yc.util;
 
 
 import java.io.StringWriter;
+
 import org.codehaus.jackson.map.ObjectMapper;
 
 /**
- * ¹¤¾ßJSON´úÂë
- * @author Administrator
+ * ï¿½ï¿½ï¿½ï¿½JSONï¿½ï¿½ï¿½ï¿½
  *
+ * @author Administrator
  */
 public class JsonConvert {
-	static String  jsonStr;
-	public static String returnJson(Object object) throws Exception{
-		ObjectMapper objectMapper=new ObjectMapper();
-		StringWriter stringWriter=new StringWriter();
-		objectMapper.writeValue(stringWriter, object);
-		jsonStr = stringWriter.toString();
-		return jsonStr;
-	}
+    static String jsonStr;
+
+    public static String returnJson(Object object) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        StringWriter stringWriter = new StringWriter();
+        objectMapper.writeValue(stringWriter, object);
+        jsonStr = stringWriter.toString();
+        return jsonStr;
+    }
 }

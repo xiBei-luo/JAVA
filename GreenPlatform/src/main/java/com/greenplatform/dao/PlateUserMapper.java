@@ -45,4 +45,12 @@ public interface PlateUserMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(PlateUser record);
+
+    /**
+     * 根据传入条件查询
+     * @param plateUser
+     * @return
+     */
+    List<PlateUser> selectPlateuser(PlateUser plateUser);
+
 }

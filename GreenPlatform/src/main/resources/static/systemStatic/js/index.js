@@ -41,9 +41,9 @@ function f_selectLoginuserAccount(){
         var oTGreenNlHz = ret.object.tGreenNlHz[0];//登陆用户能量汇总信息（获取能量总量）
         var aTGreenRwRwmx = ret.object.tGreenRwRwmx;//登陆用户任务完成信息（今日任务是否完成）
         var atGreenZzZjzzmx = ret.object.tGreenZzZjzzmx;//登陆用户种子信息（查询用户有几种未捐赠的种子）
-        $("#cUsername").text(oPlateuser.cUsername);
+        $("#cLoginname").text(oPlateuser.cLoginname);
         $("#cRydj").text("L"+oPlateuser.cRydj);
-        $("#cNlzl").text(oTGreenNlHz.cNlzl);
+        $("#cNlhz").text(oTGreenNlHz.cNlhz);
 
 
         var aRwlbArr = [];
@@ -60,7 +60,7 @@ function f_selectLoginuserAccount(){
         }
         $(atGreenZzZjzzmx).each(function(i,v){
             $("#mySeed ul").append("<li class=\"list-group-item\">\n" +
-                                        "<span id=\"cRwlb_4\">"+v.cSpbm+"</span>\n" +
+                                        "<span id=\"cRwlb_4\">"+v.cSpbh+"</span>\n" +
                                         "<button class=\"btn btn-primary btn-sm float-right\">捐赠</button>\n" +
                                   "</li>");
         });
@@ -97,7 +97,7 @@ function f_purchaseSeed(sSpbh){
 function f_doPurchaseSeed(sSpbh) {
     var sendRequest = new SendRequest("/system/insertTGreenZzZjzzmx","POST");//构造对象
     sendRequest.addParamObj({
-        cSpbm:sSpbh
+        cSpbh:sSpbh
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){

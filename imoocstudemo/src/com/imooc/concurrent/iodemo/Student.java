@@ -52,12 +52,12 @@ public class Student implements Serializable {
                 '}';
     }
 
-    private void writeObject(java.io.ObjectOutputStream s) throws java.io.IOException{
+    private void writeObject(java.io.ObjectOutputStream s) throws java.io.IOException {
         s.defaultWriteObject();//把jvm能默认序列化的元素进行序列化操作
         s.writeInt(stuage);//自行完成被transient修饰的stuage的序列化
     }//序列化
 
-    private void readObject(java.io.ObjectInputStream s) throws java.io.IOException,ClassNotFoundException{
+    private void readObject(java.io.ObjectInputStream s) throws java.io.IOException, ClassNotFoundException {
         s.defaultReadObject();//把jvm能默认反序列化的元素进行反序列化操作
         this.stuage = s.readInt();//自行完成被transient修饰的stuage的反序列化
     }//反序列化
