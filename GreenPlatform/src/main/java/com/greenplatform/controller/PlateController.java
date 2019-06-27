@@ -1,12 +1,16 @@
 package com.greenplatform.controller;
 
-import com.greenplatform.dao.PlateUserMapper;
-import com.greenplatform.model.*;
+import com.greenplatform.model.PlateCodeDmz;
+import com.greenplatform.model.PlateUser;
+import com.greenplatform.model.TGreenRwRwmx;
+import com.greenplatform.model.TGreenSpSpmx;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
 import com.greenplatform.util.GetcurrentLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
@@ -46,7 +50,7 @@ public class PlateController {
     }
 
     @PostMapping(value = "/login")
-    public ReturnModel login(PlateUser plateUser,HttpSession session){
+    public ReturnModel login(PlateUser plateUser, HttpSession session){
         ReturnModel returnModel = plateService.selectPlateuser(plateUser,session);
         return returnModel;
     }
@@ -58,7 +62,7 @@ public class PlateController {
     }
 
     @PostMapping(value = "/insertPlateuser")
-    public ReturnModel insertPlateuser(PlateUser plateUser,HttpSession session){
+    public ReturnModel insertPlateuser(PlateUser plateUser, HttpSession session){
         ReturnModel returnModel = plateService.insertPlateuser(plateUser,session);
         return returnModel;
     }

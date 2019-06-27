@@ -1,7 +1,6 @@
 package com.greenplatform.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,7 +16,7 @@ public class BaseController {
 
     @GetMapping(value = "/index")
     public String index() {
-        return "plate/yhgl/index";
+        return "plate/index";
     }
 
     @GetMapping(value = "/register")
@@ -39,27 +38,42 @@ public class BaseController {
 
     @GetMapping(value = "/history")
     public String history(String type){
-        return "system/history";
+        return "web/history";
     }
 
     @GetMapping(value = "/certification")
     public String certification(String type){
-        return "system/certification";
+        return "web/certification";
+    }
+
+    @GetMapping(value = "/yhgl")
+    public String yhgl(){
+        return "plate/yhgl/main";
+    }
+
+    @GetMapping(value = "/yhgl/edit")
+    public String yhglEdit(){
+        return "plate/yhgl/edit";
     }
 
     @GetMapping(value = "/rwgl")
     public String rwgl(){
-        return "plate/rwgl/index";
+        return "plate/rwgl/main";
     }
 
     @GetMapping(value = "/nlgl")
     public String nlgl(){
-        return "plate/nlgl/index";
+        return "plate/nlgl/main";
     }
 
     @GetMapping(value = "/spgl")
     public String spgl(){
-        return "plate/spgl/index";
+        return "plate/spgl/main";
+    }
+
+    @GetMapping(value = "/spgl/edit")
+    public String spglEdit(){
+        return "plate/spgl/edit";
     }
 
     @GetMapping(value = "/stgl")

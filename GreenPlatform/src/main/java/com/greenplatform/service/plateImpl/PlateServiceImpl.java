@@ -55,20 +55,38 @@ public class PlateServiceImpl implements PlateService {
      */
     @Override
     public ReturnModel selectPlateuser(PlateUser plateUser, HttpSession session) {
+        List plateUserList;
+        PlateUserExample plateUserExample = new PlateUserExample();
+        PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
+
+        //1、用户是否存在
         plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
-        List plateUserList = plateUserMapper.selectPlateuser(plateUser);
+        criteria.andCLoginnameEqualTo(plateUser.getcLoginname());
+        plateUserList = plateUserMapper.selectByExample(plateUserExample);
         if (plateUserList.isEmpty()){
             returnModel.setFlag(1);
-            returnModel.setMsg("登录名或密码错误");
+            returnModel.setMsg("用户不存在！");
             returnModel.setObject(null);
+            return returnModel;
         }else{
-            returnModel.setFlag(0);
-            returnModel.setMsg("登陆成功");
-            returnModel.setObject(plateUserList);
-            PlateUser plateUser1 = (PlateUser) plateUserList.get(0);
-            session.setAttribute("loginUser",plateUser1);
+            //2.登陆密码是否正确
+            criteria.andCPasswordEqualTo(plateUser.getcPassword());
+            criteria.andCRylbEqualTo(plateUser.getcRylb());
+            plateUserList = plateUserMapper.selectByExample(plateUserExample);
+            if (plateUserList.isEmpty()){
+                returnModel.setFlag(1);
+                returnModel.setMsg("登录密码错误");
+                returnModel.setObject(null);
+                return returnModel;
+            }else{
+                returnModel.setFlag(0);
+                returnModel.setMsg("登陆成功");
+                returnModel.setObject(plateUserList);
+                PlateUser plateUser1 = (PlateUser) plateUserList.get(0);
+                session.setAttribute("loginUser",plateUser1);
+                return returnModel;
+            }
         }
-        return returnModel;
     }
 
     /**
@@ -79,9 +97,20 @@ public class PlateServiceImpl implements PlateService {
     @Override
     public ReturnModel selectPlateuser(PlateUser plateUser) {
         List plateUserList;
+        PlateUserExample plateUserExample = new PlateUserExample();
+        PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
+
+        if (!(("").equals(plateUser.getcRylb()) || null == plateUser.getcRylb())){
+            criteria.andCRylbEqualTo(plateUser.getcRylb());
+        }
+        if (!(("").equals(plateUser.getcUsername()) || null == plateUser.getcUsername())){
+            criteria.andCUsernameLike("%" + plateUser.getcUsername() + "%");
+        }
+        if (!(("").equals(plateUser.getcPhone()) || null == plateUser.getcPhone())){
+            criteria.andCPhoneEqualTo(plateUser.getcPhone());
+        }
         try{
-            plateUserList = plateUserMapper.selectPlateuser(plateUser);
-            Iterator iterator = plateUserList.iterator();
+            plateUserList = plateUserMapper.selectByExample(plateUserExample);
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(plateUserList);
@@ -107,9 +136,13 @@ public class PlateServiceImpl implements PlateService {
             List plateUserList;
             PlateUser plateUser1 = new PlateUser();
             //1.判断邮箱或用户名是否被注册
-            plateUser1.setcRylb(plateUser.getcRylb());
-            plateUser1.setcEmail(plateUser.getcEmail());
-            plateUserList = plateUserMapper.selectPlateuser(plateUser1);
+
+            PlateUserExample plateUserExample = new PlateUserExample();
+            PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
+            criteria.andCRylbEqualTo(plateUser.getcRylb());
+            criteria.andCEmailEqualTo(plateUser.getcEmail());
+
+            plateUserList = plateUserMapper.selectByExample(plateUserExample);
             if (!(plateUserList.isEmpty())){
                 returnModel.setFlag(1);
                 returnModel.setObject(null);
@@ -121,9 +154,9 @@ public class PlateServiceImpl implements PlateService {
                 return returnModel;
             }
             //2.判断用户名是否被注册
-            plateUser1.setcEmail("");
-            plateUser1.setcLoginname(plateUser.getcLoginname());
-            plateUserList = plateUserMapper.selectPlateuser(plateUser1);
+            PlateUserExample plateUserExample1 = new PlateUserExample();
+            plateUserExample1.createCriteria().andCLoginnameEqualTo(plateUser.getcLoginname());
+            plateUserList = plateUserMapper.selectByExample(plateUserExample1);
             if (!(plateUserList.isEmpty())){
                 returnModel.setFlag(1);
                 returnModel.setObject(null);
@@ -146,10 +179,8 @@ public class PlateServiceImpl implements PlateService {
                 plateUser.setcCjuser(majorKey);
                 plateUser.setcRydj("1");
             }
-            plateUserMapper.insert(plateUser);
-            //4.查询数据库查看是否新增成功
-            plateUserList = plateUserMapper.selectPlateuser(plateUser);
-            if (plateUserList.isEmpty()){
+            int insertRet = plateUserMapper.insert(plateUser);
+            if (1 != insertRet){
                 returnModel.setFlag(1);
                 returnModel.setObject(null);
                 if ("1".equals(plateUser.getcRylb())){
@@ -253,7 +284,6 @@ public class PlateServiceImpl implements PlateService {
                 plateUser1.setdXgsj(getTimestamp(new Date()));
                 plateUser1.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
 
-                System.out.println("resetPass=="+plateUser1);
 
                 plateUserMapper.updateByPrimaryKey(plateUser1);
                 returnModel.setFlag(0);
@@ -304,11 +334,13 @@ public class PlateServiceImpl implements PlateService {
         }
     }
 
+
+    //查询代码类别
     @Override
     public ReturnModel selectPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
         List plateCodeDmlbList;
         try {
-            plateCodeDmlbList = plateCodeDmlbMapper.selectPlateCodeDmlb(plateCodeDmlb);
+            plateCodeDmlbList = plateCodeDmlbMapper.selectByExample(new PlateCodeDmlbExample());
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(plateCodeDmlbList);
@@ -342,7 +374,7 @@ public class PlateServiceImpl implements PlateService {
                 return returnModel;
             }
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("新增出错，系统错误！");
             returnModel.setObject(null);
@@ -371,7 +403,7 @@ public class PlateServiceImpl implements PlateService {
                 return returnModel;
             }
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("操作失败，系统错误！");
             returnModel.setObject(null);
@@ -401,7 +433,7 @@ public class PlateServiceImpl implements PlateService {
                 return returnModel;
             }
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             returnModel.setFlag(0);
             returnModel.setMsg("操作失败，服务器端出错！");
             returnModel.setObject(null);
@@ -410,10 +442,23 @@ public class PlateServiceImpl implements PlateService {
         }
     }
 
+    /**
+     * 查询基础代码
+     * @param plateCodeDmz
+     * @return
+     */
     @Override
     public ReturnModel selectPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
+        PlateCodeDmzExample plateCodeDmzExample = new PlateCodeDmzExample();
+        PlateCodeDmzExample.Criteria criteria = plateCodeDmzExample.createCriteria();
+        if (!(("").equals(plateCodeDmz.getcDmlb()) || null == plateCodeDmz.getcDmlb())){
+            criteria.andCDmlbEqualTo(plateCodeDmz.getcDmlb());
+        }
+        if (!(("").equals(plateCodeDmz.getcDm()) || null == plateCodeDmz.getcDm())){
+            criteria.andCDmEqualTo(plateCodeDmz.getcDm());
+        }
         try{
-            List plateCodeDmzList = plateCodeDmzMapper.selectPlateCodeDmz(plateCodeDmz);
+            List plateCodeDmzList = plateCodeDmzMapper.selectByExample(plateCodeDmzExample);
             returnModel.setFlag(0);
             returnModel.setMsg("操作成功!");
             returnModel.setObject(plateCodeDmzList);
@@ -447,7 +492,7 @@ public class PlateServiceImpl implements PlateService {
                 return returnModel;
             }
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("新增出错，系统错误！");
             returnModel.setObject(null);
@@ -475,7 +520,7 @@ public class PlateServiceImpl implements PlateService {
                 return returnModel;
             }
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("删除失败，系统错误！");
             returnModel.setObject(null);
@@ -506,7 +551,7 @@ public class PlateServiceImpl implements PlateService {
                 return returnModel;
             }
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("修改失败，系统错误！");
             returnModel.setObject(null);
@@ -529,7 +574,7 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel selectTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
         List tGreenSpmxList;
         try {
-            tGreenSpmxList = tGreenSpSpmxMapper.selectTGreenSpSpmx(tGreenSpSpmx);
+            tGreenSpmxList = tGreenSpSpmxMapper.selectByExample(new TGreenSpSpmxExample());
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(tGreenSpmxList);
@@ -554,7 +599,7 @@ public class PlateServiceImpl implements PlateService {
             returnModel.setObject(tGreenSpSpmx);
             return returnModel;
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("新增出错，系统错误！");
             returnModel.setObject(null);
@@ -581,7 +626,7 @@ public class PlateServiceImpl implements PlateService {
                 return returnModel;
             }
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("操作失败，系统错误！");
             returnModel.setObject(null);
@@ -615,7 +660,7 @@ public class PlateServiceImpl implements PlateService {
                 return returnModel;
             }
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("操作失败，系统错误！");
             returnModel.setObject(null);
@@ -626,9 +671,16 @@ public class PlateServiceImpl implements PlateService {
 
     @Override
     public ReturnModel selectTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
+
+        TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
+        TGreenRwRwmxExample.Criteria criteria = tGreenRwRwmxExample.createCriteria();
+
+        if (!(("").equals(tGreenRwRwmx.getcRwlb()) || null == tGreenRwRwmx.getcRwlb())){
+            criteria.andCRwlbEqualTo(tGreenRwRwmx.getcRwlb());
+        }
         List tGreenRwRwmxList;
         try {
-            tGreenRwRwmxList = tGreenRwRwmxMapper.selectTGreenRwRwmx(tGreenRwRwmx);
+            tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(tGreenRwRwmxList);
@@ -645,7 +697,7 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel selectTGreenNlHz(TGreenNlHz tGreenNlHz) {
         List tGreenNlHzList;
         try{
-            tGreenNlHzList = tGreenNlHzMapper.selectTGreenNlHz(tGreenNlHz);
+            tGreenNlHzList = tGreenNlHzMapper.selectByExample(new TGreenNlHzExample());
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(tGreenNlHzList);
@@ -699,33 +751,30 @@ public class PlateServiceImpl implements PlateService {
          * cUserid===根据人员ID获取人员姓名
          * 其他===从基础代码表中获取
          */
-        System.out.println("in");
         if ("cSpbh".equals(cDmlb)){
-            TGreenSpSpmx tGreenSpSpmx = new TGreenSpSpmx();
-            tGreenSpSpmx.setcSpbh(cDm);
-            List tGreenSpSpmxList = tGreenSpSpmxMapper.selectTGreenSpSpmx(tGreenSpSpmx);
+            TGreenSpSpmxExample tGreenSpSpmxExample = new TGreenSpSpmxExample();
+            tGreenSpSpmxExample.createCriteria().andCSpbhEqualTo(cDm);
+            List tGreenSpSpmxList = tGreenSpSpmxMapper.selectByExample(tGreenSpSpmxExample);
             TGreenSpSpmx tGreenSpSpmx1;
             if (!(tGreenSpSpmxList.isEmpty())){
                 tGreenSpSpmx1 = (TGreenSpSpmx) tGreenSpSpmxList.get(0);
             }else{
                 tGreenSpSpmx1 = new TGreenSpSpmx();
             }
-            System.out.println(tGreenSpSpmx1.getcSpmc());
             return tGreenSpSpmx1.getcSpmc();
         }else if ("cUsername".equals(cDmlb)){
             return null;
         }else{
-            PlateCodeDmz plateCodeDmz = new PlateCodeDmz();
-            plateCodeDmz.setcDmlb(cDmlb);
-            plateCodeDmz.setcDm(cDm);
-            List plateCodeDmzList = plateCodeDmzMapper.selectPlateCodeDmz(plateCodeDmz);
+            PlateCodeDmzExample plateCodeDmzExample = new PlateCodeDmzExample();
+            plateCodeDmzExample.createCriteria().andCDmEqualTo(cDm);
+            plateCodeDmzExample.createCriteria().andCDmlbEqualTo(cDmlb);
+            List plateCodeDmzList = plateCodeDmzMapper.selectByExample(plateCodeDmzExample);
             PlateCodeDmz plateCodeDmz1;
             if (!(plateCodeDmzList.isEmpty())){
                 plateCodeDmz1 = (PlateCodeDmz) plateCodeDmzList.get(0);
             }else{
                 plateCodeDmz1 = new PlateCodeDmz();
             }
-            System.out.println(plateCodeDmz1.getcDmmc());
             return plateCodeDmz1.getcDmmc();
         }
     }

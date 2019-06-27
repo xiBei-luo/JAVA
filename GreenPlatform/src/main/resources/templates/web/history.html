@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>个人账户</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/dhtmlx-4.5/skins/web/dhtmlx.css">
+    <link rel="stylesheet" href="/publicFrame/dhtmlx-4.5/skins/dhtmlxgrid.css">
+    <link rel="stylesheet" href="/style/historyStyle.css">
+</head>
+<body>
+    <header class="historyHeader">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>绿沙平台</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li id="cHome"><a href="/system/index">返回首页</a></li>
+                        <li id="cJzjl" class="active"><a href="#">捐赠记录 <span class="sr-only">(current)</span></a></li>
+                        <li id="cCzls"><a href="#">充值历史</a></li>
+                        <li id="cTxls"><a href="#">提现历史</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" id="certification">实名认证</a></li>
+                        <li><a href="#" id="perInfo">完善资料</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="modal fade bs-example-modal-lg" id="perInfoModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">完善基本信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="perInfoForm" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="cUsername" class="col-sm-1 col-xs-3 control-label">姓名</label>
+                            <div class="col-sm-3 col-xs-9">
+                                <input type="text" class="form-control" id="cUsername" placeholder="姓名">
+                            </div>
+                            <label for="cSex" class="col-sm-1 col-xs-3 control-label">性别</label>
+                            <div class="col-sm-3 col-xs-9">
+                                <input type="text" class="form-control" id="cSex" placeholder="性别">
+                            </div>
+                            <label for="cWxhm" class="col-sm-1 col-xs-3 control-label">微信号码</label>
+                            <div class="col-sm-3 col-xs-9">
+                                <input type="text" class="form-control" id="cWxhm" placeholder="微信号码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cPhone" class="col-sm-1 col-xs-3 control-label">手机号码</label>
+                            <div class="col-sm-3 col-xs-9">
+                                <input type="text" class="form-control" id="cPhone" placeholder="手机号码">
+                            </div>
+                            <label for="cQq" class="col-sm-1 col-xs-3 control-label">QQ号码</label>
+                            <div class="col-sm-3 col-xs-9">
+                                <input type="text" class="form-control" id="cQq" placeholder="QQ号码">
+                            </div>
+                            <label for="cEmail" class="col-sm-1 col-xs-3 control-label">电子邮箱</label>
+                            <div class="col-sm-3 col-xs-9">
+                                <input type="text" class="form-control" id="cEmail" placeholder="电子邮箱">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cZjlx" class="col-sm-1 col-xs-3 control-label">证件类型</label>
+                            <div class="col-sm-3 col-xs-9">
+                                <input type="text" class="form-control" id="cZjlx" placeholder="证件类型">
+                            </div>
+                            <label for="cZjhm" class="col-sm-1 col-xs-3 control-label">证件号码</label>
+                            <div class="col-sm-3 col-xs-9">
+                                <input type="text" class="form-control" id="cZjhm" placeholder="证件号码">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-warning" id="btnReset">重置</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="container-fluid tableSection">
+        <form class="form-inline searchForm">
+            <div class="form-group">
+                <label for="dKssj">操作时间起：</label>
+                <input type="text" class="form-control" id="dKssj" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="操作时间起">
+            </div>
+            <button class="btn btn-primary" id="btnSearch">检索</button>
+        </form>
+        <div class="gridbox" id="gridbox_cJzjl"></div>
+        <div class="gridbox" id="gridbox_cCzls" hidden></div>
+        <div class="gridbox" id="gridbox_cTxls" hidden></div>
+    </section>
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/dhtmlx-4.5/dhtmlx.min.js"></script>
+<script src="/publicFrame/My97DatePicker/WdatePicker.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script src="/js/history.js"></script>
+</body>
+</html>

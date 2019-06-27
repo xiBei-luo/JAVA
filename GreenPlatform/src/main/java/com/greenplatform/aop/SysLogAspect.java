@@ -3,16 +3,15 @@ package com.greenplatform.aop;
 import com.alibaba.fastjson.JSON;
 import com.greenplatform.dao.PlateLogMapper;
 import com.greenplatform.model.PlateLog;
-import com.greenplatform.service.PlateService;
 import com.greenplatform.util.CusAccessObjectUtil;
 import com.greenplatform.util.GetcurrentLoginUser;
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.stereotype.Component;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 

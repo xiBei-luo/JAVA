@@ -25,7 +25,7 @@ public class SystemController {
     public String index(Model model) {
         ReturnModel returnModel = systemService.selectTGreenSpSpmx(new TGreenSpSpmx());
         model.addAttribute("tGreenSpSpmxList", returnModel.getObject());
-        return "system/index";
+        return "web/index";
     }
 
     @RequestMapping(value = "/selectLoginuserAccount",method = RequestMethod.POST)

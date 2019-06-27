@@ -2,9 +2,6 @@ package com.greenplatform.service;
 
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
-import com.greenplatform.model.ywModel.TUserAccount;
-
-import java.util.List;
 
 public interface SystemService {
     /*系统用户操作begin

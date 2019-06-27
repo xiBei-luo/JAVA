@@ -7,7 +7,6 @@
  * @param allFlag 显示全部时的字符
  */
 function initBaseCodeSelect($container, args, defVal, allFlag){
-    console.log(args);
     if($container){
         $container.empty();
     }
@@ -24,7 +23,6 @@ function initBaseCodeSelect($container, args, defVal, allFlag){
             }
 
             for(var i=0; i<ret.object.length; i++){
-                console.log(ret.object[i].cDmmc);
                 $container.append("<option value='"+ret.object[i].cDm+"' text='"+ret.object[i].cDmmc+"'>"+ret.object[i].cDmmc+"</option>");
             }
         }
@@ -46,13 +44,42 @@ function f_getDmmc(cmlb,cDm){
         cDm:cDm
     });
     sendRequest.sendRequest(function(ret){
-        console.log(ret);
+
     });//发送请求并获取返回结果
 }
 
+/**
+ * 必输项检查
+ * @param $star
+ * @param win
+ * @param callbackFun
+ * @returns {boolean}
+ */
+function requiredFieldCheck($star, win, callbackFun){
+    var pass = true;
+    $star.each(function(){
+        var $label = $(this).parent();
+        var _title = $label.text().replace(/[*:：]/g,"");
+        var _id = $label.attr("for");
+        if(_id && $("#"+_id).val() == ""){
+            pass = false;
+            BootstrapDialog.alert({
+                type: BootstrapDialog.TYPE_WARNING,
+                size: BootstrapDialog.SIZE_SMALL,
+                title: '提示',
+                message: _title+"不能为空，请输入相应内容!",
+                closeable: true,
+                buttonLabel: "确定",
+                callback: function () {
+                    window.setTimeout(function(){$("#"+_id).focus();}, 100);
+                }
+            });
+            return false;
+        }
+    });
 
-
-
+    return pass;
+}
 /**
  * 加载公共页面
  * @param obj

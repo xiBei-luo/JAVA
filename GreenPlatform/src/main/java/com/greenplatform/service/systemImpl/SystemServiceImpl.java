@@ -41,7 +41,7 @@ public class SystemServiceImpl implements SystemService {
     public ReturnModel selectTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
         List tGreenSpmxList;
         try {
-            tGreenSpmxList = tGreenSpSpmxMapper.selectTGreenSpSpmx(tGreenSpSpmx);
+            tGreenSpmxList = tGreenSpSpmxMapper.selectByExample(new TGreenSpSpmxExample());
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(tGreenSpmxList);
@@ -184,9 +184,11 @@ public class SystemServiceImpl implements SystemService {
         try{
             String localDateDay = (getLocalDate(new Date())).substring(0,10);
             String localDateMonth = (getLocalDate(new Date())).substring(0,7);
-            tGreenRwRwmx.setcUserid(GetcurrentLoginUser.getCurrentUser().getcUserid());
-            tGreenRwRwmx.setcRwday(localDateDay);
-            List tGreenRwRwmxList = tGreenRwRwmxMapper.selectTGreenRwRwmx(tGreenRwRwmx);
+
+            TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
+            tGreenRwRwmxExample.createCriteria().andCUseridEqualTo(GetcurrentLoginUser.getCurrentUser().getcUserid());
+            tGreenRwRwmxExample.createCriteria().andCRwdayEqualTo(localDateDay);
+            List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);
             if(!(tGreenRwRwmxList.isEmpty())){
                 returnModel.setFlag(1);
                 returnModel.setMsg("您今天已完成该项任务了！");
@@ -232,6 +234,12 @@ public class SystemServiceImpl implements SystemService {
         return null;
     }
 
+
+    /**
+     * 能量兑换种子业务
+     * @param tGreenZzZjzzmx
+     * @return
+     */
     @OperationLog(cCzfs = "I")
     @Override
     public ReturnModel insertTGreenZzZjzzmx(TGreenZzZjzzmx tGreenZzZjzzmx) {
@@ -246,10 +254,12 @@ public class SystemServiceImpl implements SystemService {
         try{
             PlateUser plateUser = new PlateUser();
             plateUser.setcUserid(GetcurrentLoginUser.getCurrentUser().getcUserid());
-            TGreenZzZjzzmx tGreenZzZjzzmx1 = new TGreenZzZjzzmx();
-            tGreenZzZjzzmx1.setcUserid(plateUser.getcUserid());
-            tGreenZzZjzzmx1.setcSfjz("0");
-            List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectTGreenZzZjzzmx(tGreenZzZjzzmx1);
+
+            TGreenZzZjzzmxExample tGreenZzZjzzmxExample = new TGreenZzZjzzmxExample();
+            tGreenZzZjzzmxExample.createCriteria().andCUseridEqualTo(plateUser.getcUserid());
+            tGreenZzZjzzmxExample.createCriteria().andCSfjzEqualTo("0");
+
+            List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectByExample(tGreenZzZjzzmxExample);
             int tGreenZzZjzzmxCount = tGreenZzZjzzmxList.size();
             System.out.println("指定账户下未捐赠的种子数量为--"+tGreenZzZjzzmxCount);
             if (tGreenZzZjzzmxCount > 3){
@@ -258,14 +268,16 @@ public class SystemServiceImpl implements SystemService {
                 returnModel.setObject(null);
                 return returnModel;
             }else{
-                TGreenNlHz tGreenNlHz = new TGreenNlHz();//获取指定用户的能量总量
-                tGreenNlHz.setcUserid(plateUser.getcUserid());
-                List tGreenNlHzList = tGreenNlHzMapper.selectTGreenNlHz(tGreenNlHz);
+                //获取指定用户的能量总量
+                TGreenNlHzExample tGreenNlHzExample = new TGreenNlHzExample();
+                tGreenNlHzExample.createCriteria().andCUseridEqualTo(plateUser.getcUserid());
+                List tGreenNlHzList = tGreenNlHzMapper.selectByExample(tGreenNlHzExample);
                 Integer userNlzl = Integer.parseInt(((TGreenNlHz) tGreenNlHzList.get(0)).getcNlhz());//获取指定账户的能量总量
 
-                TGreenSpSpmx tGreenSpSpmx = new TGreenSpSpmx();//获取用户点击兑换种子的价格
-                tGreenSpSpmx.setcSpbh(tGreenZzZjzzmx.getcSpbh());
-                List tGreenSpSpmxList = tGreenSpSpmxMapper.selectTGreenSpSpmx(tGreenSpSpmx);
+                //获取用户点击兑换种子的价格
+                TGreenSpSpmxExample tGreenSpSpmxExample = new TGreenSpSpmxExample();
+                tGreenSpSpmxExample.createCriteria().andCSpbhEqualTo(tGreenZzZjzzmx.getcSpbh());
+                List tGreenSpSpmxList = tGreenSpSpmxMapper.selectByExample(tGreenSpSpmxExample);
                 Integer zzPrice = Integer.parseInt(((TGreenSpSpmx) tGreenSpSpmxList.get(0)).getcSpjg());//获取种子的价格
 
                 if (tGreenNlHzList.isEmpty()){
@@ -289,6 +301,8 @@ public class SystemServiceImpl implements SystemService {
                     tGreenNlJsnlmx.setdCjsj(getTimestamp(new Date()));
                     tGreenNlJsnlmxMapper.insert(tGreenNlJsnlmx);
 
+                    TGreenNlHz tGreenNlHz = new TGreenNlHz();
+                    tGreenNlHz.setcUserid(plateUser.getcUserid());
                     tGreenNlHz.setcNlhz(String.valueOf((userNlzl-zzPrice)));
                     tGreenNlHz.setcXguser(plateUser.getcUserid());
                     tGreenNlHz.setdXgsj(getTimestamp(new Date()));
@@ -336,10 +350,6 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public ReturnModel selectLoginuserAccount() {
-        PlateUser plateUser = new PlateUser();
-        TGreenNlHz tGreenNlHz = new TGreenNlHz();
-        TGreenZzZjzzmx tGreenZzZjzzmx = new TGreenZzZjzzmx();
-        TGreenRwRwmx tGreenRwRwmx = new TGreenRwRwmx();
         Map loginuserAccountMap;
         try{
             String loginUserId = GetcurrentLoginUser.getCurrentUser().getcUserid();
@@ -349,25 +359,28 @@ public class SystemServiceImpl implements SystemService {
                 returnModel.setObject(null);
                 return returnModel;
             }else {
-                plateUser.setcUserid(loginUserId);
-                tGreenNlHz.setcUserid(loginUserId);
-                tGreenZzZjzzmx.setcUserid(loginUserId);
-                tGreenZzZjzzmx.setcSfjz("0");
-                tGreenRwRwmx.setcUserid(loginUserId);
-                tGreenRwRwmx.setcRwday(getLocalDate(new Date()).substring(0,10));
+                PlateUserExample plateUserExample = new PlateUserExample();
+                plateUserExample.createCriteria().andCUseridEqualTo(loginUserId);
 
-                System.out.println("登陆用户基本信息参数--"+plateUser);
-                System.out.println("登陆用户能量信息参数--"+tGreenNlHz);
-                System.out.println("登陆用户种子信息参数--"+tGreenZzZjzzmx);
-                System.out.println("登陆用户任务信息参数--"+tGreenRwRwmx);
+                TGreenNlHzExample tGreenNlHzExample = new TGreenNlHzExample();
+                tGreenNlHzExample.createCriteria().andCUseridEqualTo(loginUserId);
 
-                List plateuserList = plateUserMapper.selectPlateuser(plateUser);//人员姓名与人员等级
+                TGreenZzZjzzmxExample tGreenZzZjzzmxExample = new TGreenZzZjzzmxExample();
+                tGreenZzZjzzmxExample.createCriteria().andCUseridEqualTo(loginUserId);
+                tGreenZzZjzzmxExample.createCriteria().andCSfjzEqualTo("0");
 
-                List tGreenNlHzList = tGreenNlHzMapper.selectTGreenNlHz(tGreenNlHz);//查询能量总量
+                TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
+                tGreenRwRwmxExample.createCriteria().andCUseridEqualTo(loginUserId);
+                tGreenRwRwmxExample.createCriteria().andCRwdayEqualTo(getLocalDate(new Date()).substring(0,10));
 
-                List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectTGreenZzZjzzmx(tGreenZzZjzzmx);//查询种子明细
 
-                List tGreenRwRwmxList = tGreenRwRwmxMapper.selectTGreenRwRwmx(tGreenRwRwmx);//查询当日任务完成情况明细
+                List plateuserList = plateUserMapper.selectByExample(plateUserExample);//人员姓名与人员等级
+
+                List tGreenNlHzList = tGreenNlHzMapper.selectByExample(tGreenNlHzExample);//查询能量总量
+
+                List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectByExample(tGreenZzZjzzmxExample);//查询种子明细
+
+                List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);//查询当日任务完成情况明细
 
                 System.out.println("登陆用户基本信息--"+plateuserList);
                 System.out.println("登陆用户能量信息--"+tGreenNlHzList);

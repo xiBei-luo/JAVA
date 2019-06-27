@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrapValidator.min.css">
+    <style>
+        .table label{
+            line-height: 35px;
+        }
+        .edit-footer{
+            width: 98%;
+            height: 50px;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            overflow: hidden;
+        }
+        .require{
+            color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <form id="insertPlateUserForm">
+        <table class="table" >
+            <col width="15%">
+            <col width="35%">
+            <col width="15%">
+            <col width="35%">
+            <tbody>
+            <tr>
+                <td align="right">
+                    <label for="cSpmc" class="control-label"><i class="require">*</i>商品名称:</label>
+                </td>
+                <td align="left">
+                    <input type="text" class="form-control" id="cSpmc" name="cSpmc" placeholder="请输入商品名称">
+                </td>
+                <td align="right">
+                    <label for="cSpjg" class="control-label"><i class="require">*</i>商品价格:</label>
+                </td>
+                <td align="left">
+                    <input type="text" class="form-control" id="cSpjg" name="cSpjg" placeholder="请输入商品价格">
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <label for="cSpms" class="control-label"><i class="require">*</i>商品描述:</label>
+                </td>
+                <td align="left" colspan="3">
+                    <textarea name="cSpms" id="cSpms"class="form-control" rows="2" placeholder="请输入商品描述"></textarea>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <div class="edit-footer">
+        <button type="button" class="btn btn-primary" id="btnSave">保存</button>
+        <button type="button" class="btn btn-default" id="btnRet">关闭</button>
+    </div>
+</div>
+
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrapValidator.min.js"></script>
+<script src="/publicJs/publicCommon.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/js/spgl/edit.js"></script>
+</body>
+</html>

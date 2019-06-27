@@ -5,7 +5,6 @@ import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 public interface PlateService {
 

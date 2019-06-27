@@ -15,7 +15,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //System.out.println("preHandle被调用！");
         PlateUser user = (PlateUser) request.getSession().getAttribute("loginUser");
-        System.out.println("当前登陆用户--"+user);
+        //System.out.println("当前登陆用户--"+user);
         if(user == null){
             //未登陆，返回登陆页面
             response.sendRedirect(request.getContextPath()+"/base/login");  //未登录自动跳转界面
