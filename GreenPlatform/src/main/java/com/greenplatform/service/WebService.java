@@ -3,7 +3,7 @@ package com.greenplatform.service;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 
-public interface SystemService {
+public interface WebService {
     /*系统用户操作begin
     public ReturnModel selectSystemuser(SystemUser systemUser);//查询系统用户
 

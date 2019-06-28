@@ -22,11 +22,7 @@ function _init(args, mdi, layerIdx, parentWindow) {
             if(!bPass){
                 return;
             }else{
-                if($("#cUserid").val()){
-                    f_submitData("1","/plate/updPlateuser");
-                }else{
-                    f_submitData("0","/plate/insertPlateuser");
-                }
+                f_submitData("0","/plate/insertPlateuser");
             }
         });
     }
@@ -64,10 +60,6 @@ function _init(args, mdi, layerIdx, parentWindow) {
                 "cRylb":'1',
                 "cPassword":$("#cPassword").val(),
                 "cZt":'1'
-            });//构造请求参数
-        }else if("2" === type){
-            sendRequest.addParamObj({
-                "cUserid":$("#cUserid").val()
             });//构造请求参数
         }
 

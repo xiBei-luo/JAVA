@@ -120,10 +120,9 @@ function f_upd(id){
     win.load("/spgl/edit", window, function (obj) { });
 }
 /*
-删除用户
+删除
  */
 function f_del(id){
-    $("#cSpbh").val(id);
     BootstrapDialog.confirm({
         type: BootstrapDialog.TYPE_DANGER,
         size: BootstrapDialog.SIZE_SMALL,
@@ -134,7 +133,7 @@ function f_del(id){
         btnCancelLabel: "取消",
         callback: function (ret) {
             if(ret){
-                f_submitData('2',"/plate/delTGreenSpSpmx");
+                f_submitData('2',"/plate/delTGreenSpSpmx",id);
             }
         }
     });
@@ -144,33 +143,16 @@ function f_del(id){
  * 发送请求保存数据
  * type:操作类型，0新增/1修改/2删除
  * reqURL：服务地址
+ * id：操作数据主键
  */
-function f_submitData(type,reqURL){
+function f_submitData(type,reqURL,id){
     var sendRequest = new SendRequest(reqURL,"POST");//构造对象
 
-    if ("0" === type) {
-        sendRequest.addParamObj({
-            "cSpmc":$("#cSpmc").val(),
-            "cSpjg":$("#cSpjg").val(),
-            "cSpms":$("#cSpms").val(),
-            "cZt":'1'
-        });//构造请求参数
-    }else if("1" === type){
-        sendRequest.addParamObj({
-            "cSpbh":$("#cSpbh").val(),
-            "cSpmc":$("#cSpmc").val(),
-            "cSpjg":$("#cSpjg").val(),
-            "cSpms":$("#cSpms").val(),
-            "cZt":'1'
-        });//构造请求参数
-    }else if("2" === type){
-        sendRequest.addParamObj({
-            "cSpbh":$("#cSpbh").val()
-        });//构造请求参数
-    }
+    sendRequest.addParamObj({
+        "cSpbh":id
+    });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
-        $("#btnSave").attr("disabled",false);
         if("0" != ret.flag){
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,
@@ -187,10 +169,11 @@ function f_submitData(type,reqURL){
                 title: '提示',
                 message: "操作成功",
                 closeable: true,
-                buttonLabel: "确定"
+                buttonLabel: "确定",
+                callback: function () {
+                    loadGridData();
+                }
             });
-            $("#btnRet,#btnReset").click();
-            loadGridData();
         }
     });//发送请求并获取返回结果
 }

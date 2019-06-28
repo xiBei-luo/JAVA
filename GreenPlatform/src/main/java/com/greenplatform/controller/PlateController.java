@@ -49,12 +49,6 @@ public class PlateController {
         return returnModel;
     }
 
-    @PostMapping(value = "/login")
-    public ReturnModel login(PlateUser plateUser, HttpSession session){
-        ReturnModel returnModel = plateService.selectPlateuser(plateUser,session);
-        return returnModel;
-    }
-
     @PostMapping(value = "/selectPlateuser")
     public ReturnModel selectPlateuser(PlateUser plateUser){
         ReturnModel returnModel = plateService.selectPlateuser(plateUser);
@@ -62,8 +56,8 @@ public class PlateController {
     }
 
     @PostMapping(value = "/insertPlateuser")
-    public ReturnModel insertPlateuser(PlateUser plateUser, HttpSession session){
-        ReturnModel returnModel = plateService.insertPlateuser(plateUser,session);
+    public ReturnModel insertPlateuser(PlateUser plateUser){
+        ReturnModel returnModel = plateService.insertPlateuser(plateUser);
         return returnModel;
     }
 
@@ -117,6 +111,24 @@ public class PlateController {
     @PostMapping(value = "/selectTGreenRwRwmx")
     public ReturnModel selectTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx){
         ReturnModel returnModel = plateService.selectTGreenRwRwmx(tGreenRwRwmx);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/insertYwjcdm")
+    public ReturnModel insertYwjcdm(PlateCodeDmz plateCodeDmz){
+        ReturnModel returnModel = plateService.insertYwjcdm(plateCodeDmz);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/updYwjcdm")
+    public ReturnModel updYwjcdm(PlateCodeDmz plateCodeDmz){
+        ReturnModel returnModel = plateService.updPlateCodeDmz(plateCodeDmz);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/delYwjcdm")
+    public ReturnModel delYwjcdm(PlateCodeDmz plateCodeDmz){
+        ReturnModel returnModel = plateService.delPlateCodeDmz(plateCodeDmz);
         return returnModel;
     }
 

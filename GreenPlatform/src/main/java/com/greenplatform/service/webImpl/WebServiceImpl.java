@@ -1,10 +1,10 @@
-package com.greenplatform.service.systemImpl;
+package com.greenplatform.service.webImpl;
 
 import com.greenplatform.aop.OperationLog;
 import com.greenplatform.dao.*;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
-import com.greenplatform.service.SystemService;
+import com.greenplatform.service.WebService;
 import com.greenplatform.util.GetcurrentLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.*;
 
 @Transactional
 @Service
-public class SystemServiceImpl implements SystemService {
+public class WebServiceImpl implements WebService {
     /*@Autowired
     SystemDao systemDao;*/
     @Autowired
@@ -178,6 +178,8 @@ public class SystemServiceImpl implements SystemService {
         return null;
     }
 
+
+    //完成每日任务
     @Override
     @OperationLog(cCzfs = "I")
     public ReturnModel insertTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
@@ -186,8 +188,11 @@ public class SystemServiceImpl implements SystemService {
             String localDateMonth = (getLocalDate(new Date())).substring(0,7);
 
             TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
-            tGreenRwRwmxExample.createCriteria().andCUseridEqualTo(GetcurrentLoginUser.getCurrentUser().getcUserid());
-            tGreenRwRwmxExample.createCriteria().andCRwdayEqualTo(localDateDay);
+            TGreenRwRwmxExample.Criteria criteria = tGreenRwRwmxExample.createCriteria();
+            criteria.andCUseridEqualTo(GetcurrentLoginUser.getCurrentUser().getcUserid());
+            criteria.andCRwlbEqualTo(tGreenRwRwmx.getcRwlb());
+            criteria.andCRwdayEqualTo(localDateDay);
+
             List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);
             if(!(tGreenRwRwmxList.isEmpty())){
                 returnModel.setFlag(1);
@@ -195,9 +200,11 @@ public class SystemServiceImpl implements SystemService {
                 returnModel.setObject(null);
                 return returnModel;
             }else{
+                tGreenRwRwmx.setcUserid(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 tGreenRwRwmx.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 tGreenRwRwmx.setdCjsj(getTimestamp(new Date()));
                 tGreenRwRwmx.setcRwmouth(localDateMonth);
+                tGreenRwRwmx.setcRwday(localDateDay);
                 tGreenRwRwmx.setdRwsj(getTimestamp(new Date()));
 
                 System.out.println("任务明细对象--"+tGreenRwRwmx);
@@ -256,8 +263,9 @@ public class SystemServiceImpl implements SystemService {
             plateUser.setcUserid(GetcurrentLoginUser.getCurrentUser().getcUserid());
 
             TGreenZzZjzzmxExample tGreenZzZjzzmxExample = new TGreenZzZjzzmxExample();
-            tGreenZzZjzzmxExample.createCriteria().andCUseridEqualTo(plateUser.getcUserid());
-            tGreenZzZjzzmxExample.createCriteria().andCSfjzEqualTo("0");
+            TGreenZzZjzzmxExample.Criteria criteria = tGreenZzZjzzmxExample.createCriteria();
+            criteria.andCUseridEqualTo(plateUser.getcUserid());
+            criteria.andCSfjzEqualTo("0");
 
             List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectByExample(tGreenZzZjzzmxExample);
             int tGreenZzZjzzmxCount = tGreenZzZjzzmxList.size();
@@ -279,7 +287,8 @@ public class SystemServiceImpl implements SystemService {
                 tGreenSpSpmxExample.createCriteria().andCSpbhEqualTo(tGreenZzZjzzmx.getcSpbh());
                 List tGreenSpSpmxList = tGreenSpSpmxMapper.selectByExample(tGreenSpSpmxExample);
                 Integer zzPrice = Integer.parseInt(((TGreenSpSpmx) tGreenSpSpmxList.get(0)).getcSpjg());//获取种子的价格
-
+                System.out.println("账户能量总量为："+userNlzl);
+                System.out.println("种子价格为："+zzPrice);
                 if (tGreenNlHzList.isEmpty()){
                     returnModel.setFlag(1);
                     returnModel.setMsg("您的能量不足，快去完成任务获取能量吧！");
@@ -366,13 +375,14 @@ public class SystemServiceImpl implements SystemService {
                 tGreenNlHzExample.createCriteria().andCUseridEqualTo(loginUserId);
 
                 TGreenZzZjzzmxExample tGreenZzZjzzmxExample = new TGreenZzZjzzmxExample();
-                tGreenZzZjzzmxExample.createCriteria().andCUseridEqualTo(loginUserId);
-                tGreenZzZjzzmxExample.createCriteria().andCSfjzEqualTo("0");
+                TGreenZzZjzzmxExample.Criteria criteria = tGreenZzZjzzmxExample.createCriteria();
+                criteria.andCUseridEqualTo(loginUserId);
+                criteria.andCSfjzEqualTo("0");
 
                 TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
-                tGreenRwRwmxExample.createCriteria().andCUseridEqualTo(loginUserId);
-                tGreenRwRwmxExample.createCriteria().andCRwdayEqualTo(getLocalDate(new Date()).substring(0,10));
-
+                TGreenRwRwmxExample.Criteria criteria1 = tGreenRwRwmxExample.createCriteria();
+                criteria1.andCUseridEqualTo(loginUserId);
+                criteria1.andCRwdayEqualTo(getLocalDate(new Date()).substring(0,10));
 
                 List plateuserList = plateUserMapper.selectByExample(plateUserExample);//人员姓名与人员等级
 

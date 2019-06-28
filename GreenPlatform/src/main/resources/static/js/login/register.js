@@ -13,12 +13,6 @@ function initEvent(){
             f_submitData();
         }
     });
-    $("#btnRegister").keyup(function(){
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if(keycode == '13'){// 回车触发事件
-            $("#btnRegister").click();
-        }
-    });
 }
 
 
@@ -80,7 +74,7 @@ function checkRegister(){
 }
 
 function f_submitData(){
-    var sendRequest = new SendRequest("/plate/insertPlateuser","POST");//构造对象
+    var sendRequest = new SendRequest("/login/register","POST");//构造对象
     sendRequest.addParamObj({
         "cEmail":$("#cEmail").val(),
         "cLoginname":$("#cLoginname").val(),
@@ -110,7 +104,7 @@ function f_submitData(){
                 btnCancelLabel: "留在当前页面",
                 callback: function (ret) {
                     if(ret){
-                        window.location.href="/system/index";
+                        window.location.href="/web/index";
                     }
                 }
             });

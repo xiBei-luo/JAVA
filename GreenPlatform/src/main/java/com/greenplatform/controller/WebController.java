@@ -4,7 +4,7 @@ import com.greenplatform.model.TGreenRwRwmx;
 import com.greenplatform.model.TGreenSpSpmx;
 import com.greenplatform.model.TGreenZzZjzzmx;
 import com.greenplatform.model.base.ReturnModel;
-import com.greenplatform.service.SystemService;
+import com.greenplatform.service.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created by Luowenlv on 2019/5/7,11:25
  */
 @Controller
-@RequestMapping(value = "/system")
-public class SystemController {
+@RequestMapping(value = "/web")
+public class WebController {
     @Autowired
-    SystemService systemService;
+    WebService systemService;
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(Model model) {
@@ -49,7 +49,6 @@ public class SystemController {
     @RequestMapping(value = "/insertTGreenRwRwmx",method = RequestMethod.POST)
     @ResponseBody
     public ReturnModel insertTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx){
-        System.out.println(tGreenRwRwmx);
         ReturnModel returnModel = new ReturnModel();
         returnModel = systemService.insertTGreenRwRwmx(tGreenRwRwmx);
         return returnModel;

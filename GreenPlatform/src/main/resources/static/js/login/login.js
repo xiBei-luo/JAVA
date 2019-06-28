@@ -59,7 +59,7 @@ function checkLogin(){
 }
 
 function f_submitData(){
-    var sendRequest = new SendRequest("/plate/login","POST");//构造对象
+    var sendRequest = new SendRequest("/login/login","POST");//构造对象
     sendRequest.addParamObj({
         "cLoginname":$("#cLoginname").val(),
         "cPassword":$("#cPassword").val(),
@@ -82,7 +82,7 @@ function f_submitData(){
             if ("1" == $("input[name='cRylb']:checked").val()){
                 window.location.href="/base/index";
             } else{
-                window.location.href="/system/index";
+                window.location.href="/web/index";
             }
         }
     });//发送请求并获取返回结果

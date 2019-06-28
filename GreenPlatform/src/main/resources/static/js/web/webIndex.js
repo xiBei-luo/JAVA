@@ -30,40 +30,65 @@ function initEvent() {
 点击我的账户时，查询对应账户的详细信息
  */
 function f_selectLoginuserAccount(){
-    var sendRequest = new SendRequest("/system/selectLoginuserAccount","POST");//构造对象
+    var sendRequest = new SendRequest("/web/selectLoginuserAccount","POST");//构造对象
     sendRequest.addParamObj({
 
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
-        console.log(ret);
+        console.log(ret.object);
+
+        //登陆账户信息
         var oPlateuser = ret.object.plateUser[0];//登陆账户信息（获取人员姓名与人员等级）
-        var oTGreenNlHz = ret.object.tGreenNlHz[0];//登陆用户能量汇总信息（获取能量总量）
-        var aTGreenRwRwmx = ret.object.tGreenRwRwmx;//登陆用户任务完成信息（今日任务是否完成）
-        var atGreenZzZjzzmx = ret.object.tGreenZzZjzzmx;//登陆用户种子信息（查询用户有几种未捐赠的种子）
         $("#cLoginname").text(oPlateuser.cLoginname);
         $("#cRydj").text("L"+oPlateuser.cRydj);
-        $("#cNlhz").text(oTGreenNlHz.cNlhz);
+        if(!(oPlateuser.cRydj)){
+            $("#cRydj").text("L"+0);
+        }
 
+        //登陆用户能量汇总信息（获取能量总量）
+        var oTGreenNlHz = ret.object.tGreenNlHz[0];//登陆用户能量汇总信息（获取能量总量）
+        if(oTGreenNlHz){
+            $("#cNlhz").text(oTGreenNlHz.cNlhz);
+        }
 
-        var aRwlbArr = [];
-        $(aTGreenRwRwmx).each(function(i){
-            aRwlbArr.push(aTGreenRwRwmx[i].cRwlb);
-        });
-        if (aRwlbArr.length < 3){
-            for(var i=1;i<4;i++){
-                if($.inArray(i.toString(),aRwlbArr)<0){
-                    $("#cRwlb_"+i).addClass( "badge-warning");
-                    $("#cRwlb_"+i).text( "未完成");
+        //登陆用户任务完成信息（今日任务是否完成）
+        var aTGreenRwRwmx = ret.object.tGreenRwRwmx;//登陆用户任务完成信息（今日任务是否完成）
+        if(aTGreenRwRwmx.length > 0){
+            var aRwlbArr = [];
+            $(aTGreenRwRwmx).each(function(i){
+                aRwlbArr.push(aTGreenRwRwmx[i].cRwlb);
+            });
+            if (aRwlbArr.length < 3){
+                for(var i=1;i<4;i++){
+                    if($.inArray(i.toString(),aRwlbArr)<0){
+                        $("#cRwlb_"+i).addClass( "badge-warning");
+                        $("#cRwlb_"+i).text( "未完成");
+                    }
                 }
             }
+        }else{
+            for(var i=1;i<4;i++){
+                $("#cRwlb_"+i).addClass( "badge-warning");
+                $("#cRwlb_"+i).text( "未完成");
+            }
         }
-        $(atGreenZzZjzzmx).each(function(i,v){
+
+
+        //登陆用户种子信息（查询用户有几种未捐赠的种子）
+        var atGreenZzZjzzmx = ret.object.tGreenZzZjzzmx;//登陆用户种子信息（查询用户有几种未捐赠的种子）
+        if (atGreenZzZjzzmx.length > 0) {
+            $(atGreenZzZjzzmx).each(function(i,v){
+                $("#mySeed ul").append("<li class=\"list-group-item\">\n" +
+                    "<span id=\"cRwlb_4\">"+v.cSpbh+"</span>\n" +
+                    "<button class=\"btn btn-primary btn-sm float-right\">捐赠</button>\n" +
+                    "</li>");
+            });
+        }else{
             $("#mySeed ul").append("<li class=\"list-group-item\">\n" +
-                "<span id=\"cRwlb_4\">"+v.cSpbh+"</span>\n" +
-                "<button class=\"btn btn-primary btn-sm float-right\">捐赠</button>\n" +
+                "无\n" +
                 "</li>");
-        });
+        }
 
 
     });//发送请求并获取返回结果
@@ -95,7 +120,7 @@ function f_purchaseSeed(sSpbh){
  * @param sSpbh
  */
 function f_doPurchaseSeed(sSpbh) {
-    var sendRequest = new SendRequest("/system/insertTGreenZzZjzzmx","POST");//构造对象
+    var sendRequest = new SendRequest("/web/insertTGreenZzZjzzmx","POST");//构造对象
     sendRequest.addParamObj({
         cSpbh:sSpbh
     });//构造请求参数
@@ -130,13 +155,12 @@ function f_doPurchaseSeed(sSpbh) {
  * @param sRwlb  任务类别，必传
  */
 function f_finishMission(sRwlb){
-    var sendRequest = new SendRequest("/system/insertTGreenRwRwmx","POST");//构造对象
+    var sendRequest = new SendRequest("/web/insertTGreenRwRwmx","POST");//构造对象
     sendRequest.addParamObj({
         cRwlb:sRwlb
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
-        console.log(ret);
         if("0" != ret.flag){
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,

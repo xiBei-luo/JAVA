@@ -16,8 +16,16 @@ html,body{
     font-size: 20px;
     line-height: 50px;
 }
-.dropdown-link{
+.plate-navbar-right a{
+    color:#ffffff;
+}
+.navbar-loginUser{
+    line-height: 50px;
     color: #ffffff;
+    margin:0 20px;
+}
+.plate-navbar-right a:hover{
+    color: #333333;
 }
 /**
 左侧菜单栏

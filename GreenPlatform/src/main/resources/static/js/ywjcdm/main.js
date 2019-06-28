@@ -1,6 +1,5 @@
 var grid;
 $(function(){
-
     initEvent();
     initGrid();
 });
@@ -9,20 +8,21 @@ $(function(){
  * 初始化事件
  */
 function initEvent(){
-    initBaseCodeSelect($("#cRylb"),{cDmlb:"C_USER_RYLB"},null,null);
 
     $("#btnAdd").click(function(){
-       var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
-        win.setTitle("新增系统用户");
-        win.setWindowArguments("张三");//参数
+        var win = top.$.MdiWindow(window, 750, 300, 0, 0, true);
+        win.setTitle("新增基础代码");
+        win.setWindowArguments(null);//参数
         win.btnClose(true);
         win.btnMax(false);
         win.btnMin(false);
         win.isResize(false);
         win.onClose(function (ret) {
-
+            if(ret){
+                loadGridData();
+            }
         });
-        win.load("/yhgl/edit", window, function (obj) { });
+        win.load("/ywjcdm/edit", window, function (obj) { });
     });
 
     $("#btnSearch").click(function(){
@@ -37,10 +37,10 @@ function initGrid(){
     $("#gridbox").attr({width:"100%",height:"100%"});
     grid = new dhtmlXGridObject('gridbox');
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
-    grid.setHeader("操作,姓名,性别,证件号码,人员状态,电话号码,微信号码,QQ号码,状态");
-    grid.setInitWidthsP("15,10,6,16,8,11,11,11,11.5");
-    grid.setColAlign("center,center,center,center,center,center,center,center,center");
-    grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro");
+    grid.setHeader("操作,代码类别,代码类别名称,代码值,代码值名称,排序号,状态");
+    grid.setInitWidthsP("15,15,15,15,15,10,14.5");
+    grid.setColAlign("center,center,center,center,center,center,center");
+    grid.setColTypes("ro,ro,ro,ro,ro,ro,ro");
     grid.enableMultiselect(false);
     grid.init();
 }
@@ -50,11 +50,10 @@ function initGrid(){
  */
 function loadGridData(){
     grid.clearAll();
-    var sendRequest = new SendRequest("/plate/selectPlateuser","POST");//构造对象
+    var sendRequest = new SendRequest("/plate/selectPlateCodeDmz","POST");//构造对象
     sendRequest.addParamObj({
-        "cRylb":$("#cRylb").val(),
-        "cUsername":$("#cUsername").val(),
-        "cPhone":$("#cPhone").val()
+        "cDmlb":$("#cDmlb").val(),
+        "cDm":$("#cDm").val()
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
@@ -86,48 +85,46 @@ function loadGridData(){
 function initData(data){
     for (var i=0; i<data.length; i++){
         var opLinkBuff = new StringBuffer();
-        if ("1" == data[i].cRylb){
-            opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-primary \" onclick=\"f_upd(\'"+data[i].cUserid+"\');\" id=\"xg_link_"+data[i].cUserid+"\" >重置密码</button>")
-            opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-warning \" onclick=\"f_del(\'"+data[i].cUserid+"\');\" id=\"del_link_"+data[i].cUserid+"\" >删除</button>")
-        }
+        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-primary \" onclick=\"f_upd(\'"+(i+1)+"\');\" id=\"xg_link_"+(i+1)+"\" >修改</button>")
+        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-warning \" onclick=\"f_del(\'"+(i+1)+"\');\" id=\"del_link_"+(i+1)+"\" >删除</button>")
 
-        grid.addRow(data[i].cUserid,[
+        grid.addRow((i+1),[
             opLinkBuff.toString(),
-            data[i].cUsername,
-            data[i].cSex,
-            data[i].cZjhm,
-            data[i].cRyzt,
-            data[i].cPhone,
-            data[i].cWxhm,
-            data[i].cQq,
+            data[i].cDmlb,
+            data[i].cDmlbmc,
+            data[i].cDm,
+            data[i].cDmmc,
+            data[i].cSort,
             data[i].cZt
         ]);
-        grid.setUserData(data[i].cUserid,'data',data[i]);
+        grid.setUserData((i+1),"data",data[i]);
     }
 }
+
 /*
-重置密码
+修改用户,页面赋值
  */
 function f_upd(id){
-    BootstrapDialog.confirm({
-        type: BootstrapDialog.TYPE_DANGER,
-        size: BootstrapDialog.SIZE_SMALL,
-        title: '提示',
-        message: "确认重置用户密码吗！",
-        closeable: true,
-        btnOKLabel: "确定",
-        btnCancelLabel: "取消",
-        callback: function (ret) {
-            if(ret){
-                f_submitData('1',"/plate/retsetPass",id);
-            }
+    var data = grid.getUserData(id,"data");
+    var win = top.$.MdiWindow(window, 750, 300, 0, 0, true);
+    win.setTitle("修改基础代码");
+    win.setWindowArguments(data);//参数
+    win.btnClose(true);
+    win.btnMax(false);
+    win.btnMin(false);
+    win.isResize(false);
+    win.onClose(function (ret) {
+        if(ret){
+            loadGridData();
         }
     });
+    win.load("/ywjcdm/edit", window, function (obj) { });
 }
 /*
-删除用户
+删除
  */
 function f_del(id){
+    var data = grid.getUserData(id,"data");
     BootstrapDialog.confirm({
         type: BootstrapDialog.TYPE_DANGER,
         size: BootstrapDialog.SIZE_SMALL,
@@ -138,7 +135,7 @@ function f_del(id){
         btnCancelLabel: "取消",
         callback: function (ret) {
             if(ret){
-                f_submitData('2',"/plate/delPlateuser",id);
+                f_submitData('2',"/plate/delYwjcdm",data);
             }
         }
     });
@@ -148,30 +145,15 @@ function f_del(id){
  * 发送请求保存数据
  * type:操作类型，0新增/1修改/2删除
  * reqURL：服务地址
- * id：用户参数
+ * data：业务数据
  */
-function f_submitData(type,reqURL,id){
+function f_submitData(type,reqURL,data){
     var sendRequest = new SendRequest(reqURL,"POST");//构造对象
 
-    if("1" === type){
-        sendRequest.addParamObj({
-            "cUserid":id,
-            "cUsername":$("#cUsername").val(),
-            "cSex":$("#cSex").val(),
-            "cEmail":$("#cEmail").val(),
-            "cPhone":$("#cPhone").val(),
-            "cWxhm":$("#cWxhm").val(),
-            "cZjhm":$("#cZjhm").val(),
-            "cLoginname":$("#cLoginname").val(),
-            "cRylb":'1',
-            "cPassword":$("#cPassword").val(),
-            "cZt":'1'
-        });//构造请求参数
-    }else if("2" === type){
-        sendRequest.addParamObj({
-            "cUserid":id
-        });//构造请求参数
-    }
+    sendRequest.addParamObj({
+        "cDmlb"     : data.cDmlb,
+        "cDm"       : data.cDmlb
+    });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
         if("0" != ret.flag){
@@ -191,7 +173,7 @@ function f_submitData(type,reqURL,id){
                 message: "操作成功",
                 closeable: true,
                 buttonLabel: "确定",
-                callback: function(){
+                callback: function () {
                     loadGridData();
                 }
             });
