@@ -71,6 +71,14 @@ public class BaseController {
     public String ywjcdmEdit(){
         return "plate/ywjcdm/edit";
     }
+    @GetMapping(value = "/plateYhgl")
+    public String plateYhgl(){
+        return "plate/plateYhgl/main";
+    }
+    @GetMapping(value = "/plateYhgl/edit")
+    public String plateYhglEdit(){
+        return "plate/plateYhgl/edit";
+    }
 
 
     //网站

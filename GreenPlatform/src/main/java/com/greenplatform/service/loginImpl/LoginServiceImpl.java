@@ -37,6 +37,9 @@ public class LoginServiceImpl implements LoginService {
         List plateUserList;
         PlateUserExample plateUserExample = new PlateUserExample();
         PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
+        criteria.andCRyztEqualTo("1");//人员状态（0未激活1已激活）
+        criteria.andCRyxzEqualTo("1");//人员性质（1正常 -1黑名单）
+        criteria.andCZtEqualTo("1");//数据状态（0无效  1有效）
 
         //1、用户是否存在
         plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
@@ -101,9 +104,12 @@ public class LoginServiceImpl implements LoginService {
             //3.注册用户
             String majorKey = UUID.randomUUID().toString().replaceAll("-", "");
             plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
-            plateUser.setcRyzt("1");
-            plateUser.setcRylb("2");
-            plateUser.setcRydj("1");
+            plateUser.setcRyzt("1");//人员状态（0未激活1已激活）
+            plateUser.setcRylb("2");//人员类别（1系统用户2前端用户）
+            plateUser.setcRydj("0");//人员等级（0，1，2，3，4）
+            plateUser.setcRyxz("1");//人员性质（1正常，-1黑名单）
+            plateUser.setcZt("1");//数据状态（0无效1有效）
+
             plateUser.setcUserid(majorKey);
             plateUser.setdCjsj(TimeUtil.getTimestamp(new Date()));
             plateUser.setcCjuser(majorKey);

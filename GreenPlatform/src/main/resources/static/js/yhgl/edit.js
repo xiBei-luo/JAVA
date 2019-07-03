@@ -7,9 +7,10 @@
  * @returns
  */
 function _init(args, mdi, layerIdx, parentWindow) {
+    var refresh = false;
     initEvent();
     $("#btnRet").click(function(){
-        parentWindow.returnValue = true;
+        parentWindow.returnValue = refresh;
         parent.layer.close(layerIdx);
     });
 
@@ -86,7 +87,8 @@ function _init(args, mdi, layerIdx, parentWindow) {
                     closeable: true,
                     buttonLabel: "确定",
                     callback: function () {
-                        parentWindow.returnValue = true;
+                        refresh = true;
+                        parentWindow.returnValue = refresh;
                         parent.layer.close(layerIdx);
                     }
                 });

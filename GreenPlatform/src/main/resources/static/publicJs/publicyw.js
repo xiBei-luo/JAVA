@@ -14,7 +14,6 @@ function initBaseCodeSelect($container, args, defVal, allFlag){
     var sendRequest = new SendRequest("/plate/selectPlateCodeDmz","POST");//构造对象
     sendRequest.addParamObj(args);//构造请求参数
     sendRequest.sendRequest(function(ret){
-
         if(ret.flag == "0" && ret.object.length>0){
             if(allFlag){
                 $container.append("<option value=''>"+allFlag+"</option>");

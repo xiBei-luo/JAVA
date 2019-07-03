@@ -50,7 +50,7 @@ function initGrid(){
  */
 function loadGridData(){
     grid.clearAll();
-    var sendRequest = new SendRequest("/plate/selectPlateCodeDmz","POST");//构造对象
+    var sendRequest = new SendRequest("/plate/selectYwjcdm","POST");//构造对象
     sendRequest.addParamObj({
         "cDmlb":$("#cDmlb").val(),
         "cDm":$("#cDm").val()
@@ -95,7 +95,7 @@ function initData(data){
             data[i].cDm,
             data[i].cDmmc,
             data[i].cSort,
-            data[i].cZt
+            data[i].cZtsm
         ]);
         grid.setUserData((i+1),"data",data[i]);
     }
@@ -152,7 +152,7 @@ function f_submitData(type,reqURL,data){
 
     sendRequest.addParamObj({
         "cDmlb"     : data.cDmlb,
-        "cDm"       : data.cDmlb
+        "cDm"       : data.cDm
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){

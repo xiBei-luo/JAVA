@@ -1,18 +1,18 @@
 package com.greenplatform.controller;
 
-import com.greenplatform.model.PlateCodeDmz;
-import com.greenplatform.model.PlateUser;
-import com.greenplatform.model.TGreenRwRwmx;
-import com.greenplatform.model.TGreenSpSpmx;
+import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
 import com.greenplatform.util.GetcurrentLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -44,7 +44,6 @@ public class PlateController {
 
     @PostMapping(value = "/getDmmc")
     public ReturnModel getDmmc(String cDmlb,String cDm){
-        System.out.println(cDmlb+"==="+cDm);
         ReturnModel returnModel = new ReturnModel();
         return returnModel;
     }
@@ -52,6 +51,12 @@ public class PlateController {
     @PostMapping(value = "/selectPlateuser")
     public ReturnModel selectPlateuser(PlateUser plateUser){
         ReturnModel returnModel = plateService.selectPlateuser(plateUser);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/selectWebUser")
+    public ReturnModel selectWebUser(PlateUser plateUser){
+        ReturnModel returnModel = plateService.selectWebUser(plateUser);
         return returnModel;
     }
 
@@ -109,20 +114,34 @@ public class PlateController {
     }
 
     @PostMapping(value = "/selectTGreenRwRwmx")
-    public ReturnModel selectTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx){
-        ReturnModel returnModel = plateService.selectTGreenRwRwmx(tGreenRwRwmx);
+    public ReturnModel selectTGreenRwRwmx(@RequestParam("cUsername") String cUsername,
+                                          @RequestParam("cRwlb") String cRwlb){
+        Map paramsMap = new HashMap();
+        paramsMap.put("cUsername",cUsername);
+        paramsMap.put("cRwlb",cRwlb);
+        ReturnModel returnModel = plateService.selectTGreenRwRwmx(paramsMap);
         return returnModel;
     }
 
     @PostMapping(value = "/insertYwjcdm")
-    public ReturnModel insertYwjcdm(PlateCodeDmz plateCodeDmz){
-        ReturnModel returnModel = plateService.insertYwjcdm(plateCodeDmz);
+    public ReturnModel insertYwjcdm(PlateCodeDmlb plateCodeDmlb,PlateCodeDmz plateCodeDmz){
+        ReturnModel returnModel = plateService.insertYwjcdm(plateCodeDmlb,plateCodeDmz);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/selectYwjcdm")
+    public ReturnModel selectYwjcdm(@RequestParam("cDmlb") String cDmlb,
+                                    @RequestParam("cDm") String cDm){
+        Map params = new HashMap();
+        params.put("cDmlb",cDmlb);
+        params.put("cDm",cDm);
+        ReturnModel returnModel = plateService.selectPlateCodeDmz(params);
         return returnModel;
     }
 
     @PostMapping(value = "/updYwjcdm")
-    public ReturnModel updYwjcdm(PlateCodeDmz plateCodeDmz){
-        ReturnModel returnModel = plateService.updPlateCodeDmz(plateCodeDmz);
+    public ReturnModel updYwjcdm(PlateCodeDmlb plateCodeDmlb,PlateCodeDmz plateCodeDmz){
+        ReturnModel returnModel = plateService.updYwjcdm(plateCodeDmlb,plateCodeDmz);
         return returnModel;
     }
 

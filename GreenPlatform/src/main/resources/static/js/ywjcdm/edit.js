@@ -7,20 +7,27 @@
  * @returns
  */
 function _init(args, mdi, layerIdx, parentWindow) {
+    var refresh = false;
     if(args){
         setInputArea(nullToEmptyForObject(args));
+        $("#cZt").find("option[text='1']").attr("selected","selected");
         $("#cDmlb,#cDm").attr("disabled",true);
     }
 
     initEvent();
     $("#btnRet").click(function () {
-        parentWindow.returnValue = true;
+        parentWindow.returnValue = refresh;
         parent.layer.close(layerIdx);
     });
 
 
     function initEvent() {
-        initBaseCodeSelect($("#cZt"),{cDmlb:"C_JC_ZT"},null,"---请选择状态---")
+        if (args){
+            initBaseCodeSelect($("#cZt"),{cDmlb:"C_JC_ZT"},args.cZt,"---请选择状态---");
+        } else{
+            initBaseCodeSelect($("#cZt"),{cDmlb:"C_JC_ZT"},null,"---请选择状态---");
+        }
+
 
         $("#btnSave").click(function () {
             var bPass = bPass = requiredFieldCheck($("label .require"), top, function(){});
@@ -58,7 +65,7 @@ function _init(args, mdi, layerIdx, parentWindow) {
             sendRequest.addParamObj({
                 "cDmlb"     : args.cDmlb,
                 "cDmlbmc"   : $("#cDmlbmc").val(),
-                "cDm"       : args.cDmlb,
+                "cDm"       : args.cDm,
                 "cDmmc"     : $("#cDmmc").val(),
                 "cSort"     : $("#cSort").val(),
                 "cZt"       : $("#cZt").val()
@@ -88,7 +95,8 @@ function _init(args, mdi, layerIdx, parentWindow) {
                     closeable: true,
                     buttonLabel: "确定",
                     callback: function () {
-                        parentWindow.returnValue = true;
+                        refresh = true;
+                        parentWindow.returnValue = refresh;
                         parent.layer.close(layerIdx);
                     }
                 });

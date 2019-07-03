@@ -9,21 +9,7 @@ $(function(){
  * 初始化事件
  */
 function initEvent(){
-    initBaseCodeSelect($("#cRylb"),{cDmlb:"C_USER_RYLB"},null,null);
-
-    $("#btnAdd").click(function(){
-       var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
-        win.setTitle("新增系统用户");
-        win.setWindowArguments("张三");//参数
-        win.btnClose(true);
-        win.btnMax(false);
-        win.btnMin(false);
-        win.isResize(false);
-        win.onClose(function (ret) {
-
-        });
-        win.load("/yhgl/edit", window, function (obj) { });
-    });
+    initBaseCodeSelect($("#cRydj"),{cDmlb:"C_USER_RYDJ"},null,"全部");
 
     $("#btnSearch").click(function(){
         loadGridData();
@@ -37,8 +23,8 @@ function initGrid(){
     $("#gridbox").attr({width:"100%",height:"100%"});
     grid = new dhtmlXGridObject('gridbox');
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
-    grid.setHeader("操作,姓名,性别,证件号码,人员状态,电话号码,微信号码,QQ号码,状态");
-    grid.setInitWidthsP("15,10,6,16,8,11,11,11,11.5");
+    grid.setHeader("序号,姓名,性别,证件号码,人员性质,人员状态,账户等级,注册方式,账户总能量");
+    grid.setInitWidthsP("11,10,6,20,8,11,11,11,11.5");
     grid.setColAlign("center,center,center,center,center,center,center,center,center");
     grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro");
     grid.enableMultiselect(false);
@@ -50,11 +36,11 @@ function initGrid(){
  */
 function loadGridData(){
     grid.clearAll();
-    var sendRequest = new SendRequest("/plate/selectPlateuser","POST");//构造对象
+    var sendRequest = new SendRequest("/plate/selectWebUser","POST");//构造对象
     sendRequest.addParamObj({
-        "cRylb":$("#cRylb").val(),
+        "cRydj":$("#cRydj").val(),
         "cUsername":$("#cUsername").val(),
-        "cPhone":$("#cPhone").val()
+        "cZjhm":$("#cZjhm").val()
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
@@ -85,116 +71,17 @@ function loadGridData(){
  */
 function initData(data){
     for (var i=0; i<data.length; i++){
-        var opLinkBuff = new StringBuffer();
-        if ("1" == data[i].cRylb){
-            opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-primary \" onclick=\"f_upd(\'"+data[i].cUserid+"\');\" id=\"xg_link_"+data[i].cUserid+"\" >重置密码</button>")
-            opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-warning \" onclick=\"f_del(\'"+data[i].cUserid+"\');\" id=\"del_link_"+data[i].cUserid+"\" >删除</button>")
-        }
-
         grid.addRow(data[i].cUserid,[
-            opLinkBuff.toString(),
+            (i+1),
             data[i].cUsername,
             data[i].cSex,
             data[i].cZjhm,
-            data[i].cRyzt,
-            data[i].cPhone,
-            data[i].cWxhm,
-            data[i].cQq,
-            data[i].cZt
+            data[i].cRyxzsm,
+            data[i].cRyztsm,
+            data[i].cRydj,
+            data[i].cZcfssm,
+            data[i].cNlhz
         ]);
         grid.setUserData(data[i].cUserid,'data',data[i]);
     }
-}
-/*
-重置密码
- */
-function f_upd(id){
-    BootstrapDialog.confirm({
-        type: BootstrapDialog.TYPE_DANGER,
-        size: BootstrapDialog.SIZE_SMALL,
-        title: '提示',
-        message: "确认重置用户密码吗！",
-        closeable: true,
-        btnOKLabel: "确定",
-        btnCancelLabel: "取消",
-        callback: function (ret) {
-            if(ret){
-                f_submitData('1',"/plate/retsetPass",id);
-            }
-        }
-    });
-}
-/*
-删除用户
- */
-function f_del(id){
-    BootstrapDialog.confirm({
-        type: BootstrapDialog.TYPE_DANGER,
-        size: BootstrapDialog.SIZE_SMALL,
-        title: '提示',
-        message: "确认删除吗！",
-        closeable: true,
-        btnOKLabel: "确定",
-        btnCancelLabel: "取消",
-        callback: function (ret) {
-            if(ret){
-                f_submitData('2',"/plate/delPlateuser",id);
-            }
-        }
-    });
-}
-
-/**
- * 发送请求保存数据
- * type:操作类型，0新增/1修改/2删除
- * reqURL：服务地址
- * id：用户参数
- */
-function f_submitData(type,reqURL,id){
-    var sendRequest = new SendRequest(reqURL,"POST");//构造对象
-
-    if("1" === type){
-        sendRequest.addParamObj({
-            "cUserid":id,
-            "cUsername":$("#cUsername").val(),
-            "cSex":$("#cSex").val(),
-            "cEmail":$("#cEmail").val(),
-            "cPhone":$("#cPhone").val(),
-            "cWxhm":$("#cWxhm").val(),
-            "cZjhm":$("#cZjhm").val(),
-            "cLoginname":$("#cLoginname").val(),
-            "cRylb":'1',
-            "cPassword":$("#cPassword").val(),
-            "cZt":'1'
-        });//构造请求参数
-    }else if("2" === type){
-        sendRequest.addParamObj({
-            "cUserid":id
-        });//构造请求参数
-    }
-
-    sendRequest.sendRequest(function(ret){
-        if("0" != ret.flag){
-            BootstrapDialog.alert({
-                type: BootstrapDialog.TYPE_WARNING,
-                size: BootstrapDialog.SIZE_SMALL,
-                title: '提示',
-                message: "操作失败！"+ret.msg,
-                closeable: true,
-                buttonLabel: "确定"
-            });
-        }else{
-            BootstrapDialog.alert({
-                type: BootstrapDialog.TYPE_PRIMARY,
-                size: BootstrapDialog.SIZE_SMALL,
-                title: '提示',
-                message: "操作成功",
-                closeable: true,
-                buttonLabel: "确定",
-                callback: function(){
-                    loadGridData();
-                }
-            });
-        }
-    });//发送请求并获取返回结果
 }

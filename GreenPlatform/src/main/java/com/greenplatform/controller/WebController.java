@@ -19,38 +19,47 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/web")
 public class WebController {
     @Autowired
-    WebService systemService;
+    WebService webService;
 
+    /**
+     * 查询首页所需信息（当前人当日任务完成情况，能量汇总排行前十，商品明细）
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(Model model) {
-        ReturnModel returnModel = systemService.selectTGreenSpSpmx(new TGreenSpSpmx());
-        model.addAttribute("tGreenSpSpmxList", returnModel.getObject());
+        ReturnModel returnModel = webService.selectLoginuserHome();
+        model.addAttribute("loginuserHome", returnModel.getObject());
         return "web/index";
     }
 
+    /**
+     * 查询登录用户信息（人员姓名，人员等级，能量总量，种子汇总，今日任务）
+     * @return
+     */
     @RequestMapping(value = "/selectLoginuserAccount",method = RequestMethod.POST)
     @ResponseBody
     public ReturnModel selectLoginuserAccount(){
         ReturnModel returnModel = new ReturnModel();
-        returnModel = systemService.selectLoginuserAccount();
+        returnModel = webService.selectLoginuserAccount();
         return returnModel;
     }
 
-    //种子商店兑换种子
-    @RequestMapping(value = "/insertTGreenZzZjzzmx",method = RequestMethod.POST)
+    //能量种子商店兑换种子
+    @RequestMapping(value = "/buySeeds",method = RequestMethod.POST)
     @ResponseBody
-    public ReturnModel insertTGreenZzZjzzmx(TGreenZzZjzzmx tGreenZzZjzzmx){
+    public ReturnModel buySeeds(TGreenZzZjzzmx tGreenZzZjzzmx){
         ReturnModel returnModel = new ReturnModel();
-        returnModel = systemService.insertTGreenZzZjzzmx(tGreenZzZjzzmx);
+        returnModel = webService.buySeeds(tGreenZzZjzzmx);
         return returnModel;
     }
 
     //完成每日基础任务
-    @RequestMapping(value = "/insertTGreenRwRwmx",method = RequestMethod.POST)
+    @RequestMapping(value = "/accomplishRw",method = RequestMethod.POST)
     @ResponseBody
-    public ReturnModel insertTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx){
+    public ReturnModel accomplishRw(TGreenRwRwmx tGreenRwRwmx){
         ReturnModel returnModel = new ReturnModel();
-        returnModel = systemService.insertTGreenRwRwmx(tGreenRwRwmx);
+        returnModel = webService.accomplishRw(tGreenRwRwmx);
         return returnModel;
     }
 

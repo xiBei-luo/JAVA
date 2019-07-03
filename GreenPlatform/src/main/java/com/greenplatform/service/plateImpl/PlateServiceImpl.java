@@ -2,6 +2,9 @@ package com.greenplatform.service.plateImpl;
 
 import com.greenplatform.aop.OperationLog;
 import com.greenplatform.dao.*;
+import com.greenplatform.dao.owerMapper.OwerPlateCodeDmzMapper;
+import com.greenplatform.dao.owerMapper.OwerPlateUserMapper;
+import com.greenplatform.dao.owerMapper.OwerTGreenRwRwmxMapper;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
@@ -13,13 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Transactional
 @Service
@@ -31,6 +28,8 @@ public class PlateServiceImpl implements PlateService {
     @Autowired
     PlateUserMapper plateUserMapper;
     @Autowired
+    OwerPlateUserMapper owerPlateUserMapper;
+    @Autowired
     TGreenNlZjnlmxMapper tGreenNlZjnlmxMapper;
     @Autowired
     TGreenNlHzMapper tGreenNlHzMapper;
@@ -39,18 +38,22 @@ public class PlateServiceImpl implements PlateService {
     @Autowired
     PlateCodeDmzMapper plateCodeDmzMapper;
     @Autowired
+    OwerPlateCodeDmzMapper owerPlateCodeDmzMapper;
+    @Autowired
     PlateLogMapper plateLogMapper;
     @Autowired
     TGreenSpSpmxMapper tGreenSpSpmxMapper;
     @Autowired
     TGreenRwRwmxMapper tGreenRwRwmxMapper;
+    @Autowired
+    OwerTGreenRwRwmxMapper owerTGreenRwRwmxMapper;
 
     ReturnModel returnModel = new ReturnModel();
 
 
 
     /**
-     * 查询
+     * 系统用户查询
      * @param plateUser
      * @return
      */
@@ -59,7 +62,7 @@ public class PlateServiceImpl implements PlateService {
         List plateUserList;
         PlateUserExample plateUserExample = new PlateUserExample();
         PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
-
+        criteria.andCRylbEqualTo("1");//只查系统用户
         if (!(("").equals(plateUser.getcRylb()) || null == plateUser.getcRylb())){
             criteria.andCRylbEqualTo(plateUser.getcRylb());
         }
@@ -83,6 +86,36 @@ public class PlateServiceImpl implements PlateService {
         return returnModel;
     }
 
+    /**
+     * 网站用户查询
+     * @param plateUser
+     * @return
+     */
+    @Override
+    public ReturnModel selectWebUser(PlateUser plateUser) {
+        List plateUserList;
+        plateUser.setcRylb("2");//只查询前端用户
+
+        try{
+            plateUserList = owerPlateUserMapper.selectWebUser(plateUser);
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(plateUserList);
+        }catch(Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("系统错误");
+            returnModel.setObject(null);
+        }
+        return returnModel;
+    }
+
+
+    /**
+     * 新增系统用户
+     * @param plateUser
+     * @return
+     */
     @OperationLog(cCzfs = "I")
     @Override
     public ReturnModel insertPlateuser(PlateUser plateUser) {
@@ -92,7 +125,10 @@ public class PlateServiceImpl implements PlateService {
             //1.判断邮箱或用户名是否被注册
             PlateUserExample plateUserExample = new PlateUserExample();
             PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
-            criteria.andCRylbEqualTo(plateUser.getcRylb());
+            criteria.andCRylbEqualTo("1");//人员类别
+            criteria.andCRyztEqualTo("1");//人员类别（1系统用户2网站前端用户）
+            criteria.andCRyxzEqualTo("1");//员性质（1正常 -1黑名单）
+            criteria.andCZtEqualTo("1");//数据状态（0无效  1有效）
             criteria.andCEmailEqualTo(plateUser.getcEmail());
 
             plateUserList = plateUserMapper.selectByExample(plateUserExample);
@@ -103,9 +139,8 @@ public class PlateServiceImpl implements PlateService {
                 return returnModel;
             }
             //2.判断用户名是否被注册
-            PlateUserExample plateUserExample1 = new PlateUserExample();
-            plateUserExample1.createCriteria().andCLoginnameEqualTo(plateUser.getcLoginname());
-            plateUserList = plateUserMapper.selectByExample(plateUserExample1);
+            criteria.andCLoginnameEqualTo(plateUser.getcLoginname());
+            plateUserList = plateUserMapper.selectByExample(plateUserExample);
             if (!(plateUserList.isEmpty())){
                 returnModel.setFlag(1);
                 returnModel.setObject(null);
@@ -115,11 +150,14 @@ public class PlateServiceImpl implements PlateService {
             //3.新增用户
             String majorKey = UUID.randomUUID().toString().replaceAll("-", "");
             plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
-            plateUser.setcRyzt("1");
-            plateUser.setcRylb("1");
+            plateUser.setcRyzt("1");//人员状态（0未激活1已激活）
+            plateUser.setcRylb("1");//人员类别（1系统用户2网站前端用户）
+            plateUser.setcRyxz("1");//人员性质（1正常 -1黑名单）
+            plateUser.setcZt("1");//数据状态（0无效  1有效）
             plateUser.setcUserid(majorKey);
             plateUser.setdCjsj(TimeUtil.getTimestamp(new Date()));
             plateUser.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+
             int insertRet = plateUserMapper.insert(plateUser);
             if (1 != insertRet){
                 returnModel.setFlag(1);
@@ -143,6 +181,11 @@ public class PlateServiceImpl implements PlateService {
     }
 
 
+    /**
+     * 删除系统用户
+     * @param plateUser
+     * @return
+     */
     @OperationLog(cCzfs = "D")
     @Override
     public ReturnModel delPlateuser(PlateUser plateUser) {
@@ -176,8 +219,13 @@ public class PlateServiceImpl implements PlateService {
         }
     }
 
+    /**
+     * 重置系统用户密码
+     * @param plateUser
+     * @return
+     */
     @OperationLog(cCzfs = "U")
-    @Override//重置密码
+    @Override
     public ReturnModel retsetPass(PlateUser plateUser) {
         try{
             PlateUser plateUser1 = plateUserMapper.selectByPrimaryKey(plateUser.getcUserid());
@@ -207,6 +255,11 @@ public class PlateServiceImpl implements PlateService {
         }
     }
 
+    /**
+     * 修改用户信息
+     * @param plateUser
+     * @return
+     */
     @OperationLog(cCzfs = "U")
     @Override
     public ReturnModel updPlateuser(PlateUser plateUser) {
@@ -218,15 +271,16 @@ public class PlateServiceImpl implements PlateService {
                 returnModel.setObject(null);
                 return returnModel;
             }else{
-                plateUser.setcUsername(plateUser1.getcUsername());
-                plateUser.setcLoginname(plateUser1.getcLoginname());
-                plateUser.setcPhone(plateUser1.getcPhone());//姓名，登录名，电话号码不能修改
-                plateUser.setcRyzt(plateUser1.getcRyzt());
-                plateUser.setcRylb(plateUser1.getcRylb());
+                plateUser1.setcUsername(plateUser.getcUsername());
+                plateUser1.setcSex(plateUser.getcSex());
+                plateUser1.setcPhone(plateUser.getcPhone());
+                plateUser1.setcZjlx(plateUser.getcZjlx());
+                plateUser1.setcZjhm(plateUser.getcZjhm());
+                plateUser1.setcJtzz(plateUser.getcJtzz());
+                plateUser1.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                plateUser1.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
 
-                plateUser.setdXgsj(TimeUtil.getTimestamp(new Date()));
-                plateUser.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                plateUserMapper.updateByPrimaryKey(plateUser);
+                plateUserMapper.updateByPrimaryKey(plateUser1);
                 returnModel.setFlag(0);
                 returnModel.setMsg("修改用户成功!");
                 returnModel.setObject(null);
@@ -242,130 +296,16 @@ public class PlateServiceImpl implements PlateService {
     }
 
 
-    //查询代码类别
-    @Override
-    public ReturnModel selectPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
-        List plateCodeDmlbList;
-        try {
-            plateCodeDmlbList = plateCodeDmlbMapper.selectByExample(new PlateCodeDmlbExample());
-            returnModel.setFlag(0);
-            returnModel.setMsg("");
-            returnModel.setObject(plateCodeDmlbList);
-        }catch (Exception e){
-            returnModel.setFlag(1);
-            returnModel.setMsg("查询出错，系统错误！");
-            returnModel.setObject(null);
-        }
-        return returnModel;
-    }
-
-    @OperationLog(cCzfs = "I")
-    @Override
-    public ReturnModel insertPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
-        try{
-            //1.判断代码类别是否已存在
-            PlateCodeDmlb plateCodeDmlb1 = plateCodeDmlbMapper.selectByPrimaryKey(plateCodeDmlb.getcDmlb());
-            if(!(null == plateCodeDmlb1 || "".equals(plateCodeDmlb1))){
-                returnModel.setFlag(1);
-                returnModel.setMsg("新增出错，代码类别已存在！");
-                returnModel.setObject(null);
-                return returnModel;
-            }else{
-                //2.插入值
-                plateCodeDmlb.setdCjsj(TimeUtil.getTimestamp(new Date()));
-                plateCodeDmlb.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                plateCodeDmlbMapper.insert(plateCodeDmlb);
-                returnModel.setFlag(0);
-                returnModel.setMsg("新增成功！");
-                returnModel.setObject(null);
-                return returnModel;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            returnModel.setFlag(1);
-            returnModel.setMsg("新增出错，系统错误！");
-            returnModel.setObject(null);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return returnModel;
-        }
-    }
-
-    @OperationLog(cCzfs = "D")
-    @Override
-    public ReturnModel delPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
-        try{
-            //1.判断数据是否存在
-            PlateCodeDmlb plateCodeDmlb1 = plateCodeDmlbMapper.selectByPrimaryKey(plateCodeDmlb.getcDmlb());
-            if (null == plateCodeDmlb1 || "".equals(plateCodeDmlb1)){
-                returnModel.setFlag(1);
-                returnModel.setMsg("操作失败，待删除的数据不存在！");
-                returnModel.setObject(null);
-                return returnModel;
-            }else{
-                //2.执行删除
-                plateCodeDmlbMapper.deleteByPrimaryKey(plateCodeDmlb.getcDmlb());
-                returnModel.setFlag(0);
-                returnModel.setMsg("操作成功！");
-                returnModel.setObject(null);
-                return returnModel;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            returnModel.setFlag(1);
-            returnModel.setMsg("操作失败，系统错误！");
-            returnModel.setObject(null);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return returnModel;
-        }
-    }
-
-    @OperationLog(cCzfs = "U")
-    @Override
-    public ReturnModel updPlateCodeDmlb(PlateCodeDmlb plateCodeDmlb) {
-        try{
-            //1.判断数据是否存在
-            PlateCodeDmlb plateCodeDmlb1 = plateCodeDmlbMapper.selectByPrimaryKey(plateCodeDmlb.getcDmlb());
-            if (null == plateCodeDmlb1 || "".equals(plateCodeDmlb1)){
-                returnModel.setFlag(1);
-                returnModel.setMsg("操作失败，待修改的数据不存在！");
-                returnModel.setObject(null);
-                return returnModel;
-            }else{
-                plateCodeDmlb.setdXgsj(TimeUtil.getTimestamp(new Date()));
-                plateCodeDmlb.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                plateCodeDmlbMapper.updateByPrimaryKey(plateCodeDmlb);
-                returnModel.setFlag(0);
-                returnModel.setMsg("操作成功！");
-                returnModel.setObject(null);
-                return returnModel;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            returnModel.setFlag(0);
-            returnModel.setMsg("操作失败，服务器端出错！");
-            returnModel.setObject(null);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return returnModel;
-        }
-    }
 
     /**
-     * 查询基础代码
-     * @param plateCodeDmz
+     * 自定义mapper====查询代码值
+     * @param params
      * @return
      */
     @Override
-    public ReturnModel selectPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
-        PlateCodeDmzExample plateCodeDmzExample = new PlateCodeDmzExample();
-        PlateCodeDmzExample.Criteria criteria = plateCodeDmzExample.createCriteria();
-        if (!(("").equals(plateCodeDmz.getcDmlb()) || null == plateCodeDmz.getcDmlb())){
-            criteria.andCDmlbEqualTo(plateCodeDmz.getcDmlb());
-        }
-        if (!(("").equals(plateCodeDmz.getcDm()) || null == plateCodeDmz.getcDm())){
-            criteria.andCDmEqualTo(plateCodeDmz.getcDm());
-        }
+    public ReturnModel selectPlateCodeDmz(Map params) {
         try{
-            List plateCodeDmzList = plateCodeDmzMapper.selectByExample(plateCodeDmzExample);
+            List plateCodeDmzList = owerPlateCodeDmzMapper.selectPlateCodeDmz(params);
             returnModel.setFlag(0);
             returnModel.setMsg("操作成功!");
             returnModel.setObject(plateCodeDmzList);
@@ -378,34 +318,35 @@ public class PlateServiceImpl implements PlateService {
         return returnModel;
     }
 
-    @OperationLog(cCzfs = "I")
+    /**
+     * 查询基础代码
+     * @param plateCodeDmz
+     * @return
+     */
     @Override
-    public ReturnModel insertPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
+    public ReturnModel selectPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
+        PlateCodeDmzExample plateCodeDmzExample = new PlateCodeDmzExample();
+        PlateCodeDmzExample.Criteria criteria = plateCodeDmzExample.createCriteria();
+
+        if (!(("").equals(plateCodeDmz.getcDmlb()) || null == plateCodeDmz.getcDmlb())){
+            criteria.andCDmlbLike(plateCodeDmz.getcDmlb());
+        }
+        if (!(("").equals(plateCodeDmz.getcDm()) || null == plateCodeDmz.getcDm())){
+            criteria.andCDmlbLike(plateCodeDmz.getcDm());
+        }
+        plateCodeDmzExample.setOrderByClause("c_dmlb");
         try{
-            //1.判断插入的数据是否有重复
-            PlateCodeDmz plateCodeDmz1 = plateCodeDmzMapper.selectByPrimaryKey(plateCodeDmz.getcDm(),plateCodeDmz.getcDmlb());
-            if (!(null == plateCodeDmz1 || "".equals(plateCodeDmz1))){
-                returnModel.setFlag(1);
-                returnModel.setMsg("新增出错，该代码类别下的代码值已存在！");
-                returnModel.setObject(null);
-                return returnModel;
-            }else{
-                plateCodeDmz.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                plateCodeDmz.setdCjsj(TimeUtil.getTimestamp(new Date()));
-                plateCodeDmzMapper.insert(plateCodeDmz);
-                returnModel.setFlag(0);
-                returnModel.setMsg("新增成功！");
-                returnModel.setObject(plateCodeDmz);
-                return returnModel;
-            }
+            List plateCodeDmzList = plateCodeDmzMapper.selectByExample(plateCodeDmzExample);
+            returnModel.setFlag(0);
+            returnModel.setMsg("操作成功!");
+            returnModel.setObject(plateCodeDmzList);
         }catch (Exception e){
             e.printStackTrace();
             returnModel.setFlag(1);
-            returnModel.setMsg("新增出错，系统错误！");
+            returnModel.setMsg("操作失败，系统错误!");
             returnModel.setObject(null);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return returnModel;
         }
+        return returnModel;
     }
 
     @OperationLog(cCzfs = "D")
@@ -449,9 +390,78 @@ public class PlateServiceImpl implements PlateService {
         }
     }
 
+
+    /**
+     * 自定义mapper====业务基础代码维护
+     * @param plateCodeDmlb
+     * @param plateCodeDmz
+     * @return
+     */
+    @OperationLog(cCzfs = "I")
+    @Override
+    public ReturnModel insertYwjcdm(PlateCodeDmlb plateCodeDmlb,PlateCodeDmz plateCodeDmz) {
+        try {
+            //1.参数非空判断
+            if (("").equals(plateCodeDmz.getcDmlb()) || null == plateCodeDmz.getcDmlb()){
+                returnModel.setFlag(1);
+                returnModel.setMsg("操作失败，代码类别不能为空");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+            if (("").equals(plateCodeDmz.getcDm()) || null == plateCodeDmz.getcDm()){
+                returnModel.setFlag(1);
+                returnModel.setMsg("操作失败，代码不能为空");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+            //2-1.如果指定代码类别不存在则现在代码类别主表插入一条数据
+            PlateCodeDmlb plateCodeDmlb1 = plateCodeDmlbMapper.selectByPrimaryKey(plateCodeDmz.getcDmlb());
+            if (null == plateCodeDmlb1 || "".equals(plateCodeDmlb1)){
+                plateCodeDmlb.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+                plateCodeDmlb.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                plateCodeDmlbMapper.insert(plateCodeDmlb);
+            }
+            //2-2.验证代码值是否已存在
+            PlateCodeDmzExample plateCodeDmzExample = new PlateCodeDmzExample();
+            PlateCodeDmzExample.Criteria criteria = plateCodeDmzExample.createCriteria();
+            criteria.andCDmlbEqualTo(plateCodeDmz.getcDmlb());
+            criteria.andCDmEqualTo(plateCodeDmz.getcDm());
+            List plateCodeDmzList = plateCodeDmzMapper.selectByExample(plateCodeDmzExample);
+            if (!(plateCodeDmzList.isEmpty())){
+                returnModel.setFlag(1);
+                returnModel.setMsg("指定代码类别下已经有此代码存在！代码类别【"+plateCodeDmz.getcDmlb()+"】"+",代码值【"+plateCodeDmz.getcDm()+"】");
+                returnModel.setObject(null);
+                return returnModel;
+            }else{
+                //3-1.新增代码类别数据
+                plateCodeDmz.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+                plateCodeDmz.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                plateCodeDmzMapper.insert(plateCodeDmz);
+                returnModel.setFlag(0);
+                returnModel.setMsg("新增成功！");
+                returnModel.setObject(plateCodeDmz);
+                return returnModel;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+
+    /**
+     * 自定义mapper====修改代码类别及代码值
+     * @param plateCodeDmlb
+     * @param plateCodeDmz
+     * @return
+     */
     @OperationLog(cCzfs = "U")
     @Override
-    public ReturnModel updPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
+    public ReturnModel updYwjcdm(PlateCodeDmlb plateCodeDmlb,PlateCodeDmz plateCodeDmz) {
         //1.参数非空判断
         if (("").equals(plateCodeDmz.getcDmlb()) || null == plateCodeDmz.getcDmlb()){
             returnModel.setFlag(1);
@@ -468,16 +478,29 @@ public class PlateServiceImpl implements PlateService {
         try{
             //2.判断数据是否存在
             PlateCodeDmz plateCodeDmz1 = plateCodeDmzMapper.selectByPrimaryKey(plateCodeDmz.getcDm(),plateCodeDmz.getcDmlb());
+            PlateCodeDmlb plateCodeDmlb1 = plateCodeDmlbMapper.selectByPrimaryKey(plateCodeDmlb.getcDmlb());
             if (null == plateCodeDmz1 || "".equals(plateCodeDmz1)){
                 returnModel.setFlag(1);
                 returnModel.setMsg("修改失败，没有找到待修改的数据！");
                 returnModel.setObject(null);
                 return returnModel;
+            }else if(null == plateCodeDmlb1 || "".equals(plateCodeDmlb1)){
+                returnModel.setFlag(1);
+                returnModel.setMsg("修改失败，没有找到待修改的数据！");
+                returnModel.setObject(null);
+                return returnModel;
             }else{
-                //3.执行修改
-                plateCodeDmz.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                plateCodeDmz.setdXgsj(TimeUtil.getTimestamp(new Date()));
-                plateCodeDmzMapper.updateByPrimaryKey(plateCodeDmz);
+                //3-1.执行修改代码类别
+                plateCodeDmlb1.setcDmlbmc(plateCodeDmlb.getcDmlbmc());
+                plateCodeDmlb1.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+                plateCodeDmlb1.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                plateCodeDmlbMapper.updateByPrimaryKey(plateCodeDmlb1);
+                //3-2.执行修改代码值
+                plateCodeDmz1.setcSort(plateCodeDmz.getcSort());
+                plateCodeDmz1.setcZt(plateCodeDmz.getcZt());
+                plateCodeDmz1.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+                plateCodeDmz1.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                plateCodeDmzMapper.updateByPrimaryKey(plateCodeDmz1);
                 returnModel.setFlag(0);
                 returnModel.setMsg("修改成功");
                 returnModel.setObject(plateCodeDmz);
@@ -628,19 +651,17 @@ public class PlateServiceImpl implements PlateService {
         }
     }
 
+
+    /**
+     * 自定义mapper====查询任务明细
+     * @param paramsMap
+     * @return
+     */
     @Override
-    public ReturnModel selectTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
-
-        TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
-        TGreenRwRwmxExample.Criteria criteria = tGreenRwRwmxExample.createCriteria();
-
-        if (!(("").equals(tGreenRwRwmx.getcRwlb()) || null == tGreenRwRwmx.getcRwlb())){
-            criteria.andCRwlbEqualTo(tGreenRwRwmx.getcRwlb());
-        }
-
+    public ReturnModel selectTGreenRwRwmx(Map paramsMap) {
         List tGreenRwRwmxList;
         try {
-            tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);
+            tGreenRwRwmxList = owerTGreenRwRwmxMapper.selectTGreenRwRwmx(paramsMap);
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(tGreenRwRwmxList);
@@ -651,91 +672,6 @@ public class PlateServiceImpl implements PlateService {
             returnModel.setObject(null);
         }
         return returnModel;
-    }
-
-    @Override
-    public ReturnModel selectTGreenNlHz(TGreenNlHz tGreenNlHz) {
-        List tGreenNlHzList;
-        try{
-            tGreenNlHzList = tGreenNlHzMapper.selectByExample(new TGreenNlHzExample());
-            returnModel.setFlag(0);
-            returnModel.setMsg("");
-            returnModel.setObject(tGreenNlHzList);
-        }catch (Exception e){
-            e.printStackTrace();
-            returnModel.setFlag(1);
-            returnModel.setMsg("查询出错，系统错误！");
-            returnModel.setObject(null);
-        }
-        return returnModel;
-    }
-
-    @Override
-    public ReturnModel insertTGreenNlHz(TGreenNlHz tGreenNlHz) {
-        return null;
-    }
-
-    @Override
-    public ReturnModel delTGreenNlHz(TGreenNlHz tGreenNlHz) {
-        return null;
-    }
-
-    @Override
-    public ReturnModel updTGreenNlHz(TGreenNlHz tGreenNlHz) {
-        return null;
-    }
-
-    /**
-     * 业务基础代码维护
-     * @param plateCodeDmz
-     * @return
-     */
-    @OperationLog(cCzfs = "I")
-    @Override
-    public ReturnModel insertYwjcdm(PlateCodeDmz plateCodeDmz) {
-        try {
-            //1.参数非空判断
-            if (("").equals(plateCodeDmz.getcDmlb()) || null == plateCodeDmz.getcDmlb()){
-                returnModel.setFlag(1);
-                returnModel.setMsg("操作失败，代码类别不能为空");
-                returnModel.setObject(null);
-                return returnModel;
-            }
-            if (("").equals(plateCodeDmz.getcDm()) || null == plateCodeDmz.getcDm()){
-                returnModel.setFlag(1);
-                returnModel.setMsg("操作失败，代码不能为空");
-                returnModel.setObject(null);
-                return returnModel;
-            }
-            //2.验证代码值是否已存在
-            PlateCodeDmzExample plateCodeDmzExample = new PlateCodeDmzExample();
-            PlateCodeDmzExample.Criteria criteria = plateCodeDmzExample.createCriteria();
-            criteria.andCDmlbEqualTo(plateCodeDmz.getcDmlb());
-            criteria.andCDmEqualTo(plateCodeDmz.getcDm());
-            List plateCodeDmzList = plateCodeDmzMapper.selectByExample(plateCodeDmzExample);
-            if (!(plateCodeDmzList.isEmpty())){
-                returnModel.setFlag(1);
-                returnModel.setMsg("指定代码类别下已经有此代码存在！代码类别【"+plateCodeDmz.getcDmlb()+"】"+",代码值【"+plateCodeDmz.getcDm()+"】");
-                returnModel.setObject(null);
-                return returnModel;
-            }else{
-                //3.新增数据
-                plateCodeDmz.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                plateCodeDmz.setdCjsj(TimeUtil.getTimestamp(new Date()));
-                plateCodeDmzMapper.insert(plateCodeDmz);
-                returnModel.setFlag(0);
-                returnModel.setMsg("新增成功！");
-                returnModel.setObject(plateCodeDmz);
-                return returnModel;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            returnModel.setFlag(1);
-            returnModel.setMsg("操作失败，系统错误！");
-            returnModel.setObject(null);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return returnModel;
-        }
     }
 
 

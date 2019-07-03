@@ -39,8 +39,8 @@ function loadGridData(){
     grid.clearAll();
     var sendRequest = new SendRequest("/plate/selectTGreenRwRwmx","POST");//构造对象
     sendRequest.addParamObj({
-        "cUsername":$("#cUsernameSearch").val(),
-        "cRwlb":$("#cRwlbSearch").val()
+        "cUsername":$("#cUsername").val(),
+        "cRwlb":$("#cRwlb").val()
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
@@ -70,12 +70,13 @@ function loadGridData(){
  * @param data
  */
 function initData(data){
+    console.log(data);
     for (var i=0; i<data.length; i++){
 
         grid.addRow((i+1),[
             (i+1),
-            data[i].cUserid,
-            data[i].cRwlb,
+            data[i].cUsername,
+            data[i].cRwlbsm,
             data[i].dRwsj,
             data[i].cBz
         ]);
@@ -89,8 +90,8 @@ function initData(data){
  * 初始化下拉框
  */
 function initSelect(){
-    initBaseCodeSelect($("#cRwlbSearch"),{cDmlb:"C_RW_RWLB"},null,"---请选择任务类别---");
-    $("#cRwlbSearch").change(function () {
+    initBaseCodeSelect($("#cRwlb"),{cDmlb:"C_RW_RWLB"},null,"---请选择任务类别---");
+    $("#cRwlb").change(function () {
         grid.clearAll();
     });
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenplatform.dao.owerMapper.OwerTGreenNlHzMapper">
+  <select id="selectTGreenNlHzRank"  parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    select b.c_username cUsername,b.c_loginname cLoginname,a.c_nlhz cNlhz,a.c_userid cUserid
+      from t_green_nl_hz a LEFT JOIN plate_user b ON a.c_userid = b.c_userid AND a.c_zt='1'
+  order by c_nlhz DESC
+     limit 0,9
+  </select>
+</mapper>

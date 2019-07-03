@@ -120,7 +120,7 @@ function f_purchaseSeed(sSpbh){
  * @param sSpbh
  */
 function f_doPurchaseSeed(sSpbh) {
-    var sendRequest = new SendRequest("/web/insertTGreenZzZjzzmx","POST");//构造对象
+    var sendRequest = new SendRequest("/web/buySeeds","POST");//构造对象
     sendRequest.addParamObj({
         cSpbh:sSpbh
     });//构造请求参数
@@ -155,7 +155,7 @@ function f_doPurchaseSeed(sSpbh) {
  * @param sRwlb  任务类别，必传
  */
 function f_finishMission(sRwlb){
-    var sendRequest = new SendRequest("/web/insertTGreenRwRwmx","POST");//构造对象
+    var sendRequest = new SendRequest("/web/accomplishRw","POST");//构造对象
     sendRequest.addParamObj({
         cRwlb:sRwlb
     });//构造请求参数
@@ -171,14 +171,7 @@ function f_finishMission(sRwlb){
                 buttonLabel: "确定"
             });
         }else{
-            BootstrapDialog.alert({
-                type: BootstrapDialog.TYPE_PRIMARY,
-                size: BootstrapDialog.SIZE_SMALL,
-                title: '提示',
-                message: "操作成功",
-                closeable: true,
-                buttonLabel: "确定"
-            });
+            $(".rwlb_"+sRwlb).hide(100);
         }
 
     });//发送请求并获取返回结果

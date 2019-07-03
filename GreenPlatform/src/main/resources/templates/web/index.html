@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
     <link rel="stylesheet" href="/style/web/webstyle.css">
-
 </head>
 <body>
     <div id="home"></div>
@@ -49,26 +48,26 @@
         </nav>
         <div class="container-fluid mission" id="mission">
             <div class="row"></div>
-            <div class="row">
-                <div class="col-md-11 col-sm-11 col-xs-9"></div>
-                <div class="col-md-1 col-sm-1 col-xs-3">
-                    <a id="finishMisson_sf" value="1">
+            <div class="row" th:style="${loginuserHome.tGreenRwRwmx['1']} == true ? 'display: none':''">
+                <div class="col-md-5 col-sm-4 col-xs-3"></div>
+                <div class="col-md-1 col-sm-1 col-xs-3 mission-sf">
+                    <a class="rwlb_1" id="finishMisson_sf" value="1">
                         <img src="/publicImg/icon/sf.png" id="sf" class="center-block" alt="">
                     </a>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-11 col-sm-11 col-xs-9"></div>
-                <div class="col-md-1 col-sm-1 col-xs-3">
-                    <a id="finishMisson_js" value="2">
+            <div class="row" th:style="${loginuserHome.tGreenRwRwmx['2']} == true ? 'display: none':''">
+                <div class="col-md-7 col-sm-6 col-xs-6"></div>
+                <div class="col-md-1 col-sm-1 col-xs-3 mission-js">
+                    <a class="rwlb_2" id="finishMisson_js" value="2">
                         <img src="/publicImg/icon/js.png" id="js" class="center-block" alt="">
                     </a>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-11 col-sm-11 col-xs-9"></div>
-                <div class="col-md-1 col-sm-1 col-xs-3">
-                    <a id="finishMisson_yg" value="3">
+            <div class="row" th:style="${loginuserHome.tGreenRwRwmx['3']} == true ? 'display: none':''">
+                <div class="col-md-4 col-sm-5 col-xs-2"></div>
+                <div class="col-md-1 col-sm-1 col-xs-3 mission-yg">
+                    <a class="rwlb_3" id="finishMisson_yg" value="3">
                         <img src="/publicImg/icon/yg.png" id="yg" class="center-block" alt="">
                     </a>
                 </div>
@@ -84,64 +83,10 @@
             <div class="col-md-4"></div>
         </div>
 
-        <div class="row">
+        <div class="row" th:each="tGreenNlNlhz : ${loginuserHome.tGreenNlNlhzList}">
             <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-9 col-sm-10 col-xs-10 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer"></span>张三
-                <span>15000KG</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-8 col-sm-9 col-xs-9 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer"></span>张三
-                <span>15000KG</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-8 col-sm-9 col-xs-9 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer"></span>张三
-                <span>15000KG</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-7 col-sm-8 col-xs-8 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer"></span>张三
-                <span>15000KG</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-7 col-sm-8 col-xs-8 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer"></span>张三
-                <span>15000KG</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-6 col-sm-7 col-xs-7 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer"></span>张三
-                <span>15000KG</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-5 col-sm-6 col-xs-6 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer"></span>张三
-                <span>15000KG</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-5 col-sm-5 col-xs-5 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer"></span>张三
-                <span>15000KG</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-4 col-sm-4 col-xs-4 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer"></span>张三
-                <span>15000KG</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-3 col-sm-3 col-xs-3 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer"></span>张三
-                <span>15000KG</span>
+                <span class="glyphicon glyphicon-tree-conifer" th:text=${tGreenNlNlhz.cUsername}></span>
+                <span th:text="${tGreenNlNlhz.cNlhz}+'KG'"></span>
             </div>
         </div>
     </div>
@@ -156,7 +101,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4" th:each="tGreenSpSpmxList : ${tGreenSpSpmxList}">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4" th:each="tGreenSpSpmxList : ${loginuserHome.tGreenSpSpmxList}">
                     <div class="single-package">
                         <div class="package-image">
                             <a href="#"><img src="/publicImg/system/1.jpg" alt=""></a>

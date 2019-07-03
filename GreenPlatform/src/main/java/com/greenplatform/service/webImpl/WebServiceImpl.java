@@ -2,10 +2,12 @@ package com.greenplatform.service.webImpl;
 
 import com.greenplatform.aop.OperationLog;
 import com.greenplatform.dao.*;
+import com.greenplatform.dao.owerMapper.OwerTGreenNlHzMapper;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.WebService;
 import com.greenplatform.util.GetcurrentLoginUser;
+import com.greenplatform.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +20,6 @@ import java.util.*;
 @Transactional
 @Service
 public class WebServiceImpl implements WebService {
-    /*@Autowired
-    SystemDao systemDao;*/
     @Autowired
     TGreenSpSpmxMapper tGreenSpSpmxMapper;
     @Autowired
@@ -29,6 +29,8 @@ public class WebServiceImpl implements WebService {
     @Autowired
     TGreenNlHzMapper tGreenNlHzMapper;
     @Autowired
+    OwerTGreenNlHzMapper owerTGreenNlHzMapper;
+    @Autowired
     TGreenZzZjzzmxMapper tGreenZzZjzzmxMapper;
     @Autowired
     TGreenNlJsnlmxMapper tGreenNlJsnlmxMapper;
@@ -37,161 +39,20 @@ public class WebServiceImpl implements WebService {
     ReturnModel returnModel = new ReturnModel();
 
 
-    @Override
-    public ReturnModel selectTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
-        List tGreenSpmxList;
-        try {
-            tGreenSpmxList = tGreenSpSpmxMapper.selectByExample(new TGreenSpSpmxExample());
-            returnModel.setFlag(0);
-            returnModel.setMsg("");
-            returnModel.setObject(tGreenSpmxList);
-        }catch (Exception e){
-            returnModel.setFlag(1);
-            returnModel.setMsg("查询出错，系统错误！");
-            returnModel.setObject(null);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-        }
-        return returnModel;
-    }
-
-    @OperationLog(cCzfs = "I")
-    @Override
-    public ReturnModel insertTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
-        tGreenSpSpmx.setcSpbh(UUID.randomUUID().toString().replaceAll("-", ""));
-        tGreenSpSpmx.setdCjsj(getTimestamp(new Date()));
-        tGreenSpSpmx.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-        try {
-            tGreenSpSpmxMapper.insert(tGreenSpSpmx);
-            returnModel.setFlag(0);
-            returnModel.setMsg("");
-            returnModel.setObject(null);
-        }catch (Exception e){
-            returnModel.setFlag(1);
-            returnModel.setMsg("新增出错，系统错误！");
-            returnModel.setObject(null);
-        }
-        return returnModel;
-    }
-
-    @OperationLog(cCzfs = "D")
-    @Override
-    public ReturnModel delTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
-        try {
-            TGreenSpSpmx tGreenSpSpmx1 = tGreenSpSpmxMapper.selectByPrimaryKey(tGreenSpSpmx.getcSpbh());
-            if (null == tGreenSpSpmx1 || "".equals(tGreenSpSpmx1)){
-                returnModel.setFlag(1);
-                returnModel.setMsg("操作失败，没有找到待删除的数据！");
-                returnModel.setObject(null);
-                return returnModel;
-            }else{
-                tGreenSpSpmxMapper.deleteByPrimaryKey(tGreenSpSpmx.getcSpbh());
-                returnModel.setFlag(0);
-                returnModel.setMsg("操作成功！");
-                returnModel.setObject(null);
-                return returnModel;
-            }
-        }catch (Exception e){
-            System.out.println(e);
-            returnModel.setFlag(1);
-            returnModel.setMsg("操作失败，系统错误！");
-            returnModel.setObject(null);
-            return returnModel;
-        }
-    }
-
-    @OperationLog(cCzfs = "U")
-    @Override
-    public ReturnModel updTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
-        try {
-            TGreenSpSpmx tGreenSpSpmx1 = tGreenSpSpmxMapper.selectByPrimaryKey(tGreenSpSpmx.getcSpbh());
-            if (null == tGreenSpSpmx1 || "".equals(tGreenSpSpmx1)){
-                returnModel.setFlag(1);
-                returnModel.setMsg("操作失败，没有找到待修改的数据！");
-                returnModel.setObject(null);
-                return returnModel;
-            }else{
-                tGreenSpSpmx.setdXgsj(getTimestamp(new Date()));
-                tGreenSpSpmx.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                tGreenSpSpmxMapper.updateByPrimaryKey(tGreenSpSpmx);
-                returnModel.setFlag(0);
-                returnModel.setMsg("操作成功！");
-                returnModel.setObject(null);
-                return returnModel;
-            }
-        }catch (Exception e){
-            System.out.println(e);
-            returnModel.setFlag(1);
-            returnModel.setMsg("操作失败，系统错误！");
-            returnModel.setObject(null);
-            return returnModel;
-        }
-    }
-
-    @Override
-    public ReturnModel selectTGreenNlHz(TGreenNlHz tGreenNlHz) {
-        return null;
-    }
-
-    @OperationLog(cCzfs = "I")
-    @Override
-    public ReturnModel insertTGreenNlHz(TGreenNlHz tGreenNlHz) {
-        return null;
-    }
-
-    @OperationLog(cCzfs = "D")
-    @Override
-    public ReturnModel delTGreenNlHz(TGreenNlHz tGreenNlHz) {
-        return null;
-    }
-
-    @OperationLog(cCzfs = "U")
-    @Override
-    public ReturnModel updTGreenNlHz(TGreenNlHz tGreenNlHz) {
-        return null;
-    }
-
-    @Override
-    public ReturnModel selectTGreenNlZjnlmx(TGreenNlZjnlmx tGreenNlZjnlmx) {
-        return null;
-    }
-
-    @OperationLog(cCzfs = "I")
-    @Override
-    public ReturnModel insertTGreenNlZjnlmx(TGreenNlZjnlmx tGreenNlZjnlmx) {
-        return null;
-    }
-
-    @OperationLog(cCzfs = "D")
-    @Override
-    public ReturnModel delTGreenNlZjnlmx(TGreenNlZjnlmx tGreenNlZjnlmx) {
-        return null;
-    }
-
-    @OperationLog(cCzfs = "U")
-    @Override
-    public ReturnModel updTGreenNlZjnlmx(TGreenNlZjnlmx tGreenNlZjnlmx) {
-        return null;
-    }
-
-    @Override
-    public ReturnModel selectTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
-        return null;
-    }
-
-
     //完成每日任务
     @Override
     @OperationLog(cCzfs = "I")
-    public ReturnModel insertTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
+    public ReturnModel accomplishRw(TGreenRwRwmx tGreenRwRwmx) {
         try{
-            String localDateDay = (getLocalDate(new Date())).substring(0,10);
-            String localDateMonth = (getLocalDate(new Date())).substring(0,7);
+            String localDateDay = (TimeUtil.getLocalDate(new Date()).substring(0,10));
+            String localDateMonth = (TimeUtil.getLocalDate(new Date()).substring(0,7));
 
             TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
             TGreenRwRwmxExample.Criteria criteria = tGreenRwRwmxExample.createCriteria();
             criteria.andCUseridEqualTo(GetcurrentLoginUser.getCurrentUser().getcUserid());
             criteria.andCRwlbEqualTo(tGreenRwRwmx.getcRwlb());
             criteria.andCRwdayEqualTo(localDateDay);
+            criteria.andCZtEqualTo("1");
 
             List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);
             if(!(tGreenRwRwmxList.isEmpty())){
@@ -202,10 +63,11 @@ public class WebServiceImpl implements WebService {
             }else{
                 tGreenRwRwmx.setcUserid(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 tGreenRwRwmx.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-                tGreenRwRwmx.setdCjsj(getTimestamp(new Date()));
+                tGreenRwRwmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                tGreenRwRwmx.setcZt("1");
                 tGreenRwRwmx.setcRwmouth(localDateMonth);
                 tGreenRwRwmx.setcRwday(localDateDay);
-                tGreenRwRwmx.setdRwsj(getTimestamp(new Date()));
+                tGreenRwRwmx.setdRwsj(TimeUtil.getTimestamp(new Date()));
 
                 System.out.println("任务明细对象--"+tGreenRwRwmx);
                 tGreenRwRwmxMapper.insert(tGreenRwRwmx);
@@ -224,32 +86,14 @@ public class WebServiceImpl implements WebService {
         }
     }
 
-    @OperationLog(cCzfs = "D")
-    @Override
-    public ReturnModel delTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
-        return null;
-    }
-
-    @OperationLog(cCzfs = "U")
-    @Override
-    public ReturnModel updTGreenRwRwmx(TGreenRwRwmx tGreenRwRwmx) {
-        return null;
-    }
-
-    @Override
-    public ReturnModel selectTGreenZzZjzzmx(TGreenZzZjzzmx tGreenZzZjzzmx) {
-        return null;
-    }
-
-
     /**
      * 能量兑换种子业务
-     * @param tGreenZzZjzzmx
+     * @param tGreenZzZjzzmx（要兑换的商品编号不能为空）
      * @return
      */
     @OperationLog(cCzfs = "I")
     @Override
-    public ReturnModel insertTGreenZzZjzzmx(TGreenZzZjzzmx tGreenZzZjzzmx) {
+    public ReturnModel buySeeds(TGreenZzZjzzmx tGreenZzZjzzmx) {
         System.out.println(tGreenZzZjzzmx);
         //tGreenZzZjzzmx  商品编号必传
         if (null == tGreenZzZjzzmx.getcSpbh() || "".equals(tGreenZzZjzzmx)){
@@ -265,7 +109,8 @@ public class WebServiceImpl implements WebService {
             TGreenZzZjzzmxExample tGreenZzZjzzmxExample = new TGreenZzZjzzmxExample();
             TGreenZzZjzzmxExample.Criteria criteria = tGreenZzZjzzmxExample.createCriteria();
             criteria.andCUseridEqualTo(plateUser.getcUserid());
-            criteria.andCSfjzEqualTo("0");
+            criteria.andCSfjzEqualTo("0");//未捐赠
+            criteria.andCZtEqualTo("1");
 
             List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectByExample(tGreenZzZjzzmxExample);
             int tGreenZzZjzzmxCount = tGreenZzZjzzmxList.size();
@@ -278,14 +123,26 @@ public class WebServiceImpl implements WebService {
             }else{
                 //获取指定用户的能量总量
                 TGreenNlHzExample tGreenNlHzExample = new TGreenNlHzExample();
-                tGreenNlHzExample.createCriteria().andCUseridEqualTo(plateUser.getcUserid());
+                TGreenNlHzExample.Criteria criteriaTGreenNlHzExample = tGreenNlHzExample.createCriteria();
+                criteriaTGreenNlHzExample.andCUseridEqualTo(plateUser.getcUserid());
+                criteriaTGreenNlHzExample.andCZtEqualTo("1");
                 List tGreenNlHzList = tGreenNlHzMapper.selectByExample(tGreenNlHzExample);
-                Integer userNlzl = Integer.parseInt(((TGreenNlHz) tGreenNlHzList.get(0)).getcNlhz());//获取指定账户的能量总量
 
+                Integer userNlzl = Integer.parseInt(((TGreenNlHz) tGreenNlHzList.get(0)).getcNlhz());//获取指定账户的能量总量
                 //获取用户点击兑换种子的价格
                 TGreenSpSpmxExample tGreenSpSpmxExample = new TGreenSpSpmxExample();
-                tGreenSpSpmxExample.createCriteria().andCSpbhEqualTo(tGreenZzZjzzmx.getcSpbh());
+                TGreenSpSpmxExample.Criteria criteriaTGreenSpSpmxExample = tGreenSpSpmxExample.createCriteria();
+                criteriaTGreenSpSpmxExample.andCZtEqualTo("1");
+                criteriaTGreenSpSpmxExample.andCSpbhEqualTo(tGreenZzZjzzmx.getcSpbh());
                 List tGreenSpSpmxList = tGreenSpSpmxMapper.selectByExample(tGreenSpSpmxExample);
+
+                if (tGreenSpSpmxList.size() != 1){
+                    returnModel.setFlag(1);
+                    returnModel.setMsg("操作失败，系统错误！");
+                    returnModel.setObject(null);
+                    return returnModel;
+                }
+
                 Integer zzPrice = Integer.parseInt(((TGreenSpSpmx) tGreenSpSpmxList.get(0)).getcSpjg());//获取种子的价格
                 System.out.println("账户能量总量为："+userNlzl);
                 System.out.println("种子价格为："+zzPrice);
@@ -304,29 +161,28 @@ public class WebServiceImpl implements WebService {
                     tGreenNlJsnlmx.setcUserid(plateUser.getcUserid());
                     tGreenNlJsnlmx.setcJssl(zzPrice.toString());
                     tGreenNlJsnlmx.setcJsyy("1");//减少原因：兑换商品
-                    tGreenNlJsnlmx.setdJssj(getTimestamp(new Date()));
+                    tGreenNlJsnlmx.setdJssj(TimeUtil.getTimestamp(new Date()));
                     tGreenNlJsnlmx.setcZt("1");
                     tGreenNlJsnlmx.setcCjuser(plateUser.getcUserid());
-                    tGreenNlJsnlmx.setdCjsj(getTimestamp(new Date()));
+                    tGreenNlJsnlmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
                     tGreenNlJsnlmxMapper.insert(tGreenNlJsnlmx);
 
-                    TGreenNlHz tGreenNlHz = new TGreenNlHz();
-                    tGreenNlHz.setcUserid(plateUser.getcUserid());
+                    TGreenNlHz tGreenNlHz = (TGreenNlHz) tGreenNlHzList.get(0);
                     tGreenNlHz.setcNlhz(String.valueOf((userNlzl-zzPrice)));
                     tGreenNlHz.setcXguser(plateUser.getcUserid());
-                    tGreenNlHz.setdXgsj(getTimestamp(new Date()));
+                    tGreenNlHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
                     System.out.println("修改能量汇总表"+tGreenNlHz);
                     tGreenNlHzMapper.updateByPrimaryKey(tGreenNlHz);
 
                     tGreenZzZjzzmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
                     tGreenZzZjzzmx.setcUserid(plateUser.getcUserid());
                     tGreenZzZjzzmx.setcZjyy("1");
-                    tGreenZzZjzzmx.setdZjsj(getTimestamp(new Date()));
+                    tGreenZzZjzzmx.setdZjsj(TimeUtil.getTimestamp(new Date()));
                     tGreenZzZjzzmx.setcKjz("0");
                     tGreenZzZjzzmx.setcSfjz("0");
                     tGreenZzZjzzmx.setcZt("1");
                     tGreenZzZjzzmx.setcCjuser(plateUser.getcUserid());
-                    tGreenZzZjzzmx.setdCjsj(getTimestamp(new Date()));
+                    tGreenZzZjzzmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
                     System.out.println("新增种子增加明细表"+tGreenZzZjzzmx);
                     tGreenZzZjzzmxMapper.insert(tGreenZzZjzzmx);
                     returnModel.setFlag(0);
@@ -345,18 +201,10 @@ public class WebServiceImpl implements WebService {
         }
     }
 
-    @OperationLog(cCzfs = "D")
-    @Override
-    public ReturnModel delTGreenZzZjzzmx(TGreenZzZjzzmx tGreenZzZjzzmx) {
-        return null;
-    }
-
-    @OperationLog(cCzfs = "U")
-    @Override
-    public ReturnModel updTGreenZzZjzzmx(TGreenZzZjzzmx tGreenZzZjzzmx) {
-        return null;
-    }
-
+    /**
+     * 查询我的账户信息（人员姓名，人员等级，能量总量，种子汇总，今日任务）
+     * @return
+     */
     @Override
     public ReturnModel selectLoginuserAccount() {
         Map loginuserAccountMap;
@@ -369,20 +217,30 @@ public class WebServiceImpl implements WebService {
                 return returnModel;
             }else {
                 PlateUserExample plateUserExample = new PlateUserExample();
-                plateUserExample.createCriteria().andCUseridEqualTo(loginUserId);
+                PlateUserExample.Criteria criteriaPlateuser = plateUserExample.createCriteria();
+                criteriaPlateuser.andCUseridEqualTo(loginUserId);
+                criteriaPlateuser.andCZtEqualTo("1");//数据状态
+                criteriaPlateuser.andCRyxzEqualTo("1");//人员性质
+                criteriaPlateuser.andCRylbEqualTo("2");//人员类别
+                criteriaPlateuser.andCRyztEqualTo("1");//人员状态
+
 
                 TGreenNlHzExample tGreenNlHzExample = new TGreenNlHzExample();
-                tGreenNlHzExample.createCriteria().andCUseridEqualTo(loginUserId);
+                TGreenNlHzExample.Criteria criteriaTGreenNlHzExample = tGreenNlHzExample.createCriteria();
+                criteriaTGreenNlHzExample.andCZtEqualTo("1");
+                criteriaTGreenNlHzExample.andCUseridEqualTo(loginUserId);
 
                 TGreenZzZjzzmxExample tGreenZzZjzzmxExample = new TGreenZzZjzzmxExample();
-                TGreenZzZjzzmxExample.Criteria criteria = tGreenZzZjzzmxExample.createCriteria();
-                criteria.andCUseridEqualTo(loginUserId);
-                criteria.andCSfjzEqualTo("0");
+                TGreenZzZjzzmxExample.Criteria criteriaTGreenZzZjzzmxExample = tGreenZzZjzzmxExample.createCriteria();
+                criteriaTGreenZzZjzzmxExample.andCUseridEqualTo(loginUserId);
+                criteriaTGreenZzZjzzmxExample.andCZtEqualTo("1");
+                criteriaTGreenZzZjzzmxExample.andCSfjzEqualTo("0");
 
                 TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
-                TGreenRwRwmxExample.Criteria criteria1 = tGreenRwRwmxExample.createCriteria();
-                criteria1.andCUseridEqualTo(loginUserId);
-                criteria1.andCRwdayEqualTo(getLocalDate(new Date()).substring(0,10));
+                TGreenRwRwmxExample.Criteria criteriaTGreenRwRwmxExample = tGreenRwRwmxExample.createCriteria();
+                criteriaTGreenRwRwmxExample.andCUseridEqualTo(loginUserId);
+                criteriaTGreenRwRwmxExample.andCZtEqualTo("1");
+                criteriaTGreenRwRwmxExample.andCRwdayEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,10));
 
                 List plateuserList = plateUserMapper.selectByExample(plateUserExample);//人员姓名与人员等级
 
@@ -412,27 +270,70 @@ public class WebServiceImpl implements WebService {
             returnModel.setFlag(1);
             returnModel.setMsg("查询失败，系统错误");
             returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return returnModel;
         }
     }
 
-    //获取当前系统时间timestamp
-    public Timestamp getTimestamp(Date date){
-        if (null == date){
-            date = new Date();
+    /**
+     * 查询首页所需信息（当前人当日任务完成情况，能量汇总排行前十，商品明细）
+     * @return
+     */
+    @Override
+    public ReturnModel selectLoginuserHome() {
+        try{
+            Map loginUserHomeMap = new HashMap();
+            PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+            if (("").equals(plateUser) || null == plateUser){
+                returnModel.setFlag(1);
+                returnModel.setMsg("暂未登陆，无法进行操作！");
+                returnModel.setObject(null);
+                return returnModel;
+            }else{
+                TGreenSpSpmxExample tGreenSpSpmxExample = new TGreenSpSpmxExample();
+                TGreenSpSpmxExample.Criteria criteriaTGreenSpSpmxExample = tGreenSpSpmxExample.createCriteria();
+                criteriaTGreenSpSpmxExample.andCZtEqualTo("1");
+                List tGreenSpSpmxList = tGreenSpSpmxMapper.selectByExample(tGreenSpSpmxExample);
+                loginUserHomeMap.put("tGreenSpSpmxList",tGreenSpSpmxList);
+
+                List tGreenNlHzList = owerTGreenNlHzMapper.selectTGreenNlHzRank(new HashMap());
+                loginUserHomeMap.put("tGreenNlNlhzList",tGreenNlHzList);
+
+                TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
+                TGreenRwRwmxExample.Criteria criteriaTGreenRwRwmxExample = tGreenRwRwmxExample.createCriteria();
+                criteriaTGreenRwRwmxExample.andCUseridEqualTo(plateUser.getcUserid());
+                criteriaTGreenRwRwmxExample.andCRwdayEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,10));
+                criteriaTGreenRwRwmxExample.andCZtEqualTo("1");
+                List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);//查询当日任务完成情况明细
+                Map rwmxMap = new HashMap();
+                rwmxMap.put("1",false);
+                rwmxMap.put("2",false);
+                rwmxMap.put("3",false);
+
+                for (int i=0;i<tGreenRwRwmxList.size();i++){
+                    TGreenRwRwmx tGreenRwRwmx = (TGreenRwRwmx) tGreenRwRwmxList.get(i);
+                    rwmxMap.put(tGreenRwRwmx.getcRwlb(),true);
+                }
+
+                loginUserHomeMap.put("tGreenRwRwmx",rwmxMap);
+
+                System.out.println(loginUserHomeMap);
+
+                returnModel.setFlag(0);
+                returnModel.setMsg(null);
+                returnModel.setObject(loginUserHomeMap);
+                return returnModel;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("查询失败，系统错误");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
         }
-        Timestamp timestamp = new Timestamp(date.getTime());
-        return timestamp;
     }
-    //获取系统当前时间   2019-05-22 16:35:01
-    public String getLocalDate(Date date){
-        if (null == date){
-            date = new Date();
-        }
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        String localDate = df.format(date);
-        return localDate;
-    }
+
 
 
 }
