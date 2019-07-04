@@ -364,31 +364,4 @@
       and c_rwlb = #{cRwlb,jdbcType=VARCHAR}
       and c_rwday = #{cRwday,jdbcType=VARCHAR}
   </update>
-
-
-
-  <select id="selectTGreenRwRwmx" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-    SELECT B.c_username cUsername,
-           B.c_loginname cLoginname,
-           A.c_rwlb cRwlb,
-           IFNULL(DATE_FORMAT(A.d_rwsj,'%Y-%m-%d %H:%i'),'') dRwsj,
-           A.c_rwmouth cRwmouth,
-           A.c_rwday cRwday,
-           A.c_bz cBz,
-           CASE WHEN A.c_rwlb = '1' THEN '施肥'
-                WHEN A.c_rwlb = '2' THEN '浇水'
-                WHEN A.c_rwlb = '3' THEN '沐浴阳光'
-                ELSE ''
-                 END cRwlbsm
-      FROM t_green_rw_rwmx A,plate_user B
-     WHERE A.c_userid = b.c_userid
-       AND B.C_ZT = '1'
-       <if test="cUsername!=null and cUsername!=&quot;&quot;">
-           AND B.c_username LIKE "%" #{cUsername} "%"
-       </if>
-       <if test="cRwlb!=null and cRwlb!=&quot;&quot;">
-           AND A.c_rwlb = #{cRwlb}
-       </if>
-      ORDER BY A.c_userid,a.c_rwlb,A.d_rwsj DESC
-  </select>
 </mapper>

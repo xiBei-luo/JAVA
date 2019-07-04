@@ -38,10 +38,10 @@ function initGrid(){
     $("#gridbox").attr({width:"100%",height:"100%"});
     grid = new dhtmlXGridObject('gridbox');
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
-    grid.setHeader("操作,姓名,登录名,性别,家庭住址,电话号码,微信号码,人员状态");
-    grid.setInitWidthsP("20,10,12,6,15,11,11,11.5");
-    grid.setColAlign("center,center,center,center,center,center,center,center");
-    grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro");
+    grid.setHeader("操作,业务类型代码,功能菜单代码,功能菜单简称,执行命令,排序号,状态");
+    grid.setInitWidthsP("15,15,15,15,18,10,11.5");
+    grid.setColAlign("center,center,center,center,center,center,center");
+    grid.setColTypes("ro,ro,ro,ro,ro,ro,ro");
     grid.enableMultiselect(false);
     grid.init();
 }
@@ -51,9 +51,11 @@ function initGrid(){
  */
 function loadGridData(){
     grid.clearAll();
-    var sendRequest = new SendRequest("/plate/selectPlateuser","POST");//构造对象
+    var sendRequest = new SendRequest("/plate/selectPlateYwLxMenu","POST");//构造对象
     sendRequest.addParamObj({
-        "cUsername":$("#cUsername").val()
+        "cYwlxdm":$("#cYwlxdm").val(),
+        "cMenudm":$("#cMenudm").val(),
+        "cMenumc":$("#cMenumc").val()
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
@@ -85,24 +87,19 @@ function loadGridData(){
 function initData(data){
     for (var i=0; i<data.length; i++){
         var opLinkBuff = new StringBuffer();
-        if ("1" == data[i].cRylb){
-            opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_upd(\'"+data[i].cUserid+"\');\"  >修改</a>&nbsp&nbsp");
-            opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_del(\'"+data[i].cUserid+"\');\"  >删除</a>&nbsp&nbsp");
-            opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_retPass(\'"+data[i].cUserid+"\');\"  >重置密码</a>&nbsp&nbsp");
-            opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_retPass(\'"+data[i].cUserid+"\');\"  >单独授权</a>");
+        opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_upd(\'"+data[i].cMenudm+"\');\"  >修改</a>&nbsp&nbsp");
+        opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_del(\'"+data[i].cMenudm+"\');\"  >删除</a>&nbsp&nbsp");
 
-        }
-        grid.addRow(data[i].cUserid,[
+        grid.addRow(data[i].cMenudm,[
             opLinkBuff.toString(),
-            data[i].cUsername,
-            data[i].cLoginname,
-            data[i].cSex == "1" ? "男" : "女",
-            data[i].cJtzz,
-            data[i].cPhone,
-            data[i].cWxhm,
-            data[i].cRyzt == "1" ? "已激活" : "未激活"
+            data[i].cYwlxdm,
+            data[i].cMenudm,
+            data[i].cMenujc,
+            data[i].cRuncommand,
+            data[i].cSort,
+            data[i].cZt == "1" ? "有效" : "无效"
         ]);
-        grid.setUserData(data[i].cUserid,'data',data[i]);
+        grid.setUserData(data[i].cMenudm,'data',data[i]);
     }
 }
 function f_upd(id){

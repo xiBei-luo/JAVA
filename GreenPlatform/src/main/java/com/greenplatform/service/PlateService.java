@@ -49,4 +49,20 @@ public interface PlateService {
     /*日志表操作begin*/
     public ReturnModel insertPlateLog (PlateLog plateLog);//插入代码值
 
+
+    /*查询登陆用户业务权限*/
+    public ReturnModel selectLoginuserYwqx();
+
+    /*查询系统用户角色*/
+    public ReturnModel selectPlateUserRole(PlateUserRole plateUserRole);
+    /*新增系统用户角色*/
+    public ReturnModel insertPlateUserRole(PlateUserRole plateUserRole);
+    /*修改系统用户角色*/
+    public ReturnModel updPlateUserRole(PlateUserRole plateUserRole);
+    /*删除系统用户角色*/
+    public ReturnModel delPlateUserRole(PlateUserRole plateUserRole);
+
+    /*查询系统业务功能菜单*/
+    public ReturnModel selectPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu);
+
 }

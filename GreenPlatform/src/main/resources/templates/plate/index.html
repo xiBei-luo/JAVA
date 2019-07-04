@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ch">
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -33,56 +33,23 @@
                         <div class="sidebar-nav">
                             <ul class="nav" id="side-menu">
                                 <li>
-                                    <a href="index.html" class="first-level active"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a>
-                                </li>
-                                <li>
                                     <a href="#" class="first-level"><i class="fa fa-laptop nav_icon"></i>业务功能<span class="fa fa-chevron-right"></span></a>
                                     <ul class="nav nav-second-level">
-                                        <li>
-                                            <a href="#" class="second-level" data-targetUrl="/base/yhgl">网站用户查询</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="second-level" data-targetUrl="/base/rwgl">任务管理</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="second-level" data-targetUrl="/base/nlgl">能量管理</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="second-level" data-targetUrl="/base/spgl">商品管理</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="second-level" data-targetUrl="/base/stgl">收徒管理</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="second-level" data-targetUrl="/base/zhsjgl">账户等级管理</a>
+                                        <li th:each="plateYwLxMenuList : ${loginuserYwqxMap['plateYwLxMenuList']}" th:if="${plateYwLxMenuList['cYwlxdm']} == 'C_YWGN'">
+                                            <a href="#" class="second-level" th:attr="data-targetUrl=${plateYwLxMenuList['cRuncommand']}" th:text="${plateYwLxMenuList['cMenujc']}"></a>
                                         </li>
                                     </ul>
-                                    <!-- /.nav-second-level -->
                                 </li>
                                 <li>
                                     <a href="#" class="first-level"><i class="fa fa-indent nav_icon"></i>系统配置<span class="fa fa-chevron-right"></span></a>
                                     <ul class="nav nav-second-level">
-                                        <li>
-                                            <a href="#" class="second-level" data-targetUrl="/base/ywjcdm">业务基础代码维护</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="second-level" data-targetUrl="/base/yhgl">权限管理</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="second-level" data-targetUrl="/base/plateYhgl">系统用户管理</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="second-level" data-targetUrl="/base/yhgl">系统参数设置</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="second-level" data-targetUrl="/base/yhgl">应用配置</a>
+                                        <li th:each="plateYwLxMenuList : ${loginuserYwqxMap['plateYwLxMenuList']}" th:if="${plateYwLxMenuList['cYwlxdm']} == 'C_PLATE'">
+                                            <a href="#" class="second-level" th:attr="data-targetUrl=${plateYwLxMenuList['cRuncommand']}" th:text="${plateYwLxMenuList['cMenujc']}"></a>
                                         </li>
                                     </ul>
-                                    <!-- /.nav-second-level -->
                                 </li>
                             </ul>
                         </div>
-                        <!-- /.sidebar-collapse -->
                     </div>
                 </div>
             </div>

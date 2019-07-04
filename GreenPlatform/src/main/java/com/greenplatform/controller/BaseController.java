@@ -1,8 +1,13 @@
 package com.greenplatform.controller;
 
+import com.greenplatform.model.base.ReturnModel;
+import com.greenplatform.service.PlateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +18,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping(value = "/base")
 public class BaseController {
+    @Autowired
+    PlateService plateService;
+
+
     //公用
     @GetMapping(value = "/login")
     public String login() {
@@ -26,10 +35,24 @@ public class BaseController {
 
     //后台
     //后台-业务功能
-    @GetMapping(value = "/index")
-    public String index() {
-        return "plate/index";
+    /**
+     * 查询登陆用户权限
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    public String index(HttpSession session,Model model) {
+        ReturnModel returnModel = plateService.selectLoginuserYwqx();
+        System.out.println(returnModel.getObject());
+        if (0 != returnModel.getFlag()){
+            session.removeAttribute("loginUser");
+            return "login/login";
+        }else{
+            model.addAttribute("loginuserYwqxMap",returnModel.getObject());
+            return "plate/index";
+        }
     }
+
     @GetMapping(value = "/yhgl")
     public String yhgl(){
         return "plate/yhgl/main";
@@ -78,6 +101,30 @@ public class BaseController {
     @GetMapping(value = "/plateYhgl/edit")
     public String plateYhglEdit(){
         return "plate/plateYhgl/edit";
+    }
+    @GetMapping(value = "/qxgl")
+    public String qxgl(){
+        return "plate/qxgl/main";
+    }
+    @GetMapping(value = "/qxgl/edit")
+    public String qxglEdit(){
+        return "plate/qxgl/edit";
+    }
+    @GetMapping(value = "/xtcssz")
+    public String xtcssz(){
+        return "plate/xtcssz/main";
+    }
+    @GetMapping(value = "/xtcssz/edit")
+    public String xtcsszEdit(){
+        return "plate/xtcssz/edit";
+    }
+    @GetMapping(value = "/yypz")
+    public String yypz(){
+        return "plate/yypz/main";
+    }
+    @GetMapping(value = "/yypz/edit")
+    public String yypzEdit(){
+        return "plate/yypz/edit";
     }
 
 

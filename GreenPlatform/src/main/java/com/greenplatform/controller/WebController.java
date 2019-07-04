@@ -1,7 +1,6 @@
 package com.greenplatform.controller;
 
 import com.greenplatform.model.TGreenRwRwmx;
-import com.greenplatform.model.TGreenSpSpmx;
 import com.greenplatform.model.TGreenZzZjzzmx;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.WebService;

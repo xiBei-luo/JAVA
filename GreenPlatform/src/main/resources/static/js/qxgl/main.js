@@ -12,7 +12,7 @@ function initEvent(){
 
     $("#btnAdd").click(function(){
        var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
-        win.setTitle("新增系统用户");
+        win.setTitle("新增系统用户角色");
         win.setWindowArguments(null);//参数
         win.btnClose(true);
         win.btnMax(false);
@@ -23,7 +23,7 @@ function initEvent(){
                 loadGridData();
             }
         });
-        win.load("/plateYhgl/edit", window, function (obj) { });
+        win.load("/qxgl/edit", window, function (obj) { });
     });
 
     $("#btnSearch").click(function(){
@@ -38,10 +38,10 @@ function initGrid(){
     $("#gridbox").attr({width:"100%",height:"100%"});
     grid = new dhtmlXGridObject('gridbox');
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
-    grid.setHeader("操作,姓名,登录名,性别,家庭住址,电话号码,微信号码,人员状态");
-    grid.setInitWidthsP("20,10,12,6,15,11,11,11.5");
-    grid.setColAlign("center,center,center,center,center,center,center,center");
-    grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro");
+    grid.setHeader("操作,角色标识符,角色名,状态");
+    grid.setInitWidthsP("25,25,25,24.5");
+    grid.setColAlign("center,center,center,center,center");
+    grid.setColTypes("ro,ro,ro,ro,ro");
     grid.enableMultiselect(false);
     grid.init();
 }
@@ -51,9 +51,9 @@ function initGrid(){
  */
 function loadGridData(){
     grid.clearAll();
-    var sendRequest = new SendRequest("/plate/selectPlateuser","POST");//构造对象
+    var sendRequest = new SendRequest("/plate/selectPlateUserRole","POST");//构造对象
     sendRequest.addParamObj({
-        "cUsername":$("#cUsername").val()
+        "cRolename":$("#cRolename").val()
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
@@ -85,30 +85,30 @@ function loadGridData(){
 function initData(data){
     for (var i=0; i<data.length; i++){
         var opLinkBuff = new StringBuffer();
-        if ("1" == data[i].cRylb){
-            opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_upd(\'"+data[i].cUserid+"\');\"  >修改</a>&nbsp&nbsp");
-            opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_del(\'"+data[i].cUserid+"\');\"  >删除</a>&nbsp&nbsp");
-            opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_retPass(\'"+data[i].cUserid+"\');\"  >重置密码</a>&nbsp&nbsp");
-            opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_retPass(\'"+data[i].cUserid+"\');\"  >单独授权</a>");
+        opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_upd(\'"+data[i].cRole+"\');\"  >修改</a>&nbsp&nbsp");
+        opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_del(\'"+data[i].cRole+"\');\"  >删除</a>&nbsp&nbsp");
+        opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_roleGrant(\'"+data[i].cRole+"\');\"  >角色授权</a>&nbsp&nbsp");
+        opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_grantUser(\'"+data[i].cRole+"\');\"  >授予用户</a>");
 
-        }
-        grid.addRow(data[i].cUserid,[
+
+        grid.addRow(data[i].cRole,[
             opLinkBuff.toString(),
-            data[i].cUsername,
-            data[i].cLoginname,
-            data[i].cSex == "1" ? "男" : "女",
-            data[i].cJtzz,
-            data[i].cPhone,
-            data[i].cWxhm,
-            data[i].cRyzt == "1" ? "已激活" : "未激活"
+            data[i].cRole,
+            data[i].cRolename,
+            data[i].cZt == "1" ? "有效" : "无效"
         ]);
-        grid.setUserData(data[i].cUserid,'data',data[i]);
+        grid.setUserData(data[i].cRole,'data',data[i]);
     }
 }
+
+/**
+ * 修改角色
+ * @param id
+ */
 function f_upd(id){
     var data = grid.getUserData(id,"data");
-    var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
-    win.setTitle("修改系统用户");
+    var win = top.$.MdiWindow(window, 500, 350, 0, 0, true);
+    win.setTitle("修改系统用户角色");
     win.setWindowArguments(data);//参数
     win.btnClose(true);
     win.btnMax(false);
@@ -119,27 +119,48 @@ function f_upd(id){
             loadGridData();
         }
     });
-    win.load("/plateYhgl/edit", window, function (obj) { });
+    win.load("/qxgl/edit", window, function (obj) { });
 }
 /*
-重置密码
+角色授权
  */
-function f_retPass(id){
-    BootstrapDialog.confirm({
-        type: BootstrapDialog.TYPE_DANGER,
-        size: BootstrapDialog.SIZE_SMALL,
-        title: '提示',
-        message: "确认重置用户密码吗！",
-        closeable: true,
-        btnOKLabel: "确定",
-        btnCancelLabel: "取消",
-        callback: function (ret) {
-            if(ret){
-                f_submitData('3',"/plate/retsetPass",id);
-            }
+function f_roleGrant(id){
+    var data = grid.getUserData(id,"data");
+    var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
+    win.setTitle("角色授权");
+    win.setWindowArguments(data);//参数
+    win.btnClose(true);
+    win.btnMax(false);
+    win.btnMin(false);
+    win.isResize(false);
+    win.onClose(function (ret) {
+        if (ret){
+            loadGridData();
         }
     });
+    win.load("/qxgl/edit", window, function (obj) { });
 }
+/*
+角色授予用户列表
+ */
+function f_grantUser(id){
+    var data = grid.getUserData(id,"data");
+    var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
+    win.setTitle("授予用户");
+    win.setWindowArguments(data);//参数
+    win.btnClose(true);
+    win.btnMax(false);
+    win.btnMin(false);
+    win.isResize(false);
+    win.onClose(function (ret) {
+        if (ret){
+            loadGridData();
+        }
+    });
+    win.load("/qxgl/edit", window, function (obj) { });
+}
+
+
 /*
 删除用户
  */

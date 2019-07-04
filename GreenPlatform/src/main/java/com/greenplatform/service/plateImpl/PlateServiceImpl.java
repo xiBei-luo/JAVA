@@ -22,11 +22,14 @@ import java.util.*;
 @Service
 public class PlateServiceImpl implements PlateService {
 
-    /*ReturnModel returnModel = new ReturnModel();*/
-    /*@Autowired
-    PlateDao plateDao;*/
     @Autowired
     PlateUserMapper plateUserMapper;
+    @Autowired
+    PlateUserRoleMapper plateUserRoleMapper;
+    @Autowired
+    PlateUserPermissionMapper plateUserPermissionMapper;
+    @Autowired
+    PlateYwLxMenuMapper plateYwLxMenuMapper;
     @Autowired
     OwerPlateUserMapper owerPlateUserMapper;
     @Autowired
@@ -516,6 +519,7 @@ public class PlateServiceImpl implements PlateService {
         }
     }
 
+    @OperationLog(cCzfs = "I")
     @Override
     public ReturnModel insertPlateLog(PlateLog plateLog) {
         try{
@@ -524,6 +528,65 @@ public class PlateServiceImpl implements PlateService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 查询当前登陆用户业务权限
+     * @return
+     */
+    @Override
+    public ReturnModel selectLoginuserYwqx() {
+        Map loginuserYwqxMap = new HashMap();
+
+        try{
+            PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+            PlateUserRoleExample plateUserRoleExample = new PlateUserRoleExample();
+            PlateUserRoleExample.Criteria criteria = plateUserRoleExample.createCriteria();
+            criteria.andCUseridEqualTo(plateUser.getcUserid());
+            List plateUserRoleList = plateUserRoleMapper.selectByExample(plateUserRoleExample);//查询当前用户的角色
+            loginuserYwqxMap.put("plateUserRoleList",plateUserRoleList);
+            for (int i = 0;i < plateUserRoleList.size();i++){
+                PlateUserRole plateUserRole = (PlateUserRole) plateUserRoleList.get(i);
+                PlateUserPermissionExample plateUserPermissionExample = new PlateUserPermissionExample();
+                PlateUserPermissionExample.Criteria criteria1 = plateUserPermissionExample.createCriteria();
+                criteria1.andCRoleEqualTo(plateUserRole.getcRole());
+                List plateUserPermissionmenuList = plateUserPermissionMapper.selectByExample(plateUserPermissionExample);//查询角色对应的功能表
+                loginuserYwqxMap.put("plateUserPermissionmenuList",plateUserPermissionmenuList);
+
+                List plateYwLxMenuList = new ArrayList();
+                for (int j = 0;j < plateUserPermissionmenuList.size();j++){
+                    Map plateYwLxMenuMap = new HashMap();
+                    PlateUserPermission lateUserPermission = (PlateUserPermission) plateUserPermissionmenuList.get(j);
+                    PlateYwLxMenuExample plateYwLxMenuExample = new PlateYwLxMenuExample();
+                    PlateYwLxMenuExample.Criteria criteria2 = plateYwLxMenuExample.createCriteria();
+                    criteria2.andCMenudmEqualTo(lateUserPermission.getcMenudm());
+                    List plateYwLxMenuListTmp = plateYwLxMenuMapper.selectByExample(plateYwLxMenuExample);
+                    if (plateYwLxMenuListTmp.size() > 0){
+                        PlateYwLxMenu plateYwLxMenu = (PlateYwLxMenu) plateYwLxMenuListTmp.get(0);
+                        plateYwLxMenuMap.put("cMenudm",plateYwLxMenu.getcMenudm());
+                        plateYwLxMenuMap.put("cMenumc",plateYwLxMenu.getcMenumc());
+                        plateYwLxMenuMap.put("cMenujc",plateYwLxMenu.getcMenujc());
+                        plateYwLxMenuMap.put("cYwlxdm",plateYwLxMenu.getcYwlxdm());
+                        plateYwLxMenuMap.put("cRuncommand",plateYwLxMenu.getcRuncommand());
+                        plateYwLxMenuMap.put("cZt",plateYwLxMenu.getcZt());
+                        plateYwLxMenuList.add(plateYwLxMenuMap);
+                    }
+                }
+                loginuserYwqxMap.put("plateYwLxMenuList",plateYwLxMenuList);
+            }
+
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(loginuserYwqxMap);
+            return returnModel;
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
     }
 
     @Override
@@ -672,6 +735,113 @@ public class PlateServiceImpl implements PlateService {
             returnModel.setObject(null);
         }
         return returnModel;
+    }
+
+    /**
+     * 查询系统用户角色
+     * @param plateUserRole
+     * @return
+     */
+    @Override
+    public ReturnModel selectPlateUserRole(PlateUserRole plateUserRole) {
+        try{
+            PlateUserRoleExample plateUserRoleExample = new PlateUserRoleExample();
+            PlateUserRoleExample.Criteria criteria = plateUserRoleExample.createCriteria();
+            plateUserRoleExample.setOrderByClause("d_cjsj");
+            if (!(("").equals(plateUserRole.getcRolename()) || null == plateUserRole.getcRolename())){
+                criteria.andCRolenameLike("%"+plateUserRole.getcRolename()+"%");
+            }
+            criteria.andCZtEqualTo("1");
+            List plateUserRoleList = plateUserRoleMapper.selectByExample(plateUserRoleExample);
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(plateUserRoleList);
+            return returnModel;
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+    /**
+     * 新增系统用户角色
+     * @param plateUserRole
+     * @return
+     */
+    @OperationLog(cCzfs = "I")
+    @Override
+    public ReturnModel insertPlateUserRole(PlateUserRole plateUserRole) {
+        return null;
+    }
+
+    /**
+     * 修改用户角色
+     * @param plateUserRole
+     * @return
+     */
+    @OperationLog(cCzfs = "U")
+    @Override
+    public ReturnModel updPlateUserRole(PlateUserRole plateUserRole) {
+        return null;
+    }
+
+    /**
+     * 删除用户角色
+     * @param plateUserRole
+     * @return
+     */
+    @OperationLog(cCzfs = "D")
+    @Override
+    public ReturnModel delPlateUserRole(PlateUserRole plateUserRole) {
+        return null;
+    }
+
+
+    /**
+     * 查询业务功能
+     * @param plateYwLxMenu
+     * @return
+     */
+    @Override
+    public ReturnModel selectPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu) {
+        try{
+            PlateYwLxMenuExample plateYwLxMenuExample = new PlateYwLxMenuExample();
+            PlateYwLxMenuExample.Criteria criteria = plateYwLxMenuExample.createCriteria();
+            plateYwLxMenuExample.setOrderByClause("c_ywlxdm,c_sort");
+            if (!(("").equals(plateYwLxMenu.getcYwlxdm()) || null == plateYwLxMenu.getcYwlxdm())){
+                criteria.andCYwlxdmEqualTo(plateYwLxMenu.getcYwlxdm());
+            }
+
+            if (!(("").equals(plateYwLxMenu.getcMenudm()) || null == plateYwLxMenu.getcMenudm())){
+                criteria.andCYwlxdmLike(plateYwLxMenu.getcYwlxdm());
+            }
+
+            if (!(("").equals(plateYwLxMenu.getcMenumc()) || null == plateYwLxMenu.getcMenumc())){
+                criteria.andCMenumcLike(plateYwLxMenu.getcMenumc());
+            }
+
+            if (!(("").equals(plateYwLxMenu.getcMenujc()) || null == plateYwLxMenu.getcMenujc())){
+                criteria.andCMenujcLike(plateYwLxMenu.getcMenujc());
+            }
+
+            List plateYwLxMenuList = plateYwLxMenuMapper.selectByExample(plateYwLxMenuExample);
+
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(plateYwLxMenuList);
+            return returnModel;
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
     }
 
 

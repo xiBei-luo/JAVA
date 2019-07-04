@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @SpringBootApplication
+
+@MapperScan("com.greenplatform.dao.**")
 public class GreenPlatformApplication {
 
     public static void main(String[] args) {

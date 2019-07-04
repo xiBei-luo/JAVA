@@ -5,10 +5,8 @@ import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
 import com.greenplatform.util.GetcurrentLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -148,6 +146,24 @@ public class PlateController {
     @PostMapping(value = "/delYwjcdm")
     public ReturnModel delYwjcdm(PlateCodeDmz plateCodeDmz){
         ReturnModel returnModel = plateService.delPlateCodeDmz(plateCodeDmz);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/selectPlateUserRole")
+    public ReturnModel selectPlateUserRole(PlateUserRole plateUserRole){
+        ReturnModel returnModel = plateService.selectPlateUserRole(plateUserRole);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/insertPlateUserRole")
+    public ReturnModel insertPlateUserRole(PlateUserRole plateUserRole){
+        ReturnModel returnModel = plateService.insertPlateUserRole(plateUserRole);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/selectPlateYwLxMenu")
+    public ReturnModel selectPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu){
+        ReturnModel returnModel = plateService.selectPlateYwLxMenu(plateYwLxMenu);
         return returnModel;
     }
 
