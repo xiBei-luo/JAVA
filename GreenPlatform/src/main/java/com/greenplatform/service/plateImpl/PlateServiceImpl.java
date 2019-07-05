@@ -25,6 +25,8 @@ public class PlateServiceImpl implements PlateService {
     @Autowired
     PlateUserMapper plateUserMapper;
     @Autowired
+    PlateUserRoleMidMapper plateUserRoleMidMapper;
+    @Autowired
     PlateUserRoleMapper plateUserRoleMapper;
     @Autowired
     PlateUserPermissionMapper plateUserPermissionMapper;
@@ -532,6 +534,8 @@ public class PlateServiceImpl implements PlateService {
 
     /**
      * 查询当前登陆用户业务权限
+     * plate_user===plate_user_role_mid===plate_user_role
+     * plate_user_permission===plate_yw_lx_menu
      * @return
      */
     @Override
@@ -540,16 +544,18 @@ public class PlateServiceImpl implements PlateService {
 
         try{
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
-            PlateUserRoleExample plateUserRoleExample = new PlateUserRoleExample();
-            PlateUserRoleExample.Criteria criteria = plateUserRoleExample.createCriteria();
+            PlateUserRoleMidExample plateUserRoleMidExample = new PlateUserRoleMidExample();
+            PlateUserRoleMidExample.Criteria criteria = plateUserRoleMidExample.createCriteria();
             criteria.andCUseridEqualTo(plateUser.getcUserid());
-            List plateUserRoleList = plateUserRoleMapper.selectByExample(plateUserRoleExample);//查询当前用户的角色
-            loginuserYwqxMap.put("plateUserRoleList",plateUserRoleList);
-            for (int i = 0;i < plateUserRoleList.size();i++){
-                PlateUserRole plateUserRole = (PlateUserRole) plateUserRoleList.get(i);
+            criteria.andCZtEqualTo("1");
+            List plateUserRoleMidList = plateUserRoleMidMapper.selectByExample(plateUserRoleMidExample);//查询当前用户的角色
+            loginuserYwqxMap.put("plateUserRoleMidList",plateUserRoleMidList);
+            for (int i = 0;i < plateUserRoleMidList.size();i++){
+                PlateUserRoleMid plateUserRoleMid = (PlateUserRoleMid) plateUserRoleMidList.get(i);
                 PlateUserPermissionExample plateUserPermissionExample = new PlateUserPermissionExample();
                 PlateUserPermissionExample.Criteria criteria1 = plateUserPermissionExample.createCriteria();
-                criteria1.andCRoleEqualTo(plateUserRole.getcRole());
+                criteria1.andCRoleEqualTo(plateUserRoleMid.getcRole());
+                criteria1.andCZtEqualTo("1");
                 List plateUserPermissionmenuList = plateUserPermissionMapper.selectByExample(plateUserPermissionExample);//查询角色对应的功能表
                 loginuserYwqxMap.put("plateUserPermissionmenuList",plateUserPermissionmenuList);
 
@@ -560,6 +566,7 @@ public class PlateServiceImpl implements PlateService {
                     PlateYwLxMenuExample plateYwLxMenuExample = new PlateYwLxMenuExample();
                     PlateYwLxMenuExample.Criteria criteria2 = plateYwLxMenuExample.createCriteria();
                     criteria2.andCMenudmEqualTo(lateUserPermission.getcMenudm());
+                    criteria2.andCZtEqualTo("1");
                     List plateYwLxMenuListTmp = plateYwLxMenuMapper.selectByExample(plateYwLxMenuExample);
                     if (plateYwLxMenuListTmp.size() > 0){
                         PlateYwLxMenu plateYwLxMenu = (PlateYwLxMenu) plateYwLxMenuListTmp.get(0);
@@ -574,7 +581,7 @@ public class PlateServiceImpl implements PlateService {
                 }
                 loginuserYwqxMap.put("plateYwLxMenuList",plateYwLxMenuList);
             }
-
+            System.out.println(loginuserYwqxMap);
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(loginuserYwqxMap);
@@ -751,7 +758,7 @@ public class PlateServiceImpl implements PlateService {
             if (!(("").equals(plateUserRole.getcRolename()) || null == plateUserRole.getcRolename())){
                 criteria.andCRolenameLike("%"+plateUserRole.getcRolename()+"%");
             }
-            criteria.andCZtEqualTo("1");
+            //criteria.andCZtEqualTo("1");
             List plateUserRoleList = plateUserRoleMapper.selectByExample(plateUserRoleExample);
             returnModel.setFlag(0);
             returnModel.setMsg("");
@@ -775,7 +782,42 @@ public class PlateServiceImpl implements PlateService {
     @OperationLog(cCzfs = "I")
     @Override
     public ReturnModel insertPlateUserRole(PlateUserRole plateUserRole) {
-        return null;
+        try{
+            if (("").equals(plateUserRole.getcRole()) || null == plateUserRole.getcRole()){
+                returnModel.setFlag(1);
+                returnModel.setMsg("新增用户角色失败，用户角色不能为空!");
+                returnModel.setObject(null);
+                return returnModel;
+            }else if(("").equals(plateUserRole.getcRolename()) || null == plateUserRole.getcRolename()){
+                returnModel.setFlag(1);
+                returnModel.setMsg("新增用户角色失败，用户角色名称不能为空!");
+                returnModel.setObject(null);
+                return returnModel;
+            }else{
+                PlateUserRole plateUserRole1 = plateUserRoleMapper.selectByPrimaryKey(plateUserRole.getcRole());
+                if (!(("").equals(plateUserRole1) || null == plateUserRole1)){
+                    returnModel.setFlag(1);
+                    returnModel.setMsg("新增用户角色失败，用户角色已存在!");
+                    returnModel.setObject(null);
+                }else{
+                    plateUserRole.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+                    plateUserRole.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                    plateUserRoleMapper.insert(plateUserRole);
+                    returnModel.setFlag(0);
+                    returnModel.setMsg("新增用户角色成功!");
+                    returnModel.setObject(null);
+
+                }
+                return returnModel;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
     }
 
     /**
@@ -786,7 +828,39 @@ public class PlateServiceImpl implements PlateService {
     @OperationLog(cCzfs = "U")
     @Override
     public ReturnModel updPlateUserRole(PlateUserRole plateUserRole) {
-        return null;
+        try{
+            if (("").equals(plateUserRole.getcRole()) || null == plateUserRole.getcRole()){
+                returnModel.setFlag(1);
+                returnModel.setMsg("修改用户角色失败，用户角色不能为空!");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+
+            PlateUserRole plateUserRole1 = plateUserRoleMapper.selectByPrimaryKey(plateUserRole.getcRole());
+            if (null == plateUserRole1){
+                returnModel.setFlag(1);
+                returnModel.setMsg("修改用户角色失败，没有找到待修改的数据!");
+                returnModel.setObject(null);
+                return returnModel;
+            }else{
+                plateUserRole1.setcRolename(plateUserRole.getcRolename());
+                plateUserRole1.setcZt(plateUserRole.getcZt());
+                plateUserRole1.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                plateUserRole1.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+
+                plateUserRoleMapper.updateByPrimaryKey(plateUserRole1);
+                returnModel.setFlag(0);
+                returnModel.setMsg("修改用户角色成功!");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+        }catch (Exception e){
+            returnModel.setFlag(1);
+            returnModel.setMsg("修改用户角色失败，服务器端错误!");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
     }
 
     /**
@@ -797,7 +871,34 @@ public class PlateServiceImpl implements PlateService {
     @OperationLog(cCzfs = "D")
     @Override
     public ReturnModel delPlateUserRole(PlateUserRole plateUserRole) {
-        return null;
+        try{
+            if ("".equals(plateUserRole.getcRole()) || null == plateUserRole.getcRole()){
+                returnModel.setFlag(1);
+                returnModel.setMsg("删除失败，用户角色标识符不能为空!");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+            PlateUserRole plateUserRole1 = plateUserRoleMapper.selectByPrimaryKey(plateUserRole.getcRole());
+            if (null == plateUserRole1 || "".equals(plateUserRole1.getcRole())){
+                returnModel.setFlag(1);
+                returnModel.setMsg("删除失败，没有找到待删除的数据!");
+                returnModel.setObject(null);
+                return returnModel;
+            }else{
+                plateUserRoleMapper.deleteByPrimaryKey(plateUserRole.getcRole());
+                returnModel.setFlag(0);
+                returnModel.setMsg("删除成功!");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("删除失败，服务器端错误!");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
     }
 
 
@@ -807,7 +908,7 @@ public class PlateServiceImpl implements PlateService {
      * @return
      */
     @Override
-    public ReturnModel selectPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu) {
+    public ReturnModel selectPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu){
         try{
             PlateYwLxMenuExample plateYwLxMenuExample = new PlateYwLxMenuExample();
             PlateYwLxMenuExample.Criteria criteria = plateYwLxMenuExample.createCriteria();
@@ -838,6 +939,208 @@ public class PlateServiceImpl implements PlateService {
             e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+    /**
+     * 新增应用
+     * @param plateYwLxMenu
+     * @return
+     */
+    @OperationLog(cCzfs = "I")
+    @Override
+    public ReturnModel insertPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu) {
+        try{
+            if (("").equals(plateYwLxMenu.getcYwlxdm()) || null == plateYwLxMenu.getcYwlxdm()){
+                returnModel.setFlag(1);
+                returnModel.setObject(null);
+                returnModel.setMsg("新增应用失败，业务类型代码不能为空!");
+                return returnModel;
+            }else if(("").equals(plateYwLxMenu.getcMenudm()) || null == plateYwLxMenu.getcMenudm()){
+                returnModel.setFlag(1);
+                returnModel.setObject(null);
+                returnModel.setMsg("新增应用失败，菜单功能代码代码不能为空!");
+                return returnModel;
+            }else{
+                PlateYwLxMenuExample plateYwLxMenuExample = new PlateYwLxMenuExample();
+                PlateYwLxMenuExample.Criteria criteria = plateYwLxMenuExample.createCriteria();
+                criteria.andCMenudmEqualTo(plateYwLxMenu.getcMenudm());
+                criteria.andCZtEqualTo("1");
+                List plateYwLxMenuList = plateYwLxMenuMapper.selectByExample(plateYwLxMenuExample);
+                if (!(plateYwLxMenuList.isEmpty())){
+                    returnModel.setFlag(1);
+                    returnModel.setObject(null);
+                    returnModel.setMsg("新增应用失败，菜单功能代码已存在!");
+                    return returnModel;
+                }
+                plateYwLxMenu.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                plateYwLxMenu.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+
+                plateYwLxMenuMapper.insert(plateYwLxMenu);
+                returnModel.setFlag(0);
+                returnModel.setObject(null);
+                returnModel.setMsg("新增应用成功!");
+                return  returnModel;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setObject(null);
+            returnModel.setMsg("新增应用失败,系统错误!");
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+    /**
+     * 修改应用
+     * @param plateYwLxMenu
+     * @return
+     */
+    @OperationLog(cCzfs = "U")
+    @Override
+    public ReturnModel updPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu) {
+        try{
+            if (("").equals(plateYwLxMenu.getcYwlxdm()) || null == plateYwLxMenu.getcYwlxdm()){
+                returnModel.setFlag(1);
+                returnModel.setObject(null);
+                returnModel.setMsg("修改应用失败，业务类型代码不能为空!");
+                return returnModel;
+            }else if(("").equals(plateYwLxMenu.getcMenudm()) || null == plateYwLxMenu.getcMenudm()){
+                returnModel.setFlag(1);
+                returnModel.setObject(null);
+                returnModel.setMsg("修改应用失败，菜单功能代码代码不能为空!");
+                return returnModel;
+            }else{
+                PlateYwLxMenu plateYwLxMenu1 = plateYwLxMenuMapper.selectByPrimaryKey(plateYwLxMenu.getcMenudm());
+                if (null == plateYwLxMenu1){
+                    returnModel.setFlag(1);
+                    returnModel.setMsg("修改应用失败，没有找到待修改的数据!");
+                    returnModel.setObject(null);
+                    return returnModel;
+                }else{
+                    plateYwLxMenu1.setcMenumc(plateYwLxMenu.getcMenumc());
+                    plateYwLxMenu1.setcMenujc(plateYwLxMenu.getcMenujc());
+                    plateYwLxMenu1.setcRuncommand(plateYwLxMenu.getcRuncommand());
+                    plateYwLxMenu1.setcSort(plateYwLxMenu.getcSort());
+
+                    plateYwLxMenu1.setcZt(plateYwLxMenu.getcZt());
+                    plateYwLxMenu1.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                    plateYwLxMenu1.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+
+                    plateYwLxMenuMapper.updateByPrimaryKey(plateYwLxMenu1);
+                    returnModel.setFlag(0);
+                    returnModel.setMsg("修改应用成功!");
+                    returnModel.setObject(null);
+                    return returnModel;
+                }
+            }
+        }catch (Exception e){
+            returnModel.setFlag(1);
+            returnModel.setMsg("修改用户角色失败，服务器端错误!");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+    /**
+     * 删除应用
+     * @param plateYwLxMenu
+     * @return
+     */
+    @OperationLog(cCzfs = "D")
+    @Override
+    public ReturnModel delPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu) {
+        try{
+            if(("").equals(plateYwLxMenu.getcMenudm()) || null == plateYwLxMenu.getcMenudm()){
+                returnModel.setFlag(1);
+                returnModel.setObject(null);
+                returnModel.setMsg("删除应用失败，菜单功能代码代码不能为空!");
+                return returnModel;
+            }else{
+                PlateYwLxMenu plateYwLxMenu1 = plateYwLxMenuMapper.selectByPrimaryKey(plateYwLxMenu.getcMenudm());
+                if (null == plateYwLxMenu1){
+                    returnModel.setFlag(1);
+                    returnModel.setMsg("删除应用失败，没有找到待删除的数据!");
+                    returnModel.setObject(null);
+                    return returnModel;
+                }else{
+                    plateYwLxMenuMapper.deleteByPrimaryKey(plateYwLxMenu1.getcMenudm());
+                    returnModel.setFlag(0);
+                    returnModel.setMsg("删除应用成功!");
+                    returnModel.setObject(null);
+                    return returnModel;
+                }
+            }
+        }catch (Exception e){
+            returnModel.setFlag(1);
+            returnModel.setMsg("删除应用失败，服务器端错误!");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+
+    /**
+     * 查询指定角色拥有的业务功能权限
+     * @param cRole
+     * @return
+     */
+    @Override
+    public ReturnModel selectPermissionByRole(String cRole) {
+        try{
+            PlateYwLxMenuExample plateYwLxMenuExample = new PlateYwLxMenuExample();
+            PlateYwLxMenuExample.Criteria criteria = plateYwLxMenuExample.createCriteria();
+            criteria.andCZtEqualTo("1");
+            plateYwLxMenuExample.setOrderByClause("c_ywlxdm,c_menudm,c_sort");
+            List plateYwLxMenuList = plateYwLxMenuMapper.selectByExample(plateYwLxMenuExample);//1.查出系统中所有的功能菜单
+
+            PlateUserPermissionExample plateUserPermissionExample = new PlateUserPermissionExample();
+            PlateUserPermissionExample.Criteria criteria1 = plateUserPermissionExample.createCriteria();
+            criteria1.andCZtEqualTo("1");
+            criteria1.andCRoleEqualTo(cRole);
+            plateUserPermissionExample.setOrderByClause("c_menudm");
+            List plateUserPermissionList = plateUserPermissionMapper.selectByExample(plateUserPermissionExample);//2.查询指定角色拥有的权限
+
+            List returnList = new ArrayList();
+            for(int i=0;i<plateYwLxMenuList.size();i++){
+                Map returnMap = new HashMap();
+                PlateYwLxMenu plateYwLxMenu = (PlateYwLxMenu) plateYwLxMenuList.get(i);
+                returnMap.put("cYwlxdm",plateYwLxMenu.getcYwlxdm());
+                returnMap.put("cMenudm",plateYwLxMenu.getcMenudm());
+                returnMap.put("cMenumc",plateYwLxMenu.getcMenumc());
+                returnMap.put("cMenujc",plateYwLxMenu.getcMenujc());
+                returnMap.put("cRuncommand",plateYwLxMenu.getcRuncommand());
+                returnMap.put("cSort",plateYwLxMenu.getcSort());
+
+                if (plateUserPermissionList.size() > 0){
+                    for (int j=0;j<plateUserPermissionList.size();j++){
+                        PlateUserPermission plateUserPermission = (PlateUserPermission) plateUserPermissionList.get(j);
+                        if(plateYwLxMenu.getcMenudm().equals(plateUserPermission.getcMenudm())){
+                            returnMap.put("isCheck","1");
+                            break;
+                        }else{
+                            returnMap.put("isCheck","0");
+                        }
+                    }
+                }else{
+                    returnMap.put("isCheck","0");
+                }
+                returnList.add(returnMap);
+            }
+            System.out.println(returnList);
+            returnModel.setObject(0);
+            returnModel.setMsg("");
+            returnModel.setObject(returnList);
+            return returnModel;
+        }catch (Exception e){
+            returnModel.setFlag(1);
+            returnModel.setMsg("获取数据失败，服务器端错误!");
             returnModel.setObject(null);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return returnModel;

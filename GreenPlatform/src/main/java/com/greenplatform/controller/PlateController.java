@@ -161,9 +161,35 @@ public class PlateController {
         return returnModel;
     }
 
+    @PostMapping(value = "/updPlateUserRole")
+    public ReturnModel updatePlateUserRole(PlateUserRole plateUserRole){
+        ReturnModel returnModel = plateService.updPlateUserRole(plateUserRole);
+        return returnModel;
+    }
+    @PostMapping(value = "/delPlateUserRole")
+    public ReturnModel delPlateUserRole(PlateUserRole plateUserRole){
+        ReturnModel returnModel = plateService.delPlateUserRole(plateUserRole);
+        return returnModel;
+    }
+
     @PostMapping(value = "/selectPlateYwLxMenu")
     public ReturnModel selectPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu){
         ReturnModel returnModel = plateService.selectPlateYwLxMenu(plateYwLxMenu);
+        return returnModel;
+    }
+    @PostMapping(value = "/insertPlateYwLxMenu")
+    public ReturnModel insertPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu){
+        ReturnModel returnModel = plateService.insertPlateYwLxMenu(plateYwLxMenu);
+        return returnModel;
+    }
+    @PostMapping(value = "/updPlateYwLxMenu")
+    public ReturnModel updPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu){
+        ReturnModel returnModel = plateService.updPlateYwLxMenu(plateYwLxMenu);
+        return returnModel;
+    }
+    @PostMapping(value = "/delPlateYwLxMenu")
+    public ReturnModel delPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu){
+        ReturnModel returnModel = plateService.delPlateYwLxMenu(plateYwLxMenu);
         return returnModel;
     }
 

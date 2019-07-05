@@ -11,7 +11,7 @@ $(function(){
 function initEvent(){
 
     $("#btnAdd").click(function(){
-       var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
+       var win = top.$.MdiWindow(window, 500, 350, 0, 0, true);
         win.setTitle("新增系统用户角色");
         win.setWindowArguments(null);//参数
         win.btnClose(true);
@@ -126,8 +126,8 @@ function f_upd(id){
  */
 function f_roleGrant(id){
     var data = grid.getUserData(id,"data");
-    var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
-    win.setTitle("角色授权");
+    var win = top.$.MdiWindow(window, 900, 400, 0, 0, true);
+    win.setTitle("角色【"+data.cRolename+"】授权");
     win.setWindowArguments(data);//参数
     win.btnClose(true);
     win.btnMax(false);
@@ -138,7 +138,7 @@ function f_roleGrant(id){
             loadGridData();
         }
     });
-    win.load("/qxgl/edit", window, function (obj) { });
+    win.load("/qxgl/jssq?cRole="+id, window, function (obj) { });
 }
 /*
 角色授予用户列表
@@ -157,7 +157,7 @@ function f_grantUser(id){
             loadGridData();
         }
     });
-    win.load("/qxgl/edit", window, function (obj) { });
+    win.load("/qxgl/syyh", window, function (obj) { });
 }
 
 
@@ -175,7 +175,7 @@ function f_del(id){
         btnCancelLabel: "取消",
         callback: function (ret) {
             if(ret){
-                f_submitData('2',"/plate/delPlateuser",id);
+                f_submitData('2',"/plate/delPlateUserRole",id);
             }
         }
     });
@@ -190,13 +190,9 @@ function f_del(id){
 function f_submitData(type,reqURL,id){
     var sendRequest = new SendRequest(reqURL,"POST");//构造对象
 
-    if("3" === type){
+    if("2" === type){
         sendRequest.addParamObj({
-            "cUserid":id
-        });//构造请求参数
-    }else if("2" === type){
-        sendRequest.addParamObj({
-            "cUserid":id
+            "cRole":id
         });//构造请求参数
     }
 

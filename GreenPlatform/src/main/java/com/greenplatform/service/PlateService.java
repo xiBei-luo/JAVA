@@ -64,5 +64,14 @@ public interface PlateService {
 
     /*查询系统业务功能菜单*/
     public ReturnModel selectPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu);
+    /*新增业务功能菜单*/
+    public ReturnModel insertPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu);
+    /*新增业务功能菜单*/
+    public ReturnModel updPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu);
+    /*新增业务功能菜单*/
+    public ReturnModel delPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu);
+
+    /*查询指定角色拥有的功能权限*/
+    public ReturnModel selectPermissionByRole(String cRole);
 
 }

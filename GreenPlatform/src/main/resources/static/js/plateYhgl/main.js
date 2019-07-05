@@ -89,7 +89,7 @@ function initData(data){
             opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_upd(\'"+data[i].cUserid+"\');\"  >修改</a>&nbsp&nbsp");
             opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_del(\'"+data[i].cUserid+"\');\"  >删除</a>&nbsp&nbsp");
             opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_retPass(\'"+data[i].cUserid+"\');\"  >重置密码</a>&nbsp&nbsp");
-            opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_retPass(\'"+data[i].cUserid+"\');\"  >单独授权</a>");
+            opLinkBuff.append("<a class=\"btn-link \" onclick=\"f_grandUser(\'"+data[i].cUserid+"\');\"  >单独授权</a>");
 
         }
         grid.addRow(data[i].cUserid,[
@@ -105,6 +105,11 @@ function initData(data){
         grid.setUserData(data[i].cUserid,'data',data[i]);
     }
 }
+
+/**
+ * 修改用户
+ * @param id
+ */
 function f_upd(id){
     var data = grid.getUserData(id,"data");
     var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
@@ -121,8 +126,29 @@ function f_upd(id){
     });
     win.load("/plateYhgl/edit", window, function (obj) { });
 }
+
+/**
+ * 单独授权
+ * @param id
+ */
+function f_grandUser(id){
+    var data = grid.getUserData(id,"data");
+    var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
+    win.setTitle("修改系统用户");
+    win.setWindowArguments(data);//参数
+    win.btnClose(true);
+    win.btnMax(false);
+    win.btnMin(false);
+    win.isResize(false);
+    win.onClose(function (ret) {
+        if (ret){
+            loadGridData();
+        }
+    });
+    win.load("/plateYhgl/ddsq", window, function (obj) { });
+}
 /*
-重置密码
+重置用户密码
  */
 function f_retPass(id){
     BootstrapDialog.confirm({

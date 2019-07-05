@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,7 +41,7 @@ public class BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    @GetMapping(value = "/index")
     public String index(HttpSession session,Model model) {
         ReturnModel returnModel = plateService.selectLoginuserYwqx();
         System.out.println(returnModel.getObject());
@@ -102,6 +103,10 @@ public class BaseController {
     public String plateYhglEdit(){
         return "plate/plateYhgl/edit";
     }
+    @GetMapping(value = "/plateYhgl/ddsq")
+    public String plateYhglddsq(){
+        return "plate/plateYhgl/ddsq";
+    }
     @GetMapping(value = "/qxgl")
     public String qxgl(){
         return "plate/qxgl/main";
@@ -109,6 +114,16 @@ public class BaseController {
     @GetMapping(value = "/qxgl/edit")
     public String qxglEdit(){
         return "plate/qxgl/edit";
+    }
+    @GetMapping(value = "/qxgl/jssq")//查询指定角色拥有的业务功能权限
+    public String jssq(@RequestParam(name = "cRole", required = true) String cRole,Model model){
+        ReturnModel returnModel = plateService.selectPermissionByRole(cRole);
+        model.addAttribute("rolePermissionList",returnModel.getObject());
+        return "plate/qxgl/jssq";
+    }
+    @GetMapping(value = "/qxgl/syyh")
+    public String syyh(){
+        return "plate/qxgl/syyh";
     }
     @GetMapping(value = "/xtcssz")
     public String xtcssz(){

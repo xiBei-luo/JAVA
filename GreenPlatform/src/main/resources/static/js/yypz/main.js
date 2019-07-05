@@ -11,8 +11,8 @@ $(function(){
 function initEvent(){
 
     $("#btnAdd").click(function(){
-       var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
-        win.setTitle("新增系统用户");
+       var win = top.$.MdiWindow(window, 900, 400, 0, 0, true);
+        win.setTitle("新增应用");
         win.setWindowArguments(null);//参数
         win.btnClose(true);
         win.btnMax(false);
@@ -23,7 +23,7 @@ function initEvent(){
                 loadGridData();
             }
         });
-        win.load("/plateYhgl/edit", window, function (obj) { });
+        win.load("/yypz/edit", window, function (obj) { });
     });
 
     $("#btnSearch").click(function(){
@@ -40,7 +40,7 @@ function initGrid(){
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
     grid.setHeader("操作,业务类型代码,功能菜单代码,功能菜单简称,执行命令,排序号,状态");
     grid.setInitWidthsP("15,15,15,15,18,10,11.5");
-    grid.setColAlign("center,center,center,center,center,center,center");
+    grid.setColAlign("center,center,left,left,left,center,center");
     grid.setColTypes("ro,ro,ro,ro,ro,ro,ro");
     grid.enableMultiselect(false);
     grid.init();
@@ -104,8 +104,8 @@ function initData(data){
 }
 function f_upd(id){
     var data = grid.getUserData(id,"data");
-    var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
-    win.setTitle("修改系统用户");
+    var win = top.$.MdiWindow(window, 900, 400, 0, 0, true);
+    win.setTitle("修改应用");
     win.setWindowArguments(data);//参数
     win.btnClose(true);
     win.btnMax(false);
@@ -116,26 +116,7 @@ function f_upd(id){
             loadGridData();
         }
     });
-    win.load("/plateYhgl/edit", window, function (obj) { });
-}
-/*
-重置密码
- */
-function f_retPass(id){
-    BootstrapDialog.confirm({
-        type: BootstrapDialog.TYPE_DANGER,
-        size: BootstrapDialog.SIZE_SMALL,
-        title: '提示',
-        message: "确认重置用户密码吗！",
-        closeable: true,
-        btnOKLabel: "确定",
-        btnCancelLabel: "取消",
-        callback: function (ret) {
-            if(ret){
-                f_submitData('3',"/plate/retsetPass",id);
-            }
-        }
-    });
+    win.load("/yypz/edit", window, function (obj) { });
 }
 /*
 删除用户
@@ -151,7 +132,7 @@ function f_del(id){
         btnCancelLabel: "取消",
         callback: function (ret) {
             if(ret){
-                f_submitData('2',"/plate/delPlateuser",id);
+                f_submitData('2',"/plate/delPlateYwLxMenu",id);
             }
         }
     });
@@ -159,20 +140,16 @@ function f_del(id){
 
 /**
  * 发送请求保存数据
- * type:操作类型，2删除/3重置密码
+ * type:操作类型，2删除
  * reqURL：服务地址
  * id：用户参数
  */
 function f_submitData(type,reqURL,id){
     var sendRequest = new SendRequest(reqURL,"POST");//构造对象
 
-    if("3" === type){
+    if("2" === type){
         sendRequest.addParamObj({
-            "cUserid":id
-        });//构造请求参数
-    }else if("2" === type){
-        sendRequest.addParamObj({
-            "cUserid":id
+            "cMenudm":id
         });//构造请求参数
     }
 

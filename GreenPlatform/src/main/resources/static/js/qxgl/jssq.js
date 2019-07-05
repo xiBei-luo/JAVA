@@ -7,11 +7,8 @@
  * @returns
  */
 function _init(args, mdi, layerIdx, parentWindow) {
-    if(args){
-        $("#cRole").attr("disabled",true);
-        setInputArea(nullToEmptyForObject(args));
-        $("#cRole").attr("disabled",true);
-    }
+    console.log(args);
+
     var refresh = false;
     initEvent();
     $("#btnRet").click(function(){
@@ -21,22 +18,8 @@ function _init(args, mdi, layerIdx, parentWindow) {
 
 
     function initEvent(){
-        if (args && args.cRole){
-            initBaseCodeSelect($("#cZt"),{cDmlb:"C_JC_ZT"},args.cZt,"---请选择状态---");
-        } else{
-            initBaseCodeSelect($("#cZt"),{cDmlb:"C_JC_ZT"},null,"---请选择状态---");
-        }
         $("#btnSave").click(function(){
-            var bPass = requiredFieldCheck($("label .require"), top, function(){});
-            if(!bPass){
-                return;
-            }else{
-                if(args && args.cRole){
-                    f_submitData("1","/plate/updPlateUserRole");
-                }else{
-                    f_submitData("0","/plate/insertPlateUserRole");
-                }
-            }
+            f_submitData("/plate/");
         });
     }
     /**
@@ -44,22 +27,14 @@ function _init(args, mdi, layerIdx, parentWindow) {
      * type:操作类型，0新增/1修改/2删除
      * reqURL：服务地址
      */
-    function f_submitData(type,reqURL){
+    function f_submitData(reqURL){
         var sendRequest = new SendRequest(reqURL,"POST");//构造对象
 
-        if ("0" === type) {
-            sendRequest.addParamObj({
-                "cRole":$("#cRole").val(),
-                "cRolename":$("#cRolename").val(),
-                "cZt":$("#cZt").val()
-            });//构造请求参数
-        }else if("1" === type){
-            sendRequest.addParamObj({
-                "cRole":args.cRole,
-                "cRolename":$("#cRolename").val(),
-                "cZt":$("#cZt").val()
-            });//构造请求参数
-        }
+        sendRequest.addParamObj({
+            "cRole":$("#cRole").val(),
+            "cRolename":$("#cRolename").val(),
+            "cZt":$("#cZt").val()
+        });//构造请求参数
 
         sendRequest.sendRequest(function(ret){
             $("#btnSave").attr("disabled",false);

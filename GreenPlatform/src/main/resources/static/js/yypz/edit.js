@@ -8,9 +8,8 @@
  */
 function _init(args, mdi, layerIdx, parentWindow) {
     if(args){
-        $(".password-field").hide();
         setInputArea(nullToEmptyForObject(args));
-        $("#cLoginname,#cEmail").attr("disabled",true);
+        $("#cYwlxdm,#cMenudm").attr("disabled",true);
     }
     var refresh = false;
     initEvent();
@@ -21,22 +20,20 @@ function _init(args, mdi, layerIdx, parentWindow) {
 
 
     function initEvent(){
-        if (args && args.cUserid){
-            initBaseCodeSelect($("#cSex"),{cDmlb:"C_USER_SEX"},args.cSex,"---请选择性别---");
-            initBaseCodeSelect($("#cZjlx"),{cDmlb:"C_USER_ZJLX"},args.cZjlx,"---请选择证件类型---");
+        if (args && args.cMenudm){
+            initBaseCodeSelect($("#cZt"),{cDmlb:"C_JC_ZT"},args.cZt,"---请选择状态---");
         } else{
-            initBaseCodeSelect($("#cSex"),{cDmlb:"C_USER_SEX"},null,"---请选择性别---");
-            initBaseCodeSelect($("#cZjlx"),{cDmlb:"C_USER_ZJLX"},null,"---请选择证件类型---");
+            initBaseCodeSelect($("#cZt"),{cDmlb:"C_JC_ZT"},null,"---请选择状态---");
         }
         $("#btnSave").click(function(){
             var bPass = requiredFieldCheck($("label .require"), top, function(){});
             if(!bPass){
                 return;
             }else{
-                if(args && args.cUserid){
-                    f_submitData("1","/plate/updPlateuser");
+                if(args && args.cMenudm){
+                    f_submitData("1","/plate/updPlateYwLxMenu");
                 }else{
-                    f_submitData("0","/plate/insertPlateuser");
+                    f_submitData("0","/plate/insertPlateYwLxMenu");
                 }
             }
         });
@@ -51,25 +48,23 @@ function _init(args, mdi, layerIdx, parentWindow) {
 
         if ("0" === type) {
             sendRequest.addParamObj({
-                "cUsername":$("#cUsername").val(),
-                "cSex":$("#cSex").val(),
-                "cLoginname":$("#cLoginname").val(),
-                "cEmail":$("#cEmail").val(),
-                "cPhone":$("#cPhone").val(),
-                "cZjlx":$("#cZjlx").val(),
-                "cZjhm":$("#cZjhm").val(),
-                "cJtzz":$("#cJtzz").val(),
-                "cPassword":$("#cPassword").val()
+                "cYwlxdm":$("#cYwlxdm").val(),
+                "cMenudm":$("#cMenudm").val(),
+                "cMenumc":$("#cMenumc").val(),
+                "cMenujc":$("#cMenujc").val(),
+                "cRuncommand":$("#cRuncommand").val(),
+                "cSort":$("#cSort").val(),
+                "cZt":$("#cZt").val()
             });//构造请求参数
         }else if("1" === type){
             sendRequest.addParamObj({
-                "cUserid":args.cUserid,
-                "cUsername":$("#cUsername").val(),
-                "cSex":$("#cSex").val(),
-                "cPhone":$("#cPhone").val(),
-                "cZjlx":$("#cZjlx").val(),
-                "cZjhm":$("#cZjhm").val(),
-                "cJtzz":$("#cJtzz").val()
+                "cYwlxdm":args.cYwlxdm,
+                "cMenudm":args.cMenudm,
+                "cMenumc":$("#cMenumc").val(),
+                "cMenujc":$("#cMenujc").val(),
+                "cRuncommand":$("#cRuncommand").val(),
+                "cSort":$("#cSort").val(),
+                "cZt":$("#cZt").val()
             });//构造请求参数
         }
 
