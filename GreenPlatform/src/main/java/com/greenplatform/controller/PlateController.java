@@ -1,9 +1,11 @@
 package com.greenplatform.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
 import com.greenplatform.util.GetcurrentLoginUser;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -190,6 +192,15 @@ public class PlateController {
     @PostMapping(value = "/delPlateYwLxMenu")
     public ReturnModel delPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu){
         ReturnModel returnModel = plateService.delPlateYwLxMenu(plateYwLxMenu);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/saveUserRolePermission")
+    public ReturnModel saveUserRolePermission(@RequestBody String jsonObject){
+        JSONObject jsonParams = JSONObject.fromObject(jsonObject);
+        System.out.println(jsonParams);
+
+        ReturnModel returnModel = plateService.saveUserRolePermission(jsonParams);
         return returnModel;
     }
 

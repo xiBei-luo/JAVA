@@ -24,20 +24,25 @@
             width:214.5px;
             display: inline-block;
         }
+        .page-jssq label{
+            font-weight: normal;
+        }
     </style>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid page-jssq">
     <ul class="list-group">
         <li class="list-group-item list-group-item-info">业务功能</li>
         <li class="list-group-item rolePermConItem" th:each="rolePermissionList : ${rolePermissionList}" th:if="${rolePermissionList['cYwlxdm']} == 'C_YWGN'">
-            <input type="checkbox" th:value="${rolePermissionList['cMenudm']}" th:attr="checked = ${rolePermissionList['isCheck']} == '1' ? true : false">
-            <span th:text="${rolePermissionList['cMenujc']}"></span>
+            <label th:attr="for = ${rolePermissionList['cMenudm']}">
+                <input type="checkbox" th:text="${rolePermissionList['cMenujc']}" th:id="${rolePermissionList['cMenudm']}" th:attr="checked = ${rolePermissionList['isCheck']} == '1' ? true : false">
+            </label>
         </li>
         <li class="list-group-item list-group-item-info">系统功能</li>
         <li class="list-group-item rolePermConItem" th:each="rolePermissionList : ${rolePermissionList}" th:if="${rolePermissionList['cYwlxdm']} == 'C_PLATE'">
-            <input type="checkbox" th:value="${rolePermissionList['cMenudm']}" th:attr="checked = ${rolePermissionList['isCheck']} == '1' ? true : false">
-            <span th:text="${rolePermissionList['cMenujc']}"></span>
+            <label th:attr="for = ${rolePermissionList['cMenudm']}">
+                <input type="checkbox" th:text="${rolePermissionList['cMenujc']}" th:id="${rolePermissionList['cMenudm']}" th:attr="checked = ${rolePermissionList['isCheck']} == '1' ? true : false">
+            </label>
         </li>
 
     </ul>

@@ -11,6 +11,8 @@ import com.greenplatform.service.PlateService;
 import com.greenplatform.util.GetcurrentLoginUser;
 import com.greenplatform.util.MD5;
 import com.greenplatform.util.TimeUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -1145,6 +1147,13 @@ public class PlateServiceImpl implements PlateService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return returnModel;
         }
+    }
+
+    @Override
+    public ReturnModel saveUserRolePermission(JSONObject jsonObject) {
+        Map tmpMap = jsonObject;
+        System.out.println(tmpMap.get("permissionJson"));
+        return null;
     }
 
 

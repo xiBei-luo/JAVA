@@ -3,6 +3,7 @@ package com.greenplatform.service;
 
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
+import net.sf.json.JSONObject;
 
 import java.util.Map;
 
@@ -73,5 +74,8 @@ public interface PlateService {
 
     /*查询指定角色拥有的功能权限*/
     public ReturnModel selectPermissionByRole(String cRole);
+
+    /*保存用户权限*/
+    public ReturnModel saveUserRolePermission(JSONObject jsonObject);
 
 }
