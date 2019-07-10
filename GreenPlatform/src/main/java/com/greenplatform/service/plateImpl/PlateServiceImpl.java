@@ -1151,9 +1151,54 @@ public class PlateServiceImpl implements PlateService {
 
     @Override
     public ReturnModel saveUserRolePermission(JSONObject jsonObject) {
-        Map tmpMap = jsonObject;
-        System.out.println(tmpMap.get("permissionJson"));
-        return null;
+        try{
+            if (jsonObject.isEmpty()){
+                returnModel.setFlag(1);
+                returnModel.setMsg("保存失败，参数传递错误!");
+                returnModel.setObject(null);
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+                return returnModel;
+            }
+            String cRole = (String) jsonObject.get("cRole");
+            //1.先删除该用户角色在系统中的权限
+            PlateUserPermissionExample plateUserPermissionExample = new PlateUserPermissionExample();
+            PlateUserPermissionExample.Criteria criteria = plateUserPermissionExample.createCriteria();
+            criteria.andCRoleEqualTo(cRole);
+            criteria.andCZtEqualTo("1");
+            plateUserPermissionMapper.deleteByExample(plateUserPermissionExample);
+
+            Map paramMap = (Map) jsonObject.get("permissionJson");
+            Iterator iterator = paramMap.keySet().iterator();
+            while (iterator.hasNext()){
+                String key = (String) iterator.next();
+                boolean value = (boolean) paramMap.get(key);
+                String[] cYwlxdmArr = key.split("_");
+                String cYwlxdm = cYwlxdmArr[0]+"_"+cYwlxdmArr[1];
+                if (true == value){
+                    PlateUserPermission plateUserPermission = new PlateUserPermission();
+                    plateUserPermission.setcRole(cRole);
+                    plateUserPermission.setcYwlxdm(cYwlxdm);
+                    plateUserPermission.setcMenudm(key);
+                    plateUserPermission.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+                    plateUserPermission.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                    plateUserPermission.setcZt("1");
+                    plateUserPermissionMapper.insert(plateUserPermission);
+                }
+
+            }
+
+            returnModel.setFlag(0);
+            returnModel.setMsg("保存成功!");
+            returnModel.setObject(null);
+            return returnModel;
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("保存失败，服务器端错误!");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
     }
 
 

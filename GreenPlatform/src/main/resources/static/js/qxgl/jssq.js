@@ -28,15 +28,15 @@ function _init(args, mdi, layerIdx, parentWindow) {
     function initParams(){
         var checkLen = $("input[type='checkbox']").length;
         var checkArr = [];
+        var tmpCheckJson = {};
         for (var i=0;i<checkLen;i++){
-            var tmpCheckJson = {};
             tmpCheckJson[$($("input[type='checkbox']")[i]).prop("id")] = $($("input[type='checkbox']")[i]).prop("checked");
-            checkArr.push(tmpCheckJson);
+            //checkArr.push(tmpCheckJson);
         }
 
         var data = {
             "cRole":args.cRole,
-            "permissionJson":checkArr
+            "permissionJson":tmpCheckJson
         }
         f_submitData(data,"/plate/saveUserRolePermission");
     }
