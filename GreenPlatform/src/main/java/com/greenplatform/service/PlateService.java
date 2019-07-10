@@ -75,7 +75,13 @@ public interface PlateService {
     /*查询指定角色拥有的功能权限*/
     public ReturnModel selectPermissionByRole(String cRole);
 
-    /*保存用户权限*/
+    /*查询指定角色被授予给了哪些用户*/
+    public ReturnModel selectPlateuserByRole(String cRole);
+
+    /*保存角色权限*/
     public ReturnModel saveUserRolePermission(JSONObject jsonObject);
+
+    /*保存用户角色*/
+    public ReturnModel saveUserRoleMid(JSONObject jsonObject);
 
 }

@@ -121,8 +121,12 @@ public class BaseController {
         model.addAttribute("rolePermissionList",returnModel.getObject());
         return "plate/qxgl/jssq";
     }
-    @GetMapping(value = "/qxgl/syyh")
-    public String syyh(){
+
+    @GetMapping(value = "/qxgl/syyh")//查询指定角色授予给了哪些用户
+    public String syyh(@RequestParam(name = "cRole", required = true) String cRole,Model model){
+        ReturnModel returnModel = plateService.selectPlateuserByRole(cRole);
+        model.addAttribute("plateuserRoleList",returnModel.getObject());
+
         return "plate/qxgl/syyh";
     }
     @GetMapping(value = "/xtcssz")

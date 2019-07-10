@@ -82,50 +82,7 @@ function _init(args, mdi, layerIdx, parentWindow) {
                 }
             }
         };
-
-        $.ajax(options);
-
-
-
-
-        /*var sendRequest = new SendRequest(reqURL,"POST");//构造对象
-
-        sendRequest.addParamObj({
-            "cRole":"admin",
-            "cPermission":[1,2,3,4,5]
-        });//构造请求参数
-
-        sendRequest.sendRequest(function(ret){
-            console.log(ret);
-            $("#btnSave").attr("disabled",false);
-            if("0" != ret.flag){
-                BootstrapDialog.alert({
-                    type: BootstrapDialog.TYPE_WARNING,
-                    size: BootstrapDialog.SIZE_SMALL,
-                    title: '提示',
-                    message: "操作失败！"+ret.msg,
-                    closeable: true,
-                    buttonLabel: "确定",
-                    callback: function () {
-
-                    }
-                });
-            }else{
-                BootstrapDialog.alert({
-                    type: BootstrapDialog.TYPE_PRIMARY,
-                    size: BootstrapDialog.SIZE_SMALL,
-                    title: '提示',
-                    message: "操作成功",
-                    closeable: true,
-                    buttonLabel: "确定",
-                    callback: function () {
-                        refresh = true;
-                        parentWindow.returnValue = refresh;
-                        parent.layer.close(layerIdx);
-                    }
-                });
-            }
-        });//发送请求并获取返回结果*/
+        $.ajax(options);//传递参数为json格式，不使用公共调用方式
     }
 
 }

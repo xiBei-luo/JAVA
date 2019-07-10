@@ -146,7 +146,7 @@ function f_roleGrant(id){
 function f_grantUser(id){
     var data = grid.getUserData(id,"data");
     var win = top.$.MdiWindow(window, 900, 500, 0, 0, true);
-    win.setTitle("授予用户");
+    win.setTitle("角色【"+data.cRolename+"】授予用户");
     win.setWindowArguments(data);//参数
     win.btnClose(true);
     win.btnMax(false);
@@ -157,7 +157,7 @@ function f_grantUser(id){
             loadGridData();
         }
     });
-    win.load("/qxgl/syyh", window, function (obj) { });
+    win.load("/qxgl/syyh?cRole="+id, window, function (obj) { });
 }
 
 

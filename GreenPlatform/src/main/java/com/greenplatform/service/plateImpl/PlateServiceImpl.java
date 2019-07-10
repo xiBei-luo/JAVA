@@ -11,7 +11,6 @@ import com.greenplatform.service.PlateService;
 import com.greenplatform.util.GetcurrentLoginUser;
 import com.greenplatform.util.MD5;
 import com.greenplatform.util.TimeUtil;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -1149,6 +1148,78 @@ public class PlateServiceImpl implements PlateService {
         }
     }
 
+    /**
+     * 查询系统用户中哪些用户拥有指定权限
+     * @param cRole
+     * @return
+     */
+    @Override
+    public ReturnModel selectPlateuserByRole(String cRole) {
+        try {
+            PlateUserRole plateUserRole = plateUserRoleMapper.selectByPrimaryKey(cRole);
+            String cRolename = plateUserRole.getcRolename();
+
+            PlateUserExample plateUserExample = new PlateUserExample();
+            PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
+            criteria.andCRylbEqualTo("1");//人员类别
+            criteria.andCRyztEqualTo("1");//人员类别（1系统用户2网站前端用户）
+            criteria.andCRyxzEqualTo("1");//员性质（1正常 -1黑名单）
+            criteria.andCZtEqualTo("1");//数据状态（0无效  1有效）
+            List plateUserlist = plateUserMapper.selectByExample(plateUserExample);
+
+            PlateUserRoleMidExample plateUserRoleMidExample = new PlateUserRoleMidExample();
+            PlateUserRoleMidExample.Criteria criteria1 = plateUserRoleMidExample.createCriteria();
+            criteria1.andCZtEqualTo("1");
+            criteria1.andCRoleEqualTo(cRole);
+            List plateUserRoleMidList = plateUserRoleMidMapper.selectByExample(plateUserRoleMidExample);
+
+            List returnList = new ArrayList();
+            for (int i = 0;i < plateUserlist.size();i++){
+                Map retMap = new HashMap();
+                PlateUser plateUser = (PlateUser) plateUserlist.get(i);
+                retMap.put("cUserid",plateUser.getcUserid());
+                retMap.put("cUsername",plateUser.getcUsername());
+                retMap.put("cLoginname",plateUser.getcLoginname());
+                retMap.put("cEmail",plateUser.getcEmail());
+                retMap.put("cRole",cRole);
+                retMap.put("cRolename",cRolename);
+                if (plateUserRoleMidList.size() > 0){
+                    for (int j = 0;j < plateUserRoleMidList.size();j++){
+                        PlateUserRoleMid plateUserRoleMid = (PlateUserRoleMid) plateUserRoleMidList.get(j);
+                        System.out.println(plateUserRoleMid.getcUserid());
+                        System.out.println(plateUser.getcUserid());
+                        if (plateUserRoleMid.getcUserid().equals(plateUser.getcUserid())){
+                            retMap.put("isCheck","1");
+                            break;
+                        }else{
+                            retMap.put("isCheck","0");
+                        }
+                    }
+                }
+                returnList.add(retMap);
+            }
+            System.out.println(returnList);
+
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(returnList);
+            return returnModel;
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("查询失败，服务器端错误!");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+    /**
+     * 给系统角色授权【保存角色权限】
+     * @param jsonObject
+     * @return
+     */
+    @OperationLog(cCzfs = "I")
     @Override
     public ReturnModel saveUserRolePermission(JSONObject jsonObject) {
         try{
@@ -1156,7 +1227,6 @@ public class PlateServiceImpl implements PlateService {
                 returnModel.setFlag(1);
                 returnModel.setMsg("保存失败，参数传递错误!");
                 returnModel.setObject(null);
-                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return returnModel;
             }
             String cRole = (String) jsonObject.get("cRole");
@@ -1185,6 +1255,61 @@ public class PlateServiceImpl implements PlateService {
                     plateUserPermissionMapper.insert(plateUserPermission);
                 }
 
+            }
+
+            returnModel.setFlag(0);
+            returnModel.setMsg("保存成功!");
+            returnModel.setObject(null);
+            return returnModel;
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("保存失败，服务器端错误!");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+    /**
+     * 给用户赋予某个角色【保存用户角色】
+     * @param jsonObject
+     * @return
+     */
+    @OperationLog(cCzfs = "I")
+    @Override
+    public ReturnModel saveUserRoleMid(JSONObject jsonObject) {
+        System.out.println(jsonObject);
+        try{
+            if (jsonObject.isEmpty()){
+                returnModel.setFlag(1);
+                returnModel.setMsg("保存失败，参数传递错误!");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+            String cRole = (String) jsonObject.get("cRole");
+            //1.先删除该用户角色在系统中的角色
+            PlateUserRoleMidExample plateUserRoleMidExample = new PlateUserRoleMidExample();
+            PlateUserRoleMidExample.Criteria criteria = plateUserRoleMidExample.createCriteria();
+            criteria.andCRoleEqualTo(cRole);
+            criteria.andCZtEqualTo("1");
+            plateUserRoleMidMapper.deleteByExample(plateUserRoleMidExample);
+
+            Map paramMap = (Map) jsonObject.get("userJson");
+            Iterator iterator = paramMap.keySet().iterator();
+            while (iterator.hasNext()){
+                String key = (String) iterator.next();
+                boolean value = (boolean) paramMap.get(key);
+                if (true == value){
+                    PlateUserRoleMid plateUserRoleMid = new PlateUserRoleMid();
+                    plateUserRoleMid.setcRole(cRole);
+                    plateUserRoleMid.setcUserid(key);
+
+                    plateUserRoleMid.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+                    plateUserRoleMid.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                    plateUserRoleMid.setcZt("1");
+                    plateUserRoleMidMapper.insert(plateUserRoleMid);
+                }
             }
 
             returnModel.setFlag(0);

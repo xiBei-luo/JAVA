@@ -198,8 +198,15 @@ public class PlateController {
     @PostMapping(value = "/saveUserRolePermission")
     public ReturnModel saveUserRolePermission(@RequestBody String jsonObject){
         JSONObject jsonParams = JSONObject.fromObject(jsonObject);
-
         ReturnModel returnModel = plateService.saveUserRolePermission(jsonParams);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/saveUserRoleMid")
+    public ReturnModel saveUserRoleMid(@RequestBody String jsonObject){
+        System.out.println(jsonObject);
+        JSONObject jsonParams = JSONObject.fromObject(jsonObject);
+        ReturnModel returnModel = plateService.saveUserRoleMid(jsonParams);
         return returnModel;
     }
 
