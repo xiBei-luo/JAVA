@@ -1,5 +1,6 @@
 package com.greenplatform.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -335,73 +336,63 @@ public class TGreenNlJsnlmxExample {
             return (Criteria) this;
         }
 
-        public Criteria andCJsslIsNull() {
-            addCriterion("c_jssl is null");
+        public Criteria andNJsslIsNull() {
+            addCriterion("n_jssl is null");
             return (Criteria) this;
         }
 
-        public Criteria andCJsslIsNotNull() {
-            addCriterion("c_jssl is not null");
+        public Criteria andNJsslIsNotNull() {
+            addCriterion("n_jssl is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCJsslEqualTo(String value) {
-            addCriterion("c_jssl =", value, "cJssl");
+        public Criteria andNJsslEqualTo(BigDecimal value) {
+            addCriterion("n_jssl =", value, "nJssl");
             return (Criteria) this;
         }
 
-        public Criteria andCJsslNotEqualTo(String value) {
-            addCriterion("c_jssl <>", value, "cJssl");
+        public Criteria andNJsslNotEqualTo(BigDecimal value) {
+            addCriterion("n_jssl <>", value, "nJssl");
             return (Criteria) this;
         }
 
-        public Criteria andCJsslGreaterThan(String value) {
-            addCriterion("c_jssl >", value, "cJssl");
+        public Criteria andNJsslGreaterThan(BigDecimal value) {
+            addCriterion("n_jssl >", value, "nJssl");
             return (Criteria) this;
         }
 
-        public Criteria andCJsslGreaterThanOrEqualTo(String value) {
-            addCriterion("c_jssl >=", value, "cJssl");
+        public Criteria andNJsslGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_jssl >=", value, "nJssl");
             return (Criteria) this;
         }
 
-        public Criteria andCJsslLessThan(String value) {
-            addCriterion("c_jssl <", value, "cJssl");
+        public Criteria andNJsslLessThan(BigDecimal value) {
+            addCriterion("n_jssl <", value, "nJssl");
             return (Criteria) this;
         }
 
-        public Criteria andCJsslLessThanOrEqualTo(String value) {
-            addCriterion("c_jssl <=", value, "cJssl");
+        public Criteria andNJsslLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_jssl <=", value, "nJssl");
             return (Criteria) this;
         }
 
-        public Criteria andCJsslLike(String value) {
-            addCriterion("c_jssl like", value, "cJssl");
+        public Criteria andNJsslIn(List<BigDecimal> values) {
+            addCriterion("n_jssl in", values, "nJssl");
             return (Criteria) this;
         }
 
-        public Criteria andCJsslNotLike(String value) {
-            addCriterion("c_jssl not like", value, "cJssl");
+        public Criteria andNJsslNotIn(List<BigDecimal> values) {
+            addCriterion("n_jssl not in", values, "nJssl");
             return (Criteria) this;
         }
 
-        public Criteria andCJsslIn(List<String> values) {
-            addCriterion("c_jssl in", values, "cJssl");
+        public Criteria andNJsslBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_jssl between", value1, value2, "nJssl");
             return (Criteria) this;
         }
 
-        public Criteria andCJsslNotIn(List<String> values) {
-            addCriterion("c_jssl not in", values, "cJssl");
-            return (Criteria) this;
-        }
-
-        public Criteria andCJsslBetween(String value1, String value2) {
-            addCriterion("c_jssl between", value1, value2, "cJssl");
-            return (Criteria) this;
-        }
-
-        public Criteria andCJsslNotBetween(String value1, String value2) {
-            addCriterion("c_jssl not between", value1, value2, "cJssl");
+        public Criteria andNJsslNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_jssl not between", value1, value2, "nJssl");
             return (Criteria) this;
         }
 

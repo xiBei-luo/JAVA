@@ -11,7 +11,7 @@
            A.c_rydj cRydj,
            A.c_ryxz cRyxz,
            A.c_phone cPhone,
-           B.c_nlhz cNlhz,
+           B.n_nlhz nNlhz,
            A.c_zcfs cZcfs,
            A.c_jtzz cJtzz,
            A.c_email cEmail,

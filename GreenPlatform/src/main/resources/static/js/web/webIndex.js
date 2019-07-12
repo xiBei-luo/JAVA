@@ -49,7 +49,7 @@ function f_selectLoginuserAccount(){
         //登陆用户能量汇总信息（获取能量总量）
         var oTGreenNlHz = ret.object.tGreenNlHz[0];//登陆用户能量汇总信息（获取能量总量）
         if(oTGreenNlHz){
-            $("#cNlhz").text(oTGreenNlHz.cNlhz);
+            $("#nNlhz").text(oTGreenNlHz.nNlhz);
         }
 
         //登陆用户任务完成信息（今日任务是否完成）

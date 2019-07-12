@@ -1,5 +1,6 @@
 package com.greenplatform.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -265,73 +266,63 @@ public class TGreenNlHzExample {
             return (Criteria) this;
         }
 
-        public Criteria andCNlhzIsNull() {
-            addCriterion("c_nlhz is null");
+        public Criteria andNNlhzIsNull() {
+            addCriterion("n_nlhz is null");
             return (Criteria) this;
         }
 
-        public Criteria andCNlhzIsNotNull() {
-            addCriterion("c_nlhz is not null");
+        public Criteria andNNlhzIsNotNull() {
+            addCriterion("n_nlhz is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCNlhzEqualTo(String value) {
-            addCriterion("c_nlhz =", value, "cNlhz");
+        public Criteria andNNlhzEqualTo(BigDecimal value) {
+            addCriterion("n_nlhz =", value, "nNlhz");
             return (Criteria) this;
         }
 
-        public Criteria andCNlhzNotEqualTo(String value) {
-            addCriterion("c_nlhz <>", value, "cNlhz");
+        public Criteria andNNlhzNotEqualTo(BigDecimal value) {
+            addCriterion("n_nlhz <>", value, "nNlhz");
             return (Criteria) this;
         }
 
-        public Criteria andCNlhzGreaterThan(String value) {
-            addCriterion("c_nlhz >", value, "cNlhz");
+        public Criteria andNNlhzGreaterThan(BigDecimal value) {
+            addCriterion("n_nlhz >", value, "nNlhz");
             return (Criteria) this;
         }
 
-        public Criteria andCNlhzGreaterThanOrEqualTo(String value) {
-            addCriterion("c_nlhz >=", value, "cNlhz");
+        public Criteria andNNlhzGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_nlhz >=", value, "nNlhz");
             return (Criteria) this;
         }
 
-        public Criteria andCNlhzLessThan(String value) {
-            addCriterion("c_nlhz <", value, "cNlhz");
+        public Criteria andNNlhzLessThan(BigDecimal value) {
+            addCriterion("n_nlhz <", value, "nNlhz");
             return (Criteria) this;
         }
 
-        public Criteria andCNlhzLessThanOrEqualTo(String value) {
-            addCriterion("c_nlhz <=", value, "cNlhz");
+        public Criteria andNNlhzLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_nlhz <=", value, "nNlhz");
             return (Criteria) this;
         }
 
-        public Criteria andCNlhzLike(String value) {
-            addCriterion("c_nlhz like", value, "cNlhz");
+        public Criteria andNNlhzIn(List<BigDecimal> values) {
+            addCriterion("n_nlhz in", values, "nNlhz");
             return (Criteria) this;
         }
 
-        public Criteria andCNlhzNotLike(String value) {
-            addCriterion("c_nlhz not like", value, "cNlhz");
+        public Criteria andNNlhzNotIn(List<BigDecimal> values) {
+            addCriterion("n_nlhz not in", values, "nNlhz");
             return (Criteria) this;
         }
 
-        public Criteria andCNlhzIn(List<String> values) {
-            addCriterion("c_nlhz in", values, "cNlhz");
+        public Criteria andNNlhzBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_nlhz between", value1, value2, "nNlhz");
             return (Criteria) this;
         }
 
-        public Criteria andCNlhzNotIn(List<String> values) {
-            addCriterion("c_nlhz not in", values, "cNlhz");
-            return (Criteria) this;
-        }
-
-        public Criteria andCNlhzBetween(String value1, String value2) {
-            addCriterion("c_nlhz between", value1, value2, "cNlhz");
-            return (Criteria) this;
-        }
-
-        public Criteria andCNlhzNotBetween(String value1, String value2) {
-            addCriterion("c_nlhz not between", value1, value2, "cNlhz");
+        public Criteria andNNlhzNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_nlhz not between", value1, value2, "nNlhz");
             return (Criteria) this;
         }
 

@@ -1,5 +1,6 @@
 package com.greenplatform.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -405,73 +406,63 @@ public class TGreenSpSpmxExample {
             return (Criteria) this;
         }
 
-        public Criteria andCSpjgIsNull() {
-            addCriterion("c_spjg is null");
+        public Criteria andNSpjgIsNull() {
+            addCriterion("n_spjg is null");
             return (Criteria) this;
         }
 
-        public Criteria andCSpjgIsNotNull() {
-            addCriterion("c_spjg is not null");
+        public Criteria andNSpjgIsNotNull() {
+            addCriterion("n_spjg is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCSpjgEqualTo(String value) {
-            addCriterion("c_spjg =", value, "cSpjg");
+        public Criteria andNSpjgEqualTo(BigDecimal value) {
+            addCriterion("n_spjg =", value, "nSpjg");
             return (Criteria) this;
         }
 
-        public Criteria andCSpjgNotEqualTo(String value) {
-            addCriterion("c_spjg <>", value, "cSpjg");
+        public Criteria andNSpjgNotEqualTo(BigDecimal value) {
+            addCriterion("n_spjg <>", value, "nSpjg");
             return (Criteria) this;
         }
 
-        public Criteria andCSpjgGreaterThan(String value) {
-            addCriterion("c_spjg >", value, "cSpjg");
+        public Criteria andNSpjgGreaterThan(BigDecimal value) {
+            addCriterion("n_spjg >", value, "nSpjg");
             return (Criteria) this;
         }
 
-        public Criteria andCSpjgGreaterThanOrEqualTo(String value) {
-            addCriterion("c_spjg >=", value, "cSpjg");
+        public Criteria andNSpjgGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_spjg >=", value, "nSpjg");
             return (Criteria) this;
         }
 
-        public Criteria andCSpjgLessThan(String value) {
-            addCriterion("c_spjg <", value, "cSpjg");
+        public Criteria andNSpjgLessThan(BigDecimal value) {
+            addCriterion("n_spjg <", value, "nSpjg");
             return (Criteria) this;
         }
 
-        public Criteria andCSpjgLessThanOrEqualTo(String value) {
-            addCriterion("c_spjg <=", value, "cSpjg");
+        public Criteria andNSpjgLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_spjg <=", value, "nSpjg");
             return (Criteria) this;
         }
 
-        public Criteria andCSpjgLike(String value) {
-            addCriterion("c_spjg like", value, "cSpjg");
+        public Criteria andNSpjgIn(List<BigDecimal> values) {
+            addCriterion("n_spjg in", values, "nSpjg");
             return (Criteria) this;
         }
 
-        public Criteria andCSpjgNotLike(String value) {
-            addCriterion("c_spjg not like", value, "cSpjg");
+        public Criteria andNSpjgNotIn(List<BigDecimal> values) {
+            addCriterion("n_spjg not in", values, "nSpjg");
             return (Criteria) this;
         }
 
-        public Criteria andCSpjgIn(List<String> values) {
-            addCriterion("c_spjg in", values, "cSpjg");
+        public Criteria andNSpjgBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_spjg between", value1, value2, "nSpjg");
             return (Criteria) this;
         }
 
-        public Criteria andCSpjgNotIn(List<String> values) {
-            addCriterion("c_spjg not in", values, "cSpjg");
-            return (Criteria) this;
-        }
-
-        public Criteria andCSpjgBetween(String value1, String value2) {
-            addCriterion("c_spjg between", value1, value2, "cSpjg");
-            return (Criteria) this;
-        }
-
-        public Criteria andCSpjgNotBetween(String value1, String value2) {
-            addCriterion("c_spjg not between", value1, value2, "cSpjg");
+        public Criteria andNSpjgNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_spjg not between", value1, value2, "nSpjg");
             return (Criteria) this;
         }
 

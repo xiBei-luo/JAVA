@@ -46,7 +46,7 @@ function _init(args, mdi, layerIdx, parentWindow) {
         if ("0" === type) {
             sendRequest.addParamObj({
                 "cSpmc": $("#cSpmc").val(),
-                "cSpjg": $("#cSpjg").val(),
+                "nSpjg": $("#nSpjg").val(),
                 "cSpms": $("#cSpms").val(),
                 "cZt": '1'
             });//构造请求参数
@@ -54,7 +54,7 @@ function _init(args, mdi, layerIdx, parentWindow) {
             sendRequest.addParamObj({
                 "cSpbh": args.cSpbh,
                 "cSpmc": $("#cSpmc").val(),
-                "cSpjg": $("#cSpjg").val(),
+                "nSpjg": $("#nSpjg").val(),
                 "cSpms": $("#cSpms").val(),
                 "cZt": '1'
             });//构造请求参数

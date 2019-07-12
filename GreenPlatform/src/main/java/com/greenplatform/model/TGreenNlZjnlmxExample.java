@@ -1,5 +1,6 @@
 package com.greenplatform.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -335,73 +336,63 @@ public class TGreenNlZjnlmxExample {
             return (Criteria) this;
         }
 
-        public Criteria andCZjnlIsNull() {
-            addCriterion("c_zjnl is null");
+        public Criteria andNZjnlIsNull() {
+            addCriterion("n_zjnl is null");
             return (Criteria) this;
         }
 
-        public Criteria andCZjnlIsNotNull() {
-            addCriterion("c_zjnl is not null");
+        public Criteria andNZjnlIsNotNull() {
+            addCriterion("n_zjnl is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCZjnlEqualTo(String value) {
-            addCriterion("c_zjnl =", value, "cZjnl");
+        public Criteria andNZjnlEqualTo(BigDecimal value) {
+            addCriterion("n_zjnl =", value, "nZjnl");
             return (Criteria) this;
         }
 
-        public Criteria andCZjnlNotEqualTo(String value) {
-            addCriterion("c_zjnl <>", value, "cZjnl");
+        public Criteria andNZjnlNotEqualTo(BigDecimal value) {
+            addCriterion("n_zjnl <>", value, "nZjnl");
             return (Criteria) this;
         }
 
-        public Criteria andCZjnlGreaterThan(String value) {
-            addCriterion("c_zjnl >", value, "cZjnl");
+        public Criteria andNZjnlGreaterThan(BigDecimal value) {
+            addCriterion("n_zjnl >", value, "nZjnl");
             return (Criteria) this;
         }
 
-        public Criteria andCZjnlGreaterThanOrEqualTo(String value) {
-            addCriterion("c_zjnl >=", value, "cZjnl");
+        public Criteria andNZjnlGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_zjnl >=", value, "nZjnl");
             return (Criteria) this;
         }
 
-        public Criteria andCZjnlLessThan(String value) {
-            addCriterion("c_zjnl <", value, "cZjnl");
+        public Criteria andNZjnlLessThan(BigDecimal value) {
+            addCriterion("n_zjnl <", value, "nZjnl");
             return (Criteria) this;
         }
 
-        public Criteria andCZjnlLessThanOrEqualTo(String value) {
-            addCriterion("c_zjnl <=", value, "cZjnl");
+        public Criteria andNZjnlLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_zjnl <=", value, "nZjnl");
             return (Criteria) this;
         }
 
-        public Criteria andCZjnlLike(String value) {
-            addCriterion("c_zjnl like", value, "cZjnl");
+        public Criteria andNZjnlIn(List<BigDecimal> values) {
+            addCriterion("n_zjnl in", values, "nZjnl");
             return (Criteria) this;
         }
 
-        public Criteria andCZjnlNotLike(String value) {
-            addCriterion("c_zjnl not like", value, "cZjnl");
+        public Criteria andNZjnlNotIn(List<BigDecimal> values) {
+            addCriterion("n_zjnl not in", values, "nZjnl");
             return (Criteria) this;
         }
 
-        public Criteria andCZjnlIn(List<String> values) {
-            addCriterion("c_zjnl in", values, "cZjnl");
+        public Criteria andNZjnlBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_zjnl between", value1, value2, "nZjnl");
             return (Criteria) this;
         }
 
-        public Criteria andCZjnlNotIn(List<String> values) {
-            addCriterion("c_zjnl not in", values, "cZjnl");
-            return (Criteria) this;
-        }
-
-        public Criteria andCZjnlBetween(String value1, String value2) {
-            addCriterion("c_zjnl between", value1, value2, "cZjnl");
-            return (Criteria) this;
-        }
-
-        public Criteria andCZjnlNotBetween(String value1, String value2) {
-            addCriterion("c_zjnl not between", value1, value2, "cZjnl");
+        public Criteria andNZjnlNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_zjnl not between", value1, value2, "nZjnl");
             return (Criteria) this;
         }
 

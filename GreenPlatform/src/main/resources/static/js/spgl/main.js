@@ -92,7 +92,7 @@ function initData(data){
             opLinkBuff.toString(),
             data[i].cSpmc,
             data[i].cSpms,
-            data[i].cSpjg,
+            data[i].nSpjg,
             data[i].cSpdw,
             data[i].cZt
         ]);

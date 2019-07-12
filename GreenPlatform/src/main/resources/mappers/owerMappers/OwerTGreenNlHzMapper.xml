@@ -2,9 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.greenplatform.dao.owerMapper.OwerTGreenNlHzMapper">
   <select id="selectTGreenNlHzRank"  parameterType="java.util.HashMap" resultType="java.util.HashMap">
-    select b.c_username cUsername,b.c_loginname cLoginname,a.c_nlhz cNlhz,a.c_userid cUserid
+    select b.c_username cUsername,b.c_loginname cLoginname,a.n_nlhz nNlhz,a.c_userid cUserid
       from t_green_nl_hz a LEFT JOIN plate_user b ON a.c_userid = b.c_userid AND a.c_zt='1'
-  order by c_nlhz DESC
+  order by n_nlhz DESC
      limit 0,9
+  </select>
+
+  <select id="selectTGreenNlHz"  parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    select b.c_username cUsername,b.c_loginname cLoginname,a.n_nlhz nNlhz,a.c_userid cUserid,a.c_bz cBz
+      from t_green_nl_hz a , plate_user b
+     where a.c_userid = b.c_userid
+       AND a.c_zt='1'
+      <if test='cUsername!=null and cUsername!="" '>
+        AND b.c_username LIKE "%" #{cUsername} "%"
+      </if>
+      <if test='nNlzlQ!=null and nNlzlQ!="" '>
+        AND a.n_nlhz >= #{nNlzlQ}
+      </if>
+      <if test='nNlzlZ!=null and nNlzlZ!="" '>
+        AND #{nNlzlZ} >= a.n_nlhz
+      </if>
+    order by a.n_nlhz,b.c_username desc
   </select>
 </mapper>

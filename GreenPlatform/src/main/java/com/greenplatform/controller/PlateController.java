@@ -209,6 +209,13 @@ public class PlateController {
         ReturnModel returnModel = plateService.saveUserRoleMid(jsonParams);
         return returnModel;
     }
+    @PostMapping(value = "/selectTGreenNlHz")
+    public ReturnModel selectTGreenNlHz(@RequestBody String jsonObject){
+        JSONObject jsonParams = JSONObject.fromObject(jsonObject);
+        System.out.println(jsonParams);
+        ReturnModel returnModel = plateService.selectTGreenNlHz(jsonParams);
+        return returnModel;
+    }
 
 
 }

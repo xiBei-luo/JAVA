@@ -86,7 +86,7 @@
         <div class="row" th:each="tGreenNlNlhz : ${loginuserHome.tGreenNlNlhzList}">
             <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-9 col-sm-10 col-xs-10 rankListBg">
                 <span class="glyphicon glyphicon-tree-conifer" th:text=${tGreenNlNlhz.cUsername}></span>
-                <span th:text="${tGreenNlNlhz.cNlhz}+'KG'"></span>
+                <span th:text="${tGreenNlNlhz.nNlhz}+'KG'"></span>
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@
                         <div class="package-content">
                             <h3><a href="" title="" id="cSpmc" th:text=${tGreenSpSpmxList.cSpmc}></a></h3>
                             <p id="cSpms" th:text=${tGreenSpSpmxList.cSpms}> </p>
-                            <span id="cSpjg" th:text="'$'+${tGreenSpSpmxList.cSpjg}"></span>
+                            <span id="nSpjg" th:text="'$'+${tGreenSpSpmxList.nSpjg}"></span>
                         </div>
                         <div class="package-calto-action">
                             <ul class="ct-action">
@@ -155,7 +155,7 @@
                             <a href="/base/certification" class="btn-link" target="_blank">完善资料</a>
                         </li>
                         <li class="list-group-item">
-                            <span class="badge" id="cNlhz"></span>我的能量
+                            <span class="badge" id="nNlhz"></span>我的能量
                         </li>
                         <li class="list-group-item">
                             <button class="btn btn-primary btn-sm">充值</button>

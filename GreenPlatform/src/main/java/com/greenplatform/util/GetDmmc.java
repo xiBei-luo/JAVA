@@ -2,8 +2,11 @@ package com.greenplatform.util;
 
 import com.greenplatform.dao.PlateUserMapper;
 import com.greenplatform.model.PlateUser;
+import com.greenplatform.model.PlateUserExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 @Component
@@ -29,11 +32,11 @@ public class GetDmmc {
     public static String getUsername(String cUserid){
         if (!(("").equals(cUserid) || null == cUserid)){
             PlateUser plateUser = plateUserMapper.selectByPrimaryKey(cUserid);
-            System.out.println("getcDmmc"+plateUser);
             return plateUser.getcUsername();
         }else{
             return "";
         }
     }
+
 
 }

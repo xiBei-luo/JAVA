@@ -84,4 +84,7 @@ public interface PlateService {
     /*保存用户角色*/
     public ReturnModel saveUserRoleMid(JSONObject jsonObject);
 
+    /*用户能量查询统计*/
+    public ReturnModel selectTGreenNlHz(JSONObject jsonObject);
+
 }

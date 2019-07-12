@@ -1,5 +1,6 @@
 package com.greenplatform.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -265,143 +266,123 @@ public class TGreenNlTxjlExample {
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeIsNull() {
-            addCriterion("c_txje is null");
+        public Criteria andNTxjeIsNull() {
+            addCriterion("n_txje is null");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeIsNotNull() {
-            addCriterion("c_txje is not null");
+        public Criteria andNTxjeIsNotNull() {
+            addCriterion("n_txje is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeEqualTo(String value) {
-            addCriterion("c_txje =", value, "cTxje");
+        public Criteria andNTxjeEqualTo(BigDecimal value) {
+            addCriterion("n_txje =", value, "nTxje");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeNotEqualTo(String value) {
-            addCriterion("c_txje <>", value, "cTxje");
+        public Criteria andNTxjeNotEqualTo(BigDecimal value) {
+            addCriterion("n_txje <>", value, "nTxje");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeGreaterThan(String value) {
-            addCriterion("c_txje >", value, "cTxje");
+        public Criteria andNTxjeGreaterThan(BigDecimal value) {
+            addCriterion("n_txje >", value, "nTxje");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeGreaterThanOrEqualTo(String value) {
-            addCriterion("c_txje >=", value, "cTxje");
+        public Criteria andNTxjeGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_txje >=", value, "nTxje");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeLessThan(String value) {
-            addCriterion("c_txje <", value, "cTxje");
+        public Criteria andNTxjeLessThan(BigDecimal value) {
+            addCriterion("n_txje <", value, "nTxje");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeLessThanOrEqualTo(String value) {
-            addCriterion("c_txje <=", value, "cTxje");
+        public Criteria andNTxjeLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_txje <=", value, "nTxje");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeLike(String value) {
-            addCriterion("c_txje like", value, "cTxje");
+        public Criteria andNTxjeIn(List<BigDecimal> values) {
+            addCriterion("n_txje in", values, "nTxje");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeNotLike(String value) {
-            addCriterion("c_txje not like", value, "cTxje");
+        public Criteria andNTxjeNotIn(List<BigDecimal> values) {
+            addCriterion("n_txje not in", values, "nTxje");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeIn(List<String> values) {
-            addCriterion("c_txje in", values, "cTxje");
+        public Criteria andNTxjeBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_txje between", value1, value2, "nTxje");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeNotIn(List<String> values) {
-            addCriterion("c_txje not in", values, "cTxje");
+        public Criteria andNTxjeNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_txje not between", value1, value2, "nTxje");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeBetween(String value1, String value2) {
-            addCriterion("c_txje between", value1, value2, "cTxje");
+        public Criteria andNTxnlIsNull() {
+            addCriterion("n_txnl is null");
             return (Criteria) this;
         }
 
-        public Criteria andCTxjeNotBetween(String value1, String value2) {
-            addCriterion("c_txje not between", value1, value2, "cTxje");
+        public Criteria andNTxnlIsNotNull() {
+            addCriterion("n_txnl is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCTxnlIsNull() {
-            addCriterion("c_txnl is null");
+        public Criteria andNTxnlEqualTo(BigDecimal value) {
+            addCriterion("n_txnl =", value, "nTxnl");
             return (Criteria) this;
         }
 
-        public Criteria andCTxnlIsNotNull() {
-            addCriterion("c_txnl is not null");
+        public Criteria andNTxnlNotEqualTo(BigDecimal value) {
+            addCriterion("n_txnl <>", value, "nTxnl");
             return (Criteria) this;
         }
 
-        public Criteria andCTxnlEqualTo(String value) {
-            addCriterion("c_txnl =", value, "cTxnl");
+        public Criteria andNTxnlGreaterThan(BigDecimal value) {
+            addCriterion("n_txnl >", value, "nTxnl");
             return (Criteria) this;
         }
 
-        public Criteria andCTxnlNotEqualTo(String value) {
-            addCriterion("c_txnl <>", value, "cTxnl");
+        public Criteria andNTxnlGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_txnl >=", value, "nTxnl");
             return (Criteria) this;
         }
 
-        public Criteria andCTxnlGreaterThan(String value) {
-            addCriterion("c_txnl >", value, "cTxnl");
+        public Criteria andNTxnlLessThan(BigDecimal value) {
+            addCriterion("n_txnl <", value, "nTxnl");
             return (Criteria) this;
         }
 
-        public Criteria andCTxnlGreaterThanOrEqualTo(String value) {
-            addCriterion("c_txnl >=", value, "cTxnl");
+        public Criteria andNTxnlLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_txnl <=", value, "nTxnl");
             return (Criteria) this;
         }
 
-        public Criteria andCTxnlLessThan(String value) {
-            addCriterion("c_txnl <", value, "cTxnl");
+        public Criteria andNTxnlIn(List<BigDecimal> values) {
+            addCriterion("n_txnl in", values, "nTxnl");
             return (Criteria) this;
         }
 
-        public Criteria andCTxnlLessThanOrEqualTo(String value) {
-            addCriterion("c_txnl <=", value, "cTxnl");
+        public Criteria andNTxnlNotIn(List<BigDecimal> values) {
+            addCriterion("n_txnl not in", values, "nTxnl");
             return (Criteria) this;
         }
 
-        public Criteria andCTxnlLike(String value) {
-            addCriterion("c_txnl like", value, "cTxnl");
+        public Criteria andNTxnlBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_txnl between", value1, value2, "nTxnl");
             return (Criteria) this;
         }
 
-        public Criteria andCTxnlNotLike(String value) {
-            addCriterion("c_txnl not like", value, "cTxnl");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTxnlIn(List<String> values) {
-            addCriterion("c_txnl in", values, "cTxnl");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTxnlNotIn(List<String> values) {
-            addCriterion("c_txnl not in", values, "cTxnl");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTxnlBetween(String value1, String value2) {
-            addCriterion("c_txnl between", value1, value2, "cTxnl");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTxnlNotBetween(String value1, String value2) {
-            addCriterion("c_txnl not between", value1, value2, "cTxnl");
+        public Criteria andNTxnlNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_txnl not between", value1, value2, "nTxnl");
             return (Criteria) this;
         }
 

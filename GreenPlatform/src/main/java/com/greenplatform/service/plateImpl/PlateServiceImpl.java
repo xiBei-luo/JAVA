@@ -4,6 +4,7 @@ import com.greenplatform.aop.OperationLog;
 import com.greenplatform.dao.*;
 import com.greenplatform.dao.owerMapper.OwerPlateCodeDmzMapper;
 import com.greenplatform.dao.owerMapper.OwerPlateUserMapper;
+import com.greenplatform.dao.owerMapper.OwerTGreenNlHzMapper;
 import com.greenplatform.dao.owerMapper.OwerTGreenRwRwmxMapper;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
@@ -53,6 +54,8 @@ public class PlateServiceImpl implements PlateService {
     TGreenRwRwmxMapper tGreenRwRwmxMapper;
     @Autowired
     OwerTGreenRwRwmxMapper owerTGreenRwRwmxMapper;
+    @Autowired
+    OwerTGreenNlHzMapper owerTGreenNlHzMapper;
 
     ReturnModel returnModel = new ReturnModel();
 
@@ -624,7 +627,7 @@ public class PlateServiceImpl implements PlateService {
                 returnModel.setObject(null);
                 return returnModel;
             }
-            if (("").equals(tGreenSpSpmx.getcSpjg()) || null == tGreenSpSpmx.getcSpjg()){
+            if (("").equals(tGreenSpSpmx.getnSpjg()) || null == tGreenSpSpmx.getnSpjg()){
                 returnModel.setFlag(1);
                 returnModel.setMsg("操作失败，商品价格不能为空");
                 returnModel.setObject(null);
@@ -702,7 +705,7 @@ public class PlateServiceImpl implements PlateService {
                 return returnModel;
             }else{
                 tGreenSpSpmx1.setcSpmc(tGreenSpSpmx.getcSpmc());
-                tGreenSpSpmx1.setcSpjg(tGreenSpSpmx.getcSpjg());
+                tGreenSpSpmx1.setnSpjg(tGreenSpSpmx.getnSpjg());
                 tGreenSpSpmx1.setcSpms(tGreenSpSpmx.getcSpms());
                 tGreenSpSpmx1.setdXgsj(TimeUtil.getTimestamp(new Date()));
                 tGreenSpSpmx1.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
@@ -1326,5 +1329,31 @@ public class PlateServiceImpl implements PlateService {
         }
     }
 
+    /**
+     * 用户能量总量查询
+     * @param jsonObject
+     * @return
+     */
+    @Override
+    public ReturnModel selectTGreenNlHz(JSONObject jsonObject) {
+        try{
+            Map paramMap = jsonObject;
+            System.out.println(paramMap);
+            List tGreenNlHzList = owerTGreenNlHzMapper.selectTGreenNlHz(paramMap);
+            System.out.println(tGreenNlHzList);
+
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(tGreenNlHzList);
+            return returnModel;
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("保存失败，服务器端错误!");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
 
 }

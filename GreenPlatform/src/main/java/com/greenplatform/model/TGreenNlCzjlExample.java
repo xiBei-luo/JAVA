@@ -1,5 +1,6 @@
 package com.greenplatform.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -265,143 +266,123 @@ public class TGreenNlCzjlExample {
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeIsNull() {
-            addCriterion("c_czje is null");
+        public Criteria andNCzjeIsNull() {
+            addCriterion("n_czje is null");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeIsNotNull() {
-            addCriterion("c_czje is not null");
+        public Criteria andNCzjeIsNotNull() {
+            addCriterion("n_czje is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeEqualTo(String value) {
-            addCriterion("c_czje =", value, "cCzje");
+        public Criteria andNCzjeEqualTo(BigDecimal value) {
+            addCriterion("n_czje =", value, "nCzje");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeNotEqualTo(String value) {
-            addCriterion("c_czje <>", value, "cCzje");
+        public Criteria andNCzjeNotEqualTo(BigDecimal value) {
+            addCriterion("n_czje <>", value, "nCzje");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeGreaterThan(String value) {
-            addCriterion("c_czje >", value, "cCzje");
+        public Criteria andNCzjeGreaterThan(BigDecimal value) {
+            addCriterion("n_czje >", value, "nCzje");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeGreaterThanOrEqualTo(String value) {
-            addCriterion("c_czje >=", value, "cCzje");
+        public Criteria andNCzjeGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_czje >=", value, "nCzje");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeLessThan(String value) {
-            addCriterion("c_czje <", value, "cCzje");
+        public Criteria andNCzjeLessThan(BigDecimal value) {
+            addCriterion("n_czje <", value, "nCzje");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeLessThanOrEqualTo(String value) {
-            addCriterion("c_czje <=", value, "cCzje");
+        public Criteria andNCzjeLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_czje <=", value, "nCzje");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeLike(String value) {
-            addCriterion("c_czje like", value, "cCzje");
+        public Criteria andNCzjeIn(List<BigDecimal> values) {
+            addCriterion("n_czje in", values, "nCzje");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeNotLike(String value) {
-            addCriterion("c_czje not like", value, "cCzje");
+        public Criteria andNCzjeNotIn(List<BigDecimal> values) {
+            addCriterion("n_czje not in", values, "nCzje");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeIn(List<String> values) {
-            addCriterion("c_czje in", values, "cCzje");
+        public Criteria andNCzjeBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_czje between", value1, value2, "nCzje");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeNotIn(List<String> values) {
-            addCriterion("c_czje not in", values, "cCzje");
+        public Criteria andNCzjeNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_czje not between", value1, value2, "nCzje");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeBetween(String value1, String value2) {
-            addCriterion("c_czje between", value1, value2, "cCzje");
+        public Criteria andNCznlIsNull() {
+            addCriterion("n_cznl is null");
             return (Criteria) this;
         }
 
-        public Criteria andCCzjeNotBetween(String value1, String value2) {
-            addCriterion("c_czje not between", value1, value2, "cCzje");
+        public Criteria andNCznlIsNotNull() {
+            addCriterion("n_cznl is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCCznlIsNull() {
-            addCriterion("c_cznl is null");
+        public Criteria andNCznlEqualTo(BigDecimal value) {
+            addCriterion("n_cznl =", value, "nCznl");
             return (Criteria) this;
         }
 
-        public Criteria andCCznlIsNotNull() {
-            addCriterion("c_cznl is not null");
+        public Criteria andNCznlNotEqualTo(BigDecimal value) {
+            addCriterion("n_cznl <>", value, "nCznl");
             return (Criteria) this;
         }
 
-        public Criteria andCCznlEqualTo(String value) {
-            addCriterion("c_cznl =", value, "cCznl");
+        public Criteria andNCznlGreaterThan(BigDecimal value) {
+            addCriterion("n_cznl >", value, "nCznl");
             return (Criteria) this;
         }
 
-        public Criteria andCCznlNotEqualTo(String value) {
-            addCriterion("c_cznl <>", value, "cCznl");
+        public Criteria andNCznlGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_cznl >=", value, "nCznl");
             return (Criteria) this;
         }
 
-        public Criteria andCCznlGreaterThan(String value) {
-            addCriterion("c_cznl >", value, "cCznl");
+        public Criteria andNCznlLessThan(BigDecimal value) {
+            addCriterion("n_cznl <", value, "nCznl");
             return (Criteria) this;
         }
 
-        public Criteria andCCznlGreaterThanOrEqualTo(String value) {
-            addCriterion("c_cznl >=", value, "cCznl");
+        public Criteria andNCznlLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("n_cznl <=", value, "nCznl");
             return (Criteria) this;
         }
 
-        public Criteria andCCznlLessThan(String value) {
-            addCriterion("c_cznl <", value, "cCznl");
+        public Criteria andNCznlIn(List<BigDecimal> values) {
+            addCriterion("n_cznl in", values, "nCznl");
             return (Criteria) this;
         }
 
-        public Criteria andCCznlLessThanOrEqualTo(String value) {
-            addCriterion("c_cznl <=", value, "cCznl");
+        public Criteria andNCznlNotIn(List<BigDecimal> values) {
+            addCriterion("n_cznl not in", values, "nCznl");
             return (Criteria) this;
         }
 
-        public Criteria andCCznlLike(String value) {
-            addCriterion("c_cznl like", value, "cCznl");
+        public Criteria andNCznlBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_cznl between", value1, value2, "nCznl");
             return (Criteria) this;
         }
 
-        public Criteria andCCznlNotLike(String value) {
-            addCriterion("c_cznl not like", value, "cCznl");
-            return (Criteria) this;
-        }
-
-        public Criteria andCCznlIn(List<String> values) {
-            addCriterion("c_cznl in", values, "cCznl");
-            return (Criteria) this;
-        }
-
-        public Criteria andCCznlNotIn(List<String> values) {
-            addCriterion("c_cznl not in", values, "cCznl");
-            return (Criteria) this;
-        }
-
-        public Criteria andCCznlBetween(String value1, String value2) {
-            addCriterion("c_cznl between", value1, value2, "cCznl");
-            return (Criteria) this;
-        }
-
-        public Criteria andCCznlNotBetween(String value1, String value2) {
-            addCriterion("c_cznl not between", value1, value2, "cCznl");
+        public Criteria andNCznlNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("n_cznl not between", value1, value2, "nCznl");
             return (Criteria) this;
         }
 

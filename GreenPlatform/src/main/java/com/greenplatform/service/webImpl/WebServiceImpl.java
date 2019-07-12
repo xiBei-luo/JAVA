@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -61,6 +62,7 @@ public class WebServiceImpl implements WebService {
                 returnModel.setObject(null);
                 return returnModel;
             }else{
+                //1.任务明细中增加一条记录
                 tGreenRwRwmx.setcUserid(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 tGreenRwRwmx.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 tGreenRwRwmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
@@ -71,6 +73,10 @@ public class WebServiceImpl implements WebService {
 
                 System.out.println("任务明细对象--"+tGreenRwRwmx);
                 tGreenRwRwmxMapper.insert(tGreenRwRwmx);
+
+                //2.任务汇总中更新数据(当前登陆人，当前月任务汇总)
+
+
                 returnModel.setFlag(0);
                 returnModel.setMsg("恭喜你，完成任务！");
                 returnModel.setObject(null);
@@ -128,7 +134,7 @@ public class WebServiceImpl implements WebService {
                 criteriaTGreenNlHzExample.andCZtEqualTo("1");
                 List tGreenNlHzList = tGreenNlHzMapper.selectByExample(tGreenNlHzExample);
 
-                Integer userNlzl = Integer.parseInt(((TGreenNlHz) tGreenNlHzList.get(0)).getcNlhz());//获取指定账户的能量总量
+                BigDecimal userNlzl = ((TGreenNlHz) tGreenNlHzList.get(0)).getnNlhz();//获取指定账户的能量总量
                 //获取用户点击兑换种子的价格
                 TGreenSpSpmxExample tGreenSpSpmxExample = new TGreenSpSpmxExample();
                 TGreenSpSpmxExample.Criteria criteriaTGreenSpSpmxExample = tGreenSpSpmxExample.createCriteria();
@@ -143,14 +149,14 @@ public class WebServiceImpl implements WebService {
                     return returnModel;
                 }
 
-                Integer zzPrice = Integer.parseInt(((TGreenSpSpmx) tGreenSpSpmxList.get(0)).getcSpjg());//获取种子的价格
+                BigDecimal zzPrice = ((TGreenSpSpmx) tGreenSpSpmxList.get(0)).getnSpjg();//获取种子的价格
                 System.out.println("账户能量总量为："+userNlzl);
                 System.out.println("种子价格为："+zzPrice);
                 if (tGreenNlHzList.isEmpty()){
                     returnModel.setFlag(1);
                     returnModel.setMsg("您的能量不足，快去完成任务获取能量吧！");
                     returnModel.setObject(null);
-                }else if(userNlzl < zzPrice) {
+                }else if(userNlzl.compareTo(zzPrice) == -1) {
                     returnModel.setFlag(1);
                     returnModel.setMsg("您的能量不足，快去完成任务获取能量吧！");
                     returnModel.setObject(null);
@@ -159,7 +165,7 @@ public class WebServiceImpl implements WebService {
                     TGreenNlJsnlmx tGreenNlJsnlmx = new TGreenNlJsnlmx();
                     tGreenNlJsnlmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
                     tGreenNlJsnlmx.setcUserid(plateUser.getcUserid());
-                    tGreenNlJsnlmx.setcJssl(zzPrice.toString());
+                    tGreenNlJsnlmx.setnJssl(zzPrice);
                     tGreenNlJsnlmx.setcJsyy("1");//减少原因：兑换商品
                     tGreenNlJsnlmx.setdJssj(TimeUtil.getTimestamp(new Date()));
                     tGreenNlJsnlmx.setcZt("1");
@@ -168,7 +174,7 @@ public class WebServiceImpl implements WebService {
                     tGreenNlJsnlmxMapper.insert(tGreenNlJsnlmx);
 
                     TGreenNlHz tGreenNlHz = (TGreenNlHz) tGreenNlHzList.get(0);
-                    tGreenNlHz.setcNlhz(String.valueOf((userNlzl-zzPrice)));
+                    tGreenNlHz.setnNlhz(userNlzl.subtract(zzPrice));
                     tGreenNlHz.setcXguser(plateUser.getcUserid());
                     tGreenNlHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
                     System.out.println("修改能量汇总表"+tGreenNlHz);

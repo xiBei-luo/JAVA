@@ -8,4 +8,5 @@ import java.util.Map;
 @Mapper
 public interface OwerTGreenNlHzMapper {
     List selectTGreenNlHzRank(Map params);
+    List selectTGreenNlHz(Map params);
 }
