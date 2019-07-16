@@ -1,6 +1,6 @@
 package com.greenplatform.service.plateImpl;
 
-import com.greenplatform.aop.OperationLog;
+import com.greenplatform.aop.YwOperationCheckAndLog;
 import com.greenplatform.dao.*;
 import com.greenplatform.dao.owerMapper.OwerPlateCodeDmzMapper;
 import com.greenplatform.dao.owerMapper.OwerPlateUserMapper;
@@ -125,7 +125,7 @@ public class PlateServiceImpl implements PlateService {
      * @param plateUser
      * @return
      */
-    @OperationLog(cCzfs = "I")
+    @YwOperationCheckAndLog(cCzfs = "I")
     @Override
     public ReturnModel insertPlateuser(PlateUser plateUser) {
         try{
@@ -163,6 +163,7 @@ public class PlateServiceImpl implements PlateService {
             plateUser.setcRylb("1");//人员类别（1系统用户2网站前端用户）
             plateUser.setcRyxz("1");//人员性质（1正常 -1黑名单）
             plateUser.setcZt("1");//数据状态（0无效  1有效）
+            plateUser.setcIssmz("0");//是否实名制（0非1是，此字段只针对前端用户）
             plateUser.setcUserid(majorKey);
             plateUser.setdCjsj(TimeUtil.getTimestamp(new Date()));
             plateUser.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
@@ -195,7 +196,7 @@ public class PlateServiceImpl implements PlateService {
      * @param plateUser
      * @return
      */
-    @OperationLog(cCzfs = "D")
+    @YwOperationCheckAndLog(cCzfs = "D")
     @Override
     public ReturnModel delPlateuser(PlateUser plateUser) {
         try{
@@ -233,7 +234,7 @@ public class PlateServiceImpl implements PlateService {
      * @param plateUser
      * @return
      */
-    @OperationLog(cCzfs = "U")
+    @YwOperationCheckAndLog(cCzfs = "U")
     @Override
     public ReturnModel retsetPass(PlateUser plateUser) {
         try{
@@ -269,7 +270,7 @@ public class PlateServiceImpl implements PlateService {
      * @param plateUser
      * @return
      */
-    @OperationLog(cCzfs = "U")
+    @YwOperationCheckAndLog(cCzfs = "U")
     @Override
     public ReturnModel updPlateuser(PlateUser plateUser) {
         try{
@@ -358,7 +359,7 @@ public class PlateServiceImpl implements PlateService {
         return returnModel;
     }
 
-    @OperationLog(cCzfs = "D")
+    @YwOperationCheckAndLog(cCzfs = "D")
     @Override
     public ReturnModel delPlateCodeDmz(PlateCodeDmz plateCodeDmz) {
         //1.参数非空判断
@@ -406,7 +407,7 @@ public class PlateServiceImpl implements PlateService {
      * @param plateCodeDmz
      * @return
      */
-    @OperationLog(cCzfs = "I")
+    @YwOperationCheckAndLog(cCzfs = "I")
     @Override
     public ReturnModel insertYwjcdm(PlateCodeDmlb plateCodeDmlb,PlateCodeDmz plateCodeDmz) {
         try {
@@ -468,7 +469,7 @@ public class PlateServiceImpl implements PlateService {
      * @param plateCodeDmz
      * @return
      */
-    @OperationLog(cCzfs = "U")
+    @YwOperationCheckAndLog(cCzfs = "U")
     @Override
     public ReturnModel updYwjcdm(PlateCodeDmlb plateCodeDmlb,PlateCodeDmz plateCodeDmz) {
         //1.参数非空判断
@@ -525,7 +526,7 @@ public class PlateServiceImpl implements PlateService {
         }
     }
 
-    @OperationLog(cCzfs = "I")
+    @YwOperationCheckAndLog(cCzfs = "I")
     @Override
     public ReturnModel insertPlateLog(PlateLog plateLog) {
         try{
@@ -616,7 +617,7 @@ public class PlateServiceImpl implements PlateService {
         return returnModel;
     }
 
-    @OperationLog(cCzfs = "I")
+    @YwOperationCheckAndLog(cCzfs = "I")
     @Override
     public ReturnModel insertTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
         try{
@@ -664,7 +665,7 @@ public class PlateServiceImpl implements PlateService {
         }
     }
 
-    @OperationLog(cCzfs = "D")
+    @YwOperationCheckAndLog(cCzfs = "D")
     @Override
     public ReturnModel delTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
         try{
@@ -692,7 +693,7 @@ public class PlateServiceImpl implements PlateService {
 
     }
 
-    @OperationLog(cCzfs = "U")
+    @YwOperationCheckAndLog(cCzfs = "U")
     @Override
     public ReturnModel updTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
         try {
@@ -783,7 +784,7 @@ public class PlateServiceImpl implements PlateService {
      * @param plateUserRole
      * @return
      */
-    @OperationLog(cCzfs = "I")
+    @YwOperationCheckAndLog(cCzfs = "I")
     @Override
     public ReturnModel insertPlateUserRole(PlateUserRole plateUserRole) {
         try{
@@ -829,7 +830,7 @@ public class PlateServiceImpl implements PlateService {
      * @param plateUserRole
      * @return
      */
-    @OperationLog(cCzfs = "U")
+    @YwOperationCheckAndLog(cCzfs = "U")
     @Override
     public ReturnModel updPlateUserRole(PlateUserRole plateUserRole) {
         try{
@@ -872,7 +873,7 @@ public class PlateServiceImpl implements PlateService {
      * @param plateUserRole
      * @return
      */
-    @OperationLog(cCzfs = "D")
+    @YwOperationCheckAndLog(cCzfs = "D")
     @Override
     public ReturnModel delPlateUserRole(PlateUserRole plateUserRole) {
         try{
@@ -954,7 +955,7 @@ public class PlateServiceImpl implements PlateService {
      * @param plateYwLxMenu
      * @return
      */
-    @OperationLog(cCzfs = "I")
+    @YwOperationCheckAndLog(cCzfs = "I")
     @Override
     public ReturnModel insertPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu) {
         try{
@@ -1004,7 +1005,8 @@ public class PlateServiceImpl implements PlateService {
      * @param plateYwLxMenu
      * @return
      */
-    @OperationLog(cCzfs = "U")
+    //@OperationLog(cCzfs = "U")
+    @YwOperationCheckAndLog(cCzfs = "U")
     @Override
     public ReturnModel updPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu) {
         try{
@@ -1056,7 +1058,7 @@ public class PlateServiceImpl implements PlateService {
      * @param plateYwLxMenu
      * @return
      */
-    @OperationLog(cCzfs = "D")
+    @YwOperationCheckAndLog(cCzfs = "D")
     @Override
     public ReturnModel delPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu) {
         try{
@@ -1222,7 +1224,7 @@ public class PlateServiceImpl implements PlateService {
      * @param jsonObject
      * @return
      */
-    @OperationLog(cCzfs = "I")
+    @YwOperationCheckAndLog(cCzfs = "I")
     @Override
     public ReturnModel saveUserRolePermission(JSONObject jsonObject) {
         try{
@@ -1279,7 +1281,7 @@ public class PlateServiceImpl implements PlateService {
      * @param jsonObject
      * @return
      */
-    @OperationLog(cCzfs = "I")
+    @YwOperationCheckAndLog(cCzfs = "I")
     @Override
     public ReturnModel saveUserRoleMid(JSONObject jsonObject) {
         System.out.println(jsonObject);

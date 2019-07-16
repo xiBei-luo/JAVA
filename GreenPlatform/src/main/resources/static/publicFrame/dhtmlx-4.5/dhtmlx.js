@@ -67745,7 +67745,7 @@ dhx.DataDriver.xml = {
     },
     records: "/*/item",
     child: "item",
-    config: "/*/config",
+    config: "/*/interceptor",
     getDetails: function(a) {
         return this.tagToObject(a, {})
     },

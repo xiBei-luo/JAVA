@@ -1,6 +1,6 @@
 package com.greenplatform.service.loginImpl;
 
-import com.greenplatform.aop.OperationLog;
+import com.greenplatform.aop.YwOperationCheckAndLog;
 import com.greenplatform.dao.*;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
@@ -80,7 +80,7 @@ public class LoginServiceImpl implements LoginService {
      * @param session
      * @return
      */
-    @OperationLog(cCzfs = "I")
+    @YwOperationCheckAndLog(cCzfs = "I")
     @Override
     public ReturnModel doRegister(PlateUser plateUser, HttpSession session) {
         try{
@@ -121,6 +121,7 @@ public class LoginServiceImpl implements LoginService {
             plateUser.setcRydj("0");//人员等级（0，1，2，3，4）
             plateUser.setcRyxz("1");//人员性质（1正常，-1黑名单）
             plateUser.setcZt("1");//数据状态（0无效1有效）
+            plateUser.setcIssmz("0");//是否实名制
             plateUser.setcZcfs("");//注册方式
 
             plateUser.setcUserid(majorKey);

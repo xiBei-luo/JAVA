@@ -1,6 +1,6 @@
 package com.greenplatform.service.webImpl;
 
-import com.greenplatform.aop.OperationLog;
+import com.greenplatform.aop.YwOperationCheckAndLog;
 import com.greenplatform.dao.*;
 import com.greenplatform.dao.owerMapper.OwerTGreenNlHzMapper;
 import com.greenplatform.model.*;
@@ -14,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Transactional
@@ -42,7 +40,7 @@ public class WebServiceImpl implements WebService {
 
     //完成每日任务
     @Override
-    @OperationLog(cCzfs = "I")
+    @YwOperationCheckAndLog(cCzfs = "I")
     public ReturnModel accomplishRw(TGreenRwRwmx tGreenRwRwmx) {
         try{
             String localDateDay = (TimeUtil.getLocalDate(new Date()).substring(0,10));
@@ -97,8 +95,8 @@ public class WebServiceImpl implements WebService {
      * @param tGreenZzZjzzmx（要兑换的商品编号不能为空）
      * @return
      */
-    @OperationLog(cCzfs = "I")
     @Override
+    @YwOperationCheckAndLog(cCzfs = "I")
     public ReturnModel buySeeds(TGreenZzZjzzmx tGreenZzZjzzmx) {
         System.out.println(tGreenZzZjzzmx);
         //tGreenZzZjzzmx  商品编号必传

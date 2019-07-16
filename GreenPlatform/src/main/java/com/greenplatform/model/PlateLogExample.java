@@ -605,6 +605,146 @@ public class PlateLogExample {
             return (Criteria) this;
         }
 
+        public Criteria andCSfcgIsNull() {
+            addCriterion("c_sfcg is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgIsNotNull() {
+            addCriterion("c_sfcg is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgEqualTo(String value) {
+            addCriterion("c_sfcg =", value, "cSfcg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgNotEqualTo(String value) {
+            addCriterion("c_sfcg <>", value, "cSfcg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgGreaterThan(String value) {
+            addCriterion("c_sfcg >", value, "cSfcg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgGreaterThanOrEqualTo(String value) {
+            addCriterion("c_sfcg >=", value, "cSfcg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgLessThan(String value) {
+            addCriterion("c_sfcg <", value, "cSfcg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgLessThanOrEqualTo(String value) {
+            addCriterion("c_sfcg <=", value, "cSfcg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgLike(String value) {
+            addCriterion("c_sfcg like", value, "cSfcg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgNotLike(String value) {
+            addCriterion("c_sfcg not like", value, "cSfcg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgIn(List<String> values) {
+            addCriterion("c_sfcg in", values, "cSfcg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgNotIn(List<String> values) {
+            addCriterion("c_sfcg not in", values, "cSfcg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgBetween(String value1, String value2) {
+            addCriterion("c_sfcg between", value1, value2, "cSfcg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSfcgNotBetween(String value1, String value2) {
+            addCriterion("c_sfcg not between", value1, value2, "cSfcg");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscIsNull() {
+            addCriterion("c_dysc is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscIsNotNull() {
+            addCriterion("c_dysc is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscEqualTo(String value) {
+            addCriterion("c_dysc =", value, "cDysc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscNotEqualTo(String value) {
+            addCriterion("c_dysc <>", value, "cDysc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscGreaterThan(String value) {
+            addCriterion("c_dysc >", value, "cDysc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscGreaterThanOrEqualTo(String value) {
+            addCriterion("c_dysc >=", value, "cDysc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscLessThan(String value) {
+            addCriterion("c_dysc <", value, "cDysc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscLessThanOrEqualTo(String value) {
+            addCriterion("c_dysc <=", value, "cDysc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscLike(String value) {
+            addCriterion("c_dysc like", value, "cDysc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscNotLike(String value) {
+            addCriterion("c_dysc not like", value, "cDysc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscIn(List<String> values) {
+            addCriterion("c_dysc in", values, "cDysc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscNotIn(List<String> values) {
+            addCriterion("c_dysc not in", values, "cDysc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscBetween(String value1, String value2) {
+            addCriterion("c_dysc between", value1, value2, "cDysc");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDyscNotBetween(String value1, String value2) {
+            addCriterion("c_dysc not between", value1, value2, "cDysc");
+            return (Criteria) this;
+        }
+
         public Criteria andCIpIsNull() {
             addCriterion("c_ip is null");
             return (Criteria) this;
