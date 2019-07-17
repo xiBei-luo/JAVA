@@ -75,6 +75,20 @@
         </div>
     </header>
 
+    <div id="goldList" class="container-fluid mr-top-50">
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4">
+                <h3 class="text-center">金币点赞排行榜</h3>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-9 col-sm-10 col-xs-10 rankListBg">
+                <button class="btn btn-primary" id="btnLike">点赞</button>
+            </div>
+        </div>
+    </div>
+
     <div id="rankList" class="container-fluid mr-top-50">
         <div class="row">
             <div class="col-md-offset-4 col-md-4">
@@ -82,10 +96,9 @@
             </div>
             <div class="col-md-4"></div>
         </div>
-
         <div class="row" th:each="tGreenNlNlhz : ${loginuserHome.tGreenNlNlhzList}">
             <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-9 col-sm-10 col-xs-10 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer" th:text=${tGreenNlNlhz.cUsername}></span>
+                <span class="glyphicon glyphicon-tree-conifer" th:text=${tGreenNlNlhz.cLoginname}></span>
                 <span th:text="${tGreenNlNlhz.nNlhz}+'KG'"></span>
             </div>
         </div>
@@ -152,7 +165,7 @@
                         <li class="list-group-item">
                             <span id="cLoginname"></span>
                             <span class="badge" id="cRydj"></span>
-                            <a href="/base/certification" class="btn-link" target="_blank">完善资料</a>
+                            <a href="/base/certification" class="btn-link" target="_blank">实名制</a>
                         </li>
                         <li class="list-group-item">
                             <span class="badge" id="nNlhz"></span>我的能量

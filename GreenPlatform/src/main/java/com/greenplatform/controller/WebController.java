@@ -1,9 +1,11 @@
 package com.greenplatform.controller;
 
+import com.greenplatform.model.PlateUser;
 import com.greenplatform.model.TGreenRwRwmx;
 import com.greenplatform.model.TGreenZzZjzzmx;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.WebService;
+import com.greenplatform.util.GetcurrentLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,6 +61,25 @@ public class WebController {
     public ReturnModel accomplishRw(TGreenRwRwmx tGreenRwRwmx){
         ReturnModel returnModel = new ReturnModel();
         returnModel = webService.accomplishRw(tGreenRwRwmx);
+        return returnModel;
+    }
+
+    //点赞业务
+    @RequestMapping(value = "/doLike",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel doLike(){
+        ReturnModel returnModel = new ReturnModel();
+        returnModel = webService.doLike();
+        return returnModel;
+    }
+
+    //实名认证（调用支付宝或微信接口）
+    @RequestMapping(value = "/certification",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel certification(){
+        PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+        ReturnModel returnModel = new ReturnModel();
+        returnModel = webService.certification(plateUser);
         return returnModel;
     }
 

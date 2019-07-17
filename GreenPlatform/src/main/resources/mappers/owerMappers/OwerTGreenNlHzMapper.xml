@@ -3,7 +3,7 @@
 <mapper namespace="com.greenplatform.dao.owerMapper.OwerTGreenNlHzMapper">
   <select id="selectTGreenNlHzRank"  parameterType="java.util.HashMap" resultType="java.util.HashMap">
     select b.c_username cUsername,b.c_loginname cLoginname,a.n_nlhz nNlhz,a.c_userid cUserid
-      from t_green_nl_hz a LEFT JOIN plate_user b ON a.c_userid = b.c_userid AND a.c_zt='1'
+      from t_green_nl_hz a, plate_user b WHERE a.c_userid = b.c_userid AND a.c_zt='1'
   order by n_nlhz DESC
      limit 0,9
   </select>

@@ -56,6 +56,8 @@ public class PlateServiceImpl implements PlateService {
     OwerTGreenRwRwmxMapper owerTGreenRwRwmxMapper;
     @Autowired
     OwerTGreenNlHzMapper owerTGreenNlHzMapper;
+    @Autowired
+    PlateCodeXtcsMapper plateCodeXtcsMapper;
 
     ReturnModel returnModel = new ReturnModel();
 
@@ -1352,6 +1354,159 @@ public class PlateServiceImpl implements PlateService {
             e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("保存失败，服务器端错误!");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+    /**
+     * 查询系统参数
+     * @param plateCodeXtcs
+     * @return
+     */
+    @Override
+    public ReturnModel selectPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs) {
+        try{
+            PlateCodeXtcsExample plateCodeXtcsExample = new PlateCodeXtcsExample();
+            PlateCodeXtcsExample.Criteria criteria = plateCodeXtcsExample.createCriteria();
+            if (!(("").equals(plateCodeXtcs.getcKey()) || null == plateCodeXtcs.getcKey())){
+                criteria.andCKeyLike(plateCodeXtcs.getcKey());
+            }
+            List plateCodeXtcsList = plateCodeXtcsMapper.selectByExample(plateCodeXtcsExample);
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(plateCodeXtcsList);
+            return returnModel;
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("查询失败，服务器端错误!");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+    /**
+     * 新增系统参数
+     * @param plateCodeXtcs
+     * @return
+     */
+    @YwOperationCheckAndLog(cCzfs = "I")
+    @Override
+    public ReturnModel insertPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs) {
+        try{
+            List plateCodeXtcsList;
+            PlateUser plateUser1 = new PlateUser();
+            //1.判断参数代码是否已存在
+            PlateCodeXtcsExample plateCodeXtcsExample = new PlateCodeXtcsExample();
+            PlateCodeXtcsExample.Criteria criteria = plateCodeXtcsExample.createCriteria();
+            criteria.andCZtEqualTo("1");
+            criteria.andCKeyEqualTo(plateCodeXtcs.getcKey());
+
+            plateCodeXtcsList = plateCodeXtcsMapper.selectByExample(plateCodeXtcsExample);
+            if (!(plateCodeXtcsList.isEmpty())){
+                returnModel.setFlag(1);
+                returnModel.setObject(null);
+                returnModel.setMsg("新增失败，参数代码已存在!");
+                return returnModel;
+            }
+            //3.新增参数
+            plateCodeXtcs.setdCjsj(TimeUtil.getTimestamp(new Date()));
+            plateCodeXtcs.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+
+            int insertRet = plateCodeXtcsMapper.insert(plateCodeXtcs);
+            if (1 != insertRet){
+                returnModel.setFlag(1);
+                returnModel.setObject(null);
+                returnModel.setMsg("新增失败,系统错误!");
+                return returnModel;
+            }else{
+                returnModel.setFlag(0);
+                returnModel.setObject(null);
+                returnModel.setMsg("新增成功!");
+                return  returnModel;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setObject(null);
+            returnModel.setMsg("新增失败,系统错误!");
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+    /**
+     * 修改系统参数
+     * @param plateCodeXtcs
+     * @return
+     */
+    @YwOperationCheckAndLog(cCzfs = "U")
+    @Override
+    public ReturnModel updPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs) {
+        try{
+            PlateCodeXtcs plateCodeXtcs1 = plateCodeXtcsMapper.selectByPrimaryKey(plateCodeXtcs.getcKey());
+            if (null == plateCodeXtcs1){
+                returnModel.setFlag(1);
+                returnModel.setMsg("修改失败，没有找到待修改的数据!");
+                returnModel.setObject(null);
+                return returnModel;
+            }else{
+                plateCodeXtcs1.setcValue(plateCodeXtcs.getcValue());
+                plateCodeXtcs1.setcBz(plateCodeXtcs.getcBz());
+                plateCodeXtcs1.setcZt(plateCodeXtcs.getcZt());
+                plateCodeXtcs1.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                plateCodeXtcs1.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
+
+                plateCodeXtcsMapper.updateByPrimaryKey(plateCodeXtcs1);
+                returnModel.setFlag(0);
+                returnModel.setMsg("修改成功!");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+        }catch (Exception e){
+            returnModel.setFlag(1);
+            returnModel.setMsg("修改失败，服务器端错误!");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
+    }
+
+    /**
+     * 删除系统参数
+     * @param plateCodeXtcs
+     * @return
+     */
+    @YwOperationCheckAndLog(cCzfs = "D")
+    @Override
+    public ReturnModel delPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs) {
+        try{
+            if ("".equals(plateCodeXtcs.getcKey())){
+                returnModel.setFlag(1);
+                returnModel.setMsg("删除失败，参数代码不能为空!");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+            PlateCodeXtcs plateCodeXtcs1 = plateCodeXtcsMapper.selectByPrimaryKey(plateCodeXtcs.getcKey());
+            if (null == plateCodeXtcs1 || "".equals(plateCodeXtcs1.getcKey())){
+                returnModel.setFlag(1);
+                returnModel.setMsg("删除用失败，没有找到待删除的数据!");
+                returnModel.setObject(null);
+                return returnModel;
+            }else{
+                plateCodeXtcsMapper.deleteByPrimaryKey(plateCodeXtcs.getcKey());
+                returnModel.setFlag(0);
+                returnModel.setMsg("删除成功!");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("删除失败，服务器端错误!");
             returnModel.setObject(null);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return returnModel;

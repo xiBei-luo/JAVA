@@ -75,7 +75,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     /**
-     * 注册业务，前端用户注册成功，账户赠送价值100能量的种子，需调整（2019-07-12）
+     * 注册业务，前端用户注册成功，账户赠送价值100能量的种子，已调整（2019-07-17）
      * @param plateUser
      * @param session
      * @return
@@ -134,7 +134,7 @@ public class LoginServiceImpl implements LoginService {
                 returnModel.setMsg("注册失败，系统错误!");
                 return returnModel;
             }else{
-                //平台用户注册成功则对应账户账户增加价值100能量的种子
+                //平台用户注册成功则对应账户账户增加价值100能量的种子(注册成功，但还未实名制账户，实名制后将状态修改为有效1)
                 TGreenZzZjzzmx tGreenZzZjzzmx = new TGreenZzZjzzmx();
                 tGreenZzZjzzmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
                 tGreenZzZjzzmx.setcUserid(plateUser.getcUserid());
@@ -143,17 +143,17 @@ public class LoginServiceImpl implements LoginService {
                 tGreenZzZjzzmx.setdZjsj(TimeUtil.getTimestamp(new Date()));
                 tGreenZzZjzzmx.setcKjz("0");
                 tGreenZzZjzzmx.setcSfjz("0");
-                tGreenZzZjzzmx.setcZt("1");
+                tGreenZzZjzzmx.setcZt("0");//(注册成功，但还未实名制账户，实名制后将状态修改为有效1)
                 tGreenZzZjzzmx.setcCjuser(plateUser.getcUserid());
                 tGreenZzZjzzmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
                 tGreenZzZjzzmxMapper.insert(tGreenZzZjzzmx);
 
 
-                //能量汇总表为用户添加一条记录
+                //能量汇总表为用户添加一条记录(注册成功，但还未实名制账户，实名制后将状态修改为有效1)
                 TGreenNlHz tGreenNlHz = new TGreenNlHz();
                 tGreenNlHz.setcUserid(plateUser.getcUserid());
                 tGreenNlHz.setnNlhz(new BigDecimal("0"));
-                tGreenNlHz.setcZt("1");
+                tGreenNlHz.setcZt("0");//(注册成功，但还未实名制账户，实名制后将状态修改为有效1)
                 tGreenNlHz.setcCjuser(plateUser.getcUserid());
                 tGreenNlHz.setdCjsj(TimeUtil.getTimestamp(new Date()));
 

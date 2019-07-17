@@ -25,6 +25,10 @@ function initEvent() {
     $("#mission a").click(function(){
         f_finishMission($(this).attr("value"));
     });//完成任务
+
+    $("#btnLike").click(function(){
+        f_doLike();
+    });//点赞业务
 }
 /*
 点击我的账户时，查询对应账户的详细信息
@@ -80,8 +84,8 @@ function f_selectLoginuserAccount(){
         if (atGreenZzZjzzmx.length > 0) {
             $(atGreenZzZjzzmx).each(function(i,v){
                 $("#mySeed ul").append("<li class=\"list-group-item\">\n" +
-                    "<span id=\"cRwlb_4\">"+v.cSpbh+"</span>\n" +
-                    "<button class=\"btn btn-primary btn-sm float-right\">捐赠</button>\n" +
+                    "<span id='"+v.cSpbh+"'>"+v.cSpmc+"</span>\n" +
+                    "<button id='"+v.cSpbh+"' class='btn btn-primary btn-sm float-right' "+(v.cKjz == '0' ? 'disabled' : '')+">捐赠</button>\n" +
                     "</li>");
             });
         }else{
@@ -176,6 +180,43 @@ function f_finishMission(sRwlb){
 
     });//发送请求并获取返回结果
 }
+
+/**
+ * 点赞业务
+ */
+function f_doLike(){
+    var sendRequest = new SendRequest("/web/doLike","POST");//构造对象
+
+    sendRequest.sendRequest(function(ret){
+        if("0" != ret.flag){
+            BootstrapDialog.alert({
+                type: BootstrapDialog.TYPE_WARNING,
+                size: BootstrapDialog.SIZE_SMALL,
+                title: '提示',
+                message: "操作失败！"+ret.msg,
+                closeable: true,
+                buttonLabel: "确定"
+            });
+        }else{
+            BootstrapDialog.alert({
+                type: BootstrapDialog.TYPE_PRIMARY,
+                size: BootstrapDialog.SIZE_SMALL,
+                title: '提示',
+                message: "操作成功！",
+                closeable: true,
+                buttonLabel: "确定"
+            });
+        }
+
+    });//发送请求并获取返回结果
+}
+
+
+
+
+
+
+
 
 
 

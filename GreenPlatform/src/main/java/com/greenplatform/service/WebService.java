@@ -15,6 +15,15 @@ public interface WebService {
     public ReturnModel selectLoginuserAccount();
 
     //查询首页所需信息（当前人当日任务完成情况，能量汇总排行前十，商品明细）
-    public  ReturnModel selectLoginuserHome();
+    public ReturnModel selectLoginuserHome();
+
+    //点赞业务
+    public ReturnModel doLike();
+
+    //实名认证
+    public ReturnModel certification(PlateUser plateUser);
+
+    //金币点赞数达到10万，瓜分能量业务
+    public void divideNl();
 
 }

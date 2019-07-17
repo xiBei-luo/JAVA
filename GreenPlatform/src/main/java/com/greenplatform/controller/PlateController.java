@@ -216,6 +216,26 @@ public class PlateController {
         ReturnModel returnModel = plateService.selectTGreenNlHz(jsonParams);
         return returnModel;
     }
+    @PostMapping(value = "/selectPlateCodeXtcs")
+    public ReturnModel selectPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs){
+        ReturnModel returnModel = plateService.selectPlateCodeXtcs(plateCodeXtcs);
+        return returnModel;
+    }
+    @PostMapping(value = "/insertPlateCodeXtcs")
+    public ReturnModel insertPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs){
+        ReturnModel returnModel = plateService.insertPlateCodeXtcs(plateCodeXtcs);
+        return returnModel;
+    }
+    @PostMapping(value = "/updPlateCodeXtcs")
+    public ReturnModel updPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs){
+        ReturnModel returnModel = plateService.updPlateCodeXtcs(plateCodeXtcs);
+        return returnModel;
+    }
+    @PostMapping(value = "/delPlateCodeXtcs")
+    public ReturnModel delPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs){
+        ReturnModel returnModel = plateService.delPlateCodeXtcs(plateCodeXtcs);
+        return returnModel;
+    }
 
 
 }

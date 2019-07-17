@@ -1,8 +1,10 @@
 package com.greenplatform.service.webImpl;
 
+import com.greenplatform.aop.WebDoLike;
 import com.greenplatform.aop.YwOperationCheckAndLog;
 import com.greenplatform.dao.*;
 import com.greenplatform.dao.owerMapper.OwerTGreenNlHzMapper;
+import com.greenplatform.dao.owerMapper.OwerTGreenZzZjzzmxMapper;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.WebService;
@@ -24,6 +26,8 @@ public class WebServiceImpl implements WebService {
     @Autowired
     TGreenRwRwmxMapper tGreenRwRwmxMapper;
     @Autowired
+    TGreenRwRwhzMapper tGreenRwRwhzMapper;
+    @Autowired
     PlateUserMapper plateUserMapper;
     @Autowired
     TGreenNlHzMapper tGreenNlHzMapper;
@@ -31,6 +35,8 @@ public class WebServiceImpl implements WebService {
     OwerTGreenNlHzMapper owerTGreenNlHzMapper;
     @Autowired
     TGreenZzZjzzmxMapper tGreenZzZjzzmxMapper;
+    @Autowired
+    OwerTGreenZzZjzzmxMapper owerTGreenZzZjzzmxMapper;
     @Autowired
     TGreenNlJsnlmxMapper tGreenNlJsnlmxMapper;
 
@@ -45,6 +51,7 @@ public class WebServiceImpl implements WebService {
         try{
             String localDateDay = (TimeUtil.getLocalDate(new Date()).substring(0,10));
             String localDateMonth = (TimeUtil.getLocalDate(new Date()).substring(0,7));
+
 
             TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
             TGreenRwRwmxExample.Criteria criteria = tGreenRwRwmxExample.createCriteria();
@@ -115,8 +122,20 @@ public class WebServiceImpl implements WebService {
             criteria.andCUseridEqualTo(plateUser.getcUserid());
             criteria.andCSfjzEqualTo("0");//未捐赠
             criteria.andCZtEqualTo("1");
-
             List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectByExample(tGreenZzZjzzmxExample);
+
+            //1.同一账户下只能同时种植一类植物
+            for (int i=0;i<tGreenZzZjzzmxList.size();i++){
+                TGreenZzZjzzmx tGreenZzZjzzmx1 = (TGreenZzZjzzmx) tGreenZzZjzzmxList.get(i);
+                if (tGreenZzZjzzmx1.getcSpbh().equals(tGreenZzZjzzmx.getcSpbh())){
+                    returnModel.setFlag(1);
+                    returnModel.setMsg("您已经有这类种子正在种植中，无法进行兑换！");
+                    returnModel.setObject(null);
+                    return returnModel;
+                }
+            }
+
+
             int tGreenZzZjzzmxCount = tGreenZzZjzzmxList.size();
             System.out.println("指定账户下未捐赠的种子数量为--"+tGreenZzZjzzmxCount);
             if (tGreenZzZjzzmxCount > 3){
@@ -234,12 +253,6 @@ public class WebServiceImpl implements WebService {
                 criteriaTGreenNlHzExample.andCZtEqualTo("1");
                 criteriaTGreenNlHzExample.andCUseridEqualTo(loginUserId);
 
-                TGreenZzZjzzmxExample tGreenZzZjzzmxExample = new TGreenZzZjzzmxExample();
-                TGreenZzZjzzmxExample.Criteria criteriaTGreenZzZjzzmxExample = tGreenZzZjzzmxExample.createCriteria();
-                criteriaTGreenZzZjzzmxExample.andCUseridEqualTo(loginUserId);
-                criteriaTGreenZzZjzzmxExample.andCZtEqualTo("1");
-                criteriaTGreenZzZjzzmxExample.andCSfjzEqualTo("0");
-
                 TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
                 TGreenRwRwmxExample.Criteria criteriaTGreenRwRwmxExample = tGreenRwRwmxExample.createCriteria();
                 criteriaTGreenRwRwmxExample.andCUseridEqualTo(loginUserId);
@@ -250,7 +263,11 @@ public class WebServiceImpl implements WebService {
 
                 List tGreenNlHzList = tGreenNlHzMapper.selectByExample(tGreenNlHzExample);//查询能量总量
 
-                List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectByExample(tGreenZzZjzzmxExample);//查询种子明细
+                Map paramsMap = new HashMap();
+                paramsMap.put("cUserid",loginUserId);
+                paramsMap.put("cSfjz","0");
+
+                List tGreenZzZjzzmxList = owerTGreenZzZjzzmxMapper.selectTGreenZzZjzzmx(paramsMap);//查询种子明细
 
                 List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);//查询当日任务完成情况明细
 
@@ -338,6 +355,82 @@ public class WebServiceImpl implements WebService {
         }
     }
 
+    /**
+     * 金币点赞业务（调用aop环绕通知验证当前系统中点赞数有无达到10万），环绕通知注解未写（2019-07-17）
+     * 1.判断当前账户下金币是否足够
+     * 2.调用此业务前后都要判断金币点赞数是否达到10万（达到10万关闭此业务，等待系统清空数据并瓜分能量）
+     * @return
+     */
+    @WebDoLike()
+    @Override
+    public ReturnModel doLike() {
+        return null;
+    }
+
+    /**
+     * 实名制服务，还需要调整（2019-07-17）
+     * @param plateUser
+     * @return
+     */
+    @Override
+    public ReturnModel certification(PlateUser plateUser) {
+        System.out.println(plateUser);
+
+        //1.验证账户，查询平台表中是否有记录，若没有则新增一条，若有则修改各个参数状态
+        PlateUser plateUser1 = plateUserMapper.selectByPrimaryKey(plateUser.getcUserid());
+        plateUser1.setcIssmz("1");
+        plateUser1.setcXguser(plateUser.getcUserid());
+        plateUser1.setdXgsj(TimeUtil.getTimestamp(new Date()));
+        plateUserMapper.updateByPrimaryKey(plateUser1);
+
+
+        //2.实名制完成后要更新session域中的值
+
+
+        //3.将该账户下的种子状态设为有效
+        TGreenZzZjzzmxExample tGreenZzZjzzmxExample = new TGreenZzZjzzmxExample();
+        TGreenZzZjzzmxExample.Criteria criteria = tGreenZzZjzzmxExample.createCriteria();
+        criteria.andCUseridEqualTo(plateUser.getcUserid());
+        criteria.andCKjzEqualTo("0");
+        criteria.andCSfjzEqualTo("0");
+        criteria.andCSpbhEqualTo("1");//注册赠送仙人掌种子
+        List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectByExample(tGreenZzZjzzmxExample);
+        System.out.println("实名认证："+tGreenZzZjzzmxList);
+        TGreenZzZjzzmx tGreenZzZjzzmx = (TGreenZzZjzzmx) tGreenZzZjzzmxList.get(0);
+        tGreenZzZjzzmx.setcZt("1");
+        tGreenZzZjzzmx.setcXguser(plateUser.getcUserid());
+        tGreenZzZjzzmx.setdXgsj(TimeUtil.getTimestamp(new Date()));
+        tGreenZzZjzzmxMapper.updateByPrimaryKey(tGreenZzZjzzmx);
+
+
+
+        //4.将该账户下能量汇总表的状态设为有效(如果该账户下无增加种子记录则增加一条新的有效种子记录)
+        TGreenNlHz tGreenNlHz = tGreenNlHzMapper.selectByPrimaryKey(plateUser.getcUserid());
+        tGreenNlHz.setcZt("1");
+        tGreenNlHz.setcXguser(plateUser.getcUserid());
+        tGreenNlHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
+        tGreenNlHzMapper.updateByPrimaryKey(tGreenNlHz);
+
+
+        returnModel.setFlag(0);
+        returnModel.setMsg("");
+        returnModel.setObject(null);
+        return returnModel;
+    }
+
+
+    /**
+     * 金币点赞数达到10万，瓜分能量业务
+     * 瓜分规则：排名前一百可瓜分固定数的绿沙能量，
+     * 第一名88能量，第二名：58能量，第三名：38能量，4-10：18能量，
+     * 11-50：8能量，51-100：2能量，101名后获得随机数量金币，（随机数范围？）
+     *
+     * 点赞数排名每个名次仅一名用户，点赞数量相同时，按完成时间排列；
+     */
+    @Override
+    public void divideNl() {
+
+    }
 
 
 }

@@ -87,4 +87,13 @@ public interface PlateService {
     /*用户能量查询统计*/
     public ReturnModel selectTGreenNlHz(JSONObject jsonObject);
 
+    /*查询系统参数*/
+    public ReturnModel selectPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs);
+    /*新增系统参数*/
+    public ReturnModel insertPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs);
+    /*修改系统参数*/
+    public ReturnModel updPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs);
+    /*删除系统参数*/
+    public ReturnModel delPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs);
+
 }
