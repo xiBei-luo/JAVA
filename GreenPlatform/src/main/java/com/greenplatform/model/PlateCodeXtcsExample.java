@@ -335,6 +335,76 @@ public class PlateCodeXtcsExample {
             return (Criteria) this;
         }
 
+        public Criteria andCSmIsNull() {
+            addCriterion("c_sm is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmIsNotNull() {
+            addCriterion("c_sm is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmEqualTo(String value) {
+            addCriterion("c_sm =", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmNotEqualTo(String value) {
+            addCriterion("c_sm <>", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmGreaterThan(String value) {
+            addCriterion("c_sm >", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmGreaterThanOrEqualTo(String value) {
+            addCriterion("c_sm >=", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmLessThan(String value) {
+            addCriterion("c_sm <", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmLessThanOrEqualTo(String value) {
+            addCriterion("c_sm <=", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmLike(String value) {
+            addCriterion("c_sm like", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmNotLike(String value) {
+            addCriterion("c_sm not like", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmIn(List<String> values) {
+            addCriterion("c_sm in", values, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmNotIn(List<String> values) {
+            addCriterion("c_sm not in", values, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmBetween(String value1, String value2) {
+            addCriterion("c_sm between", value1, value2, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmNotBetween(String value1, String value2) {
+            addCriterion("c_sm not between", value1, value2, "cSm");
+            return (Criteria) this;
+        }
+
         public Criteria andCBzIsNull() {
             addCriterion("c_bz is null");
             return (Criteria) this;

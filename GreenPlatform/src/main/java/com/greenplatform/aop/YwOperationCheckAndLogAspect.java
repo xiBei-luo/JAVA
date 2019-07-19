@@ -14,7 +14,6 @@ import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -40,63 +39,56 @@ public class YwOperationCheckAndLogAspect {
     public void ywOperPoinCut() {
     }
 
-    //环绕通知（调用方法前验证前端用户是否实名制，若没有实名制则不能进行业务操作）
-    @Around("ywOperPoinCut()")
-    public ReturnModel watchywOperPoinCut(ProceedingJoinPoint  proceedingJoinPoint){
-        long startTime=System.currentTimeMillis();//方法调用时间起
+    //调用前-验证
+    @Before("ywOperPoinCut()")
+    public ReturnModel beforeywOperPoinCut(JoinPoint proceedingJoinPoint){
+        System.out.println("系统验证brfore");
         ReturnModel returnModel = new ReturnModel();
         try {
-            if(proceedingJoinPoint.getSignature().getName().equals("doRegister")){
-                returnModel = (ReturnModel) proceedingJoinPoint.proceed();//调用目标方法
-                long endTime=System.currentTimeMillis();
-                saveSysLog(proceedingJoinPoint,returnModel,endTime-startTime);
-                return returnModel;
-            }//前端用户注册时不用验证是否实名制
-
-
-            PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
-            //1.系统用户不用验证是否实名制,前端用户需验证是否实名制
-            if("1".equals(plateUser.getcRylb())){
-                returnModel = (ReturnModel) proceedingJoinPoint.proceed();//调用目标方法
-                long endTime=System.currentTimeMillis();
-                saveSysLog(proceedingJoinPoint,returnModel,endTime-startTime);
-                return returnModel;
-            }else if ("2".equals(plateUser.getcRylb())){
-                if (("1").equals(plateUser.getcIssmz())){
-                    returnModel = (ReturnModel) proceedingJoinPoint.proceed();//调用目标方法
-                    long endTime=System.currentTimeMillis();
-                    saveSysLog(proceedingJoinPoint,returnModel,endTime-startTime);
-                    return returnModel;
-                }else{
+            //前端用户注册时不用验证是否实名制
+            if(!(proceedingJoinPoint.getSignature().getName().equals("doRegister"))){
+                PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+                //1.未登录不能进行操作
+                if (null == plateUser || "".equals(plateUser.getcUserid())){
+                    returnModel.setFlag(1);
+                    returnModel.setMsg("请登录平台后再进行操作！");
+                    returnModel.setObject(null);
+                }
+                //2.前端用户未实名制不能进行操作
+                if ("2".equals(plateUser.getcRylb()) && !(("1").equals(plateUser.getcIssmz()))){
                     returnModel.setFlag(1);
                     returnModel.setMsg("请先完成实名制再进行业务操作！");
                     returnModel.setObject(null);
                 }
-                return returnModel;
-            }else{
-                returnModel.setFlag(1);
-                returnModel.setMsg("请登录平台后再进行操作！");
-                returnModel.setObject(null);
-                return returnModel;
             }
+
+
+            return returnModel;
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("操作失败，系统错误！");
             returnModel.setObject(null);
             long endTime=System.currentTimeMillis();
-            saveSysLog(proceedingJoinPoint,returnModel,endTime-startTime);
             return returnModel;
         }
     }
 
+
+    //调用后保存日志
+    @AfterReturning("ywOperPoinCut()")
+    public void afterywOperPoinCut(JoinPoint  proceedingJoinPoint){
+        System.out.println("系统日志after");
+        saveSysLog(proceedingJoinPoint);
+    }
+
+
     /**
      *
      * @param proceedingJoinPoint
-     * @param returnModel  调用方法返回结果
-     * @param time   调用方法耗时（毫秒）
      */
-    private void saveSysLog(ProceedingJoinPoint proceedingJoinPoint,ReturnModel returnModel,long time){
+    private void saveSysLog(JoinPoint proceedingJoinPoint){
+        System.out.println("保存日志");
         //保存日志
         PlateLog plateLog = new PlateLog();
 
@@ -115,8 +107,6 @@ public class YwOperationCheckAndLogAspect {
         plateLog.setcCzrzbh(UUID.randomUUID().toString().replaceAll("-", ""));//操作日志编号
         plateLog.setcCzr(GetcurrentLoginUser.getCurrentUser().getcUserid());//操作人
         plateLog.setdCzsj(TimeUtil.getTimestamp(new Date()));//操作时间
-        plateLog.setcSfcg(String.valueOf(returnModel.getFlag()));
-        plateLog.setcDysc(String.valueOf(time));
 
         //获取请求的类名
         String className = proceedingJoinPoint.getTarget().getClass().getName();

@@ -1,5 +1,6 @@
 package com.greenplatform.service.webImpl;
 
+import com.greenplatform.aop.WebAddGold;
 import com.greenplatform.aop.WebDoLike;
 import com.greenplatform.aop.YwOperationCheckAndLog;
 import com.greenplatform.dao.*;
@@ -8,6 +9,7 @@ import com.greenplatform.dao.owerMapper.OwerTGreenZzZjzzmxMapper;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.WebService;
+import com.greenplatform.service.utilImpl.UtilServiceImpl;
 import com.greenplatform.util.GetcurrentLoginUser;
 import com.greenplatform.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ import java.util.*;
 @Transactional
 @Service
 public class WebServiceImpl implements WebService {
+    @Autowired
+    UtilServiceImpl utilService;
     @Autowired
     TGreenSpSpmxMapper tGreenSpSpmxMapper;
     @Autowired
@@ -39,6 +43,14 @@ public class WebServiceImpl implements WebService {
     OwerTGreenZzZjzzmxMapper owerTGreenZzZjzzmxMapper;
     @Autowired
     TGreenNlJsnlmxMapper tGreenNlJsnlmxMapper;
+    @Autowired
+    TGreenGoldDzmxMapper tGreenGoldDzmxMapper;
+    @Autowired
+    TGreenGoldJsmxMapper tGreenGoldJsmxMapper;
+    @Autowired
+    TGreenGoldHzMapper tGreenGoldHzMapper;
+    @Autowired
+    TGreenGoldDzhzMapper tGreenGoldDzhzMapper;
 
 
     ReturnModel returnModel = new ReturnModel();
@@ -47,11 +59,12 @@ public class WebServiceImpl implements WebService {
     //完成每日任务
     @Override
     @YwOperationCheckAndLog(cCzfs = "I")
+    @WebAddGold(cAddType = "C_GOLD_ZJYY_1")
     public ReturnModel accomplishRw(TGreenRwRwmx tGreenRwRwmx) {
+        System.out.println("正在调用目标方法");
         try{
             String localDateDay = (TimeUtil.getLocalDate(new Date()).substring(0,10));
             String localDateMonth = (TimeUtil.getLocalDate(new Date()).substring(0,7));
-
 
             TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
             TGreenRwRwmxExample.Criteria criteria = tGreenRwRwmxExample.createCriteria();
@@ -76,7 +89,6 @@ public class WebServiceImpl implements WebService {
                 tGreenRwRwmx.setcRwday(localDateDay);
                 tGreenRwRwmx.setdRwsj(TimeUtil.getTimestamp(new Date()));
 
-                System.out.println("任务明细对象--"+tGreenRwRwmx);
                 tGreenRwRwmxMapper.insert(tGreenRwRwmx);
 
                 //2.任务汇总中更新数据(当前登陆人，当前月任务汇总)
@@ -105,7 +117,6 @@ public class WebServiceImpl implements WebService {
     @Override
     @YwOperationCheckAndLog(cCzfs = "I")
     public ReturnModel buySeeds(TGreenZzZjzzmx tGreenZzZjzzmx) {
-        System.out.println(tGreenZzZjzzmx);
         //tGreenZzZjzzmx  商品编号必传
         if (null == tGreenZzZjzzmx.getcSpbh() || "".equals(tGreenZzZjzzmx)){
             returnModel.setFlag(1);
@@ -137,7 +148,6 @@ public class WebServiceImpl implements WebService {
 
 
             int tGreenZzZjzzmxCount = tGreenZzZjzzmxList.size();
-            System.out.println("指定账户下未捐赠的种子数量为--"+tGreenZzZjzzmxCount);
             if (tGreenZzZjzzmxCount > 3){
                 returnModel.setFlag(1);
                 returnModel.setMsg("您正在种植的植物数量已经有三种，无法进行兑换！");
@@ -167,8 +177,6 @@ public class WebServiceImpl implements WebService {
                 }
 
                 BigDecimal zzPrice = ((TGreenSpSpmx) tGreenSpSpmxList.get(0)).getnSpjg();//获取种子的价格
-                System.out.println("账户能量总量为："+userNlzl);
-                System.out.println("种子价格为："+zzPrice);
                 if (tGreenNlHzList.isEmpty()){
                     returnModel.setFlag(1);
                     returnModel.setMsg("您的能量不足，快去完成任务获取能量吧！");
@@ -178,7 +186,6 @@ public class WebServiceImpl implements WebService {
                     returnModel.setMsg("您的能量不足，快去完成任务获取能量吧！");
                     returnModel.setObject(null);
                 }else{
-                    System.out.println("进行兑换");
                     TGreenNlJsnlmx tGreenNlJsnlmx = new TGreenNlJsnlmx();
                     tGreenNlJsnlmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
                     tGreenNlJsnlmx.setcUserid(plateUser.getcUserid());
@@ -194,7 +201,6 @@ public class WebServiceImpl implements WebService {
                     tGreenNlHz.setnNlhz(userNlzl.subtract(zzPrice));
                     tGreenNlHz.setcXguser(plateUser.getcUserid());
                     tGreenNlHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
-                    System.out.println("修改能量汇总表"+tGreenNlHz);
                     tGreenNlHzMapper.updateByPrimaryKey(tGreenNlHz);
 
                     tGreenZzZjzzmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
@@ -206,7 +212,6 @@ public class WebServiceImpl implements WebService {
                     tGreenZzZjzzmx.setcZt("1");
                     tGreenZzZjzzmx.setcCjuser(plateUser.getcUserid());
                     tGreenZzZjzzmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
-                    System.out.println("新增种子增加明细表"+tGreenZzZjzzmx);
                     tGreenZzZjzzmxMapper.insert(tGreenZzZjzzmx);
                     returnModel.setFlag(0);
                     returnModel.setMsg("");
@@ -271,10 +276,6 @@ public class WebServiceImpl implements WebService {
 
                 List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);//查询当日任务完成情况明细
 
-                System.out.println("登陆用户基本信息--"+plateuserList);
-                System.out.println("登陆用户能量信息--"+tGreenNlHzList);
-                System.out.println("登陆用户种子信息--"+tGreenZzZjzzmxList);
-                System.out.println("登陆用户任务信息--"+tGreenRwRwmxList);
                 loginuserAccountMap = new HashMap();
                 loginuserAccountMap.put("plateUser",plateuserList);
                 loginuserAccountMap.put("tGreenNlHz",tGreenNlHzList);
@@ -338,8 +339,6 @@ public class WebServiceImpl implements WebService {
 
                 loginUserHomeMap.put("tGreenRwRwmx",rwmxMap);
 
-                System.out.println(loginUserHomeMap);
-
                 returnModel.setFlag(0);
                 returnModel.setMsg(null);
                 returnModel.setObject(loginUserHomeMap);
@@ -363,8 +362,108 @@ public class WebServiceImpl implements WebService {
      */
     @WebDoLike()
     @Override
+    @YwOperationCheckAndLog(cCzfs = "I")
     public ReturnModel doLike() {
-        return null;
+        try{
+            PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+            //1.判断账户金币是否足够点赞一次
+            TGreenGoldHzExample tGreenGoldHzExample1 = new TGreenGoldHzExample();
+            TGreenGoldHzExample.Criteria criteria3 = tGreenGoldHzExample1.createCriteria();
+            criteria3.andCZtEqualTo("1");
+            criteria3.andCUseridEqualTo(plateUser.getcUserid());
+            List tGreenGoldHzList1 = tGreenGoldHzMapper.selectByExample(tGreenGoldHzExample1);
+
+            if (tGreenGoldHzList1.size() < 1){
+                returnModel.setFlag(1);
+                returnModel.setMsg("金币不足，快去做任务获取金币吧！");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+
+            TGreenGoldHz tGreenGoldHz1 = (TGreenGoldHz) tGreenGoldHzList1.get(0);
+            PlateCodeXtcs plateCodeXtcs = utilService.getPlateCodeXtcsObject("C_DZSL_ONE");
+            if(tGreenGoldHz1.getnJbzl().compareTo(new BigDecimal(plateCodeXtcs.getcValue())) == -1){
+                returnModel.setFlag(1);
+                returnModel.setMsg("金币不足，快去做任务获取金币吧！");
+                returnModel.setObject(null);
+                return returnModel;
+            }
+
+            //2.如果当前人是第一次点赞，则在点赞汇总表中增加一条记录，否则不加
+            TGreenGoldDzmxExample tGreenGoldDzmxExample = new TGreenGoldDzmxExample();
+            TGreenGoldDzmxExample.Criteria criteria2 = tGreenGoldDzmxExample.createCriteria();
+            criteria2.andCZtEqualTo("1");
+            criteria2.andCUseridEqualTo(plateUser.getcUserid());
+            List tGreenGoldDzmxList = tGreenGoldDzmxMapper.selectByExample(tGreenGoldDzmxExample);
+            if (tGreenGoldDzmxList.size() < 1){
+                TGreenGoldDzhz tGreenGoldDzhz = new TGreenGoldDzhz();
+                tGreenGoldDzhz.setcUserid(plateUser.getcUserid());
+                tGreenGoldDzhz.setnDzzl(new BigDecimal("1"));
+                tGreenGoldDzhz.setcZt("1");
+                tGreenGoldDzhz.setcCjuser(plateUser.getcUserid());
+                tGreenGoldDzhz.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                tGreenGoldDzhzMapper.insert(tGreenGoldDzhz);
+            }
+
+            //3.点赞明细表中新增一条记录
+            TGreenGoldDzmx tGreenGoldDzmx = new TGreenGoldDzmx();
+            tGreenGoldDzmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
+            tGreenGoldDzmx.setcUserid(plateUser.getcUserid());
+            tGreenGoldDzmx.setnDzsl(new BigDecimal("1"));
+            tGreenGoldDzmx.setdDzsj(TimeUtil.getTimestamp(new Date()));
+            tGreenGoldDzmx.setcZt("1");
+            tGreenGoldDzmx.setcCjuser(plateUser.getcUserid());
+            tGreenGoldDzmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
+            tGreenGoldDzmxMapper.insert(tGreenGoldDzmx);
+
+            //4.金币减少明细表中增加一条记录
+            TGreenGoldJsmx tGreenGoldJsmx = new TGreenGoldJsmx();
+            tGreenGoldJsmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
+            tGreenGoldJsmx.setcUserid(plateUser.getcUserid());
+            tGreenGoldJsmx.setnJssl(new BigDecimal(plateCodeXtcs.getcValue()));
+            tGreenGoldJsmx.setcJsyy("1");
+            tGreenGoldJsmx.setcJsyysm("点赞");
+            tGreenGoldJsmx.setcZt("1");
+            tGreenGoldJsmx.setcCjuser(plateUser.getcUserid());
+            tGreenGoldJsmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
+            tGreenGoldJsmxMapper.insert(tGreenGoldJsmx);
+
+            //5.修改金币汇总表(原金币总量-一次点赞花费的金币数)
+            TGreenGoldHzExample tGreenGoldHzExample = new TGreenGoldHzExample();
+            TGreenGoldHzExample.Criteria criteria = tGreenGoldHzExample.createCriteria();
+            criteria.andCUseridEqualTo(plateUser.getcUserid());
+            criteria.andCZtEqualTo("1");
+            List tGreenGoldHzList = tGreenGoldHzMapper.selectByExample(tGreenGoldHzExample);
+            TGreenGoldHz tGreenGoldHz = (TGreenGoldHz) tGreenGoldHzList.get(0);
+            tGreenGoldHz.setnJbzl(tGreenGoldHz.getnJbzl().subtract(new BigDecimal(plateCodeXtcs.getcValue())));
+            tGreenGoldHz.setcXguser(plateUser.getcUserid());
+            tGreenGoldHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
+            tGreenGoldHzMapper.updateByPrimaryKey(tGreenGoldHz);
+
+            //6.修改点赞汇总表
+            TGreenGoldDzhzExample tGreenGoldDzhzExample = new TGreenGoldDzhzExample();
+            TGreenGoldDzhzExample.Criteria criteria1 = tGreenGoldDzhzExample.createCriteria();
+            criteria1.andCZtEqualTo("1");
+            criteria1.andCUseridEqualTo(plateUser.getcUserid());
+            List tGreenGoldDzhzList = tGreenGoldDzhzMapper.selectByExample(tGreenGoldDzhzExample);
+            TGreenGoldDzhz tGreenGoldDzhz = (TGreenGoldDzhz) tGreenGoldDzhzList.get(0);
+            tGreenGoldDzhz.setnDzzl(tGreenGoldDzhz.getnDzzl().add(new BigDecimal("1")));
+            tGreenGoldDzhz.setcXguser(plateUser.getcUserid());
+            tGreenGoldDzhz.setdXgsj(TimeUtil.getTimestamp(new Date()));
+            tGreenGoldDzhzMapper.updateByPrimaryKey(tGreenGoldDzhz);
+
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(null);
+            return returnModel;
+        }catch (Exception e){
+            e.printStackTrace();
+            returnModel.setFlag(1);
+            returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setObject(null);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return returnModel;
+        }
     }
 
     /**
@@ -374,7 +473,6 @@ public class WebServiceImpl implements WebService {
      */
     @Override
     public ReturnModel certification(PlateUser plateUser) {
-        System.out.println(plateUser);
 
         //1.验证账户，查询平台表中是否有记录，若没有则新增一条，若有则修改各个参数状态
         PlateUser plateUser1 = plateUserMapper.selectByPrimaryKey(plateUser.getcUserid());
@@ -395,7 +493,6 @@ public class WebServiceImpl implements WebService {
         criteria.andCSfjzEqualTo("0");
         criteria.andCSpbhEqualTo("1");//注册赠送仙人掌种子
         List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectByExample(tGreenZzZjzzmxExample);
-        System.out.println("实名认证："+tGreenZzZjzzmxList);
         TGreenZzZjzzmx tGreenZzZjzzmx = (TGreenZzZjzzmx) tGreenZzZjzzmxList.get(0);
         tGreenZzZjzzmx.setcZt("1");
         tGreenZzZjzzmx.setcXguser(plateUser.getcUserid());

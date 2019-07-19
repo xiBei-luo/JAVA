@@ -68,8 +68,7 @@ public class WebController {
     @RequestMapping(value = "/doLike",method = RequestMethod.POST)
     @ResponseBody
     public ReturnModel doLike(){
-        ReturnModel returnModel = new ReturnModel();
-        returnModel = webService.doLike();
+        ReturnModel returnModel = webService.doLike();
         return returnModel;
     }
 
