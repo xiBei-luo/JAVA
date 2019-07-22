@@ -165,17 +165,27 @@ function f_finishMission(sRwlb){
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
-        if("0" != ret.flag){
+        console.log(ret);
+        if("0" == ret.flag){
+            $(".rwlb_"+sRwlb).hide(100);
+        }else if("1" == ret.flag){
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,
                 size: BootstrapDialog.SIZE_SMALL,
                 title: '提示',
-                message: "操作失败！"+ret.msg,
+                message: ret.msg,
                 closeable: true,
                 buttonLabel: "确定"
             });
         }else{
-            $(".rwlb_"+sRwlb).hide(100);
+            BootstrapDialog.alert({
+                type: BootstrapDialog.TYPE_WARNING,
+                size: BootstrapDialog.SIZE_SMALL,
+                title: '提示',
+                message: "我是前端，操作失败！"+ret.msg,
+                closeable: true,
+                buttonLabel: "确定"
+            });
         }
 
     });//发送请求并获取返回结果

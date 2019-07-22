@@ -1512,5 +1512,4 @@ public class PlateServiceImpl implements PlateService {
             return returnModel;
         }
     }
-
 }

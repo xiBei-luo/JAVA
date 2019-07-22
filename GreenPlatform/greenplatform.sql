@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2019-07-17 17:44:53
+Date: 2019-07-22 16:22:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,21 +35,22 @@ CREATE TABLE `plate_code_dmlb` (
 -- Records of plate_code_dmlb
 -- ----------------------------
 INSERT INTO `plate_code_dmlb` VALUES ('C_GFNLZ', '瓜分能量值', null, '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-16 14:49:54', null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_GOLD_JSYY', '减少金币原因', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmlb` VALUES ('C_GOLD_ZJYY', '增加金币原因', null, '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-16 16:34:22', null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_JC_SF', '是否', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_JC_YWZT', '业务状态', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_JC_ZT', '状态', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_NL_JSYY', '能量减少原因', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_NL_ZJYY', '能量增加原因', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_RW_RWLB', '任务类别', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_RW_YWZT', '业务状态', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_USER_RYDJ', '人员等级', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_USER_RYLB', '人员类别', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_USER_RYZT', '人员状态', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_USER_SEX', '性别', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_USER_ZCFS', '注册方式', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_USER_ZJLX', '证件类型', null, null, null, null, null, null);
-INSERT INTO `plate_code_dmlb` VALUES ('C_ZZ_ZJYY', '增加种子原因', null, null, null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_JC_SF', '是否', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_JC_YWZT', '业务状态', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_JC_ZT', '状态', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_NL_JSYY', '能量减少原因', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_NL_ZJYY', '能量增加原因', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_RW_RWLB', '任务类别', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_RW_YWZT', '业务状态', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_USER_RYDJ', '人员等级', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_USER_RYLB', '人员类别', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_USER_RYZT', '人员状态', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_USER_SEX', '性别', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_USER_ZCFS', '注册方式', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_USER_ZJLX', '证件类型', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_ZZ_ZJYY', '增加种子原因', null, '1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for plate_code_dmz
@@ -77,6 +78,7 @@ INSERT INTO `plate_code_dmz` VALUES ('C_JC_YWZT', '0', '未完成', '1', null, '
 INSERT INTO `plate_code_dmz` VALUES ('C_JC_ZT', '0', '无效', '1', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_RW_YWZT', '0', '未完成', '1', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_USER_RYDJ', '0', '零级', '1', '', '1', '', '2019-07-02 10:21:50', '', '2019-07-02 10:22:02');
+INSERT INTO `plate_code_dmz` VALUES ('C_GOLD_JSYY', '1', '点赞', '1', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_GOLD_ZJYY', '1', '完成种植任务', '1', null, '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-16 16:34:22', null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_JC_SF', '1', '是', '2', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_JC_YWZT', '1', '已完成', '2', null, '1', null, null, null, null);
@@ -119,6 +121,7 @@ DROP TABLE IF EXISTS `plate_code_xtcs`;
 CREATE TABLE `plate_code_xtcs` (
   `c_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '参数代码',
   `c_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '参数值',
+  `c_sm` varchar(255) DEFAULT NULL COMMENT '说明',
   `c_bz` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `c_zt` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态(0无效1有效)',
   `c_cjuser` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '创建人',
@@ -131,10 +134,11 @@ CREATE TABLE `plate_code_xtcs` (
 -- ----------------------------
 -- Records of plate_code_xtcs
 -- ----------------------------
-INSERT INTO `plate_code_xtcs` VALUES ('C_GFNLZ', '100000', '瓜分能量值', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-17 10:26:00', '3309b23c28584179b9d69e226e3eeeee', '2019-07-17 10:34:39');
-INSERT INTO `plate_code_xtcs` VALUES ('C_GOLD_ZJYY_1', '50', '增加金币原因_完成种植任务', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-17 10:38:54', '3309b23c28584179b9d69e226e3eeeee', '2019-07-17 10:39:40');
-INSERT INTO `plate_code_xtcs` VALUES ('C_GOLD_ZJYY_2', '1000', '增加金币原因_邀请用户', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-17 10:40:16', null, null);
-INSERT INTO `plate_code_xtcs` VALUES ('C_GOLD_ZJYY_3', '500', '增加金币原因_完成植物捐赠', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-17 10:41:38', null, null);
+INSERT INTO `plate_code_xtcs` VALUES ('C_DZSL_ONE', '50', '1次点赞花费金币数', '1次点赞花费金币数', '1', null, null, null, null);
+INSERT INTO `plate_code_xtcs` VALUES ('C_GFNLZ', '100000', '瓜分能量值', '瓜分能量值', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-17 10:26:00', '3309b23c28584179b9d69e226e3eeeee', '2019-07-17 10:34:39');
+INSERT INTO `plate_code_xtcs` VALUES ('C_GOLD_ZJYY_1', '50', '完成种植任务', '增加金币原因_完成种植任务', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-17 10:38:54', '3309b23c28584179b9d69e226e3eeeee', '2019-07-17 10:39:40');
+INSERT INTO `plate_code_xtcs` VALUES ('C_GOLD_ZJYY_2', '1000', '邀请用户', '增加金币原因_邀请用户', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-17 10:40:16', null, null);
+INSERT INTO `plate_code_xtcs` VALUES ('C_GOLD_ZJYY_3', '500', '完成植物捐赠', '增加金币原因_完成植物捐赠', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-17 10:41:38', null, null);
 
 -- ----------------------------
 -- Table structure for plate_log
@@ -160,10 +164,6 @@ CREATE TABLE `plate_log` (
 -- ----------------------------
 -- Records of plate_log
 -- ----------------------------
-INSERT INTO `plate_log` VALUES ('05bfced618c644b893cfb26ea7a4d222', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:45:28', 'I', 'com.greenplatform.service.webImpl.WebServiceImpl.accomplishRw', '[{\"cCjuser\":\"65a84553a6e84d80a5fe2af8c17fbbee\",\"cRwday\":\"2019-07-17\",\"cRwlb\":\"1\",\"cRwmouth\":\"2019-07\",\"cUserid\":\"65a84553a6e84d80a5fe2af8c17fbbee\",\"cZt\":\"1\",\"dCjsj\":1563345928289,\"dRwsj\":1563345928289}]', '0', '4', '127.0.0.1', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:45:28', null, null);
-INSERT INTO `plate_log` VALUES ('8685b379c7cb43e98b7189bfd20e93a4', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:45:56', 'I', 'com.greenplatform.service.webImpl.WebServiceImpl.buySeeds', '[{\"cSpbh\":\"1\"}]', '1', '4', '127.0.0.1', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:45:56', null, null);
-INSERT INTO `plate_log` VALUES ('c9202122d2d44452b9839c436692a6db', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:45:59', 'I', 'com.greenplatform.service.webImpl.WebServiceImpl.buySeeds', '[{\"cSpbh\":\"2\"}]', '1', '9', '127.0.0.1', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:45:59', null, null);
-INSERT INTO `plate_log` VALUES ('f2ddc1b0900d40199a0cccf19d9cb3a4', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:42:39', 'I', 'com.greenplatform.service.loginImpl.LoginServiceImpl.doRegister', '[{\"cCjuser\":\"65a84553a6e84d80a5fe2af8c17fbbee\",\"cEmail\":\"123@qq.com\",\"cIssmz\":\"0\",\"cLoginname\":\"zhangsan\",\"cPassword\":\"0b4e7a0e5fe84ad35fb5f95b9ceeac79\",\"cRydj\":\"0\",\"cRylb\":\"2\",\"cRyxz\":\"1\",\"cRyzt\":\"1\",\"cUserid\":\"65a84553a6e84d80a5fe2af8c17fbbee\",\"cUsername\":\"UIiDCm\",\"cZcfs\":\"\",\"cZt\":\"1\",\"dCjsj\":1563345758907},{\"attributeNames\":[\"loginUser\"],\"creationTime\":1563345724730,\"id\":\"C335910E1F140C0DABE720329DB625B7\",\"lastAccessedTime\":1563345753054,\"maxInactiveInterval\":1800,\"new\":false,\"servletContext\":{\"attributeNames\":[\"javax.servlet.context.tempdir\",\"org.apache.catalina.resources\",\"org.springframework.web.context.WebApplicationContext.ROOT\",\"org.springframework.web.context.support.ServletContextScope\",\"org.apache.tomcat.InstanceManager\",\"org.apache.catalina.jsp_classpath\",\"javax.websocket.server.ServerContainer\",\"org.apache.tomcat.JarScanner\",\"org.springframework.web.servlet.FrameworkServlet.CONTEXT.dispatcherServlet\"],\"contextPath\":\"\",\"defaultSessionTrackingModes\":[\"COOKIE\",\"URL\"],\"effectiveMajorVersion\":3,\"effectiveMinorVersion\":0,\"effectiveSessionTrackingModes\":[\"COOKIE\",\"URL\"],\"filterRegistrations\":{\"requestContextFilter\":{\"className\":\"org.springframework.boot.web.servlet.filter.OrderedRequestContextFilter\",\"initParameters\":{},\"name\":\"requestContextFilter\",\"servletNameMappings\":[],\"urlPatternMappings\":[\"/*\"]},\"Tomcat WebSocket (JSR356) Filter\":{\"className\":\"org.apache.tomcat.websocket.server.WsFilter\",\"initParameters\":{},\"name\":\"Tomcat WebSocket (JSR356) Filter\",\"servletNameMappings\":[],\"urlPatternMappings\":[\"/*\"]},\"httpPutFormContentFilter\":{\"className\":\"org.springframework.boot.web.servlet.filter.OrderedHttpPutFormContentFilter\",\"initParameters\":{},\"name\":\"httpPutFormContentFilter\",\"servletNameMappings\":[],\"urlPatternMappings\":[\"/*\"]},\"hiddenHttpMethodFilter\":{\"className\":\"org.springframework.boot.web.servlet.filter.OrderedHiddenHttpMethodFilter\",\"initParameters\":{},\"name\":\"hiddenHttpMethodFilter\",\"servletNameMappings\":[],\"urlPatternMappings\":[\"/*\"]},\"characterEncodingFilter\":{\"className\":\"org.springframework.boot.web.servlet.filter.OrderedCharacterEncodingFilter\",\"initParameters\":{},\"name\":\"characterEncodingFilter\",\"servletNameMappings\":[],\"urlPatternMappings\":[\"/*\"]}},\"initParameterNames\":[],\"majorVersion\":3,\"minorVersion\":1,\"serverInfo\":\"Apache Tomcat/8.5.34\",\"servletContextName\":\"application\",\"servletNames\":[],\"servletRegistrations\":{\"default\":{\"className\":\"org.apache.catalina.servlets.DefaultServlet\",\"initParameters\":{\"listings\":\"false\",\"debug\":\"0\"},\"mappings\":[],\"name\":\"default\"},\"dispatcherServlet\":{\"className\":\"org.springframework.web.servlet.DispatcherServlet\",\"initParameters\":{},\"mappings\":[\"/\"],\"name\":\"dispatcherServlet\"}},\"servlets\":[],\"sessionCookieConfig\":{\"httpOnly\":false,\"maxAge\":-1,\"secure\":false},\"sessionTimeout\":30,\"virtualServerName\":\"Tomcat/localhost\"},\"sessionContext\":{\"ids\":[]},\"valueNames\":[\"loginUser\"]}]', '0', '25', '127.0.0.1', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:42:39', null, null);
 
 -- ----------------------------
 -- Table structure for plate_user
@@ -203,7 +203,6 @@ CREATE TABLE `plate_user` (
 -- ----------------------------
 INSERT INTO `plate_user` VALUES ('318eb9ef076446ea8b85cb8d2559fb55', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 'lisi', '李四', '2', '0', null, null, '1', '1', '1', null, '1', '2', '四川省成都市', '13255555555', null, null, '123@qq.com', null, '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-02 15:00:32', '3309b23c28584179b9d69e226e3eeeee', '2019-07-02 15:01:29');
 INSERT INTO `plate_user` VALUES ('3309b23c28584179b9d69e226e3eeeee', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 'admin', '系统管理员', '1', '0', null, null, '1', '1', '1', '1', '1', '1212', '121212', '18328023251', '18328023251', '1271826981', '1213@qq.com', '测试测试', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-06-25 14:49:27', '3309b23c28584179b9d69e226e3eeeee', '2019-07-02 14:59:59');
-INSERT INTO `plate_user` VALUES ('65a84553a6e84d80a5fe2af8c17fbbee', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 'zhangsan', 'UIiDCm', null, '1', null, '0', '2', '1', '1', '', null, null, null, null, null, null, '123@qq.com', null, '1', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:42:39', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:44:12');
 
 -- ----------------------------
 -- Table structure for plate_user_blacklist
@@ -460,7 +459,7 @@ CREATE TABLE `t_green_gold_zjmx` (
   `c_userid` varchar(255) NOT NULL,
   `n_zjsl` decimal(8,4) DEFAULT NULL COMMENT '增加数量',
   `d_zjsj` datetime DEFAULT NULL COMMENT '增加时间',
-  `c_zjyy` varchar(1) DEFAULT NULL COMMENT '增加原因',
+  `c_zjyy` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '增加原因',
   `c_zjyysm` varchar(255) DEFAULT NULL COMMENT '增加原因说明',
   `c_bz` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `c_zt` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态(0无效1有效)',
@@ -520,7 +519,6 @@ CREATE TABLE `t_green_nl_hz` (
 -- ----------------------------
 -- Records of t_green_nl_hz
 -- ----------------------------
-INSERT INTO `t_green_nl_hz` VALUES ('65a84553a6e84d80a5fe2af8c17fbbee', '0.0000', null, '1', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:42:39', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:44:12');
 
 -- ----------------------------
 -- Table structure for t_green_nl_jsnlmx
@@ -544,7 +542,6 @@ CREATE TABLE `t_green_nl_jsnlmx` (
 -- ----------------------------
 -- Records of t_green_nl_jsnlmx
 -- ----------------------------
-INSERT INTO `t_green_nl_jsnlmx` VALUES ('54779e89338544fc8cc1468789c7e0a9', '179956ccbc0745c6ba9d79bef0b0b174', '300.0000', '2019-07-17 11:28:19', '1', null, '1', '179956ccbc0745c6ba9d79bef0b0b174', '2019-07-17 11:28:19', null, null);
 
 -- ----------------------------
 -- Table structure for t_green_nl_txjl
@@ -640,8 +637,6 @@ CREATE TABLE `t_green_rw_rwmx` (
 -- ----------------------------
 -- Records of t_green_rw_rwmx
 -- ----------------------------
-INSERT INTO `t_green_rw_rwmx` VALUES ('179956ccbc0745c6ba9d79bef0b0b174', '1', '2019-07-16', '2019-07', '2019-07-16 11:37:06', null, '1', '179956ccbc0745c6ba9d79bef0b0b174', '2019-07-16 11:37:06', null, null);
-INSERT INTO `t_green_rw_rwmx` VALUES ('65a84553a6e84d80a5fe2af8c17fbbee', '1', '2019-07-17', '2019-07', '2019-07-17 14:45:28', null, '1', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:45:28', null, null);
 
 -- ----------------------------
 -- Table structure for t_green_sp_spmx
@@ -724,4 +719,3 @@ CREATE TABLE `t_green_zz_zjzzmx` (
 -- ----------------------------
 -- Records of t_green_zz_zjzzmx
 -- ----------------------------
-INSERT INTO `t_green_zz_zjzzmx` VALUES ('0b3bd37296d04d24bb96371a626684e5', '65a84553a6e84d80a5fe2af8c17fbbee', '1', '1', '2019-07-17 14:42:39', '0', '0', null, null, '1', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:42:39', '65a84553a6e84d80a5fe2af8c17fbbee', '2019-07-17 14:44:12');

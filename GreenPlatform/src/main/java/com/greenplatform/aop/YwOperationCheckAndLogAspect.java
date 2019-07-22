@@ -13,7 +13,9 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -30,6 +32,7 @@ import java.util.UUID;
  */
 @Aspect
 @Component
+@Order(1)
 public class YwOperationCheckAndLogAspect {
     @Autowired
     private PlateLogMapper plateLogMapper;
@@ -40,46 +43,49 @@ public class YwOperationCheckAndLogAspect {
     }
 
     //调用前-验证
-    @Before("ywOperPoinCut()")
-    public ReturnModel beforeywOperPoinCut(JoinPoint proceedingJoinPoint){
-        System.out.println("系统验证brfore");
+    @Around("ywOperPoinCut()")
+    public ReturnModel beforeywOperPoinCut(ProceedingJoinPoint proceedingJoinPoint){
+        System.out.println("系统验证before");
         ReturnModel returnModel = new ReturnModel();
+
+
         try {
             //前端用户注册时不用验证是否实名制
             if(!(proceedingJoinPoint.getSignature().getName().equals("doRegister"))){
                 PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
-                //1.未登录不能进行操作
-                if (null == plateUser || "".equals(plateUser.getcUserid())){
-                    returnModel.setFlag(1);
-                    returnModel.setMsg("请登录平台后再进行操作！");
-                    returnModel.setObject(null);
-                }
-                //2.前端用户未实名制不能进行操作
+                //1.前端用户未实名制不能进行操作
                 if ("2".equals(plateUser.getcRylb()) && !(("1").equals(plateUser.getcIssmz()))){
                     returnModel.setFlag(1);
                     returnModel.setMsg("请先完成实名制再进行业务操作！");
                     returnModel.setObject(null);
+                }else{
+                    returnModel = (ReturnModel) proceedingJoinPoint.proceed();
                 }
+            }else{
+                returnModel = (ReturnModel) proceedingJoinPoint.proceed();
             }
-
-
             return returnModel;
-        } catch (Throwable throwable) {
+        }catch (Throwable throwable) {
             throwable.printStackTrace();
             returnModel.setFlag(1);
-            returnModel.setMsg("操作失败，系统错误！");
+            returnModel.setMsg("操作出错，系统错误！");
             returnModel.setObject(null);
-            long endTime=System.currentTimeMillis();
             return returnModel;
         }
     }
 
 
     //调用后保存日志
-    @AfterReturning("ywOperPoinCut()")
+    @After("ywOperPoinCut()")
     public void afterywOperPoinCut(JoinPoint  proceedingJoinPoint){
         System.out.println("系统日志after");
         saveSysLog(proceedingJoinPoint);
+    }
+
+    //处理异常
+    @AfterThrowing("ywOperPoinCut()")
+    public void afterThrowingPoinCut(){
+        System.out.println("出现异常啦~~~");
     }
 
 
