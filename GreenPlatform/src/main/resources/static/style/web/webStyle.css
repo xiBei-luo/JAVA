@@ -109,9 +109,33 @@ header{
 }
 /*banner下的三个任务end*/
 
+/*点赞排行榜begin*/
+#goldList .table{
+    width: 80%;
+    margin:30px auto 0;
+}
+.btnLikeBox{
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+}
+#btnLike{
+    font-size: 28px;
+}
+#btnLike:hover{
+    color: #b92c28;
+}
+#jsGold{
+    opacity: 0;
+    position: absolute;
+    font-weight: bold;
+    color: #eea236;
+}
+/*点赞排行榜end*/
+
 /*能量排行榜begin*/
 #rankList .row .rankListBg{
-    background: #3e8f3e;
+    background: #419641;
     margin-top: 10px;
     height:50px;
     line-height: 50px;

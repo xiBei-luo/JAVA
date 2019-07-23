@@ -353,8 +353,7 @@ public class WebServiceImpl implements WebService {
                 //4.点赞排行榜前十
                 List tGreenGoldDzhzList = owerTGreenGoldDzhzMapper.selectGreenGoldDzhzRank();
                 loginUserHomeMap.put("tGreenGoldDzhzList",tGreenGoldDzhzList);
-                System.out.println("点赞排行榜");
-                System.out.println(tGreenGoldDzhzList);
+                System.out.println(loginUserHomeMap);
 
                 returnModel.setFlag(0);
                 returnModel.setMsg(null);
@@ -630,6 +629,7 @@ public class WebServiceImpl implements WebService {
      * @return   调用是否成功
      */
     private void checkAddGoldOperation() throws Exception{
+        System.out.println("in");
         PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
         //1.获取金币汇总表中的记录，如果是第一次增加金币的操作则新增一条金币汇总表记录，此后对此表都是修改操作
         TGreenGoldHzExample tGreenGoldHzExample = new TGreenGoldHzExample();
@@ -637,7 +637,9 @@ public class WebServiceImpl implements WebService {
         criteria.andCZtEqualTo("1");
         criteria.andCUseridEqualTo(plateUser.getcUserid());
         List tGreenGoldHzList = tGreenGoldHzMapper.selectByExample(tGreenGoldHzExample);
+        System.out.println(tGreenGoldHzList);
         if (tGreenGoldHzList.size() < 1){
+            System.out.println("in if");
             TGreenGoldHz tGreenGoldHz = new TGreenGoldHz();
             tGreenGoldHz.setcUserid(plateUser.getcUserid());
             tGreenGoldHz.setnJbzl(new BigDecimal("0"));

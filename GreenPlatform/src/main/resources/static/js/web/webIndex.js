@@ -30,6 +30,12 @@ function initEvent() {
         f_doLike();
     });//点赞业务
 }
+function toStart(){
+    $("#jsGold").css({
+        "top":"0",
+        "opacity":"1"
+    });
+}
 /*
 点击我的账户时，查询对应账户的详细信息
  */
@@ -40,7 +46,7 @@ function f_selectLoginuserAccount(){
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
-        console.log(ret.object);
+        //console.log(ret.object);
 
         //登陆账户信息
         var oPlateuser = ret.object.plateUser[0];//登陆账户信息（获取人员姓名与人员等级）
@@ -130,7 +136,6 @@ function f_doPurchaseSeed(sSpbh) {
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
-        console.log(ret);
         if("0" != ret.flag){
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,
@@ -165,7 +170,6 @@ function f_finishMission(sRwlb){
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
-        console.log(ret);
         if("0" == ret.flag){
             $(".rwlb_"+sRwlb).hide(100);
         }else if("1" == ret.flag){
@@ -208,14 +212,12 @@ function f_doLike(){
                 buttonLabel: "确定"
             });
         }else{
-            BootstrapDialog.alert({
-                type: BootstrapDialog.TYPE_PRIMARY,
-                size: BootstrapDialog.SIZE_SMALL,
-                title: '提示',
-                message: "操作成功！",
-                closeable: true,
-                buttonLabel: "确定"
-            });
+            $("#jsGold").animate({
+                top:"-30px",
+                opacity:"0"
+            }, {speed:"300",easing:"swing",callback:toStart()});
+
+            $("#btnLike").css({"color":"#b92c28"});
         }
 
     });//发送请求并获取返回结果

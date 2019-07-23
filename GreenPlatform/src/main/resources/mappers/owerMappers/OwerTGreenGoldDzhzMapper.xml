@@ -18,7 +18,7 @@
             plate_user b
         WHERE
             a.c_userid = b.c_userid
-     ORDER BY a.n_dzzl,b.c_username
+     ORDER BY a.n_dzzl DESC ,b.c_username
         LIMIT 0,10
     </select>
 </mapper>

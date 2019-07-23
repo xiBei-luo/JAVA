@@ -5,6 +5,7 @@ import com.greenplatform.dao.*;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.LoginService;
+import com.greenplatform.util.GetcurrentLoginUser;
 import com.greenplatform.util.MD5;
 import com.greenplatform.util.TimeUtil;
 import com.greenplatform.util.UserStringUtil;
@@ -31,6 +32,8 @@ public class LoginServiceImpl implements LoginService {
     TGreenNlHzMapper tGreenNlHzMapper;
     @Autowired
     TGreenZzZjzzmxMapper tGreenZzZjzzmxMapper;
+    @Autowired
+    TGreenGoldHzMapper tGreenGoldHzMapper;
 
     ReturnModel returnModel = new ReturnModel();
 
@@ -156,8 +159,8 @@ public class LoginServiceImpl implements LoginService {
                 tGreenNlHz.setcZt("0");//(注册成功，但还未实名制账户，实名制后将状态修改为有效1)
                 tGreenNlHz.setcCjuser(plateUser.getcUserid());
                 tGreenNlHz.setdCjsj(TimeUtil.getTimestamp(new Date()));
-
                 tGreenNlHzMapper.insert(tGreenNlHz);
+
                 session.setAttribute("loginUser",plateUser);//前端用户注册成功后写入session
                 returnModel.setFlag(0);
                 returnModel.setObject(null);

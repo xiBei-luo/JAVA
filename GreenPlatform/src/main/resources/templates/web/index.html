@@ -28,6 +28,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#home" id="btnHome">首页 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#goldList">点赞排行榜</a></li>
                         <li><a href="#rankList">能量排行榜</a></li>
                         <li><a href="#market">种子商店</a></li>
                     </ul>
@@ -46,6 +47,8 @@
                 </div>
             </div>
         </nav>
+
+        <!--任务-->
         <div class="container-fluid mission" id="mission">
             <div class="row"></div>
             <div class="row" th:style="${loginuserHome.tGreenRwRwmx['1']} == true ? 'display: none':''">
@@ -75,6 +78,7 @@
         </div>
     </header>
 
+    <!--点赞排行榜-->
     <div id="goldList" class="container-fluid mr-top-50">
         <div class="row">
             <div class="col-md-offset-4 col-md-4">
@@ -83,12 +87,28 @@
             <div class="col-md-4"></div>
         </div>
         <div class="row">
-            <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-9 col-sm-10 col-xs-10 rankListBg">
-                <button class="btn btn-primary" id="btnLike">点赞</button>
+            <div class="col-md-offset-4 col-md-4">
+                <div class="btnLikeBox">
+                    <span class="glyphicon glyphicon-thumbs-up" id="btnLike"></span>
+                    <span id="jsGold">-50</span>
+                </div>
             </div>
         </div>
+        <table class="table text-center goldTbl">
+            <tr class="bg-success">
+                <td><strong>排名</strong></td>
+                <td><strong>姓名</strong></td>
+                <td><strong>点赞总量</strong></td>
+            </tr>
+            <tr th:each="tGreenGoldDzhzList,tGreenGoldDzhzStatu : ${loginuserHome.tGreenGoldDzhzList}">
+                <td th:text=${tGreenGoldDzhzStatu.index+1}>1</td>
+                <td th:text="${tGreenGoldDzhzList.cUsername}"></td>
+                <td th:text="${tGreenGoldDzhzList.nDzzl}"></td>
+            </tr>
+        </table>
     </div>
 
+    <!--能量排行榜-->
     <div id="rankList" class="container-fluid mr-top-50">
         <div class="row">
             <div class="col-md-offset-4 col-md-4">
@@ -98,12 +118,14 @@
         </div>
         <div class="row" th:each="tGreenNlNlhz : ${loginuserHome.tGreenNlNlhzList}">
             <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-9 col-sm-10 col-xs-10 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer" th:text=${tGreenNlNlhz.cLoginname}></span>
+                <span class="glyphicon glyphicon-tree-conifer" th:text=${tGreenNlNlhz.cUsername}></span>
                 <span th:text="${tGreenNlNlhz.nNlhz}+'KG'"></span>
             </div>
         </div>
     </div>
 
+
+    <!--种子商店-->
     <section id="market" class="popular-packages">
         <div class="container">
             <div class="row">
@@ -134,6 +156,8 @@
             </div>
         </div>
     </section> <!--end  popular packajge -->
+
+
     <footer class="container-fluid indexFooter">
         <ul>
             <li><a href="">12</a></li>
