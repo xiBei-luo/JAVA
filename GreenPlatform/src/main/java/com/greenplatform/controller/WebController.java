@@ -9,6 +9,7 @@ import com.greenplatform.util.GetcurrentLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -75,11 +76,21 @@ public class WebController {
     //实名认证（调用支付宝或微信接口）
     @RequestMapping(value = "/certification",method = RequestMethod.POST)
     @ResponseBody
-    public ReturnModel certification(){
-        PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
-        ReturnModel returnModel = new ReturnModel();
-        returnModel = webService.certification(plateUser);
+    public ReturnModel certification(PlateUser plateUser){
+        PlateUser plateUser1 = GetcurrentLoginUser.getCurrentUser();
+        plateUser1.setcUsername(plateUser.getcUsername());
+        plateUser1.setcPhone(plateUser.getcPhone());
+        plateUser1.setcZjhm(plateUser.getcZjhm());
+
+        ReturnModel returnModel = webService.certification(plateUser1);
         return returnModel;
+    }
+
+    //捐赠业务
+    @RequestMapping(value = "/contributeSeed",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel contributeSeed(String cLsh,String cSpbh){
+        return webService.contributeSeed(cLsh,cSpbh);
     }
 
 

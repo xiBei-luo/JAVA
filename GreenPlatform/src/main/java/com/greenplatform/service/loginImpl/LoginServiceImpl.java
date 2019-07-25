@@ -40,6 +40,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public ReturnModel checkLogin(PlateUser plateUser, HttpSession session) {
+
         List plateUserList;
         PlateUserExample plateUserExample = new PlateUserExample();
         PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
@@ -176,6 +177,7 @@ public class LoginServiceImpl implements LoginService {
             return returnModel;
         }
     }
+
 
 
 

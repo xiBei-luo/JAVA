@@ -1525,6 +1525,76 @@ public class PlateUserExample {
             return (Criteria) this;
         }
 
+        public Criteria andCFatheridIsNull() {
+            addCriterion("c_fatherId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridIsNotNull() {
+            addCriterion("c_fatherId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridEqualTo(String value) {
+            addCriterion("c_fatherId =", value, "cFatherid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridNotEqualTo(String value) {
+            addCriterion("c_fatherId <>", value, "cFatherid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridGreaterThan(String value) {
+            addCriterion("c_fatherId >", value, "cFatherid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridGreaterThanOrEqualTo(String value) {
+            addCriterion("c_fatherId >=", value, "cFatherid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridLessThan(String value) {
+            addCriterion("c_fatherId <", value, "cFatherid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridLessThanOrEqualTo(String value) {
+            addCriterion("c_fatherId <=", value, "cFatherid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridLike(String value) {
+            addCriterion("c_fatherId like", value, "cFatherid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridNotLike(String value) {
+            addCriterion("c_fatherId not like", value, "cFatherid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridIn(List<String> values) {
+            addCriterion("c_fatherId in", values, "cFatherid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridNotIn(List<String> values) {
+            addCriterion("c_fatherId not in", values, "cFatherid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridBetween(String value1, String value2) {
+            addCriterion("c_fatherId between", value1, value2, "cFatherid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCFatheridNotBetween(String value1, String value2) {
+            addCriterion("c_fatherId not between", value1, value2, "cFatherid");
+            return (Criteria) this;
+        }
+
         public Criteria andCBzIsNull() {
             addCriterion("c_bz is null");
             return (Criteria) this;

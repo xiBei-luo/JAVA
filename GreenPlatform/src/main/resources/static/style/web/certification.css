@@ -1,0 +1,27 @@
+/*公共begin*/
+header{
+    width: 100%;
+    background: url("../../publicImg/systemBg.jpg") repeat-x;
+    overflow-x: hidden;
+}
+.mr-top-100{
+    margin-top:100px;
+}
+.mr-top-50{
+    margin-top: 50px;
+}
+.float-right{
+    float: right;
+}
+.badge-warning{
+    background-color: #f0ad4e;
+}
+.badge-primary{
+    background-color: #337ab7;
+}
+/*公共end*/
+.certificationHeader{
+    height:100%;
+}
+
+

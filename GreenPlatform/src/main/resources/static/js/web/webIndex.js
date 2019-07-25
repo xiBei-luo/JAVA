@@ -50,11 +50,17 @@ function f_selectLoginuserAccount(){
 
         //登陆账户信息
         var oPlateuser = ret.object.plateUser[0];//登陆账户信息（获取人员姓名与人员等级）
-        $("#cLoginname").text(oPlateuser.cLoginname);
+        $("#cUsername").text(oPlateuser.cUsername);
         $("#cRydj").text("L"+oPlateuser.cRydj);
         if(!(oPlateuser.cRydj)){
             $("#cRydj").text("L"+0);
         }
+        if (oPlateuser.cIssmz == 1){
+            $("#certiBtn").hide();
+        } else{
+            $("#certiBtn").show();
+        }
+
 
         //登陆用户能量汇总信息（获取能量总量）
         var oTGreenNlHz = ret.object.tGreenNlHz[0];//登陆用户能量汇总信息（获取能量总量）
@@ -87,13 +93,18 @@ function f_selectLoginuserAccount(){
 
         //登陆用户种子信息（查询用户有几种未捐赠的种子）
         var atGreenZzZjzzmx = ret.object.tGreenZzZjzzmx;//登陆用户种子信息（查询用户有几种未捐赠的种子）
+        //console.log(atGreenZzZjzzmx);
         if (atGreenZzZjzzmx.length > 0) {
+
+            $("#mySeed ul li").remove();
+
             $(atGreenZzZjzzmx).each(function(i,v){
                 $("#mySeed ul").append("<li class=\"list-group-item\">\n" +
                     "<span id='"+v.cSpbh+"'>"+v.cSpmc+"</span>\n" +
-                    "<button id='"+v.cSpbh+"' class='btn btn-primary btn-sm float-right' "+(v.cKjz == '0' ? 'disabled' : '')+">捐赠</button>\n" +
+                    //"<button id='"+v.cSpbh+"' class='btn btn-primary btn-sm float-right' "+(v.cKjz == '0' ? 'disabled' : '')+">捐赠</button>\n" +
+                    "<button id='"+v.cSpbh+"' onclick='f_contributeSeed("+JSON.stringify(v)+")' class='btn btn-primary btn-sm float-right'>捐赠</button>\n" +
                     "</li>");
-            });
+            });;
         }else{
             $("#mySeed ul").append("<li class=\"list-group-item\">\n" +
                 "无\n" +
@@ -221,6 +232,41 @@ function f_doLike(){
         }
 
     });//发送请求并获取返回结果
+}
+
+
+/**
+ * 捐赠种子
+ * @param id
+ */
+function f_contributeSeed(data){
+    console.log(data);
+    var sendRequest = new SendRequest("/web/contributeSeed","POST");//构造对象
+    sendRequest.addParamObj({
+       "cSpbh":data.cSpbh,
+        "cLsh":data.cLsh
+    });
+
+    sendRequest.sendRequest(function(ret){
+        console.log(ret);
+        /*if("0" != ret.flag){
+            BootstrapDialog.alert({
+                type: BootstrapDialog.TYPE_WARNING,
+                size: BootstrapDialog.SIZE_SMALL,
+                title: '提示',
+                message: "操作失败！"+ret.msg,
+                closeable: true,
+                buttonLabel: "确定"
+            });
+        }else{
+            $("#jsGold").animate({
+                top:"-30px",
+                opacity:"0"
+            }, {speed:"300",easing:"swing",callback:toStart()});
+
+            $("#btnLike").css({"color":"#b92c28"});
+        }*/
+    });
 }
 
 

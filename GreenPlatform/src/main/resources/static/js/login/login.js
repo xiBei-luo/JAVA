@@ -7,6 +7,11 @@ $(function(){
 
 
 function initEvent(){
+    $(document).keyup(function(event){
+        if(event.keyCode ==13){
+            $("#btnLogin").trigger("click");
+        }
+    });
     $("#btnLogin").click(function(){
         checkLogin();
         $("#loginForm").bootstrapValidator('validate');//提交验证

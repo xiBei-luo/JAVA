@@ -6,6 +6,7 @@
            A.c_dmlb cDmlb,
            B.c_dm cDm,
            B.c_dmmc cDmmc,
+           B.c_dmz cDmz,
            A.c_bz cBz,
            B.c_sort cSort,
            B.c_zt cZt,

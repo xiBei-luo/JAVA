@@ -58,6 +58,7 @@ function _init(args, mdi, layerIdx, parentWindow) {
                 "cDmlbmc"   : $("#cDmlbmc").val(),
                 "cDm"       : $("#cDm").val(),
                 "cDmmc"     : $("#cDmmc").val(),
+                "cDmz"      : $("#cDmz").val(),
                 "cSort"     : $("#cSort").val(),
                 "cZt"       : $("#cZt").val()
             });//构造请求参数
@@ -67,6 +68,7 @@ function _init(args, mdi, layerIdx, parentWindow) {
                 "cDmlbmc"   : $("#cDmlbmc").val(),
                 "cDm"       : args.cDm,
                 "cDmmc"     : $("#cDmmc").val(),
+                "cDmz"     : $("#cDmz").val(),
                 "cSort"     : $("#cSort").val(),
                 "cZt"       : $("#cZt").val()
             });//构造请求参数

@@ -508,6 +508,7 @@ public class PlateServiceImpl implements PlateService {
                 plateCodeDmlb1.setdXgsj(TimeUtil.getTimestamp(new Date()));
                 plateCodeDmlbMapper.updateByPrimaryKey(plateCodeDmlb1);
                 //3-2.执行修改代码值
+                plateCodeDmz1.setcDmz(plateCodeDmz.getcDmz());
                 plateCodeDmz1.setcSort(plateCodeDmz.getcSort());
                 plateCodeDmz1.setcZt(plateCodeDmz.getcZt());
                 plateCodeDmz1.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
@@ -1512,4 +1513,6 @@ public class PlateServiceImpl implements PlateService {
             return returnModel;
         }
     }
+
+
 }

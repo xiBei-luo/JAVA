@@ -6,6 +6,12 @@ $(function () {
 
 
 function initEvent(){
+    $(document).keyup(function(event){
+        if(event.keyCode ==13){
+            $("#btnRegister").trigger("click");
+        }
+    });
+
     $("#btnRegister").click(function(){
         checkRegister();
         $("#registerForm").bootstrapValidator('validate');//提交验证

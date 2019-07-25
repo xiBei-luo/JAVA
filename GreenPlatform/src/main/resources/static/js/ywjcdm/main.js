@@ -10,7 +10,7 @@ $(function(){
 function initEvent(){
 
     $("#btnAdd").click(function(){
-        var win = top.$.MdiWindow(window, 750, 300, 0, 0, true);
+        var win = top.$.MdiWindow(window, 750, 350, 0, 0, true);
         win.setTitle("新增基础代码");
         win.setWindowArguments(null);//参数
         win.btnClose(true);
@@ -37,10 +37,10 @@ function initGrid(){
     $("#gridbox").attr({width:"100%",height:"100%"});
     grid = new dhtmlXGridObject('gridbox');
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
-    grid.setHeader("操作,代码类别,代码类别名称,代码值,代码值名称,排序号,状态");
-    grid.setInitWidthsP("15,15,15,15,15,10,14.5");
-    grid.setColAlign("center,center,center,center,center,center,center");
-    grid.setColTypes("ro,ro,ro,ro,ro,ro,ro");
+    grid.setHeader("操作,代码类别,代码类别名称,代码,代码名称,代码值,排序号,状态");
+    grid.setInitWidthsP("12,15,15,10,15,10,8,10.5");
+    grid.setColAlign("center,center,center,center,center,center,center,center");
+    grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro");
     grid.enableMultiselect(false);
     grid.init();
 }
@@ -94,6 +94,7 @@ function initData(data){
             data[i].cDmlbmc,
             data[i].cDm,
             data[i].cDmmc,
+            data[i].cDmz,
             data[i].cSort,
             data[i].cZtsm
         ]);
@@ -106,7 +107,7 @@ function initData(data){
  */
 function f_upd(id){
     var data = grid.getUserData(id,"data");
-    var win = top.$.MdiWindow(window, 750, 300, 0, 0, true);
+    var win = top.$.MdiWindow(window, 750, 350, 0, 0, true);
     win.setTitle("修改基础代码");
     win.setWindowArguments(data);//参数
     win.btnClose(true);

@@ -405,6 +405,146 @@ public class PlateCodeDmzExample {
             return (Criteria) this;
         }
 
+        public Criteria andCDmzIsNull() {
+            addCriterion("c_dmz is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzIsNotNull() {
+            addCriterion("c_dmz is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzEqualTo(String value) {
+            addCriterion("c_dmz =", value, "cDmz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzNotEqualTo(String value) {
+            addCriterion("c_dmz <>", value, "cDmz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzGreaterThan(String value) {
+            addCriterion("c_dmz >", value, "cDmz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzGreaterThanOrEqualTo(String value) {
+            addCriterion("c_dmz >=", value, "cDmz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzLessThan(String value) {
+            addCriterion("c_dmz <", value, "cDmz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzLessThanOrEqualTo(String value) {
+            addCriterion("c_dmz <=", value, "cDmz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzLike(String value) {
+            addCriterion("c_dmz like", value, "cDmz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzNotLike(String value) {
+            addCriterion("c_dmz not like", value, "cDmz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzIn(List<String> values) {
+            addCriterion("c_dmz in", values, "cDmz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzNotIn(List<String> values) {
+            addCriterion("c_dmz not in", values, "cDmz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzBetween(String value1, String value2) {
+            addCriterion("c_dmz between", value1, value2, "cDmz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCDmzNotBetween(String value1, String value2) {
+            addCriterion("c_dmz not between", value1, value2, "cDmz");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmIsNull() {
+            addCriterion("c_sm is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmIsNotNull() {
+            addCriterion("c_sm is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmEqualTo(String value) {
+            addCriterion("c_sm =", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmNotEqualTo(String value) {
+            addCriterion("c_sm <>", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmGreaterThan(String value) {
+            addCriterion("c_sm >", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmGreaterThanOrEqualTo(String value) {
+            addCriterion("c_sm >=", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmLessThan(String value) {
+            addCriterion("c_sm <", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmLessThanOrEqualTo(String value) {
+            addCriterion("c_sm <=", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmLike(String value) {
+            addCriterion("c_sm like", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmNotLike(String value) {
+            addCriterion("c_sm not like", value, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmIn(List<String> values) {
+            addCriterion("c_sm in", values, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmNotIn(List<String> values) {
+            addCriterion("c_sm not in", values, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmBetween(String value1, String value2) {
+            addCriterion("c_sm between", value1, value2, "cSm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCSmNotBetween(String value1, String value2) {
+            addCriterion("c_sm not between", value1, value2, "cSm");
+            return (Criteria) this;
+        }
+
         public Criteria andCSortIsNull() {
             addCriterion("c_sort is null");
             return (Criteria) this;
