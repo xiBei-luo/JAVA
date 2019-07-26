@@ -21,6 +21,12 @@ header{
 }
 /*公共end*/
 
+/*logo*/
+.logo{
+    float: left;
+    margin-right: 8px;
+}
+
 .indexHeader{
     height:500px;
 }

@@ -226,7 +226,7 @@ function f_doLike(){
             $("#jsGold").animate({
                 top:"-30px",
                 opacity:"0"
-            }, {speed:"300",easing:"swing",callback:toStart()});
+            }, {speed:"400",easing:"swing",callback:toStart()});
 
             $("#btnLike").css({"color":"#b92c28"});
         }
@@ -249,7 +249,7 @@ function f_contributeSeed(data){
 
     sendRequest.sendRequest(function(ret){
         console.log(ret);
-        /*if("0" != ret.flag){
+        if("0" != ret.flag){
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,
                 size: BootstrapDialog.SIZE_SMALL,
@@ -259,13 +259,15 @@ function f_contributeSeed(data){
                 buttonLabel: "确定"
             });
         }else{
-            $("#jsGold").animate({
-                top:"-30px",
-                opacity:"0"
-            }, {speed:"300",easing:"swing",callback:toStart()});
-
-            $("#btnLike").css({"color":"#b92c28"});
-        }*/
+            BootstrapDialog.alert({
+                type: BootstrapDialog.TYPE_PRIMARY,
+                size: BootstrapDialog.SIZE_SMALL,
+                title: '提示',
+                message: "操作成功！",
+                closeable: true,
+                buttonLabel: "确定"
+            });
+        }
     });
 }
 

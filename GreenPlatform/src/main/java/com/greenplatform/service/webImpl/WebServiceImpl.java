@@ -57,6 +57,8 @@ public class WebServiceImpl implements WebService {
     TGreenZzJzjlMapper tGreenZzJzjlMapper;
     @Autowired
     PlateCodeDmzMapper plateCodeDmzMapper;
+    @Autowired
+    TGreenNlZjnlmxMapper tGreenNlZjnlmxMapper;
 
 
 
@@ -603,14 +605,14 @@ public class WebServiceImpl implements WebService {
             List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);
             System.out.println("连续完成基础任务："+tGreenRwRwmxList.size()+"天");
 
-            /*if (tGreenRwRwmxList.size() < dayOfMouth){
+            /**if (tGreenRwRwmxList.size() < dayOfMouth){
                 returnModel.setFlag(1);
                 returnModel.setMsg("操作失败，您还没有连续一个月完成基础任务！");
                 returnModel.setObject("");
                 return returnModel;
             }*/
 
-            //1.同一账户24小时内只能捐赠一种植物
+            //1.同一账户24小时内只能捐赠一种植物（需要调整判断是否是同一天）
             TGreenZzJzjlExample tGreenZzJzjlExample = new TGreenZzJzjlExample();
             TGreenZzJzjlExample.Criteria criteria1 = tGreenZzJzjlExample.createCriteria();
             criteria1.andCZtEqualTo("1");
@@ -630,35 +632,42 @@ public class WebServiceImpl implements WebService {
             //当前账户的父账户奖励规则？如师傅可得到的固定奖励为100，额外奖励为植物奖励的5%
             //完成植物种植获取的金币数量？
             float sysParamOfAddNl = Float.parseFloat(getDmzByDm("C_ZWJZJL_NL_"+cSpbh));//捐赠种子后得到的能量奖励
-            System.out.println("捐赠此植物的能量奖励"+sysParamOfAddNl);
+
 
             float sysParamOfUserLev = Float.parseFloat(getDmzByDm("C_ZHDJ_EXTJL_"+plateUser.getcRydj()));//账户等级对应的能量奖励百分比
-            System.out.println("捐赠此植物的账户等级额外奖励百分比"+sysParamOfUserLev);
+
 
             float extraNL = sysParamOfUserLev*sysParamOfAddNl;//账户等级对应的能量奖励
-            System.out.println("捐赠此植物的账户等级额外奖励值"+extraNL);
+
 
             float sysParamOfFatherGd = Float.parseFloat(getDmzByDm("C_FATHER_JL_GD"));//父账户固定奖励
-            System.out.println("捐赠此植物的父账户固定奖励"+sysParamOfFatherGd);
+
 
             float sysParamOfFatherExt = Float.parseFloat(getDmzByDm("C_FATHER_JL_EXT"));//父账户额外奖励
+
+
+            //float sysParamOfGoldJlPer = Float.parseFloat(getDmzByDm("C_ZWJZJL_GOLD_"+cSpbh));//植物捐赠后的金币奖励
+
+
+
+            float sysParamOfGoldJl = 500;//植物捐赠后的金币奖励值
+
+            /*System.out.println("捐赠此植物的能量奖励"+sysParamOfAddNl);
+            System.out.println("捐赠此植物的账户等级额外奖励百分比"+sysParamOfUserLev);
+            System.out.println("捐赠此植物的账户等级额外奖励值"+extraNL);
+            System.out.println("捐赠此植物的父账户固定奖励"+sysParamOfFatherGd);
             System.out.println("捐赠此植物的父账户额外奖励"+sysParamOfFatherExt);
-
-            float sysParamOfGoldJlPer = Float.parseFloat(getDmzByDm("C_ZWJZJL_GOLD_"+cSpbh));//植物捐赠后的金币奖励比例
             System.out.println("捐赠此植物的金币奖励百分比"+sysParamOfGoldJlPer);
-
-            float sysParamOfGoldJl = sysParamOfGoldJlPer*sysParamOfAddNl;//植物捐赠后的金币奖励值
-            System.out.println("捐赠此植物的金币奖励值"+sysParamOfGoldJl);
+            System.out.println("捐赠此植物的金币奖励值"+sysParamOfGoldJl);*/
 
 
 
 
 
 
-            /**
+
             //2.修改种子增加明细表种子状态（已捐赠，捐赠事件）
             TGreenZzZjzzmx tGreenZzZjzzmx = tGreenZzZjzzmxMapper.selectByPrimaryKey(cLsh);
-            System.out.println("当前操作的种子信息："+tGreenZzZjzzmx);
             tGreenZzZjzzmx.setcKjz("1");
             tGreenZzZjzzmx.setcSfjz("1");
             tGreenZzZjzzmx.setdJzsj(TimeUtil.getTimestamp(new Date()));
@@ -678,16 +687,16 @@ public class WebServiceImpl implements WebService {
             tGreenZzJzjl.setdCjsj(TimeUtil.getTimestamp(new Date()));
             tGreenZzJzjlMapper.insert(tGreenZzJzjl);
 
-            //4.新增增加能量明细表记录（增加数量需查询账户等级，是否还有额外奖励）
-            //int sysParamOfAddNl = 112;
-            //int extraNL = 12;
+            //4.新增增加能量明细表记录（增加数量等于捐赠种子指定的能量加上账户等级额外的奖励）
             TGreenNlZjnlmx tGreenNlZjnlmx = new TGreenNlZjnlmx();
             tGreenNlZjnlmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
             tGreenNlZjnlmx.setcUserid(plateUser.getcUserid());
             tGreenNlZjnlmx.setnZjnl(new BigDecimal(sysParamOfAddNl+extraNL));
             tGreenNlZjnlmx.setdZjsj(TimeUtil.getTimestamp(new Date()));
+            tGreenNlZjnlmx.setcZjyy("4");
             tGreenNlZjnlmx.setcCjuser(plateUser.getcUserid());
             tGreenNlZjnlmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
+            tGreenNlZjnlmxMapper.insert(tGreenNlZjnlmx);
 
 
             //5.更新账户能量汇总表记录
@@ -702,9 +711,11 @@ public class WebServiceImpl implements WebService {
             TGreenGoldZjmx tGreenGoldZjmx = new TGreenGoldZjmx();
             tGreenGoldZjmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
             tGreenGoldZjmx.setcUserid(plateUser.getcUserid());
-            tGreenGoldZjmx.setnZjsl(new BigDecimal("500"));
+            System.out.println("增加金币数量："+sysParamOfGoldJl);
+            tGreenGoldZjmx.setnZjsl(new BigDecimal(sysParamOfGoldJl));
             tGreenGoldZjmx.setcZjyy("C_GOLD_ZJYY_3");
             tGreenGoldZjmx.setcZjyysm("完成植物捐赠");
+            tGreenGoldZjmx.setdZjsj(TimeUtil.getTimestamp(new Date()));
             tGreenGoldZjmx.setcZt("1");
             tGreenGoldZjmx.setcCjuser(plateUser.getcUserid());
             tGreenGoldZjmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
@@ -713,7 +724,7 @@ public class WebServiceImpl implements WebService {
 
             //7.修改金币汇总表
             TGreenGoldHz tGreenGoldHz = tGreenGoldHzMapper.selectByPrimaryKey(plateUser.getcUserid());
-            tGreenGoldHz.setnJbzl(tGreenGoldHz.getnJbzl().add(new BigDecimal("500")));
+            tGreenGoldHz.setnJbzl(tGreenGoldHz.getnJbzl().add(new BigDecimal(sysParamOfGoldJl)));
             tGreenGoldHz.setcXguser(plateUser.getcUserid());
             tGreenGoldHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
             tGreenGoldHzMapper.updateByPrimaryKey(tGreenGoldHz);
@@ -722,11 +733,13 @@ public class WebServiceImpl implements WebService {
             //8.查询当前账户是否有父账户（是否有师傅），有则师傅账户增加奖励
             if (!(("").equals(plateUser.getcFatherid()) || null == plateUser.getcFatherid())){
                 System.out.println("有父账户！");
+                System.out.println("父账户增加相应的能量奖励");//父账户是否需要金币奖励
             }
 
-             */
+
         }catch (Exception e){
             e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 
 
