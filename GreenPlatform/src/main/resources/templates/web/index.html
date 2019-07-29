@@ -22,18 +22,20 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img class="logo" src="/publicImg/logo.png" width="20px" height="20px">绿沙平台</a>
+                    <div class="navbar-brand" href="#" id="navbarBrand">
+                        <img class="logo" src="/publicImg/logo.png">
+                        <div id="brandTitle">绿沙平台<span id="brandSubttle">LVSHAPINGTAI</span></div>
+                        <span id="smallTitle">绿化沙漠&nbsp&nbsp&nbsp&nbsp共享未来</span>
+                    </div>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="#home" id="btnHome">首页 <span class="sr-only">(current)</span></a></li>
                         <li><a href="#goldList">点赞排行榜</a></li>
                         <li><a href="#rankList">能量排行榜</a></li>
                         <li><a href="#market">种子商店</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a th:text="${loginuserHome.plateUser.cUsername}"></a></li>
+                        <!--<li><a th:text="${loginuserHome.plateUser.cUsername}"></a></li>-->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -80,46 +82,51 @@
 
     <!--点赞排行榜-->
     <div id="goldList" class="container-fluid mr-top-50">
-        <div class="row">
-            <div class="col-md-offset-4 col-md-4">
-                <h3 class="text-center">金币点赞排行榜</h3>
-            </div>
-            <div class="col-md-4"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-offset-4 col-md-4">
-                <div class="btnLikeBox">
-                    <span class="glyphicon glyphicon-thumbs-up" id="btnLike"></span>
-                    <span id="jsGold">-50</span>
+        <div class="goldListWrap">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-center goldListTitle">金币点赞排行榜</h3>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <div class="btnLikeBox">
+                        <span class="glyphicon glyphicon-thumbs-up" id="btnLike"></span>
+                        <span id="jsGold">-50</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row goldDzRankTitle">
+                <div class="col-md-4 col-xs-3">排名</div>
+                <div class="col-md-4 col-xs-4">用户</div>
+                <div class="col-md-4 col-xs-5">点赞数</div>
+            </div>
+            <div class="row goldDzRankContent" th:each="tGreenGoldDzhzList,tGreenGoldDzhzStatu : ${loginuserHome.tGreenGoldDzhzList}">
+                <div class="col-md-4 col-xs-3" th:text=${tGreenGoldDzhzStatu.index+1}></div>
+                <div class="col-md-4 col-xs-4" th:text="${tGreenGoldDzhzList.cUsername}"></div>
+                <div class="col-md-4 col-xs-5" th:text="${tGreenGoldDzhzList.nDzzl}"></div>
+            </div>
         </div>
-        <table class="table text-center goldTbl">
-            <tr class="bg-success">
-                <td><strong>排名</strong></td>
-                <td><strong>姓名</strong></td>
-                <td><strong>点赞总量</strong></td>
-            </tr>
-            <tr th:each="tGreenGoldDzhzList,tGreenGoldDzhzStatu : ${loginuserHome.tGreenGoldDzhzList}">
-                <td th:text=${tGreenGoldDzhzStatu.index+1}>1</td>
-                <td th:text="${tGreenGoldDzhzList.cUsername}"></td>
-                <td th:text="${tGreenGoldDzhzList.nDzzl}"></td>
-            </tr>
-        </table>
     </div>
 
-    <!--能量排行榜-->
+
+    <!--点赞排行榜-->
     <div id="rankList" class="container-fluid mr-top-50">
-        <div class="row">
-            <div class="col-md-offset-4 col-md-4">
-                <h3 class="text-center">能量排行榜</h3>
+        <div class="goldListWrap">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-center goldListTitle">能量排行榜</h3>
+                </div>
             </div>
-            <div class="col-md-4"></div>
-        </div>
-        <div class="row" th:each="tGreenNlNlhz : ${loginuserHome.tGreenNlNlhzList}">
-            <div class="col-md-offset-2 col-sm-offset-1 col-xs-offset-1 col-md-9 col-sm-10 col-xs-10 rankListBg">
-                <span class="glyphicon glyphicon-tree-conifer" th:text=${tGreenNlNlhz.cUsername}></span>
-                <span th:text="${tGreenNlNlhz.nNlhz}+'KG'"></span>
+            <div class="row goldDzRankTitle">
+                <div class="col-md-4 col-xs-3">排名</div>
+                <div class="col-md-4 col-xs-4">用户</div>
+                <div class="col-md-4 col-xs-5">能量总量</div>
+            </div>
+            <div class="row goldDzRankContent" th:each="tGreenNlNlhz,tGreenNlNlhzStatu : ${loginuserHome.tGreenNlNlhzList}">
+                <div class="col-md-4 col-xs-3" th:text=${tGreenNlNlhzStatu.index+1}></div>
+                <div class="col-md-4 col-xs-4" th:text=${tGreenNlNlhz.cUsername}></div>
+                <div class="col-md-4 col-xs-5" th:text="${tGreenNlNlhz.nNlhz}+'KG'"></div>
             </div>
         </div>
     </div>
@@ -136,7 +143,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4" th:each="tGreenSpSpmxList : ${loginuserHome.tGreenSpSpmxList}">
+                <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-4" th:each="tGreenSpSpmxList : ${loginuserHome.tGreenSpSpmxList}">
                     <div class="single-package">
                         <div class="package-image">
                             <a href="#"><img src="/publicImg/system/1.jpg" alt=""></a>
@@ -144,7 +151,7 @@
                         <div class="package-content">
                             <h3><a href="" title="" id="cSpmc" th:text=${tGreenSpSpmxList.cSpmc}></a></h3>
                             <p id="cSpms" th:text=${tGreenSpSpmxList.cSpms}> </p>
-                            <span id="nSpjg" th:text="'$'+${tGreenSpSpmxList.nSpjg}"></span>
+                            <span id="nSpjg" th:text="'￥'+${tGreenSpSpmxList.nSpjg}"></span>
                         </div>
                         <div class="package-calto-action">
                             <ul class="ct-action">
