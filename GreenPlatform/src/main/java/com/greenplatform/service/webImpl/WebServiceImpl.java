@@ -327,6 +327,7 @@ public class WebServiceImpl implements WebService {
                 TGreenSpSpmxExample tGreenSpSpmxExample = new TGreenSpSpmxExample();
                 TGreenSpSpmxExample.Criteria criteriaTGreenSpSpmxExample = tGreenSpSpmxExample.createCriteria();
                 criteriaTGreenSpSpmxExample.andCZtEqualTo("1");
+                tGreenSpSpmxExample.setOrderByClause("n_spjg");
                 List tGreenSpSpmxList = tGreenSpSpmxMapper.selectByExample(tGreenSpSpmxExample);
                 loginUserHomeMap.put("tGreenSpSpmxList",tGreenSpSpmxList);
 
@@ -605,12 +606,12 @@ public class WebServiceImpl implements WebService {
             List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);
             System.out.println("连续完成基础任务："+tGreenRwRwmxList.size()+"天");
 
-            /**if (tGreenRwRwmxList.size() < dayOfMouth){
+            if (tGreenRwRwmxList.size() < dayOfMouth){
                 returnModel.setFlag(1);
                 returnModel.setMsg("操作失败，您还没有连续一个月完成基础任务！");
                 returnModel.setObject("");
                 return returnModel;
-            }*/
+            }
 
             //1.同一账户24小时内只能捐赠一种植物（需要调整判断是否是同一天）
             TGreenZzJzjlExample tGreenZzJzjlExample = new TGreenZzJzjlExample();

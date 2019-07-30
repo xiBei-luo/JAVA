@@ -138,7 +138,7 @@
             <div class="row">
                 <div class="col-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="single-package">
-                        <h2 class="text-center">种子商店</h2>
+                        <h3 class="text-center">种子商店</h3>
                     </div>
                 </div>
             </div>
@@ -146,12 +146,12 @@
                 <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-4" th:each="tGreenSpSpmxList : ${loginuserHome.tGreenSpSpmxList}">
                     <div class="single-package">
                         <div class="package-image">
-                            <a href="#"><img src="/publicImg/system/1.jpg" alt=""></a>
+                            <a href="#"><img th:attr="src = ${tGreenSpSpmxList.cImgurl}" alt=""></a>
                         </div>
                         <div class="package-content">
                             <h3><a href="" title="" id="cSpmc" th:text=${tGreenSpSpmxList.cSpmc}></a></h3>
-                            <p id="cSpms" th:text=${tGreenSpSpmxList.cSpms}> </p>
                             <span id="nSpjg" th:text="'￥'+${tGreenSpSpmxList.nSpjg}"></span>
+                            <p id="cSpms" th:attr="title = ${tGreenSpSpmxList.cSpms}" th:text=${tGreenSpSpmxList.cSpms}> </p>
                         </div>
                         <div class="package-calto-action">
                             <ul class="ct-action">
@@ -166,21 +166,10 @@
 
 
     <footer class="container-fluid indexFooter">
-        <ul>
-            <li><a href="">12</a></li>
-            <li><a href="">12</a></li>
-            <li><a href="">12</a></li>
-            <li><a href="">12</a></li>
-            <li><a href="">12</a></li>
-            <li><a href="">12</a></li>
-            <li><a href="">12</a></li>
-            <li><a href="">12</a></li>
-            <li><a href="">12</a></li>
-            <li><a href="">12</a></li>
-        </ul>
+        @copyright 版权所有，绿沙平台
     </footer>
-    <div id="returnTop">
-        <span class="glyphicon glyphicon-chevron-up"></span>
+    <div class="sidebar-returnTop">
+        <span id="returnTop" class="glyphicon glyphicon-chevron-up"></span>
     </div>
 
     <!-- myAccountModel -->

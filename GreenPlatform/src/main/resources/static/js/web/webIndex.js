@@ -7,6 +7,10 @@ function initEvent() {
         window.location.reload()
     });
 
+    $("#returnTop").click(function(){
+        $('body,html').animate({scrollTop:0},300)
+    });
+
     $("#myAccount").click(function(){
         f_selectLoginuserAccount();
         $("#myAccountModel").modal('show');

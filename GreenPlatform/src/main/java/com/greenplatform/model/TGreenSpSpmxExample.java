@@ -536,6 +536,76 @@ public class TGreenSpSpmxExample {
             return (Criteria) this;
         }
 
+        public Criteria andCImgurlIsNull() {
+            addCriterion("c_imgurl is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlIsNotNull() {
+            addCriterion("c_imgurl is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlEqualTo(String value) {
+            addCriterion("c_imgurl =", value, "cImgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlNotEqualTo(String value) {
+            addCriterion("c_imgurl <>", value, "cImgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlGreaterThan(String value) {
+            addCriterion("c_imgurl >", value, "cImgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlGreaterThanOrEqualTo(String value) {
+            addCriterion("c_imgurl >=", value, "cImgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlLessThan(String value) {
+            addCriterion("c_imgurl <", value, "cImgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlLessThanOrEqualTo(String value) {
+            addCriterion("c_imgurl <=", value, "cImgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlLike(String value) {
+            addCriterion("c_imgurl like", value, "cImgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlNotLike(String value) {
+            addCriterion("c_imgurl not like", value, "cImgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlIn(List<String> values) {
+            addCriterion("c_imgurl in", values, "cImgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlNotIn(List<String> values) {
+            addCriterion("c_imgurl not in", values, "cImgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlBetween(String value1, String value2) {
+            addCriterion("c_imgurl between", value1, value2, "cImgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andCImgurlNotBetween(String value1, String value2) {
+            addCriterion("c_imgurl not between", value1, value2, "cImgurl");
+            return (Criteria) this;
+        }
+
         public Criteria andCBzIsNull() {
             addCriterion("c_bz is null");
             return (Criteria) this;

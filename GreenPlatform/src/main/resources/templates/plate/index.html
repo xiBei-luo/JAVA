@@ -32,7 +32,7 @@
                     <div class="navbar-default sidebar" role="navigation">
                         <div class="sidebar-nav">
                             <ul class="nav" id="side-menu">
-                                <li>
+                                <li th:if="${loginuserYwqxMap['permissionFlMap']['C_YWGN']} == true">
                                     <a href="#" class="first-level"><i class="fa fa-laptop nav_icon"></i>业务功能<span class="fa fa-chevron-right"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li th:each="plateYwLxMenuList : ${loginuserYwqxMap['plateYwLxMenuList']}" th:if="${plateYwLxMenuList['cYwlxdm']} == 'C_YWGN'">
@@ -40,7 +40,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li>
+                                <li th:if="${loginuserYwqxMap['permissionFlMap']['C_PLATE']} == true">
                                     <a href="#" class="first-level"><i class="fa fa-indent nav_icon"></i>系统配置<span class="fa fa-chevron-right"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li th:each="plateYwLxMenuList : ${loginuserYwqxMap['plateYwLxMenuList']}" th:if="${plateYwLxMenuList['cYwlxdm']} == 'C_PLATE'">

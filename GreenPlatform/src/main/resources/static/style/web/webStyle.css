@@ -188,7 +188,7 @@ header{
 }
 .btnLikeBox{
     text-align: center;
-    margin: 10px 0;
+    margin: 0px 0 10px;
     position: relative;
 }
 #btnLike{
@@ -223,7 +223,7 @@ header{
 }
 /*能量排行榜end*/
 
-#returnTop{
+.sidebar-returnTop{
     position: fixed;
     right:0;
     bottom:0;
@@ -231,14 +231,14 @@ header{
     height: 50px;
     background: #5cb85c;
 }
-#returnTop span{
+.sidebar-returnTop span{
     font-size: 22px;
     color: #ffffff;
     line-height: 50px;
     padding-left: 13px;
 }
 .indexFooter{
-    height: 300px;
+    height: 30px;
     background: #737373;
     color: #ffffff;
 }
@@ -246,7 +246,7 @@ header{
 /*种子商店begin*/
 .popular-packages {
     background: #ffffff;
-    padding: 100px 0 50px;
+    padding: 50px 0;
 }
 .popular-packages .single-package {
     margin-bottom: 30px;
@@ -284,7 +284,10 @@ header{
     transition: all ease-in-out 0.3s;
 }
 .popular-packages .single-package .package-content {
-    padding: 20px;
+    padding: 10px;
+}
+.popular-packages .single-package .package-content h3{
+    display: inline-block;
 }
 .popular-packages .single-package .package-content h3 a {
     font-weight: 600;
@@ -298,15 +301,21 @@ header{
 }
 .popular-packages .single-package .package-content p {
     color: #727272;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
-    display: inline;
+    width:100%;
+    height: 60px;
+    /*word-break:keep-all; 不换行 */
+    /*white-space:nowrap; 不换行 */
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
 }
 .popular-packages .single-package .package-content #nSpjg {
-    color: #37b721;
+    background: #37b721;
+    padding:2px 6px;
+    border-radius: 5px;
+    color: #ffffff;
     font-weight: 600;
-    display: inline-block;
-    float: right;
 }
 .popular-packages .single-package .package-calto-action {
     padding: 0 20px 25px 0px;
@@ -323,6 +332,7 @@ header{
     align-items: center;
 }
 .popular-packages .single-package .package-calto-action .ct-action li:first-child a {
+    cursor: pointer;
     -webkit-transition: all ease-in-out 0.5s;
     transition: all ease-in-out 0.5s;
     overflow: hidden;
@@ -339,5 +349,44 @@ header{
     list-style: none;
 }
 /*种子商店end*/
+
+
+/*终端尺寸适配*/
+@media screen and (max-width: 800px) {
+    /*排行榜*/
+    .goldListWrap{
+        width: 98%;
+    }
+    .goldListTitle{
+        font-size: 18px;
+    }
+    #btnLike{
+        font-size: 22px;
+    }
+    .goldDzRankTitle,.goldDzRankContent {
+        width: 90%;
+        font-size: 14px;
+    }
+    .goldDzRankContent{
+        font-size: 12px;
+    }
+
+    /*种子商店*/
+    #market #cSpmc{
+        font-size: 18px;
+    }
+    #market #cSpms{
+        height: 50px;
+        font-size: 12px;
+    }
+    #market #nSpjg{
+        font-size: 10px;
+    }
+    #market .ct-action a{
+        font-size: 12px;
+    }
+
+
+}
 
 

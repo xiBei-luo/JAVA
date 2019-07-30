@@ -38,10 +38,10 @@ function initGrid(){
     $("#gridbox").attr({width:"100%",height:"100%"});
     grid = new dhtmlXGridObject('gridbox');
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
-    grid.setHeader("操作,商品名称,商品描述,商品价格,商品单位,状态");
-    grid.setInitWidthsP("15,10,40,15,10,9.5");
-    grid.setColAlign("center,center,center,center,center,center");
-    grid.setColTypes("ro,ro,ro,ro,ro,ro");
+    grid.setHeader("操作,商品名称,商品描述,商品价格,商品单位,图片地址,状态");
+    grid.setInitWidthsP("12,10,30,8,10,20,8.5");
+    grid.setColAlign("center,left,left,right,left,left,center");
+    grid.setColTypes("ro,ro,ro,ro,ro,ro,ro");
     grid.enableMultiselect(false);
     grid.init();
 }
@@ -94,7 +94,8 @@ function initData(data){
             data[i].cSpms,
             data[i].nSpjg,
             data[i].cSpdw,
-            data[i].cZt
+            data[i].cImgurl,
+            data[i].cZt == '1' ? '有效' : '无效'
         ]);
         grid.setUserData(data[i].cSpbh,'data',data[i]);
     }

@@ -20,6 +20,12 @@ function _init(args, mdi, layerIdx, parentWindow) {
 
 
     function initEvent() {
+        if (args){
+            initBaseCodeSelect($("#cZt"),{cDmlb:"C_JC_ZT"},args.cZt,"---请选择状态---");
+        } else{
+            initBaseCodeSelect($("#cZt"),{cDmlb:"C_JC_ZT"},null,"---请选择状态---");
+        }
+
         $("#btnSave").click(function () {
             var bPass = bPass = requiredFieldCheck($("label .require"), top, function(){});
             if (!bPass) {
@@ -47,16 +53,18 @@ function _init(args, mdi, layerIdx, parentWindow) {
             sendRequest.addParamObj({
                 "cSpmc": $("#cSpmc").val(),
                 "nSpjg": $("#nSpjg").val(),
+                "cImgurl": $("#cImgurl").val(),
                 "cSpms": $("#cSpms").val(),
-                "cZt": '1'
+                "cZt"  : $("#cZt").val()
             });//构造请求参数
         } else if ("1" === type) {
             sendRequest.addParamObj({
                 "cSpbh": args.cSpbh,
                 "cSpmc": $("#cSpmc").val(),
                 "nSpjg": $("#nSpjg").val(),
+                "cImgurl": $("#cImgurl").val(),
                 "cSpms": $("#cSpms").val(),
-                "cZt": '1'
+                "cZt"  : $("#cZt").val()
             });//构造请求参数
         } else if ("2" === type) {
             sendRequest.addParamObj({

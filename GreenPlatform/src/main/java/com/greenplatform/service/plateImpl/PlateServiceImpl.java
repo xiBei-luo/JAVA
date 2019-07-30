@@ -551,6 +551,10 @@ public class PlateServiceImpl implements PlateService {
         Map loginuserYwqxMap = new HashMap();
 
         try{
+            Map permissionFlMap = new HashMap();//具备哪些类型的权限（系统应用/业务应用）
+            permissionFlMap.put("C_YWGN",false);
+            permissionFlMap.put("C_PLATE",false);
+
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
             PlateUserRoleMidExample plateUserRoleMidExample = new PlateUserRoleMidExample();
             PlateUserRoleMidExample.Criteria criteria = plateUserRoleMidExample.createCriteria();
@@ -570,10 +574,10 @@ public class PlateServiceImpl implements PlateService {
                 List plateYwLxMenuList = new ArrayList();
                 for (int j = 0;j < plateUserPermissionmenuList.size();j++){
                     Map plateYwLxMenuMap = new HashMap();
-                    PlateUserPermission lateUserPermission = (PlateUserPermission) plateUserPermissionmenuList.get(j);
+                    PlateUserPermission plateUserPermission = (PlateUserPermission) plateUserPermissionmenuList.get(j);
                     PlateYwLxMenuExample plateYwLxMenuExample = new PlateYwLxMenuExample();
                     PlateYwLxMenuExample.Criteria criteria2 = plateYwLxMenuExample.createCriteria();
-                    criteria2.andCMenudmEqualTo(lateUserPermission.getcMenudm());
+                    criteria2.andCMenudmEqualTo(plateUserPermission.getcMenudm());
                     criteria2.andCZtEqualTo("1");
                     List plateYwLxMenuListTmp = plateYwLxMenuMapper.selectByExample(plateYwLxMenuExample);
                     if (plateYwLxMenuListTmp.size() > 0){
@@ -586,9 +590,19 @@ public class PlateServiceImpl implements PlateService {
                         plateYwLxMenuMap.put("cZt",plateYwLxMenu.getcZt());
                         plateYwLxMenuList.add(plateYwLxMenuMap);
                     }
+
+                    if ("C_YWGN".equals(plateUserPermission.getcYwlxdm())){
+                        permissionFlMap.put("C_YWGN",true);
+                    }
+
+                    if ("C_PLATE".equals(plateUserPermission.getcYwlxdm())){
+                        permissionFlMap.put("C_PLATE",true);
+                    }
+
                 }
                 loginuserYwqxMap.put("plateYwLxMenuList",plateYwLxMenuList);
             }
+            loginuserYwqxMap.put("permissionFlMap",permissionFlMap);
             System.out.println(loginuserYwqxMap);
             returnModel.setFlag(0);
             returnModel.setMsg("");
@@ -608,11 +622,14 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel selectTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx) {
         List tGreenSpmxList;
         try {
-            tGreenSpmxList = tGreenSpSpmxMapper.selectByExample(new TGreenSpSpmxExample());
+            TGreenSpSpmxExample tGreenSpSpmxExample = new TGreenSpSpmxExample();
+            tGreenSpSpmxExample.setOrderByClause("n_spjg");
+            tGreenSpmxList = tGreenSpSpmxMapper.selectByExample(tGreenSpSpmxExample);
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(tGreenSpmxList);
         }catch (Exception e){
+            e.printStackTrace();
             returnModel.setFlag(1);
             returnModel.setMsg("查询出错，系统错误！");
             returnModel.setObject(null);
@@ -711,6 +728,7 @@ public class PlateServiceImpl implements PlateService {
                 tGreenSpSpmx1.setcSpmc(tGreenSpSpmx.getcSpmc());
                 tGreenSpSpmx1.setnSpjg(tGreenSpSpmx.getnSpjg());
                 tGreenSpSpmx1.setcSpms(tGreenSpSpmx.getcSpms());
+                tGreenSpSpmx1.setcImgurl(tGreenSpSpmx.getcImgurl());
                 tGreenSpSpmx1.setdXgsj(TimeUtil.getTimestamp(new Date()));
                 tGreenSpSpmx1.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
                 tGreenSpSpmxMapper.updateByPrimaryKey(tGreenSpSpmx1);
