@@ -24,19 +24,17 @@
                     </div>
                     <div class="panel-body">
                         <div class="form-horizontal" id="loginForm">
-                            <div class="form-group">
-                                <label for="cLoginname" class="control-label"></label>
+                            <div class="row">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control input-lg" id="cLoginname" name="cLoginname" placeholder="登录名/手机号码">
+                                    <input type="text" class="form-control input-lg" id="cLoginname" name="cLoginname" placeholder="请输入用户名">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="cPassword" class="control-label"></label>
+                            <div class="row">
                                 <div class="col-sm-12">
                                     <input type="password" class="form-control input-lg" id="cPassword" name="cPassword" placeholder="请输入登陆密码">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="row">
                                 <label class="radio-inline">
                                     <div class="col-sm-12">
                                         <input type="radio" name="cRylb" id="cRylb_2" value="2" checked> 平台用户
@@ -48,15 +46,17 @@
                                     </div>
                                 </label>
                             </div>
-                            <div class="form-group">
+                            <div class="row">
                                 <div class="col-sm-12">
                                     <button type="button" class="btn btn-block btn-lg btn-primary" id="btnLogin">登陆</button>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="row">
                                 <div class="col-sm-12">
-                                    <a href="#">忘记密码</a>
-                                    <a href="register">免费注册</a>
+                                    <a href="/base/register">免费注册</a>
+                                    <a href="/base/getBackPassword">忘记密码</a>
+                                    <a href="/base/loginByPhone">手机验证码登陆</a>
+                                    <a href="/base/loginByWx">微信扫码登陆</a>
                                 </div>
                             </div>
                         </div>

@@ -91,28 +91,20 @@ public class LoginServiceImpl implements LoginService {
             List plateUserList;
             PlateUser plateUser1 = new PlateUser();
             //1.判断邮箱或用户名是否被注册
-            PlateUserExample plateUserExample = new PlateUserExample();
-            PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
-            criteria.andCRylbEqualTo(plateUser.getcRylb());
-            criteria.andCEmailEqualTo(plateUser.getcEmail());
-
-            plateUserList = plateUserMapper.selectByExample(plateUserExample);
-            if (!(plateUserList.isEmpty())){
+            if (false == checkUser("phone",plateUser.getcPhone())){
                 returnModel.setFlag(1);
                 returnModel.setObject(null);
                 returnModel.setMsg("注册失败，邮箱已经被注册!");
                 return returnModel;
             }
-            //2.判断用户名是否被注册
-            PlateUserExample plateUserExample1 = new PlateUserExample();
-            plateUserExample1.createCriteria().andCLoginnameEqualTo(plateUser.getcLoginname());
-            plateUserList = plateUserMapper.selectByExample(plateUserExample1);
-            if (!(plateUserList.isEmpty())){
+
+            if (false == checkUser("loginname",plateUser.getcLoginname())){
                 returnModel.setFlag(1);
                 returnModel.setObject(null);
                 returnModel.setMsg("注册失败，用户名已经被注册!");
                 return returnModel;
             }
+
             //3.注册用户
             String majorKey = UUID.randomUUID().toString().replaceAll("-", "");
             plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
@@ -178,6 +170,36 @@ public class LoginServiceImpl implements LoginService {
         }
     }
 
+    /**
+     * 验证用户是否有重复
+     * @param type 验证类型（phone手机号码，email邮箱，loginname登录名）
+     * @param value
+     * @return  false未通过，true通过
+     */
+    @Override
+    public boolean checkUser(String type,String value){
+        PlateUserExample plateUserExample = new PlateUserExample();
+        PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
+        criteria.andCZtEqualTo("1");
+        criteria.andCRylbEqualTo("2");
+        criteria.andCRyztEqualTo("1");
+        criteria.andCRyxzEqualTo("1");
+        if ("phone".equals(type)){
+            criteria.andCPhoneEqualTo(value);
+        }else if ("email".equals(type)){
+            criteria.andCEmailEqualTo(value);
+        }else if("loginname".equals(type)){
+            criteria.andCLoginnameEqualTo(value);
+        }
+        List plateUserList = plateUserMapper.selectByExample(plateUserExample);
+
+
+        if (!(plateUserList.isEmpty())){
+            return false;
+        }else {
+            return true;
+        }
+    }
 
 
 

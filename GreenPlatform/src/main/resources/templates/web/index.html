@@ -52,30 +52,47 @@
 
         <!--任务-->
         <div class="container-fluid mission" id="mission">
-            <div class="row"></div>
-            <div class="row" th:style="${loginuserHome.tGreenRwRwmx['1']} == true ? 'display: none':''">
-                <div class="col-md-5 col-sm-4 col-xs-3"></div>
-                <div class="col-md-1 col-sm-1 col-xs-3 mission-sf">
+            <!--<div class="mission-sf" th:style="${loginuserHome.tGreenRwRwmx['1']} == true ? 'display: none':''">
+                <a class="rwlb_1" id="finishMisson_sf" value="1">
+                    <img src="/publicImg/icon/sf.png" id="sf" class="center-block" alt="">
+                </a>
+            </div>
+            <div class="mission-js" th:style="${loginuserHome.tGreenRwRwmx['2']} == true ? 'display: none':''">
+                <a class="rwlb_2" id="finishMisson_js" value="2">
+                    <img src="/publicImg/icon/js.png" id="js" class="center-block" alt="">
+                </a>
+            </div>
+            <div class="mission-yg" th:style="${loginuserHome.tGreenRwRwmx['3']} == true ? 'display: none':''">
+                <a class="rwlb_3" id="finishMisson_yg" value="3">
+                    <img src="/publicImg/icon/yg.png" id="yg" class="center-block" alt="">
+                </a>
+            </div>
+            <div class="tree">
+                <span class="glyphicon glyphicon-tree-conifer"></span>
+            </div>-->
+            <div th:style="${loginuserHome.tGreenRwRwmx['1']} == true ? 'display: none':''">
+                <div class="mission-sf">
                     <a class="rwlb_1" id="finishMisson_sf" value="1">
                         <img src="/publicImg/icon/sf.png" id="sf" class="center-block" alt="">
                     </a>
                 </div>
             </div>
-            <div class="row" th:style="${loginuserHome.tGreenRwRwmx['2']} == true ? 'display: none':''">
-                <div class="col-md-7 col-sm-6 col-xs-6"></div>
-                <div class="col-md-1 col-sm-1 col-xs-3 mission-js">
+            <div th:style="${loginuserHome.tGreenRwRwmx['2']} == true ? 'display: none':''">
+                <div class="mission-js">
                     <a class="rwlb_2" id="finishMisson_js" value="2">
                         <img src="/publicImg/icon/js.png" id="js" class="center-block" alt="">
                     </a>
                 </div>
             </div>
-            <div class="row" th:style="${loginuserHome.tGreenRwRwmx['3']} == true ? 'display: none':''">
-                <div class="col-md-4 col-sm-5 col-xs-2"></div>
-                <div class="col-md-1 col-sm-1 col-xs-3 mission-yg">
+            <div th:style="${loginuserHome.tGreenRwRwmx['3']} == true ? 'display: none':''">
+                <div class="mission-yg">
                     <a class="rwlb_3" id="finishMisson_yg" value="3">
                         <img src="/publicImg/icon/yg.png" id="yg" class="center-block" alt="">
                     </a>
                 </div>
+            </div>
+            <div class="tree">
+                <span class="glyphicon glyphicon-tree-conifer"></span>
             </div>
         </div>
     </header>
@@ -102,7 +119,7 @@
                 <div class="col-md-4 col-xs-5">点赞数</div>
             </div>
             <div class="row goldDzRankContent" th:each="tGreenGoldDzhzList,tGreenGoldDzhzStatu : ${loginuserHome.tGreenGoldDzhzList}">
-                <div class="col-md-4 col-xs-3" th:text=${tGreenGoldDzhzStatu.index+1}></div>
+                <div class="col-md-4 col-xs-3" th:text=${tGreenGoldDzhzStatu.index+1} th:attr="id = 'goldDzRankContent_'+${tGreenGoldDzhzStatu.index+1}"></div>
                 <div class="col-md-4 col-xs-4" th:text="${tGreenGoldDzhzList.cUsername}"></div>
                 <div class="col-md-4 col-xs-5" th:text="${tGreenGoldDzhzList.nDzzl}"></div>
             </div>
@@ -124,7 +141,7 @@
                 <div class="col-md-4 col-xs-5">能量总量</div>
             </div>
             <div class="row goldDzRankContent" th:each="tGreenNlNlhz,tGreenNlNlhzStatu : ${loginuserHome.tGreenNlNlhzList}">
-                <div class="col-md-4 col-xs-3" th:text=${tGreenNlNlhzStatu.index+1}></div>
+                <div class="col-md-4 col-xs-3" th:text=${tGreenNlNlhzStatu.index+1} th:attr="id = 'goldDzRankContent_'+${tGreenNlNlhzStatu.index+1}"></div>
                 <div class="col-md-4 col-xs-4" th:text=${tGreenNlNlhz.cUsername}></div>
                 <div class="col-md-4 col-xs-5" th:text="${tGreenNlNlhz.nNlhz}+'KG'"></div>
             </div>

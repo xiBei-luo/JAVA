@@ -2,6 +2,7 @@
 header{
     width: 100%;
     background: url("../../publicImg/systemBg.jpg");
+    background-repeat: no-repeat;
     background-size: 1368px 500px;
     overflow-x: hidden;
 }
@@ -24,5 +25,28 @@ header{
 .loginHeader{
     height:100%;
 }
+#registerForm .row,#loginForm .row{
+    margin-top: 10px;
+}
 
+/*注册*/
+#getVerificationCode{
+    font-size: 14px;
+    padding: auto 2px;
+}
+.cVerification{
+    display: none;
+}
+
+
+/*终端尺寸适配*/
+@media screen and (max-width: 800px) {
+    #registerForm .row{
+        height: 50px;
+        margin-bottom: 0;
+        margin-top: 5px;
+    }
+
+
+}
 

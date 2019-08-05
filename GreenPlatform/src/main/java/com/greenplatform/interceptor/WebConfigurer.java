@@ -32,6 +32,11 @@ public class WebConfigurer implements WebMvcConfigurer {
         exclude.add("/base/register");
         exclude.add("/login/login");
         exclude.add("/login/register");
+        exclude.add("/login/getVerificationCode");
+        exclude.add("/base/loginByPhone");
+        exclude.add("/base/getBackPassword");
+        exclude.add("/base/loginByWx");
+        exclude.add("/base/registerByWx");
 
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(exclude);
     }

@@ -39,9 +39,10 @@ header{
 }
 /*banner begind*/
 #smallTitle{
+    font-family: 方正舒体;
     background: #3e8f3e;
-    padding: 5px 8px;
-    font-size: 12px;
+    padding: 3px 8px;
+    font-size: 14px;
     margin-left: 105px;
     border-radius: 5px;
     color: #ffffff;
@@ -75,20 +76,24 @@ header{
 /*banner下的三个任务begin*/
 .mission{
     margin-top:100px;
+    position: relative;
 }
-.mission-js{
+.mission-js,.mission-sf,.mission-yg{
+    width: 100px;
+    height: 100px;
     position: relative;
     animation:mymove 2s infinite;
+}
+.mission-js{
+    margin-left: 30%;
     -webkit-animation:jsMove 2s infinite; /*Safari and Chrome*/
 }
 .mission-sf{
-    position: relative;
-    animation:mymove 2s infinite;
+    margin-left: 50%;
     -webkit-animation:sfMove 2s infinite; /*Safari and Chrome*/
 }
 .mission-yg{
-    position: relative;
-    animation:mymove 2s infinite;
+    margin-left: 60%;
     -webkit-animation:ygMove 2s infinite; /*Safari and Chrome*/
 }
 @keyframes jsMove
@@ -133,11 +138,10 @@ header{
 .mission img{
     width: 100%;
     height: 100%;
-    background-position: center ;
+    background-position: center;
     border:2px solid;
     border-radius: 50%;
     padding:10px;
-    margin-top: 10%;
 }
 #js{
     border-color: #2b542c;
@@ -150,6 +154,14 @@ header{
 #yg{
     border-color: #e38d13;
     background: #f5e79e;
+}
+
+.tree span{
+    position: absolute;
+    left: 48%;
+    font-size: 90px;
+    color: #419641;
+    top: 200px;
 }
 /*banner下的三个任务end*/
 
@@ -220,6 +232,21 @@ header{
 #rankList .row .rankListBg span:nth-child(2){
     position: absolute;
     right: 20px;
+}
+#goldDzRankContent_1{
+    background: url("../../publicImg/ranklist/first.png") no-repeat;
+    background-size: 40px 40px;
+    background-position: center;
+}
+#goldDzRankContent_2{
+    background: url("../../publicImg/ranklist/second.png") no-repeat;
+    background-size: 40px 40px;
+    background-position: center;
+}
+#goldDzRankContent_3{
+    background: url("../../publicImg/ranklist/third.png") no-repeat;
+    background-size: 40px 40px;
+    background-position: center;
 }
 /*能量排行榜end*/
 
@@ -353,6 +380,10 @@ header{
 
 /*终端尺寸适配*/
 @media screen and (max-width: 800px) {
+    /*header{*/
+    /*    background: url("../../publicImg/telBg.jpg");*/
+    /*}*/
+
     /*排行榜*/
     .goldListWrap{
         width: 98%;

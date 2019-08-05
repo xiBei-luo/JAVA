@@ -152,6 +152,22 @@ public class BaseController {
     public String register() {
         return "login/register";
     }
+    @GetMapping(value = "/loginByPhone")
+    public String loginByPhone() {
+        return "login/loginByPhone";
+    }
+    @GetMapping(value = "/getBackPassword")
+    public String getBackPassword() {
+        return "login/getBackPassword";
+    }
+    @GetMapping(value = "/loginByWx")
+    public String loginByWx() {
+        return "login/loginByWx";
+    }
+    @GetMapping(value = "/registerByWx")
+    public String registerByWx() {
+        return "login/registerByWx";
+    }
     @GetMapping(value = "/history")
     public String history(String type){
         return "web/history";

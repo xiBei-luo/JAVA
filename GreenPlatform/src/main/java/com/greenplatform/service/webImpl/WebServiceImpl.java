@@ -895,7 +895,7 @@ public class WebServiceImpl implements WebService {
     }
 
     /**
-     * 仅限于能量值字段不为空的查询
+     * 仅限于代码值字段不为空的查询
      * @param cDm
      * @return
      */
@@ -910,7 +910,7 @@ public class WebServiceImpl implements WebService {
     }
 
     /**
-     * 仅限于能量值字段不为空的查询
+     * 仅限于代码值字段不为空的查询
      * @param cDm
      * @return
      */
