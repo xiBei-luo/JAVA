@@ -30,13 +30,15 @@ public class WebConfigurer implements WebMvcConfigurer {
         //登录页与注册页
         exclude.add("/base/login");
         exclude.add("/base/register");
-        exclude.add("/login/login");
-        exclude.add("/login/register");
-        exclude.add("/login/getVerificationCode");
         exclude.add("/base/loginByPhone");
         exclude.add("/base/getBackPassword");
+        exclude.add("/base/doGetBackPassword");
         exclude.add("/base/loginByWx");
         exclude.add("/base/registerByWx");
+        exclude.add("/base/tipPage");
+
+        exclude.add("/checkForm/**");
+        exclude.add("/login/**");
 
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(exclude);
     }

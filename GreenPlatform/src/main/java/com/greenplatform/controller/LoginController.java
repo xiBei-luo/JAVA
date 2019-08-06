@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/login")
@@ -33,55 +35,8 @@ public class LoginController {
 
     @PostMapping(value = "/register")
     public ReturnModel register(@RequestBody String jsonObject, HttpSession session){
-        ReturnModel returnModel = new ReturnModel();
-        JSONObject jsonParams = JSONObject.fromObject(jsonObject);
-        JSONObject jsonSessionParams = JSONObject.fromObject(session.getAttribute("smsCodeObj"));
-        System.out.println(jsonParams);
-        System.out.println(jsonSessionParams);
 
-        String sessionSmsCode = jsonSessionParams.getString("smsCode");//session域中的验证码
-        String smsCode = jsonParams.getString("smsCode");//传入的验证码
-
-        System.out.println("页面传入的code"+smsCode);
-        System.out.println("session中的code"+sessionSmsCode);
-
-        //验证：手机号码是否匹配
-        if (jsonParams.getString("cPhone").equals("")){
-            returnModel.setFlag(1);
-            returnModel.setMsg("手机号码不能为空！");
-            returnModel.setObject(null);
-            return returnModel;
-        }else{
-            if (!(jsonParams.getString("cPhone").equals(jsonSessionParams.getString("cPhone")))){
-                returnModel.setFlag(1);
-                returnModel.setMsg("当前手机号码与验证手机号码不一致");
-                returnModel.setObject(null);
-                return returnModel;
-            }else{
-                if(!(smsCode.equals(sessionSmsCode))){
-                    returnModel.setFlag(1);
-                    returnModel.setMsg("验证码错误！");
-                    returnModel.setObject(null);
-                    return returnModel;
-                }
-                if((System.currentTimeMillis() - jsonSessionParams.getLong("createTime")) > 1000 * 60 * 5){
-                    returnModel.setFlag(1);
-                    returnModel.setMsg("验证码已过期，请重新获取！");
-                    returnModel.setObject(null);
-                    return returnModel;
-                }
-            }
-
-        }
-
-        session.removeAttribute("smsCodeObj");
-        PlateUser plateUser = new PlateUser();
-        plateUser.setcZcfs("1");
-        plateUser.setcPhone(jsonParams.getString("cPhone"));
-        plateUser.setcLoginname(jsonParams.getString("cLoginname"));
-        plateUser.setcPassword(jsonParams.getString("cPassword"));
-        plateUser.setcRylb(jsonParams.getString("cRylb"));
-        returnModel = loginService.doRegister(plateUser,session);
+        ReturnModel returnModel = loginService.doRegister(jsonObject,session);
         return returnModel;
     }
 
@@ -96,18 +51,53 @@ public class LoginController {
     public ReturnModel getVerificationCode(PlateUser plateUser, HttpSession session){
         System.out.println(plateUser);
         ReturnModel returnModel = new ReturnModel();
-        if (false == loginService.checkUser("loginname",plateUser.getcLoginname())){
-            returnModel.setFlag(1);
-            returnModel.setMsg("用户名已经被注册");
-            returnModel.setObject(null);
-        }else if (false == loginService.checkUser("phone",plateUser.getcPhone())){
-            returnModel.setFlag(1);
-            returnModel.setMsg("手机号已经被注册");
-            returnModel.setObject(null);
-        }else{
-            returnModel = GetMessageCode.getCode(plateUser.getcPhone(),session);
-            System.out.println(session.getAttribute("smsCodeObj"));
-        }
+        returnModel = GetMessageCode.getCode(plateUser.getcPhone(),session);
+        System.out.println(session.getAttribute("smsCodeObj"));
         return returnModel;
     }
+
+
+    /**
+     * 验证手机验证码
+     * @param jsonObject
+     * @param session
+     * @return
+     */
+    @PostMapping(value = "/checkSmsCode")
+    public ReturnModel checkSmsCode(@RequestBody String jsonObject, HttpSession session){
+        JSONObject jsonParams = JSONObject.fromObject(jsonObject);
+        Map hashMap = new HashMap();
+        hashMap.put("cPhone",jsonParams.getString("cPhone"));
+        hashMap.put("smsCode",jsonParams.getString("smsCode"));
+        System.out.println("in controller params:"+jsonParams);
+        ReturnModel returnModel = loginService.checkSmsCode(hashMap,session);
+        System.out.println(returnModel);
+        return returnModel;
+    }
+
+    /**
+     * 修改账户密码
+     * @param jsonObject
+     * @param session
+     * @return
+     */
+    @PostMapping(value = "/retWebUserPassowrd")
+    public ReturnModel retWebUserPassowrd(@RequestBody String jsonObject, HttpSession session){
+        ReturnModel returnModel = loginService.retWebUserPassowrd(jsonObject,session);
+        System.out.println(returnModel);
+        return returnModel;
+    }
+
+
+    /**
+     * 手机验证码登陆
+     * @param jsonObject
+     * @param session
+     * @return
+     */
+    @PostMapping(value = "/loginByPhone")
+    public ReturnModel loginByPhone(@RequestBody String jsonObject, HttpSession session){
+        return loginService.loginByPhone(jsonObject,session);
+    }
+
 }

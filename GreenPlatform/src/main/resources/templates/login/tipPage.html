@@ -16,35 +16,24 @@
 <header class="loginHeader">
     <div class="container-fluid">
         <div class="row mr-top-50">
-            <div class="col-md-4"></div>
-            <div class="col-md-4 col-xs-12">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 col-xs-12">
                 <div class="panel panel-success">
                     <div class="panel-heading text-center">
-                        <b>手机验证码登陆</b>
+                        <b>等待跳转</b>
                     </div>
                     <div class="panel-body">
                         <div id="registerForm">
                             <div class="row">
-                                <div class="col-sm-8 col-xs-8">
-                                    <input type="text" class="form-control input-lg" id="cPhone" name="cPhone" placeholder="请输入电话号码">
-                                </div>
-                                <div class="col-sm-4 col-xs-4">
-                                    <input type="button" id="getVerificationCode" class="form-control input-lg btn-default" value="获取验证码" />
-                                </div>
-                            </div>
-                            <div class="row cVerification">
-                                <div class="col-sm-8 col-xs-8">
-                                    <input type="text" class="form-control input-lg" id="smsCode" name="smsCode" placeholder="请输入验证码">
+                                <div class="col-sm-12 col-xs-12">
+                                    <p>您的用户名为:  <strong class="text-danger">zhangsan  </strong><br>
+                                        重置密码成功，等待跳转至登陆页面，<strong class="text-danger" id="btnCountDown"></strong>
+                                    </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <button type="submit" id="btnLogin" class="btn btn-block btn-lg btn-primary">登陆</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <a href="./login">返回密码登陆</a>
+                                    <a href="./login">立即跳转</a>
                                 </div>
                             </div>
                         </div>
@@ -61,6 +50,6 @@
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrapValidator.min.js"></script>
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
 <script src="/publicJs/SendRequest.js"></script>
-<script src="/js/login/loginByPhone.js"></script>
+<script src="/js/login/tipPage.js"></script>
 </body>
 </html>

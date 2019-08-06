@@ -157,8 +157,13 @@ public class BaseController {
         return "login/loginByPhone";
     }
     @GetMapping(value = "/getBackPassword")
-    public String getBackPassword() {
+    public String getBackPassword(HttpSession session) {
+        session.removeAttribute("loginUser");
         return "login/getBackPassword";
+    }
+    @GetMapping(value = "/tipPage")
+    public String tipPage() {
+        return "login/tipPage";
     }
     @GetMapping(value = "/loginByWx")
     public String loginByWx() {

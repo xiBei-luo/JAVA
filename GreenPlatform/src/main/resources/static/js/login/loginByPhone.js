@@ -10,14 +10,7 @@ $(function () {
 
 function initEvent(){
 
-    $(document).keyup(function(event){
-        if(event.keyCode ==13){
-            $("#btnRegister").trigger("click");
-        }
-    });
-
     $("#getVerificationCode").click(function () {
-        //checkRegister();
         $("#registerForm").bootstrapValidator('validate');//提交验证
         if ($("#registerForm").data('bootstrapValidator').isValid()) {
             //调用短信接口发送验证码
@@ -26,43 +19,41 @@ function initEvent(){
 
     });
 
-    $("#btnRegister").click(function(){
-        //checkRegister();
+    $("#cPhone").blur(function () {
+        $("#getVerificationCode").attr("disabled",true);
+        setTimeout(f_controlGetSmsBtn,2000);
+    });
+
+    $("#btnLogin").click(function(){
         $("#registerForm").bootstrapValidator('validate');//提交验证
         if ($("#registerForm").data('bootstrapValidator').isValid()) {
-            if ($("#btnAgreeRule").prop("checked")) {
-                if (smsCodeFlag){
-                    f_submitData();
-                }else{
-                    BootstrapDialog.alert({
-                        type: BootstrapDialog.TYPE_WARNING,
-                        size: BootstrapDialog.SIZE_SMALL,
-                        title: '提示',
-                        message: "请先输入短信验证码！",
-                        closeable: true,
-                        buttonLabel: "确定",
-                        callback: function () {
-                            $("#btnRegister").attr("disabled",false);
-                        }
-                    });
-                    return;
-                }
+            if (smsCodeFlag){
+                f_loginByPhone();
             }else{
                 BootstrapDialog.alert({
                     type: BootstrapDialog.TYPE_WARNING,
                     size: BootstrapDialog.SIZE_SMALL,
                     title: '提示',
-                    message: "请先阅读并同意《法律声明及平台服务条款》",
+                    message: "请先输入短信验证码！",
                     closeable: true,
                     buttonLabel: "确定",
                     callback: function () {
-                        $("#btnRegister").attr("disabled",false);
+
                     }
                 });
                 return;
             }
         }
     });
+}
+
+function f_controlGetSmsBtn(){
+    $("#registerForm").bootstrapValidator('validate');//提交验证
+    if ($("#registerForm").data('bootstrapValidator').isValid()) {
+        $("#getVerificationCode").attr("disabled",false);
+    }else{
+        $("#getVerificationCode").attr("disabled",true);
+    }
 }
 
 /**
@@ -89,10 +80,8 @@ function countDownTime() {
  * 获取短信验证码
  */
 function getVerificationCode() {
-    $("#btnRegister").attr("disabled",false);
     var sendRequest = new SendRequest("/login/getVerificationCode","POST");//构造对象
     sendRequest.addParamObj({
-        "cLoginname":$("#cLoginname").val(),
         "cPhone":$("#cPhone").val()
     });
 
@@ -124,7 +113,6 @@ function getVerificationCode() {
  */
 function checkRegister(){
     $('#registerForm').bootstrapValidator({
-        excluded: [':disabled'],
         feedbackIcons: {
             validating: 'glyphicon glyphicon-refresh'
         },
@@ -141,75 +129,44 @@ function checkRegister(){
                     },
                     remote: {
                         url: '/checkForm/checkPhone',//验证地址
-                        data:{cPhone:$("#cPhone").val()},
-                        message: '手机号已被注册',//提示消息
+                        data:{type:"1",cPhone:$("#cPhone").val()},
+                        message: '手机号未被注册,请先注册',//提示消息
                         delay: 2000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
                         type: 'POST'//请求方式
                     }
                 }
             },
-            cLoginname: {
-                message: '用户名验证失败',
+            smsCode: {
+                message: '验证码无效',
                 validators: {
                     notEmpty: {
-                        message: '用户名不能为空'
-                    },
-                    stringLength: {
-                        min: 3,
-                        max: 18,
-                        message: '用户名长度必须在3到18位之间'
+                        message: '验证码不能为空'
                     },
                     regexp: {
-                        regexp: /^[a-zA-Z0-9_]+$/,
-                        message: '用户名只能包含大写、小写、数字和下划线'
-                    },
-                    remote: {
-                        url: '/checkForm/checkLoginname',//验证地址
-                        data:{cLoginname:$("#cLoginname").val()},
-                        message: '用户名已被注册',//提示消息
-                        delay: 2000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
-                        type: 'POST'//请求方式
+                        regexp: /^\d{6}\b/,
+                        message: '验证码格式有误'
                     }
-                }
-            },
-            cPassword: {
-                validators: {
-                    notEmpty: {
-                        message: '密码不能为空'
-                    }
-                }
-            },
-            cPassword1: {
-                validators: {
-                    notEmpty: {
-                        message: '密码不能为空'
-                    },
-                    identical: {
-                        field: 'cPassword',
-                        message: '两次密码不一致'
-                    },
                 }
             }
         }
     });
 }
 
-function f_submitData(){
+/**
+ * 提交登陆
+ */
+function f_loginByPhone(){
     var data = {
         "cPhone":$("#cPhone").val(),
-        "cLoginname":$("#cLoginname").val(),
-        "cPassword":$("#cPassword").val(),
-        "smsCode":$("#smsCode").val(),
-        "cRylb":'2'
+        "smsCode":$("#smsCode").val()
     }
     var options = {
-        url : '/login/register',
+        url : '/login/loginByPhone',
         type : 'post',
         data : JSON.stringify(data),
         contentType: 'application/json',
         dataType : 'json',
         success: function(ret){
-            $("#btnRegister").attr("disabled",false);
             if("0" != ret.flag){
                 BootstrapDialog.alert({
                     type: BootstrapDialog.TYPE_WARNING,
@@ -223,23 +180,9 @@ function f_submitData(){
                     }
                 });
             }else{
-                BootstrapDialog.confirm({
-                    type: BootstrapDialog.TYPE_PRIMARY,
-                    size: BootstrapDialog.SIZE_SMALL,
-                    title: '提示',
-                    message: "操作成功！"+ret.msg,
-                    closeable: true,
-                    btnOKLabel: "确定",
-                    btnCancelLabel: "留在当前页面",
-                    callback: function (ret) {
-                        if(ret){
-                            window.location.href="/web/index";
-                        }
-                    }
-                });
+                window.location.href="/web/index";
             }
         }
     };
     $.ajax(options);//传递参数为json格式，不使用公共调用方式
-
 }
