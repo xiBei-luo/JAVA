@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ch">
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -26,7 +26,7 @@
                         <div id="registerForm">
                             <div class="row">
                                 <div class="col-sm-12 col-xs-12">
-                                    <p>您的用户名为:  <strong class="text-danger">zhangsan  </strong><br>
+                                    <p>您的用户名为:  <strong class="text-danger" th:text="${plateUser.cLoginname}">  </strong><br>
                                         重置密码成功，等待跳转至登陆页面，<strong class="text-danger" id="btnCountDown"></strong>
                                     </p>
                                 </div>

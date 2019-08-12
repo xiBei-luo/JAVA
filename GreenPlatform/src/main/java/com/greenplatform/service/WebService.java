@@ -5,6 +5,9 @@ import com.greenplatform.model.base.ReturnModel;
 
 public interface WebService {
 
+    //查询用户
+    ReturnModel selectUserByPhone(String cPhone);
+
     //完成任务业务
     ReturnModel accomplishRw(TGreenRwRwmx tGreenRwRwmx);
 

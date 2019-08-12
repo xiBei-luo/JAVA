@@ -1,7 +1,9 @@
 package com.greenplatform.controller;
 
+import com.greenplatform.model.PlateUser;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
+import com.greenplatform.service.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,9 @@ import javax.servlet.http.HttpSession;
 public class BaseController {
     @Autowired
     PlateService plateService;
+
+    @Autowired
+    WebService webService;
 
 
     //公用
@@ -162,7 +167,10 @@ public class BaseController {
         return "login/getBackPassword";
     }
     @GetMapping(value = "/tipPage")
-    public String tipPage() {
+    public String tipPage(@RequestParam(name = "cPhone",required = true) String cPhone,Model model) {
+        ReturnModel returnModel = webService.selectUserByPhone(cPhone);
+        model.addAttribute("plateUser",returnModel.getObject());
+        System.out.println(returnModel.getObject());
         return "login/tipPage";
     }
     @GetMapping(value = "/loginByWx")

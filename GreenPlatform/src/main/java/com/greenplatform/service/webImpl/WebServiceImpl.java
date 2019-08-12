@@ -65,6 +65,44 @@ public class WebServiceImpl implements WebService {
     ReturnModel returnModel = new ReturnModel();
 
 
+    /**
+     * 查询用户
+     * @param cPhone
+     * @return
+     */
+    @Override
+    public ReturnModel selectUserByPhone(String cPhone) {
+        try{
+            PlateUser plateUser = new PlateUser();
+            plateUser.setcRylb("2");
+            plateUser.setcPhone(cPhone);
+            plateUser.setcZt("1");
+            plateUser.setcRyzt("1");
+            plateUser.setcRyxz("1");
+
+            PlateUserExample plateUserExample = new PlateUserExample();
+            PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
+            criteria.andCZtEqualTo(plateUser.getcZt());
+            criteria.andCRyxzEqualTo(plateUser.getcRyxz());
+            criteria.andCRylbEqualTo(plateUser.getcRylb());
+            criteria.andCRyztEqualTo(plateUser.getcRyzt());
+            criteria.andCPhoneEqualTo(plateUser.getcPhone());
+
+            List plateUserList = plateUserMapper.selectByExample(plateUserExample);
+            PlateUser plateUser1 = (PlateUser) plateUserList.get(0);
+            returnModel.setFlag(0);
+            returnModel.setMsg("");
+            returnModel.setObject(plateUser1);
+            return returnModel;
+        }catch (Exception e){
+            returnModel.setFlag(1);
+            returnModel.setMsg("查询出错系统错误");
+            returnModel.setObject(null);
+            return returnModel;
+        }
+
+    }
+
     //完成每日任务
     @Override
     @YwOperationCheckAndLog(cCzfs = "I")

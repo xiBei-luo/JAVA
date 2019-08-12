@@ -235,7 +235,7 @@ function f_foGetBackPassword(){
                     }
                 });
             }else{
-                window.location.href="/base/tipPage";
+                window.location.href="/base/tipPage?cPhone="+$("#cPhone").val();
             }
         }
     };
