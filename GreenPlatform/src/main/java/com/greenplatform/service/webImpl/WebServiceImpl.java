@@ -279,7 +279,7 @@ public class WebServiceImpl implements WebService {
     }
 
     /**
-     * 查询我的账户信息（人员姓名，人员等级，能量总量，种子汇总，今日任务）
+     * 查询我的账户信息（人员姓名，人员等级，能量总量,金币总量,点赞总量，种子汇总，今日任务）
      * @return
      */
     @Override
@@ -293,6 +293,7 @@ public class WebServiceImpl implements WebService {
                 returnModel.setObject(null);
                 return returnModel;
             }else {
+                //人员信息
                 PlateUserExample plateUserExample = new PlateUserExample();
                 PlateUserExample.Criteria criteriaPlateuser = plateUserExample.createCriteria();
                 criteriaPlateuser.andCUseridEqualTo(loginUserId);
@@ -301,22 +302,41 @@ public class WebServiceImpl implements WebService {
                 criteriaPlateuser.andCRylbEqualTo("2");//人员类别
                 criteriaPlateuser.andCRyztEqualTo("1");//人员状态
 
-
+                //能量汇总
                 TGreenNlHzExample tGreenNlHzExample = new TGreenNlHzExample();
                 TGreenNlHzExample.Criteria criteriaTGreenNlHzExample = tGreenNlHzExample.createCriteria();
                 criteriaTGreenNlHzExample.andCZtEqualTo("1");
                 criteriaTGreenNlHzExample.andCUseridEqualTo(loginUserId);
 
+                //任务完成情况
                 TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
                 TGreenRwRwmxExample.Criteria criteriaTGreenRwRwmxExample = tGreenRwRwmxExample.createCriteria();
                 criteriaTGreenRwRwmxExample.andCUseridEqualTo(loginUserId);
                 criteriaTGreenRwRwmxExample.andCZtEqualTo("1");
                 criteriaTGreenRwRwmxExample.andCRwdayEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,10));
 
+                //点赞总量
+                TGreenGoldDzhzExample tGreenGoldDzhzExample = new TGreenGoldDzhzExample();
+                TGreenGoldDzhzExample.Criteria criteria = tGreenGoldDzhzExample.createCriteria();
+                criteria.andCZtEqualTo("1");
+                criteria.andCUseridEqualTo(loginUserId);
+
+                //金币总量
+                TGreenGoldHzExample tGreenGoldHzExample = new TGreenGoldHzExample();
+                TGreenGoldHzExample.Criteria criteria1 = tGreenGoldHzExample.createCriteria();
+                criteria1.andCZtEqualTo("1");
+                criteria1.andCUseridEqualTo(loginUserId);
+
                 List plateuserList = plateUserMapper.selectByExample(plateUserExample);//人员姓名与人员等级
 
                 List tGreenNlHzList = tGreenNlHzMapper.selectByExample(tGreenNlHzExample);//查询能量总量
 
+                List tGreenGoldDzhzList = tGreenGoldDzhzMapper.selectByExample(tGreenGoldDzhzExample);//点赞总量
+
+                List tGreenGoldJbhzList = tGreenGoldHzMapper.selectByExample(tGreenGoldHzExample);//金币总量
+
+
+                //种子明细
                 Map paramsMap = new HashMap();
                 paramsMap.put("cUserid",loginUserId);
                 paramsMap.put("cSfjz","0");
@@ -330,6 +350,11 @@ public class WebServiceImpl implements WebService {
                 loginuserAccountMap.put("tGreenNlHz",tGreenNlHzList);
                 loginuserAccountMap.put("tGreenZzZjzzmx",tGreenZzZjzzmxList);
                 loginuserAccountMap.put("tGreenRwRwmx",tGreenRwRwmxList);
+                loginuserAccountMap.put("tGreenDzzl",tGreenGoldDzhzList);
+                loginuserAccountMap.put("tGreenJbzl",tGreenGoldJbhzList);
+
+                System.out.println(tGreenGoldDzhzList);
+                System.out.println(tGreenGoldJbhzList);
 
                 returnModel.setFlag(0);
                 returnModel.setMsg("查询成功");

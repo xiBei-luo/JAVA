@@ -96,4 +96,11 @@ public interface PlateService {
     /*删除系统参数*/
     public ReturnModel delPlateCodeXtcs(PlateCodeXtcs plateCodeXtcs);
 
+    /*能量充值*/
+    public ReturnModel insertTGreenNlCzjl(JSONObject jsonObject);
+    /*能量提现*/
+    public ReturnModel insertTGreenNlTxjl(JSONObject jsonObject);
+    /*用户加入黑名单*/
+    public ReturnModel insertPlateuserBlacklist(JSONObject jsonObject);
+
 }

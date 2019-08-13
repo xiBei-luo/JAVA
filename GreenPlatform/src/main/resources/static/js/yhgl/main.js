@@ -23,10 +23,10 @@ function initGrid(){
     $("#gridbox").attr({width:"100%",height:"100%"});
     grid = new dhtmlXGridObject('gridbox');
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
-    grid.setHeader("序号,姓名,性别,证件号码,人员性质,人员状态,账户等级,注册方式,账户总能量");
-    grid.setInitWidthsP("11,10,6,20,8,11,11,11,11.5");
-    grid.setColAlign("center,center,center,center,center,center,center,center,center");
-    grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro");
+    grid.setHeader("操作,姓名,登录名,性别,证件号码,人员性质,人员状态,是否实名制,账户等级,电话号码,账户能量");
+    grid.setInitWidthsP("20,10,10,6,16,8,8,8,8,11,8");
+    grid.setColAlign("center,left,left,center,left,center,center,center,center,center,center");
+    grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
     grid.enableMultiselect(false);
     grid.init();
 }
@@ -71,17 +71,95 @@ function loadGridData(){
  */
 function initData(data){
     for (var i=0; i<data.length; i++){
+        var opLinkBuff = new StringBuffer();
+        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-primary \" onclick=\"f_cz(\'"+data[i].cUserid+"\');\" id=\"cz_link_"+data[i].cUserid+"\" >充值</button>&nbsp&nbsp&nbsp")
+        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-info \" onclick=\"f_tx(\'"+data[i].cUserid+"\');\" id=\"tx_link_"+data[i].cUserid+"\" >提现</button>&nbsp&nbsp&nbsp")
+        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-warning \" onclick=\"f_hmd(\'"+data[i].cUserid+"\');\" id=\"hmd_link_"+data[i].cUserid+"\" >加入黑名单</button>")
+
+
+        var xbSm = "";
+        if ("1" == data[i].cSex){
+            xbSm = "男";
+        } else if ("2" == data[i].cSex){
+            xbSm = "女";
+        }
+
         grid.addRow(data[i].cUserid,[
-            (i+1),
+            opLinkBuff.toString(),
             data[i].cUsername,
-            data[i].cSex,
+            data[i].cLoginname,
+            xbSm,
             data[i].cZjhm,
             data[i].cRyxzsm,
             data[i].cRyztsm,
-            data[i].cRydj,
-            data[i].cZcfssm,
-            data[i].cNlhz
+            data[i].cIssmz == '1' ? '是' : '否',
+            data[i].cRydj+'级',
+            data[i].cPhone,
+            data[i].nNlhz
         ]);
         grid.setUserData(data[i].cUserid,'data',data[i]);
     }
+}
+
+/**
+ * 账户充值
+ * @param cUserid
+ */
+function f_cz(cUserid){
+    var data = grid.getUserData(cUserid,"data");
+    var win = top.$.MdiWindow(window, 800, 600, 0, 0, true);
+    win.setTitle("账户能量充值");
+    win.setWindowArguments(data);//参数
+    win.btnClose(true);
+    win.btnMax(false);
+    win.btnMin(false);
+    win.isResize(false);
+    win.onClose(function (ret) {
+        if(ret){
+            loadGridData();
+        }
+    });
+    win.load("/yhgl/nlcz", window, function (obj) { });
+}
+
+/**
+ * 账户能量体现
+ * @param cUserid
+ */
+function f_tx(cUserid) {
+    var data = grid.getUserData(cUserid,"data");
+    var win = top.$.MdiWindow(window, 800, 600, 0, 0, true);
+    win.setTitle("账户能量提现");
+    win.setWindowArguments(data);//参数
+    win.btnClose(true);
+    win.btnMax(false);
+    win.btnMin(false);
+    win.isResize(false);
+    win.onClose(function (ret) {
+        if(ret){
+            loadGridData();
+        }
+    });
+    win.load("/yhgl/nltx", window, function (obj) { });
+}
+
+/**
+ * 加入黑名单
+ * @param cUserid
+ */
+function f_hmd(cUserid){
+    var data = grid.getUserData(cUserid,"data");
+    var win = top.$.MdiWindow(window, 800, 600, 0, 0, true);
+    win.setTitle("【"+data.cUsername+"】加入黑名单");
+    win.setWindowArguments(data);//参数
+    win.btnClose(true);
+    win.btnMax(false);
+    win.btnMin(false);
+    win.isResize(false);
+    win.onClose(function (ret) {
+        if(ret){
+            loadGridData();
+        }
+    });
+    win.load("/yhgl/hmd", window, function (obj) { });
 }

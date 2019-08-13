@@ -37,6 +37,13 @@ header{
 .cVerification{
     display: none;
 }
+#legalStatement p{
+    text-indent: 30px;
+}
+.footerRight{
+    float: right;
+}
+
 
 
 /*终端尺寸适配*/

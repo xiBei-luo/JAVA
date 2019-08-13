@@ -26916,8 +26916,8 @@ dhtmlXDataView.prototype = {
     },
     on_dblclick: {
         dhx_dataview_item: function(a, c) {
-            if (this._settings.edit) {
-                this.edit(c)
+            if (this._settings.nlcz) {
+                this.nlcz(c)
             }
         }
     },
@@ -27045,8 +27045,8 @@ dhtmlXList.prototype = {
     },
     on_dblclick: {
         dhx_list_item: function(a, c) {
-            if (this._settings.edit) {
-                this.edit(c)
+            if (this._settings.nlcz) {
+                this.nlcz(c)
             }
         }
     },
@@ -33558,9 +33558,9 @@ function dhtmlXGridObject(id) {
                 this.editor = null;
                 return false
             }
-            if (this.callEvent("onEditCell", [0, this.row.idd, this.cell._cellIndex]) != false && this.editor.edit) {
+            if (this.callEvent("onEditCell", [0, this.row.idd, this.cell._cellIndex]) != false && this.editor.nlcz) {
                 this._Opera_stop = (new Date).valueOf();
-                this.editor.edit();
+                this.editor.nlcz();
                 c.className += " editable";
                 this.callEvent("onEditCell", [1, this.row.idd, this.cell._cellIndex])
             } else {
@@ -44040,7 +44040,7 @@ function eXcell_math(a) {
             return this.cell.original
         }) : this.getValue;
         this.grid.editor.setValue = this.setValue;
-        this.grid.editor.edit()
+        this.grid.editor.nlcz()
     };
     this.isDisabled = function() {
         return ! this.grid._mathEdit

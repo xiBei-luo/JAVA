@@ -63,9 +63,17 @@ public class BaseController {
     public String yhgl(){
         return "plate/yhgl/main";
     }
-    @GetMapping(value = "/yhgl/edit")
-    public String yhglEdit(){
-        return "plate/yhgl/edit";
+    @GetMapping(value = "/yhgl/nlcz")
+    public String yhglNlcz(){
+        return "plate/yhgl/nlcz";
+    }
+    @GetMapping(value = "/yhgl/nltx")
+    public String yhglNltx(){
+        return "plate/yhgl/nltx";
+    }
+    @GetMapping(value = "/yhgl/hmd")
+    public String yhglHmd(){
+        return "plate/yhgl/hmd";
     }
     @GetMapping(value = "/rwgl")
     public String rwgl(){

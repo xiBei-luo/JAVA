@@ -149,7 +149,7 @@
                         </div>
                         <div class="package-content">
                             <h3><a href="" title="" id="cSpmc" th:text=${tGreenSpSpmxList.cSpmc}></a></h3>
-                            <span id="nSpjg" th:text="'￥'+${tGreenSpSpmxList.nSpjg}"></span>
+                            <span id="nSpjg" th:text="${tGreenSpSpmxList.nSpjg} + '克'"></span>
                             <p id="cSpms" th:attr="title = ${tGreenSpSpmxList.cSpms}" th:text=${tGreenSpSpmxList.cSpms}> </p>
                         </div>
                         <div class="package-calto-action">
@@ -190,9 +190,15 @@
                             <span class="badge" id="nNlhz"></span>我的能量
                         </li>
                         <li class="list-group-item">
+                            <span class="badge" id="nJbzl"></span>我的金币
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge" id="nDzzl"></span>我的点赞数
+                        </li>
+                        <!--<li class="list-group-item">
                             <button class="btn btn-primary btn-sm">充值</button>
                             <button class="btn btn-info btn-sm">提现</button>
-                        </li>
+                        </li>-->
                         <li class="list-group-item">
                             我的植物
                         </li>
@@ -223,10 +229,10 @@
                             <a href="/base/history" target="">捐赠记录</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="/base/history" target="">充值历史</a>
+                            <a href="/base/history" target="">充值记录</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="/base/history" target="">提现历史</a>
+                            <a href="/base/history" target="">提现记录</a>
                         </li>
                     </ul>
                 </div>

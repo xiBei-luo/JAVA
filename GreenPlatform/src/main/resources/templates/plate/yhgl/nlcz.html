@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrapValidator.min.css">
+    <style>
+        .table label{
+            line-height: 35px;
+        }
+        .edit-footer{
+            width: 95%;
+            height: 50px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .require{
+            color: #c9302c;
+        }
+        #insertPlateUserForm td span{
+            line-height: 35px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <form id="insertPlateUserForm">
+        <table class="table" >
+            <col width="20%">
+            <col width="30%">
+            <col width="20%">
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="4">
+                        <span class="text-danger"><strong>注意：请仔细核对用户信息，并按照用户提供的转账凭证与平台账户收款凭证正确填写以下信息！<br>
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp若信息填写错误可能导致充值失败！</strong></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="cUsername" class="control-label">用户姓名:</label>
+                    </td>
+                    <td align="left">
+                        <span class="cUsername"></span>
+                        <input type="hidden" id="cUsername">
+                        <input type="hidden" id="cUserid">
+                    </td>
+                    <td align="right">
+                        <label for="cZjhm" class="control-label">身份证号码:</label>
+                    </td>
+                    <td align="left">
+                        <span class="cZjhm"></span>
+                        <input type="hidden" id="cZjhm">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="cEmail" class="control-label">电子邮箱:</label>
+                    </td>
+                    <td align="left">
+                        <span class="cEmail"></span>
+                        <input type="hidden" id="cEmail">
+                    </td>
+                    <td align="right">
+                        <label for="cPhone" class="control-label">电话号码:</label>
+                    </td>
+                    <td align="left">
+                        <span class="cPhone"></span>
+                        <input type="hidden" id="cPhone">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="cFkzh" class="control-label"><i class="require">*</i>付款账户:</label>
+                    </td>
+                    <td align="left">
+                        <input type="text" class="form-control" id="cFkzh" name="cFkzh" placeholder="请输入付款账户">
+                    </td>
+                    <td align="right">
+                        <label for="cDzzh" class="control-label"><i class="require">*</i>到账账户:</label>
+                    </td>
+                    <td align="left">
+                        <input type="text" class="form-control" id="cDzzh" name="cDzzh" placeholder="到账账户">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="cCzfs" class="control-label"><i class="require">*</i>充值方式:</label>
+                    </td>
+                    <td align="left">
+                        <select class="form-control"  name="cCzfs" id="cCzfs"></select>
+                    </td>
+                    <td align="right">
+                        <label for="cSfcg" class="control-label"><i class="require">*</i>是否成功:</label>
+                    </td>
+                    <td align="left">
+                        <select class="form-control"  name="cSfcg" id="cSfcg"></select>
+                    </td>
+                </tr>
+                <tr class="czfs_yhk" hidden>
+                    <td align="right">
+                        <label for="cCzyh" class="control-label">充值银行:</label>
+                    </td>
+                    <td align="left">
+                        <input type="text" class="form-control" id="cCzyh" name="cCzyh" placeholder="请输入充值银行">
+                    </td>
+                    <td align="right">
+                        <label for="cCzkh" class="control-label">充值卡号:</label>
+                    </td>
+                    <td align="left">
+                        <input type="text" class="form-control" id="cCzkh" name="cCzkh" placeholder="请输入充值卡号">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="dDzsj" class="control-label"><i class="require">*</i>到账时间:</label>
+                    </td>
+                    <td align="left">
+                        <input type="text" class="form-control" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  id="dDzsj" name="dDzsj" placeholder="请输入到账时间">
+                    </td>
+                    <td align="right">
+                        <label for="nCzje" class="control-label"><i class="require">*</i>充值金额:</label>
+                    </td>
+                    <td align="left">
+                        <input type="text" class="form-control" id="nCzje" name="nCzje" placeholder="请输入充值金额">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="cZzdh" class="control-label"><i class="require">*</i>转账单号:</label>
+                    </td>
+                    <td align="left" colspan="3">
+                        <input type="text" class="form-control" id="cZzdh" name="cZzdh" placeholder="请输入转账单号">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="cBz" class="control-label">备注:</label>
+                    </td>
+                    <td align="left" colspan="3">
+                        <textarea class="form-control" id="cBz" name="cBz" placeholder="请输入备注"></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <div class="edit-footer">
+        <button type="button" class="btn btn-primary" id="btnSave">确认充值</button>
+        <button type="button" class="btn btn-default" id="btnRet">关&nbsp&nbsp&nbsp&nbsp闭</button>
+    </div>
+</div>
+
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrapValidator.min.js"></script>
+<script src="/publicFrame/My97DatePicker/WdatePicker.js"></script>
+<script src="/publicJs/publicCommon.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/js/yhgl/nlcz.js"></script>
+</body>
+</html>

@@ -237,5 +237,29 @@ public class PlateController {
         return returnModel;
     }
 
+    @PostMapping(value = "/insertTGreenNlCzjl")
+    public ReturnModel insertTGreenNlCzjl(@RequestBody String jsonObject){
+        JSONObject jsonParams = JSONObject.fromObject(jsonObject);
+        System.out.println(jsonParams);
+        ReturnModel returnModel = plateService.insertTGreenNlCzjl(jsonParams);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/insertTGreenNlTxjl")
+    public ReturnModel insertTGreenNlTxjl(@RequestBody String jsonObject){
+        JSONObject jsonParams = JSONObject.fromObject(jsonObject);
+        System.out.println(jsonParams);
+        ReturnModel returnModel = plateService.insertTGreenNlTxjl(jsonParams);
+        return returnModel;
+    }
+
+    @PostMapping(value = "/insertPlateuserBlacklist")
+    public ReturnModel insertPlateuserBlacklist(@RequestBody String jsonObject){
+        JSONObject jsonParams = JSONObject.fromObject(jsonObject);
+        System.out.println(jsonParams);
+        ReturnModel returnModel = plateService.insertPlateuserBlacklist(jsonParams);
+        return returnModel;
+    }
+
 
 }

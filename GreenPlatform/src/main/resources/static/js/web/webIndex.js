@@ -50,7 +50,7 @@ function f_selectLoginuserAccount(){
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
-        //console.log(ret.object);
+        console.log(ret.object);
 
         //登陆账户信息
         var oPlateuser = ret.object.plateUser[0];//登陆账户信息（获取人员姓名与人员等级）
@@ -69,7 +69,24 @@ function f_selectLoginuserAccount(){
         //登陆用户能量汇总信息（获取能量总量）
         var oTGreenNlHz = ret.object.tGreenNlHz[0];//登陆用户能量汇总信息（获取能量总量）
         if(oTGreenNlHz){
-            $("#nNlhz").text(oTGreenNlHz.nNlhz);
+            $("#nNlhz").text(oTGreenNlHz.nNlhz+"克");
+        }else {
+            $("#nNlhz").text("0"+"克");
+        }
+
+        //登陆用户点赞数量
+        var oTGreenDzzl = ret.object.tGreenDzzl[0];//登陆用户点赞数量
+        if(oTGreenDzzl){
+            $("#nDzzl").text(oTGreenDzzl.nDzzl+"次");
+        }else{
+            $("#nDzzl").text("0"+"次");
+        }
+        //登陆用户金币总量
+        var oTGreenJbzl = ret.object.tGreenJbzl[0];//登陆用户金币总量
+        if(oTGreenJbzl){
+            $("#nJbzl").text(oTGreenJbzl.nJbzl+"金币");
+        }else{
+            $("#nJbzl").text("0"+"金币");
         }
 
         //登陆用户任务完成信息（今日任务是否完成）
@@ -105,8 +122,8 @@ function f_selectLoginuserAccount(){
             $(atGreenZzZjzzmx).each(function(i,v){
                 $("#mySeed ul").append("<li class=\"list-group-item\">\n" +
                     "<span id='"+v.cSpbh+"'>"+v.cSpmc+"</span>\n" +
-                    //"<button id='"+v.cSpbh+"' class='btn btn-primary btn-sm float-right' "+(v.cKjz == '0' ? 'disabled' : '')+">捐赠</button>\n" +
-                    "<button id='"+v.cSpbh+"' onclick='f_contributeSeed("+JSON.stringify(v)+")' class='btn btn-primary btn-sm float-right'>捐赠</button>\n" +
+                    "<button id='"+v.cSpbh+"' onclick='f_contributeSeed("+JSON.stringify(v)+")'  class='btn btn-primary btn-sm float-right' "+(v.cKjz == '0' ? 'disabled' : '')+">捐赠</button>\n" +
+                    //"<button id='"+v.cSpbh+"' onclick='f_contributeSeed("+JSON.stringify(v)+")' class='btn btn-primary btn-sm float-right'>捐赠</button>\n" +
                     "</li>");
             });;
         }else{

@@ -109,6 +109,7 @@ public class PlateServiceImpl implements PlateService {
 
         try{
             plateUserList = owerPlateUserMapper.selectWebUser(plateUser);
+            System.out.println(plateUserList);
             returnModel.setFlag(0);
             returnModel.setMsg("");
             returnModel.setObject(plateUserList);
@@ -1530,6 +1531,40 @@ public class PlateServiceImpl implements PlateService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return returnModel;
         }
+    }
+
+    /**
+     * 用户能量充值
+     * @param jsonObject
+     * @return
+     */
+    @YwOperationCheckAndLog(cCzfs = "I")
+    @Override
+    public ReturnModel insertTGreenNlCzjl(JSONObject jsonObject) {
+        return null;
+    }
+
+
+    /**
+     * 用户能量提现
+     * @param jsonObject
+     * @return
+     */
+    @YwOperationCheckAndLog(cCzfs = "I")
+    @Override
+    public ReturnModel insertTGreenNlTxjl(JSONObject jsonObject) {
+        return null;
+    }
+
+
+    /**
+     * 用户添加或移除黑名单
+     * @param jsonObject
+     * @return
+     */
+    @Override
+    public ReturnModel insertPlateuserBlacklist(JSONObject jsonObject) {
+        return null;
     }
 
 
