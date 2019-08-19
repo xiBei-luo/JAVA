@@ -21,4 +21,26 @@
      ORDER BY a.n_dzzl DESC ,b.c_username
         LIMIT 0,10
     </select>
+
+    <select id="selectTGreenGoldDzhzBycUserid" parameterType="java.lang.String" resultType="java.util.HashMap">
+        SELECT
+            b.*
+        FROM
+            (
+                SELECT
+                    t.*, ROUND(@rownum := @rownum + 1) AS 'rank'
+                FROM
+                    (SELECT @rownum := 0) r,
+                    (
+                        SELECT
+                            *
+                        FROM
+                            t_green_gold_dzhz
+                        ORDER BY
+                            n_dzzl DESC,d_cjsj DESC
+                    ) AS t
+            ) AS b
+        WHERE
+            b.c_userid = #{cUserid};
+    </select>
 </mapper>

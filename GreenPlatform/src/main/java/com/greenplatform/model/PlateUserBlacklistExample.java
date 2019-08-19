@@ -535,6 +535,76 @@ public class PlateUserBlacklistExample {
             return (Criteria) this;
         }
 
+        public Criteria andCCzyyIsNull() {
+            addCriterion("c_czyy is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyIsNotNull() {
+            addCriterion("c_czyy is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyEqualTo(String value) {
+            addCriterion("c_czyy =", value, "cCzyy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyNotEqualTo(String value) {
+            addCriterion("c_czyy <>", value, "cCzyy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyGreaterThan(String value) {
+            addCriterion("c_czyy >", value, "cCzyy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyGreaterThanOrEqualTo(String value) {
+            addCriterion("c_czyy >=", value, "cCzyy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyLessThan(String value) {
+            addCriterion("c_czyy <", value, "cCzyy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyLessThanOrEqualTo(String value) {
+            addCriterion("c_czyy <=", value, "cCzyy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyLike(String value) {
+            addCriterion("c_czyy like", value, "cCzyy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyNotLike(String value) {
+            addCriterion("c_czyy not like", value, "cCzyy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyIn(List<String> values) {
+            addCriterion("c_czyy in", values, "cCzyy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyNotIn(List<String> values) {
+            addCriterion("c_czyy not in", values, "cCzyy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyBetween(String value1, String value2) {
+            addCriterion("c_czyy between", value1, value2, "cCzyy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCCzyyNotBetween(String value1, String value2) {
+            addCriterion("c_czyy not between", value1, value2, "cCzyy");
+            return (Criteria) this;
+        }
+
         public Criteria andCZtIsNull() {
             addCriterion("c_zt is null");
             return (Criteria) this;

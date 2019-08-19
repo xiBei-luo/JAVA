@@ -1,11 +1,10 @@
 package com.greenplatform.controller;
 
-import com.greenplatform.model.PlateUser;
-import com.greenplatform.model.TGreenRwRwmx;
-import com.greenplatform.model.TGreenZzZjzzmx;
+import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.WebService;
 import com.greenplatform.util.GetcurrentLoginUser;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -93,6 +92,27 @@ public class WebController {
         return webService.contributeSeed(cLsh,cSpbh);
     }
 
+    //查询充值历史
+    @RequestMapping(value = "/selectTGreenNlCzjl",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel selectTGreenNlCzjl(@RequestBody String jsonObject){
+        JSONObject jsonParams = JSONObject.fromObject(jsonObject);
+        return webService.selectTGreenNlCzjl(jsonParams);
+    }
+    //查询提现历史
+    @RequestMapping(value = "/selectTGreenNlTxjl",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel selectTGreenNlTxjl(@RequestBody String jsonObject){
+        JSONObject jsonParams = JSONObject.fromObject(jsonObject);
+        return webService.selectTGreenNlTxjl(jsonParams);
+    }
+    //查询捐赠历史
+    @RequestMapping(value = "/selectTGreenZzJzjl",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel selectTGreenZzJzjl(@RequestBody String jsonObject){
+        JSONObject jsonParams = JSONObject.fromObject(jsonObject);
+        return webService.selectTGreenZzJzjl(jsonParams);
+    }
 
 
 

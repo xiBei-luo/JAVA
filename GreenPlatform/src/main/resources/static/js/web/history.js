@@ -1,5 +1,7 @@
 var grid1,grid2,grid3;
+var tmpClickLink;
 $(function(){
+    tmpClickLink = $($(".loadGrid[class~='active']")).prop("id");//当前选中项
     initEvent();
     initGrid();
 })
@@ -8,9 +10,15 @@ function initEvent() {
     $(".navbar-nav li").click(function(){
         $(".navbar-nav li").removeClass("active");
         $(this).addClass("active");
+    });
+
+    $(".loadGrid").click(function () {
+        tmpClickLink = $($(".loadGrid[class~='active']")).prop("id");//当前选中项
         $(".gridbox").hide();
         $("#gridbox_"+this.id).show();
     });
+
+    $("#dKssj").val("2019-01-01");
 
     $("#perInfo").click(function () {
         $("#perInfoModel").modal('show');
@@ -21,7 +29,13 @@ function initEvent() {
     });
 
     $("#btnSearch").click(function(){
-        loadGridData();
+        if("cJzjl" == tmpClickLink){
+            loadGridData("/web/selectTGreenZzJzjl");
+        }else if("cCzls" == tmpClickLink){
+            loadGridData("/web/selectTGreenNlCzjl");
+        }else if("cTxls" == tmpClickLink){
+            loadGridData("/web/selectTGreenNlTxjl");
+        }
     });
 
 }
@@ -58,8 +72,85 @@ function initGrid(){
     grid3.init();
 }
 
-function loadGridData(){
-    alert(1)
+function loadGridData(reqUrl){
+    var frontGrid;
+    if(tmpClickLink == "cJzjl"){
+        frontGrid = grid1;
+    }else if(tmpClickLink == "cCzls"){
+        frontGrid = grid2;
+    }else if(tmpClickLink == "cTxls"){
+        frontGrid = grid3;
+    }
+    frontGrid.clearAll();
+
+
+    var data = {
+        "dKssj":$("#dKssj").val()
+    };
+
+    var options = {
+        url : reqUrl,
+        type : 'post',
+        data : JSON.stringify(data),
+        contentType: 'application/json',
+        dataType : 'json',
+        success: function(ret){
+            if("0" != ret.flag){
+                BootstrapDialog.alert({
+                    type: BootstrapDialog.TYPE_WARNING,
+                    size: BootstrapDialog.SIZE_SMALL,
+                    title: '提示',
+                    message: "查询出错！"+ret.msg,
+                    closeable: true,
+                    buttonLabel: "确定",
+                    callback: function () {
+
+                    }
+                });
+            }else{
+                if(ret.object.length > 0){
+                    $("#commonInfo").hide();
+                    var data = ret.object;
+
+                    for (var i=0; i<data.length; i++){
+                        if("cJzjl" == tmpClickLink){
+                            frontGrid.addRow(data[i].cLsh,[
+                                data[i].dJzsj,
+                                data[i].cUsername,
+                                data[i].cSpmc,
+                                data[i].cBz
+                            ]);
+                            frontGrid.setUserData(data[i].cLsh,'data',data[i]);
+                        }else if("cCzls" == tmpClickLink){
+                            frontGrid.addRow(data[i].cLsh,[
+                                data[i].dFksj,
+                                data[i].nFkje,
+                                data[i].cFkzh,
+                                data[i].cFksfcg == "1" ? "成功" : "失败",
+                                data[i].cBz
+                            ]);
+                            frontGrid.setUserData(data[i].cLsh,'data',data[i]);
+                        }else if("cTxls" == tmpClickLink){
+                            frontGrid.addRow(data[i].cLsh,[
+                                data[i].dSksj,
+                                data[i].nFknl,
+                                data[i].nSkje,
+                                data[i].cFkzh,
+                                data[i].cSksfcg == "1" ? "成功" : "失败",
+                                data[i].cBz
+                            ]);
+                            frontGrid.setUserData(data[i].cLsh,'data',data[i]);
+                        }
+                    }
+
+                }else{
+                    $("#commonInfo").show();
+                    $("#commonInfo").text("没有查询结果！");
+                }
+            }
+        }
+    };
+    $.ajax(options);
 }
 
 

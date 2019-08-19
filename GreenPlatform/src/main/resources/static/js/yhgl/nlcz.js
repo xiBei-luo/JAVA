@@ -28,17 +28,25 @@ function _init(args, mdi, layerIdx, parentWindow) {
 
 
     function initEvent(){
-        $("#cCzfs").change(function(){
-            $(".czfs_yhk input").val("");
-            if ("3" == $("#cCzfs").val()){
-                $(".czfs_yhk").show();
+        $("#cFkfs").change(function(){
+            $(".fk_yhk input").val("");
+            if ("3" == $("#cFkfs").val()){
+                $(".fk_yhk input").attr("disabled",false);
             } else {
-                $(".czfs_yhk").hide();
+                $(".fk_yhk input").attr("disabled",true);
+            }
+        });
+        $("#cSkfs").change(function(){
+            $(".sk_yhk input").val("");
+            if ("3" == $("#cSkfs").val()){
+                $(".sk_yhk input").attr("disabled",false);
+            } else {
+                $(".sk_yhk input").attr("disabled",true);
             }
         });
 
-        initBaseCodeSelect($("#cSfcg"),{cDmlb:"C_JC_SF"},null,"---请选择是否成功---");
-        initBaseCodeSelect($("#cCzfs"),{cDmlb:"C_NLCZ_ZFFS"},null,"---请选择充值方式---");
+        initBaseCodeSelect($("#cFksfcg,#cSksfcg"),{cDmlb:"C_JC_SF"},null,"---请选择是否成功---");
+        initBaseCodeSelect($("#cFkfs,#cSkfs"),{cDmlb:"C_NLCZ_ZFFS"},null,"---请选择支付方式---");
         $("#btnSave").click(function(){
             var bPass = requiredFieldCheck($("label .require"), top, function(){});
             if(!bPass){
@@ -54,7 +62,7 @@ function _init(args, mdi, layerIdx, parentWindow) {
      * 参数验证
      */
     function checkParms() {
-        var aParams = ["#cFkzh","#cDzzh","#nCzje","#cZzdh"];
+        var aParams = ["#cFkzh","#cSkzh","#cFkdh","#cSkdh","#nFkje"];
         for (var i=0;i<aParams.length;i++){
             if (!f_checkNumObj(aParams[i])) {
                 return;
@@ -98,14 +106,22 @@ function _init(args, mdi, layerIdx, parentWindow) {
 
 
             "cFkzh":$("#cFkzh").val(),
-            "cDzzh":$("#cDzzh").val(),
-            "cCzfs":$("#cCzfs").val(),
-            "cSfcg":$("#cSfcg").val(),
-            "cCzyh":$("#cCzyh").val(),
-            "cCzkh":$("#cCzkh").val(),
-            "dDzsj":$("#dDzsj").val(),
-            "nCzje":$("#nCzje").val(),
-            "cZzdh":$("#cZzdh").val(),
+            "cFkfs":$("#cFkfs").val(),
+            "dFksj":$("#dFksj").val(),
+            "cFkyh":$("#cFkyh").val(),
+            "cFkkh":$("#cFkkh").val(),
+            "cFksfcg":$("#cFksfcg").val(),
+            "cFkdh":$("#cFkdh").val(),
+
+            "cSkzh":$("#cSkzh").val(),
+            "cSkfs":$("#cSkfs").val(),
+            "dSksj":$("#dSksj").val(),
+            "cSkyh":$("#cSkyh").val(),
+            "cSkkh":$("#cSkkh").val(),
+            "cSksfcg":$("#cSksfcg").val(),
+            "cSkdh":$("#cSkdh").val(),
+
+            "nFkje":$("#nFkje").val(),
             "cBz":$("#cBz").val()
         };
 

@@ -2,6 +2,7 @@ package com.greenplatform.service;
 
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
+import net.sf.json.JSONObject;
 
 public interface WebService {
 
@@ -37,6 +38,15 @@ public interface WebService {
 
     //金币点赞数达到10万，瓜分能量业务
     void divideNl();
+
+    //查询能量充值记录
+    ReturnModel selectTGreenNlCzjl(JSONObject jsonObject);
+
+    //查询能量提现记录
+    ReturnModel selectTGreenNlTxjl(JSONObject jsonObject);
+
+    //查询捐赠记录
+    ReturnModel selectTGreenZzJzjl(JSONObject jsonObject);
 
 
 

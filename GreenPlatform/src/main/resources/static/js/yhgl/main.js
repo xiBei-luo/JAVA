@@ -72,9 +72,15 @@ function loadGridData(){
 function initData(data){
     for (var i=0; i<data.length; i++){
         var opLinkBuff = new StringBuffer();
-        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-primary \" onclick=\"f_cz(\'"+data[i].cUserid+"\');\" id=\"cz_link_"+data[i].cUserid+"\" >充值</button>&nbsp&nbsp&nbsp")
-        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-info \" onclick=\"f_tx(\'"+data[i].cUserid+"\');\" id=\"tx_link_"+data[i].cUserid+"\" >提现</button>&nbsp&nbsp&nbsp")
-        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-warning \" onclick=\"f_hmd(\'"+data[i].cUserid+"\');\" id=\"hmd_link_"+data[i].cUserid+"\" >加入黑名单</button>")
+        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-primary \" onclick=\"f_cz(\'"+data[i].cUserid+"\');\" id=\"cz_link_"+data[i].cUserid+"\" >充值</button>&nbsp&nbsp&nbsp");
+        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-info \" onclick=\"f_tx(\'"+data[i].cUserid+"\');\" id=\"tx_link_"+data[i].cUserid+"\" >提现</button>&nbsp&nbsp&nbsp");
+
+        if("1" == data[i].cRyxz){
+            opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-danger \" onclick=\"f_hmd('add',\'"+data[i].cUserid+"\');\" >加入黑名单</button>");
+        }else if("-1" == data[i].cRyxz){
+            opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-warning \" onclick=\"f_hmd('remove',\'"+data[i].cUserid+"\');\" >移除黑名单</button>");
+        }
+
 
 
         var xbSm = "";
@@ -145,13 +151,24 @@ function f_tx(cUserid) {
 
 /**
  * 加入黑名单
+ * @param type (add加入/remove移除)
  * @param cUserid
  */
-function f_hmd(cUserid){
+function f_hmd(type,cUserid){
     var data = grid.getUserData(cUserid,"data");
-    var win = top.$.MdiWindow(window, 800, 600, 0, 0, true);
-    win.setTitle("【"+data.cUsername+"】加入黑名单");
-    win.setWindowArguments(data);//参数
+    var args = {
+        data:data,
+        cCzfs:type
+    }
+    var tmpTxt = "";
+    if("add" == type){
+        tmpTxt = "加入";
+    }else if("remove" == type){
+        tmpTxt = "移除";
+    }
+    var win = top.$.MdiWindow(window, 800, 300, 0, 0, true);
+    win.setTitle("【"+data.cUsername+"】"+tmpTxt+"黑名单");
+    win.setWindowArguments(args);//参数
     win.btnClose(true);
     win.btnMax(false);
     win.btnMin(false);

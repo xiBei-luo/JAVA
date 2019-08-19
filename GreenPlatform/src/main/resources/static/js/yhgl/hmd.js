@@ -7,17 +7,22 @@
  * @returns
  */
 function _init(args, mdi, layerIdx, parentWindow) {
-    if(args){
-        $("#cUserid").val(args.cUserid);
+    var cCzfs = "add";
+    if(args.cCzfs){
+        cCzfs = args.cCzfs;
+    }
 
-        $(".cUsername").text(args.cUsername);
-        $("#cUsername").val(args.cUsername);
-        $(".cZjhm").text(args.cZjhm);
-        $("#cZjhm").val(args.cZjhm);
-        $(".cEmail").text(args.cEmail);
-        $("#cEmail").val(args.cEmail);
-        $(".cPhone").text(args.cPhone);
-        $("#cPhone").val(args.cPhone);
+    if(args && args.data){
+        $("#cUserid").val(args.data.cUserid);
+
+        $(".cUsername").text(args.data.cUsername);
+        $("#cUsername").val(args.data.cUsername);
+        $(".cZjhm").text(args.data.cZjhm);
+        $("#cZjhm").val(args.data.cZjhm);
+        $(".cEmail").text(args.data.cEmail);
+        $("#cEmail").val(args.data.cEmail);
+        $(".cPhone").text(args.data.cPhone);
+        $("#cPhone").val(args.data.cPhone);
     }
     var refresh = false;
     initEvent();
@@ -28,22 +33,21 @@ function _init(args, mdi, layerIdx, parentWindow) {
 
 
     function initEvent(){
-        initBaseCodeSelect($("#cSfcg"),{cDmlb:"C_JC_SF"},null,"---请选择是否成功---");
-        initBaseCodeSelect($("#cCzfs"),{cDmlb:"C_NLCZ_ZFFS"},null,"---请选择充值方式---");
         $("#btnSave").click(function(){
             var bPass = requiredFieldCheck($("label .require"), top, function(){});
             if(!bPass){
                 return;
             }else{
-                f_submitData("/plate/insertTGreenNlCzjl");
+                f_submitData("add","/plate/insertPlateuserBlacklist");
             }
         });
     }
     /**
      * 发送请求保存数据
+     * type：操作方式（add加入黑名单/remove移除黑名单）
      * reqURL：服务地址
      */
-    function f_submitData(reqURL){
+    function f_submitData(type,reqURL){
         var data = {
             "cUserid":$("#cUserid").val(),
             "cUsername":$("#cUsername").val(),
@@ -51,16 +55,8 @@ function _init(args, mdi, layerIdx, parentWindow) {
             "cEmail":$("#cEmail").val(),
             "cPhone":$("#cPhone").val(),
 
-
-            "nCzje":$("#nCzje").val(),
-            "dDzsj":$("#dDzsj").val(),
-            "cSfcg":$("#cSfcg").val(),
-            "cCzfs":$("#cCzfs").val(),
-            "cCzyh":$("#cCzyh").val(),
-            "cZfzh":$("#cZfzh").val(),
-            "cDzzh":$("#cDzzh").val(),
-            "cZzdh":$("#cZzdh").val(),
-            "cBz":$("#cBz").val()
+            "cCzfs":cCzfs,
+            "cCzyy":$("#cCzyy").val()
         };
 
         var options = {

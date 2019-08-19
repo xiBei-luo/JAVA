@@ -16,6 +16,10 @@ function initEvent() {
         $("#myAccountModel").modal('show');
     });
 
+    $("#btnCz,#btnTx").click(function () {
+        $("#customModel").modal('show');
+    });
+
 
     $(".navbar-nav li").click(function(){
         $(".navbar-nav li").removeClass("active");
@@ -34,6 +38,8 @@ function initEvent() {
         f_doLike();
     });//点赞业务
 }
+
+
 function toStart(){
     $("#jsGold").css({
         "top":"0",

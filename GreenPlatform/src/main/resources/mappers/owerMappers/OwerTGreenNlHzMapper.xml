@@ -8,7 +8,7 @@
      limit 0,9
   </select>
 
-  <select id="selectTGreenNlHz"  parameterType="java.util.HashMap" resultType="java.util.HashMap">
+  <select id="selectTGreenNlHz" parameterType="java.util.HashMap" resultType="java.util.HashMap">
     select b.c_username cUsername,b.c_loginname cLoginname,a.n_nlhz nNlhz,a.c_userid cUserid,a.c_bz cBz
       from t_green_nl_hz a , plate_user b
      where a.c_userid = b.c_userid
@@ -23,5 +23,28 @@
         AND #{nNlzlZ} >= a.n_nlhz
       </if>
     order by a.n_nlhz,b.c_username desc
+  </select>
+
+
+  <select id="selectTGreenNlHzBycUserid" parameterType="java.lang.String" resultType="java.util.HashMap">
+        SELECT
+            b.*
+        FROM
+            (
+                SELECT
+                    t.*, ROUND(@rownum := @rownum + 1) AS 'rank'
+                FROM
+                    (SELECT @rownum := 0) r,
+                    (
+                        SELECT
+                            *
+                        FROM
+                            t_green_nl_hz
+                        ORDER BY
+                            n_nlhz DESC,d_cjsj DESC
+                    ) AS t
+            ) AS b
+        WHERE
+            b.c_userid = #{cUserid};
   </select>
 </mapper>

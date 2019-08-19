@@ -2,20 +2,21 @@ package com.greenplatform.service.webImpl;
 
 import com.greenplatform.aop.YwOperationCheckAndLog;
 import com.greenplatform.dao.*;
-import com.greenplatform.dao.owerMapper.OwerTGreenGoldDzhzMapper;
-import com.greenplatform.dao.owerMapper.OwerTGreenNlHzMapper;
-import com.greenplatform.dao.owerMapper.OwerTGreenZzZjzzmxMapper;
+import com.greenplatform.dao.owerMapper.*;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.WebService;
 import com.greenplatform.util.GetcurrentLoginUser;
 import com.greenplatform.util.TimeUtil;
+import com.greenplatform.util.returnUtil.ReturnModelHandler;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Transactional
@@ -56,14 +57,19 @@ public class WebServiceImpl implements WebService {
     @Autowired
     TGreenZzJzjlMapper tGreenZzJzjlMapper;
     @Autowired
+    OwerTGreenZzJzjlMapper owerTGreenZzJzjlMapper;
+    @Autowired
     PlateCodeDmzMapper plateCodeDmzMapper;
     @Autowired
     TGreenNlZjnlmxMapper tGreenNlZjnlmxMapper;
-
-
-
-    ReturnModel returnModel = new ReturnModel();
-
+    @Autowired
+    TGreenNlCzjlMapper tGreenNlCzjlMapper;
+    @Autowired
+    TGreenNlTxjlMapper tGreenNlTxjlMapper;
+    @Autowired
+    OwerTGreenNlCzjlMapper owerTGreenNlCzjlMapper;
+    @Autowired
+    OwerTGreenNlTxjlMapper owerTGreenNlTxjlMapper;
 
     /**
      * 查询用户
@@ -90,15 +96,11 @@ public class WebServiceImpl implements WebService {
 
             List plateUserList = plateUserMapper.selectByExample(plateUserExample);
             PlateUser plateUser1 = (PlateUser) plateUserList.get(0);
-            returnModel.setFlag(0);
-            returnModel.setMsg("");
-            returnModel.setObject(plateUser1);
-            return returnModel;
+            return ReturnModelHandler.success(plateUser1);
         }catch (Exception e){
-            returnModel.setFlag(1);
-            returnModel.setMsg("查询出错系统错误");
-            returnModel.setObject(null);
-            return returnModel;
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return ReturnModelHandler.systemError();
         }
 
     }
@@ -124,10 +126,7 @@ public class WebServiceImpl implements WebService {
 
             List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);
             if(!(tGreenRwRwmxList.isEmpty())){
-                returnModel.setFlag(1);
-                returnModel.setMsg("您今天已完成该项任务了！");
-                returnModel.setObject(null);
-                return returnModel;
+                return ReturnModelHandler.error("您今天已完成该项任务了！");
             }else{
                 //1.任务明细中增加一条记录
                 tGreenRwRwmx.setcUserid(GetcurrentLoginUser.getCurrentUser().getcUserid());
@@ -143,18 +142,12 @@ public class WebServiceImpl implements WebService {
                 addGoldOperation("C_GOLD_ZJYY_1");//调用后增加对金币表相关的操作
 
 
-                returnModel.setFlag(0);
-                returnModel.setMsg("恭喜你，完成任务！");
-                returnModel.setObject(null);
-                return returnModel;
+                return ReturnModelHandler.success(null);
             }
         }catch (Exception e){
             e.printStackTrace();
-            returnModel.setFlag(1);
-            returnModel.setMsg("操作出错，系统错误！");
-            returnModel.setObject(null);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return returnModel;
+            return ReturnModelHandler.systemError();
         }
     }
 
@@ -168,10 +161,7 @@ public class WebServiceImpl implements WebService {
     public ReturnModel buySeeds(TGreenZzZjzzmx tGreenZzZjzzmx) {
         //tGreenZzZjzzmx  商品编号必传
         if (null == tGreenZzZjzzmx.getcSpbh() || "".equals(tGreenZzZjzzmx)){
-            returnModel.setFlag(1);
-            returnModel.setMsg("兑换种子编号不能为空！");
-            returnModel.setObject(null);
-            return returnModel;
+            return ReturnModelHandler.error("兑换种子编号不能为空！");
         }
         try{
             PlateUser plateUser = new PlateUser();
@@ -188,20 +178,14 @@ public class WebServiceImpl implements WebService {
             for (int i=0;i<tGreenZzZjzzmxList.size();i++){
                 TGreenZzZjzzmx tGreenZzZjzzmx1 = (TGreenZzZjzzmx) tGreenZzZjzzmxList.get(i);
                 if (tGreenZzZjzzmx1.getcSpbh().equals(tGreenZzZjzzmx.getcSpbh())){
-                    returnModel.setFlag(1);
-                    returnModel.setMsg("您已经有这类种子正在种植中，无法进行兑换！");
-                    returnModel.setObject(null);
-                    return returnModel;
+                    return ReturnModelHandler.error("您已经有这类种子正在种植中，无法进行兑换！");
                 }
             }
 
 
             int tGreenZzZjzzmxCount = tGreenZzZjzzmxList.size();
             if (tGreenZzZjzzmxCount > 3){
-                returnModel.setFlag(1);
-                returnModel.setMsg("您正在种植的植物数量已经有三种，无法进行兑换！");
-                returnModel.setObject(null);
-                return returnModel;
+                return ReturnModelHandler.error("您正在种植的植物数量已经有三种，无法进行兑换！");
             }else{
                 //获取指定用户的能量总量
                 TGreenNlHzExample tGreenNlHzExample = new TGreenNlHzExample();
@@ -219,21 +203,14 @@ public class WebServiceImpl implements WebService {
                 List tGreenSpSpmxList = tGreenSpSpmxMapper.selectByExample(tGreenSpSpmxExample);
 
                 if (tGreenSpSpmxList.size() != 1){
-                    returnModel.setFlag(1);
-                    returnModel.setMsg("操作失败，系统错误！");
-                    returnModel.setObject(null);
-                    return returnModel;
+                    return ReturnModelHandler.systemError();
                 }
 
                 BigDecimal zzPrice = ((TGreenSpSpmx) tGreenSpSpmxList.get(0)).getnSpjg();//获取种子的价格
                 if (tGreenNlHzList.isEmpty()){
-                    returnModel.setFlag(1);
-                    returnModel.setMsg("您的能量不足，快去完成任务获取能量吧！");
-                    returnModel.setObject(null);
+                    return ReturnModelHandler.error("您的能量不足，快去完成任务获取能量吧！");
                 }else if(userNlzl.compareTo(zzPrice) == -1) {
-                    returnModel.setFlag(1);
-                    returnModel.setMsg("您的能量不足，快去完成任务获取能量吧！");
-                    returnModel.setObject(null);
+                    return ReturnModelHandler.error("您的能量不足，快去完成任务获取能量吧！");
                 }else{
                     TGreenNlJsnlmx tGreenNlJsnlmx = new TGreenNlJsnlmx();
                     tGreenNlJsnlmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
@@ -262,19 +239,13 @@ public class WebServiceImpl implements WebService {
                     tGreenZzZjzzmx.setcCjuser(plateUser.getcUserid());
                     tGreenZzZjzzmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
                     tGreenZzZjzzmxMapper.insert(tGreenZzZjzzmx);
-                    returnModel.setFlag(0);
-                    returnModel.setMsg("");
-                    returnModel.setObject(tGreenZzZjzzmx);
+                    return ReturnModelHandler.success(tGreenZzZjzzmx);
                 }
-                return returnModel;
             }
         }catch (Exception e){
             e.printStackTrace();
-            returnModel.setFlag(1);
-            returnModel.setMsg("兑换失败，系统错误！");
-            returnModel.setObject(null);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return returnModel;
+            return ReturnModelHandler.systemError();
         }
     }
 
@@ -288,10 +259,7 @@ public class WebServiceImpl implements WebService {
         try{
             String loginUserId = GetcurrentLoginUser.getCurrentUser().getcUserid();
             if ("".equals(loginUserId) || null == loginUserId){
-                returnModel.setFlag(1);
-                returnModel.setMsg("查询失败，人员编号不能为空");
-                returnModel.setObject(null);
-                return returnModel;
+                return ReturnModelHandler.error("查询失败，人员编号不能为空");
             }else {
                 //人员信息
                 PlateUserExample plateUserExample = new PlateUserExample();
@@ -356,18 +324,12 @@ public class WebServiceImpl implements WebService {
                 System.out.println(tGreenGoldDzhzList);
                 System.out.println(tGreenGoldJbhzList);
 
-                returnModel.setFlag(0);
-                returnModel.setMsg("查询成功");
-                returnModel.setObject(loginuserAccountMap);
-                return returnModel;
+                return ReturnModelHandler.success(loginuserAccountMap);
             }
         }catch (Exception e){
             e.printStackTrace();
-            returnModel.setFlag(1);
-            returnModel.setMsg("查询失败，系统错误");
-            returnModel.setObject(null);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return returnModel;
+            return ReturnModelHandler.systemError();
         }
     }
 
@@ -381,10 +343,7 @@ public class WebServiceImpl implements WebService {
             Map loginUserHomeMap = new HashMap();
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
             if (("").equals(plateUser) || null == plateUser){
-                returnModel.setFlag(1);
-                returnModel.setMsg("暂未登陆，无法进行操作！");
-                returnModel.setObject(null);
-                return returnModel;
+                return ReturnModelHandler.error("暂未登陆，无法进行操作！");
             }else{
                 //1.商品
                 TGreenSpSpmxExample tGreenSpSpmxExample = new TGreenSpSpmxExample();
@@ -415,6 +374,25 @@ public class WebServiceImpl implements WebService {
                     TGreenRwRwmx tGreenRwRwmx = (TGreenRwRwmx) tGreenRwRwmxList.get(i);
                     rwmxMap.put(tGreenRwRwmx.getcRwlb(),true);
                 }
+                //3-1当前月任务完成次数
+                TGreenRwRwmxExample tGreenRwRwmxExample1 = new TGreenRwRwmxExample();
+                TGreenRwRwmxExample.Criteria criteria = tGreenRwRwmxExample1.createCriteria();
+                criteria.andCUseridEqualTo(plateUser.getcUserid());
+                criteria.andCZtEqualTo("1");
+                criteria.andCRwmouthEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,7));
+                List tGreenRwRwmxList1 = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample1);
+                int countRank =  tGreenRwRwmxList1.size()/3;
+                String tmpTxt = "";
+                if(countRank > 20){
+                    tmpTxt = "big";
+                }else if(countRank > 10 && countRank < 20){
+                    tmpTxt = "mid";
+                }else {
+                    tmpTxt = "sm";
+                }
+
+                rwmxMap.put("endRwCountDay",tmpTxt);//完成任务天数
+
                 loginUserHomeMap.put("tGreenRwRwmx",rwmxMap);
 
                 //4.点赞排行榜前十
@@ -424,21 +402,31 @@ public class WebServiceImpl implements WebService {
                 //5.当前登陆人信息
                 loginUserHomeMap.put("plateUser",plateUser);
 
+                //6.当前登陆人的能量排名
+                Map tGreenNlHzMap = owerTGreenNlHzMapper.selectTGreenNlHzBycUserid(plateUser.getcUserid());
+                tGreenNlHzMap.put("cUsername",plateUser.getcUsername());
+                tGreenNlHzMap.put("nRank",Math.round((Double) tGreenNlHzMap.get("rank")));
+                loginUserHomeMap.put("owerTGreenNlHz",tGreenNlHzMap);
 
-                System.out.println(loginUserHomeMap);
+                //7.当前登陆人的点赞排名
+                Map tGreenGoldDzhzMap = owerTGreenGoldDzhzMapper.selectTGreenGoldDzhzBycUserid(plateUser.getcUserid());
+                tGreenGoldDzhzMap.put("cUsername",plateUser.getcUsername());
+                tGreenGoldDzhzMap.put("nRank",Math.round((Double) tGreenNlHzMap.get("rank")));
+                loginUserHomeMap.put("owerTGreenGoldDzhz",tGreenGoldDzhzMap);
 
-                returnModel.setFlag(0);
-                returnModel.setMsg(null);
-                returnModel.setObject(loginUserHomeMap);
-                return returnModel;
+
+                //System.out.println(loginUserHomeMap);
+                System.out.println(rwmxMap);
+                System.out.println(tGreenNlHzMap);
+                System.out.println(tGreenGoldDzhzMap);
+
+
+                return ReturnModelHandler.success(loginUserHomeMap);
             }
         }catch (Exception e){
             e.printStackTrace();
-            returnModel.setFlag(1);
-            returnModel.setMsg("查询失败，系统错误");
-            returnModel.setObject(null);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return returnModel;
+            return ReturnModelHandler.systemError();
         }
     }
 
@@ -455,11 +443,8 @@ public class WebServiceImpl implements WebService {
             //系统能量值是否达到十万
             Map enabledDivideNlMap = enabledDivideNl();
             if ((boolean)enabledDivideNlMap.get("isAbled")){
-                returnModel.setFlag(1);
-                returnModel.setMsg("系统正在准备瓜分能量，暂时不能进行点赞！");
-                returnModel.setObject(null);
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                return returnModel;
+                return ReturnModelHandler.error("系统正在准备瓜分能量，暂时不能进行点赞！");
             }
 
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
@@ -471,19 +456,13 @@ public class WebServiceImpl implements WebService {
             List tGreenGoldHzList1 = tGreenGoldHzMapper.selectByExample(tGreenGoldHzExample1);
 
             if (tGreenGoldHzList1.size() < 1){
-                returnModel.setFlag(1);
-                returnModel.setMsg("金币不足，快去做任务获取金币吧！");
-                returnModel.setObject(null);
-                return returnModel;
+                return ReturnModelHandler.error("金币不足，快去做任务获取金币吧！");
             }
 
             TGreenGoldHz tGreenGoldHz1 = (TGreenGoldHz) tGreenGoldHzList1.get(0);
 
             if(tGreenGoldHz1.getnJbzl().compareTo(new BigDecimal(getDmzByDm("C_DZSL_ONE_1"))) == -1){
-                returnModel.setFlag(1);
-                returnModel.setMsg("金币不足，快去做任务获取金币吧！");
-                returnModel.setObject(null);
-                return returnModel;
+                return ReturnModelHandler.error("金币不足，快去做任务获取金币吧！");
             }
 
             //2.如果当前人是第一次点赞，则在点赞汇总表中增加一条记录，否则不加
@@ -558,17 +537,11 @@ public class WebServiceImpl implements WebService {
                 System.out.println("能量达到十万啦~~~现在开始瓜分能量");
             }
 
-            returnModel.setFlag(0);
-            returnModel.setMsg("恭喜你，点赞成功！");
-            returnModel.setObject(null);
-            return returnModel;
+            return ReturnModelHandler.success(null);
         }catch (Exception e){
             e.printStackTrace();
-            returnModel.setFlag(1);
-            returnModel.setMsg("操作失败，系统错误！");
-            returnModel.setObject(null);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return returnModel;
+            return ReturnModelHandler.systemError();
         }
     }
 
@@ -593,7 +566,7 @@ public class WebServiceImpl implements WebService {
         plateUserMapper.updateByPrimaryKey(plateUser1);
 
 
-        //2.实名制完成后要更新session域中的值
+        //2.实名制完成后要更新session域中的值或强制退出重新登陆
 
 
         //3.将该账户下的种子状态设为有效
@@ -620,10 +593,7 @@ public class WebServiceImpl implements WebService {
         tGreenNlHzMapper.updateByPrimaryKey(tGreenNlHz);
 
 
-        returnModel.setFlag(0);
-        returnModel.setMsg("");
-        returnModel.setObject(null);
-        return returnModel;
+        return ReturnModelHandler.success(null);
     }
 
 
@@ -641,8 +611,9 @@ public class WebServiceImpl implements WebService {
     }
 
 
+
     /**
-     * 捐赠植物业务
+     * 捐赠植物业务(需完善)
      * @param cSpbh  捐赠植物编号
      * @return
      */
@@ -670,10 +641,7 @@ public class WebServiceImpl implements WebService {
             System.out.println("连续完成基础任务："+tGreenRwRwmxList.size()+"天");
 
             if (tGreenRwRwmxList.size() < dayOfMouth){
-                returnModel.setFlag(1);
-                returnModel.setMsg("操作失败，您还没有连续一个月完成基础任务！");
-                returnModel.setObject("");
-                return returnModel;
+                return ReturnModelHandler.error("操作失败，您还没有连续一个月完成基础任务！");
             }
 
             //1.同一账户24小时内只能捐赠一种植物（需要调整判断是否是同一天）
@@ -683,10 +651,7 @@ public class WebServiceImpl implements WebService {
             criteria1.andDJzsjEqualTo(TimeUtil.getTimestamp(new Date()));//此日期需要调整修改
             List tGreenZzJzjlList = tGreenZzJzjlMapper.selectByExample(tGreenZzJzjlExample);
             if (tGreenZzJzjlList.size() > 0){
-                returnModel.setFlag(1);
-                returnModel.setMsg("您今天已经捐赠植物了，同一天只能捐赠一次！");
-                returnModel.setObject("");
-                return returnModel;
+                return ReturnModelHandler.error("您今天已经捐赠植物了，同一天只能捐赠一次！");
             }
 
 
@@ -805,9 +770,6 @@ public class WebServiceImpl implements WebService {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
-
-
-
 
         return null;
     }
@@ -985,6 +947,90 @@ public class WebServiceImpl implements WebService {
         PlateCodeDmz plateCodeDmz = (PlateCodeDmz)plateCodeDmzMapper.selectByExample(plateCodeDmzExample).get(0);
 
         return plateCodeDmz;
+    }
+
+
+    /**
+     * 能量充值记录
+     * @param jsonObject
+     * @return
+     */
+    @Override
+    public ReturnModel selectTGreenNlCzjl(JSONObject jsonObject) {
+        try{
+            PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date dkssj = sdf.parse(jsonObject.getString("dKssj"));//格式化时间
+
+            Map params = new HashMap();
+            params.put("dKssj",dkssj);
+            params.put("cUserid",plateUser.getcUserid());
+
+
+            List tGreenNlCzjlList = owerTGreenNlCzjlMapper.selectTGreenNlCzjl(params);
+
+            return ReturnModelHandler.success(tGreenNlCzjlList);
+        }catch (Exception e){
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return ReturnModelHandler.systemError();
+        }
+    }
+
+    /**
+     * 能量提现记录
+     * @param jsonObject
+     * @return
+     */
+    @Override
+    public ReturnModel selectTGreenNlTxjl(JSONObject jsonObject) {
+        try{
+            PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date dkssj = sdf.parse(jsonObject.getString("dKssj"));//格式化时间
+
+            Map params = new HashMap();
+            params.put("dKssj",dkssj);
+            params.put("cUserid",plateUser.getcUserid());
+
+            List tGreenNlTxjlList = owerTGreenNlTxjlMapper.selectTGreenNlTxjl(params);
+
+            return ReturnModelHandler.success(tGreenNlTxjlList);
+        }catch (Exception e){
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return ReturnModelHandler.systemError();
+        }
+    }
+
+
+    /**
+     * 种子捐赠记录
+     * @param jsonObject
+     * @return
+     */
+    @Override
+    public ReturnModel selectTGreenZzJzjl(JSONObject jsonObject) {
+        try{
+            PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date dkssj = sdf.parse(jsonObject.getString("dKssj"));//格式化时间
+
+            Map params = new HashMap();
+            params.put("dKssj",dkssj);
+            params.put("cUserid",plateUser.getcUserid());
+
+            List tGreenZzJzjlList = owerTGreenZzJzjlMapper.selectTGreenZzJzjl(params);
+
+            return ReturnModelHandler.success(tGreenZzJzjlList);
+        }catch (Exception e){
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return ReturnModelHandler.systemError();
+        }
     }
 
 }

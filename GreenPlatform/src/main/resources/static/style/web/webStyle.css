@@ -37,7 +37,6 @@ header{
 .loginHeader{
     height:100%;
 }
-/*banner begind*/
 #smallTitle{
     font-family: 方正舒体;
     background: #3e8f3e;
@@ -71,7 +70,7 @@ header{
 #navbarBrand{
     position: relative;
 }
-/*banner end*/
+/*logo end*/
 
 /*banner下的三个任务begin*/
 .mission{
@@ -135,7 +134,7 @@ header{
     50%  {left:0px; top:0px;}
     100% {left:0px; top:10px;}
 }
-.mission img{
+.mission img[class='center-block']{
     width: 100%;
     height: 100%;
     background-position: center;
@@ -156,12 +155,13 @@ header{
     background: #f5e79e;
 }
 
-.tree span{
+.tree img{
+    width: 100px;
+    height: 100px;
     position: absolute;
-    left: 48%;
-    font-size: 90px;
-    color: #419641;
-    top: 200px;
+    left: 50%;
+    margin-left: -50px;
+    top: 250px;
 }
 /*banner下的三个任务end*/
 
@@ -248,8 +248,14 @@ header{
     background-size: 40px 40px;
     background-position: center;
 }
+.goldDzRankContent_ower{
+    background: url("../../publicImg/ranklist/ower.png") no-repeat;
+    background-size: 30px 30px;
+    background-position: center;
+}
 /*能量排行榜end*/
 
+/*返回顶部*/
 .sidebar-returnTop{
     position: fixed;
     right:0;
@@ -264,10 +270,13 @@ header{
     line-height: 50px;
     padding-left: 13px;
 }
+/*底部版权声明*/
 .indexFooter{
     height: 30px;
-    background: #737373;
+    background: #333333;
     color: #ffffff;
+    line-height: 30px;
+    text-align: center;
 }
 
 /*种子商店begin*/
@@ -379,10 +388,37 @@ header{
 
 
 /*终端尺寸适配*/
-@media screen and (max-width: 800px) {
-    /*header{*/
-    /*    background: url("../../publicImg/telBg.jpg");*/
-    /*}*/
+@media screen and (max-width: 600px) {
+    /*header左部*/
+    #brandTitle{
+        font-size: 16px;
+    }
+    #brandSubttle{
+        font-size: 12px;
+    }
+    #smallTitle{
+        padding: 3px 5px;
+    }
+
+
+    /*手机背景*/
+    header{
+        background: url("../../publicImg/telBg.jpg") no-repeat;
+    }
+
+    /*三个任务*/
+    .mission{
+        margin-top: 150px;
+    }
+    .mission-js{
+        margin-left: 15%;
+        -webkit-animation:jsMove 2s infinite; /*Safari and Chrome*/
+    }
+    .mission-yg{
+        margin-left: 75%;
+        -webkit-animation:ygMove 2s infinite; /*Safari and Chrome*/
+    }
+
 
     /*排行榜*/
     .goldListWrap{
@@ -418,6 +454,21 @@ header{
     }
 
 
+}
+
+
+/*客服微信二维码*/
+#customModel .modal-content{
+    width: 340px;
+    height: 420px;
+}
+#customModel .modal-body{
+    width: 300px;
+    height: 300px;
+}
+#customImg{
+    width: 300px;
+    height: 300px;
 }
 
 

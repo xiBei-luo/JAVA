@@ -74,7 +74,7 @@
                 </div>
             </div>
             <div class="tree">
-                <span class="glyphicon glyphicon-tree-conifer"></span>
+                <img th:attr="src='/publicImg/icon/'+${loginuserHome.tGreenRwRwmx['endRwCountDay']}+'.png'" alt="">
             </div>
         </div>
     </header>
@@ -105,11 +105,16 @@
                 <div class="col-md-4 col-xs-4" th:text="${tGreenGoldDzhzList.cUsername}"></div>
                 <div class="col-md-4 col-xs-5" th:text="${tGreenGoldDzhzList.nDzzl}"></div>
             </div>
+            <div class="row goldDzRankContent">
+                <div class="col-md-4 col-xs-4 goldDzRankContent_ower" th:text="${loginuserHome.owerTGreenGoldDzhz['nRank']}"></div>
+                <div class="col-md-4 col-xs-3" th:text="${loginuserHome.owerTGreenGoldDzhz['cUsername']}"></div>
+                <div class="col-md-4 col-xs-5" th:text="${loginuserHome.owerTGreenGoldDzhz['n_dzzl']}"></div>
+            </div>
         </div>
     </div>
 
 
-    <!--点赞排行榜-->
+    <!--能量排行榜-->
     <div id="rankList" class="container-fluid mr-top-50">
         <div class="goldListWrap">
             <div class="row">
@@ -125,7 +130,12 @@
             <div class="row goldDzRankContent" th:each="tGreenNlNlhz,tGreenNlNlhzStatu : ${loginuserHome.tGreenNlNlhzList}">
                 <div class="col-md-4 col-xs-3" th:text=${tGreenNlNlhzStatu.index+1} th:attr="id = 'goldDzRankContent_'+${tGreenNlNlhzStatu.index+1}"></div>
                 <div class="col-md-4 col-xs-4" th:text=${tGreenNlNlhz.cUsername}></div>
-                <div class="col-md-4 col-xs-5" th:text="${tGreenNlNlhz.nNlhz}+'KG'"></div>
+                <div class="col-md-4 col-xs-5" th:text="${tGreenNlNlhz.nNlhz}+'G'"></div>
+            </div>
+            <div class="row goldDzRankContent">
+                <div class="col-md-4 col-xs-4 goldDzRankContent_ower" th:text="${loginuserHome.owerTGreenNlHz['nRank']}"></div>
+                <div class="col-md-4 col-xs-3" th:text="${loginuserHome.owerTGreenNlHz['cUsername']}"></div>
+                <div class="col-md-4 col-xs-5" th:text="${loginuserHome.owerTGreenNlHz['n_nlhz']}"></div>
             </div>
         </div>
     </div>
@@ -165,7 +175,7 @@
 
 
     <footer class="container-fluid indexFooter">
-        @copyright 版权所有，绿沙平台
+        版权所有:绿沙种植网络平台有限责任公司
     </footer>
     <div class="sidebar-returnTop">
         <span id="returnTop" class="glyphicon glyphicon-chevron-up"></span>
@@ -195,10 +205,10 @@
                         <li class="list-group-item">
                             <span class="badge" id="nDzzl"></span>我的点赞数
                         </li>
-                        <!--<li class="list-group-item">
-                            <button class="btn btn-primary btn-sm">充值</button>
-                            <button class="btn btn-info btn-sm">提现</button>
-                        </li>-->
+                        <li class="list-group-item">
+                            <button class="btn btn-primary btn-sm" id="btnCz">充值</button>
+                            <button class="btn btn-info btn-sm" id="btnTx">提现</button>
+                        </li>
                         <li class="list-group-item">
                             我的植物
                         </li>
@@ -239,6 +249,20 @@
                 <!--<div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnRet">关闭</button>
                 </div>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="customModel" tabindex="-1" role="dialog" aria-labelledby="customModelLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="customModelLabel">扫码加客服</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="/publicImg/customImg.jpg" id="customImg" alt="">
+                </div>
             </div>
         </div>
     </div>

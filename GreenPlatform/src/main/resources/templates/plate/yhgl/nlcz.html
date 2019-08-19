@@ -38,8 +38,8 @@
             <tbody>
                 <tr>
                     <td colspan="4">
-                        <span class="text-danger"><strong>注意：请仔细核对用户信息，并按照用户提供的转账凭证与平台账户收款凭证正确填写以下信息！<br>
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp若信息填写错误可能导致充值失败！</strong></span>
+                            <span class="text-danger"><strong>注意：请仔细核对用户信息，并按照收款凭证与用户提供的转账凭证正确填写以下信息！若信息填写错误可能导致提现失败！【充值操作时，付款方为用户，收款方为平台】。<br>
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp注意：提现成功后不可撤回！</strong></span>
                     </td>
                 </tr>
                 <tr>
@@ -83,60 +83,102 @@
                         <input type="text" class="form-control" id="cFkzh" name="cFkzh" placeholder="请输入付款账户">
                     </td>
                     <td align="right">
-                        <label for="cDzzh" class="control-label"><i class="require">*</i>到账账户:</label>
+                        <label for="cSkzh" class="control-label"><i class="require">*</i>收款账户:</label>
                     </td>
                     <td align="left">
-                        <input type="text" class="form-control" id="cDzzh" name="cDzzh" placeholder="到账账户">
+                        <input type="text" class="form-control" id="cSkzh" name="cSkzh" placeholder="请输入收款账户">
                     </td>
                 </tr>
                 <tr>
                     <td align="right">
-                        <label for="cCzfs" class="control-label"><i class="require">*</i>充值方式:</label>
+                        <label for="cFkfs" class="control-label"><i class="require">*</i>付款方式:</label>
                     </td>
                     <td align="left">
-                        <select class="form-control"  name="cCzfs" id="cCzfs"></select>
+                        <select class="form-control"  name="cFkfs" id="cFkfs"></select>
                     </td>
                     <td align="right">
-                        <label for="cSfcg" class="control-label"><i class="require">*</i>是否成功:</label>
+                        <label for="cSkfs" class="control-label"><i class="require">*</i>收款方式:</label>
                     </td>
                     <td align="left">
-                        <select class="form-control"  name="cSfcg" id="cSfcg"></select>
-                    </td>
-                </tr>
-                <tr class="czfs_yhk" hidden>
-                    <td align="right">
-                        <label for="cCzyh" class="control-label">充值银行:</label>
-                    </td>
-                    <td align="left">
-                        <input type="text" class="form-control" id="cCzyh" name="cCzyh" placeholder="请输入充值银行">
-                    </td>
-                    <td align="right">
-                        <label for="cCzkh" class="control-label">充值卡号:</label>
-                    </td>
-                    <td align="left">
-                        <input type="text" class="form-control" id="cCzkh" name="cCzkh" placeholder="请输入充值卡号">
+                        <select class="form-control"  name="cSkfs" id="cSkfs"></select>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">
-                        <label for="dDzsj" class="control-label"><i class="require">*</i>到账时间:</label>
+                        <label for="dFksj" class="control-label"><i class="require">*</i>付款时间:</label>
                     </td>
                     <td align="left">
-                        <input type="text" class="form-control" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  id="dDzsj" name="dDzsj" placeholder="请输入到账时间">
+                        <input type="text" class="form-control" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  id="dFksj" name="dFksj" placeholder="请输入付款时间">
                     </td>
                     <td align="right">
-                        <label for="nCzje" class="control-label"><i class="require">*</i>充值金额:</label>
+                        <label for="dSksj" class="control-label"><i class="require">*</i>收款时间:</label>
                     </td>
                     <td align="left">
-                        <input type="text" class="form-control" id="nCzje" name="nCzje" placeholder="请输入充值金额">
+                        <input type="text" class="form-control" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  id="dSksj" name="dSksj" placeholder="请输入收款时间">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" class="fk_yhk">
+                        <label for="cFkyh" class="control-label">付款银行:</label>
+                    </td>
+                    <td align="left" class="fk_yhk">
+                        <input type="text" class="form-control" id="cFkyh" name="cFkyh" placeholder="请输入付款银行" disabled>
+                    </td>
+                    <td align="right" class="sk_yhk">
+                        <label for="cSkyh" class="control-label">收款银行:</label>
+                    </td>
+                    <td align="left" class="sk_yhk">
+                        <input type="text" class="form-control" id="cSkyh" name="cSkyh" placeholder="请输入收款银行" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" class="fk_yhk">
+                        <label for="cFkkh" class="control-label">付款卡号:</label>
+                    </td>
+                    <td align="left" class="fk_yhk">
+                        <input type="text" class="form-control" id="cFkkh" name="cFkkh" placeholder="请输入付款卡号" disabled>
+                    </td>
+                    <td align="right" class="sk_yhk">
+                        <label for="cSkkh" class="control-label">收款卡号:</label>
+                    </td>
+                    <td align="left" class="sk_yhk">
+                        <input type="text" class="form-control" id="cSkkh" name="cSkkh" placeholder="请输入收款卡号" disabled>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">
-                        <label for="cZzdh" class="control-label"><i class="require">*</i>转账单号:</label>
+                        <label for="cFksfcg" class="control-label"><i class="require">*</i>付款是否成功:</label>
+                    </td>
+                    <td align="left">
+                        <select class="form-control"  name="cFksfcg" id="cFksfcg"></select>
+                    </td>
+                    <td align="right">
+                        <label for="cSksfcg" class="control-label"><i class="require">*</i>收款是否成功:</label>
+                    </td>
+                    <td align="left">
+                        <select class="form-control"  name="cSksfcg" id="cSksfcg"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="cFkdh" class="control-label"><i class="require">*</i>付款单号:</label>
+                    </td>
+                    <td align="left">
+                        <input type="text" class="form-control" id="cFkdh" name="cFkdh" placeholder="请输入付款单号">
+                    </td>
+                    <td align="right">
+                        <label for="cSkdh" class="control-label"><i class="require">*</i>收款单号:</label>
+                    </td>
+                    <td align="left">
+                        <input type="text" class="form-control" id="cSkdh" name="cSkdh" placeholder="请输入收款单号">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="nFkje" class="control-label"><i class="require">*</i>付款金额:</label>
                     </td>
                     <td align="left" colspan="3">
-                        <input type="text" class="form-control" id="cZzdh" name="cZzdh" placeholder="请输入转账单号">
+                        <input type="text" class="form-control" id="nFkje" name="nFkje" placeholder="请输入付款金额">
                     </td>
                 </tr>
                 <tr>

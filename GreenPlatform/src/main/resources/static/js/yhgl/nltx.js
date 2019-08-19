@@ -28,17 +28,70 @@ function _init(args, mdi, layerIdx, parentWindow) {
 
 
     function initEvent(){
-        initBaseCodeSelect($("#cSfcg"),{cDmlb:"C_JC_SF"},null,"---请选择是否成功---");
-        initBaseCodeSelect($("#cCzfs"),{cDmlb:"C_NLCZ_ZFFS"},null,"---请选择充值方式---");
+        $("#cFkfs").change(function(){
+            $(".fk_yhk input").val("");
+            if ("3" == $("#cFkfs").val()){
+                $(".fk_yhk input").attr("disabled",false);
+            } else {
+                $(".fk_yhk input").attr("disabled",true);
+            }
+        });
+        $("#cSkfs").change(function(){
+            $(".sk_yhk input").val("");
+            if ("3" == $("#cSkfs").val()){
+                $(".sk_yhk input").attr("disabled",false);
+            } else {
+                $(".sk_yhk input").attr("disabled",true);
+            }
+        });
+
+        initBaseCodeSelect($("#cFksfcg,#cSksfcg"),{cDmlb:"C_JC_SF"},null,"---请选择是否成功---");
+        initBaseCodeSelect($("#cFkfs,#cSkfs"),{cDmlb:"C_NLCZ_ZFFS"},null,"---请选择支付方式---");
         $("#btnSave").click(function(){
             var bPass = requiredFieldCheck($("label .require"), top, function(){});
             if(!bPass){
                 return;
             }else{
-                f_submitData("/plate/insertTGreenNlCzjl");
+                checkParms();
             }
         });
     }
+
+
+    /**
+     * 参数验证
+     */
+    function checkParms() {
+        var aParams = ["#cFkzh","#cSkzh","#cFkdh","#cSkdh","#nFknl"];
+        for (var i=0;i<aParams.length;i++){
+            if (!f_checkNumObj(aParams[i])) {
+                return;
+            }
+        }
+        f_submitData("/plate/insertTGreenNlTxjl");
+    }
+
+    function f_checkNumObj(obj) {
+        var cFkzhReg = /^\d+(\.\d{1,2})?$/;
+
+        if (!cFkzhReg.test($(obj).val())){
+            BootstrapDialog.alert({
+                type: BootstrapDialog.TYPE_WARNING,
+                size: BootstrapDialog.SIZE_SMALL,
+                title: '提示',
+                message: "输入格式有误！",
+                closeable: true,
+                buttonLabel: "确定",
+                callback: function () {
+                    $(obj).focus();
+                }
+            });
+            return false;
+        }
+        return true;
+    }
+
+
     /**
      * 发送请求保存数据
      * reqURL：服务地址
@@ -52,14 +105,23 @@ function _init(args, mdi, layerIdx, parentWindow) {
             "cPhone":$("#cPhone").val(),
 
 
-            "nCzje":$("#nCzje").val(),
-            "dDzsj":$("#dDzsj").val(),
-            "cSfcg":$("#cSfcg").val(),
-            "cCzfs":$("#cCzfs").val(),
-            "cCzyh":$("#cCzyh").val(),
-            "cZfzh":$("#cZfzh").val(),
-            "cDzzh":$("#cDzzh").val(),
-            "cZzdh":$("#cZzdh").val(),
+            "cFkzh":$("#cFkzh").val(),
+            "cFkfs":$("#cFkfs").val(),
+            "dFksj":$("#dFksj").val(),
+            "cFkyh":$("#cFkyh").val(),
+            "cFkkh":$("#cFkkh").val(),
+            "cFksfcg":$("#cFksfcg").val(),
+            "cFkdh":$("#cFkdh").val(),
+
+            "cSkzh":$("#cSkzh").val(),
+            "cSkfs":$("#cSkfs").val(),
+            "dSksj":$("#dSksj").val(),
+            "cSkyh":$("#cSkyh").val(),
+            "cSkkh":$("#cSkkh").val(),
+            "cSksfcg":$("#cSksfcg").val(),
+            "cSkdh":$("#cSkdh").val(),
+
+            "nFknl":$("#nFknl").val(),
             "cBz":$("#cBz").val()
         };
 

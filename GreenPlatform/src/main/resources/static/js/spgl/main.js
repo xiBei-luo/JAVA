@@ -107,7 +107,7 @@ function initData(data){
 function f_upd(id){
     var data = grid.getUserData(id,"data");
     var win = top.$.MdiWindow(window, 750, 300, 0, 0, true);
-    win.setTitle("新增商品");
+    win.setTitle("修改商品");
     win.setWindowArguments(data);//参数
     win.btnClose(true);
     win.btnMax(false);

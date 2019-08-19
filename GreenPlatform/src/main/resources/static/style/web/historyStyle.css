@@ -13,7 +13,90 @@
     height: 50px;
     line-height: 50px;
 }
+.searchForm input{
+    margin:7px 0;
+}
+#tableSection .row div{
+    padding: 0 5px;
+}
 #perInfoForm label{
     text-align: right;
     padding-right: 2px;
+}
+
+/*logo*/
+.logo{
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 5px;
+    margin-top: -10px;
+}
+.indexHeader{
+    height:500px;
+}
+.loginHeader{
+    height:100%;
+}
+/*banner begind*/
+#smallTitle{
+    font-family: 方正舒体;
+    background: #3e8f3e;
+    padding: 3px 8px;
+    font-size: 14px;
+    margin-left: 105px;
+    border-radius: 5px;
+    color: #ffffff;
+}
+#brandTitle{
+    font-weight: bold;
+    position: absolute;
+    top: 3px;
+    left: 60px;
+    height: 44px;
+    line-height: 28px;
+    font-size: 18px;
+    float: left;
+    padding-right: 5px;
+    border-right: 1px solid #555555;
+    margin: 0;
+    letter-spacing: 5px;
+}
+#brandSubttle{
+    font-weight: normal;
+    font-size: 12px;
+    letter-spacing: normal;
+    display: block;
+    margin-top: -5px;
+}
+#navbarBrand{
+    position: relative;
+}
+/*banner end*/
+
+#commonInfo{
+    z-index: 999;
+    width: 95%;
+    height: auto;
+    position: absolute;
+    top:50%;
+    text-align: center;
+    font-size: 18px;
+    color: #C6C6C6;
+}
+
+
+/*终端尺寸适配*/
+@media screen and (max-width: 600px) {
+    /*header左部*/
+    #brandTitle{
+        font-size: 16px;
+    }
+    #brandSubttle{
+        font-size: 12px;
+    }
+    #smallTitle{
+        padding: 3px 5px;
+    }
+
 }

@@ -8,6 +8,7 @@ import com.greenplatform.service.LoginService;
 import com.greenplatform.util.MD5;
 import com.greenplatform.util.TimeUtil;
 import com.greenplatform.util.UserStringUtil;
+import com.greenplatform.util.returnUtil.ReturnModelHandler;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     TGreenGoldHzMapper tGreenGoldHzMapper;
 
-    ReturnModel returnModel = new ReturnModel();
+    //ReturnModel returnModel = new ReturnModel();
 
 
     /**
@@ -57,27 +58,18 @@ public class LoginServiceImpl implements LoginService {
         criteria.andCLoginnameEqualTo(plateUser.getcLoginname());
         plateUserList = plateUserMapper.selectByExample(plateUserExample);
         if (plateUserList.isEmpty()){
-            returnModel.setFlag(1);
-            returnModel.setMsg("用户不存在！");
-            returnModel.setObject(null);
-            return returnModel;
+            return ReturnModelHandler.error("用户不存在!");
         }else{
             //2.登陆密码是否正确
             criteria.andCPasswordEqualTo(plateUser.getcPassword());
             criteria.andCRylbEqualTo(plateUser.getcRylb());
             plateUserList = plateUserMapper.selectByExample(plateUserExample);
             if (plateUserList.isEmpty()){
-                returnModel.setFlag(1);
-                returnModel.setMsg("登录密码错误");
-                returnModel.setObject(null);
-                return returnModel;
+                return ReturnModelHandler.error("登录密码错误!");
             }else{
-                returnModel.setFlag(0);
-                returnModel.setMsg("登陆成功");
-                returnModel.setObject(plateUserList);
                 PlateUser plateUser1 = (PlateUser) plateUserList.get(0);
                 session.setAttribute("loginUser",plateUser1);
-                return returnModel;
+                return ReturnModelHandler.success(plateUser1);
             }
         }
     }
@@ -92,16 +84,17 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public ReturnModel doRegister(String jsonObject, HttpSession session) {
         try{
+
             JSONObject jsonParams = JSONObject.fromObject(jsonObject);
 
             Map hashMap = new HashMap();
             hashMap.put("cPhone",jsonParams.getString("cPhone"));
             hashMap.put("smsCode",jsonParams.getString("smsCode"));
 
-            returnModel = checkSmsCode(hashMap,session);
+            ReturnModel checkSmsCodeReturnModel = checkSmsCode(hashMap,session);
 
-            if (!(0 == returnModel.getFlag())){
-                return returnModel;
+            if (!(0 == checkSmsCodeReturnModel.getFlag())){
+                return checkSmsCodeReturnModel;
             }else{
                 session.removeAttribute("smsCodeObj");
                 PlateUser plateUser = new PlateUser();
@@ -113,17 +106,11 @@ public class LoginServiceImpl implements LoginService {
 
                 //1.判断邮箱或用户名是否被注册
                 if (false == checkUser("phone",plateUser.getcPhone())){
-                    returnModel.setFlag(1);
-                    returnModel.setObject(null);
-                    returnModel.setMsg("注册失败，邮箱已经被注册!");
-                    return returnModel;
+                    return ReturnModelHandler.error("注册失败，邮箱已经被注册！");
                 }
 
                 if (false == checkUser("loginname",plateUser.getcLoginname())){
-                    returnModel.setFlag(1);
-                    returnModel.setObject(null);
-                    returnModel.setMsg("注册失败，用户名已经被注册!");
-                    return returnModel;
+                    return ReturnModelHandler.error("注册失败，用户名已经被注册!");
                 }
 
                 //3.注册用户
@@ -146,10 +133,7 @@ public class LoginServiceImpl implements LoginService {
                 plateUser.setcCjuser(majorKey);
                 int insertRet = plateUserMapper.insert(plateUser);
                 if (1 != insertRet){
-                    returnModel.setFlag(1);
-                    returnModel.setObject(null);
-                    returnModel.setMsg("注册失败，系统错误!");
-                    return returnModel;
+                    return ReturnModelHandler.systemError();
                 }else{
                     //平台用户注册成功则对应账户账户增加价值100能量的种子(注册成功，但还未实名制账户，实名制后将状态修改为有效1)
                     TGreenZzZjzzmx tGreenZzZjzzmx = new TGreenZzZjzzmx();
@@ -176,20 +160,14 @@ public class LoginServiceImpl implements LoginService {
                     tGreenNlHzMapper.insert(tGreenNlHz);
 
                     session.setAttribute("loginUser",plateUser);//前端用户注册成功后写入session
-                    returnModel.setFlag(0);
-                    returnModel.setObject(null);
-                    returnModel.setMsg("注册成功!");
-                    return  returnModel;
+                    return  ReturnModelHandler.success(plateUser);
                 }
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            returnModel.setFlag(1);
-            returnModel.setObject(null);
-            returnModel.setMsg("注册失败，系统错误!");
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return returnModel;
+            return ReturnModelHandler.systemError();
         }
     }
 
@@ -296,6 +274,8 @@ public class LoginServiceImpl implements LoginService {
             List plateUserList = plateUserMapper.selectByExample(plateUserExample);
             if (plateUserList.size() < 1){
                 System.out.println("用户没有注册平台");
+
+                return ReturnModelHandler.error("用户没有注册平台");
             }else if (plateUserList.size() == 1){
                 System.out.println("注册过平台，找回密码");
                 PlateUser plateUser = (PlateUser) plateUserList.get(0);
@@ -304,20 +284,15 @@ public class LoginServiceImpl implements LoginService {
                 plateUser.setcXguser(plateUser.getcUserid());
                 System.out.println("修改数据："+plateUser);
                 plateUserMapper.updateByPrimaryKey(plateUser);
-                returnModel.setFlag(0);
-                returnModel.setMsg("");
-                returnModel.setObject(null);
+                return ReturnModelHandler.success(plateUser);
             }else{
-                System.out.println("电话号码存在重复，有误！");
+                return ReturnModelHandler.error("电话号码存在重复，有误！");
             }
-            return returnModel;
+
         }catch (Exception e){
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            returnModel.setFlag(1);
-            returnModel.setMsg("操作失败，系统错误");
-            returnModel.setObject(null);
-            return returnModel;
+            return ReturnModelHandler.systemError();
         }
     }
 
@@ -335,9 +310,9 @@ public class LoginServiceImpl implements LoginService {
         Map hashMap = new HashMap();
         hashMap.put("cPhone",jsonParams.getString("cPhone"));
         hashMap.put("smsCode",jsonParams.getString("smsCode"));
-        ReturnModel returnModel1 = checkSmsCode(hashMap,session);//验证验证码是否正确
+        ReturnModel checkSmsCodeReturnModel = checkSmsCode(hashMap,session);//验证验证码是否正确
 
-        if (0 == returnModel.getFlag()){
+        if (0 == checkSmsCodeReturnModel.getFlag()){
             PlateUserExample plateUserExample = new PlateUserExample();
             PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
             criteria.andCZtEqualTo("1");
@@ -348,12 +323,9 @@ public class LoginServiceImpl implements LoginService {
             List plateUserList = plateUserMapper.selectByExample(plateUserExample);
             PlateUser plateUser = (PlateUser) plateUserList.get(0);
             session.setAttribute("loginUser",plateUser);
-            returnModel1.setFlag(0);
-            returnModel1.setMsg("登陆成功");
-            returnModel1.setObject(null);
-            return returnModel1;
+            return ReturnModelHandler.success(plateUser);
         }else{
-            return returnModel1;
+            return ReturnModelHandler.error(checkSmsCodeReturnModel.getMsg());
         }
     }
 

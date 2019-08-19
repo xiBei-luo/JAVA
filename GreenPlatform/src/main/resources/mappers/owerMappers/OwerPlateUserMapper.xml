@@ -16,13 +16,13 @@
            A.c_zcfs cZcfs,
            A.c_jtzz cJtzz,
            A.c_email cEmail,
-           CASE WHEN A.c_ryzt = '0' THEN '未激活'
-                WHEN A.c_ryzt = '1' THEN '已激活'
+           CASE WHEN A.c_ryzt = '0' THEN '无效'
+                WHEN A.c_ryzt = '1' THEN '有效'
                 ELSE ''
            END cRyztsm,
 
            CASE WHEN A.c_ryxz = '1' THEN '正常'
-                WHEN A.c_ryzt = '-1' THEN '黑名单用户'
+                WHEN A.c_ryxz = '-1' THEN '黑名单用户'
                 ELSE ''
            END cRyxzsm,
 
