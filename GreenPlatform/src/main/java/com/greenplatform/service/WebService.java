@@ -4,6 +4,8 @@ import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import net.sf.json.JSONObject;
 
+import javax.servlet.http.HttpSession;
+
 public interface WebService {
 
     //查询用户
@@ -25,7 +27,7 @@ public interface WebService {
     ReturnModel doLike();
 
     //实名认证
-    ReturnModel certification(PlateUser plateUser);
+    ReturnModel certification(PlateUser plateUser, HttpSession session);
 
     //捐赠植物业务
     ReturnModel contributeSeed(String cLsh,String cSpbh);
@@ -47,6 +49,9 @@ public interface WebService {
 
     //查询捐赠记录
     ReturnModel selectTGreenZzJzjl(JSONObject jsonObject);
+
+    //查询欢迎页数据
+    ReturnModel selectWelcomePageInfo();
 
 
 

@@ -8,6 +8,7 @@ import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.util.CusAccessObjectUtil;
 import com.greenplatform.util.GetcurrentLoginUser;
 import com.greenplatform.util.TimeUtil;
+import com.greenplatform.util.returnUtil.ReturnModelHandler;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -45,7 +46,6 @@ public class YwOperationCheckAndLogAspect {
     //调用前-验证
     @Around("ywOperPoinCut()")
     public ReturnModel beforeywOperPoinCut(ProceedingJoinPoint proceedingJoinPoint){
-        System.out.println("系统验证before");
         ReturnModel returnModel = new ReturnModel();
 
 
@@ -55,9 +55,7 @@ public class YwOperationCheckAndLogAspect {
                 PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
                 //1.前端用户未实名制不能进行操作
                 if ("2".equals(plateUser.getcRylb()) && !(("1").equals(plateUser.getcIssmz()))){
-                    returnModel.setFlag(1);
-                    returnModel.setMsg("请先完成实名制再进行业务操作！");
-                    returnModel.setObject(null);
+                    return ReturnModelHandler.error("请先完成实名制再进行业务操作！");
                 }else{
                     returnModel = (ReturnModel) proceedingJoinPoint.proceed();
                 }
@@ -78,7 +76,6 @@ public class YwOperationCheckAndLogAspect {
     //调用后保存日志
     @After("ywOperPoinCut()")
     public void afterywOperPoinCut(JoinPoint  proceedingJoinPoint){
-        System.out.println("系统日志after");
         saveSysLog(proceedingJoinPoint);
     }
 
@@ -94,7 +91,6 @@ public class YwOperationCheckAndLogAspect {
      * @param proceedingJoinPoint
      */
     private void saveSysLog(JoinPoint proceedingJoinPoint){
-        System.out.println("保存日志");
         //保存日志
         PlateLog plateLog = new PlateLog();
 

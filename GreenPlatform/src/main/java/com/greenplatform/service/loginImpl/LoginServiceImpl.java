@@ -215,8 +215,6 @@ public class LoginServiceImpl implements LoginService {
         JSONObject jsonSessionParams = JSONObject.fromObject(session.getAttribute("smsCodeObj"));
         String sessionSmsCode = jsonSessionParams.getString("smsCode");//session域中的验证码
 
-        System.out.println("验证参数"+hashMap);
-        System.out.println("session域"+jsonSessionParams);
 
         //验证：手机号码是否匹配
         if (null == cPhone || ("").equals(cPhone)){
@@ -260,7 +258,6 @@ public class LoginServiceImpl implements LoginService {
     public ReturnModel retWebUserPassowrd(String jsonObject, HttpSession session) {
         try{
             JSONObject jsonParams = JSONObject.fromObject(jsonObject);
-            System.out.println("参数："+jsonParams);
             String cPhone = jsonParams.getString("cPhone");
             String cPassword = jsonParams.getString("cPassword");
 
@@ -273,16 +270,12 @@ public class LoginServiceImpl implements LoginService {
             criteria.andCPhoneEqualTo(cPhone);
             List plateUserList = plateUserMapper.selectByExample(plateUserExample);
             if (plateUserList.size() < 1){
-                System.out.println("用户没有注册平台");
-
                 return ReturnModelHandler.error("用户没有注册平台");
             }else if (plateUserList.size() == 1){
-                System.out.println("注册过平台，找回密码");
                 PlateUser plateUser = (PlateUser) plateUserList.get(0);
                 plateUser.setcPassword(MD5.md5(cPassword));
                 plateUser.setdXgsj(TimeUtil.getTimestamp(new Date()));
                 plateUser.setcXguser(plateUser.getcUserid());
-                System.out.println("修改数据："+plateUser);
                 plateUserMapper.updateByPrimaryKey(plateUser);
                 return ReturnModelHandler.success(plateUser);
             }else{

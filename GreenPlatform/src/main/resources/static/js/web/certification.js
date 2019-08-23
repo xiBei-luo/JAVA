@@ -14,6 +14,7 @@ $(function(){
  * 表单验证
  */
 function checkForm(){
+    var hanReg = /^[\u4e00-\u9fa5]{2,4}$/;
     var phoneReg = /^1[3456789]\d{9}$/;
     var zjhmReg = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4}$/;
 
@@ -27,7 +28,11 @@ function checkForm(){
                 message: '姓名验证失败',
                 validators: {
                     notEmpty: {
-                        message: '邮箱不能为空'
+                        message: '姓名不能为空'
+                    },
+                    regexp: {
+                        regexp: hanReg,
+                        message: '姓名为2-4个长度的汉字'
                     }
                 }
             },
@@ -35,7 +40,7 @@ function checkForm(){
                 message: '电话号码验证失败',
                 validators: {
                     notEmpty: {
-                        message: '用户名不能为空'
+                        message: '电话号码不能为空'
                     },
                     regexp: {
                         regexp: phoneReg,
@@ -50,7 +55,7 @@ function checkForm(){
                     },
                     regexp: {
                         regexp: zjhmReg,
-                        message: '电话号码格式有误'
+                        message: '证件号码格式有误'
                     }
                 }
             }

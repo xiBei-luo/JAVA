@@ -1,10 +1,19 @@
 /*公共begin*/
 header{
-    width: 100%;
-    background: url("../../publicImg/systemBg.jpg");
-    background-repeat: no-repeat;
-    background-size: 1368px 500px;
-    overflow-x: hidden;
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    min-width: 800px;
+    z-index:-10;
+    zoom: 1;
+    background-color: #fff;
+    background: url("../../publicImg/systemBg.jpg") no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center 0;
 }
 .mr-top-100{
     margin-top:100px;
@@ -47,12 +56,18 @@ header{
 
 
 /*终端尺寸适配*/
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
    /* #registerForm .row{
         height: 50px;
         margin-bottom: 0;
         margin-top: 5px;
     }*/
+
+    /*手机背景*/
+    header{
+        min-width: 350px;
+        background: url("../../publicImg/telBg.jpg") no-repeat;
+    }
 
 
 }

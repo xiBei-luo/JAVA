@@ -13,6 +13,10 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * 登陆相关
+ */
 @RestController
 @RequestMapping(value = "/login")
 public class LoginController {
@@ -29,7 +33,6 @@ public class LoginController {
     @PostMapping(value = "/login")
     public ReturnModel login(PlateUser plateUser, HttpSession session){
         ReturnModel returnModel = loginService.checkLogin(plateUser,session);
-        System.out.println(returnModel);
         return returnModel;
     }
 
@@ -49,10 +52,8 @@ public class LoginController {
      */
     @PostMapping(value = "/getVerificationCode")
     public ReturnModel getVerificationCode(PlateUser plateUser, HttpSession session){
-        System.out.println(plateUser);
         ReturnModel returnModel = new ReturnModel();
         returnModel = GetMessageCode.getCode(plateUser.getcPhone(),session);
-        System.out.println(session.getAttribute("smsCodeObj"));
         return returnModel;
     }
 
@@ -69,9 +70,7 @@ public class LoginController {
         Map hashMap = new HashMap();
         hashMap.put("cPhone",jsonParams.getString("cPhone"));
         hashMap.put("smsCode",jsonParams.getString("smsCode"));
-        System.out.println("in controller params:"+jsonParams);
         ReturnModel returnModel = loginService.checkSmsCode(hashMap,session);
-        System.out.println(returnModel);
         return returnModel;
     }
 
@@ -84,7 +83,6 @@ public class LoginController {
     @PostMapping(value = "/retWebUserPassowrd")
     public ReturnModel retWebUserPassowrd(@RequestBody String jsonObject, HttpSession session){
         ReturnModel returnModel = loginService.retWebUserPassowrd(jsonObject,session);
-        System.out.println(returnModel);
         return returnModel;
     }
 

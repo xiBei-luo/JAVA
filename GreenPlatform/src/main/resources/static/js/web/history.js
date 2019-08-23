@@ -44,6 +44,7 @@ function initEvent() {
  * 初始化表格
  */
 function initGrid(){
+    $(".gridbox").attr({width:"100%",height:"100%"});
     grid1 = new dhtmlXGridObject('gridbox_cJzjl');
     grid1.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
     grid1.setHeader("捐赠时间,捐赠人,捐赠种子,备注");

@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by Luowenlv on 2019/5/7,11:25
+ * 网站前端相关
  */
 @Controller
 @RequestMapping(value = "/web")
@@ -75,13 +78,13 @@ public class WebController {
     //实名认证（调用支付宝或微信接口）
     @RequestMapping(value = "/certification",method = RequestMethod.POST)
     @ResponseBody
-    public ReturnModel certification(PlateUser plateUser){
+    public ReturnModel certification(PlateUser plateUser, HttpSession session){
         PlateUser plateUser1 = GetcurrentLoginUser.getCurrentUser();
         plateUser1.setcUsername(plateUser.getcUsername());
         plateUser1.setcPhone(plateUser.getcPhone());
         plateUser1.setcZjhm(plateUser.getcZjhm());
 
-        ReturnModel returnModel = webService.certification(plateUser1);
+        ReturnModel returnModel = webService.certification(plateUser1,session);
         return returnModel;
     }
 

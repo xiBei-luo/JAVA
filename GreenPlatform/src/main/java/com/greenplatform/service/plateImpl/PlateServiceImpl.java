@@ -114,7 +114,6 @@ public class PlateServiceImpl implements PlateService {
 
         try{
             plateUserList = owerPlateUserMapper.selectWebUser(plateUser);
-            System.out.println(plateUserList);
             return ReturnModelHandler.success(plateUserList);
         }catch(Exception e){
             e.printStackTrace();
@@ -501,7 +500,6 @@ public class PlateServiceImpl implements PlateService {
                 loginuserYwqxMap.put("plateYwLxMenuList",plateYwLxMenuList);
             }
             loginuserYwqxMap.put("permissionFlMap",permissionFlMap);
-            System.out.println(loginuserYwqxMap);
             return ReturnModelHandler.success(loginuserYwqxMap);
         }catch (Exception e){
             e.printStackTrace();
@@ -921,7 +919,6 @@ public class PlateServiceImpl implements PlateService {
                 }
                 returnList.add(returnMap);
             }
-            System.out.println(returnList);
             return ReturnModelHandler.success(returnList);
         }catch (Exception e){
             e.printStackTrace();
@@ -968,8 +965,6 @@ public class PlateServiceImpl implements PlateService {
                 if (plateUserRoleMidList.size() > 0){
                     for (int j = 0;j < plateUserRoleMidList.size();j++){
                         PlateUserRoleMid plateUserRoleMid = (PlateUserRoleMid) plateUserRoleMidList.get(j);
-                        System.out.println(plateUserRoleMid.getcUserid());
-                        System.out.println(plateUser.getcUserid());
                         if (plateUserRoleMid.getcUserid().equals(plateUser.getcUserid())){
                             retMap.put("isCheck","1");
                             break;
@@ -980,7 +975,6 @@ public class PlateServiceImpl implements PlateService {
                 }
                 returnList.add(retMap);
             }
-            System.out.println(returnList);
 
             return ReturnModelHandler.success(returnList);
         }catch (Exception e){
@@ -1045,7 +1039,6 @@ public class PlateServiceImpl implements PlateService {
     @YwOperationCheckAndLog(cCzfs = "I")
     @Override
     public ReturnModel saveUserRoleMid(JSONObject jsonObject) {
-        System.out.println(jsonObject);
         try{
             if (jsonObject.isEmpty()){
                 return ReturnModelHandler.error("保存失败，参数传递错误!");
@@ -1092,9 +1085,7 @@ public class PlateServiceImpl implements PlateService {
     public ReturnModel selectTGreenNlHz(JSONObject jsonObject) {
         try{
             Map paramMap = jsonObject;
-            System.out.println(paramMap);
             List tGreenNlHzList = owerTGreenNlHzMapper.selectTGreenNlHz(paramMap);
-            System.out.println(tGreenNlHzList);
 
             return ReturnModelHandler.success(tGreenNlHzList);
         }catch (Exception e){
@@ -1280,7 +1271,6 @@ public class PlateServiceImpl implements PlateService {
             }
 
             PlateUser plateUserCz = plateUser;//充值账户
-            System.out.println(plateUserCz);
 
             //增加能量明细
             TGreenNlZjnlmx tGreenNlZjnlmx = new TGreenNlZjnlmx();//增加能量明细表
@@ -1292,7 +1282,6 @@ public class PlateServiceImpl implements PlateService {
             tGreenNlZjnlmx.setcZt("1");
             tGreenNlZjnlmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
             tGreenNlZjnlmx.setcCjuser(plateUserOp.getcUserid());
-            System.out.println(tGreenNlZjnlmx);
             tGreenNlZjnlmxMapper.insert(tGreenNlZjnlmx);
 
             //修改能量汇总
@@ -1300,7 +1289,6 @@ public class PlateServiceImpl implements PlateService {
             tGreenNlHz.setnNlhz(tGreenNlHz.getnNlhz().add(new BigDecimal(nSknl)));//充值金额对应能量比目前为  1:1
             tGreenNlHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
             tGreenNlHz.setcXguser(plateUserOp.getcUserid());
-            System.out.println(tGreenNlHz);
             tGreenNlHzMapper.updateByPrimaryKey(tGreenNlHz);
 
             //新增充值记录
@@ -1341,7 +1329,6 @@ public class PlateServiceImpl implements PlateService {
             tGreenNlCzjl.setcZt("1");
             tGreenNlCzjl.setcCjuser(plateUserOp.getcUserid());
             tGreenNlCzjl.setdCjsj(TimeUtil.getTimestamp(new Date()));
-            System.out.println(tGreenNlCzjl);
             tGreenNlCzjlMapper.insert(tGreenNlCzjl);
 
             return ReturnModelHandler.success(null);
@@ -1383,9 +1370,6 @@ public class PlateServiceImpl implements PlateService {
             }
 
             PlateUser plateUser = plateUserMapper.selectByPrimaryKey(jsonObject.getString("cUserid"));
-            System.out.println(plateUser);
-            System.out.println(jsonObject.getString("cPhone"));
-            System.out.println(jsonObject.getString("cUsername"));
             //参数核对
             if (!("1".equals(plateUser.getcRyzt()))){
                 return ReturnModelHandler.error("操作失败，充值账户人员状态无效！");
@@ -1421,7 +1405,6 @@ public class PlateServiceImpl implements PlateService {
             tGreenNlJsnlmx.setcZt("1");
             tGreenNlJsnlmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
             tGreenNlJsnlmx.setcCjuser(plateUserOp.getcUserid());
-            System.out.println(tGreenNlJsnlmx);
             tGreenNlJsnlmxMapper.insert(tGreenNlJsnlmx);
 
             //修改能量汇总
@@ -1429,7 +1412,6 @@ public class PlateServiceImpl implements PlateService {
             tGreenNlHz.setnNlhz(tGreenNlHz.getnNlhz().subtract(new BigDecimal(nSkje)));//充值金额对应能量比目前为  1:1
             tGreenNlHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
             tGreenNlHz.setcXguser(plateUserOp.getcUserid());
-            System.out.println(tGreenNlHz);
             tGreenNlHzMapper.updateByPrimaryKey(tGreenNlHz);
 
             //新增提现记录
@@ -1470,7 +1452,6 @@ public class PlateServiceImpl implements PlateService {
             tGreenNlTxjl.setcZt("1");
             tGreenNlTxjl.setcCjuser(plateUserOp.getcUserid());
             tGreenNlTxjl.setdCjsj(TimeUtil.getTimestamp(new Date()));
-            System.out.println(tGreenNlTxjl);
             tGreenNlTxjlMapper.insert(tGreenNlTxjl);
 
             return ReturnModelHandler.success(null);

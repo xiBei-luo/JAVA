@@ -227,7 +227,7 @@ function f_submitData(){
                     type: BootstrapDialog.TYPE_PRIMARY,
                     size: BootstrapDialog.SIZE_SMALL,
                     title: '提示',
-                    message: "操作成功！"+ret.msg,
+                    message: "操作成功！",
                     closeable: true,
                     btnOKLabel: "确定",
                     btnCancelLabel: "留在当前页面",

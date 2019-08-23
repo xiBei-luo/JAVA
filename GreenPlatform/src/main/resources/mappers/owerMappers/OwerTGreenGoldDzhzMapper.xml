@@ -41,6 +41,26 @@
                     ) AS t
             ) AS b
         WHERE
-            b.c_userid = #{cUserid};
+            b.c_userid = #{cUserid}
+            and b.c_zt='1';
+    </select>
+
+    <select id="selectGreenGoldDzhzAllRank" resultType="java.util.HashMap">
+      SELECT
+            t.*, ROUND(@rownum := @rownum + 1) rownum
+        FROM
+            (SELECT @rownum := 0) r,
+            (
+                SELECT
+                    *
+                FROM
+                    t_green_gold_dzhz
+                ORDER BY
+                    n_dzzl DESC,
+                    d_xgsj
+            ) AS t
+        WHERE
+            t.c_zt = '1'
+        AND t.n_dzzl > 0
     </select>
 </mapper>

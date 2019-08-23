@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Created by Luowenlv on 2019/5/15,14:44
- * 基础控制
+ * 基础控制，页面跳转
  */
 @Controller
 @RequestMapping(value = "/base")
@@ -26,7 +26,6 @@ public class BaseController {
 
     @Autowired
     WebService webService;
-
 
     //公用
     @GetMapping(value = "/login")
@@ -49,7 +48,6 @@ public class BaseController {
     @GetMapping(value = "/index")
     public String index(HttpSession session,Model model) {
         ReturnModel returnModel = plateService.selectLoginuserYwqx();
-        System.out.println(returnModel.getObject());
         if (0 != returnModel.getFlag()){
             session.removeAttribute("loginUser");
             return "login/login";
@@ -178,7 +176,6 @@ public class BaseController {
     public String tipPage(@RequestParam(name = "cPhone",required = true) String cPhone,Model model) {
         ReturnModel returnModel = webService.selectUserByPhone(cPhone);
         model.addAttribute("plateUser",returnModel.getObject());
-        System.out.println(returnModel.getObject());
         return "login/tipPage";
     }
     @GetMapping(value = "/loginByWx")
@@ -196,6 +193,13 @@ public class BaseController {
     @GetMapping(value = "/certification")
     public String certification(String type){
         return "web/certification";
+    }
+
+
+    //维护页面
+    @GetMapping(value = "/safeguard")
+    public String safeguard(){
+        return "safeguard";
     }
 
 

@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * Created by Luowenlv on 2019/5/7,11:25
+ * 后台相关
  */
 @RestController
 @RequestMapping(value = "/plate")
@@ -204,7 +205,6 @@ public class PlateController {
 
     @PostMapping(value = "/saveUserRoleMid")
     public ReturnModel saveUserRoleMid(@RequestBody String jsonObject){
-        System.out.println(jsonObject);
         JSONObject jsonParams = JSONObject.fromObject(jsonObject);
         ReturnModel returnModel = plateService.saveUserRoleMid(jsonParams);
         return returnModel;
@@ -212,7 +212,6 @@ public class PlateController {
     @PostMapping(value = "/selectTGreenNlHz")
     public ReturnModel selectTGreenNlHz(@RequestBody String jsonObject){
         JSONObject jsonParams = JSONObject.fromObject(jsonObject);
-        System.out.println(jsonParams);
         ReturnModel returnModel = plateService.selectTGreenNlHz(jsonParams);
         return returnModel;
     }
@@ -240,7 +239,6 @@ public class PlateController {
     @PostMapping(value = "/insertTGreenNlCzjl")
     public ReturnModel insertTGreenNlCzjl(@RequestBody String jsonObject){
         JSONObject jsonParams = JSONObject.fromObject(jsonObject);
-        System.out.println(jsonParams);
         ReturnModel returnModel = plateService.insertTGreenNlCzjl(jsonParams);
         return returnModel;
     }
@@ -248,7 +246,6 @@ public class PlateController {
     @PostMapping(value = "/insertTGreenNlTxjl")
     public ReturnModel insertTGreenNlTxjl(@RequestBody String jsonObject){
         JSONObject jsonParams = JSONObject.fromObject(jsonObject);
-        System.out.println(jsonParams);
         ReturnModel returnModel = plateService.insertTGreenNlTxjl(jsonParams);
         return returnModel;
     }
@@ -256,7 +253,6 @@ public class PlateController {
     @PostMapping(value = "/insertPlateuserBlacklist")
     public ReturnModel insertPlateuserBlacklist(@RequestBody String jsonObject){
         JSONObject jsonParams = JSONObject.fromObject(jsonObject);
-        System.out.println(jsonParams);
         ReturnModel returnModel = plateService.insertPlateuserBlacklist(jsonParams);
         return returnModel;
     }

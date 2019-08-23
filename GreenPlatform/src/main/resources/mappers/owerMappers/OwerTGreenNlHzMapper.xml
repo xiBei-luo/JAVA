@@ -8,6 +8,7 @@
      limit 0,9
   </select>
 
+
   <select id="selectTGreenNlHz" parameterType="java.util.HashMap" resultType="java.util.HashMap">
     select b.c_username cUsername,b.c_loginname cLoginname,a.n_nlhz nNlhz,a.c_userid cUserid,a.c_bz cBz
       from t_green_nl_hz a , plate_user b
@@ -45,6 +46,7 @@
                     ) AS t
             ) AS b
         WHERE
-            b.c_userid = #{cUserid};
+            b.c_userid = #{cUserid}
+            and b.c_zt='1';
   </select>
 </mapper>

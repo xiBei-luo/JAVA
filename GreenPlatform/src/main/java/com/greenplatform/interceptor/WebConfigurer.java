@@ -56,6 +56,9 @@ public class WebConfigurer implements WebMvcConfigurer {
         exclude.add("/checkForm/**");
         exclude.add("/login/**");
 
+        //主页
+        exclude.add("/*");
+
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(exclude);
     }
 

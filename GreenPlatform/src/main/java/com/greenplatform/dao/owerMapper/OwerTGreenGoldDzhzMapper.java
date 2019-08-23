@@ -17,4 +17,8 @@ public interface OwerTGreenGoldDzhzMapper {
 
     //根据id查询点赞排名
     Map selectTGreenGoldDzhzBycUserid(String cUserid);
+
+    //查询排名
+    Map selectGreenGoldDzhzAllRank();
+
 }

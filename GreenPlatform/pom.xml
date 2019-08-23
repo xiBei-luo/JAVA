@@ -44,12 +44,13 @@
                 </exclusion>
             </exclusions>-->
         </dependency>
+        <!--移除内置tomcat-->
         <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
         </dependency>-->
-<!--        servlet-api的依赖-->
+        <!--servlet-api的依赖-->
         <!--<dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-servlet-api</artifactId>

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
+/**
+ * 表单验证
+ */
 @RestController
 @RequestMapping(value = "/checkForm")
 public class CheckFormController {
@@ -34,7 +37,6 @@ public class CheckFormController {
             hashMap.put("valid",loginService.checkUser("phone",cPhone));
         }
 
-        System.out.println(hashMap);
         return JSON.toJSONString(hashMap);
     }
 
@@ -45,11 +47,9 @@ public class CheckFormController {
      */
     @PostMapping(value = "/checkLoginname")
     public String checkLoginname(String cLoginname){
-        System.out.println("in");
         HashMap<String,Boolean> hashMap = new HashMap();
 
         hashMap.put("valid",loginService.checkUser("loginname",cLoginname));
-        System.out.println(hashMap);
         return JSON.toJSONString(hashMap);
     }
 

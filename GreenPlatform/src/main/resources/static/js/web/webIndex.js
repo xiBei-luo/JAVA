@@ -95,6 +95,14 @@ function f_selectLoginuserAccount(){
             $("#nJbzl").text("0"+"金币");
         }
 
+        //登陆用户连续完成任务多少天
+        var nMonthRw = ret.object.nMonthRw;
+        if (nMonthRw){
+            $("#nMonthRw").text(nMonthRw + "天");
+        } else{
+            $("#nMonthRw").text("0天");
+        }
+
         //登陆用户任务完成信息（今日任务是否完成）
         var aTGreenRwRwmx = ret.object.tGreenRwRwmx;//登陆用户任务完成信息（今日任务是否完成）
         if(aTGreenRwRwmx.length > 0){
@@ -128,8 +136,8 @@ function f_selectLoginuserAccount(){
             $(atGreenZzZjzzmx).each(function(i,v){
                 $("#mySeed ul").append("<li class=\"list-group-item\">\n" +
                     "<span id='"+v.cSpbh+"'>"+v.cSpmc+"</span>\n" +
-                    "<button id='"+v.cSpbh+"' onclick='f_contributeSeed("+JSON.stringify(v)+")'  class='btn btn-primary btn-sm float-right' "+(v.cKjz == '0' ? 'disabled' : '')+">捐赠</button>\n" +
-                    //"<button id='"+v.cSpbh+"' onclick='f_contributeSeed("+JSON.stringify(v)+")' class='btn btn-primary btn-sm float-right'>捐赠</button>\n" +
+                    //"<button id='"+v.cSpbh+"' onclick='f_contributeSeed("+JSON.stringify(v)+")'  class='btn btn-primary btn-sm float-right' "+(v.cKjz == '0' ? 'disabled' : '')+">捐赠</button>\n" +
+                    "<button id='"+v.cSpbh+"' onclick='f_contributeSeed("+JSON.stringify(v)+")' class='btn btn-primary btn-sm float-right'>捐赠</button>\n" +
                     "</li>");
             });;
         }else{
@@ -292,7 +300,10 @@ function f_contributeSeed(data){
                 title: '提示',
                 message: "操作成功！",
                 closeable: true,
-                buttonLabel: "确定"
+                buttonLabel: "确定",
+                callback: function(){
+                    f_selectLoginuserAccount();
+                }
             });
         }
     });

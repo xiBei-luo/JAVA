@@ -23,6 +23,6 @@
        <if test='cRwlb!=null and cRwlb!=""'>
            AND A.c_rwlb = #{cRwlb}
        </if>
-      ORDER BY A.c_userid,A.d_rwsj,A.c_rwlb DESC
+      ORDER BY A.c_userid,A.d_rwsj DESC,A.c_rwlb DESC
   </select>
 </mapper>
