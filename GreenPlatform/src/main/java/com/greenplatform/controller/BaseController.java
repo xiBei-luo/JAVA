@@ -4,6 +4,7 @@ import com.greenplatform.model.PlateUser;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
 import com.greenplatform.service.WebService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -200,6 +201,14 @@ public class BaseController {
     @GetMapping(value = "/safeguard")
     public String safeguard(){
         return "safeguard";
+    }
+
+
+    //扫描二维码注册
+    @GetMapping(value = "/qrcodeRegister")
+    public String qrcodeRegister(@RequestParam(name = "user", required = true) String user,Model model){
+        model.addAttribute("cYqm",user);
+        return "login/qrcodeRegister";
     }
 
 

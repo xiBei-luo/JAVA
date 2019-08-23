@@ -196,7 +196,7 @@ function checkRegister(){
 
 function f_submitData(){
     var data = {
-        "cYqm":"-1",
+        "cYqm":$("#cYqm").val(),
         "cPhone":$("#cPhone").val(),
         "cLoginname":$("#cLoginname").val(),
         "cPassword":$("#cPassword").val(),
@@ -243,4 +243,13 @@ function f_submitData(){
     };
     $.ajax(options);//传递参数为json格式，不使用公共调用方式
 
+}
+
+function getParam(paramName) {
+    paramValue = "", isFound = !1;
+    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+        arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+        while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+    }
+    return paramValue == "" && (paramValue = null), paramValue
 }

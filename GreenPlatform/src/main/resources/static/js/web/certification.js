@@ -93,7 +93,7 @@ function doCertification(){
                 closeable: true,
                 buttonLabel: "确定",
                 callback:function(){
-                    window.location.href = "/web/index";
+                    window.location.href = "/base/login";
                 }
             });
         }

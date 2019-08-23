@@ -3,7 +3,9 @@ package com.greenplatform.service;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import net.sf.json.JSONObject;
+import org.springframework.http.HttpRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public interface WebService {
@@ -39,7 +41,7 @@ public interface WebService {
     ReturnModel presentationNl();
 
     //金币点赞数达到10万，瓜分能量业务
-    void divideNl();
+    void divideNl() throws Exception;
 
     //查询能量充值记录
     ReturnModel selectTGreenNlCzjl(JSONObject jsonObject);
@@ -52,6 +54,8 @@ public interface WebService {
 
     //查询欢迎页数据
     ReturnModel selectWelcomePageInfo();
+
+    ReturnModel getInviteQrcode(HttpServletRequest httpServletRequest);
 
 
 

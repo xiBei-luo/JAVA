@@ -56,6 +56,9 @@ public class WebConfigurer implements WebMvcConfigurer {
         exclude.add("/checkForm/**");
         exclude.add("/login/**");
 
+        //邀请注册二维码
+        exclude.add("/qrcode/**");
+
         //主页
         exclude.add("/*");
 

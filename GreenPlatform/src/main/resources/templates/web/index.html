@@ -40,7 +40,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#" id="myAccount">我的账户</a></li>
-                                <li><a href="#">邀请好友</a></li>
+                                <li><a href="#" id="btnInviteUser" th:style="${loginuserHome.plateUser['cIssmz']} == 1 ? '':'display: none'">邀请好友</a></li>
                                 <li><a href="/base/loginout">退出</a></li>
                             </ul>
                         </li>
@@ -266,6 +266,20 @@
                 </div>
                 <div class="modal-body">
                     <img src="/publicImg/customImg.jpg" id="customImg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="inviteUserModel" tabindex="-1" role="dialog" aria-labelledby="inviteUserLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="inviteUserLabel">邀请码</h4>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="inviteUserQrcode" alt="">
                 </div>
             </div>
         </div>

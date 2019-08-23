@@ -1525,6 +1525,76 @@ public class PlateUserExample {
             return (Criteria) this;
         }
 
+        public Criteria andCYqmIsNull() {
+            addCriterion("c_yqm is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmIsNotNull() {
+            addCriterion("c_yqm is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmEqualTo(String value) {
+            addCriterion("c_yqm =", value, "cYqm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmNotEqualTo(String value) {
+            addCriterion("c_yqm <>", value, "cYqm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmGreaterThan(String value) {
+            addCriterion("c_yqm >", value, "cYqm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmGreaterThanOrEqualTo(String value) {
+            addCriterion("c_yqm >=", value, "cYqm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmLessThan(String value) {
+            addCriterion("c_yqm <", value, "cYqm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmLessThanOrEqualTo(String value) {
+            addCriterion("c_yqm <=", value, "cYqm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmLike(String value) {
+            addCriterion("c_yqm like", value, "cYqm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmNotLike(String value) {
+            addCriterion("c_yqm not like", value, "cYqm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmIn(List<String> values) {
+            addCriterion("c_yqm in", values, "cYqm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmNotIn(List<String> values) {
+            addCriterion("c_yqm not in", values, "cYqm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmBetween(String value1, String value2) {
+            addCriterion("c_yqm between", value1, value2, "cYqm");
+            return (Criteria) this;
+        }
+
+        public Criteria andCYqmNotBetween(String value1, String value2) {
+            addCriterion("c_yqm not between", value1, value2, "cYqm");
+            return (Criteria) this;
+        }
+
         public Criteria andCFatheridIsNull() {
             addCriterion("c_fatherId is null");
             return (Criteria) this;

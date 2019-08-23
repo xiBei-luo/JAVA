@@ -4,16 +4,19 @@ import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.WebService;
 import com.greenplatform.util.GetcurrentLoginUser;
+import com.greenplatform.util.ReadFileUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 
 /**
  * Created by Luowenlv on 2019/5/7,11:25
@@ -115,6 +118,26 @@ public class WebController {
     public ReturnModel selectTGreenZzJzjl(@RequestBody String jsonObject){
         JSONObject jsonParams = JSONObject.fromObject(jsonObject);
         return webService.selectTGreenZzJzjl(jsonParams);
+    }
+
+    //获取邀请二维码
+    @GetMapping(value = "/getInviteQrcode")
+    public void getInviteQrcode(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
+        ReturnModel returnModel = webService.getInviteQrcode(httpServletRequest);
+        String filePath = returnModel.getObject().toString();
+        //System.out.println(filePath);
+        try{
+            byte data[] = ReadFileUtil.readFile(filePath);
+            httpServletResponse.setContentType("image/jpg"); //设置返回的文件类型
+            OutputStream os = httpServletResponse.getOutputStream();
+            os.write(data);
+            os.flush();
+            os.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 
 

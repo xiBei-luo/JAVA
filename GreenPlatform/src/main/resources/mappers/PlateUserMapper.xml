@@ -25,6 +25,7 @@
     <result column="c_wxhm" jdbcType="VARCHAR" property="cWxhm" />
     <result column="c_qq" jdbcType="VARCHAR" property="cQq" />
     <result column="c_email" jdbcType="VARCHAR" property="cEmail" />
+    <result column="c_yqm" jdbcType="VARCHAR" property="cYqm" />
     <result column="c_fatherId" jdbcType="VARCHAR" property="cFatherid" />
     <result column="c_bz" jdbcType="VARCHAR" property="cBz" />
     <result column="c_zt" jdbcType="VARCHAR" property="cZt" />
@@ -106,7 +107,7 @@
     -->
     c_userid, c_password, c_loginname, c_username, c_sex, c_issmz, c_userid_smz, c_rydj, 
     c_rylb, c_ryzt, c_ryxz, c_zcfs, c_zjlx, c_zjhm, c_jtzz, c_phone, c_wxhm, c_qq, c_email, 
-    c_fatherId, c_bz, c_zt, c_cjuser, d_cjsj, c_xguser, d_xgsj
+    c_yqm, c_fatherId, c_bz, c_zt, c_cjuser, d_cjsj, c_xguser, d_xgsj
   </sql>
   <select id="selectByExample" parameterType="com.greenplatform.model.PlateUserExample" resultMap="BaseResultMap">
     <!--
@@ -166,18 +167,20 @@
       c_ryzt, c_ryxz, c_zcfs, 
       c_zjlx, c_zjhm, c_jtzz, 
       c_phone, c_wxhm, c_qq, 
-      c_email, c_fatherId, c_bz, 
-      c_zt, c_cjuser, d_cjsj, 
-      c_xguser, d_xgsj)
+      c_email, c_yqm, c_fatherId, 
+      c_bz, c_zt, c_cjuser, 
+      d_cjsj, c_xguser, d_xgsj
+      )
     values (#{cUserid,jdbcType=VARCHAR}, #{cPassword,jdbcType=VARCHAR}, #{cLoginname,jdbcType=VARCHAR}, 
       #{cUsername,jdbcType=VARCHAR}, #{cSex,jdbcType=VARCHAR}, #{cIssmz,jdbcType=VARCHAR}, 
       #{cUseridSmz,jdbcType=VARCHAR}, #{cRydj,jdbcType=VARCHAR}, #{cRylb,jdbcType=VARCHAR}, 
       #{cRyzt,jdbcType=VARCHAR}, #{cRyxz,jdbcType=VARCHAR}, #{cZcfs,jdbcType=VARCHAR}, 
       #{cZjlx,jdbcType=VARCHAR}, #{cZjhm,jdbcType=VARCHAR}, #{cJtzz,jdbcType=VARCHAR}, 
       #{cPhone,jdbcType=VARCHAR}, #{cWxhm,jdbcType=VARCHAR}, #{cQq,jdbcType=VARCHAR}, 
-      #{cEmail,jdbcType=VARCHAR}, #{cFatherid,jdbcType=VARCHAR}, #{cBz,jdbcType=VARCHAR}, 
-      #{cZt,jdbcType=VARCHAR}, #{cCjuser,jdbcType=VARCHAR}, #{dCjsj,jdbcType=TIMESTAMP}, 
-      #{cXguser,jdbcType=VARCHAR}, #{dXgsj,jdbcType=TIMESTAMP})
+      #{cEmail,jdbcType=VARCHAR}, #{cYqm,jdbcType=VARCHAR}, #{cFatherid,jdbcType=VARCHAR}, 
+      #{cBz,jdbcType=VARCHAR}, #{cZt,jdbcType=VARCHAR}, #{cCjuser,jdbcType=VARCHAR}, 
+      #{dCjsj,jdbcType=TIMESTAMP}, #{cXguser,jdbcType=VARCHAR}, #{dXgsj,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.greenplatform.model.PlateUser">
     <!--
@@ -242,6 +245,9 @@
       </if>
       <if test="cEmail != null">
         c_email,
+      </if>
+      <if test="cYqm != null">
+        c_yqm,
       </if>
       <if test="cFatherid != null">
         c_fatherId,
@@ -322,6 +328,9 @@
       </if>
       <if test="cEmail != null">
         #{cEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="cYqm != null">
+        #{cYqm,jdbcType=VARCHAR},
       </if>
       <if test="cFatherid != null">
         #{cFatherid,jdbcType=VARCHAR},
@@ -420,6 +429,9 @@
       <if test="record.cEmail != null">
         c_email = #{record.cEmail,jdbcType=VARCHAR},
       </if>
+      <if test="record.cYqm != null">
+        c_yqm = #{record.cYqm,jdbcType=VARCHAR},
+      </if>
       <if test="record.cFatherid != null">
         c_fatherId = #{record.cFatherid,jdbcType=VARCHAR},
       </if>
@@ -471,6 +483,7 @@
       c_wxhm = #{record.cWxhm,jdbcType=VARCHAR},
       c_qq = #{record.cQq,jdbcType=VARCHAR},
       c_email = #{record.cEmail,jdbcType=VARCHAR},
+      c_yqm = #{record.cYqm,jdbcType=VARCHAR},
       c_fatherId = #{record.cFatherid,jdbcType=VARCHAR},
       c_bz = #{record.cBz,jdbcType=VARCHAR},
       c_zt = #{record.cZt,jdbcType=VARCHAR},
@@ -543,6 +556,9 @@
       <if test="cEmail != null">
         c_email = #{cEmail,jdbcType=VARCHAR},
       </if>
+      <if test="cYqm != null">
+        c_yqm = #{cYqm,jdbcType=VARCHAR},
+      </if>
       <if test="cFatherid != null">
         c_fatherId = #{cFatherid,jdbcType=VARCHAR},
       </if>
@@ -591,6 +607,7 @@
       c_wxhm = #{cWxhm,jdbcType=VARCHAR},
       c_qq = #{cQq,jdbcType=VARCHAR},
       c_email = #{cEmail,jdbcType=VARCHAR},
+      c_yqm = #{cYqm,jdbcType=VARCHAR},
       c_fatherId = #{cFatherid,jdbcType=VARCHAR},
       c_bz = #{cBz,jdbcType=VARCHAR},
       c_zt = #{cZt,jdbcType=VARCHAR},

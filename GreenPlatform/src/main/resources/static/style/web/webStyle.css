@@ -471,4 +471,11 @@ header{
     height: 300px;
 }
 
+/**
+邀请二维码
+ */
+#inviteUserModel .modal-content{
+    width: 340px;
+}
+
 

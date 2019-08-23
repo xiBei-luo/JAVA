@@ -72,8 +72,8 @@ function loadGridData(){
 function initData(data){
     for (var i=0; i<data.length; i++){
         var opLinkBuff = new StringBuffer();
-        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-primary \" onclick=\"f_cz(\'"+data[i].cUserid+"\');\" id=\"cz_link_"+data[i].cUserid+"\" >充值</button>&nbsp&nbsp&nbsp");
-        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-info \" onclick=\"f_tx(\'"+data[i].cUserid+"\');\" id=\"tx_link_"+data[i].cUserid+"\" >提现</button>&nbsp&nbsp&nbsp");
+        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-primary \" onclick=\"f_cz(\'"+data[i].cUserid+"\');\" id=\"cz_link_"+data[i].cUserid+"\" "+(data[i].cIssmz == '1' ? '' : 'disabled')+">充值</button>&nbsp&nbsp&nbsp");
+        opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-info \" onclick=\"f_tx(\'"+data[i].cUserid+"\');\" id=\"tx_link_"+data[i].cUserid+"\" "+(data[i].cIssmz == '1' ? '' : 'disabled')+">提现</button>&nbsp&nbsp&nbsp");
 
         if("1" == data[i].cRyxz){
             opLinkBuff.append("<button type=\"button\" class=\"btn btn-sm btn-danger \" onclick=\"f_hmd('add',\'"+data[i].cUserid+"\');\" >加入黑名单</button>");

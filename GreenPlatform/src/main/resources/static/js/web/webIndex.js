@@ -3,9 +3,9 @@ $(function(){
 });
 
 function initEvent() {
-    $(".close").click(function(){
+    /*$("#myAccountModel .close").click(function(){
         window.location.reload()
-    });
+    });*/
 
     $("#returnTop").click(function(){
         $('body,html').animate({scrollTop:0},300)
@@ -25,6 +25,11 @@ function initEvent() {
         $(".navbar-nav li").removeClass("active");
         $(this).addClass("active");
     });
+
+    $("#btnInviteUser").click(function () {
+        $("#inviteUserQrcode").attr("src","/web/getInviteQrcode");
+        $("#inviteUserModel").modal('show');
+    });//邀请好友
 
     $(".ct-action a").click(function(){
         f_purchaseSeed($(this).attr("value"));
@@ -66,8 +71,10 @@ function f_selectLoginuserAccount(){
             $("#cRydj").text("L"+0);
         }
         if (oPlateuser.cIssmz == 1){
+            $("#btnCz,#btnTx").attr("disabled",false);
             $("#certiBtn").hide();
         } else{
+            $("#btnCz,#btnTx").attr("disabled",true);
             $("#certiBtn").show();
         }
 
@@ -275,7 +282,6 @@ function f_doLike(){
  * @param id
  */
 function f_contributeSeed(data){
-    console.log(data);
     var sendRequest = new SendRequest("/web/contributeSeed","POST");//构造对象
     sendRequest.addParamObj({
        "cSpbh":data.cSpbh,
@@ -308,7 +314,6 @@ function f_contributeSeed(data){
         }
     });
 }
-
 
 
 

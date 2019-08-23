@@ -1,5 +1,9 @@
 package com.greenplatform.qrcode;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+
 public class QrCodeTest {
     public static void main(String[] args) throws Exception {
         // 存放在二维码中的内容（扫描后跳转路径）
@@ -14,6 +18,7 @@ public class QrCodeTest {
         String str = QRCodeUtil.decode(destPath);
         // 打印出解析出的内容
         System.out.println(str);
+
 
     }
 }

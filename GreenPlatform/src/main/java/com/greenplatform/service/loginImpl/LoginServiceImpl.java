@@ -87,6 +87,7 @@ public class LoginServiceImpl implements LoginService {
 
             JSONObject jsonParams = JSONObject.fromObject(jsonObject);
 
+
             Map hashMap = new HashMap();
             hashMap.put("cPhone",jsonParams.getString("cPhone"));
             hashMap.put("smsCode",jsonParams.getString("smsCode"));
@@ -103,6 +104,10 @@ public class LoginServiceImpl implements LoginService {
                 plateUser.setcLoginname(jsonParams.getString("cLoginname"));
                 plateUser.setcPassword(jsonParams.getString("cPassword"));
                 plateUser.setcRylb(jsonParams.getString("cRylb"));
+                if (!("-1".equals(jsonParams.getString("cYqm")))){
+                    plateUser.setcFatherid(jsonParams.getString("cYqm"));
+                    plateUser.setcYqm(jsonParams.getString("cYqm"));
+                }
 
                 //1.判断邮箱或用户名是否被注册
                 if (false == checkUser("phone",plateUser.getcPhone())){
