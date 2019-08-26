@@ -12,7 +12,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 
 @MapperScan("com.greenplatform.dao.**")
-public class GreenPlatformApplication {
+public class GreenPlatformApplication extends SpringBootServletInitializer {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(GreenPlatformApplication.class);
+    }
 
 
     public static void main(String[] args) {

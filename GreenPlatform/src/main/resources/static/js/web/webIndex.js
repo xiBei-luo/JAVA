@@ -82,9 +82,9 @@ function f_selectLoginuserAccount(){
         //登陆用户能量汇总信息（获取能量总量）
         var oTGreenNlHz = ret.object.tGreenNlHz[0];//登陆用户能量汇总信息（获取能量总量）
         if(oTGreenNlHz){
-            $("#nNlhz").text(oTGreenNlHz.nNlhz+"克");
+            $("#nNlhz").text("￥"+oTGreenNlHz.nNlhz);
         }else {
-            $("#nNlhz").text("0"+"克");
+            $("#nNlhz").text("￥"+"0");
         }
 
         //登陆用户点赞数量
@@ -97,9 +97,9 @@ function f_selectLoginuserAccount(){
         //登陆用户金币总量
         var oTGreenJbzl = ret.object.tGreenJbzl[0];//登陆用户金币总量
         if(oTGreenJbzl){
-            $("#nJbzl").text(oTGreenJbzl.nJbzl+"金币");
+            $("#nJbzl").text(oTGreenJbzl.nJbzl+"M");
         }else{
-            $("#nJbzl").text("0"+"金币");
+            $("#nJbzl").text("0"+"M");
         }
 
         //登陆用户连续完成任务多少天

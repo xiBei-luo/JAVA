@@ -8,7 +8,7 @@
     <title>绿沙平台</title>
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
-    <link rel="stylesheet" href="/style/web/webstyle.css">
+    <link rel="stylesheet" href="/style/web/webStyle.css">
 </head>
 <body>
     <div id="home"></div>
@@ -80,7 +80,7 @@
     </header>
 
     <!--点赞排行榜-->
-    <div id="goldList" class="container-fluid mr-top-50">
+    <div id="goldList" class="container-fluid">
         <div class="goldListWrap">
             <div class="row">
                 <div class="col-md-12">
@@ -90,7 +90,7 @@
             <div class="row">
                 <div class="col-md-offset-4 col-md-4">
                     <div class="btnLikeBox">
-                        <span class="glyphicon glyphicon-thumbs-up" id="btnLike"></span>
+                        <span class="glyphicon glyphicon-heart" id="btnLike"></span>
                         <span id="jsGold">-50</span>
                     </div>
                 </div>
@@ -106,8 +106,8 @@
                 <div class="col-md-4 col-xs-5" th:text="${tGreenGoldDzhzList.nDzzl}"></div>
             </div>
             <div class="row goldDzRankContent">
-                <div class="col-md-4 col-xs-4 goldDzRankContent_ower" th:text="${loginuserHome.owerTGreenGoldDzhz['nRank']}"></div>
-                <div class="col-md-4 col-xs-3" th:text="${loginuserHome.owerTGreenGoldDzhz['cUsername']}"></div>
+                <div class="col-md-4 col-xs-3 goldDzRankContent_ower" th:text="${loginuserHome.owerTGreenGoldDzhz['nRank']}"></div>
+                <div class="col-md-4 col-xs-4" th:text="${loginuserHome.owerTGreenGoldDzhz['cUsername']}"></div>
                 <div class="col-md-4 col-xs-5" th:text="${loginuserHome.owerTGreenGoldDzhz['n_dzzl']}"></div>
             </div>
         </div>
@@ -115,7 +115,7 @@
 
 
     <!--能量排行榜-->
-    <div id="rankList" class="container-fluid mr-top-50">
+    <div id="rankList" class="container-fluid">
         <div class="goldListWrap">
             <div class="row">
                 <div class="col-md-12">
@@ -130,12 +130,12 @@
             <div class="row goldDzRankContent" th:each="tGreenNlNlhz,tGreenNlNlhzStatu : ${loginuserHome.tGreenNlNlhzList}">
                 <div class="col-md-4 col-xs-3" th:text=${tGreenNlNlhzStatu.index+1} th:attr="id = 'goldDzRankContent_'+${tGreenNlNlhzStatu.index+1}"></div>
                 <div class="col-md-4 col-xs-4" th:text=${tGreenNlNlhz.cUsername}></div>
-                <div class="col-md-4 col-xs-5" th:text="${tGreenNlNlhz.nNlhz}+'G'"></div>
+                <div class="col-md-4 col-xs-5" th:text="${tGreenNlNlhz.nNlhz}"></div>
             </div>
             <div class="row goldDzRankContent">
-                <div class="col-md-4 col-xs-4 goldDzRankContent_ower" th:text="${loginuserHome.owerTGreenNlHz['nRank']}"></div>
-                <div class="col-md-4 col-xs-3" th:text="${loginuserHome.owerTGreenNlHz['cUsername']}"></div>
-                <div class="col-md-4 col-xs-5" th:text="${loginuserHome.owerTGreenNlHz['n_nlhz']}+G"></div>
+                <div class="col-md-4 col-xs-3 goldDzRankContent_ower" th:text="${loginuserHome.owerTGreenNlHz['nRank']}"></div>
+                <div class="col-md-4 col-xs-4" th:text="${loginuserHome.owerTGreenNlHz['cUsername']}"></div>
+                <div class="col-md-4 col-xs-5" th:text="${loginuserHome.owerTGreenNlHz['n_nlhz']}"></div>
             </div>
         </div>
     </div>
@@ -147,7 +147,7 @@
             <div class="row">
                 <div class="col-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="single-package">
-                        <h3 class="text-center">种子商店</h3>
+                        <h3 class="text-center market-title">种子商店</h3>
                     </div>
                 </div>
             </div>
@@ -155,7 +155,7 @@
                 <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-4" th:each="tGreenSpSpmxList : ${loginuserHome.tGreenSpSpmxList}">
                     <div class="single-package">
                         <div class="package-image">
-                            <a href="#"><img th:attr="src = ${tGreenSpSpmxList.cImgurl}" alt=""></a>
+                            <a href="##"><img th:attr="src = ${tGreenSpSpmxList.cImgurl}" alt=""></a>
                         </div>
                         <div class="package-content">
                             <h3><a href="" title="" id="cSpmc" th:text=${tGreenSpSpmxList.cSpmc}></a></h3>

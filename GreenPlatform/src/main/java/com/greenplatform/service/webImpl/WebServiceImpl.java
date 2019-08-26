@@ -416,7 +416,7 @@ public class WebServiceImpl implements WebService {
                     tGreenNlHzMap.put("n_nlhz","0");
                 }else{
 
-                    tGreenNlHzMap.put("nRank",tGreenNlHzMap1.get("rank").toString().split(",")[0]);
+                    tGreenNlHzMap.put("nRank",tGreenNlHzMap1.get("rank").toString().split("\\.")[0]);
                     tGreenNlHzMap.put("n_nlhz",tGreenNlHzMap1.get("n_nlhz"));
                 }
                 loginUserHomeMap.put("owerTGreenNlHz",tGreenNlHzMap);
@@ -428,11 +428,11 @@ public class WebServiceImpl implements WebService {
                 tGreenGoldDzhzMap.put("cUsername",plateUser.getcUsername());
 
                 Map tGreenGoldDzhzMap1 = owerTGreenGoldDzhzMapper.selectTGreenGoldDzhzBycUserid(plateUser.getcUserid());
-                if (null == tGreenGoldDzhzMap1){
+                if (null == tGreenGoldDzhzMap1 || tGreenGoldDzhzMap1.isEmpty()){
                     tGreenGoldDzhzMap.put("nRank","暂无");
                     tGreenGoldDzhzMap.put("n_dzzl","0");
                 }else{
-                    tGreenGoldDzhzMap.put("nRank",tGreenGoldDzhzMap1.get("rank").toString().split(".")[0]);
+                    tGreenGoldDzhzMap.put("nRank",tGreenGoldDzhzMap1.get("rank").toString().split("\\.")[0]);
                     tGreenGoldDzhzMap.put("n_dzzl",tGreenGoldDzhzMap1.get("n_dzzl"));
                 }
                 loginUserHomeMap.put("owerTGreenGoldDzhz",tGreenGoldDzhzMap);
@@ -1129,7 +1129,7 @@ public class WebServiceImpl implements WebService {
         try{
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
             //扫描后跳转路径（跳转至注册页面）
-            String qrcodeUrl = "http://127.0.0.1:8081/base/qrcodeRegister?user="+plateUser.getcUserid();
+            String qrcodeUrl = "http://127.0.0.1/base/qrcodeRegister?user="+plateUser.getcUserid();
             //String qrcodeUrl = "https://www.baidu.com/";
             // 嵌入二维码的图片路径
             String imgPath = "C:/Users/CDMCS/Desktop/logo.png";

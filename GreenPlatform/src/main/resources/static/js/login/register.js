@@ -1,6 +1,7 @@
 var wait = 60;
 var smsCodeFlag = false;
 $(function () {
+
     checkRegister();
 
     initEvent();

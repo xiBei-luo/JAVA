@@ -35,7 +35,7 @@ public class GetMessageCode {
         String sig = getMD5(ACCOUNT_SID, AUTH_TOKEN, timestamp);//获取签名
 
 
-        String tamp = "【绿沙平台】您的验证码为" + rod + "，您正在申请注册绿沙平台账号，需要进行验证。请勿泄漏于他人。如非本人操作，请忽略此短信。";//短信内容
+        String tamp = "【绿沙平台】您的验证码为" + rod + "，五分钟内有效，请勿泄漏于他人。如非本人操作，请忽略此短信。";//短信内容
 
 
         OutputStreamWriter out = null;
@@ -137,7 +137,7 @@ public class GetMessageCode {
     // 创建验证码
     public static String smsCode() {
         String random = (int) ((Math.random() * 9 + 1) * 100000) + "";
-        //System.out.println("验证码："+random);
+        System.out.println("验证码："+random);
         return random;
     }
 }

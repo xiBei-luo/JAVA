@@ -18,7 +18,7 @@
             plate_user b
         WHERE
             a.c_userid = b.c_userid
-     ORDER BY a.n_dzzl DESC ,b.c_username
+     ORDER BY a.n_dzzl DESC ,a.d_xgsj
         LIMIT 0,10
     </select>
 
@@ -36,8 +36,7 @@
                             *
                         FROM
                             t_green_gold_dzhz
-                        ORDER BY
-                            n_dzzl DESC,d_cjsj DESC
+                    ORDER BY n_dzzl DESC ,d_xgsj
                     ) AS t
             ) AS b
         WHERE
@@ -46,7 +45,7 @@
     </select>
 
     <select id="selectGreenGoldDzhzAllRank" resultType="java.util.HashMap">
-      SELECT
+       SELECT
             t.*, ROUND(@rownum := @rownum + 1) rownum
         FROM
             (SELECT @rownum := 0) r,
@@ -55,12 +54,12 @@
                     *
                 FROM
                     t_green_gold_dzhz
+                WHERE
+                    c_zt = '1'
+              AND n_dzzl > 0
                 ORDER BY
                     n_dzzl DESC,
                     d_xgsj
             ) AS t
-        WHERE
-            t.c_zt = '1'
-        AND t.n_dzzl > 0
     </select>
 </mapper>

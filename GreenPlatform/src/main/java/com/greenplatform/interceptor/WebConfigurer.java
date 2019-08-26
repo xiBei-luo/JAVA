@@ -58,6 +58,7 @@ public class WebConfigurer implements WebMvcConfigurer {
 
         //邀请注册二维码
         exclude.add("/qrcode/**");
+        exclude.add("/base/qrcodeRegister");
 
         //主页
         exclude.add("/*");

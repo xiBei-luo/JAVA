@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.greenplatform.dao.owerMapper.OwerTGreenNlHzMapper">
   <select id="selectTGreenNlHzRank"  parameterType="java.util.HashMap" resultType="java.util.HashMap">
-    select b.c_username cUsername,b.c_loginname cLoginname,a.n_nlhz nNlhz,a.c_userid cUserid
+    select b.c_username cUsername,b.c_loginname cLoginname,a.n_nlhz nNlhz,a.c_userid cUserid,a.d_xgsj dXgsj
       from t_green_nl_hz a, plate_user b WHERE a.c_userid = b.c_userid AND a.c_zt='1'
-  order by n_nlhz DESC
-     limit 0,9
+  order by a.n_nlhz DESC,a.d_xgsj
+     limit 0,10
   </select>
 
 
@@ -41,12 +41,10 @@
                             *
                         FROM
                             t_green_nl_hz
-                        ORDER BY
-                            n_nlhz DESC,d_cjsj DESC
+                    ORDER BY n_nlhz DESC ,d_xgsj
                     ) AS t
             ) AS b
-        WHERE
-            b.c_userid = #{cUserid}
-            and b.c_zt='1';
+        WHERE c_userid = #{cUserid}
+          AND c_zt='1'
   </select>
 </mapper>

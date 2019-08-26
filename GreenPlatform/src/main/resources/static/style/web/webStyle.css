@@ -166,11 +166,14 @@ header{
 /*banner下的三个任务end*/
 
 /*点赞排行榜begin*/
+#goldList,#rankList{
+    padding-top: 50px;
+}
 .goldListWrap{
     width: 80%;
     background: #398439;
     margin: 0px auto;
-    border-radius: 15px 15px 0 0;
+    border-radius: 15px;
     overflow: hidden;
     padding-bottom: 30px;
 }
@@ -205,10 +208,7 @@ header{
 }
 #btnLike{
     font-size: 28px;
-    color: #ffffff;
-}
-#btnLike:hover{
-    color: #b92c28;
+    color:#b92c28;
 }
 #jsGold{
     opacity: 0;
@@ -272,7 +272,7 @@ header{
 }
 /*底部版权声明*/
 .indexFooter{
-    height: 130px;
+    height: 140px;
     background: #333333;
     color: #ffffff;
     line-height: 30px;
@@ -280,6 +280,12 @@ header{
 }
 
 /*种子商店begin*/
+.market-title{
+    padding:15px;
+    background: #419641;
+    color: #ffffff;
+}
+
 .popular-packages {
     background: #ffffff;
     padding: 50px 0;
@@ -451,6 +457,10 @@ header{
     }
     #market .ct-action a{
         font-size: 12px;
+    }
+
+    .indexFooter{
+        height: 180px;
     }
 
 

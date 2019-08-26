@@ -46,7 +46,7 @@ header{
 .cVerification{
     display: none;
 }
-#legalStatement p{
+#myModal p{
     text-indent: 30px;
 }
 .footerRight{
