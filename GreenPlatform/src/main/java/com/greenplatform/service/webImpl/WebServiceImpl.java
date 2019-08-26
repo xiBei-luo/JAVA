@@ -1129,12 +1129,13 @@ public class WebServiceImpl implements WebService {
         try{
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
             //扫描后跳转路径（跳转至注册页面）
-            String qrcodeUrl = "http://127.0.0.1/base/qrcodeRegister?user="+plateUser.getcUserid();
+            String qrcodeUrl = "http://29.226.64.196/base/qrcodeRegister?user="+plateUser.getcUserid();
             //String qrcodeUrl = "https://www.baidu.com/";
             // 嵌入二维码的图片路径
-            String imgPath = "C:/Users/CDMCS/Desktop/logo.png";
+            String imgPath = "C:/Users/Administrator/greenplatformTmp/logo.png";
+
             // 生成的二维码的路径及名称
-            String destPath = "C:/Users/CDMCS/Desktop/qrcode/"+plateUser.getcUserid()+".jpg";
+            String destPath = "C:/Users/Administrator/greenplatformTmp/qrcode/"+plateUser.getcUserid()+".jpg";
 
             //生成二维码
             QRCodeUtil.encode(qrcodeUrl, imgPath, destPath, true);

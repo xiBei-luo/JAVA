@@ -159,7 +159,7 @@
                         </div>
                         <div class="package-content">
                             <h3><a href="" title="" id="cSpmc" th:text=${tGreenSpSpmxList.cSpmc}></a></h3>
-                            <span id="nSpjg" th:text="${tGreenSpSpmxList.nSpjg} + '克'"></span>
+                            <span id="nSpjg" th:text="'￥'+${tGreenSpSpmxList.nSpjg}"></span>
                             <p id="cSpms" th:attr="title = ${tGreenSpSpmxList.cSpms}" th:text=${tGreenSpSpmxList.cSpms}> </p>
                         </div>
                         <div class="package-calto-action">

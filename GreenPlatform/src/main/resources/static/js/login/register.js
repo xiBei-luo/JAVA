@@ -168,7 +168,7 @@ function checkRegister(){
                         url: '/checkForm/checkLoginname',//验证地址
                         data:{cLoginname:$("#cLoginname").val()},
                         message: '用户名已被注册',//提示消息
-                        delay: 2000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
+                        delay: 1000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
                         type: 'POST'//请求方式
                     }
                 }

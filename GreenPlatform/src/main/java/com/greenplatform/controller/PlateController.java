@@ -1,6 +1,7 @@
 package com.greenplatform.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.greenplatform.configer.MyHttpSessionListener;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
@@ -256,6 +257,16 @@ public class PlateController {
         ReturnModel returnModel = plateService.insertPlateuserBlacklist(jsonParams);
         return returnModel;
     }
+
+    /**
+     *查询在线人数
+     */
+    @RequestMapping("/online")
+    public Object online() {
+        System.out.println(MyHttpSessionListener.online);
+        return  "当前在线人数：" + MyHttpSessionListener.online + "人";
+    }
+
 
 
 }

@@ -33,9 +33,11 @@ public class BaseController {
     public String login() {
         return "login/login";
     }
+
     @GetMapping(value = "/loginout")
     public String loginout(HttpSession session){
         session.removeAttribute("loginUser");
+        session.invalidate();//真正销毁session
         return "login/login";
     }
 
@@ -157,6 +159,10 @@ public class BaseController {
     public String yypzEdit(){
         return "plate/yypz/edit";
     }
+    @GetMapping(value = "/online")
+    public String online(){
+        return "plate/online/main";
+    }
 
 
     //网站
@@ -210,6 +216,8 @@ public class BaseController {
         model.addAttribute("cYqm",user);
         return "login/qrcodeRegister";
     }
+
+
 
 
 
