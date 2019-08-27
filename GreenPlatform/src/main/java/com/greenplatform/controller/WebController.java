@@ -5,6 +5,7 @@ import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.WebService;
 import com.greenplatform.util.GetcurrentLoginUser;
 import com.greenplatform.util.ReadFileUtil;
+import com.greenplatform.util.returnUtil.ReturnModelHandler;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -120,12 +121,24 @@ public class WebController {
         return webService.selectTGreenZzJzjl(jsonParams);
     }
 
+    //测试瓜分能量接口
+    @RequestMapping(value = "/divideNl",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel divideNl(){
+        try {
+            webService.divideNl();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ReturnModelHandler.success(null);
+    }
+
     //获取邀请二维码
     @GetMapping(value = "/getInviteQrcode")
     public void getInviteQrcode(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
         ReturnModel returnModel = webService.getInviteQrcode(httpServletRequest);
+
         String filePath = returnModel.getObject().toString();
-        //System.out.println(filePath);
         try{
             byte data[] = ReadFileUtil.readFile(filePath);
             httpServletResponse.setContentType("image/jpg"); //设置返回的文件类型
@@ -136,6 +149,7 @@ public class WebController {
         }catch (Exception e){
             e.printStackTrace();
         }
+
 
 
     }

@@ -74,6 +74,10 @@ public class WebServiceImpl implements WebService {
     OwerTGreenNlCzjlMapper owerTGreenNlCzjlMapper;
     @Autowired
     OwerTGreenNlTxjlMapper owerTGreenNlTxjlMapper;
+    @Autowired
+    TGreenNlGfjlMapper tGreenNlGfjlMapper;
+    @Autowired
+    PlateUserFatherMapper plateUserFatherMapper;
 
     /**
      * 查询用户
@@ -640,33 +644,47 @@ public class WebServiceImpl implements WebService {
 
 
         //1.获取排名
-        Map tGreenGoldDzhzMap = owerTGreenGoldDzhzMapper.selectGreenGoldDzhzAllRank();
-        System.out.println(tGreenGoldDzhzMap);
+        List tGreenGoldDzhzList = owerTGreenGoldDzhzMapper.selectGreenGoldDzhzAllRank();
+        System.out.println(tGreenGoldDzhzList);
+
 
         //2.奖励能量
-        List divideNlByUserList = new ArrayList();
-        Map<String,Integer> divideNlByUserMap = new HashMap<String,Integer>();
-        divideNlByUserList.add(divideNlByUserMap);
-        ReturnModel divideNlByUser = divideNlByUser(divideNlByUserList);
+        List tGreenGoldDzhzList1 = new ArrayList();
+        if (tGreenGoldDzhzList.size() > 100){
+            tGreenGoldDzhzList1 = tGreenGoldDzhzList.subList(0,101);
+        }else{
+            tGreenGoldDzhzList1 = tGreenGoldDzhzList;
+        }
+        ReturnModel divideNlByUser = divideNlByUser(tGreenGoldDzhzList);
 
 
         //3.奖励金币
-        List divideGoldByUserList = new ArrayList();
-        Map<String,Integer> divideGoldByUserMap = new HashMap<String,Integer>();
-        divideGoldByUserList.add(divideGoldByUserMap);
-        ReturnModel divideGoldByUser = divideGoldByUser(divideGoldByUserList);
-
+        List tGreenGoldDzhzList2 = new ArrayList();
+        if (tGreenGoldDzhzList.size() > 100){
+            tGreenGoldDzhzList2 = tGreenGoldDzhzList.subList(101,tGreenGoldDzhzList.size());
+            ReturnModel divideGoldByUser = divideGoldByUser(tGreenGoldDzhzList2);
+        }
 
         //3.瓜分记录增加一条数据
+        int nSumDzzl = owerTGreenGoldDzhzMapper.selectSumGoldDzhz();
+        System.out.println(nSumDzzl);
         TGreenNlGfjl tGreenNlGfjl = new TGreenNlGfjl();
         tGreenNlGfjl.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
         tGreenNlGfjl.setdGfsj(TimeUtil.getTimestamp(new Date()));
-        tGreenNlGfjl.setnGfzl(new BigDecimal("1000000"));
+        tGreenNlGfjl.setnGfzl(new BigDecimal(nSumDzzl));
         tGreenNlGfjl.setcCzr(GetcurrentLoginUser.getCurrentUser().getcUserid());
         tGreenNlGfjl.setcZt("1");
+        tGreenNlGfjlMapper.insert(tGreenNlGfjl);
 
         //4.清空点赞汇总表
+        Map tGreenGoldDzhzMap = new HashMap();
+        String cBz = "清空点赞数，原因：金币点赞瓜分能量活动,时间："+TimeUtil.getTimestamp(new Date()).toString();
 
+        tGreenGoldDzhzMap.put("nDzzl",new BigDecimal("0"));
+        tGreenGoldDzhzMap.put("cXguser",GetcurrentLoginUser.getCurrentUser().getcUserid());
+        tGreenGoldDzhzMap.put("dXgsj",TimeUtil.getTimestamp(new Date()));
+        tGreenGoldDzhzMap.put("cBz",cBz);
+        owerTGreenGoldDzhzMapper.clearAllGoldDzhz(tGreenGoldDzhzMap);
 
 
     }
@@ -1127,15 +1145,27 @@ public class WebServiceImpl implements WebService {
     @Override
     public ReturnModel getInviteQrcode(HttpServletRequest httpServletRequest) {
         try{
+            PlateUserFatherExample plateUserFatherExample = new PlateUserFatherExample();
+            PlateUserFatherExample.Criteria criteria = plateUserFatherExample.createCriteria();
+            criteria.andCZtEqualTo("1");
+            criteria.andCUseridEqualTo(GetcurrentLoginUser.getCurrentUser().getcUserid());
+            criteria.andCFxmouthEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,7));
+            List plateUserFatherList = plateUserFatherMapper.selectByExample(plateUserFatherExample);
+            if (plateUserFatherList.size() >= 5){
+                return ReturnModelHandler.success("C:/Users/CDMCS/Desktop/qrcode/error.png");
+            }
+
+
+
+
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
             //扫描后跳转路径（跳转至注册页面）
-            String qrcodeUrl = "http://29.226.64.196/base/qrcodeRegister?user="+plateUser.getcUserid();
-            //String qrcodeUrl = "https://www.baidu.com/";
+            String qrcodeUrl = "http://127.0.0.1/base/qrcodeRegister?user="+plateUser.getcUserid();
             // 嵌入二维码的图片路径
-            String imgPath = "C:/Users/Administrator/greenplatformTmp/logo.png";
+            String imgPath = "C:/Users/CDMCS/Desktop/logo.png";
 
             // 生成的二维码的路径及名称
-            String destPath = "C:/Users/Administrator/greenplatformTmp/qrcode/"+plateUser.getcUserid()+".jpg";
+            String destPath = "C:/Users/CDMCS/Desktop/qrcode/"+plateUser.getcUserid()+".jpg";
 
             //生成二维码
             QRCodeUtil.encode(qrcodeUrl, imgPath, destPath, true);
@@ -1211,10 +1241,27 @@ public class WebServiceImpl implements WebService {
             Map map = (Map) iterator.next();
             System.out.println(map);
             //1.增加能量明细新增一条记录
+            String nZjnl = "";//增加能量
+            Integer rank = Integer.parseInt(map.get("rank").toString().split("\\.")[0]);
+            if (1 == rank){
+                nZjnl = getDmzByDm("C_NL_DZGF_1");
+            }else if(2 == rank){
+                nZjnl = getDmzByDm("C_NL_DZGF_2");
+            }else if(3 == rank){
+                nZjnl = getDmzByDm("C_NL_DZGF_3");
+            }else if (rank>=4 && rank<=10){
+                nZjnl = getDmzByDm("C_NL_DZGF_4-10");
+            }else if(rank>=11 && rank<=50){
+                nZjnl = getDmzByDm("C_NL_DZGF_11-50");
+            }else if(rank>=51 && rank<=100){
+                nZjnl = getDmzByDm("C_NL_DZGF_51-100");
+            }
+            System.out.println("第"+rank+"名"+"奖励能量："+nZjnl);
+
             TGreenNlZjnlmx tGreenNlZjnlmx = new TGreenNlZjnlmx();
             tGreenNlZjnlmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
-            tGreenNlZjnlmx.setcUserid(map.get("c_userid").toString());
-            tGreenNlZjnlmx.setnZjnl(new BigDecimal(map.get("n_zjnl").toString()));
+            tGreenNlZjnlmx.setcUserid(map.get("cUserid").toString());
+            tGreenNlZjnlmx.setnZjnl(new BigDecimal(nZjnl));
             tGreenNlZjnlmx.setdZjsj(TimeUtil.getTimestamp(new Date()));
             tGreenNlZjnlmx.setcZjyy("C_NL_ZJYY_3");//点赞活动瓜分能量
             tGreenNlZjnlmx.setcBz("金币点赞瓜分能量获得奖励");
@@ -1223,14 +1270,15 @@ public class WebServiceImpl implements WebService {
             tGreenNlZjnlmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
 
             tGreenNlZjnlmxMapper.insert(tGreenNlZjnlmx);
-
+            System.out.println("第"+rank+"名增加能量明细："+tGreenNlZjnlmx);
 
             //2.修改能量汇总表
-            TGreenNlHz tGreenNlHz = tGreenNlHzMapper.selectByPrimaryKey(map.get("c_userid").toString());
-            tGreenNlHz.setnNlhz(tGreenNlHz.getnNlhz().add(new BigDecimal(map.get("n_zjnl").toString())));
+            TGreenNlHz tGreenNlHz = tGreenNlHzMapper.selectByPrimaryKey(map.get("cUserid").toString());
+            tGreenNlHz.setnNlhz(tGreenNlHz.getnNlhz().add(new BigDecimal(nZjnl)));
             tGreenNlHz.setcZt("1");
             tGreenNlHz.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
             tGreenNlHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
+            System.out.println("第"+rank+"名能量汇总："+tGreenNlHz);
 
             tGreenNlHzMapper.updateByPrimaryKey(tGreenNlHz);
         }
@@ -1243,8 +1291,8 @@ public class WebServiceImpl implements WebService {
      * 瓜分能量时，奖励金币
      *
      * list = [
-     *      {"c_userid":"3309b23c28584179b9d69e226e3eeeee","n_zjsl":100},
-     *      {"c_userid":"b55cbb78e1e54da7a14171c34031f692","n_zjsl":200}
+     *      {"cUserid":"3309b23c28584179b9d69e226e3eeeee","n_zjsl":100},
+     *      {"cUserid":"b55cbb78e1e54da7a14171c34031f692","n_zjsl":200}
      * ]
      * @param list
      * @return
@@ -1256,11 +1304,14 @@ public class WebServiceImpl implements WebService {
             Map map = (Map) iterator.next();
             System.out.println(iterator.next());
 
+            int nZjsl = (int)(300+Math.random()*(500-300+1));//300-500的随机数
+            System.out.println("随机数金币"+nZjsl);
+
             //1.增加明细新增一条记录
             TGreenGoldZjmx tGreenGoldZjmx = new TGreenGoldZjmx();
             tGreenGoldZjmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
-            tGreenGoldZjmx.setcUserid(map.get("c_userid").toString());
-            tGreenGoldZjmx.setnZjsl(new BigDecimal(map.get("n_zjsl").toString()));
+            tGreenGoldZjmx.setcUserid(map.get("cUserid").toString());
+            tGreenGoldZjmx.setnZjsl(new BigDecimal(nZjsl));
             tGreenGoldZjmx.setdZjsj(TimeUtil.getTimestamp(new Date()));
             tGreenGoldZjmx.setcZjyy("C_GOLD_ZJYY_4");
             tGreenGoldZjmx.setcZjyysm("金币点赞活动奖励金币");
@@ -1268,16 +1319,16 @@ public class WebServiceImpl implements WebService {
             tGreenGoldZjmx.setcBz("金币点赞活动奖励随机数量金币");
             tGreenGoldZjmx.setcCjuser(GetcurrentLoginUser.getCurrentUser().getcUserid());
             tGreenGoldZjmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
-            tGreenGoldZjmxMapper.insert(tGreenGoldZjmx);
+            //tGreenGoldZjmxMapper.insert(tGreenGoldZjmx);
 
 
             //2.修改汇总表
-            TGreenGoldHz tGreenGoldHz = tGreenGoldHzMapper.selectByPrimaryKey(map.get("c_userid").toString());
-            tGreenGoldHz.setnJbzl(tGreenGoldHz.getnJbzl().add(new BigDecimal(map.get("n_zjsl").toString())));
+            TGreenGoldHz tGreenGoldHz = tGreenGoldHzMapper.selectByPrimaryKey(map.get("cUserid").toString());
+            tGreenGoldHz.setnJbzl(tGreenGoldHz.getnJbzl().add(new BigDecimal(nZjsl)));
             tGreenGoldHz.setcZt("1");
             tGreenGoldHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
             tGreenGoldHz.setcXguser(GetcurrentLoginUser.getCurrentUser().getcUserid());
-            tGreenGoldHzMapper.updateByPrimaryKey(tGreenGoldHz);
+            //tGreenGoldHzMapper.updateByPrimaryKey(tGreenGoldHz);
         }
 
         return ReturnModelHandler.success(null);

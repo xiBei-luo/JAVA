@@ -90,16 +90,16 @@ function f_selectLoginuserAccount(){
         //登陆用户点赞数量
         var oTGreenDzzl = ret.object.tGreenDzzl[0];//登陆用户点赞数量
         if(oTGreenDzzl){
-            $("#nDzzl").text(oTGreenDzzl.nDzzl+"次");
+            $("#nDzzl").text(oTGreenDzzl.nDzzl+" M");
         }else{
-            $("#nDzzl").text("0"+"次");
+            $("#nDzzl").text("0"+" M");
         }
         //登陆用户金币总量
         var oTGreenJbzl = ret.object.tGreenJbzl[0];//登陆用户金币总量
         if(oTGreenJbzl){
-            $("#nJbzl").text(oTGreenJbzl.nJbzl+"M");
+            $("#nJbzl").text(oTGreenJbzl.nJbzl+"个");
         }else{
-            $("#nJbzl").text("0"+"M");
+            $("#nJbzl").text("0"+"个");
         }
 
         //登陆用户连续完成任务多少天

@@ -54,7 +54,8 @@
 
     <select id="selectGreenGoldDzhzAllRank" resultType="java.util.HashMap">
        SELECT
-            t.*, ROUND(@rownum := @rownum + 1) rownum
+            t.c_userid cUserid,
+            ROUND(@rownum := @rownum + 1) 'rank'
         FROM
             (SELECT @rownum := 0) r,
             (
@@ -70,4 +71,12 @@
                     d_xgsj
             ) AS t
     </select>
+
+    <update id="clearAllGoldDzhz" parameterType="java.util.HashMap">
+        UPDATE t_green_gold_dzhz
+           SET n_dzzl = #{nDzzl,jdbcType=DECIMAL},
+           c_xguser = #{cXguser,jdbcType=VARCHAR},
+           d_xgsj = #{dXgsj,jdbcType=TIMESTAMP},
+           c_bz = #{cBz,jdbcType=VARCHAR}
+    </update>
 </mapper>

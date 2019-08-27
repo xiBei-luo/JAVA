@@ -5,7 +5,9 @@ import com.greenplatform.configer.MyHttpSessionListener;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
+import com.greenplatform.service.WebService;
 import com.greenplatform.util.GetcurrentLoginUser;
+import com.greenplatform.util.returnUtil.ReturnModelHandler;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -26,6 +28,9 @@ public class PlateController {
 
     @Autowired
     PlateService plateService;
+
+    @Autowired
+    WebService webService;
 
     @PostMapping(value = "/getLoginUser")
     public ReturnModel getLoginUser(){
@@ -265,6 +270,18 @@ public class PlateController {
     public Object online() {
         System.out.println(MyHttpSessionListener.online);
         return  "当前在线人数：" + MyHttpSessionListener.online + "人";
+    }
+
+    //测试瓜分能量接口
+    @RequestMapping(value = "/divideNl",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel divideNl(){
+        try {
+            webService.divideNl();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ReturnModelHandler.success(null);
     }
 
 

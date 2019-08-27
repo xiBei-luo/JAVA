@@ -19,6 +19,9 @@ public interface OwerTGreenGoldDzhzMapper {
     Map selectTGreenGoldDzhzBycUserid(String cUserid);
 
     //查询排名
-    Map selectGreenGoldDzhzAllRank();
+    List selectGreenGoldDzhzAllRank();
+
+    int clearAllGoldDzhz(Map hashMap);
+
 
 }

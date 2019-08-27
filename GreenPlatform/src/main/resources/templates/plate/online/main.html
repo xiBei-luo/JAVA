@@ -19,6 +19,7 @@
 
 <button class="btn btn-primary" id="getOnlinePerson">在线人数</button>
 <div class="onlinePerson"></div>
+<div class="btn btn-info" id="gfnl">瓜分能量</div>
 
 <script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
@@ -38,6 +39,16 @@
 
         sendRequest.sendRequest(function(ret){
             $(".onlinePerson").text(ret);
+            console.log(ret);
+
+        });//发送请求并获取返回结果
+    });
+
+    $("#gfnl").click(function () {
+        var sendRequest = new SendRequest("/plate/divideNl","POST");//构造对象
+        sendRequest.addParamObj(null);//构造请求参数
+
+        sendRequest.sendRequest(function(ret){
             console.log(ret);
 
         });//发送请求并获取返回结果

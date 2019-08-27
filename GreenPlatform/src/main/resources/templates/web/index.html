@@ -90,7 +90,7 @@
             <div class="row">
                 <div class="col-md-offset-4 col-md-4">
                     <div class="btnLikeBox">
-                        <span class="glyphicon glyphicon-heart" id="btnLike"></span>
+                        <span class="glyphicon glyphicon-thumbs-up" id="btnLike"></span>
                         <span id="jsGold">-50</span>
                     </div>
                 </div>
@@ -103,12 +103,12 @@
             <div class="row goldDzRankContent" th:each="tGreenGoldDzhzList,tGreenGoldDzhzStatu : ${loginuserHome.tGreenGoldDzhzList}">
                 <div class="col-md-4 col-xs-3" th:text=${tGreenGoldDzhzStatu.index+1} th:attr="id = 'goldDzRankContent_'+${tGreenGoldDzhzStatu.index+1}"></div>
                 <div class="col-md-4 col-xs-4" th:text="${tGreenGoldDzhzList.cUsername}"></div>
-                <div class="col-md-4 col-xs-5" th:text="${tGreenGoldDzhzList.nDzzl}"></div>
+                <div class="col-md-4 col-xs-5" th:text="${'M '+tGreenGoldDzhzList.nDzzl}"></div>
             </div>
             <div class="row goldDzRankContent">
                 <div class="col-md-4 col-xs-3 goldDzRankContent_ower" th:text="${loginuserHome.owerTGreenGoldDzhz['nRank']}"></div>
                 <div class="col-md-4 col-xs-4" th:text="${loginuserHome.owerTGreenGoldDzhz['cUsername']}"></div>
-                <div class="col-md-4 col-xs-5" th:text="${loginuserHome.owerTGreenGoldDzhz['n_dzzl']}"></div>
+                <div class="col-md-4 col-xs-5" th:text="${'M '+loginuserHome.owerTGreenGoldDzhz['n_dzzl']}"></div>
             </div>
         </div>
     </div>
@@ -130,12 +130,12 @@
             <div class="row goldDzRankContent" th:each="tGreenNlNlhz,tGreenNlNlhzStatu : ${loginuserHome.tGreenNlNlhzList}">
                 <div class="col-md-4 col-xs-3" th:text=${tGreenNlNlhzStatu.index+1} th:attr="id = 'goldDzRankContent_'+${tGreenNlNlhzStatu.index+1}"></div>
                 <div class="col-md-4 col-xs-4" th:text=${tGreenNlNlhz.cUsername}></div>
-                <div class="col-md-4 col-xs-5" th:text="${tGreenNlNlhz.nNlhz}"></div>
+                <div class="col-md-4 col-xs-5" th:text="${'￥'+tGreenNlNlhz.nNlhz}"></div>
             </div>
             <div class="row goldDzRankContent">
                 <div class="col-md-4 col-xs-3 goldDzRankContent_ower" th:text="${loginuserHome.owerTGreenNlHz['nRank']}"></div>
                 <div class="col-md-4 col-xs-4" th:text="${loginuserHome.owerTGreenNlHz['cUsername']}"></div>
-                <div class="col-md-4 col-xs-5" th:text="${loginuserHome.owerTGreenNlHz['n_nlhz']}"></div>
+                <div class="col-md-4 col-xs-5" th:text="${'￥'+loginuserHome.owerTGreenNlHz['n_nlhz']}"></div>
             </div>
         </div>
     </div>
@@ -172,7 +172,6 @@
             </div>
         </div>
     </section> <!--end  popular packajge -->
-
 
     <footer class="container-fluid indexFooter">
         联系方式：QQ：1584638913    邮箱：1584638913@qq.com <br>

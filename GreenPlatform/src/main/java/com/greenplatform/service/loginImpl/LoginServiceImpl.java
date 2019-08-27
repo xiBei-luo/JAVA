@@ -17,6 +17,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.util.*;
 
 
@@ -33,6 +34,8 @@ public class LoginServiceImpl implements LoginService {
     TGreenZzZjzzmxMapper tGreenZzZjzzmxMapper;
     @Autowired
     TGreenGoldHzMapper tGreenGoldHzMapper;
+    @Autowired
+    PlateUserFatherMapper plateUserFatherMapper;
 
     //ReturnModel returnModel = new ReturnModel();
 
@@ -85,6 +88,8 @@ public class LoginServiceImpl implements LoginService {
     public ReturnModel doRegister(String jsonObject, HttpSession session) {
         try{
 
+            String majorKey = UUID.randomUUID().toString().replaceAll("-", "");//生成的用户编号
+
             JSONObject jsonParams = JSONObject.fromObject(jsonObject);
 
 
@@ -104,9 +109,21 @@ public class LoginServiceImpl implements LoginService {
                 plateUser.setcLoginname(jsonParams.getString("cLoginname"));
                 plateUser.setcPassword(jsonParams.getString("cPassword"));
                 plateUser.setcRylb(jsonParams.getString("cRylb"));
+                //如果是被邀请注册的用户
                 if (!("-1".equals(jsonParams.getString("cYqm")))){
                     plateUser.setcFatherid(jsonParams.getString("cYqm"));
                     plateUser.setcYqm(jsonParams.getString("cYqm"));
+
+                    PlateUserFather plateUserFather = new PlateUserFather();
+                    plateUserFather.setcUserid(jsonParams.getString("cYqm"));
+                    plateUserFather.setcSonid(majorKey);
+                    plateUserFather.setdFxsj(TimeUtil.getTimestamp(new Date()));
+                    plateUserFather.setcFxmouth(TimeUtil.getLocalDate(new Date()).substring(0,7));
+                    plateUserFather.setcZt("1");
+                    plateUserFather.setcCjuser(majorKey);
+                    plateUserFather.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                    plateUserFatherMapper.insert(plateUserFather);
+
                 }
 
                 //1.判断邮箱或用户名是否被注册
@@ -119,7 +136,6 @@ public class LoginServiceImpl implements LoginService {
                 }
 
                 //3.注册用户
-                String majorKey = UUID.randomUUID().toString().replaceAll("-", "");
                 plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
                 //3-1生成随机的username
                 String tmpUsername = UserStringUtil.getRandomString2(6);
