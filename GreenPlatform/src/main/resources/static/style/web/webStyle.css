@@ -464,6 +464,10 @@ header{
         height: 180px;
     }
 
+    #myAccountModel .nav li a{
+        padding:8px;
+    }
+
 
 }
 

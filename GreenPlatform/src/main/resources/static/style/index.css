@@ -27,6 +27,10 @@ html,body{
 .plate-navbar-right a:hover{
     color: #333333;
 }
+.page-box .navbar-loginUser a:visited{
+    background: #1b6d85;
+    color: #ffffff;
+}
 /**
 左侧菜单栏
  */

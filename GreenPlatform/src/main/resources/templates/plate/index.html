@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-offset-4 col-xs-offset-4 col-md-4 col-xs-4">
                 <ul class="nav navbar-nav navbar-right plate-navbar-right">
-                    <li class="navbar-loginUser">欢迎您，<span>系统管理员</span></li>
+                    <li class="navbar-loginUser"><a href="##" data-toggle="modal" data-target="#myModal">欢迎您，管理员</a></li>
                     <li><a href="/base/loginout">退出系统</a></li>
                 </ul>
             </div>
@@ -60,14 +60,47 @@
 
     </div>
 
+    <!-- 修改密码 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="updPassForm">
+                        <div class="form-group">
+                            <label for="cPassword">新密码:</label>
+                            <input type="password" class="form-control" name="cPassword" id="cPassword" placeholder="请输入新密码">
+                        </div>
+                        <div class="form-group">
+                            <label for="cPassword1">确认密码:</label>
+                            <input type="password" class="form-control" name="cPassword1" id="cPassword1" placeholder="请再次输入密码">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnSave">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
     <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrapValidator.min.js"></script>
+    <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+    <script src="/publicJs/SendRequest.js"></script>
     <script src="/publicJs/publicyw.js"></script>
     <script src="/publicJs/MdiWindow.js"></script>
     <script src="/publicJs/layer/layer.js"></script>
     <script>
         $(function(){
+            checkForm();
+            
             $(".first-level").click(function(){
                 $(".first-level").removeClass("active");
                 $(this).addClass("active");//设置点击后的样式
@@ -98,7 +131,94 @@
             $(".nav-second-level a").click(function(){
                 $("#iframe-page-content").attr("src",$(this).attr("data-targetUrl"));
             });
+            
+            //修改密码
+            $("#btnSave").click(function(){
+                $("#updPassForm").bootstrapValidator('validate');//提交验证
+                if ($("#updPassForm").data('bootstrapValidator').isValid()) {
+                    f_savePass();
+                }
+            });
         });
+        
+        /*
+        * 输入验证
+        * */
+        function checkForm() {
+            $('#updPassForm').bootstrapValidator({
+                excluded: [':disabled'],
+                feedbackIcons: {
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    cPassword: {
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_]+$/,
+                                message: '用户名只能包含大写、小写、数字和下划线'
+                            }
+                        }
+                    },
+                    cPassword1: {
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            },
+                            identical: {
+                                field: 'cPassword',
+                                message: '两次密码不一致'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_]+$/,
+                                message: '用户名只能包含大写、小写、数字和下划线'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+
+        /**
+         * 修改密码
+         */
+        function f_savePass(){
+            var sendRequest = new SendRequest("/plate/updPlateUserPass","POST");//构造对象
+            sendRequest.addParamObj({
+                "cPassword":$("#cPassword").val()
+            });//构造请求参数
+            sendRequest.sendRequest(function(ret){
+                $("#btnSave").attr("disabled",false);
+                if("0" != ret.flag){
+                    $("#btnSave").attr("disabled",false);
+                    BootstrapDialog.alert({
+                        type: BootstrapDialog.TYPE_WARNING,
+                        size: BootstrapDialog.SIZE_SMALL,
+                        title: '修改失败',
+                        message: ret.msg,
+                        closeable: true,
+                        buttonLabel: "确定"
+                    });
+                }else{
+                    BootstrapDialog.alert({
+                        type: BootstrapDialog.TYPE_PRIMARY,
+                        size: BootstrapDialog.SIZE_SMALL,
+                        title: '修改成功',
+                        message: '修改成功，请重新登陆系统',
+                        closeable: true,
+                        buttonLabel: "确定",
+                        callback: function (ret) {
+                            if (ret){
+                                window.location.href = "/base/loginout";
+                            }
+                        }
+                    });
+                }
+            });//发送请求并获取返回结果
+        }
 
 
     </script>

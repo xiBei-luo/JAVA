@@ -64,14 +64,29 @@ function checkLogin(){
 }
 
 function f_submitData(){
+    var phoneReg = /^1[3456789]\d{9}$/;//电话号码正则
+
+    var cLoginname = $("#cLoginname").val();
+
+    var params = {};
+
+    if (phoneReg.test(cLoginname)) {
+        params = {
+            "cPhone":$("#cLoginname").val(),
+            "cPassword":$("#cPassword").val(),
+            "cRylb":$("input[name='cRylb']:checked").val()
+        }
+    }else{
+        params = {
+            "cLoginname":$("#cLoginname").val(),
+            "cPassword":$("#cPassword").val(),
+            "cRylb":$("input[name='cRylb']:checked").val()
+        }
+    }
+
     var sendRequest = new SendRequest("/login/login","POST");//构造对象
-    sendRequest.addParamObj({
-        "cLoginname":$("#cLoginname").val(),
-        "cPassword":$("#cPassword").val(),
-        "cRylb":$("input[name='cRylb']:checked").val()
-    });//构造请求参数
+    sendRequest.addParamObj(params);//构造请求参数
     sendRequest.sendRequest(function(ret){
-        console.log(ret);
         $("#btnLogin").attr("disabled",false);
         if("0" != ret.flag){
             $("#btnLogin").attr("disabled",false);

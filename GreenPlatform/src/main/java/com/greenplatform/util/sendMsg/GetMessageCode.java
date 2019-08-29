@@ -67,7 +67,7 @@ public class GetMessageCode {
         }
 
         JSONObject json = JSONObject.parseObject(result.toString());
-        System.out.println("返回参数："+json);
+        //System.out.println("返回参数："+json);
         String respCode = json.getString("respCode");
         String defaultRespCode = "0000";//发送成功状态码
 
@@ -137,7 +137,7 @@ public class GetMessageCode {
     // 创建验证码
     public static String smsCode() {
         String random = (int) ((Math.random() * 9 + 1) * 100000) + "";
-        System.out.println("验证码："+random);
+        //System.out.println("验证码："+random);
         return random;
     }
 }

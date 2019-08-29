@@ -7,4 +7,5 @@ import java.util.Map;
 @Mapper
 public interface OwerTGreenRwRwmxMapper {
     List selectTGreenRwRwmx(Map paramMap);
+    int clearPlateUserRwmx(Map paramMap);
 }

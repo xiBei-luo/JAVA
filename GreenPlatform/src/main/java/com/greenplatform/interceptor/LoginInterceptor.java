@@ -27,7 +27,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         Calendar cal = Calendar.getInstance();
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         if (hour >= 0 && hour < 5 && requestURI.contains("web")) {
-            System.out.println("0点到5点系统维护中");
+            //System.out.println("0点到5点系统维护中");
             response.sendRedirect(request.getContextPath()+"/base/safeguard");  //系统维护中不能被访问，跳转至维护页面
             return false;
         }

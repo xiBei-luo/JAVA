@@ -103,4 +103,7 @@ public interface PlateService {
     /*用户加入黑名单*/
     public ReturnModel insertPlateuserBlacklist(JSONObject jsonObject);
 
+    /*修改密码*/
+    public ReturnModel updPlateUserPass(String cPassword);
+
 }

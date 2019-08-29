@@ -268,8 +268,18 @@ public class PlateController {
      */
     @RequestMapping("/online")
     public Object online() {
-        System.out.println(MyHttpSessionListener.online);
+        //System.out.println(MyHttpSessionListener.online);
         return  "当前在线人数：" + MyHttpSessionListener.online + "人";
+    }
+
+    /**
+     * 修改管理员登陆密码
+     * @return
+     */
+    @RequestMapping(value = "/updPlateUserPass",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel updPlateUserPass(String cPassword){
+        return plateService.updPlateUserPass(cPassword);
     }
 
     //测试瓜分能量接口

@@ -41,7 +41,7 @@ public class LoginServiceImpl implements LoginService {
 
 
     /**
-     * 账号密码登陆
+     * 账号密码登陆/手机号码密码登陆
      * @param plateUser
      * @param session
      * @return
@@ -57,8 +57,15 @@ public class LoginServiceImpl implements LoginService {
         criteria.andCZtEqualTo("1");//数据状态（0无效  1有效）
 
         //1、用户是否存在
-        plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));
-        criteria.andCLoginnameEqualTo(plateUser.getcLoginname());
+        if (!(null == plateUser.getcPhone()|| "".equals(plateUser.getcPhone()))){
+            criteria.andCPhoneEqualTo(plateUser.getcPhone());
+        }else if(!(null == plateUser.getcLoginname()|| "".equals(plateUser.getcLoginname()))){
+            criteria.andCLoginnameEqualTo(plateUser.getcLoginname());
+        }
+
+
+        plateUser.setcPassword(MD5.md5(plateUser.getcPassword()));//数据库中密码已加密
+
         plateUserList = plateUserMapper.selectByExample(plateUserExample);
         if (plateUserList.isEmpty()){
             return ReturnModelHandler.error("用户不存在!");

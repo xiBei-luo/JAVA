@@ -1469,6 +1469,7 @@ public class PlateServiceImpl implements PlateService {
      * @return
      */
     @Override
+    @YwOperationCheckAndLog(cCzfs = "I")
     public ReturnModel insertPlateuserBlacklist(JSONObject jsonObject) {
         try{
             if (null == jsonObject.getString("cUserid") || "".equals(jsonObject.getString("cUserid"))){
@@ -1514,6 +1515,33 @@ public class PlateServiceImpl implements PlateService {
             return ReturnModelHandler.systemError();
         }
     }
+
+
+    /**
+     * 修改管理员密码
+     * @param cPassword
+     * @return
+     */
+    @Override
+    @YwOperationCheckAndLog(cCzfs = "U")
+    public ReturnModel updPlateUserPass(String cPassword) {
+        try{
+            PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+            plateUser.setcPassword(MD5.md5(cPassword));
+            plateUser.setdXgsj(TimeUtil.getTimestamp(new Date()));
+            plateUser.setcXguser(plateUser.getcUserid());
+            plateUserMapper.updateByPrimaryKey(plateUser);
+
+            return ReturnModelHandler.success(plateUser);
+        }catch (Exception e){
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return ReturnModelHandler.systemError();
+        }
+    }
+
+
+
 
 
 }

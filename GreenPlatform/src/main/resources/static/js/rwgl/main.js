@@ -70,7 +70,6 @@ function loadGridData(){
  * @param data
  */
 function initData(data){
-    console.log(data);
     for (var i=0; i<data.length; i++){
 
         grid.addRow((i+1),[

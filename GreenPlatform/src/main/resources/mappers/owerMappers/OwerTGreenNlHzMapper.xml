@@ -29,7 +29,15 @@
 
   <select id="selectTGreenNlHzBycUserid" parameterType="java.lang.String" resultType="java.util.HashMap">
         SELECT
-            b.*
+            b.c_userid,
+            ROUND(b.n_nlhz,2) n_nlhz,
+            b.c_bz,
+            b.c_zt,
+            b.c_cjuser,
+            b.d_cjsj,
+            b.c_xguser,
+            b.d_xgsj,
+            b.rank
         FROM
             (
                 SELECT
@@ -41,10 +49,13 @@
                             *
                         FROM
                             t_green_nl_hz
-                    ORDER BY n_nlhz DESC ,d_xgsj
+                        ORDER BY
+                            n_nlhz DESC,
+                            d_xgsj
                     ) AS t
             ) AS b
-        WHERE c_userid = #{cUserid}
-          AND c_zt='1'
+        WHERE
+            c_userid = #{cUserid}
+        AND c_zt = '1'
   </select>
 </mapper>

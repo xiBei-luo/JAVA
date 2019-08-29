@@ -102,7 +102,7 @@
             </div>
             <div class="row goldDzRankContent" th:each="tGreenGoldDzhzList,tGreenGoldDzhzStatu : ${loginuserHome.tGreenGoldDzhzList}">
                 <div class="col-md-4 col-xs-3" th:text=${tGreenGoldDzhzStatu.index+1} th:attr="id = 'goldDzRankContent_'+${tGreenGoldDzhzStatu.index+1}"></div>
-                <div class="col-md-4 col-xs-4" th:text="${tGreenGoldDzhzList.cUsername}"></div>
+                <div class="col-md-4 col-xs-4" th:text="${tGreenGoldDzhzList.cUserid == loginuserHome.owerTGreenGoldDzhz['cUserid'] ? tGreenGoldDzhzList.cUsername : #strings.substring(tGreenGoldDzhzList.cUsername,0,1) + '**'}"></div>
                 <div class="col-md-4 col-xs-5" th:text="${'M '+tGreenGoldDzhzList.nDzzl}"></div>
             </div>
             <div class="row goldDzRankContent">
@@ -129,7 +129,7 @@
             </div>
             <div class="row goldDzRankContent" th:each="tGreenNlNlhz,tGreenNlNlhzStatu : ${loginuserHome.tGreenNlNlhzList}">
                 <div class="col-md-4 col-xs-3" th:text=${tGreenNlNlhzStatu.index+1} th:attr="id = 'goldDzRankContent_'+${tGreenNlNlhzStatu.index+1}"></div>
-                <div class="col-md-4 col-xs-4" th:text=${tGreenNlNlhz.cUsername}></div>
+                <div class="col-md-4 col-xs-4" th:text="${tGreenNlNlhz.cUserid == loginuserHome.owerTGreenNlHz['cUserid'] ? tGreenNlNlhz.cUsername : #strings.substring(tGreenNlNlhz.cUsername,0,1) + '**'}"></div>
                 <div class="col-md-4 col-xs-5" th:text="${'￥'+tGreenNlNlhz.nNlhz}"></div>
             </div>
             <div class="row goldDzRankContent">
@@ -183,7 +183,6 @@
         <span id="returnTop" class="glyphicon glyphicon-chevron-up"></span>
     </div>
 
-    <!-- myAccountModel -->
     <div class="modal fade" id="myAccountModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -192,73 +191,113 @@
                     <h4 class="modal-title" id="myModalLabel">我的账户</h4>
                 </div>
                 <div class="modal-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <span id="cUsername"></span>
-                            <span class="badge" id="cRydj"></span>
-                            <a href="/base/certification" class="btn-link" target="" id="certiBtn">实名制</a>
-                            <!--<a href="/base/webIndexEdit" class="btn-link" target="" id="certiEdit">修改信息</a>-->
+                    <!--标签页头-->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#myAccountModelBase" aria-controls="myAccountModelBase" role="tab" data-toggle="tab">基本信息</a>
                         </li>
-                        <li class="list-group-item">
-                            <span class="badge" id="nNlhz"></span>我的能量
+                        <li role="presentation">
+                            <a href="#myAccountModelProfile" aria-controls="myAccountModelProfile" role="tab" data-toggle="tab">我的任务</a>
                         </li>
-                        <li class="list-group-item">
-                            <span class="badge" id="nJbzl"></span>我的金币
+                        <li role="presentation">
+                            <a href="##myAccountModelMessages" aria-controls="myAccountModelMessages" role="tab" data-toggle="tab">我的植物</a>
                         </li>
-                        <li class="list-group-item">
-                            <span class="badge" id="nDzzl"></span>我的点赞数
-                        </li>
-                        <li class="list-group-item">
-                            <button class="btn btn-primary btn-sm" id="btnCz">充值</button>
-                            <button class="btn btn-info btn-sm" id="btnTx">提现</button>
-                        </li>
-                        <li class="list-group-item">
-                            我的植物
-                        </li>
-                        <li class="list-group-item" id = "mySeed">
-                            <ul class="list-group">
-                            </ul>
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge" id="nMonthRw"></span>本月任务
-                        </li>
-                        <li class="list-group-item">
-                            今日任务
-                        </li>
-                        <li class="list-group-item">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <span>施肥</span>
-                                    <span id="cRwlb_1" class="badge">已完成</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span>浇水</span>
-                                    <span id="cRwlb_2" class="badge">已完成</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span>沐浴阳光</span>
-                                    <span id="cRwlb_3" class="badge">已完成</span>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="/base/history" target="">捐赠记录</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="/base/history" target="">充值记录</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="/base/history" target="">提现记录</a>
+                        <li role="presentation">
+                            <a href="#myAccountModelSettings" aria-controls="myAccountModelSettings" role="tab" data-toggle="tab">我的徒弟</a>
                         </li>
                     </ul>
+
+                    <!--标签页内容-->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane in active" id="myAccountModelBase">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span id="cUsername"></span>
+                                    <span class="badge" id="cRydj"></span>
+                                    <a href="/base/certification" class="btn-link" target="" id="certiBtn">实名制</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge" id="nNlhz"></span>我的能量
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge" id="nJbzl"></span>我的金币
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge" id="nDzzl"></span>我的点赞数
+                                </li>
+                                <li class="list-group-item">
+                                    <button class="btn btn-primary btn-sm" id="btnCz">充值</button>
+                                    <button class="btn btn-info btn-sm" id="btnTx">提现</button>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="/base/history" target="">捐赠记录</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="/base/history" target="">充值记录</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="/base/history" target="">提现记录</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="myAccountModelProfile">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge" id="nMonthRw"></span>本月任务
+                                </li>
+                                <li class="list-group-item">
+                                    今日任务
+                                </li>
+                                <li class="list-group-item">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <span>施肥</span>
+                                            <span id="cRwlb_1" class="badge">已完成</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>浇水</span>
+                                            <span id="cRwlb_2" class="badge">已完成</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>沐浴阳光</span>
+                                            <span id="cRwlb_3" class="badge">已完成</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="myAccountModelMessages">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    我的植物
+                                </li>
+                                <li class="list-group-item" id = "mySeed">
+                                    <ul class="list-group">
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="myAccountModelSettings">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span>我的徒弟</span>
+                                    <span class="float-right text-danger">今日任务</span>
+                                </li>
+                                <li class="list-group-item" id = "mySon">
+                                    <ul class="list-group">
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <!--<div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnRet">关闭</button>
-                </div>-->
             </div>
         </div>
     </div>
 
+
+
+    <!--加载客服二维码-->
     <div class="modal fade" id="customModel" tabindex="-1" role="dialog" aria-labelledby="customModelLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -273,6 +312,8 @@
         </div>
     </div>
 
+
+    <!--邀请码-->
     <div class="modal fade" id="inviteUserModel" tabindex="-1" role="dialog" aria-labelledby="inviteUserLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

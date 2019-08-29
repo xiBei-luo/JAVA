@@ -3,9 +3,9 @@ $(function(){
 });
 
 function initEvent() {
-    /*$("#myAccountModel .close").click(function(){
+    $("#myAccountModel .close").click(function(){
         window.location.reload()
-    });*/
+    });
 
     $("#returnTop").click(function(){
         $('body,html').animate({scrollTop:0},300)
@@ -61,8 +61,6 @@ function f_selectLoginuserAccount(){
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
-        console.log(ret.object);
-
         //登陆账户信息
         var oPlateuser = ret.object.plateUser[0];//登陆账户信息（获取人员姓名与人员等级）
         $("#cUsername").text(oPlateuser.cUsername);
@@ -135,7 +133,6 @@ function f_selectLoginuserAccount(){
 
         //登陆用户种子信息（查询用户有几种未捐赠的种子）
         var atGreenZzZjzzmx = ret.object.tGreenZzZjzzmx;//登陆用户种子信息（查询用户有几种未捐赠的种子）
-        //console.log(atGreenZzZjzzmx);
         if (atGreenZzZjzzmx.length > 0) {
 
             $("#mySeed ul li").remove();
@@ -146,12 +143,37 @@ function f_selectLoginuserAccount(){
                     //"<button id='"+v.cSpbh+"' onclick='f_contributeSeed("+JSON.stringify(v)+")'  class='btn btn-primary btn-sm float-right' "+(v.cKjz == '0' ? 'disabled' : '')+">捐赠</button>\n" +
                     "<button id='"+v.cSpbh+"' onclick='f_contributeSeed("+JSON.stringify(v)+")' class='btn btn-primary btn-sm float-right'>捐赠</button>\n" +
                     "</li>");
-            });;
+            });
         }else{
             $("#mySeed ul").append("<li class=\"list-group-item\">\n" +
                 "无\n" +
                 "</li>");
         }
+
+        //登陆人的徒弟账户信息
+        var aplateUserSon = ret.object.plateUserSon;//登陆用户的子账户信息
+        if (aplateUserSon.length > 0) {
+
+            $("#mySon ul li").remove();
+
+            $(aplateUserSon).each(function(i,v){
+
+                $("#mySon ul").append("<li class=\"list-group-item\">\n" +
+                    "<span id='"+v.cUserid+"'>"+v.cUsername+"</span>\n" +
+
+                    "<div class='float-right'>"+
+                    "<input type='checkbox' disabled "+(v.sonUserRwmx['1'] == true ? 'checked' : '')+"> 施肥&nbsp&nbsp"+
+                    "<input type='checkbox' disabled "+(v.sonUserRwmx['2'] == true ? 'checked' : '')+"> 浇水&nbsp&nbsp"+
+                    "<input type='checkbox' disabled "+(v.sonUserRwmx['3'] == true ? 'checked' : '')+"> 沐浴阳光"+
+                    "</div>"+
+                    "</li>");
+            });
+        }else{
+            $("#mySon ul").append("<li class=\"list-group-item\">\n" +
+                "无\n" +
+                "</li>");
+        }
+
 
 
     });//发送请求并获取返回结果
@@ -289,7 +311,6 @@ function f_contributeSeed(data){
     });
 
     sendRequest.sendRequest(function(ret){
-        console.log(ret);
         if("0" != ret.flag){
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,

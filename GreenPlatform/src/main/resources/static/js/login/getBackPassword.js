@@ -151,6 +151,10 @@ function checkRegister(){
                 validators: {
                     notEmpty: {
                         message: '密码不能为空'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: '用户名只能包含大写、小写、数字和下划线'
                     }
                 }
             },
@@ -162,6 +166,10 @@ function checkRegister(){
                     identical: {
                         field: 'cPassword',
                         message: '两次密码不一致'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: '用户名只能包含大写、小写、数字和下划线'
                     }
                 }
             }

@@ -25,4 +25,12 @@
        </if>
       ORDER BY A.c_userid,A.d_rwsj DESC,A.c_rwlb DESC
   </select>
+
+    <update id="clearPlateUserRwmx" parameterType="java.util.HashMap">
+        UPDATE t_green_rw_rwmx
+           SET c_zt = #{cZt,jdbcType=VARCHAR},
+           c_xguser = #{cXguser,jdbcType=VARCHAR},
+           d_xgsj = #{dXgsj,jdbcType=TIMESTAMP}
+        WHERE c_userid = #{cUserid,jdbcType=TIMESTAMP}
+    </update>
 </mapper>
