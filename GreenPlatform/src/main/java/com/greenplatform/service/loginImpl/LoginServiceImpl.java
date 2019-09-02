@@ -36,8 +36,13 @@ public class LoginServiceImpl implements LoginService {
     TGreenGoldHzMapper tGreenGoldHzMapper;
     @Autowired
     PlateUserFatherMapper plateUserFatherMapper;
+    @Autowired
+    PlateCodeDmzMapper plateCodeDmzMapper;
+    @Autowired
+    TGreenGoldZjmxMapper tGreenGoldZjmxMapper;
+    @Autowired
+    TGreenRwRwhzMapper tGreenRwRwhzMapper;
 
-    //ReturnModel returnModel = new ReturnModel();
 
 
     /**
@@ -116,13 +121,15 @@ public class LoginServiceImpl implements LoginService {
                 plateUser.setcLoginname(jsonParams.getString("cLoginname"));
                 plateUser.setcPassword(jsonParams.getString("cPassword"));
                 plateUser.setcRylb(jsonParams.getString("cRylb"));
-                //如果是被邀请注册的用户
+                //如果是被邀请注册的用户（师傅表增加记录，师傅账户获得1000金币奖励）
                 if (!("-1".equals(jsonParams.getString("cYqm")))){
-                    plateUser.setcFatherid(jsonParams.getString("cYqm"));
-                    plateUser.setcYqm(jsonParams.getString("cYqm"));
+                    String cUseridFather = jsonParams.getString("cYqm");
+                    plateUser.setcFatherid(cUseridFather);
+                    plateUser.setcYqm(cUseridFather);
 
+                    //师傅表增加记录
                     PlateUserFather plateUserFather = new PlateUserFather();
-                    plateUserFather.setcUserid(jsonParams.getString("cYqm"));
+                    plateUserFather.setcUserid(cUseridFather);
                     plateUserFather.setcSonid(majorKey);
                     plateUserFather.setdFxsj(TimeUtil.getTimestamp(new Date()));
                     plateUserFather.setcFxmouth(TimeUtil.getLocalDate(new Date()).substring(0,7));
@@ -130,6 +137,28 @@ public class LoginServiceImpl implements LoginService {
                     plateUserFather.setcCjuser(majorKey);
                     plateUserFather.setdCjsj(TimeUtil.getTimestamp(new Date()));
                     plateUserFatherMapper.insert(plateUserFather);
+
+                    //师傅账户获得1000金币奖励（金币金币增加表，金币汇总表）
+                    TGreenGoldZjmx tGreenGoldZjmx = new TGreenGoldZjmx();
+                    String nZjsj = getDmzByDm("C_GOLD_ZJYY_2");
+                    tGreenGoldZjmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
+                    tGreenGoldZjmx.setcUserid(cUseridFather);
+                    tGreenGoldZjmx.setnZjsl(new BigDecimal(nZjsj));
+                    tGreenGoldZjmx.setdZjsj(TimeUtil.getTimestamp(new Date()));
+                    tGreenGoldZjmx.setcZjyy("C_GOLD_ZJYY_2");
+                    tGreenGoldZjmx.setcZjyysm("平台分享好友");
+                    tGreenGoldZjmx.setcZt("1");
+                    tGreenGoldZjmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                    tGreenGoldZjmx.setcCjuser(majorKey);
+                    tGreenGoldZjmxMapper.insert(tGreenGoldZjmx);
+
+                    TGreenGoldHz tGreenGoldHz = tGreenGoldHzMapper.selectByPrimaryKey(cUseridFather);
+                    tGreenGoldHz.setnJbzl(tGreenGoldHz.getnJbzl().add(new BigDecimal(nZjsj)));
+                    tGreenGoldHz.setcXguser(majorKey);
+                    tGreenGoldHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                    tGreenGoldHzMapper.updateByPrimaryKey(tGreenGoldHz);
+
+
 
                 }
 
@@ -187,6 +216,15 @@ public class LoginServiceImpl implements LoginService {
                     tGreenNlHz.setdCjsj(TimeUtil.getTimestamp(new Date()));
                     tGreenNlHzMapper.insert(tGreenNlHz);
 
+                    //任务汇总表增加一条记录（注册成功，但未实名制账户，实名制后将状态修改为有效1）
+                    TGreenRwRwhz tGreenRwRwhz = new TGreenRwRwhz();
+                    tGreenRwRwhz.setcUserid(plateUser.getcUserid());
+                    tGreenRwRwhz.setnLjwccs(0);
+                    tGreenRwRwhz.setcZt("0");
+                    tGreenRwRwhz.setcCjuser(plateUser.getcUserid());
+                    tGreenRwRwhz.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                    tGreenRwRwhzMapper.insert(tGreenRwRwhz);
+
                     session.setAttribute("loginUser",plateUser);//前端用户注册成功后写入session
                     return  ReturnModelHandler.success(plateUser);
                 }
@@ -243,36 +281,29 @@ public class LoginServiceImpl implements LoginService {
         JSONObject jsonSessionParams = JSONObject.fromObject(session.getAttribute("smsCodeObj"));
         String sessionSmsCode = jsonSessionParams.getString("smsCode");//session域中的验证码
 
+        //验证手机号码是否注册
+        boolean isUse = checkUser("cPhone",cPhone);
+        if (isUse == true){
+            return ReturnModelHandler.error("手机号未注册");
+        }
 
         //验证：手机号码是否匹配
         if (null == cPhone || ("").equals(cPhone)){
-            returnModel.setFlag(1);
-            returnModel.setMsg("手机号码不能为空！");
-            returnModel.setObject(null);
-            return returnModel;
+            return ReturnModelHandler.error("手机号码不能为空！");
         }else{
             if (!(cPhone.equals(jsonSessionParams.getString("cPhone")))){
-                returnModel.setFlag(1);
-                returnModel.setMsg("当前手机号码与验证手机号码不一致");
-                returnModel.setObject(null);
-                return returnModel;
+                return ReturnModelHandler.error("当前手机号码与验证手机号码不一致");
             }else{
                 if(!(smsCode.equals(sessionSmsCode))){
-                    returnModel.setFlag(1);
-                    returnModel.setMsg("验证码错误！");
-                    returnModel.setObject(null);
-                    return returnModel;
+                    return ReturnModelHandler.error("验证码错误！");
                 }
                 if((System.currentTimeMillis() - jsonSessionParams.getLong("createTime")) > 1000 * 60 * 5){
-                    returnModel.setFlag(1);
-                    returnModel.setMsg("验证码已过期，请重新获取！");
-                    returnModel.setObject(null);
-                    return returnModel;
+                    return ReturnModelHandler.error("验证码已过期，请重新获取！");
                 }
             }
         }
 
-        return returnModel;
+        return ReturnModelHandler.success(null);
     }
 
 
@@ -348,6 +379,22 @@ public class LoginServiceImpl implements LoginService {
         }else{
             return ReturnModelHandler.error(checkSmsCodeReturnModel.getMsg());
         }
+    }
+
+
+    /**
+     * 仅限于代码值字段不为空的查询
+     * @param cDm
+     * @return
+     */
+    private String getDmzByDm(String cDm) throws Exception{
+        PlateCodeDmzExample plateCodeDmzExample = new PlateCodeDmzExample();
+        PlateCodeDmzExample.Criteria criteria = plateCodeDmzExample.createCriteria();
+        criteria.andCDmEqualTo(cDm);
+        criteria.andCZtEqualTo("1");
+        PlateCodeDmz plateCodeDmz = (PlateCodeDmz)plateCodeDmzMapper.selectByExample(plateCodeDmzExample).get(0);
+
+        return plateCodeDmz.getcDmz();
     }
 
 

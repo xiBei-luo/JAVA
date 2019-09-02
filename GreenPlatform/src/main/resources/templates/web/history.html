@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ch">
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -32,10 +32,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li id="cHome"><a href="/web/index">返回首页</a></li>
-                        <li class="loadGrid active" id="cJzjl"><a href="#">捐赠记录 <span class="sr-only">(current)</span></a></li>
-                        <li class="loadGrid" id="cCzls"><a href="#">充值历史</a></li>
-                        <li class="loadGrid" id="cTxls"><a href="#">提现历史</a></li>
-                        <!--<li><a href="#" id="perInfo">修改资料</a></li>-->
+                        <li class="loadGrid" id="cJzjl"><a href="#">捐赠记录 </a></li>
+                        <li class="loadGrid" id="cCzls"><a href="#">充值历史 </a></li>
+                        <li class="loadGrid" id="cTxls"><a href="#">提现历史 </a></li>
                     </ul>
                 </div>
             </div>
@@ -49,10 +48,10 @@
                 <input type="text" class="form-control" id="dKssj" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="操作时间起">
             </div>
             <div class="col-md-1 col-xs-2">
-                <button class="btn btn-primary" id="btnSearch">检索</button>
+                <button class="btn btn-primary" id="btnSearch">查询</button>
             </div>
         </div>
-        <div class="gridbox" id="gridbox_cJzjl"></div>
+        <div class="gridbox" id="gridbox_cJzjl" hidden></div>
         <div class="gridbox" id="gridbox_cCzls" hidden></div>
         <div class="gridbox" id="gridbox_cTxls" hidden></div>
         <div id="commonInfo"></div>

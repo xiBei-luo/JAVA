@@ -84,15 +84,15 @@ header{
     animation:mymove 2s infinite;
 }
 .mission-js{
-    margin-left: 30%;
+    margin-left: 80%;
     -webkit-animation:jsMove 2s infinite; /*Safari and Chrome*/
 }
 .mission-sf{
-    margin-left: 50%;
+    margin-left: 70%;
     -webkit-animation:sfMove 2s infinite; /*Safari and Chrome*/
 }
 .mission-yg{
-    margin-left: 60%;
+    margin-left: 70%;
     -webkit-animation:ygMove 2s infinite; /*Safari and Chrome*/
 }
 @keyframes jsMove
@@ -144,7 +144,7 @@ header{
 }
 #js{
     border-color: #2b542c;
-    background: #5cb85c;
+    background: #ffffff;
 }
 #sf{
     border-color: #8a6d3b;
@@ -152,16 +152,15 @@ header{
 }
 #yg{
     border-color: #e38d13;
-    background: #f5e79e;
+    background: #f1586a;
 }
 
 .tree img{
-    width: 100px;
-    height: 100px;
+    width: 350px;
+    height: 350px;
     position: absolute;
-    left: 50%;
-    margin-left: -50px;
-    top: 250px;
+    top: 0;
+    left: 35%;
 }
 /*banner下的三个任务end*/
 
@@ -411,19 +410,33 @@ header{
     /*手机背景*/
     header{
         background: url("../../publicImg/telBg.jpg") no-repeat;
+        background-size: 420px 500px;
     }
 
     /*三个任务*/
+    .mission-js,.mission-sf,.mission-yg{
+        width: 80px;
+        height: 80px;
+    }
     .mission{
-        margin-top: 150px;
+        margin-top: 80px;
     }
     .mission-js{
-        margin-left: 15%;
+        margin-left: 45%;
         -webkit-animation:jsMove 2s infinite; /*Safari and Chrome*/
     }
     .mission-yg{
         margin-left: 75%;
         -webkit-animation:ygMove 2s infinite; /*Safari and Chrome*/
+    }
+
+    /*树苗*/
+    .tree img{
+        width: 250px;
+        height: 250px;
+        position: absolute;
+        top: 150px;
+        left:10%;
     }
 
 

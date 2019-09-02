@@ -1,6 +1,17 @@
 var grid1,grid2,grid3;
 var tmpClickLink;
 $(function(){
+    var curentLink = getQueryString("type");
+    if(3 == curentLink){
+        $("#cTxls").attr("class","loadGrid active");
+        $("#gridbox_cTxls").show();
+    }else if(2 == curentLink){
+        $("#cCzls").attr("class","loadGrid active");
+        $("#gridbox_cCzls").show();
+    }else{
+        $("#cJzjl").attr("class","loadGrid active");
+        $("#gridbox_cJzjl").show();
+    }
     tmpClickLink = $($(".loadGrid[class~='active']")).prop("id");//当前选中项
     initEvent();
     initGrid();
@@ -153,5 +164,15 @@ function loadGridData(reqUrl){
     };
     $.ajax(options);
 }
+
+
+
+function getQueryString(name)
+{
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+    if(r!=null)return  unescape(r[2]); return null;
+}
+
 
 

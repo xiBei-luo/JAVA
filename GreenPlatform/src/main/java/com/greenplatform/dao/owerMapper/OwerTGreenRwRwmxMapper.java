@@ -8,4 +8,5 @@ import java.util.Map;
 public interface OwerTGreenRwRwmxMapper {
     List selectTGreenRwRwmx(Map paramMap);
     int clearPlateUserRwmx(Map paramMap);
+    int updateZtBycUserid(Map paramMap);
 }
