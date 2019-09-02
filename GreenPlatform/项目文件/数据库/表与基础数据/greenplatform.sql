@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2019-08-27 16:19:24
+Date: 2019-09-02 17:27:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -154,15 +154,15 @@ INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_GOLD', 'C_ZWJZJL_GOLD_7', '生石
 INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_GOLD', 'C_ZWJZJL_GOLD_8', '光棍树', '500', '', '8', '', '1', '', '2019-07-25 14:29:27', '', '2019-07-25 14:29:27');
 INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_GOLD', 'C_ZWJZJL_GOLD_9', '巨人柱', '500', '', '9', '', '1', '', '2019-07-25 14:29:27', '', '2019-07-25 14:29:27');
 INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_1', '仙人掌', '112', null, '1', null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_10', '金琥', '121', null, '10', null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_2', '白刺', '113', null, '2', null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_3', '肉苁蓉', '114', null, '3', null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_4', '芦荟', '115', null, '4', null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_5', '大犀角', '116', null, '5', null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_6', '绿之玲', '117', null, '6', null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_7', '生石花', '118', null, '7', null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_8', '光棍树', '119', null, '8', null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_9', '巨人柱', '120', null, '9', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_10', '金琥', '112000', null, '10', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_2', '白刺', '336', null, '2', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_3', '肉苁蓉', '560', null, '3', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_4', '芦荟', '1120', null, '4', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_5', '大犀角', '3360', null, '5', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_6', '绿之玲', '5600', null, '6', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_7', '生石花', '11200', null, '7', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_8', '光棍树', '33600', null, '8', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_ZWJZJL_NL', 'C_ZWJZJL_NL_9', '巨人柱', '56000', null, '9', null, '1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for plate_code_xtcs
@@ -267,7 +267,7 @@ CREATE TABLE `plate_user` (
 -- ----------------------------
 -- Records of plate_user
 -- ----------------------------
-INSERT INTO `plate_user` VALUES ('3309b23c28584179b9d69e226e3eeeee', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 'admin', '系统管理员', '1', '0', null, null, '1', '1', '1', '1', '1', '1212', '121212', '18328823251', '18328023251', '1271826981', '1213@qq.com', null, null, '测试测试', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-06-25 14:49:27', '3309b23c28584179b9d69e226e3eeeee', '2019-07-02 14:59:59');
+INSERT INTO `plate_user` VALUES ('3309b23c28584179b9d69e226e3eeeee', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 'admin', '系统管理员', '1', '0', null, null, '1', '1', '1', '1', '1', '1212', '121212', '18328823251', '18328023251', '1271826981', '1213@qq.com', null, null, '测试测试', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-06-25 14:49:27', '3309b23c28584179b9d69e226e3eeeee', '2019-08-29 14:23:51');
 
 -- ----------------------------
 -- Table structure for plate_user_blacklist
@@ -290,6 +290,28 @@ CREATE TABLE `plate_user_blacklist` (
 
 -- ----------------------------
 -- Records of plate_user_blacklist
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for plate_user_father
+-- ----------------------------
+DROP TABLE IF EXISTS `plate_user_father`;
+CREATE TABLE `plate_user_father` (
+  `c_userid` varchar(255) NOT NULL COMMENT '父账户ID',
+  `c_sonid` varchar(255) NOT NULL COMMENT '徒弟ID',
+  `c_fxmouth` varchar(255) DEFAULT NULL COMMENT '收徒月份（分享月）',
+  `d_fxsj` datetime DEFAULT NULL COMMENT '分享时间',
+  `c_zt` varchar(1) DEFAULT NULL COMMENT '状态',
+  `c_bz` varchar(255) DEFAULT NULL COMMENT '备注',
+  `c_cjuser` varchar(255) DEFAULT NULL COMMENT '创建人',
+  `d_cjsj` datetime DEFAULT NULL COMMENT '创建时间',
+  `c_xguser` varchar(255) DEFAULT NULL COMMENT '修改人',
+  `d_xgsj` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`c_userid`,`c_sonid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='分享平台收徒表';
+
+-- ----------------------------
+-- Records of plate_user_father
 -- ----------------------------
 
 -- ----------------------------
@@ -565,7 +587,7 @@ CREATE TABLE `t_green_nl_czjl` (
   `c_fkkh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '付款卡号',
   `c_fksfcg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '付款是否成功(0失败1成功）',
   `c_fkdh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '付款单号',
-  `n_fkje` decimal(8,4) DEFAULT NULL COMMENT '付款金额(用多少人民币兑换能量）',
+  `n_fkje` decimal(12,4) DEFAULT NULL COMMENT '付款金额(用多少人民币兑换能量）',
   `c_skzh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '收款账户',
   `d_sksj` datetime DEFAULT NULL COMMENT '收款时间',
   `c_skfs` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '收款方式(支付宝/微信/银行卡）',
@@ -713,9 +735,6 @@ CREATE TABLE `t_green_nl_zjnlmx` (
 DROP TABLE IF EXISTS `t_green_rw_rwhz`;
 CREATE TABLE `t_green_rw_rwhz` (
   `c_userid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '人员ID',
-  `c_rwlb` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务类别',
-  `c_rwsj` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务完成时间(格式年月日，为了查询时的日期比较)',
-  `n_rwcs` int(11) DEFAULT NULL COMMENT '任务次数（一个账户同一任务一个月最多30次）',
   `n_ljwccs` int(11) DEFAULT NULL COMMENT '累计完成次数(三项任务加起来次数,不大于90次）',
   `c_bz` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `c_zt` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态(0无效1有效)',
@@ -723,12 +742,19 @@ CREATE TABLE `t_green_rw_rwhz` (
   `d_cjsj` datetime DEFAULT NULL COMMENT '创建时间',
   `c_xguser` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '修改人',
   `d_xgsj` datetime DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`c_userid`,`c_rwlb`,`c_rwsj`)
+  PRIMARY KEY (`c_userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='基础任务完成汇总表（用于用户一个月完成任务次数）';
 
 -- ----------------------------
 -- Records of t_green_rw_rwhz
 -- ----------------------------
+INSERT INTO `t_green_rw_rwhz` VALUES ('06d4d91d9e6047febae59a017c135b91', '3', null, '1', null, null, null, null);
+INSERT INTO `t_green_rw_rwhz` VALUES ('441d1b15644a42ffb6670cdf4e0abca1', '3', null, '1', null, null, null, null);
+INSERT INTO `t_green_rw_rwhz` VALUES ('563d03768ba644f2827f1afd6703ba1e', '15', null, '1', null, null, '563d03768ba644f2827f1afd6703ba1e', '2019-09-02 15:13:18');
+INSERT INTO `t_green_rw_rwhz` VALUES ('a42038e3950a441b945f46081f5e097f', '3', null, '1', null, null, 'a42038e3950a441b945f46081f5e097f', '2019-09-02 17:22:28');
+INSERT INTO `t_green_rw_rwhz` VALUES ('aee52760658d49b0bafb298bc171eb68', '6', null, '1', null, null, null, null);
+INSERT INTO `t_green_rw_rwhz` VALUES ('b55cbb78e1e54da7a14171c34031f692', '3', null, '1', null, null, null, null);
+INSERT INTO `t_green_rw_rwhz` VALUES ('cdc60bbeb94040e792bca23d9f9876ab', '6', null, '1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for t_green_rw_rwmx
