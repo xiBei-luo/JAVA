@@ -335,6 +335,66 @@ public class TGreenRwRwmxExample {
             return (Criteria) this;
         }
 
+        public Criteria andDRwsjIsNull() {
+            addCriterion("d_rwsj is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDRwsjIsNotNull() {
+            addCriterion("d_rwsj is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDRwsjEqualTo(Date value) {
+            addCriterion("d_rwsj =", value, "dRwsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDRwsjNotEqualTo(Date value) {
+            addCriterion("d_rwsj <>", value, "dRwsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDRwsjGreaterThan(Date value) {
+            addCriterion("d_rwsj >", value, "dRwsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDRwsjGreaterThanOrEqualTo(Date value) {
+            addCriterion("d_rwsj >=", value, "dRwsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDRwsjLessThan(Date value) {
+            addCriterion("d_rwsj <", value, "dRwsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDRwsjLessThanOrEqualTo(Date value) {
+            addCriterion("d_rwsj <=", value, "dRwsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDRwsjIn(List<Date> values) {
+            addCriterion("d_rwsj in", values, "dRwsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDRwsjNotIn(List<Date> values) {
+            addCriterion("d_rwsj not in", values, "dRwsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDRwsjBetween(Date value1, Date value2) {
+            addCriterion("d_rwsj between", value1, value2, "dRwsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDRwsjNotBetween(Date value1, Date value2) {
+            addCriterion("d_rwsj not between", value1, value2, "dRwsj");
+            return (Criteria) this;
+        }
+
         public Criteria andCRwdayIsNull() {
             addCriterion("c_rwday is null");
             return (Criteria) this;
@@ -472,66 +532,6 @@ public class TGreenRwRwmxExample {
 
         public Criteria andCRwmouthNotBetween(String value1, String value2) {
             addCriterion("c_rwmouth not between", value1, value2, "cRwmouth");
-            return (Criteria) this;
-        }
-
-        public Criteria andDRwsjIsNull() {
-            addCriterion("d_rwsj is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDRwsjIsNotNull() {
-            addCriterion("d_rwsj is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDRwsjEqualTo(Date value) {
-            addCriterion("d_rwsj =", value, "dRwsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDRwsjNotEqualTo(Date value) {
-            addCriterion("d_rwsj <>", value, "dRwsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDRwsjGreaterThan(Date value) {
-            addCriterion("d_rwsj >", value, "dRwsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDRwsjGreaterThanOrEqualTo(Date value) {
-            addCriterion("d_rwsj >=", value, "dRwsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDRwsjLessThan(Date value) {
-            addCriterion("d_rwsj <", value, "dRwsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDRwsjLessThanOrEqualTo(Date value) {
-            addCriterion("d_rwsj <=", value, "dRwsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDRwsjIn(List<Date> values) {
-            addCriterion("d_rwsj in", values, "dRwsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDRwsjNotIn(List<Date> values) {
-            addCriterion("d_rwsj not in", values, "dRwsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDRwsjBetween(Date value1, Date value2) {
-            addCriterion("d_rwsj between", value1, value2, "dRwsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDRwsjNotBetween(Date value1, Date value2) {
-            addCriterion("d_rwsj not between", value1, value2, "dRwsj");
             return (Criteria) this;
         }
 

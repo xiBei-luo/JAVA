@@ -406,62 +406,132 @@ public class TGreenZzJzjlExample {
         }
 
         public Criteria andDJzsjIsNull() {
-            addCriterion("d_Jzsj is null");
+            addCriterion("d_jzsj is null");
             return (Criteria) this;
         }
 
         public Criteria andDJzsjIsNotNull() {
-            addCriterion("d_Jzsj is not null");
+            addCriterion("d_jzsj is not null");
             return (Criteria) this;
         }
 
         public Criteria andDJzsjEqualTo(Date value) {
-            addCriterion("d_Jzsj =", value, "dJzsj");
+            addCriterion("d_jzsj =", value, "dJzsj");
             return (Criteria) this;
         }
 
         public Criteria andDJzsjNotEqualTo(Date value) {
-            addCriterion("d_Jzsj <>", value, "dJzsj");
+            addCriterion("d_jzsj <>", value, "dJzsj");
             return (Criteria) this;
         }
 
         public Criteria andDJzsjGreaterThan(Date value) {
-            addCriterion("d_Jzsj >", value, "dJzsj");
+            addCriterion("d_jzsj >", value, "dJzsj");
             return (Criteria) this;
         }
 
         public Criteria andDJzsjGreaterThanOrEqualTo(Date value) {
-            addCriterion("d_Jzsj >=", value, "dJzsj");
+            addCriterion("d_jzsj >=", value, "dJzsj");
             return (Criteria) this;
         }
 
         public Criteria andDJzsjLessThan(Date value) {
-            addCriterion("d_Jzsj <", value, "dJzsj");
+            addCriterion("d_jzsj <", value, "dJzsj");
             return (Criteria) this;
         }
 
         public Criteria andDJzsjLessThanOrEqualTo(Date value) {
-            addCriterion("d_Jzsj <=", value, "dJzsj");
+            addCriterion("d_jzsj <=", value, "dJzsj");
             return (Criteria) this;
         }
 
         public Criteria andDJzsjIn(List<Date> values) {
-            addCriterion("d_Jzsj in", values, "dJzsj");
+            addCriterion("d_jzsj in", values, "dJzsj");
             return (Criteria) this;
         }
 
         public Criteria andDJzsjNotIn(List<Date> values) {
-            addCriterion("d_Jzsj not in", values, "dJzsj");
+            addCriterion("d_jzsj not in", values, "dJzsj");
             return (Criteria) this;
         }
 
         public Criteria andDJzsjBetween(Date value1, Date value2) {
-            addCriterion("d_Jzsj between", value1, value2, "dJzsj");
+            addCriterion("d_jzsj between", value1, value2, "dJzsj");
             return (Criteria) this;
         }
 
         public Criteria andDJzsjNotBetween(Date value1, Date value2) {
-            addCriterion("d_Jzsj not between", value1, value2, "dJzsj");
+            addCriterion("d_jzsj not between", value1, value2, "dJzsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayIsNull() {
+            addCriterion("c_jzday is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayIsNotNull() {
+            addCriterion("c_jzday is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayEqualTo(String value) {
+            addCriterion("c_jzday =", value, "cJzday");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayNotEqualTo(String value) {
+            addCriterion("c_jzday <>", value, "cJzday");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayGreaterThan(String value) {
+            addCriterion("c_jzday >", value, "cJzday");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayGreaterThanOrEqualTo(String value) {
+            addCriterion("c_jzday >=", value, "cJzday");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayLessThan(String value) {
+            addCriterion("c_jzday <", value, "cJzday");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayLessThanOrEqualTo(String value) {
+            addCriterion("c_jzday <=", value, "cJzday");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayLike(String value) {
+            addCriterion("c_jzday like", value, "cJzday");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayNotLike(String value) {
+            addCriterion("c_jzday not like", value, "cJzday");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayIn(List<String> values) {
+            addCriterion("c_jzday in", values, "cJzday");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayNotIn(List<String> values) {
+            addCriterion("c_jzday not in", values, "cJzday");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayBetween(String value1, String value2) {
+            addCriterion("c_jzday between", value1, value2, "cJzday");
+            return (Criteria) this;
+        }
+
+        public Criteria andCJzdayNotBetween(String value1, String value2) {
+            addCriterion("c_jzday not between", value1, value2, "cJzday");
             return (Criteria) this;
         }
 

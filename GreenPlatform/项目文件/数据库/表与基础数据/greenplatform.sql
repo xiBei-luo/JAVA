@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2019-09-02 17:27:12
+Date: 2019-09-03 16:44:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -86,7 +86,6 @@ INSERT INTO `plate_code_dmz` VALUES ('C_JC_SF', '0', '否', null, null, '1', nul
 INSERT INTO `plate_code_dmz` VALUES ('C_JC_YWZT', '0', '未完成', null, null, '1', null, '1', null, null, '3309b23c28584179b9d69e226e3eeeee', '2019-07-01 14:31:03');
 INSERT INTO `plate_code_dmz` VALUES ('C_JC_ZT', '0', '无效', null, null, '1', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_RW_YWZT', '0', '未完成', null, null, '1', null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_USER_RYDJ', '0', '零级', null, null, '1', '', '1', '', '2019-07-02 10:21:50', '', '2019-07-02 10:22:02');
 INSERT INTO `plate_code_dmz` VALUES ('C_JC_SF', '1', '是', null, null, '2', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_JC_YWZT', '1', '已完成', null, null, '2', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_JC_ZT', '1', '有效', null, null, '2', null, '1', null, null, null, null);
@@ -748,13 +747,6 @@ CREATE TABLE `t_green_rw_rwhz` (
 -- ----------------------------
 -- Records of t_green_rw_rwhz
 -- ----------------------------
-INSERT INTO `t_green_rw_rwhz` VALUES ('06d4d91d9e6047febae59a017c135b91', '3', null, '1', null, null, null, null);
-INSERT INTO `t_green_rw_rwhz` VALUES ('441d1b15644a42ffb6670cdf4e0abca1', '3', null, '1', null, null, null, null);
-INSERT INTO `t_green_rw_rwhz` VALUES ('563d03768ba644f2827f1afd6703ba1e', '15', null, '1', null, null, '563d03768ba644f2827f1afd6703ba1e', '2019-09-02 15:13:18');
-INSERT INTO `t_green_rw_rwhz` VALUES ('a42038e3950a441b945f46081f5e097f', '3', null, '1', null, null, 'a42038e3950a441b945f46081f5e097f', '2019-09-02 17:22:28');
-INSERT INTO `t_green_rw_rwhz` VALUES ('aee52760658d49b0bafb298bc171eb68', '6', null, '1', null, null, null, null);
-INSERT INTO `t_green_rw_rwhz` VALUES ('b55cbb78e1e54da7a14171c34031f692', '3', null, '1', null, null, null, null);
-INSERT INTO `t_green_rw_rwhz` VALUES ('cdc60bbeb94040e792bca23d9f9876ab', '6', null, '1', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for t_green_rw_rwmx
@@ -765,14 +757,14 @@ CREATE TABLE `t_green_rw_rwmx` (
   `c_rwlb` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务类别（1施肥，2浇水，3沐浴阳光）',
   `c_rwday` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务日期（年月日）',
   `c_rwmouth` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '任务完成月份（年月）',
-  `d_rwsj` datetime DEFAULT NULL COMMENT '任务完成时间具体时间（年月日：时分秒）',
+  `d_rwsj` datetime NOT NULL COMMENT '任务完成时间具体时间（年月日：时分秒）',
   `c_bz` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `c_zt` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态(0无效1有效)',
   `c_cjuser` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '创建人',
   `d_cjsj` datetime DEFAULT NULL COMMENT '创建时间',
   `c_xguser` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '修改人',
   `d_xgsj` datetime DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`c_userid`,`c_rwlb`,`c_rwday`)
+  PRIMARY KEY (`c_userid`,`c_rwlb`,`d_rwsj`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户完成任务后保存对应记录到此表';
 
 -- ----------------------------
@@ -821,7 +813,8 @@ CREATE TABLE `t_green_zz_jzjl` (
   `c_lsh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '捐赠记录流水号',
   `c_zzzjlsh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '增加种子流水号(捐赠的是哪一颗种子）',
   `c_userid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '捐赠人',
-  `d_Jzsj` datetime DEFAULT NULL COMMENT '捐赠时间',
+  `d_jzsj` datetime DEFAULT NULL COMMENT '捐赠时间',
+  `c_jzday` varchar(255) DEFAULT NULL COMMENT '捐赠日期（年月日）',
   `c_spbh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '捐赠种子编号',
   `c_bz` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `c_zt` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态(0无效1有效)',

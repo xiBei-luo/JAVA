@@ -137,7 +137,7 @@ public class GetMessageCode {
     // 创建验证码
     public static String smsCode() {
         String random = (int) ((Math.random() * 9 + 1) * 100000) + "";
-        //System.out.println("验证码："+random);
+        System.out.println("验证码："+random);
         return random;
     }
 }

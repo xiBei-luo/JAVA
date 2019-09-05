@@ -261,7 +261,7 @@ function f_finishMission(sRwlb){
                 type: BootstrapDialog.TYPE_WARNING,
                 size: BootstrapDialog.SIZE_SMALL,
                 title: '提示',
-                message: "我是前端，操作失败！"+ret.msg,
+                message: "操作失败！"+ret.msg,
                 closeable: true,
                 buttonLabel: "确定"
             });
@@ -328,8 +328,10 @@ function f_contributeSeed(data){
                 message: "操作成功！",
                 closeable: true,
                 buttonLabel: "确定",
-                callback: function(){
-                    f_selectLoginuserAccount();
+                callback: function(ret){
+                    if (ret){
+                        $("#myAccountModel .close").trigger("click");
+                    }
                 }
             });
         }

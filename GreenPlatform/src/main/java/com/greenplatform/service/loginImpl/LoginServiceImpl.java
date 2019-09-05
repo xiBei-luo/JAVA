@@ -95,7 +95,6 @@ public class LoginServiceImpl implements LoginService {
      * @param session
      * @return
      */
-    @YwOperationCheckAndLog(cCzfs = "I")
     @Override
     public ReturnModel doRegister(String jsonObject, HttpSession session) {
         try{
@@ -108,6 +107,12 @@ public class LoginServiceImpl implements LoginService {
             Map hashMap = new HashMap();
             hashMap.put("cPhone",jsonParams.getString("cPhone"));
             hashMap.put("smsCode",jsonParams.getString("smsCode"));
+
+            //验证手机号码是否注册
+            boolean isUse = checkUser("phone",jsonParams.getString("cPhone"));
+            if (isUse == false){
+                return ReturnModelHandler.error("手机号已经被注册！");
+            }
 
             ReturnModel checkSmsCodeReturnModel = checkSmsCode(hashMap,session);
 
@@ -179,7 +184,7 @@ public class LoginServiceImpl implements LoginService {
                 plateUser.setcUsername(tmpUsername);
                 plateUser.setcRyzt("1");//人员状态（0未激活1已激活）
                 plateUser.setcRylb("2");//人员类别（1系统用户2前端用户）
-                plateUser.setcRydj("0");//人员等级（0，1，2，3，4）
+                plateUser.setcRydj("1");//人员等级（1，2，3，4）
                 plateUser.setcRyxz("1");//人员性质（1正常，-1黑名单）
                 plateUser.setcZt("1");//数据状态（0无效1有效）
                 plateUser.setcIssmz("0");//是否实名制
@@ -281,11 +286,6 @@ public class LoginServiceImpl implements LoginService {
         JSONObject jsonSessionParams = JSONObject.fromObject(session.getAttribute("smsCodeObj"));
         String sessionSmsCode = jsonSessionParams.getString("smsCode");//session域中的验证码
 
-        //验证手机号码是否注册
-        boolean isUse = checkUser("cPhone",cPhone);
-        if (isUse == true){
-            return ReturnModelHandler.error("手机号未注册");
-        }
 
         //验证：手机号码是否匹配
         if (null == cPhone || ("").equals(cPhone)){
@@ -362,6 +362,13 @@ public class LoginServiceImpl implements LoginService {
         Map hashMap = new HashMap();
         hashMap.put("cPhone",jsonParams.getString("cPhone"));
         hashMap.put("smsCode",jsonParams.getString("smsCode"));
+
+        //验证手机号码是否注册
+        boolean isUse = checkUser("phone",jsonParams.getString("cPhone"));
+        if (isUse == true){
+            return ReturnModelHandler.error("手机号未被注册，请先注册！");
+        }
+
         ReturnModel checkSmsCodeReturnModel = checkSmsCode(hashMap,session);//验证验证码是否正确
 
         if (0 == checkSmsCodeReturnModel.getFlag()){
