@@ -95,7 +95,10 @@ public class WebController {
     //捐赠业务
     @RequestMapping(value = "/contributeSeed",method = RequestMethod.POST)
     @ResponseBody
-    public ReturnModel contributeSeed(String cLsh,String cSpbh){
+    public ReturnModel contributeSeed(TGreenZzZjzzmx tGreenZzZjzzmx){
+        System.out.println(tGreenZzZjzzmx);
+        String cLsh = tGreenZzZjzzmx.getcLsh();
+        String cSpbh = tGreenZzZjzzmx.getcSpbh();
         return webService.contributeSeed(cLsh,cSpbh);
     }
 

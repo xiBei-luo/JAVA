@@ -162,6 +162,32 @@ header{
     top: 0;
     left: 35%;
 }
+
+
+/*攻略*/
+#method{
+    position: absolute;
+    -webkit-animation:methodMove 2s infinite; /*Safari and Chrome*/
+    margin-left: 300px;
+}
+#method img{
+    width: 80px;
+    height: 80px;
+}
+
+@keyframes methodMove
+{
+    0%   {left:10px; top:0px;}
+    50%  {left:0px; top:10px;}
+    100% {left:10px; top:0px;}
+}
+
+@-webkit-keyframes methodMove /*Safari and Chrome*/
+{
+    0%   {left:10px; top:0px;}
+    50%  {left:0px; top:10px;}
+    100% {left:10px; top:0px;}
+}
 /*banner下的三个任务end*/
 
 /*点赞排行榜begin*/
@@ -411,6 +437,13 @@ header{
     header{
         background: url("../../publicImg/telBg.jpg") no-repeat;
         background-size: 420px 500px;
+    }
+
+    /*攻略*/
+    #method{
+        position: absolute;
+        -webkit-animation:methodMove 2s infinite; /*Safari and Chrome*/
+        margin-left: 80px;
     }
 
     /*三个任务*/

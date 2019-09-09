@@ -873,6 +873,13 @@ public class WebServiceImpl implements WebService {
     @YwOperationCheckAndLog(cCzfs = "I")
     public ReturnModel contributeSeed(String cLsh,String cSpbh) {
         try{
+            if(null == cLsh){
+                return ReturnModelHandler.error("捐赠种子流水号不能为空！");
+            }
+            if (cSpbh == null){
+                return ReturnModelHandler.error("捐赠种子编号不能为空！");
+            }
+
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
             //1.判断种子是否可捐赠
             TGreenZzZjzzmx tGreenZzZjzzmx1 = tGreenZzZjzzmxMapper.selectByPrimaryKey(cLsh);
@@ -880,7 +887,7 @@ public class WebServiceImpl implements WebService {
                 return ReturnModelHandler.error("种子还不能进行捐赠！");
             }
 
-            //1.同一账户24小时内只能捐赠一种植物（需要调整判断是否是同一天）
+            //1.同一账户24小时内只能捐赠一种植物
             TGreenZzJzjlExample tGreenZzJzjlExample = new TGreenZzJzjlExample();
             TGreenZzJzjlExample.Criteria criteria1 = tGreenZzJzjlExample.createCriteria();
             criteria1.andCUseridEqualTo(plateUser.getcUserid());
@@ -909,7 +916,7 @@ public class WebServiceImpl implements WebService {
             float sysParamOfUserLev = Float.parseFloat(getDmzByDm("C_ZHDJ_EXTJL_"+plateUser.getcRydj()));//账户等级对应的能量奖励百分比
 
 
-            float extraNL = sysParamOfUserLev*sysParamOfAddNl;//账户等级对应的能量奖励
+            float extraNL = sysParamOfUserLev*nSpjg;//账户等级对应的能量奖励（种子价格*账户等级的额外奖励）
 
 
             float sysParamOfFatherGd = Float.parseFloat(getDmzByDm("C_FATHER_JL_GD"));//父账户固定奖励
@@ -1399,7 +1406,7 @@ public class WebServiceImpl implements WebService {
 
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
             //扫描后跳转路径（跳转至注册页面）
-            String qrcodeUrl = "http://lhwlljnw.com/base/qrcodeRegister?user="+plateUser.getcUserid();//正式环境
+            String qrcodeUrl = "https://lhwlljnw.com/base/qrcodeRegister?user="+plateUser.getcUserid();//正式环境
             //String qrcodeUrl = "http://127.0.0.1/base/qrcodeRegister?user="+plateUser.getcUserid();//测试环境
             // 嵌入二维码的图片路径
             String imgPath = "C:/Users/Administrator/greenplatformTmp/logo.png";//正式环境
@@ -1414,7 +1421,7 @@ public class WebServiceImpl implements WebService {
             // 解析二维码
             String str = QRCodeUtil.decode(destPath);
             // 打印出解析出的内容
-            //System.out.println(str);
+            System.out.println(str);
 
             return ReturnModelHandler.success(destPath);
         }catch (Exception e){

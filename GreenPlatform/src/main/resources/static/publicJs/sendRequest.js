@@ -18,6 +18,7 @@ SendRequest.prototype.sendRequest = function (callbackMethod) {
         url:this._requestURL,
         type:this._RequestMethod,
         data:this._paramObj,
+        contentType:"application/x-www-form-urlencoded",
         success:function(ret,textStatus){
             callbackMethod(ret);
         },

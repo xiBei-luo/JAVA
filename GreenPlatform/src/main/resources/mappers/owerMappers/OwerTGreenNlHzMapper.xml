@@ -14,7 +14,7 @@
                     sum(n_zjnl) n_zjnl
                 FROM
                     t_green_nl_zjnlmx
-            where c_zjyy != '5'
+                where c_zjyy != '5'
                 GROUP BY
                     c_userid
                 ORDER BY
@@ -49,15 +49,7 @@
 
   <select id="selectTGreenNlHzBycUserid" parameterType="java.lang.String" resultType="java.util.HashMap">
         SELECT
-            b.c_userid,
-            ROUND(b.n_nlhz,2) n_nlhz,
-            b.c_bz,
-            b.c_zt,
-            b.c_cjuser,
-            b.d_cjsj,
-            b.c_xguser,
-            b.d_xgsj,
-            b.rank
+            x1.c_username,x.*
         FROM
             (
                 SELECT
@@ -66,16 +58,22 @@
                     (SELECT @rownum := 0) r,
                     (
                         SELECT
-                            *
+                            c_userid,
+                            sum(n_zjnl) n_nlhz
                         FROM
-                            t_green_nl_hz
+                            t_green_nl_zjnlmx
+                        WHERE
+                            c_zjyy != '5'
+                        GROUP BY
+                            c_userid
                         ORDER BY
-                            n_nlhz DESC,
-                            d_xgsj
+                            n_nlhz DESC
                     ) AS t
-            ) AS b
+            ) x,
+            plate_user x1
         WHERE
-            c_userid = #{cUserid}
-        AND c_zt = '1'
+            x.c_userid = x1.c_userid
+        and x1.c_zt = '1'
+        and x.c_userid = #{c_userid}
   </select>
 </mapper>
