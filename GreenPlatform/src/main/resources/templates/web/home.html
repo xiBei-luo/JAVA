@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绿沙平台</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/style/web/home.css">
+
+</head>
+<body>
+<header class="indexHeader">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand" href="#" id="navbarBrand">
+                    <img class="logo" src="/publicImg/logo.png">
+                    <div id="brandTitle">绿沙平台<span id="brandSubttle">LVSHAPINGTAI</span></div>
+                    <span id="smallTitle">绿化沙漠&nbsp&nbsp&nbsp&nbsp共享未来</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!--banner开始-->
+<banner class="banner-bak">
+    <div id="carousel-example-generic" class="carousel slide both">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="../../publicImg/telBg.jpg" alt="...">
+                <div class="carousel-caption">
+                    <!--攻略-->
+                    <div class="method" id="method">
+                        <img src="/publicImg/icon/method.png" data-toggle="modal" data-target="#legalStatement" alt="">
+                    </div>
+
+                    <!--植物形态-->
+                    <div class="tree">
+                        <img th:attr="src='/publicImg/icon/'+${loginuserHome.tGreenRwRwmx['endRwCountDay']}+'.png'" alt="">
+                    </div>
+
+                    <!--任务-->
+                    <div class=" mission" id="mission">
+                        <div th:style="${loginuserHome.tGreenRwRwmx['1']} == true ? 'display: none':''">
+                            <div class="mission-sf">
+                                <a class="rwlb_1" id="finishMisson_sf" value="1">
+                                    <img src="/publicImg/icon/sf.png" id="sf" class="center-block" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div th:style="${loginuserHome.tGreenRwRwmx['2']} == true ? 'display: none':''">
+                            <div class="mission-js">
+                                <a class="rwlb_2" id="finishMisson_js" value="2">
+                                    <img src="/publicImg/icon/js.png" id="js" class="center-block" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div th:style="${loginuserHome.tGreenRwRwmx['3']} == true ? 'display: none':''">
+                            <div class="mission-yg">
+                                <a class="rwlb_3" id="finishMisson_yg" value="3">
+                                    <img src="/publicImg/icon/yg.png" id="yg" class="center-block" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img src="../../publicImg/telBg.jpg" alt="...">
+                <div class="carousel-caption">
+                    ...
+                </div>
+            </div>
+            <div class="item">
+                <img src="../../publicImg/telBg.jpg" alt="...">
+                <div class="carousel-caption">
+                    ...
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a id="carleft" class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a id="carright" class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+</banner>
+
+
+
+
+<!--平台使用机制Model-->
+<div class="modal fade bs-example-modal-lg" id="legalStatement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="legalMyModalLabel">《绿沙平台使用机制》</h4>
+            </div>
+            <div class="modal-body">
+                <h4><strong>平台使用机制：</strong></h4>
+                <p>1.每位用户必须进行实名注册才能正常使用平台功能。</p>
+                <p>2.平台部分功能使用说明：</p>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp A、种植任务规则（每位用户每天登录平台完成主页面对种植植物进行浇水、施肥、沐浴阳光，当天种植任务才算完成。）</p>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp B、金币获取规则（每位用户可以每天完成种植任务、成功分享好友、植物捐赠来获取金币，通过主页面进行金币点赞获取排名。）</p>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp C、金币点赞排名奖励规则（排名累积到10万金币，平台会自动根据排名瓜分相应的奖励给用户。第1名：奖励88绿沙能量。第2名：奖励58绿沙能量。第3名：奖励38绿沙能量。第4~10名：奖励18绿沙能量。第11~50名：奖励8绿沙能量。第51~100名：奖励2绿沙能量。第101以上随机数量金币。）</p>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp D、能量排名规则（用户只要每次获得能量奖励，能量排名就会每次累积，主页面只显示能量排名前十名。）</p>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp E、能量获取规则（可以通过完成种植任务在平台捐赠，成功分享好友及金币点赞获取相应能量奖励。）</p>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp F、能量奖励规则（a.新用户完成注册及实名认证，平台会奖励价值100能量的仙人掌，完成一个月的种植任务可以获得112的能量奖励，可提现，可继续购买种子进行种植获得能量奖励。b.完成种植任务成功捐赠，每次可获得种植植物价值的12%作为任务奖励。c.成功分享好友，好友完成第一次种植任务，师傅可获得105的能量奖励，好友第二次开始完成的每次种植任务，师傅都可以获得好友种植植物价值的5%作为任务奖励。</p>
+                <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp G、账号等级升级规则（每个月持续完成任务，持续三个月账户升一级，升级后每次植物捐赠完成，在原有12%基础上增加2%的绿沙能量作为奖励。账号升到第三级，在原有12%基础上增加3%的绿沙能量作为奖励。账号升至第四级，在原有12%基础上增加5%的绿沙能量作为奖励。账户最高等级为四级。）</p>
+                <p>3.植物种植说明（用户只有每天持续完成种植任务，持续一个月才算真正完成种植任务，才能进行平台植物捐赠获取能量奖励，如果其中有一天用户忘记完成种植任务，种植任务会重新从第一天算起，每位用户一定要记住每天完成种植任务。）</p>
+                <p>4.提现及充值请加微信客服，更高的效率以及资金安全。</p>
+                <p>5.用户在使用过程中遇到任何不清楚的问题，请咨询微信客服。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary center-block" data-dismiss="modal">关&nbsp&nbsp&nbsp&nbsp闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/toucher.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script src="/js/web/home.js"></script>
+</body>
+</html>

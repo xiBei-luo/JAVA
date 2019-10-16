@@ -63,6 +63,7 @@ public class WebConfigurer implements WebMvcConfigurer {
         //主页
         exclude.add("/*");
 
+
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(exclude);
     }
 

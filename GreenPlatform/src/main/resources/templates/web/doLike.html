@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绿沙平台</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/style/web/doLike.css">
+
+</head>
+<body>
+
+
+<!--点赞排行榜-->
+<div id="goldList" class="container-fluid">
+    <div class="goldListWrap">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-center goldListTitle">金币点赞排行榜TOP10</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4">
+                <div class="btnLikeBox">
+                    <span class="glyphicon glyphicon-thumbs-up" id="btnLike"></span>
+                    <span id="jsGold">-50</span>
+                </div>
+            </div>
+        </div>
+        <div class="row goldDzRankTitle">
+            <div class="col-md-4 col-xs-3">排名</div>
+            <div class="col-md-4 col-xs-4">用户</div>
+            <div class="col-md-4 col-xs-5">点赞数</div>
+        </div>
+        <div class="row goldDzRankContent" th:each="tGreenGoldDzhzList,tGreenGoldDzhzStatu : ${loginuserHome.tGreenGoldDzhzList}">
+            <div class="col-md-4 col-xs-3" th:text=${tGreenGoldDzhzStatu.index+1} th:attr="id = 'goldDzRankContent_'+${tGreenGoldDzhzStatu.index+1}"></div>
+            <div class="col-md-4 col-xs-4" th:text="${tGreenGoldDzhzList.cUserid == loginuserHome.owerTGreenGoldDzhz['cUserid'] ? tGreenGoldDzhzList.cUsername : #strings.substring(tGreenGoldDzhzList.cUsername,0,1) + '**'}"></div>
+            <div class="col-md-4 col-xs-5" th:text="${'M '+tGreenGoldDzhzList.nDzzl}"></div>
+        </div>
+        <div class="row goldDzRankContent">
+            <div class="col-md-4 col-xs-3 goldDzRankContent_ower" th:text="${loginuserHome.owerTGreenGoldDzhz['nRank']}"></div>
+            <div class="col-md-4 col-xs-4" th:text="${loginuserHome.owerTGreenGoldDzhz['cUsername']}"></div>
+            <div class="col-md-4 col-xs-5" th:text="${'M '+loginuserHome.owerTGreenGoldDzhz['n_dzzl']}"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script src="/js/web/doLike.js"></script>
+</body>
+</html>

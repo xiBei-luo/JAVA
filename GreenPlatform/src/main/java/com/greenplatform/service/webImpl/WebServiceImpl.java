@@ -1572,7 +1572,7 @@ public class WebServiceImpl implements WebService {
     }
 
     /**
-     * 获取用户姓名根据用户id
+     * 获取用户姓名根据用户id（不判断用户状态）
      * @param cUserid
      * @return
      */
@@ -1580,11 +1580,11 @@ public class WebServiceImpl implements WebService {
         PlateUserExample plateUserExample = new PlateUserExample();
         PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
         criteria.andCUseridEqualTo(cUserid);
-        criteria.andCRylbEqualTo("2");
-        criteria.andCRyxzEqualTo("1");
-        criteria.andCRyztEqualTo("1");
-        criteria.andCZtEqualTo("1");
-        criteria.andCIssmzEqualTo("1");
+        //criteria.andCRylbEqualTo("2");
+        //criteria.andCRyxzEqualTo("1");
+        //criteria.andCRyztEqualTo("1");
+        //criteria.andCZtEqualTo("1");
+        //criteria.andCIssmzEqualTo("1");
 
         List plateUserList = plateUserMapper.selectByExample(plateUserExample);
         PlateUser plateUser = (PlateUser) plateUserList.get(0);

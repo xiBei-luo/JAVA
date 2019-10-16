@@ -18,7 +18,7 @@ mybatis:
   mapper-locations: classpath:mappers/**/*.xml
   type-aliases-package: com.greenplatform.model
 server:
-  port: 8081
+  port: 8080
   servlet:
     context-path: /GreenPlatform_war_exploded  #请求上下文
 #logging:

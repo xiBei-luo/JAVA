@@ -199,6 +199,67 @@ public class BaseController {
     public String certification(String type){
         return "web/certification";
     }
+    @GetMapping(value = "/home")
+    public String home(Model model){
+        ReturnModel returnModel = webService.selectLoginuserHome();
+        model.addAttribute("loginuserHome", returnModel.getObject());
+        return "web/home";
+    }
+    @GetMapping(value = "/doLike")
+    public String doLike(Model model){
+        ReturnModel returnModel = webService.selectLoginuserHome();
+        model.addAttribute("loginuserHome", returnModel.getObject());
+        return "web/doLike";
+    }
+    @GetMapping(value = "/nlRank")
+    public String nlRank(Model model){
+        ReturnModel returnModel = webService.selectLoginuserHome();
+        model.addAttribute("loginuserHome", returnModel.getObject());
+        return "web/nlRank";
+    }
+    @GetMapping(value = "/shop")
+    public String shop(Model model){
+        ReturnModel returnModel = webService.selectLoginuserHome();
+        model.addAttribute("loginuserHome", returnModel.getObject());
+        return "web/shop";
+    }
+    //我的账户
+    @GetMapping(value = "/myAccount")
+    public String myAccount(Model model){
+        ReturnModel returnModel = webService.selectLoginuserHome();
+        model.addAttribute("loginuserHome", returnModel.getObject());
+        return "web/myAccount/main";
+    }
+    @GetMapping(value = "/myAccount/jbxx")
+    public String myAccountJbxx(Model model){
+        ReturnModel returnModel = webService.selectLoginuserHome();
+        model.addAttribute("loginuserHome", returnModel.getObject());
+        return "web/myAccount/jbxx";
+    }
+    @GetMapping(value = "/myAccount/wdrw")
+    public String myAccountWdrw(Model model){
+        ReturnModel returnModel = webService.selectLoginuserHome();
+        model.addAttribute("loginuserHome", returnModel.getObject());
+        return "web/myAccount/wdrw";
+    }
+    @GetMapping(value = "/myAccount/wdzw")
+    public String myAccountWdzw(Model model){
+        ReturnModel returnModel = webService.selectLoginuserHome();
+        model.addAttribute("loginuserHome", returnModel.getObject());
+        return "web/myAccount/wdzw";
+    }
+    @GetMapping(value = "/myAccount/wdtd")
+    public String myAccountWdtd(Model model){
+        ReturnModel returnModel = webService.selectLoginuserHome();
+        model.addAttribute("loginuserHome", returnModel.getObject());
+        return "web/myAccount/wdtd";
+    }
+    @GetMapping(value = "/myAccount/nlgl")
+    public String myAccountNlgl(Model model){
+        ReturnModel returnModel = webService.selectLoginuserHome();
+        model.addAttribute("loginuserHome", returnModel.getObject());
+        return "web/myAccount/nlgl";
+    }
 
 
     //维护页面

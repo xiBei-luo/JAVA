@@ -16,7 +16,7 @@ $(function(){
 function checkForm(){
     var hanReg = /^[\u4e00-\u9fa5]{2,4}$/;
     var phoneReg = /^1[3456789]\d{9}$/;
-    var zjhmReg = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4}$/;
+    var zjhmReg = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
 
     $('#dataForm').bootstrapValidator({
         excluded: [':disabled'],

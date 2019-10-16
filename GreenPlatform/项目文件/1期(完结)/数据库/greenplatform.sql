@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80011
 File Encoding         : 65001
 
-Date: 2019-09-03 16:44:29
+Date: 2019-09-10 11:58:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,11 +37,13 @@ CREATE TABLE `plate_code_dmlb` (
 INSERT INTO `plate_code_dmlb` VALUES ('C_DZSL_ONE', '1次点赞花费金币数', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmlb` VALUES ('C_FATHER_JL', '父账户能量奖励', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmlb` VALUES ('C_GFNLZ', '瓜分能量值', null, '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-16 14:49:54', null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_GFNL_COUNT', '点赞瓜分能量排名', '点赞瓜分能量排名-金币点赞活动中排名前几的瓜分能量', '1', '', '2019-09-04 10:35:07', '', '2019-09-04 10:35:17');
 INSERT INTO `plate_code_dmlb` VALUES ('C_GOLD_JSYY', '减少金币原因', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmlb` VALUES ('C_GOLD_ZJYY', '增加金币原因', null, '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-16 16:34:22', null, null);
 INSERT INTO `plate_code_dmlb` VALUES ('C_JC_SF', '是否', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmlb` VALUES ('C_JC_YWZT', '业务状态', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmlb` VALUES ('C_JC_ZT', '状态', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmlb` VALUES ('C_JZ_RWDAY', '完成基础任务天数可捐赠种子', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmlb` VALUES ('C_NLCZ_ZFFS', '能量充值支付方式', null, '1', '3309b23c28584179b9d69e226e3eeeee', '2019-08-13 15:43:42', null, null);
 INSERT INTO `plate_code_dmlb` VALUES ('C_NL_DZGF', '金币点赞活动根据排名瓜分能量', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmlb` VALUES ('C_NL_JSYY', '能量减少原因', null, '1', null, null, null, null);
@@ -120,12 +122,14 @@ INSERT INTO `plate_code_dmz` VALUES ('C_NL_ZJYY', '6', '账户等级奖励', nul
 INSERT INTO `plate_code_dmz` VALUES ('C_DZSL_ONE', 'C_DZSL_ONE_1', '1次点赞花费金币数', '50', null, '1', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_FATHER_JL', 'C_FATHER_JL_EXT', '父账户能量奖励_额外', '0.05', '父账户能量奖励_额外', '2', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_FATHER_JL', 'C_FATHER_JL_GD', '父账户能量奖励_固定', '100', '父账户能量奖励_固定', '1', null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_GFNLZ', 'C_GFNLZ_1', '瓜分能量值', '100000', null, '1', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_GFNLZ', 'C_GFNLZ_1', '瓜分能量值', '100000', null, '1', '原：100000', '1', null, null, null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_GFNL_COUNT', 'C_GFNL_COUNT_1', '点赞瓜分能量排名', '100', '金币点赞活动中排名前几的瓜分能量', '1', '原：100', '1', '', '2019-09-04 10:35:48', '', '2019-09-04 10:35:53');
 INSERT INTO `plate_code_dmz` VALUES ('C_GOLD_JSYY', 'C_GOLD_JSYY_1', '点赞', null, null, '1', null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_GOLD_ZJYY', 'C_GOLD_ZJYY_1', '完成种植任务', '50', '完成种植任务', '1', null, '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-16 16:34:22', null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_GOLD_ZJYY', 'C_GOLD_ZJYY_1', '完成种植任务', '50', '完成种植任务（浇水，施肥沐浴阳光）', '1', null, '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-16 16:34:22', null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_GOLD_ZJYY', 'C_GOLD_ZJYY_2', '平台分享好友', '1000', '平台分享好友', '2', null, '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-16 16:34:55', null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_GOLD_ZJYY', 'C_GOLD_ZJYY_3', '完成植物捐赠', '500', '完成植物捐赠', '3', null, '1', '3309b23c28584179b9d69e226e3eeeee', '2019-07-16 16:37:26', null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_GOLD_ZJYY', 'C_GOLD_ZJYY_4', '金币点赞活动奖励金币', null, '金币点赞瓜分能量_奖励金币', '4', null, '1', null, null, null, null);
+INSERT INTO `plate_code_dmz` VALUES ('C_JZ_RWDAY', 'C_JZ_RWDAY_1', '完成基础任务天数可捐赠种子', '30', null, '1', '原：30', '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_NL_DZGF', 'C_NL_DZGF_1', '第一名', '88', '金币点赞瓜分能量_第一名', '1', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_NL_DZGF', 'C_NL_DZGF_11-50', '第11至50名', '8', '金币点赞瓜分能量_第十一至五十名', '5', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_NL_DZGF', 'C_NL_DZGF_2', '第二名', '58', '金币点赞瓜分能量_第二名', '2', null, '1', null, null, null, null);
@@ -137,7 +141,6 @@ INSERT INTO `plate_code_dmz` VALUES ('C_NL_JSYY', 'C_NL_JSYY_2', '提现', null,
 INSERT INTO `plate_code_dmz` VALUES ('C_NL_ZJYY', 'C_NL_ZJYY_1', '注册赠送', null, null, '1', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_NL_ZJYY', 'C_NL_ZJYY_2', '徒弟完成捐赠任务', null, null, '7', null, null, null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_NL_ZJYY', 'C_NL_ZJYY_3', '点赞活动瓜分能量', null, null, null, null, '1', null, null, null, null);
-INSERT INTO `plate_code_dmz` VALUES ('C_ZHDJ_EXTJL', 'C_ZHDJ_EXTJL_0', '零级', '0', null, '1', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_ZHDJ_EXTJL', 'C_ZHDJ_EXTJL_1', '一级', '0', null, '2', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_ZHDJ_EXTJL', 'C_ZHDJ_EXTJL_2', '二级', '0.02', null, '3', null, '1', null, null, null, null);
 INSERT INTO `plate_code_dmz` VALUES ('C_ZHDJ_EXTJL', 'C_ZHDJ_EXTJL_3', '三级', '0.03', null, '4', null, '1', null, null, null, null);
@@ -266,7 +269,19 @@ CREATE TABLE `plate_user` (
 -- ----------------------------
 -- Records of plate_user
 -- ----------------------------
-INSERT INTO `plate_user` VALUES ('3309b23c28584179b9d69e226e3eeeee', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 'admin', '系统管理员', '1', '0', null, null, '1', '1', '1', '1', '1', '1212', '121212', '18328823251', '18328023251', '1271826981', '1213@qq.com', null, null, '测试测试', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-06-25 14:49:27', '3309b23c28584179b9d69e226e3eeeee', '2019-08-29 14:23:51');
+INSERT INTO `plate_user` VALUES ('03de8c55c0f04747af75640e82321a73', 'cb0f36ce7473293f46fd32e3bda8b26c', '1522', '李清勇', '1', '1', null, '1', '2', '1', '1', '', null, '510521199512093432', null, '15228462758', null, null, null, '6ee1dcf0f2fb4857ba0f54c5127b8167', '6ee1dcf0f2fb4857ba0f54c5127b8167', '原始数据', '1', '03de8c55c0f04747af75640e82321a73', '2019-08-31 13:10:20', '03de8c55c0f04747af75640e82321a73', '2019-08-31 13:11:21');
+INSERT INTO `plate_user` VALUES ('05d3914cd2644f5388e929872ae44bf7', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 'luowenlv', '罗文旅', '2', '1', null, '1', '2', '1', '1', '', null, '510111199501012222', null, '18322222222', null, null, null, null, null, '原始数据', '1', '05d3914cd2644f5388e929872ae44bf7', '2019-08-29 13:12:48', '05d3914cd2644f5388e929872ae44bf7', '2019-08-29 13:13:38');
+INSERT INTO `plate_user` VALUES ('3309b23c28584179b9d69e226e3eeeee', '025b35f1bd1c01ccbf5c66e2b0662c0b', 'admin', '系统管理员', '1', '0', null, null, '1', '1', '1', '1', '1', '1212', '121212', '18328823251', '18328023251', '1271826981', '1213@qq.com', null, null, '原始数据', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-06-25 14:49:27', '3309b23c28584179b9d69e226e3eeeee', '2019-08-29 17:38:09');
+INSERT INTO `plate_user` VALUES ('36520e557e2c436286fa223fa6e035de', '5219ecb242aec2ebbaaf0984b0c78b05', 'Taozi927', '王艺琼', '2', '1', null, '1', '2', '1', '1', '', null, '410185199412074521', null, '15333833707', null, null, null, 'f0d0b12a63ae4b4f9d45aff8bcbb3211', 'f0d0b12a63ae4b4f9d45aff8bcbb3211', '原始数据', '1', '36520e557e2c436286fa223fa6e035de', '2019-08-28 20:58:28', '36520e557e2c436286fa223fa6e035de', '2019-09-09 18:44:10');
+INSERT INTO `plate_user` VALUES ('568a7b57165b4ac3aeb5046067e96f5a', 'e2f275076f4bad1aa6b33694aac34201', 'clh', '米老鼠', '1', '1', null, '1', '2', '1', '1', '', null, '510523199607229058', null, '19960960722', null, null, null, null, null, '原始数据', '1', '568a7b57165b4ac3aeb5046067e96f5a', '2019-09-01 12:22:03', '568a7b57165b4ac3aeb5046067e96f5a', '2019-09-01 12:27:47');
+INSERT INTO `plate_user` VALUES ('6536e3dbd98645238249f986bd585f2e', '65a0ec385ca6a0c1e20d1f8270c28303', '18328023283', '张高县', '2', '1', null, '1', '2', '1', '1', '', null, '521522199410049266', null, '18328023283', null, null, null, null, null, '原始数据', '1', '6536e3dbd98645238249f986bd585f2e', '2019-08-29 13:37:06', '6536e3dbd98645238249f986bd585f2e', '2019-08-29 13:42:58');
+INSERT INTO `plate_user` VALUES ('6ee1dcf0f2fb4857ba0f54c5127b8167', '4dffab80a01c84d705dac6e69811d1ad', 'JIEJIE', '贺文杰', '1', '1', null, '1', '2', '1', '1', '', null, '510502199408227411', null, '17778318092', null, null, null, null, null, '原始数据', '1', '6ee1dcf0f2fb4857ba0f54c5127b8167', '2019-08-28 20:47:33', '6ee1dcf0f2fb4857ba0f54c5127b8167', '2019-09-09 21:19:31');
+INSERT INTO `plate_user` VALUES ('7db7a102fd1e47439462ad379f4f3439', 'e10adc3949ba59abbe56e057f20f883e', 'RJJ', '任佳佳', '2', '1', null, '1', '2', '1', '1', '', null, '511381199708245764', null, '15082494816', null, null, null, 'e2dcabf6f2ef4f829b23a199b255f939', 'e2dcabf6f2ef4f829b23a199b255f939', '原始数据', '1', '7db7a102fd1e47439462ad379f4f3439', '2019-09-01 16:39:06', '7db7a102fd1e47439462ad379f4f3439', '2019-09-09 09:51:42');
+INSERT INTO `plate_user` VALUES ('9561c4f085f64f58b845d19881cf075f', 'c3c6a95326ccec225ca59bc5de330f91', 'xj1007', '肖大建', '1', '1', null, '1', '2', '1', '1', '', null, '510522199211019059', null, '18933067010', null, null, null, null, null, '原始数据', '1', '9561c4f085f64f58b845d19881cf075f', '2019-08-30 14:14:39', '9561c4f085f64f58b845d19881cf075f', '2019-09-08 11:43:14');
+INSERT INTO `plate_user` VALUES ('9ae47854f7114030bdec2e5f31c06cdf', 'e2f275076f4bad1aa6b33694aac34201', 'yangfeifan', '杨非凡', '1', '0', null, null, '1', '1', '1', null, '1', '510522199401049056', '', '18113545454', null, null, '1584638913@qq.com', null, null, '原始数据', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-08-28 13:12:19', '9ae47854f7114030bdec2e5f31c06cdf', '2019-08-30 15:40:56');
+INSERT INTO `plate_user` VALUES ('e2dcabf6f2ef4f829b23a199b255f939', 'e7133a5a3f02011548249fc3585733fc', 'yangnuozhou', '杨诺洲', '1', '1', null, '1', '2', '1', '1', '', null, '510502199206211913', null, '18183394160', null, null, null, 'f0d0b12a63ae4b4f9d45aff8bcbb3211', 'f0d0b12a63ae4b4f9d45aff8bcbb3211', '原始数据', '1', 'e2dcabf6f2ef4f829b23a199b255f939', '2019-08-30 14:23:23', 'e2dcabf6f2ef4f829b23a199b255f939', '2019-09-09 09:50:57');
+INSERT INTO `plate_user` VALUES ('f0d0b12a63ae4b4f9d45aff8bcbb3211', '2635b988cf16c58ca41a2351b28a6b54', 'LSPT', '杨非凡', '1', '1', null, '1', '2', '1', '1', '', null, '510522199401049056', null, '18113545454', null, null, null, null, null, '原始数据', '1', 'f0d0b12a63ae4b4f9d45aff8bcbb3211', '2019-08-28 12:16:08', 'f0d0b12a63ae4b4f9d45aff8bcbb3211', '2019-09-10 10:05:56');
+INSERT INTO `plate_user` VALUES ('f369e00fb903482e85ce3d55a663e857', '675ab9b3b265329e2506b4674e55b8a4', 'hff', '郝总', '1', '1', null, '1', '2', '1', '1', '', null, '340822199806142531', null, '18117970314', null, null, null, 'f0d0b12a63ae4b4f9d45aff8bcbb3211', 'f0d0b12a63ae4b4f9d45aff8bcbb3211', '原始数据', '1', 'f369e00fb903482e85ce3d55a663e857', '2019-08-29 13:57:15', 'f369e00fb903482e85ce3d55a663e857', '2019-08-29 13:58:10');
 
 -- ----------------------------
 -- Table structure for plate_user_blacklist
@@ -312,6 +327,11 @@ CREATE TABLE `plate_user_father` (
 -- ----------------------------
 -- Records of plate_user_father
 -- ----------------------------
+INSERT INTO `plate_user_father` VALUES ('6ee1dcf0f2fb4857ba0f54c5127b8167', '03de8c55c0f04747af75640e82321a73', '2019-08', '2019-08-28 11:56:30', '1', '原始数据', null, '2019-09-10 11:56:59', null, '2019-09-10 11:56:59');
+INSERT INTO `plate_user_father` VALUES ('e2dcabf6f2ef4f829b23a199b255f939', '7db7a102fd1e47439462ad379f4f3439', '2019-08', '2019-08-28 11:56:30', '1', '原始数据', null, '2019-09-10 11:56:59', null, '2019-09-10 11:56:59');
+INSERT INTO `plate_user_father` VALUES ('f0d0b12a63ae4b4f9d45aff8bcbb3211', '36520e557e2c436286fa223fa6e035de', '2019-08', '2019-08-28 11:56:30', '1', '原始数据', null, '2019-09-10 11:56:59', null, '2019-09-10 11:56:59');
+INSERT INTO `plate_user_father` VALUES ('f0d0b12a63ae4b4f9d45aff8bcbb3211', 'e2dcabf6f2ef4f829b23a199b255f939', '2019-08', '2019-08-28 11:56:30', '1', '原始数据', null, '2019-09-10 11:56:59', null, '2019-09-10 11:56:59');
+INSERT INTO `plate_user_father` VALUES ('f0d0b12a63ae4b4f9d45aff8bcbb3211', 'f369e00fb903482e85ce3d55a663e857', '2019-08', '2019-08-28 11:56:30', '1', '原始数据', null, '2019-09-10 11:56:59', null, '2019-09-10 11:56:59');
 
 -- ----------------------------
 -- Table structure for plate_user_permission
@@ -394,6 +414,7 @@ CREATE TABLE `plate_user_role_mid` (
 -- Records of plate_user_role_mid
 -- ----------------------------
 INSERT INTO `plate_user_role_mid` VALUES ('3309b23c28584179b9d69e226e3eeeee', 'c_sysAdmin', '1', null, null, null, null);
+INSERT INTO `plate_user_role_mid` VALUES ('9ae47854f7114030bdec2e5f31c06cdf', 'c_htAdmin', '1', '3309b23c28584179b9d69e226e3eeeee', '2019-09-04 16:37:15', null, null);
 
 -- ----------------------------
 -- Table structure for plate_user_smz
@@ -468,7 +489,7 @@ INSERT INTO `plate_yw_lx_menu` VALUES ('C_YWGN', 'C_YWGN_ZHDJGL', '业务功能_
 DROP TABLE IF EXISTS `t_green_gold_dzhz`;
 CREATE TABLE `t_green_gold_dzhz` (
   `c_userid` varchar(255) NOT NULL,
-  `n_dzzl` decimal(8,4) DEFAULT NULL COMMENT '点赞总量',
+  `n_dzzl` decimal(19,4) DEFAULT NULL COMMENT '点赞总量',
   `c_bz` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `c_zt` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态(0无效1有效)',
   `c_cjuser` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '创建人',
@@ -481,6 +502,17 @@ CREATE TABLE `t_green_gold_dzhz` (
 -- ----------------------------
 -- Records of t_green_gold_dzhz
 -- ----------------------------
+INSERT INTO `t_green_gold_dzhz` VALUES ('03de8c55c0f04747af75640e82321a73', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_dzhz` VALUES ('05d3914cd2644f5388e929872ae44bf7', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_dzhz` VALUES ('36520e557e2c436286fa223fa6e035de', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_dzhz` VALUES ('568a7b57165b4ac3aeb5046067e96f5a', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_dzhz` VALUES ('6536e3dbd98645238249f986bd585f2e', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_dzhz` VALUES ('6ee1dcf0f2fb4857ba0f54c5127b8167', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_dzhz` VALUES ('7db7a102fd1e47439462ad379f4f3439', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_dzhz` VALUES ('9561c4f085f64f58b845d19881cf075f', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_dzhz` VALUES ('e2dcabf6f2ef4f829b23a199b255f939', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_dzhz` VALUES ('f0d0b12a63ae4b4f9d45aff8bcbb3211', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_dzhz` VALUES ('f369e00fb903482e85ce3d55a663e857', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
 
 -- ----------------------------
 -- Table structure for t_green_gold_dzmx
@@ -489,7 +521,7 @@ DROP TABLE IF EXISTS `t_green_gold_dzmx`;
 CREATE TABLE `t_green_gold_dzmx` (
   `c_lsh` varchar(255) NOT NULL,
   `c_userid` varchar(255) NOT NULL,
-  `n_dzsl` decimal(8,4) DEFAULT NULL COMMENT '点赞数量',
+  `n_dzsl` decimal(19,4) DEFAULT NULL COMMENT '点赞数量',
   `d_dzsj` datetime DEFAULT NULL COMMENT '点赞时间',
   `c_bz` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `c_zt` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态(0无效1有效)',
@@ -510,7 +542,7 @@ CREATE TABLE `t_green_gold_dzmx` (
 DROP TABLE IF EXISTS `t_green_gold_hz`;
 CREATE TABLE `t_green_gold_hz` (
   `c_userid` varchar(255) NOT NULL,
-  `n_jbzl` decimal(8,4) DEFAULT NULL COMMENT '金币总量',
+  `n_jbzl` decimal(19,4) DEFAULT NULL COMMENT '金币总量',
   `c_bz` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `c_zt` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态(0无效1有效)',
   `c_cjuser` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '创建人',
@@ -523,6 +555,17 @@ CREATE TABLE `t_green_gold_hz` (
 -- ----------------------------
 -- Records of t_green_gold_hz
 -- ----------------------------
+INSERT INTO `t_green_gold_hz` VALUES ('03de8c55c0f04747af75640e82321a73', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_hz` VALUES ('05d3914cd2644f5388e929872ae44bf7', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_hz` VALUES ('36520e557e2c436286fa223fa6e035de', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_hz` VALUES ('568a7b57165b4ac3aeb5046067e96f5a', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_hz` VALUES ('6536e3dbd98645238249f986bd585f2e', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_hz` VALUES ('6ee1dcf0f2fb4857ba0f54c5127b8167', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_hz` VALUES ('7db7a102fd1e47439462ad379f4f3439', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_hz` VALUES ('9561c4f085f64f58b845d19881cf075f', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_hz` VALUES ('e2dcabf6f2ef4f829b23a199b255f939', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_hz` VALUES ('f0d0b12a63ae4b4f9d45aff8bcbb3211', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_gold_hz` VALUES ('f369e00fb903482e85ce3d55a663e857', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
 
 -- ----------------------------
 -- Table structure for t_green_gold_jsmx
@@ -531,7 +574,7 @@ DROP TABLE IF EXISTS `t_green_gold_jsmx`;
 CREATE TABLE `t_green_gold_jsmx` (
   `c_lsh` varchar(255) NOT NULL,
   `c_userid` varchar(255) NOT NULL,
-  `n_jssl` decimal(8,4) DEFAULT NULL COMMENT '减少数量',
+  `n_jssl` decimal(19,4) DEFAULT NULL COMMENT '减少数量',
   `d_jssj` datetime DEFAULT NULL COMMENT '减少时间',
   `c_jsyy` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '增加原因',
   `c_jsyysm` varchar(255) DEFAULT NULL COMMENT '减少原因说明',
@@ -555,7 +598,7 @@ DROP TABLE IF EXISTS `t_green_gold_zjmx`;
 CREATE TABLE `t_green_gold_zjmx` (
   `c_lsh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '操作业务流水号',
   `c_userid` varchar(255) NOT NULL,
-  `n_zjsl` decimal(8,4) DEFAULT NULL COMMENT '增加数量',
+  `n_zjsl` decimal(19,4) DEFAULT NULL COMMENT '增加数量',
   `d_zjsj` datetime DEFAULT NULL COMMENT '增加时间',
   `c_zjyy` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '增加原因',
   `c_zjyysm` varchar(255) DEFAULT NULL COMMENT '增加原因说明',
@@ -586,7 +629,7 @@ CREATE TABLE `t_green_nl_czjl` (
   `c_fkkh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '付款卡号',
   `c_fksfcg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '付款是否成功(0失败1成功）',
   `c_fkdh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '付款单号',
-  `n_fkje` decimal(12,4) DEFAULT NULL COMMENT '付款金额(用多少人民币兑换能量）',
+  `n_fkje` decimal(19,4) DEFAULT NULL COMMENT '付款金额(用多少人民币兑换能量）',
   `c_skzh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '收款账户',
   `d_sksj` datetime DEFAULT NULL COMMENT '收款时间',
   `c_skfs` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '收款方式(支付宝/微信/银行卡）',
@@ -594,7 +637,7 @@ CREATE TABLE `t_green_nl_czjl` (
   `c_skkh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '收款银行卡号',
   `c_sksfcg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '收款是否成功（0否1是）',
   `c_skdh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '收款单号',
-  `n_sknl` decimal(8,4) DEFAULT NULL COMMENT '收款能量',
+  `n_sknl` decimal(19,4) DEFAULT NULL COMMENT '收款能量',
   `c_zt` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态(0无效1有效)',
   `c_bz` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `c_cjuser` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '创建人',
@@ -616,7 +659,7 @@ CREATE TABLE `t_green_nl_gfjl` (
   `c_lsh` varchar(255) NOT NULL COMMENT '流水号',
   `d_kssj` datetime DEFAULT NULL COMMENT '本轮瓜分开始时间',
   `d_gfsj` datetime NOT NULL COMMENT '瓜分时间（本轮瓜分结束时间）',
-  `n_gfzl` decimal(8,4) NOT NULL COMMENT '瓜分总量',
+  `n_gfzl` decimal(19,4) NOT NULL COMMENT '瓜分总量',
   `c_czr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '调用瓜分服务的操作员',
   `c_zt` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`c_lsh`)
@@ -632,7 +675,7 @@ CREATE TABLE `t_green_nl_gfjl` (
 DROP TABLE IF EXISTS `t_green_nl_hz`;
 CREATE TABLE `t_green_nl_hz` (
   `c_userid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `n_nlhz` decimal(11,4) DEFAULT NULL COMMENT '能量总量',
+  `n_nlhz` decimal(19,4) DEFAULT NULL COMMENT '能量总量',
   `c_bz` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
   `c_zt` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态(0无效1有效)',
   `c_cjuser` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '创建人',
@@ -645,6 +688,17 @@ CREATE TABLE `t_green_nl_hz` (
 -- ----------------------------
 -- Records of t_green_nl_hz
 -- ----------------------------
+INSERT INTO `t_green_nl_hz` VALUES ('03de8c55c0f04747af75640e82321a73', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_nl_hz` VALUES ('05d3914cd2644f5388e929872ae44bf7', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_nl_hz` VALUES ('36520e557e2c436286fa223fa6e035de', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_nl_hz` VALUES ('568a7b57165b4ac3aeb5046067e96f5a', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_nl_hz` VALUES ('6536e3dbd98645238249f986bd585f2e', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_nl_hz` VALUES ('6ee1dcf0f2fb4857ba0f54c5127b8167', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_nl_hz` VALUES ('7db7a102fd1e47439462ad379f4f3439', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_nl_hz` VALUES ('9561c4f085f64f58b845d19881cf075f', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_nl_hz` VALUES ('e2dcabf6f2ef4f829b23a199b255f939', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_nl_hz` VALUES ('f0d0b12a63ae4b4f9d45aff8bcbb3211', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_nl_hz` VALUES ('f369e00fb903482e85ce3d55a663e857', '0.0000', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
 
 -- ----------------------------
 -- Table structure for t_green_nl_jsnlmx
@@ -653,7 +707,7 @@ DROP TABLE IF EXISTS `t_green_nl_jsnlmx`;
 CREATE TABLE `t_green_nl_jsnlmx` (
   `c_lsh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '操作业务流水号',
   `c_userid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户ID',
-  `n_jssl` decimal(11,4) DEFAULT NULL COMMENT '减少数量',
+  `n_jssl` decimal(19,4) DEFAULT NULL COMMENT '减少数量',
   `d_jssj` datetime DEFAULT NULL COMMENT 'c_jsyy)减少时间',
   `c_jsyy` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '减少原因（c_jsyy）',
   `c_bz` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
@@ -747,6 +801,17 @@ CREATE TABLE `t_green_rw_rwhz` (
 -- ----------------------------
 -- Records of t_green_rw_rwhz
 -- ----------------------------
+INSERT INTO `t_green_rw_rwhz` VALUES ('03de8c55c0f04747af75640e82321a73', '0', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_rw_rwhz` VALUES ('05d3914cd2644f5388e929872ae44bf7', '0', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_rw_rwhz` VALUES ('36520e557e2c436286fa223fa6e035de', '0', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_rw_rwhz` VALUES ('568a7b57165b4ac3aeb5046067e96f5a', '0', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_rw_rwhz` VALUES ('6536e3dbd98645238249f986bd585f2e', '0', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_rw_rwhz` VALUES ('6ee1dcf0f2fb4857ba0f54c5127b8167', '0', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_rw_rwhz` VALUES ('7db7a102fd1e47439462ad379f4f3439', '0', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_rw_rwhz` VALUES ('9561c4f085f64f58b845d19881cf075f', '0', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_rw_rwhz` VALUES ('e2dcabf6f2ef4f829b23a199b255f939', '0', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_rw_rwhz` VALUES ('f0d0b12a63ae4b4f9d45aff8bcbb3211', '0', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
+INSERT INTO `t_green_rw_rwhz` VALUES ('f369e00fb903482e85ce3d55a663e857', '0', '原始数据', '1', null, '2019-09-10 11:48:48', null, '2019-09-10 11:48:48');
 
 -- ----------------------------
 -- Table structure for t_green_rw_rwmx
@@ -838,7 +903,7 @@ CREATE TABLE `t_green_zz_zjzzmx` (
   `c_userid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `c_spbh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '种子编号（对应系统中的商品编号）',
   `c_zjyy` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '增加种子原因（C_ZZ_ZJYY）',
-  `d_zjsj` datetime DEFAULT NULL COMMENT '增加时间',
+  `d_zjsj` datetime NOT NULL COMMENT '增加时间',
   `c_kjz` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '是否可捐赠（0否1是）对应任务明细表中cLjrwcs字段',
   `c_sfjz` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '是否捐赠（0否1是）',
   `d_jzsj` datetime DEFAULT NULL COMMENT '捐赠时间',

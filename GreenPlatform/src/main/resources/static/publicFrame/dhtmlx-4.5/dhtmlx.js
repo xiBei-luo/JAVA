@@ -8208,7 +8208,7 @@ dhtmlXCombo.prototype.getOptionByLabel = function(h) {
     return (l == null ? null: this._getOption(l, e))
 };
 dhtmlXCombo.prototype.getSelectedIndex = function() {
-    return this._getOptionProp(this.conf.last_selected, "static.systemStatic.js.index.css.index.css", -1)
+    return this._getOptionProp(this.conf.last_selected, "static.systemStatic.js.index-bak.html.css.index-bak.html.css", -1)
 };
 dhtmlXCombo.prototype.getSelectedText = function() {
     return this._getOptionProp(this.conf.last_selected, "text", "")

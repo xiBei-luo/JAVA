@@ -1,0 +1,150 @@
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+/*种子商店begin*/
+.market-title{
+    margin: 0;
+    padding:25px;
+    background: #419641;
+    color: #ffffff;
+}
+
+.popular-packages {
+    background: #ffffff;
+    padding: 5px 0;
+}
+.popular-packages .single-package {
+    border:3px solid #419641;
+    margin-bottom: 30px;
+    -webkit-transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.5s;
+    overflow: hidden;
+    position: relative;
+    -webkit-box-shadow: 0 0 20px 0 rgba(47, 47, 47, 0.05);
+    box-shadow: 0 0 20px 0 rgba(47, 47, 47, 0.05);
+    transition: all ease-in-out 0.5s;
+}
+.popular-packages .single-package:hover {
+    -webkit-box-shadow: 0 0 60px 0 rgba(47, 47, 47, 0.1);
+    box-shadow: 0 0 60px 0 rgba(47, 47, 47, 0.1);
+}
+.popular-packages .single-package:hover .package-image a img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.popular-packages .single-package:hover .package-calto-action {
+    padding: 0 20px 10px 0px;
+}
+.popular-packages .single-package:hover .package-calto-action .ct-action li:first-child a {
+    background: #f15b5c;
+}
+.popular-packages .single-package .package-image {
+    overflow: hidden;
+}
+.popular-packages .single-package .package-image a img {
+    display: block;
+    width: 100%;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: all ease-in-out 0.3s;
+    transition: all ease-in-out 0.3s;
+}
+.popular-packages .single-package .package-content {
+    padding: 10px;
+}
+.popular-packages .single-package .package-content h3{
+    display: inline-block;
+}
+.popular-packages .single-package .package-content h3 a {
+    font-weight: 600;
+    color: #2f2f2f;
+    font-size: 20px;
+    -webkit-transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.5s;
+}
+.popular-packages .single-package .package-content h3 a:hover {
+    color: #f15b5c;
+}
+.popular-packages .single-package .package-content p {
+    color: #727272;
+    font-size: 14px;
+    font-weight: 500;
+    width:100%;
+    height: 60px;
+    /*word-break:keep-all; 不换行 */
+    /*white-space:nowrap; 不换行 */
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.popular-packages .single-package .package-content #nSpjg {
+    background: #37b721;
+    padding:2px 6px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 600;
+}
+.popular-packages .single-package .package-calto-action {
+    padding: 0 20px 10px 0px;
+}
+.popular-packages .single-package .package-calto-action .ct-action {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.popular-packages .single-package .package-calto-action .ct-action li:first-child a {
+    cursor: pointer;
+    -webkit-transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.5s;
+    overflow: hidden;
+}
+.travel-booking-btn {
+    display: inline-block;
+    background: #37b721;
+    padding: 9px;
+    color: #fefefe;
+    font-weight: 500;
+    font-size: 15px;
+}
+.package-calto-action li{
+    list-style: none;
+}
+/*种子商店end*/
+
+
+
+
+/*终端尺寸适配*/
+@media screen and (max-width: 600px) {
+
+    /*种子商店*/
+    #market #cSpmc{
+        font-size: 18px;
+    }
+    #market #cSpms{
+        height: 120px;
+        font-size: 12px;
+    }
+    #market #nSpjg{
+        font-size: 10px;
+    }
+    #market .ct-action a{
+        font-size: 12px;
+    }
+
+    .indexFooter{
+        height: 180px;
+    }
+
+    #myAccountModel .nav li a{
+        padding:8px;
+    }
+}
+

@@ -1,0 +1,120 @@
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+
+/*点赞排行榜begin*/
+#goldList,#rankList{
+    padding-top: 5px;
+}
+.goldListWrap{
+    width: 100%;
+    background: #398439;
+    margin: 0px auto;
+    border-radius: 15px;
+    overflow: hidden;
+    padding-bottom: 30px;
+}
+.goldListTitle{
+    color: #ffffff;
+    line-height: 60px;
+    margin: 0;
+}
+.goldDzRankTitle{
+    width: 80%;
+    margin:0 auto;
+    text-align: center;
+    background: #ffffff;
+    font-size: 20px;
+    line-height: 32px;
+    border-radius: 5px;
+}
+.goldDzRankContent{
+    font-size: 16px;
+    line-height: 32px;
+    border-radius: 5px;
+    background: #419641;
+    width: 80%;
+    margin: 5px auto;
+    text-align: center;
+    color: #ffffff;
+}
+.btnLikeBox{
+    text-align: center;
+    margin: 0px 0 10px;
+    position: relative;
+}
+#btnLike{
+    font-size: 28px;
+    color:#b92c28;
+}
+#jsGold{
+    opacity: 0;
+    position: absolute;
+    font-weight: bold;
+    color: #eea236;
+}
+/*点赞排行榜end*/
+
+/*能量排行榜begin*/
+#rankList .row .rankListBg{
+    background: #419641;
+    margin-top: 10px;
+    height:50px;
+    line-height: 50px;
+    font-size: 18px;
+    color: #ffffff;
+    border-radius: 10px;
+    position: relative;
+}
+#rankList .row .rankListBg span:nth-child(2){
+    position: absolute;
+    right: 20px;
+}
+#goldDzRankContent_1{
+    background: url("../../publicImg/ranklist/first.png") no-repeat;
+    background-size: 40px 40px;
+    background-position: center;
+}
+#goldDzRankContent_2{
+    background: url("../../publicImg/ranklist/second.png") no-repeat;
+    background-size: 40px 40px;
+    background-position: center;
+}
+#goldDzRankContent_3{
+    background: url("../../publicImg/ranklist/third.png") no-repeat;
+    background-size: 40px 40px;
+    background-position: center;
+}
+.goldDzRankContent_ower{
+    background: url("../../publicImg/ranklist/ower.png") no-repeat;
+    background-size: 30px 30px;
+    background-position: center;
+}
+/*能量排行榜end*/
+
+
+/*终端尺寸适配*/
+@media screen and (max-width: 600px) {
+
+    /*排行榜*/
+    .goldListWrap{
+        width: 98%;
+    }
+    .goldListTitle{
+        font-size: 18px;
+    }
+    #btnLike{
+        font-size: 22px;
+    }
+    .goldDzRankTitle,.goldDzRankContent {
+        width: 90%;
+        font-size: 14px;
+    }
+    .goldDzRankContent{
+        font-size: 12px;
+    }
+
+}
+
