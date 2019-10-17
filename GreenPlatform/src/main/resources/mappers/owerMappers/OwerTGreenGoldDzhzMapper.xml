@@ -9,7 +9,7 @@
 
     <select id="selectGreenGoldDzhzRank" resultType="java.util.HashMap">
         SELECT
-            ROUND(a.n_dzzl) nDzzl,
+            ROUND(a.n_dzzl,2) nDzzl,
             b.c_username cUsername,
             b.c_loginname cLoginname,
             a.c_userid cUserid
@@ -25,7 +25,7 @@
     <select id="selectTGreenGoldDzhzBycUserid" parameterType="java.lang.String" resultType="java.util.HashMap">
         SELECT
             b.c_userid,
-            ROUND(b.n_dzzl) n_dzzl,
+            ROUND(b.n_dzzl,2) n_dzzl,
             b.c_bz,
             b.c_zt,
             b.c_cjuser,

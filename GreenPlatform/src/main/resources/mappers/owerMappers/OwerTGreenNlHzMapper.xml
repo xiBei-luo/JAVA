@@ -49,7 +49,10 @@
 
   <select id="selectTGreenNlHzBycUserid" parameterType="java.lang.String" resultType="java.util.HashMap">
         SELECT
-            x1.c_username,x.*
+            x1.c_username,
+            x.c_userid,
+            ROUND(x.n_nlhz, 2) n_nlhz,
+            x.rank
         FROM
             (
                 SELECT
