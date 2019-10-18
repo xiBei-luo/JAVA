@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的主页-基本信息</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/style/web/myAccount/jbxx.css">
+
+</head>
+<body>
+
+
+
+<!--我的账户-->
+<div id="myAccount">
+    <div class="titleBox">
+        <h3>基本信息</h3>
+    </div>
+    <div class="contentBox">
+        <div class="contentBoxWrap">
+            <table class="table">
+                <tr>
+                    <td>我的能量</td>
+                    <td align="right"><span class="badge" th:text="'￥'+${loginuserAccountJbxx.n_nlhz}"></span></td>
+                </tr>
+                <tr>
+                    <td>我的金币</td>
+                    <td align="right"><span class="badge" th:text="'S'+${loginuserAccountJbxx.n_jbzl}"></span></td>
+                </tr>
+                <tr>
+                    <td>我的点赞</td>
+                    <td align="right"><span class="badge" th:text="'M'+${loginuserAccountJbxx.n_dzzl}">/span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="footerBtn">
+        <a href="/base/myAccount" class="btn btn-success btn-lg">返回</a>
+    </div>
+</div>
+
+
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script src="/js/web/nlRank.js"></script>
+</body>
+</html>
