@@ -10,72 +10,64 @@
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrapValidator.min.css">
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
-    <link rel="stylesheet" href="/style/login/login.css">
+    <link rel="stylesheet" href="/style/login/register.css">
 </head>
 <body>
 <header class="loginHeader">
-    <div class="container-fluid">
-        <div class="row mr-top-50">
-            <div class="col-md-4"></div>
-            <div class="col-md-4 col-xs-12">
-                <div class="panel panel-success">
-                    <div class="panel-heading text-center">
-                        <b>平台用户注册</b>
-                    </div>
-                    <div class="panel-body">
-                        <div id="registerForm">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control input-lg" id="cLoginname" name="cLoginname" placeholder="设置会员名">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <input type="password" class="form-control input-lg" id="cPassword" name="cPassword" placeholder="设置你的登陆密码">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <input type="password" class="form-control input-lg" id="cPassword1" name="cPassword1" placeholder="请再次输入你的密码">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8">
-                                    <input type="text" class="form-control input-lg" id="cPhone" name="cPhone" placeholder="请输入电话号码">
-                                </div>
-                                <div class="col-sm-4 col-xs-4">
-                                    <input type="button" id="getVerificationCode" class="form-control input-lg btn-default" value="获取验证码" />
-                                </div>
-                            </div>
-                            <div class="row cVerification">
-                                <div class="col-sm-8 col-xs-8">
-                                    <input type="text" class="form-control input-lg" id="smsCode" name="smsCode" placeholder="请输入验证码">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-1 col-xs-2">
-                                    <input type="checkbox" class="checkbox" id="btnAgreeRule">
-                                </div>
-                                <div class="col-sm-11 col-xs-10">
-                                    <a href="#" data-toggle="modal" data-target="#legalStatement">《法律声明及平台服务条款》</a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <button type="submit" id="btnRegister" class="btn btn-block btn-lg btn-primary">注册</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <a href="/base/login">已有账号?立即登陆</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="loginBox">
+        <div class="login-title">
+            <h2>用户注册</h2>
+        </div>
+        <div class="login-content" id="loginForm">
+            <div class="row" id="registerForm">
+                <div class="col-md-12 col-xs-12">
+                    <input type="text" id="cLoginname" name="cLoginname" placeholder="设置会员名">
                 </div>
             </div>
-            <div class="col-md-4 col-xs-1"></div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <input type="password" id="cPassword" name="cPassword" placeholder="设置你的登陆密码">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <input type="password" id="cPassword1" name="cPassword1" placeholder="请再次输入你的密码">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8 col-xs-8">
+                    <input type="text" id="cPhone" name="cPhone" placeholder="请输入电话号码">
+                </div>
+                <div class="col-sm-4 col-xs-4">
+                    <button id="getVerificationCode" >验证码</button>
+                </div>
+            </div>
+            <div class="row cVerification">
+                <div class="col-sm-8 col-xs-8">
+                    <input type="text" id="smsCode" name="smsCode" placeholder="请输入验证码">
+                </div>
+            </div>
+            <div class="row legal">
+                <div class="col-sm-1 col-xs-1">
+                    <input type="checkbox" class="checkbox" id="btnAgreeRule">
+                </div>
+                <div class="col-sm-11 col-xs-11">
+                    <a href="#" data-toggle="modal" data-target="#legalStatement">《法律声明及平台服务条款》</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button" id="btnRegister" >注册</button>
+                </div>
+            </div>
+            <div class="row elseLink">
+                <div class="col-sm-12">
+                    <a href="/base/login">已有账号?立即登陆</a>
+                </div>
+            </div>
+
         </div>
+
     </div>
 </header>
 

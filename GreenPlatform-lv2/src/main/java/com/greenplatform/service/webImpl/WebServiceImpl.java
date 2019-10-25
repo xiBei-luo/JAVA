@@ -82,6 +82,8 @@ public class WebServiceImpl implements WebService {
     OwerTGreenRwRwmxMapper owerTGreenRwRwmxMapper;
     @Autowired
     OwerPlateUserAccountMapper owerPlateUserAccountMapper;
+    @Autowired
+    OperateTableMapper operateTableMapper;
 
     /**
      * 查询用户
@@ -834,7 +836,20 @@ public class WebServiceImpl implements WebService {
         tGreenNlGfjl.setcZt("1");
         tGreenNlGfjlMapper.insert(tGreenNlGfjl);
 
-        //4.清空点赞汇总表
+        //4.备份点赞汇总表
+        String newTbleName = "t_green_gold_dzhz_"+(TimeUtil.getLocalDate(new Date()).substring(0,10).replace("-",""));//新备份表名称
+        Map newTblMap = new HashMap();
+        newTblMap.put("tableName",newTbleName);
+        operateTableMapper.createDzhzNewTable(newTblMap);//创建新表
+        Map paramsMap = new HashMap();
+        paramsMap.put("newTable",newTbleName);
+        paramsMap.put("oldTable","t_green_gold_dzhz");
+        operateTableMapper.insert(paramsMap);//新表插入数据
+
+
+
+
+        //5.清空点赞汇总表
         Map tGreenGoldDzhzMap = new HashMap();
         String cBz = "清空点赞数，原因：金币点赞瓜分能量活动,时间："+TimeUtil.getTimestamp(new Date()).toString();
 
@@ -1277,11 +1292,11 @@ public class WebServiceImpl implements WebService {
         try{
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date dkssj = sdf.parse(jsonObject.getString("dKssj"));//格式化时间
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+            Date cMonth = sdf.parse(jsonObject.getString("cMonth"));//格式化时间
 
             Map params = new HashMap();
-            params.put("dKssj",dkssj);
+            params.put("cMonth",cMonth);
             params.put("cUserid",plateUser.getcUserid());
 
 
@@ -1305,11 +1320,11 @@ public class WebServiceImpl implements WebService {
         try{
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date dkssj = sdf.parse(jsonObject.getString("dKssj"));//格式化时间
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+            Date cMonth = sdf.parse(jsonObject.getString("cMonth"));//格式化时间
 
             Map params = new HashMap();
-            params.put("dKssj",dkssj);
+            params.put("cMonth",cMonth);
             params.put("cUserid",plateUser.getcUserid());
 
             List tGreenNlTxjlList = owerTGreenNlTxjlMapper.selectTGreenNlTxjl(params);
@@ -1333,11 +1348,11 @@ public class WebServiceImpl implements WebService {
         try{
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date dkssj = sdf.parse(jsonObject.getString("dKssj"));//格式化时间
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+            Date cMonth = sdf.parse(jsonObject.getString("cMonth"));//格式化时间
 
             Map params = new HashMap();
-            params.put("dKssj",dkssj);
+            params.put("cMonth",cMonth);
             params.put("cUserid",plateUser.getcUserid());
 
             List tGreenZzJzjlList = owerTGreenZzJzjlMapper.selectTGreenZzJzjl(params);

@@ -32,6 +32,10 @@ public class BaseController {
     public String login() {
         return "login/login";
     }
+    @GetMapping(value = "/loginAdmin")
+    public String loginAdmin() {
+        return "login/loginAdmin";
+    }
 
     @GetMapping(value = "/loginout")
     public String loginout(HttpSession session){
@@ -264,6 +268,23 @@ public class BaseController {
         ReturnModel returnModel = webService.selectLoginuserAccountJbxx();
         model.addAttribute("loginuserAccountNlgl", returnModel.getObject());
         return "web/myAccount/nlgl";
+    }
+    //能量管理(捐赠记录、充值记录、提现记录)
+    @GetMapping(value = "/myAccount/nlgl/jzjl")
+    public String myAccountNlglJzjl(Model model){
+        return "web/myAccount/nlgl/jzjl";
+    }
+    @GetMapping(value = "/myAccount/nlgl/czjl")
+    public String myAccountNlglCzjl(Model model){
+        ReturnModel returnModel = webService.selectLoginuserAccountJbxx();
+        model.addAttribute("loginuserAccountNlgl", returnModel.getObject());
+        return "web/myAccount/nlgl/czjl";
+    }
+    @GetMapping(value = "/myAccount/nlgl/txjl")
+    public String myAccountNlglTxjl(Model model){
+        ReturnModel returnModel = webService.selectLoginuserAccountJbxx();
+        model.addAttribute("loginuserAccountNlgl", returnModel.getObject());
+        return "web/myAccount/nlgl/txjl";
     }
 
 

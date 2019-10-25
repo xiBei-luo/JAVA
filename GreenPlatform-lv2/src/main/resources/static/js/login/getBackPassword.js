@@ -26,6 +26,7 @@ function initEvent(){
     });
 
     $("#getVerificationCode").click(function () {
+        $("#getVerificationCode").attr("disabled",true);
         //checkRegister();
         $("#registerForm").bootstrapValidator('validate');//提交验证
         if ($("#registerForm").data('bootstrapValidator').isValid()) {
@@ -97,6 +98,7 @@ function getVerificationCode() {
     });
 
     sendRequest.sendRequest(function(ret){
+        $("#getVerificationCode").attr("disabled",false);
         if("0" != ret.flag){
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,

@@ -22,6 +22,8 @@ function initEvent() {
  * @param sRwlb  任务类别，必传
  */
 function f_finishMission(sRwlb){
+    alert(sRwlb);
+    return
     var sendRequest = new SendRequest("/web/accomplishRw","POST");//构造对象
     sendRequest.addParamObj({
         cRwlb:sRwlb
@@ -30,6 +32,7 @@ function f_finishMission(sRwlb){
     sendRequest.sendRequest(function(ret){
         if("0" == ret.flag){
             $(".rwlb_"+sRwlb).hide(100);
+            $(".hand_"+sRwlb).hide(100);
         }else if("1" == ret.flag){
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,

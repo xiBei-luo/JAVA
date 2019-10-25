@@ -20,7 +20,7 @@
         AND A.c_spbh = C.c_spbh
         AND A.c_zt = '1'
         AND A.c_userid = #{cUserid}
-        AND A.d_jzsj >= STR_TO_DATE(#{dKssj}, '%Y-%m-%d %H:%i:%s')
+        AND date_format(A.c_jzday, '%Y-%m') = date_format(#{cMonth}, '%Y-%m')
       ORDER BY A.d_Jzsj,C.c_spbh
   </select>
 </mapper>

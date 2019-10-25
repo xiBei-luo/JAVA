@@ -32,26 +32,94 @@ html,body{
 /*任务，植物，攻略的父元素*/
 .carousel-caption{
     width: 100%;
-    height: 100%;
+    height: 90%;
     position: absolute;
     left: 0;
     top: 0;
     display: flex;
     justify-content:space-between;
 }
+/*攻略*/
 #method img{
     width: 40px;
     height: 70px;
+}
+/*任务天数日历*/
+.rwCalendar{
+    align-self: center;
+}
+.rwCalendar #rwDayBox{
+    font-size: 20px;
+    font-weight: bold;
+    color: #333333;
+    background: url("/publicImg/home/calenderBg.png") no-repeat;
+    background-size: cover;
+    width: 40px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+}
+#rwDay{
+    align-self: flex-end;
+}
+/*植物形态begin*/
+.tree{
+    align-self:flex-end;
+}
+.tree img{
+    width: 350px;
+    height: 350px;
 }
 /*三个任务begin*/
 .mission{
     margin-right: 10px;
     align-self: center;
     display: flex;
-    flex-direction: column;
-    justify-content: end;
+
 }
-.mission-js,.mission-sf,.mission-yg{
+.mission-hand{
+    height: 30%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+.mission-hand img{
+    align-items: baseline;
+    position: relative;
+    animation: myfirst 5s infinite;
+    -webkit-animation: myfirst 2s infinite; /* Safari 与 Chrome infinite*/
+}
+@keyframes myfirst
+{
+    0%   {left:0px; top:0px;}
+    50%  {left:5px; top:-5px;}
+    100% {left:0px; top:0px;}
+}
+
+@-moz-keyframes myfirst /*!* Firefox *!*/
+{
+    0%   {left:0px; top:0px;}
+    50%  {left:5px; top:-5px;}
+    100% {left:0px; top:0px;}
+}
+
+@-webkit-keyframes myfirst /*!* Safari and Chrome *!*/
+{
+    0%   {left:0px; top:0px;}
+    50%  {left:5px; top:-5px;}
+    100% {left:0px; top:0px;}
+}
+
+@-o-keyframes myfirst /*!* Opera *!*/
+{
+    0%   {left:0px; top:0px;}
+    50%  {left:5px; top:-5px;}
+    100% {left:0px; top:0px;}
+}
+
+
+
+.mission-js,.mission-sf,.mission-yg,.mission-hand img{
     width: 80px;
     height: 80px;
 }
@@ -59,31 +127,10 @@ html,body{
     width: 100%;
     height: 100%;
     background-position: center;
-    border:2px solid;
     border-radius: 50%;
-    padding:10px;
-}
-#js{
-    border-color: #2b542c;
-    background: #ffffff;
-}
-#sf{
-    border-color: #8a6d3b;
-    background: #c0a16b;
-}
-#yg{
-    border-color: #e38d13;
-    background: #f1586a;
 }
 /*三个任务end*/
-/*植物形态begin*/
-.tree{
-    align-self:center;
-}
-.tree img{
-    width: 350px;
-    height: 350px;
-}
+
 
 
 
@@ -155,11 +202,15 @@ html,body{
         width: 40px;
         height: 40px;
     }
+    .mission-hand img{
+        width: 30px;
+        height: 30px;
+    }
 
     /*树苗*/
     .tree img{
-        width: 250px;
-        height: 250px;
+        width: 200px;
+        height: 300px;
     }
 
 }

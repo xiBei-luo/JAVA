@@ -89,7 +89,7 @@ function loadGridData(reqUrl){
     if(tmpClickLink == "cJzjl"){
         frontGrid = grid1;
     }else if(tmpClickLink == "cCzls"){
-        frontGrid = grid2;
+        frontGrid = grid2;btnSearch
     }else if(tmpClickLink == "cTxls"){
         frontGrid = grid3;
     }

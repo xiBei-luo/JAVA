@@ -74,13 +74,13 @@ function f_submitData(){
         params = {
             "cPhone":$("#cLoginname").val(),
             "cPassword":$("#cPassword").val(),
-            "cRylb":'2'
+            "cRylb":'1'
         }
     }else{
         params = {
             "cLoginname":$("#cLoginname").val(),
             "cPassword":$("#cPassword").val(),
-            "cRylb":'2'
+            "cRylb":'1'
         }
     }
 
@@ -99,7 +99,7 @@ function f_submitData(){
                 buttonLabel: "确定"
             });
         }else{
-            window.location.href="/web/index";
+            window.location.href="/base/index";
         }
     });//发送请求并获取返回结果
 }

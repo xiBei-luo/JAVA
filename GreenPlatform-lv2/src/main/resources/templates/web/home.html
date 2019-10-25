@@ -44,6 +44,13 @@
                         <img src="/publicImg/home/methodBg.png" data-toggle="modal" data-target="#legalStatement" alt="">
                     </div>
 
+                    <!--任务天数提示-->
+                    <div class="rwCalendar">
+                        <div id="rwDayBox">
+                            <span id="rwDay">1</span>
+                        </div>
+                    </div>
+
                     <!--植物形态-->
                     <div class="tree">
                         <img th:attr="src='/publicImg/icon/'+${loginuserHome.tGreenRwRwmx['endRwCountDay']}+'.png'" alt="">
@@ -51,27 +58,38 @@
 
                     <!--任务-->
                     <div class=" mission" id="mission">
-                        <div th:style="${loginuserHome.tGreenRwRwmx['1']} == true ? 'display: none':''">
-                            <div class="mission-sf">
-                                <a class="rwlb_1" id="finishMisson_sf" value="1">
-                                    <img src="/publicImg/icon/sf.png" id="sf" class="center-block" alt="">
-                                </a>
+                        <!--左侧三个指引手指-->
+                        <div class="mission-hand">
+                            <img class="hand_1" src="/publicImg/home/hand.png" alt="">
+                            <img class="hand_2" src="/publicImg/home/hand.png" alt="">
+                            <img class="hand_3" src="/publicImg/home/hand.png" alt="">
+                        </div>
+
+                        <!--右侧三个任务图标-->
+                        <div class="mission-rw">
+                            <div th:style="${loginuserHome.tGreenRwRwmx['1']} == true ? 'display: none':''">
+                                <div class="mission-sf">
+                                    <a class="rwlb_1" id="finishMisson_sf" value="1">
+                                        <img src="/publicImg/home/sf.png" id="sf" class="center-block" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div th:style="${loginuserHome.tGreenRwRwmx['2']} == true ? 'display: none':''">
+                                <div class="mission-js">
+                                    <a class="rwlb_2" id="finishMisson_js" value="2">
+                                        <img src="/publicImg/home/js.png" id="js" class="center-block" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div th:style="${loginuserHome.tGreenRwRwmx['3']} == true ? 'display: none':''">
+                                <div class="mission-yg">
+                                    <a class="rwlb_3" id="finishMisson_yg" value="3">
+                                        <img src="/publicImg/home/yg.png" id="yg" class="center-block" alt="">
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div th:style="${loginuserHome.tGreenRwRwmx['2']} == true ? 'display: none':''">
-                            <div class="mission-js">
-                                <a class="rwlb_2" id="finishMisson_js" value="2">
-                                    <img src="/publicImg/icon/js.png" id="js" class="center-block" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div th:style="${loginuserHome.tGreenRwRwmx['3']} == true ? 'display: none':''">
-                            <div class="mission-yg">
-                                <a class="rwlb_3" id="finishMisson_yg" value="3">
-                                    <img src="/publicImg/icon/yg.png" id="yg" class="center-block" alt="">
-                                </a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

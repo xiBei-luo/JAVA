@@ -27,7 +27,7 @@
                 <strong th:text="'你好,'+${loginuserAccount[0].cUsername}"></strong>
                 <div class="usernameBoxDesc" th:attr="style=${loginuserAccount[0].cIssmz} == '1' ? 'display: none':''">
                     您的账户还没有实名制,
-                    <a class="text-primary" href="/base/certification">【实名制】</a>
+                    <a class="text-primary" id="certificationBtn">【实名制】</a>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
                 </a>
             </li>
             <li>
-                <a href="/base/loginout">
+                <a id="loginoutBtn">
                     <span class="linkImg button">退出登录</span>
                 </a>
             </li>
@@ -86,6 +86,6 @@
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
 <script src="/publicJs/SendRequest.js"></script>
 <script src="/publicJs/publicyw.js"></script>
-<script src="/js/web/nlRank.js"></script>
+<script src="/js/web/myAccount/main.js"></script>
 </body>
 </html>
