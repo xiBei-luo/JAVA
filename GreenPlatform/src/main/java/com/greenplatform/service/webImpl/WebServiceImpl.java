@@ -80,6 +80,8 @@ public class WebServiceImpl implements WebService {
     PlateUserFatherMapper plateUserFatherMapper;
     @Autowired
     OwerTGreenRwRwmxMapper owerTGreenRwRwmxMapper;
+    @Autowired
+    OperateTableMapper operateTableMapper;
 
     /**
      * 查询用户
@@ -834,7 +836,20 @@ public class WebServiceImpl implements WebService {
         tGreenNlGfjl.setcZt("1");
         tGreenNlGfjlMapper.insert(tGreenNlGfjl);
 
-        //4.清空点赞汇总表
+        //4.备份点赞汇总表
+        String newTbleName = "t_green_gold_dzhz_"+(TimeUtil.getLocalDate(new Date()).substring(0,10).replace("-",""));//新备份表名称
+        Map newTblMap = new HashMap();
+        newTblMap.put("tableName",newTbleName);
+        operateTableMapper.createDzhzNewTable(newTblMap);//创建新表
+        Map paramsMap = new HashMap();
+        paramsMap.put("newTable",newTbleName);
+        paramsMap.put("oldTable","t_green_gold_dzhz");
+        operateTableMapper.insert(paramsMap);//新表插入数据
+
+
+
+
+        //5.清空点赞汇总表
         Map tGreenGoldDzhzMap = new HashMap();
         String cBz = "清空点赞数，原因：金币点赞瓜分能量活动,时间："+TimeUtil.getTimestamp(new Date()).toString();
 
@@ -1474,7 +1489,7 @@ public class WebServiceImpl implements WebService {
      * @return
      */
     private ReturnModel divideNlByUser(List list) throws Exception{
-        //System.out.println(list);
+        System.out.println(list);
         Iterator iterator = list.iterator();
         while (iterator.hasNext()){
             Map map = (Map) iterator.next();
@@ -1495,7 +1510,7 @@ public class WebServiceImpl implements WebService {
             }else if(rank>=51 && rank<=100){
                 nZjnl = getDmzByDm("C_NL_DZGF_51-100");
             }
-            //System.out.println("第"+rank+"名"+"奖励能量："+nZjnl);
+            System.out.println("第"+rank+"名"+"奖励能量："+nZjnl);
 
             TGreenNlZjnlmx tGreenNlZjnlmx = new TGreenNlZjnlmx();
             tGreenNlZjnlmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));

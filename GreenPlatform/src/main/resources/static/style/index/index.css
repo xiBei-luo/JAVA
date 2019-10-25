@@ -296,7 +296,7 @@ header{
 }
 /*底部版权声明*/
 .indexFooter{
-    height: 140px;
+    height: 100px;
     background: #333333;
     color: #ffffff;
     line-height: 30px;
@@ -507,7 +507,7 @@ header{
     }
 
     .indexFooter{
-        height: 160px;
+        height: 100px;
     }
 
 

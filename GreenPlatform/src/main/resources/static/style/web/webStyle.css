@@ -297,7 +297,7 @@ header{
 }
 /*底部版权声明*/
 .indexFooter{
-    height: 140px;
+    height: 100px;
     background: #333333;
     color: #ffffff;
     line-height: 30px;
@@ -507,7 +507,7 @@ header{
     }
 
     .indexFooter{
-        height: 180px;
+        height: 100px;
     }
 
     #myAccountModel .nav li a{
@@ -527,10 +527,7 @@ header{
     width: 300px;
     height: 300px;
 }
-#customImg{
-    width: 300px;
-    height: 300px;
-}
+
 
 /**
 邀请二维码
