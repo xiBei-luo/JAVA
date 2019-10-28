@@ -15,6 +15,11 @@ function initEvent() {
     $("#mission a").click(function(){
         f_finishMission($(this).attr("value"));
     });//完成任务
+
+    //任务天数日历事件
+    $("#rwDay").click(function(){
+
+    });
 }
 
 /**
@@ -22,7 +27,8 @@ function initEvent() {
  * @param sRwlb  任务类别，必传
  */
 function f_finishMission(sRwlb){
-    alert(sRwlb);
+    $(".rwlb_"+sRwlb).hide(100);
+    $(".hand_"+sRwlb).hide(100);
     return
     var sendRequest = new SendRequest("/web/accomplishRw","POST");//构造对象
     sendRequest.addParamObj({

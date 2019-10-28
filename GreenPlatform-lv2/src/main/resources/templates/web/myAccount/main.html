@@ -29,6 +29,12 @@
                     您的账户还没有实名制,
                     <a class="text-primary" id="certificationBtn">【实名制】</a>
                 </div>
+
+                <div class="usernameBoxDesc" th:attr="style=${loginuserAccount[0].cIssmz} == '0' ? 'display: none':''">
+                    <a class="text-primary" id="btnInviteUser">【邀请好友】</a>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -75,6 +81,22 @@
                 </a>
             </li>
         </ul>
+    </div>
+</div>
+
+
+<!--邀请码-->
+<div class="modal fade" id="inviteUserModel" tabindex="-1" role="dialog" aria-labelledby="inviteUserLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="inviteUserLabel">邀请码</h4>
+            </div>
+            <div class="modal-body">
+                <img src="" id="inviteUserQrcode" alt="">
+            </div>
+        </div>
     </div>
 </div>
 

@@ -20,6 +20,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -551,6 +552,7 @@ public class WebServiceImpl implements WebService {
                 }
 
                 rwmxMap.put("endRwCountDay",tmpTxt);//完成任务天数
+                rwmxMap.put("sumRwCountDay",countRank);//完成任务天数
 
                 loginUserHomeMap.put("tGreenRwRwmx",rwmxMap);
 
@@ -1457,8 +1459,45 @@ public class WebServiceImpl implements WebService {
         Map paramMap = new HashMap();
         paramMap.put("c_userid",plateUser.getcUserid());
 
-        List retList = owerPlateUserAccountMapper.selectLoginuserAccountJbxx(paramMap);
-        return ReturnModelHandler.success(retList.get(0));
+        //BigDecimal保留两位小数
+        DecimalFormat df1 = new DecimalFormat("0.00");
+
+        //List retList = owerPlateUserAccountMapper.selectLoginuserAccountJbxx(paramMap);
+
+        TGreenGoldHz tGreenGoldHz = tGreenGoldHzMapper.selectByPrimaryKey(plateUser.getcUserid());
+        String n_jbzl = "0.00";
+        if (null != tGreenGoldHz){
+            n_jbzl = df1.format(tGreenGoldHz.getnJbzl());//金币总量
+        }
+
+
+        TGreenNlHz tGreenNlHz = tGreenNlHzMapper.selectByPrimaryKey(plateUser.getcUserid());
+        String n_nlhz = "0.00";
+        if (null != tGreenNlHz){
+            n_nlhz = df1.format(tGreenNlHz.getnNlhz());//能量总量
+        }
+
+        TGreenGoldDzhz tGreenGoldDzhz = tGreenGoldDzhzMapper.selectByPrimaryKey(plateUser.getcUserid());
+        String n_dzzl = "0.00";
+        if (null != tGreenGoldDzhz){
+            n_dzzl = df1.format(tGreenGoldDzhz.getnDzzl());//点赞huiz
+        }
+
+
+
+
+
+        Map retMap = new HashMap();
+        retMap.put("c_userid",plateUser.getcUserid());
+        retMap.put("c_username",plateUser.getcUsername());
+        retMap.put("c_loginname",plateUser.getcLoginname());
+        retMap.put("n_jbzl",n_jbzl);
+        retMap.put("n_nlhz",n_nlhz);
+        retMap.put("n_dzzl",n_dzzl);
+        System.out.println(retMap);
+
+        return ReturnModelHandler.success(retMap);
+
     }
 
     /**

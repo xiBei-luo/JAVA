@@ -1,5 +1,9 @@
 $(function(){
 
+    $("#btnReturnHome").click(function(){
+        window.location.href = "/base/myAccount";
+    });
+
     $("#btnCertification").click(function(){
         checkForm();
         $("#dataForm").bootstrapValidator('validate');//提交验证

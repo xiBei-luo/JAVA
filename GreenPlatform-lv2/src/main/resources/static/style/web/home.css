@@ -40,7 +40,7 @@ html,body{
     justify-content:space-between;
 }
 /*攻略*/
-#method img{
+.method img{
     width: 40px;
     height: 70px;
 }
@@ -59,7 +59,7 @@ html,body{
     display: flex;
     justify-content: center;
 }
-#rwDay{
+.rwDay{
     align-self: flex-end;
 }
 /*植物形态begin*/

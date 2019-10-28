@@ -47,7 +47,7 @@
                     <!--任务天数提示-->
                     <div class="rwCalendar">
                         <div id="rwDayBox">
-                            <span id="rwDay">1</span>
+                            <span class="rwDay" id="rwDay" th:text="${loginuserHome.tGreenRwRwmx['sumRwCountDay']}"></span>
                         </div>
                     </div>
 
@@ -96,7 +96,26 @@
             <div class="item">
                 <img src="../../publicImg/telBg.jpg" alt="...">
                 <div class="carousel-caption">
-                    ...
+                    <!--攻略-->
+                    <div class="method">
+
+                    </div>
+
+                    <!--任务天数提示-->
+                    <div class="rwCalendar">
+
+                    </div>
+
+                    <!--植物形态-->
+                    <div class="tree">
+                        <img th:attr="src='/publicImg/icon/'+${loginuserHome.tGreenRwRwmx['endRwCountDay']}+'.png'" alt="">
+                    </div>
+
+                    <!--任务-->
+                    <div class=" mission">
+
+
+                    </div>
                 </div>
             </div>
             <div class="item">

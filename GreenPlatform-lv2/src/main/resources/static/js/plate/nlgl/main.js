@@ -1,7 +1,6 @@
 var grid;
 $(function(){
     initEvent();
-    initGrid();
 });
 
 /**
@@ -13,20 +12,6 @@ function initEvent(){
     });
 }
 
-/**
- * 初始化表格
- */
-function initGrid(){
-    $("#gridbox").attr({width:"100%",height:"100%"});
-    grid = new dhtmlXGridObject('gridbox');
-    grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
-    grid.setHeader("序号,姓名,能量总量,备注");
-    grid.setInitWidthsP("25,25,25,24.5");
-    grid.setColAlign("center,center,center,center");
-    grid.setColTypes("ro,ro,ro,ro");
-    grid.enableMultiselect(false);
-    grid.init();
-}
 
 
 
@@ -34,7 +19,6 @@ function initGrid(){
  * 查询数据
  */
 function loadGridData(){
-    grid.clearAll();
     var data = {
       "cUsername" : $("#cUsername").val(),
       "nNlzlQ" : $("#nNlzlQ").val(),
@@ -76,14 +60,12 @@ function loadGridData(){
  */
 function initData(data){
     for (var i=0; i<data.length; i++){
-
-        grid.addRow((i+1),[
-            (i+1),
-            data[i].cUsername,
-            data[i].nNlhz,
-            data[i].cBz
-        ]);
-        grid.setUserData((i+1),'data',data[i]);
+        $("#dataTbl tbody").append("<tr>" +
+            "<td>"+(i+1)+"</td>" +
+            "<td>"+data[i].cUsername+"</td>" +
+            "<td>"+data[i].nNlhz+"</td>" +
+            "<td>"+data[i].cBz+"</td>" +
+            "</tr>");
     }
 }
 

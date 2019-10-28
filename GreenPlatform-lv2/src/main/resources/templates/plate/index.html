@@ -9,56 +9,57 @@
 
     <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/publicFrame/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/style/index.css">
+    <link rel="stylesheet" href="/style/plate/index.css">
 </head>
 <body class="page-box">
-    <div class="container-fluid">
-        <div class="row header-nav">
-            <div class="col-md-4 col-xs-4">
-                <span class="header-nav-title">绿沙平台后台管理系统</span>
-            </div>
-            <div class="col-md-offset-4 col-xs-offset-4 col-md-4 col-xs-4">
-                <ul class="nav navbar-nav navbar-right plate-navbar-right">
-                    <li class="navbar-loginUser"><a href="##" data-toggle="modal" data-target="#myModal">欢迎您，管理员</a></li>
-                    <li><a href="/base/loginout">退出系统</a></li>
-                </ul>
-            </div>
+    <div class="title-box">
+        <div class="title-box-left">
+            <h4>绿沙平台后台管理系统</h4>
+        </div>
+        <div class="title-box-right">
+            <ul class="nav navbar-nav navbar-right plate-navbar-right">
+                <li class="navbar-loginUser"><a href="##" data-toggle="modal" data-target="#myModal">欢迎您，管理员</a></li>
+                <li><a href="/base/loginout">退出系统</a></li>
+            </ul>
         </div>
     </div>
-    <div class="container-fluid center-content">
-        <div class="row center-content-row">
-            <div class="col-md-2 center-left">
-                <div id="sidebar">
-                    <div class="navbar-default sidebar" role="navigation">
-                        <div class="sidebar-nav">
-                            <ul class="nav" id="side-menu">
-                                <li th:if="${loginuserYwqxMap['permissionFlMap']['C_YWGN']} == true">
-                                    <a href="#" class="first-level"><i class="fa fa-laptop nav_icon"></i>业务功能<span class="fa fa-chevron-right"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li th:each="plateYwLxMenuList : ${loginuserYwqxMap['plateYwLxMenuList']}" th:if="${plateYwLxMenuList['cYwlxdm']} == 'C_YWGN'">
-                                            <a href="#" class="second-level" th:attr="data-targetUrl=${plateYwLxMenuList['cRuncommand']}" th:text="${plateYwLxMenuList['cMenujc']}"></a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li th:if="${loginuserYwqxMap['permissionFlMap']['C_PLATE']} == true">
-                                    <a href="#" class="first-level"><i class="fa fa-indent nav_icon"></i>系统配置<span class="fa fa-chevron-right"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li th:each="plateYwLxMenuList : ${loginuserYwqxMap['plateYwLxMenuList']}" th:if="${plateYwLxMenuList['cYwlxdm']} == 'C_PLATE'">
-                                            <a href="#" class="second-level" th:attr="data-targetUrl=${plateYwLxMenuList['cRuncommand']}" th:text="${plateYwLxMenuList['cMenujc']}"></a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+
+    <div class="content-box">
+        <!--左侧导航区-->
+        <div class="content-box-left">
+            <div id="sidebar">
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav">
+                        <ul class="nav" id="side-menu">
+                            <li th:if="${loginuserYwqxMap['permissionFlMap']['C_YWGN']} == true">
+                                <a href="#" class="first-level"><i class="fa fa-laptop nav_icon"></i>业务功能<span class="fa fa-chevron-right"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li th:each="plateYwLxMenuList : ${loginuserYwqxMap['plateYwLxMenuList']}" th:if="${plateYwLxMenuList['cYwlxdm']} == 'C_YWGN'">
+                                        <a href="#" class="second-level" th:attr="data-targetUrl=${plateYwLxMenuList['cRuncommand']}" th:text="${plateYwLxMenuList['cMenujc']}"></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li th:if="${loginuserYwqxMap['permissionFlMap']['C_PLATE']} == true">
+                                <a href="#" class="first-level"><i class="fa fa-indent nav_icon"></i>系统配置<span class="fa fa-chevron-right"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li th:each="plateYwLxMenuList : ${loginuserYwqxMap['plateYwLxMenuList']}" th:if="${plateYwLxMenuList['cYwlxdm']} == 'C_PLATE'">
+                                        <a href="#" class="second-level" th:attr="data-targetUrl=${plateYwLxMenuList['cRuncommand']}" th:text="${plateYwLxMenuList['cMenujc']}"></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-10 cneter-right">
-                 <iframe id="iframe-page-content" src="" width="100%" height="100%" frameborder="0" ></iframe>
-            </div>
         </div>
 
+        <!--右侧内容区-->
+        <div class="content-box-right">
+            <iframe id="iframe-page-content" src="" width="100%" height="100%" frameborder="0" ></iframe>
+        </div>
     </div>
+
+
 
     <!-- 修改密码 -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
