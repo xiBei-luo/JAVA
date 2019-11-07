@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greenplatform.dao.owerMapper.OwerTGreenSpSpmxMapper" >
+  <select id="selectOwerZz" parameterType="java.util.Map" resultType="java.util.Map">
+       SELECT
+             *
+        FROM
+            (
+                SELECT
+                    A.*
+                FROM
+                    t_green_zz_zjzzmx A
+                WHERE
+                    A.c_kjz = '0'
+                AND A.c_sfjz = '0'
+                AND A.c_userid = #{C_USERID}
+            ) X,
+            t_green_sp_spmx X1
+        WHERE
+            X.C_SPBH = X1.c_spbh
+  </select>
+
+
+  <select id="selectExaZz" parameterType="java.util.Map" resultType="java.util.Map">
+       SELECT
+            *
+        FROM
+            t_green_sp_spmx a
+        WHERE
+            a.c_spbh NOT IN (
+                SELECT
+                    A.c_spbh
+                FROM
+                    t_green_zz_zjzzmx A
+                WHERE
+                    A.c_kjz = '0'
+                AND A.c_sfjz = '0'
+                AND A.c_userid = #{C_USERID}
+            )
+  </select>
+</mapper>

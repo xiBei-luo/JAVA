@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绿沙平台</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/style/welcome/shop.css">
+
+</head>
+<body>
+<div class="marketTitleBox">
+    <h3>种子商店</h3>
+</div>
+<div class="market" id="market">
+    <div class="container-fluid">
+        <div class="marketWrap">
+            <div class="item" th:each="tGreenSpSpmxList : ${loginuserHome.tGreenSpSpmxList}">
+                <div class="shopImgBox">
+                    <img  th:attr="src = ${tGreenSpSpmxList.cImgurl}" alt="">
+                </div>
+                <div class="shopDesc">
+                    <a href="" title="" class="cSpmc" th:text=${tGreenSpSpmxList.cSpmc}></a>
+                    <span class="nSpjg" th:text="'￥'+${tGreenSpSpmxList.nSpjg}"></span>
+                    <!--<p>仙人掌是设计的还是</p>-->
+                    <p id="cSpms" th:attr="title = ${tGreenSpSpmxList.cSpms}" th:text=${tGreenSpSpmxList.cSpms}> </p>
+                </div>
+                <div class="shopBtn">
+                    <button class="btn btn-sm btn-success" th:value="${tGreenSpSpmxList.cSpbh}">兑换</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script>
+    $(function(){
+        $(".shopBtn button").click(function(){
+            f_gotoLogin();
+        });
+    });
+    function f_gotoLogin(){
+        BootstrapDialog.confirm({
+            type: BootstrapDialog.TYPE_WARNING,
+            size: BootstrapDialog.SIZE_SMALL,
+            title: '提示',
+            message: "请登录系统后操作，是否跳转到登录页？",
+            closeable: true,
+            btnOKLabel: "确定",
+            btnCancelLabel: "取消",
+            callback: function (ret) {
+                if(ret){
+                    window.parent.location = "/base/login";
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

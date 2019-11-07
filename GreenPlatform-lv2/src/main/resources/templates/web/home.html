@@ -29,14 +29,13 @@
 <!--banner开始-->
 <banner class="banner-bak">
     <div id="carousel-example-generic" class="carousel slide both">
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        <ol class="carousel-indicators" >
+            <li data-target="#carousel-example-generic" th:each="tGreenSpSpmxList,spStatus : ${loginuserHome.owerTGreenSpSpmxList}" th:attr="data-slide-to=${spStatus.index}" class="active"></li>
+            <li data-target="#carousel-example-generic" th:each="tGreenSpSpmxList,spStatus : ${loginuserHome.exaTGreenSpSpmxList}" th:attr="data-slide-to=(${spStatus.index}+1)" ></li>
         </ol>
 
         <div class="carousel-inner" role="listbox">
-            <div class="item active">
+            <div class="item active"  th:each="tGreenSpSpmxList : ${loginuserHome.owerTGreenSpSpmxList}">
                 <img src="../../publicImg/telBg.jpg" alt="...">
                 <div class="carousel-caption">
                     <!--攻略-->
@@ -53,7 +52,7 @@
 
                     <!--植物形态-->
                     <div class="tree">
-                        <img th:attr="src='/publicImg/icon/'+${loginuserHome.tGreenRwRwmx['endRwCountDay']}+'.png'" alt="">
+                        <img th:attr="src='/publicImg/shop/'+${loginuserHome.tGreenRwRwmx['endRwCountDay']}+'/'+${tGreenSpSpmxList['c_spbh']}+'.png'" alt="">
                     </div>
 
                     <!--任务-->
@@ -93,7 +92,7 @@
                     </div>
                 </div>
             </div>
-            <div class="item">
+            <div class="item" th:each="tGreenSpSpmxList : ${loginuserHome.exaTGreenSpSpmxList}" >
                 <img src="../../publicImg/telBg.jpg" alt="...">
                 <div class="carousel-caption">
                     <!--攻略-->
@@ -108,7 +107,7 @@
 
                     <!--植物形态-->
                     <div class="tree">
-                        <img th:attr="src='/publicImg/icon/'+${loginuserHome.tGreenRwRwmx['endRwCountDay']}+'.png'" alt="">
+                        <img th:attr="src=${tGreenSpSpmxList['c_imgurl']}" alt="">
                     </div>
 
                     <!--任务-->
@@ -118,12 +117,7 @@
                     </div>
                 </div>
             </div>
-            <div class="item">
-                <img src="../../publicImg/telBg.jpg" alt="...">
-                <div class="carousel-caption">
-                    ...
-                </div>
-            </div>
+
         </div>
 
         <!-- Controls -->
@@ -136,8 +130,6 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-
-
 </banner>
 
 
@@ -163,8 +155,10 @@
                 <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp F、能量奖励规则（a.新用户完成注册及实名认证，平台会奖励价值100能量的仙人掌，完成一个月的种植任务可以获得112的能量奖励，可提现，可继续购买种子进行种植获得能量奖励。b.完成种植任务成功捐赠，每次可获得种植植物价值的12%作为任务奖励。c.成功分享好友，好友完成第一次种植任务，师傅可获得105的能量奖励，好友第二次开始完成的每次种植任务，师傅都可以获得好友种植植物价值的5%作为任务奖励。</p>
                 <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp G、账号等级升级规则（每个月持续完成任务，持续三个月账户升一级，升级后每次植物捐赠完成，在原有12%基础上增加2%的绿沙能量作为奖励。账号升到第三级，在原有12%基础上增加3%的绿沙能量作为奖励。账号升至第四级，在原有12%基础上增加5%的绿沙能量作为奖励。账户最高等级为四级。）</p>
                 <p>3.植物种植说明（用户只有每天持续完成种植任务，持续一个月才算真正完成种植任务，才能进行平台植物捐赠获取能量奖励，如果其中有一天用户忘记完成种植任务，种植任务会重新从第一天算起，每位用户一定要记住每天完成种植任务。）</p>
-                <p>4.提现及充值请加微信客服，更高的效率以及资金安全。</p>
-                <p>5.用户在使用过程中遇到任何不清楚的问题，请咨询微信客服。</p>
+                <p>4.提现规则：账户必须有种植一棵植物的情况下方可提现，最低100能量起提。</p>
+                <p>5.邀请好友只有用我们自己账户里面的邀请码邀请注册才能获得平台奖励。</p>
+                <p>6.提现及充值请加微信客服，更高的效率以及资金安全。注意：账户能量满100才能提现！</p>
+                <p>7.用户在使用过程中遇到任何不清楚的问题，请咨询微信客服。</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary center-block" data-dismiss="modal">关&nbsp&nbsp&nbsp&nbsp闭</button>
@@ -176,7 +170,6 @@
 
 <script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/toucher.js"></script>
 <script src="/publicJs/SendRequest.js"></script>
 <script src="/publicJs/publicyw.js"></script>

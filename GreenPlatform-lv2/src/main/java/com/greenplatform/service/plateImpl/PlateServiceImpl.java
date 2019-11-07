@@ -2,10 +2,7 @@ package com.greenplatform.service.plateImpl;
 
 import com.greenplatform.aop.YwOperationCheckAndLog;
 import com.greenplatform.dao.*;
-import com.greenplatform.dao.owerMapper.OwerPlateCodeDmzMapper;
-import com.greenplatform.dao.owerMapper.OwerPlateUserMapper;
-import com.greenplatform.dao.owerMapper.OwerTGreenNlHzMapper;
-import com.greenplatform.dao.owerMapper.OwerTGreenRwRwmxMapper;
+import com.greenplatform.dao.owerMapper.*;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
 import com.greenplatform.service.PlateService;
@@ -70,6 +67,8 @@ public class PlateServiceImpl implements PlateService {
     TGreenNlTxjlMapper tGreenNlTxjlMapper;
     @Autowired
     PlateUserBlacklistMapper plateUserBlacklistMapper;
+    @Autowired
+    OperateTableMapper operateTableMapper;
 
 
 
@@ -1540,8 +1539,26 @@ public class PlateServiceImpl implements PlateService {
         }
     }
 
+    @Override
+    public ReturnModel bakupLog() {
+        //备份日志表
+        String newTbleName = "plate_log_"+(TimeUtil.getLocalDate(new Date()).substring(0,10).replace("-",""));//新备份表名称
+        Map newTblMap = new HashMap();
+        newTblMap.put("oldTable","plate_log");
+        newTblMap.put("newTable",newTbleName);
+        operateTableMapper.createNewTable(newTblMap);//创建新表
+        Map paramsMap = new HashMap();
+        paramsMap.put("newTable",newTbleName);
+        paramsMap.put("oldTable","plate_log");
+        operateTableMapper.insertNewTblData(paramsMap);//新表插入数据
 
 
+
+
+        //清空日志表
+        plateLogMapper.deleteByExample(new PlateLogExample());
+        return ReturnModelHandler.success(null);
+    }
 
 
 }

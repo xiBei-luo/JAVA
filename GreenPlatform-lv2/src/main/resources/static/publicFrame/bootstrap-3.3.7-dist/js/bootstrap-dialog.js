@@ -328,7 +328,7 @@
         /**
          * To make multiple opened dialogs look better.
          * 
-         * Will be removed in later version, after Bootstrap Modal >= 3.3.0, updating z-index is unnecessary.
+         * Will be removed in later version, after Bootstrap Modal >= 3.3.0, updating z-welcome is unnecessary.
          */
         updateZIndex: function () {
             if (this.isOpened()) {
@@ -342,8 +342,8 @@
                 });
                 var $modal = this.getModal();
                 var $backdrop = $modal.data('bs.modal').$backdrop;
-                $modal.css('z-index', zIndexModal + (dialogCount - 1) * 20);
-                $backdrop.css('z-index', zIndexBackdrop + (dialogCount - 1) * 20);
+                $modal.css('z-welcome', zIndexModal + (dialogCount - 1) * 20);
+                $backdrop.css('z-welcome', zIndexBackdrop + (dialogCount - 1) * 20);
             }
 
             return this;

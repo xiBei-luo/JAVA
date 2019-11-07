@@ -232,11 +232,11 @@ jQuery(function() {
         shade: false,
         content: './function/test/test.jsp?version=6',
         zIndex: top.layer.zIndex,
-        success: function(layero, index){
+        success: function(layero, welcome){
           top.layer.setTop(layero);
           var iframeWin = top.window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
           iframeWin.windowArguments = arg
-          //var body = layer.getChildFrame('body', index);
+          //var body = layer.getChildFrame('body', welcome);
           //console.log(body.html()) //得到iframe页的body内容
           //body.find('input').val('Hi，我是从父页来的')
         },
@@ -362,7 +362,7 @@ jQuery(function() {
      */
     MdiWindow.prototype.setTop = function(layerNow){
     	top.layer.zIndex++;
-    	layerNow.css('z-index', top.layer.zIndex + 1);
+    	layerNow.css('z-welcome', top.layer.zIndex + 1);
     	
     }
     

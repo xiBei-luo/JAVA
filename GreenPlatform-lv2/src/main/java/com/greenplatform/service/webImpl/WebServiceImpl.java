@@ -85,6 +85,8 @@ public class WebServiceImpl implements WebService {
     OwerPlateUserAccountMapper owerPlateUserAccountMapper;
     @Autowired
     OperateTableMapper operateTableMapper;
+    @Autowired
+    OwerTGreenSpSpmxMapper owerTGreenSpSpmxMapper;
 
     /**
      * 查询用户
@@ -512,7 +514,7 @@ public class WebServiceImpl implements WebService {
             if (("").equals(plateUser) || null == plateUser){
                 return ReturnModelHandler.error("暂未登陆，无法进行操作！");
             }else{
-                //1.商品
+                //1.全部植物
                 TGreenSpSpmxExample tGreenSpSpmxExample = new TGreenSpSpmxExample();
                 TGreenSpSpmxExample.Criteria criteriaTGreenSpSpmxExample = tGreenSpSpmxExample.createCriteria();
                 criteriaTGreenSpSpmxExample.andCZtEqualTo("1");
@@ -520,6 +522,17 @@ public class WebServiceImpl implements WebService {
                 List tGreenSpSpmxList = tGreenSpSpmxMapper.selectByExample(tGreenSpSpmxExample);
                 loginUserHomeMap.put("tGreenSpSpmxList",tGreenSpSpmxList);
 
+                //1-1当前登陆人种植的植物
+                Map paramsMap = new HashMap();
+                paramsMap.put("C_USERID",plateUser.getcUserid());
+                List owerTGreenSpSpmxList = owerTGreenSpSpmxMapper.selectOwerZz(paramsMap);
+                loginUserHomeMap.put("owerTGreenSpSpmxList",owerTGreenSpSpmxList);
+
+                //1-2当前登陆人未种植的植物
+                Map paramsMap1 = new HashMap();
+                paramsMap1.put("C_USERID",plateUser.getcUserid());
+                List exaTGreenSpSpmxList = owerTGreenSpSpmxMapper.selectExaZz(paramsMap1);
+                loginUserHomeMap.put("exaTGreenSpSpmxList",exaTGreenSpSpmxList);
 
                 //2.能量排行榜前十
                 List tGreenNlHzList = owerTGreenNlHzMapper.selectTGreenNlHzRank(new HashMap());
@@ -595,6 +608,7 @@ public class WebServiceImpl implements WebService {
 
                 //5.当前登陆人信息
                 loginUserHomeMap.put("plateUser",plateUser);
+
 
                 return ReturnModelHandler.success(loginUserHomeMap);
             }
@@ -841,12 +855,13 @@ public class WebServiceImpl implements WebService {
         //4.备份点赞汇总表
         String newTbleName = "t_green_gold_dzhz_"+(TimeUtil.getLocalDate(new Date()).substring(0,10).replace("-",""));//新备份表名称
         Map newTblMap = new HashMap();
-        newTblMap.put("tableName",newTbleName);
-        operateTableMapper.createDzhzNewTable(newTblMap);//创建新表
+        newTblMap.put("oldTable","t_green_gold_dzhz");
+        newTblMap.put("newTable",newTbleName);
+        operateTableMapper.createNewTable(newTblMap);//创建新表
         Map paramsMap = new HashMap();
         paramsMap.put("newTable",newTbleName);
         paramsMap.put("oldTable","t_green_gold_dzhz");
-        operateTableMapper.insert(paramsMap);//新表插入数据
+        operateTableMapper.insertNewTblData(paramsMap);//新表插入数据
 
 
 
@@ -961,7 +976,8 @@ public class WebServiceImpl implements WebService {
 
 
 
-            float sysParamOfGoldJl = 500;//植物捐赠后的金币奖励值，固定500
+            float sysParamOfGoldJl = Float.parseFloat(getDmzByDm("C_ZWJZJL_GOLD_"+cSpbh));//捐赠种子后得到的金币奖励
+            //float sysParamOfGoldJl = 500;//植物捐赠后的金币奖励值，固定500
 
             /*System.out.println("捐赠此植物的能量奖励"+sysParamOfAddNl);
             System.out.println("捐赠此植物的账户等级额外奖励百分比"+sysParamOfUserLev);

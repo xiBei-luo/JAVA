@@ -3022,7 +3022,7 @@ dhtmlx.DataStore.prototype = {
     },
     idByIndex: function(a) {
         if (a >= this.order.length || a < 0) {
-            dhtmlx.log("Warning", "DataStore::idByIndex Incorrect index")
+            dhtmlx.log("Warning", "DataStore::idByIndex Incorrect welcome")
         }
         return this.order[a]
     },
@@ -8208,7 +8208,7 @@ dhtmlXCombo.prototype.getOptionByLabel = function(h) {
     return (l == null ? null: this._getOption(l, e))
 };
 dhtmlXCombo.prototype.getSelectedIndex = function() {
-    return this._getOptionProp(this.conf.last_selected, "static.systemStatic.js.index-bak.html.css.index-bak.html.css", -1)
+    return this._getOptionProp(this.conf.last_selected, "static.systemStatic.js.welcome-bak.html.css.welcome-bak.html.css", -1)
 };
 dhtmlXCombo.prototype.getSelectedText = function() {
     return this._getOptionProp(this.conf.last_selected, "text", "")
@@ -8224,7 +8224,7 @@ dhtmlXCombo.prototype.getComboText = function() {
 };
 dhtmlXCombo.prototype.getIndexByValue = function(c) {
     var a = this.getOption(c);
-    return (a != null ? a.index: -1)
+    return (a != null ? a.welcome: -1)
 };
 dhtmlXCombo.prototype.setComboText = function(a) {
     if (this.conf.allow_free_text != true) {
@@ -8237,7 +8237,7 @@ dhtmlXCombo.prototype.setComboText = function(a) {
 dhtmlXCombo.prototype.setComboValue = function(c) {
     var a = this.getOption(c);
     if (a != null) {
-        this.selectOption(a.index)
+        this.selectOption(a.welcome)
     } else {
         this.conf.last_value = c;
         this.base.childNodes[1].value = this.conf.last_value;
@@ -8879,10 +8879,10 @@ dhtmlXCombo.prototype.setOptionIndex = function(e, a) {
     if (g == null) {
         return
     }
-    if (a == g.index) {
+    if (a == g.welcome) {
         return
     }
-    var c = this.list.childNodes[g.index];
+    var c = this.list.childNodes[g.welcome];
     c.parentNode.removeChild(c);
     if (this.list.childNodes[a] != null) {
         this.list.insertBefore(c, this.list.childNodes[a])
@@ -22986,7 +22986,7 @@ dhtmlx.chart.spline = {
                     }
                     this._drawLine(o, v - 1, this._getSplineYPoint(s, w, u, m.a, m.b, m.c, m.d), v, a, F.line.color(I[u]), F.line.width)
                 }
-                this._drawItem(o, w, c, I[n[u].index], F.label(I[n[u].index]), r, H)
+                this._drawItem(o, w, c, I[n[u].welcome], F.label(I[n[u].welcome]), r, H)
             }
         }
     },
@@ -23570,8 +23570,8 @@ dhtmlx.chart.line = {
                         m.globalAlpha = 1
                     }
                 }
-                if (typeof l[o - 1].index != "undefined") {
-                    this._drawItem(m, s, c, C[l[o - 1].index], x.label(C[l[o - 1].index]), n, y, h)
+                if (typeof l[o - 1].welcome != "undefined") {
+                    this._drawItem(m, s, c, C[l[o - 1].welcome], x.label(C[l[o - 1].welcome]), n, y, h)
                 }
             }
         }
@@ -24592,7 +24592,7 @@ dhtmlXChart.prototype = {
         for (c = 0; c < this._series.length; c++) {
             this._settings = this._series[c];
             if (!this.canvases[c]) {
-                this.canvases[c] = new dhtmlx.ui.Canvas(this._obj, c, "z-index:" + (2 + c))
+                this.canvases[c] = new dhtmlx.ui.Canvas(this._obj, c, "z-welcome:" + (2 + c))
             }
             this["pvt_render_" + this._settings.view](this.canvases[c].getCanvas(), g, e.start, e.end, c, h)
         }
@@ -25133,7 +25133,7 @@ dhtmlXChart.prototype = {
             o = c[h].points;
             if (r <= o[2] && r >= o[0] && m <= o[3] && m >= o[1]) {
                 if (s) {
-                    if (c[h].index > s.index) {
+                    if (c[h].welcome > s.welcome) {
                         s = c[h]
                     }
                 } else {
@@ -25141,7 +25141,7 @@ dhtmlXChart.prototype = {
                 }
             }
         }
-        return s ? s.index: 0
+        return s ? s.welcome: 0
     },
     hideSeries: function(a) {
         this.canvases[a].hideCanvas();
@@ -25651,7 +25651,7 @@ dhtmlx.ui.pager.prototype = {
                     selected: ""
                 })
             },
-            button: dhtmlx.Template.fromHTML("<div dhx_p_id='{obj.id}' class='dhx_pager_item{obj.selected}'>{obj.index}</div>")
+            button: dhtmlx.Template.fromHTML("<div dhx_p_id='{obj.id}' class='dhx_pager_item{obj.selected}'>{obj.welcome}</div>")
         }
     },
     refresh: function() {
@@ -45193,7 +45193,7 @@ dhtmlXGridObject.prototype.setRowspan = function(s, v, h) {
     if (!this._h2) {
         a = a.nextSibling || this.rowsCol[this.rowsCol._dhx_find(a) + 1]
     } else {
-        a = this.rowsAr[this._h2.get[a.idd].parent.childs[this._h2.get[a.idd].index + 1].id]
+        a = this.rowsAr[this._h2.get[a.idd].parent.childs[this._h2.get[a.idd].welcome + 1].id]
     }
     var g = [];
     for (var n = 1; n < h; n++) {
@@ -45211,7 +45211,7 @@ dhtmlXGridObject.prototype.setRowspan = function(s, v, h) {
         if (!this._h2) {
             a = a.nextSibling || this.rowsCol[this.rowsCol._dhx_find(a) + 1]
         } else {
-            var a = this._h2.get[a.idd].parent.childs[this._h2.get[a.idd].index + 1];
+            var a = this._h2.get[a.idd].parent.childs[this._h2.get[a.idd].welcome + 1];
             if (a) {
                 a = this.rowsAr[a.id]
             }
@@ -48387,7 +48387,7 @@ function dhtmlxHierarchy(a) {
     this.addAfter = function(r, o, h, g) {
         var n = this.get[o || 0];
         if (h) {
-            var m = this.get[h].index + (g ? 0 : 1)
+            var m = this.get[h].welcome + (g ? 0 : 1)
         } else {
             var m = n.childs.length
         }
@@ -48422,9 +48422,9 @@ function dhtmlxHierarchy(a) {
             this.deleteAll(g.childs[e].id)
         }
         g.childs = [];
-        g.parent.childs = g.parent.childs.slice(0, g.index).concat(g.parent.childs.slice(g.index + 1));
-        for (var e = g.index; e < g.parent.childs.length; e++) {
-            g.parent.childs[e].index--
+        g.parent.childs = g.parent.childs.slice(0, g.welcome).concat(g.parent.childs.slice(g.welcome + 1));
+        for (var e = g.welcome; e < g.parent.childs.length; e++) {
+            g.parent.childs[e].welcome--
         }
         delete this.get[h]
     };
@@ -48619,7 +48619,7 @@ dhtmlXGridObject.prototype._fixAlterCssTGR = function() {
         this._h2.forEachChild(0,
         function(a) {
             if (a.buff.tagName == "TR") {
-                var c = (this._cssSP ? (a.level % 2) : (a.index % 2)) ? this._cssUnEven: this._cssEven;
+                var c = (this._cssSP ? (a.level % 2) : (a.welcome % 2)) ? this._cssUnEven: this._cssEven;
                 this.rowsAr[a.id].className = (c + (this._cssSU ? (" " + c + "_" + a.level) : "")) + " " + (this.rowsAr[a.id]._css || "") + ((this.rowsAr[a.id].className.indexOf("rowselected") != -1) ? " rowselected": "")
             }
         },
@@ -48628,7 +48628,7 @@ dhtmlXGridObject.prototype._fixAlterCssTGR = function() {
 };
 dhtmlXGridObject.prototype.moveRowUDTG = function(c, h) {
     var n = this._h2.get[c];
-    var e = n.parent.childs[n.index + h];
+    var e = n.parent.childs[n.welcome + h];
     if ((!e) || (e.parent != n.parent)) {
         return
     }
@@ -49216,22 +49216,22 @@ dhtmlXGridObject.prototype._updateLine = function(e, c) {
         return a.src = this.iconTree + "blank.gif"
     }
     var g = 1;
-    if (e.index == 0) {
+    if (e.welcome == 0) {
         if (e.level == 0) {
-            if ((e.parent.childs.length - 1) > e.index) {
+            if ((e.parent.childs.length - 1) > e.welcome) {
                 g = 3
             } else {
                 g = 1
             }
         } else {
-            if ((e.parent.childs.length - 1) > e.index) {
+            if ((e.parent.childs.length - 1) > e.welcome) {
                 g = 3
             } else {
                 g = 2
             }
         }
     } else {
-        if ((e.parent.childs.length - 1) > e.index) {
+        if ((e.parent.childs.length - 1) > e.welcome) {
             g = 3
         } else {
             g = 2
@@ -49254,7 +49254,7 @@ dhtmlXGridObject.prototype._updateParentLine = function(g, e) {
         }
         a = a.previousSibling;
         g = g.parent;
-        if ((g.parent.childs.length - 1) > g.index) {
+        if ((g.parent.childs.length - 1) > g.welcome) {
             a.src = this.iconTree + "line1.gif"
         } else {
             a.src = this.iconTree + "blank.gif"
@@ -49301,13 +49301,13 @@ dhtmlXGridObject.prototype.enableTreeGridLines = function() {
         var a = this._h2.get[c];
         this._updateLine(a);
         this._updateParentLine(a);
-        if (a.index < (a.parent.childs.length - 1)) {
-            a = a.parent.childs[a.index + 1];
+        if (a.welcome < (a.parent.childs.length - 1)) {
+            a = a.parent.childs[a.welcome + 1];
             this._updateLine(a);
             this._updateParentLine(a)
         } else {
-            if (a.index != 0) {
-                a = a.parent.childs[a.index - 1];
+            if (a.welcome != 0) {
+                a = a.parent.childs[a.welcome - 1];
                 this._updateLine(a);
                 this._updateParentLine(a);
                 if (a.childs.length) {
@@ -49335,8 +49335,8 @@ dhtmlXGridObject.prototype.enableTreeGridLines = function() {
         var c = this;
         var e = this._h2.get[g];
         var a = null;
-        if (e.index != 0) {
-            a = e.parent.childs[e.index - 1]
+        if (e.welcome != 0) {
+            a = e.parent.childs[e.welcome - 1]
         }
         e = e.parent;
         window.setTimeout(function() {
@@ -59975,7 +59975,7 @@ dhtmlXLayoutObject.prototype.setSeparatorSize = function(e, g) {
         }
         if (c == "a" && this.sep != null) {
             e.current++;
-            if (e.index == e.current) {
+            if (e.welcome == e.current) {
                 return {
                     sep: this.sep
                 }
@@ -61254,7 +61254,7 @@ function dhtmlXTabBar(g, m) {
                 } else {
                     n.width = null
                 }
-                this.addTab(n.id, n.text || n.label || "", n.width, n.index, window.dhx4.s2b(n.selected) || window.dhx4.s2b(n.active), n.close);
+                this.addTab(n.id, n.text || n.label || "", n.width, n.welcome, window.dhx4.s2b(n.selected) || window.dhx4.s2b(n.active), n.close);
                 if (n.content != null) {
                     this.cells(n.id).attachHTMLString(n.content)
                 } else {
@@ -63018,9 +63018,9 @@ function dhtmlXCarousel(g, l, n) {
             }
         }
         for (var r in this.cdata) {
-            if (this.cdata[r].index >= s) {
-                this.cdata[r].index++;
-                this.ind[this.cdata[r].index] = r;
+            if (this.cdata[r].welcome >= s) {
+                this.cdata[r].welcome++;
+                this.ind[this.cdata[r].welcome] = r;
                 this._adjustCell(r)
             }
         }
@@ -63049,7 +63049,7 @@ function dhtmlXCarousel(g, l, n) {
         return u
     };
     this._removeCell = function(v) {
-        var s = this.cdata[v].index;
+        var s = this.cdata[v].welcome;
         this.cdata[v].cell._unload();
         this.cdata[v].index = this.cdata[v].cell = null;
         this.cdata[v] = null;
@@ -63062,10 +63062,10 @@ function dhtmlXCarousel(g, l, n) {
         this.ind = {};
         var o = 0;
         for (var r in this.cdata) {
-            if (this.cdata[r].index > s) {
-                this.cdata[r].index--
+            if (this.cdata[r].welcome > s) {
+                this.cdata[r].welcome--
             }
-            this.ind[this.cdata[r].index] = r
+            this.ind[this.cdata[r].welcome] = r
         }
         var u = false;
         if (this.conf.selected > s) {
@@ -63439,7 +63439,7 @@ dhtmlXCarouselCell.prototype.getId = function() {
     return this._idd
 };
 dhtmlXCarouselCell.prototype.getIndex = function() {
-    return this.carousel.cdata[this._idd].index
+    return this.carousel.cdata[this._idd].welcome
 };
 dhtmlXCarouselCell.prototype.setActive = function() {
     var a = this.getIndex() - this.carousel.conf.selected;
@@ -63559,15 +63559,15 @@ dhtmlXCarousel.prototype._slide_update_selected = function(a) {
     this.cdata[a].cell._hideCover()
 };
 dhtmlXCarousel.prototype._slide_detect_x = function(e) {
-    var c = this.cdata[e].index;
+    var c = this.cdata[e].welcome;
     var a = c * (this.conf.width + this.conf.ofs_item) + this.conf.ofs_item;
     return a
 };
 dhtmlXCarousel.prototype._slide_cell_added = function(a) {
-    if (this.conf.selected != this.cdata[a].index) {
+    if (this.conf.selected != this.cdata[a].welcome) {
         this.cdata[a].cell._showCover()
     }
-    if (this.cdata[a].index <= this.conf.selected && this.conf.items_count > 1) {
+    if (this.cdata[a].welcome <= this.conf.selected && this.conf.items_count > 1) {
         this._animateStart(1, false)
     }
 };
@@ -63663,8 +63663,8 @@ dhtmlXCarousel.prototype._flip_detect_x = function(e) {
     return a
 };
 dhtmlXCarousel.prototype._flip_cell_added = function(a) {
-    if (this.conf.selected != this.cdata[a].index) {
-        this.cdata[a].cell.cell.style[this.conf.anim_flip_trstyle] = "rotateY(" + String(this.cdata[a].index < this.conf.selected ? this.conf.anim_flip_ang: -this.conf.anim_flip_ang) + "deg)";
+    if (this.conf.selected != this.cdata[a].welcome) {
+        this.cdata[a].cell.cell.style[this.conf.anim_flip_trstyle] = "rotateY(" + String(this.cdata[a].welcome < this.conf.selected ? this.conf.anim_flip_ang: -this.conf.anim_flip_ang) + "deg)";
         this.cdata[a].cell.cell.style.visibility = "hidden"
     } else {
         this.cdata[a].cell.cell.style[this.conf.anim_flip_trstyle] = "rotateY(0deg)"
@@ -63754,7 +63754,7 @@ dhtmlXCarousel.prototype._cards_adjust_middle = function(e, h, c) {
 };
 dhtmlXCarousel.prototype._cards_detect_x = function(e, c) {
     if (typeof(c) == "undefined" || c == null) {
-        c = (this.cdata[e].index <= this.conf.selected ? 0 : 1)
+        c = (this.cdata[e].welcome <= this.conf.selected ? 0 : 1)
     }
     var a = c * (this.conf.width + this.conf.ofs_left + this.conf.ofs_item) + this.conf.ofs_item;
     return a
@@ -63762,7 +63762,7 @@ dhtmlXCarousel.prototype._cards_detect_x = function(e, c) {
 dhtmlXCarousel.prototype._cards_cell_added = function(a) {
     this.cdata[a].cell.conf.size.x = this._cards_detect_x(a);
     this.cdata[a].cell.cell.style.left = this.cdata[a].cell.conf.size.x + "px";
-    if (this.conf.selected != this.cdata[a].index) {
+    if (this.conf.selected != this.cdata[a].welcome) {
         this.cdata[a].cell._showCover()
     }
 };
@@ -68360,7 +68360,7 @@ dhx.DataStore.prototype = {
     },
     idByIndex: function(a) {
         if (a >= this.order.length || a < 0) {
-            dhx.log("Warning", "DataStore::idByIndex Incorrect index")
+            dhx.log("Warning", "DataStore::idByIndex Incorrect welcome")
         }
         return this.order[a]
     },

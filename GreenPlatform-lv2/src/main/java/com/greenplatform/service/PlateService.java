@@ -106,4 +106,7 @@ public interface PlateService {
     /*修改密码*/
     public ReturnModel updPlateUserPass(String cPassword);
 
+    /*备份日志表*/
+    public ReturnModel bakupLog();
+
 }

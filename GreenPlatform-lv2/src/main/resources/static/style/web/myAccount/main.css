@@ -58,6 +58,7 @@ html,body{
 
 /*内容区*/
 .contentBox{
+    overflow: scroll;
     width: 100%;
     height: 80%;
 }

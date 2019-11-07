@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绿沙平台</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <style>
+        body{
+            display: flex;
+            flex-direction:column;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .page-container{
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 91%;
+        }
+        .nvaBar{
+            position: fixed;
+            bottom: 0;
+            display: flex;
+            width: 100%;
+            height: 9%;
+            justify-content:center;
+            padding:8px 0 3px;
+        }
+        .nvaBar ul{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .nvaBar ul li{
+            list-style: none;
+            float: left;
+            width: 20%;
+            height: 100%;
+            background: #ffffff;
+            text-align: center;
+        }
+        .nvaBar ul li a{
+            height: 100%;
+            display: block;
+            color: #333333;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .nvaBar ul li a:hover{
+            text-decoration: none;
+        }
+        .nvaBar ul li a img{
+            width: 30px;
+            height: 30px;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <iframe id="iframe-page-content" src="" width="100%" height="100%" frameborder="0" ></iframe>
+</div>
+<div class="nvaBar">
+    <ul>
+        <li>
+            <a href="#" data-targetUrl="home" id="home">
+                <img src="/publicImg/icon/home.png" alt="">
+                <span>首页</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-targetUrl="doLike" id="doLike">
+                <img src="/publicImg/icon/doLike.png" width="30" height="30" alt="">
+                <span>点赞</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-targetUrl="nlRank" id="nlRank">
+                <img src="/publicImg/icon/nlRank.png" width="30" height="30" alt="">
+                <span>能量</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-targetUrl="shop" id="shop">
+                <img src="/publicImg/icon/shop.png" width="30" height="30" alt="">
+                <span>商店</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-targetUrl="myAccount" id="myAccount">
+                <img src="/publicImg/icon/my.png" width="30" height="30" alt="">
+                <span>我的</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script>
+    $(function () {
+        $(".nvaBar li a").click(function(){
+            $("#iframe-page-content").attr("src","/"+$(this).attr("data-targetUrl"));
+        });
+        $("#home").click();
+    });
+
+</script>
+</body>
+</html>

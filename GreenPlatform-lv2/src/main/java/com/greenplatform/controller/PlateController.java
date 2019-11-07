@@ -273,6 +273,15 @@ public class PlateController {
     }
 
     /**
+     * 备份数据日志
+     */
+    @RequestMapping(value = "/bakupLog")
+    public ReturnModel bakupLog(){
+        return plateService.bakupLog();
+    }
+
+
+    /**
      * 修改管理员登陆密码
      * @return
      */

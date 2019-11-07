@@ -180,7 +180,7 @@ function f_loginByPhone(){
                     }
                 });
             }else{
-                window.location.href="/web/index";
+                window.location.href="/web/welcome";
             }
         }
     };

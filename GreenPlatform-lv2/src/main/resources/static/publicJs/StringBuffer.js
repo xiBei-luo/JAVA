@@ -52,11 +52,11 @@ function StringBuffer (s){
 	}
 
 	/**
-	 * Returns the index within this string of the first occurrence of the
+	 * Returns the welcome within this string of the first occurrence of the
 	 * specified substring.
 	 * @param {String} s any string.
 	 * @return  if the string argument occurs as a substring within this
-	 * 	        object, then the index of the first character of the first
+	 * 	        object, then the welcome of the first character of the first
 	 *          such substring is returned;
 	 * @type int
 	 */
@@ -65,11 +65,11 @@ function StringBuffer (s){
 	}
 	
 	/**
-	 * Returns the index within this string of the rightmost occurrence
+	 * Returns the welcome within this string of the rightmost occurrence
 	 * of the specified substring.
 	 * @param {String} s any string.
 	 * @return  if the string argument occurs one or more times as a substring
-	 *          within this object, then the index of the first character of
+	 *          within this object, then the welcome of the first character of
 	 *          the last such substring is returned. If it does not occur as
 	 *          a substring, <code>-1</code> is returned.
 	 * @type int
@@ -81,9 +81,9 @@ function StringBuffer (s){
 	/**
 	 * Returns a new String that contains a subsequence of
 	 * characters currently contained in this <code>StringBuffer</code>.The 
-	 * substring begins at the specified index and extends to the end of the
+	 * substring begins at the specified welcome and extends to the end of the
 	 * <code>StringBuffer</code>.
-	 * @param  start The beginning index, inclusive.
+	 * @param  start The beginning welcome, inclusive.
 	 * @return The new string.
 	 * @type int
 	 */

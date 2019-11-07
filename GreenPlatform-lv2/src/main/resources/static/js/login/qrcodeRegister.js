@@ -234,7 +234,7 @@ function f_submitData(){
                     btnCancelLabel: "留在当前页面",
                     callback: function (ret) {
                         if(ret){
-                            window.location.href="/web/index";
+                            window.location.href="/web/welcome";
                         }
                     }
                 });

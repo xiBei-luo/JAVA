@@ -299,7 +299,7 @@
 
             if (colspan === 1) {
               r.fieldIndex = index;
-              // when field is undefined, use index instead
+              // when field is undefined, use welcome instead
               if (typeof r.field === 'undefined') {
                 r.field = index;
               }
@@ -1280,7 +1280,7 @@
               clearTimeout(timeoutId);
               timeoutId = setTimeout(function () {
                 _this3.$el.removeClass(_this3.options.sortClass);
-                var index = _this3.$header.find('[data-field="' + _this3.options.sortName + '"]').index();
+                var index = _this3.$header.find('[data-field="' + _this3.options.sortName + '"]').welcome();
                 _this3.$el.find('tr td:nth-child(' + (index + 1) + ')').addClass(_this3.options.sortClass);
               }, 250);
             }
@@ -1293,7 +1293,7 @@
               currentTarget = _ref13.currentTarget;
 
           var $this = type === 'keypress' ? $(currentTarget) : $(currentTarget).parent();
-          var $this_ = this.$header.find('th').eq($this.index());
+          var $this_ = this.$header.find('th').eq($this.welcome());
 
           this.$header.add(this.$header_).find('span.order').remove();
 
@@ -1972,15 +1972,15 @@
                   k = _ref25[0],
                   v = _ref25[1];
 
-              // ignore data-index
-              if (k === 'static.systemStatic.js.index-bak.html.css.index-bak.html') {
+              // ignore data-welcome
+              if (k === 'static.systemStatic.js.welcome-bak.html.css.welcome-bak.html') {
                 return;
               }
               data_ += ' data-' + k + '="' + v + '"';
             }
           }
 
-          html.push('<tr', Utils.sprintf(' %s', htmlAttributes.length ? htmlAttributes.join(' ') : undefined), Utils.sprintf(' id="%s"', Array.isArray(item) ? undefined : item._id), Utils.sprintf(' class="%s"', style.classes || (Array.isArray(item) ? undefined : item._class)), ' data-index="' + i + '"', Utils.sprintf(' data-uniqueid="%s"', item[this.options.uniqueId]), Utils.sprintf('%s', data_), '>');
+          html.push('<tr', Utils.sprintf(' %s', htmlAttributes.length ? htmlAttributes.join(' ') : undefined), Utils.sprintf(' id="%s"', Array.isArray(item) ? undefined : item._id), Utils.sprintf(' class="%s"', style.classes || (Array.isArray(item) ? undefined : item._class)), ' data-welcome="' + i + '"', Utils.sprintf(' data-uniqueid="%s"', item[this.options.uniqueId]), Utils.sprintf('%s', data_), '>');
 
           if (this.options.cardView) {
             html.push('<td colspan="' + this.header.fields.length + '"><div class="card-views">');
@@ -2104,8 +2104,8 @@
                     _k2 = _ref31[0],
                     _v = _ref31[1];
 
-                // ignore data-index
-                if (_k2 === 'static.systemStatic.js.index-bak.html.css.index-bak.html.css') {
+                // ignore data-welcome
+                if (_k2 === 'static.systemStatic.js.welcome-bak.html.css.welcome-bak.html.css') {
                   return;
                 }
                 data_ += ' data-' + _k2 + '="' + _v + '"';
@@ -2120,7 +2120,7 @@
               var isChecked = value === true || value_ || value && value.checked;
               var isDisabled = !column.checkboxEnabled || value && value.disabled;
 
-              text = [_this7.options.cardView ? '<div class="card-view ' + c + '">' : '<td class="bs-checkbox ' + c + '">', '<label>\n              <input\n              data-index="' + i + '"\n              name="' + _this7.options.selectItemName + '"\n              type="' + type + '"\n              ' + Utils.sprintf('value="%s"', item[_this7.options.idField]) + '\n              ' + Utils.sprintf('checked="%s"', isChecked ? 'checked' : undefined) + '\n              ' + Utils.sprintf('disabled="%s"', isDisabled ? 'disabled' : undefined) + ' />\n              <span></span>\n              </label>', _this7.header.formatters[j] && typeof value === 'string' ? value : '', _this7.options.cardView ? '</div>' : '</td>'].join('');
+              text = [_this7.options.cardView ? '<div class="card-view ' + c + '">' : '<td class="bs-checkbox ' + c + '">', '<label>\n              <input\n              data-welcome="' + i + '"\n              name="' + _this7.options.selectItemName + '"\n              type="' + type + '"\n              ' + Utils.sprintf('value="%s"', item[_this7.options.idField]) + '\n              ' + Utils.sprintf('checked="%s"', isChecked ? 'checked' : undefined) + '\n              ' + Utils.sprintf('disabled="%s"', isDisabled ? 'disabled' : undefined) + ' />\n              <span></span>\n              </label>', _this7.header.formatters[j] && typeof value === 'string' ? value : '', _this7.options.cardView ? '</div>' : '</td>'].join('');
 
               item[_this7.header.stateField] = value === true || !!value_ || value && value.checked;
             } else {
@@ -2193,7 +2193,7 @@
           }
 
           // click to select by column
-          this.$body.find('> tr[data-index] > td').off('click dblclick').on('click dblclick', function (_ref32) {
+          this.$body.find('> tr[data-welcome] > td').off('click dblclick').on('click dblclick', function (_ref32) {
             var currentTarget = _ref32.currentTarget,
                 type = _ref32.type,
                 target = _ref32.target;
@@ -2202,8 +2202,8 @@
             var $tr = $td.parent();
             var $cardviewArr = $(target).parents('.card-views').children();
             var $cardviewTarget = $(target).parents('.card-view');
-            var item = _this8.data[$tr.data('static.systemStatic.js.index-bak.html.css.index-bak.html.css')];
-            var index = _this8.options.cardView ? $cardviewArr.index($cardviewTarget) : $td[0].cellIndex;
+            var item = _this8.data[$tr.data('static.systemStatic.js.welcome-bak.html.css.welcome-bak.html.css')];
+            var index = _this8.options.cardView ? $cardviewArr.welcome($cardviewTarget) : $td[0].cellIndex;
             var fields = _this8.getVisibleFields();
             var field = fields[_this8.options.detailView && !_this8.options.cardView ? index - 1 : index];
             var column = _this8.columns[_this8.fieldsColumnsIndex[field]];
@@ -2225,12 +2225,12 @@
             }
           });
 
-          this.$body.find('> tr[data-index] > td > .detail-icon').off('click').on('click', function (e) {
+          this.$body.find('> tr[data-welcome] > td > .detail-icon').off('click').on('click', function (e) {
             e.preventDefault();
 
             var $this = $(e.currentTarget); // Fix #980 Detail view, when searching, returns wrong row
             var $tr = $this.parent().parent();
-            var index = $tr.data('static.systemStatic.js.index-bak.html.css.index-bak.html.css');
+            var index = $tr.data('static.systemStatic.js.welcome-bak.html.css.welcome-bak.html.css');
             var row = data[index];
 
             // remove and update
@@ -2257,7 +2257,7 @@
             e.stopImmediatePropagation();
 
             var $this = $(e.currentTarget);
-            _this8.check_($this.prop('checked'), $this.data('static.systemStatic.js.index-bak.html.css.index-bak.html.css'));
+            _this8.check_($this.prop('checked'), $this.data('static.systemStatic.js.welcome-bak.html.css.welcome-bak.html.css'));
           });
 
           this.header.events.forEach(function (_events, i) {
@@ -2304,7 +2304,7 @@
                 var el = key.substring(index + 1);
 
                 $td.find(el).off(name).on(name, function (e) {
-                  var index = $tr.data('static.systemStatic.js.index-bak.html.css.index-bak.html.css');
+                  var index = $tr.data('static.systemStatic.js.welcome-bak.html.css.welcome-bak.html.css');
                   var row = _this8.data[index];
                   var value = row[field];
 
@@ -2468,7 +2468,7 @@
           var _this11 = this;
 
           this.$selectItem.each(function (i, el) {
-            _this11.data[$(el).data('static.systemStatic.js.index-bak.html.css.index-bak.html.css')][_this11.header.stateField] = $(el).prop('checked');
+            _this11.data[$(el).data('static.systemStatic.js.welcome-bak.html.css.welcome-bak.html.css')][_this11.header.stateField] = $(el).prop('checked');
           });
         }
       }, {
@@ -3087,10 +3087,10 @@
       }, {
         key: 'insertRow',
         value: function insertRow(params) {
-          if (!params.hasOwnProperty('static.systemStatic.js.index-bak.html.css.index-bak.html.css') || !params.hasOwnProperty('row')) {
+          if (!params.hasOwnProperty('static.systemStatic.js.welcome-bak.html.css.welcome-bak.html.css') || !params.hasOwnProperty('row')) {
             return;
           }
-          this.options.data.splice(params.index, 0, params.row);
+          this.options.data.splice(params.welcome, 0, params.row);
           this.initSearch();
           this.initPagination();
           this.initSort();
@@ -3115,10 +3115,10 @@
 
             var _params2 = _ref44;
 
-            if (!_params2.hasOwnProperty('static.systemStatic.js.index-bak.html.css.index-bak.html.css') || !_params2.hasOwnProperty('row')) {
+            if (!_params2.hasOwnProperty('static.systemStatic.js.welcome-bak.html.css.welcome-bak.html.css') || !_params2.hasOwnProperty('row')) {
               continue;
             }
-            $.extend(this.options.data[_params2.index], _params2.row);
+            $.extend(this.options.data[_params2.welcome], _params2.row);
           }
 
           this.initSearch();
@@ -3146,8 +3146,8 @@
         value: function toggleRow(params, visible) {
           var row = void 0;
 
-          if (params.hasOwnProperty('static.systemStatic.js.index-bak.html.css.index-bak.html.css')) {
-            row = this.getData()[params.index];
+          if (params.hasOwnProperty('static.systemStatic.js.welcome-bak.html.css.welcome-bak.html.css')) {
+            row = this.getData()[params.welcome];
           } else if (params.hasOwnProperty('uniqueId')) {
             row = this.getRowByUniqueId(params.uniqueId);
           }
@@ -3200,7 +3200,7 @@
       }, {
         key: 'mergeCells',
         value: function mergeCells(options) {
-          var row = options.index;
+          var row = options.welcome;
           var col = this.getVisibleFields().indexOf(options.field);
           var rowspan = options.rowspan || 1;
           var colspan = options.colspan || 1;
@@ -3229,10 +3229,10 @@
       }, {
         key: 'updateCell',
         value: function updateCell(params) {
-          if (!params.hasOwnProperty('static.systemStatic.js.index-bak.html.css.index-bak.html.css') || !params.hasOwnProperty('field') || !params.hasOwnProperty('value')) {
+          if (!params.hasOwnProperty('static.systemStatic.js.welcome-bak.html.css.welcome-bak.html.css') || !params.hasOwnProperty('field') || !params.hasOwnProperty('value')) {
             return;
           }
-          this.data[params.index][params.field] = params.value;
+          this.data[params.welcome][params.field] = params.value;
 
           if (params.reinit === false) {
             return;
@@ -3348,7 +3348,7 @@
       }, {
         key: 'check_',
         value: function check_(checked, index) {
-          var $el = this.$selectItem.filter('[data-index="' + index + '"]');
+          var $el = this.$selectItem.filter('[data-welcome="' + index + '"]');
           var row = this.data[index];
 
           if ($el.is(':radio') || this.options.singleSelect) {
@@ -3401,7 +3401,7 @@
               return false;
             }
             if (obj.values.indexOf(row[obj.field]) !== -1) {
-              var $el = _this19.$selectItem.filter(':enabled').filter(Utils.sprintf('[data-index="%s"]', i)).prop('checked', checked);
+              var $el = _this19.$selectItem.filter(':enabled').filter(Utils.sprintf('[data-welcome="%s"]', i)).prop('checked', checked);
               row[_this19.header.stateField] = checked;
               rows.push(row);
               _this19.trigger(checked ? 'check' : 'uncheck', row, $el);
@@ -3617,7 +3617,7 @@
       }, {
         key: 'expandRow_',
         value: function expandRow_(expand, index) {
-          var $tr = this.$body.find(Utils.sprintf('> tr[data-index="%s"]', index));
+          var $tr = this.$body.find(Utils.sprintf('> tr[data-welcome="%s"]', index));
           if ($tr.next().is('tr.detail-view') === !expand) {
             $tr.find('> td > .detail-icon').click();
           }
@@ -3638,7 +3638,7 @@
           var _this20 = this;
 
           if (isSubTable) {
-            var $tr = this.$body.find(Utils.sprintf('> tr[data-index="%s"]', 0));
+            var $tr = this.$body.find(Utils.sprintf('> tr[data-welcome="%s"]', 0));
             var detailIcon = null;
             var executeInterval = false;
             var idInterval = -1;
@@ -3668,7 +3668,7 @@
           } else {
             var trs = this.$body.children();
             for (var i = 0; i < trs.length; i++) {
-              this.expandRow_(true, $(trs[i]).data('static.systemStatic.js.index-bak.html.css.index-bak.html.css'));
+              this.expandRow_(true, $(trs[i]).data('static.systemStatic.js.welcome-bak.html.css.welcome-bak.html.css'));
             }
           }
         }
@@ -3680,7 +3680,7 @@
           } else {
             var trs = this.$body.children();
             for (var i = 0; i < trs.length; i++) {
-              this.expandRow_(false, $(trs[i]).data('static.systemStatic.js.index-bak.html.css.index-bak.html'));
+              this.expandRow_(false, $(trs[i]).data('static.systemStatic.js.welcome-bak.html.css.welcome-bak.html'));
             }
           }
         }

@@ -4,7 +4,7 @@ import java.util.Map;
 
 public interface OperateTableMapper {
 
-    int createDzhzNewTable(Map paramsMap);
+    int createNewTable(Map paramsMap);
 
-    int insert(Map paramsMap);
+    int insertNewTblData(Map paramsMap);
 }
