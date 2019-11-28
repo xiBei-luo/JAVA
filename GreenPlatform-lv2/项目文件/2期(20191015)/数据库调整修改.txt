@@ -1,0 +1,4 @@
+1.商品表图片路径修改
+2.基础代码表增加：C_RW_BCCS   C_RW_BCCS    3   --累计补任务次数
+3.新增表：【t_green_rw_rwmx_replenish】
+4.修改表：【t_green_rw_rwhz】新增字段【d_yrw_q】

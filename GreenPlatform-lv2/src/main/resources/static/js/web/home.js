@@ -17,9 +17,34 @@ function initEvent() {
     });//完成任务
 
     //任务天数日历事件
-    $("#rwDay").click(function(){
-
+    $("#rwDayBox").click(function(){
+        f_selectRwDayTips();
+        $("#rwDayModal").modal('show');
     });
+}
+
+/**
+ * 查询任务日历提示
+ */
+function f_selectRwDayTips(){
+    var sendRequest = new SendRequest("/web/selectRwDayTips","POST");//构造对象
+    sendRequest.addParamObj({
+
+    });//构造请求参数
+
+    sendRequest.sendRequest(function(ret){
+        console.log(ret);
+        if("0" == ret.flag){
+           /* $("#rwDayModal .modal-body").html("<p>亲爱的用户，您本次已种植【仙人掌】14天，</p>\n" +
+                "                    <p>完成本次30天任务种植可获得总能量为￥：112，</p>\n" +
+                "                    <p>您的账户等级为1级，完成本次种植任务后还可额外获得能量奖励￥：2。</p>");*/
+
+            $("#rwDayModal .modal-body").html(ret['object']);
+        }else{
+            $("#rwDayModal .modal-body").html("查询出错啦！");
+        }
+
+    });//发送请求并获取返回结果
 }
 
 /**
@@ -27,18 +52,19 @@ function initEvent() {
  * @param sRwlb  任务类别，必传
  */
 function f_finishMission(sRwlb){
-    $(".rwlb_"+sRwlb).hide(100);
-    $(".hand_"+sRwlb).hide(100);
-    return
+    /*$(".rwlb_"+sRwlb).css("visibility","hidden");
+    $(".hand_"+sRwlb).css("visibility","hidden");
+    return;*/
     var sendRequest = new SendRequest("/web/accomplishRw","POST");//构造对象
     sendRequest.addParamObj({
         cRwlb:sRwlb
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
+        console.log(ret);
         if("0" == ret.flag){
-            $(".rwlb_"+sRwlb).hide(100);
-            $(".hand_"+sRwlb).hide(100);
+            $(".rwlb_"+sRwlb).css("visibility","hidden");
+            $(".hand_"+sRwlb).css("visibility","hidden");
         }else if("1" == ret.flag){
             BootstrapDialog.alert({
                 type: BootstrapDialog.TYPE_WARNING,

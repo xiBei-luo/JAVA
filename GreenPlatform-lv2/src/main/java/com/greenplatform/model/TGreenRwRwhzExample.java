@@ -325,6 +325,66 @@ public class TGreenRwRwhzExample {
             return (Criteria) this;
         }
 
+        public Criteria andDYrwQIsNull() {
+            addCriterion("d_yrw_q is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDYrwQIsNotNull() {
+            addCriterion("d_yrw_q is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDYrwQEqualTo(Date value) {
+            addCriterion("d_yrw_q =", value, "dYrwQ");
+            return (Criteria) this;
+        }
+
+        public Criteria andDYrwQNotEqualTo(Date value) {
+            addCriterion("d_yrw_q <>", value, "dYrwQ");
+            return (Criteria) this;
+        }
+
+        public Criteria andDYrwQGreaterThan(Date value) {
+            addCriterion("d_yrw_q >", value, "dYrwQ");
+            return (Criteria) this;
+        }
+
+        public Criteria andDYrwQGreaterThanOrEqualTo(Date value) {
+            addCriterion("d_yrw_q >=", value, "dYrwQ");
+            return (Criteria) this;
+        }
+
+        public Criteria andDYrwQLessThan(Date value) {
+            addCriterion("d_yrw_q <", value, "dYrwQ");
+            return (Criteria) this;
+        }
+
+        public Criteria andDYrwQLessThanOrEqualTo(Date value) {
+            addCriterion("d_yrw_q <=", value, "dYrwQ");
+            return (Criteria) this;
+        }
+
+        public Criteria andDYrwQIn(List<Date> values) {
+            addCriterion("d_yrw_q in", values, "dYrwQ");
+            return (Criteria) this;
+        }
+
+        public Criteria andDYrwQNotIn(List<Date> values) {
+            addCriterion("d_yrw_q not in", values, "dYrwQ");
+            return (Criteria) this;
+        }
+
+        public Criteria andDYrwQBetween(Date value1, Date value2) {
+            addCriterion("d_yrw_q between", value1, value2, "dYrwQ");
+            return (Criteria) this;
+        }
+
+        public Criteria andDYrwQNotBetween(Date value1, Date value2) {
+            addCriterion("d_yrw_q not between", value1, value2, "dYrwQ");
+            return (Criteria) this;
+        }
+
         public Criteria andCBzIsNull() {
             addCriterion("c_bz is null");
             return (Criteria) this;

@@ -69,11 +69,27 @@ public class WebController {
         return returnModel;
     }
 
-    //点赞业务
+    //补任务
+    @RequestMapping(value = "/accYesRw",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel accYesRw(){
+        ReturnModel returnModel = webService.accYesRw();
+        return returnModel;
+    }
+
+    //查询任务日历提示
     @RequestMapping(value = "/doLike",method = RequestMethod.POST)
     @ResponseBody
     public ReturnModel doLike(){
         ReturnModel returnModel = webService.doLike();
+        return returnModel;
+    }
+
+    //点赞业务
+    @RequestMapping(value = "/selectRwDayTips",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel selectRwDayTips(){
+        ReturnModel returnModel = webService.selectRwDayTips();
         return returnModel;
     }
 

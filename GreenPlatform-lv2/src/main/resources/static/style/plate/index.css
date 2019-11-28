@@ -6,97 +6,29 @@ html,body{
     height: 100%;
     margin: 0;
     padding: 0;
+}
+.page-box{
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
-
-/**
-上方header
- */
 .title-box{
-    width: 100%;
     height: 50px;
-    background: #1b6d85;
-    line-height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    color: #fff;
 }
-
 /**
 主体内容
  */
 .content-box{
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-}
-/*主体右侧内容 */
-.content-box-right{
-    width: 83%;
-}
-/*主体左侧菜单*/
-.content-box-left{
-    width: 17%;
-    height: 100%;
-    margin:0;
-    padding: 0;
-    font-size: 12px;
-    background: #2f363f;
-}
-#side-menu .nav-second-level{
-    display: none;
-    background: #1f242b;
-}
-#side-menu .nav-second-level li a{
-    padding-left: 50px;
-}
-#side-menu .nav-second-level li a:hover{
-    background: #3e8f3e;
-}
-#side-menu>li{
-    border-bottom: 1px solid #1f262d;
-    border-top: 1px solid #37414b;
-    background: #2f363f;
-}
-#side-menu>li a{
-    color: #939da8;
-    position: relative;
-}
-#side-menu>li a span{
-    position: absolute;
-    right: 10px;
-}
-#side-menu>li a:hover{
-    background: #27a9e3;
-    color: #ffffff;
-}
-#side-menu .active{
-    background: #27a9e3;
-    color: #ffffff;
-}
-#side-menu .secActive{
-    background: #3e8f3e;
-    color: #ffffff;
-}
-.nav_icon{
-    margin-right: 10px;
+    height: 92%;
 }
 
 
 
 /*终端尺寸适配*/
 @media screen and (max-width: 600px) {
-    /*主体右侧内容 */
-    .content-box-right{
-        width: 70%;
-    }
-    /*主体左侧菜单*/
-    .content-box-left{
-        width: 30%;
-    }
+
 
 }
 

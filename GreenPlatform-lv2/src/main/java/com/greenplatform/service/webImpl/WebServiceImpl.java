@@ -20,6 +20,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -87,6 +88,8 @@ public class WebServiceImpl implements WebService {
     OperateTableMapper operateTableMapper;
     @Autowired
     OwerTGreenSpSpmxMapper owerTGreenSpSpmxMapper;
+    @Autowired
+    TGreenRwRwmxReplenishMapper tGreenRwRwmxReplenishMapper;
 
     /**
      * 查询用户
@@ -129,7 +132,7 @@ public class WebServiceImpl implements WebService {
      *          2.用户账户内是否有未捐赠/不可捐赠/有效的种子，有则可进行任务，没得则需要购买种子后再做任务；
      *          3.完成任务前验证：是否是第一次操作与金币有关的业务（基础任务与金币业务有关联）；
      *          4.验证当日的前一天是否有完成任务，如果有则继续任务，如果没有则视为不是连续操作，则将该用户所有任务记录状态置为无效
-     *              4-1如果三种基础任务没有连续完成，且当前任务是当日第一次完成则将任务汇总表置0
+     *              4-1如果三种基础任务没有连续完成，且当前任务是当日第一次完成则将任务汇总表置0（此业务调整到用户登陆系统成功时操作）
      *          5.查询数据验证当前任务是否已完成，已完成返回错误信息，否则：新增任务明细记录，修改任务汇总记录
      *          6.金币操作（如果完成了当日的三项任务则新增账户金币——明细表，汇总表）
      *          7.完成当前任务后，验证是否连续一个月完成基础任务，是则修改种子状态为可捐赠
@@ -163,103 +166,234 @@ public class WebServiceImpl implements WebService {
 
             checkAddGoldOperation();//调用前验证是否需要新增金币汇总表记录
 
-            //1.查询完成任务当日的前一天是否有完成任务，若前一天没有完成任务则视用户操作为不是连续完成任务，先删除当前用户的此前任务操作，再完成当日任务
-            TGreenRwRwmxExample tGreenRwRwmxExample1 = new TGreenRwRwmxExample();
-            TGreenRwRwmxExample.Criteria criteria2 = tGreenRwRwmxExample1.createCriteria();
-            criteria2.andCZtEqualTo("1");
-            criteria2.andCUseridEqualTo(plateUser.getcUserid());
-            //获取当前日期的前一天
-            String prevDayOfCur = getPrevDayOfCur(TimeUtil.getLocalDate(new Date()),-1);
-            criteria2.andCRwdayEqualTo(prevDayOfCur);
-            List tGreenRwRwmxList1 = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample1);
-            //若用户完成任务的前一天没有完成任务则将此前任务状态修改为无效,并修改任务汇总表，将该用户任务汇总表的记录置为0
-            if (tGreenRwRwmxList1.size() < 3){
-                Map paramMap = new HashMap();
-                paramMap.put("cUserid",plateUser.getcUserid());
-                paramMap.put("cZt","0");
-                paramMap.put("dXgsj",TimeUtil.getTimestamp(new Date()));
-                paramMap.put("cXguser",plateUser.getcUserid());
-                paramMap.put("cRwday",TimeUtil.getLocalDate(new Date()).substring(0,10));
-                //修改状态为无效
-                owerTGreenRwRwmxMapper.updateZtBycUserid(paramMap);
-
-
-                //如果当日是第一次完成任务，则置任务汇总条数为0
-                TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
-                TGreenRwRwmxExample.Criteria criteria = tGreenRwRwmxExample.createCriteria();
-                criteria.andCZtEqualTo("1");
-                criteria.andCUseridEqualTo(plateUser.getcUserid());
-                criteria.andCRwdayEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,10));
-                List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);
-                if (tGreenRwRwmxList.size() < 1){
-                    TGreenRwRwhz tGreenRwRwhz = tGreenRwRwhzMapper.selectByPrimaryKey(plateUser.getcUserid());
-                    tGreenRwRwhz.setnLjwccs(0);//置为0
-                    tGreenRwRwhz.setdXgsj(TimeUtil.getTimestamp(new Date()));
-                    tGreenRwRwhz.setcXguser(plateUser.getcUserid());
-                    //任务汇总置空
-                    tGreenRwRwhzMapper.updateByPrimaryKey(tGreenRwRwhz);
-                }
-            }
-
-            String localDateDay = (TimeUtil.getLocalDate(new Date()).substring(0,10));
-            String localDateMonth = (TimeUtil.getLocalDate(new Date()).substring(0,7));
-
             //今日任务是否完成
             TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
             TGreenRwRwmxExample.Criteria criteria = tGreenRwRwmxExample.createCriteria();
             criteria.andCUseridEqualTo(plateUser.getcUserid());
             criteria.andCRwlbEqualTo(tGreenRwRwmx.getcRwlb());
-            criteria.andCRwdayEqualTo(localDateDay);
+            criteria.andCRwdayEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,10));
             criteria.andCZtEqualTo("1");
             List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);
             if(!(tGreenRwRwmxList.isEmpty())){
                 return ReturnModelHandler.error("您今天已完成该项任务了！");
             }else{
-                //1.任务明细中增加一条记录
-                tGreenRwRwmx.setcUserid(plateUser.getcUserid());
-                tGreenRwRwmx.setcCjuser(plateUser.getcUserid());
-                tGreenRwRwmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
-                tGreenRwRwmx.setcZt("1");
-                tGreenRwRwmx.setcRwmouth(localDateMonth);
-                tGreenRwRwmx.setcRwday(localDateDay);
-                tGreenRwRwmx.setdRwsj(TimeUtil.getTimestamp(new Date()));
-                tGreenRwRwmxMapper.insert(tGreenRwRwmx);
+                //昨日任务是否完成:yes(照常进行完成任务)
+                //               no(前日任务是否完成:
+                //                                  yes:(补任务)
+                //                                  no:(照常完成今日任务并清空)
+                //               )
+                //(1)昨日任务是否完成
+                String prevDayOfCur = getPrevDayOfCur(TimeUtil.getLocalDate(new Date()),-1);//昨日
+                String beforeYesDay = getPrevDayOfCur(TimeUtil.getLocalDate(new Date()),-2);//前日
 
-                //2.修改任务汇总表
-                TGreenRwRwhz tGreenRwRwhz = tGreenRwRwhzMapper.selectByPrimaryKey(plateUser.getcUserid());
-                tGreenRwRwhz.setnLjwccs(tGreenRwRwhz.getnLjwccs() + 1);
-                tGreenRwRwhz.setdXgsj(TimeUtil.getTimestamp(new Date()));
-                tGreenRwRwhz.setcXguser(plateUser.getcUserid());
-                tGreenRwRwhzMapper.updateByPrimaryKey(tGreenRwRwhz);
+                boolean yesRw = isAccRwOfDay(prevDayOfCur,plateUser.getcUserid());//昨日任务
+                boolean beYesRw = isAccRwOfDay(beforeYesDay,plateUser.getcUserid());//前日任务
 
-                addGoldOperation("C_GOLD_ZJYY_1");//调用后增加对金币表相关的操作
+                if (yesRw == false){
+                    if (beYesRw == false){
+                        System.out.println("前日任务未完成！");
+                        //前日任务未完成,置空汇总表,修改明细表状态为0
+                        Map paramMap = new HashMap();
+                        paramMap.put("cUserid",plateUser.getcUserid());
+                        paramMap.put("cZt","0");
+                        paramMap.put("dXgsj",TimeUtil.getTimestamp(new Date()));
+                        paramMap.put("cXguser",plateUser.getcUserid());
+                        paramMap.put("cRwday",TimeUtil.getLocalDate(new Date()).substring(0,10));
+                        //修改状态为无效
+                        owerTGreenRwRwmxMapper.updateZtBycUserid(paramMap);
 
-                //是否连续一个月完成任务，若是，则将种子状态修改为"可捐赠"
-                boolean isContinueAcomreplishRw = isContinueAcomreplishRw(plateUser.getcUserid());
-                if (isContinueAcomreplishRw == true){
-                    TGreenZzZjzzmxExample tGreenZzZjzzmxExample = new TGreenZzZjzzmxExample();
-                    TGreenZzZjzzmxExample.Criteria criteria1 = tGreenZzZjzzmxExample.createCriteria();
-                    criteria1.andCZtEqualTo("1");
-                    criteria1.andCUseridEqualTo(plateUser.getcUserid());
-                    criteria1.andCKjzEqualTo("0");
-                    criteria1.andCSfjzEqualTo("0");
-                    List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectByExample(tGreenZzZjzzmxExample);
 
-                    TGreenZzZjzzmx tGreenZzZjzzmx = (TGreenZzZjzzmx) tGreenZzZjzzmxList.get(0);
-                    tGreenZzZjzzmx.setcKjz("1");
-                    tGreenZzZjzzmx.setcXguser(plateUser.getcUserid());
-                    tGreenZzZjzzmx.setdXgsj(TimeUtil.getTimestamp(new Date()));
-                    tGreenZzZjzzmxMapper.updateByPrimaryKey(tGreenZzZjzzmx);
+                        //如果当日是第一次完成任务，则置任务汇总条数为0
+                        TGreenRwRwmxExample tGreenRwRwmxExample2 = new TGreenRwRwmxExample();
+                        TGreenRwRwmxExample.Criteria criteria2 = tGreenRwRwmxExample2.createCriteria();
+                        criteria2.andCZtEqualTo("1");
+                        criteria2.andCUseridEqualTo(plateUser.getcUserid());
+                        criteria2.andCRwdayEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,10));
+                        List tGreenRwRwmxList11 = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample2);
+                        if (tGreenRwRwmxList11.size() < 1){
+                            TGreenRwRwhz tGreenRwRwhz = tGreenRwRwhzMapper.selectByPrimaryKey(plateUser.getcUserid());
+                            tGreenRwRwhz.setdYrwQ(null);
+                            tGreenRwRwhz.setnLjwccs(0);//置为0
+                            tGreenRwRwhz.setdYrwQ(TimeUtil.getTimestamp(new Date()));
+                            tGreenRwRwhz.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                            tGreenRwRwhz.setcXguser(plateUser.getcUserid());
+                            //任务汇总置空
+                            tGreenRwRwhzMapper.updateByPrimaryKey(tGreenRwRwhz);
+                        }
+
+
+                        //完成任务
+                        accomplishRwOfUser(plateUser.getcUserid(),tGreenRwRwmx.getcRwlb(),TimeUtil.getLocalDate(new Date()));
+
+                        //完成任务后增加对金币表相关的操作
+                        addGoldOperation("C_GOLD_ZJYY_1");
+
+                        //是否连续一个月完成任务，若是，则将种子状态修改为"可捐赠"
+                        boolean isContinueAcomreplishRw = isContinueAcomreplishRw(plateUser.getcUserid());
+                        if (isContinueAcomreplishRw == true){
+                            TGreenZzZjzzmxExample tGreenZzZjzzmxExample = new TGreenZzZjzzmxExample();
+                            TGreenZzZjzzmxExample.Criteria criteria1 = tGreenZzZjzzmxExample.createCriteria();
+                            criteria1.andCZtEqualTo("1");
+                            criteria1.andCUseridEqualTo(plateUser.getcUserid());
+                            criteria1.andCKjzEqualTo("0");
+                            criteria1.andCSfjzEqualTo("0");
+                            List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectByExample(tGreenZzZjzzmxExample);
+
+                            TGreenZzZjzzmx tGreenZzZjzzmx = (TGreenZzZjzzmx) tGreenZzZjzzmxList.get(0);
+                            tGreenZzZjzzmx.setcKjz("1");
+                            tGreenZzZjzzmx.setcXguser(plateUser.getcUserid());
+                            tGreenZzZjzzmx.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                            tGreenZzZjzzmxMapper.updateByPrimaryKey(tGreenZzZjzzmx);
+                        }
+                        return ReturnModelHandler.success(null);
+
+                    }else{
+                        return ReturnModelHandler.error("你的昨日任务未完成,请先前往[我的]-[我的任务]功能中补昨日任务！");
+                    }
+                }else{
+                    //完成任务
+                    accomplishRwOfUser(plateUser.getcUserid(),tGreenRwRwmx.getcRwlb(),TimeUtil.getLocalDate(new Date()));
+
+                    //完成任务后增加对金币表相关的操作
+                    addGoldOperation("C_GOLD_ZJYY_1");
+
+                    //是否连续一个月完成任务，若是，则将种子状态修改为"可捐赠"
+                    boolean isContinueAcomreplishRw = isContinueAcomreplishRw(plateUser.getcUserid());
+                    if (isContinueAcomreplishRw == true){
+                        TGreenZzZjzzmxExample tGreenZzZjzzmxExample = new TGreenZzZjzzmxExample();
+                        TGreenZzZjzzmxExample.Criteria criteria1 = tGreenZzZjzzmxExample.createCriteria();
+                        criteria1.andCZtEqualTo("1");
+                        criteria1.andCUseridEqualTo(plateUser.getcUserid());
+                        criteria1.andCKjzEqualTo("0");
+                        criteria1.andCSfjzEqualTo("0");
+                        List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectByExample(tGreenZzZjzzmxExample);
+
+                        TGreenZzZjzzmx tGreenZzZjzzmx = (TGreenZzZjzzmx) tGreenZzZjzzmxList.get(0);
+                        tGreenZzZjzzmx.setcKjz("1");
+                        tGreenZzZjzzmx.setcXguser(plateUser.getcUserid());
+                        tGreenZzZjzzmx.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                        tGreenZzZjzzmxMapper.updateByPrimaryKey(tGreenZzZjzzmx);
+                    }
+                    return ReturnModelHandler.success(null);
                 }
-
-
-                return ReturnModelHandler.success(null);
             }
         }catch (Exception e){
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return ReturnModelHandler.systemError();
         }
+    }
+
+
+    /**
+     * （补任务按钮必须要限制显示）
+     * 补任务业务条件：
+     * 1.若昨日任务已完成，则不允许补任务
+     * 2.查询前日任务是否完成，若前日与昨日任务均未完成（连续两日未完成基础任务），则不允许补任务
+     * 3.一个月补任务次数3次；查询当前人当前月补了几次，超过三次不允许补
+     *
+     * 补任务业务：
+     * 1.补任务明细表增加一条记录
+     * 2.任务明细表增加一条记录
+     * 3.任务汇总表修改一条记录
+     *
+     *
+     *
+     * @return
+     */
+    @Override
+    public ReturnModel accYesRw() {
+        try{
+            PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+            String prevDayOfCur = getPrevDayOfCur(TimeUtil.getLocalDate(new Date()),-1);
+
+            TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
+            TGreenRwRwmxExample.Criteria criteria = tGreenRwRwmxExample.createCriteria();
+            criteria.andCZtEqualTo("1");
+            criteria.andCUseridEqualTo(plateUser.getcUserid());
+            criteria.andCRwdayEqualTo(prevDayOfCur);
+            List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);
+            if (tGreenRwRwmxList.size() >= 3){
+                return ReturnModelHandler.error("昨日任务已完成,不需要补任务！");
+            }
+
+            //1.是否允许补任务
+            int rwBccs = Integer.parseInt(getDmzByDm("C_RW_BCCS"));
+            boolean enabledBrw = enableBrw(plateUser.getcUserid(),rwBccs);
+            if (enabledBrw == false){
+                return ReturnModelHandler.error("您本月的补任务次数已经用完，不能再补任务！");
+            }else{
+                //补任务日期
+                String cBrwDay = getPrevTimeOfCur(TimeUtil.getLocalDate(new Date()),-1);
+                Timestamp dPrevDay = Timestamp.valueOf(cBrwDay);//Timestamp格式
+
+                //业务
+                // 1.补任务明细表增加一条记录
+                TGreenRwRwmxReplenish tGreenRwRwmxReplenish = new TGreenRwRwmxReplenish();
+                tGreenRwRwmxReplenish.setcUserid(plateUser.getcUserid());
+                tGreenRwRwmxReplenish.setdCzsj(TimeUtil.getTimestamp(new Date()));
+                tGreenRwRwmxReplenish.setcBcday(cBrwDay);
+                tGreenRwRwmxReplenish.setcZt("1");
+                tGreenRwRwmxReplenish.setcCjuser(plateUser.getcUserid());
+                tGreenRwRwmxReplenish.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                tGreenRwRwmxReplenishMapper.insert(tGreenRwRwmxReplenish);
+
+                //2删除昨日任务后更新任务汇总表
+                int yesRwCnt = cntRwOfDay(prevDayOfCur,plateUser.getcUserid());
+                TGreenRwRwhz tGreenRwRwhz = tGreenRwRwhzMapper.selectByPrimaryKey(plateUser.getcUserid());
+                tGreenRwRwhz.setnLjwccs(tGreenRwRwhz.getnLjwccs()-yesRwCnt);
+                tGreenRwRwhz.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                tGreenRwRwhz.setcXguser(plateUser.getcUserid());
+                tGreenRwRwhzMapper.updateByPrimaryKey(tGreenRwRwhz);
+
+                // 2-1.任务明细表(先删除昨日任务)
+                TGreenRwRwmxExample tGreenRwRwmxExample1 = new TGreenRwRwmxExample();
+                TGreenRwRwmxExample.Criteria criteria2 = tGreenRwRwmxExample1.createCriteria();
+                criteria2.andCUseridEqualTo(plateUser.getcUserid());
+                criteria2.andCRwdayEqualTo(prevDayOfCur);
+                criteria2.andCZtEqualTo("1");
+                tGreenRwRwmxMapper.deleteByExample(tGreenRwRwmxExample1);
+
+
+
+
+
+                //3增加记录
+                TGreenRwRwmx tGreenRwRwmx = new TGreenRwRwmx();
+                tGreenRwRwmx.setcUserid(plateUser.getcUserid());
+                tGreenRwRwmx.setcRwday(cBrwDay.substring(0,10));
+                tGreenRwRwmx.setcRwmouth(cBrwDay.substring(0,7));
+                tGreenRwRwmx.setdRwsj(dPrevDay);
+                tGreenRwRwmx.setcZt("1");
+                tGreenRwRwmx.setcBz("补任务，补任务时间："+TimeUtil.getTimestamp(new Date()));
+                tGreenRwRwmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                tGreenRwRwmx.setcCjuser(plateUser.getcUserid());
+
+                tGreenRwRwmx.setcRwlb("1");
+                tGreenRwRwmxMapper.insert(tGreenRwRwmx);
+                tGreenRwRwmx.setcRwlb("2");
+                tGreenRwRwmxMapper.insert(tGreenRwRwmx);
+                tGreenRwRwmx.setcRwlb("3");
+                tGreenRwRwmxMapper.insert(tGreenRwRwmx);
+
+
+                // 3-1.任务汇总表修改一条记录
+                TGreenRwRwhz tGreenRwRwhz1 = tGreenRwRwhzMapper.selectByPrimaryKey(plateUser.getcUserid());
+                tGreenRwRwhz1.setnLjwccs(tGreenRwRwhz1.getnLjwccs()+3);
+                tGreenRwRwhz1.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                tGreenRwRwhz1.setcXguser(plateUser.getcUserid());
+                tGreenRwRwhzMapper.updateByPrimaryKey(tGreenRwRwhz1);
+
+
+                return ReturnModelHandler.success(null);
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return ReturnModelHandler.systemError();
+        }
+
     }
 
     /**
@@ -894,6 +1028,7 @@ public class WebServiceImpl implements WebService {
      *          6.新增金币：金币增加明细记录表，金币汇总表
      *          7.是否有父账户：有则：
      *              7-1.父账户新增能量：能量明细表，能量汇总表
+     *              //师傅账户是否有固定奖励判断，徒弟第一次捐赠则师傅有固定奖励，否则只有浮动奖励5%
      *          8.修改任务：任务明细表记录为无效，任务汇总表置为"0"
      *          9.验证用户是否连续三个月完成任务：
      *              9-1.查询用户一共捐赠了几颗种子，第三颗对应一级，第六颗对应二级，以此类推，修改用户等级
@@ -1087,6 +1222,7 @@ public class WebServiceImpl implements WebService {
             //10.任务汇总表置0
             TGreenRwRwhz tGreenRwRwhz = tGreenRwRwhzMapper.selectByPrimaryKey(plateUser.getcUserid());
             tGreenRwRwhz.setnLjwccs(0);
+            tGreenRwRwhz.setdYrwQ(null);//月任务开始时间置为空
             tGreenRwRwhz.setdXgsj(TimeUtil.getTimestamp(new Date()));
             tGreenRwRwhz.setcXguser(plateUser.getcUserid());
             tGreenRwRwhzMapper.updateByPrimaryKey(tGreenRwRwhz);
@@ -1397,10 +1533,16 @@ public class WebServiceImpl implements WebService {
             TGreenSpSpmxExample tGreenSpSpmxExample = new TGreenSpSpmxExample();
             TGreenSpSpmxExample.Criteria criteriaTGreenSpSpmxExample = tGreenSpSpmxExample.createCriteria();
             criteriaTGreenSpSpmxExample.andCZtEqualTo("1");
+            criteriaTGreenSpSpmxExample.andCSpbhNotEqualTo("1");//不查询仙人掌
             tGreenSpSpmxExample.setOrderByClause("n_spjg");
             List tGreenSpSpmxList = tGreenSpSpmxMapper.selectByExample(tGreenSpSpmxExample);
             loginUserHomeMap.put("tGreenSpSpmxList",tGreenSpSpmxList);
-
+            //1-1.当前商品
+            TGreenSpSpmxExample tGreenSpSpmxExample1 = new TGreenSpSpmxExample();
+            TGreenSpSpmxExample.Criteria criteriaTGreenSpSpmxExample1 = tGreenSpSpmxExample1.createCriteria();
+            criteriaTGreenSpSpmxExample1.andCSpbhEqualTo("1");//查询仙人掌
+            List curTGreenSpSpmxList = tGreenSpSpmxMapper.selectByExample(tGreenSpSpmxExample1);
+            loginUserHomeMap.put("curTGreenSpSpmxList",curTGreenSpSpmxList);
 
             //2.能量排行榜前十
             List tGreenNlHzList = owerTGreenNlHzMapper.selectTGreenNlHzRank(new HashMap());
@@ -1432,34 +1574,39 @@ public class WebServiceImpl implements WebService {
             criteria.andCUseridEqualTo(GetcurrentLoginUser.getCurrentUser().getcUserid());
             criteria.andCFxmouthEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,7));
             List plateUserFatherList = plateUserFatherMapper.selectByExample(plateUserFatherExample);
+            System.out.println("徒弟数量："+plateUserFatherList.size());
             if (plateUserFatherList.size() >= 5){
+                System.out.println("收徒数量大于5");
                 return ReturnModelHandler.success("C:/Users/Administrator/greenplatformTmp/qrcode/error.png");
             }
 
 
-
-
+            System.out.println("1");
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+            System.out.println("当前登陆人："+plateUser);
             //扫描后跳转路径（跳转至注册页面）
             String qrcodeUrl = "https://lhwlljnw.com/base/qrcodeRegister?user="+plateUser.getcUserid();//正式环境
             //String qrcodeUrl = "http://127.0.0.1/base/qrcodeRegister?user="+plateUser.getcUserid();//测试环境
+            System.out.println("2");
             // 嵌入二维码的图片路径
             String imgPath = "C:/Users/Administrator/greenplatformTmp/logo.png";//正式环境
             //String imgPath = "C:/Users/CDMCS/Desktop/logo.png";//测试环境
-
+            System.out.println("3");
             // 生成的二维码的路径及名称
             String destPath = "C:/Users/Administrator/greenplatformTmp/qrcode/"+plateUser.getcUserid()+".jpg";//正式环境
             //String destPath = "C:/Users/CDMCS/Desktop/qrcode/"+plateUser.getcUserid()+".jpg";//测试环境
-
+            System.out.println("4");
             //生成二维码
             QRCodeUtil.encode(qrcodeUrl, imgPath, destPath, true);
+            System.out.println("5");
             // 解析二维码
             String str = QRCodeUtil.decode(destPath);
             // 打印出解析出的内容
             System.out.println(str);
-
+            System.out.println(destPath);
             return ReturnModelHandler.success(destPath);
         }catch (Exception e){
+            System.out.println("异常");
             e.printStackTrace();
             return ReturnModelHandler.systemError();
         }
@@ -1575,6 +1722,56 @@ public class WebServiceImpl implements WebService {
         List retList = owerPlateUserAccountMapper.selectLoginuserAccountWdtd(paramsMap);
 
         return ReturnModelHandler.success(retList);
+    }
+
+    //查询当前登陆人任务日历提示
+    @Override
+    public ReturnModel selectRwDayTips() {
+        try{
+            PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+            String retHtmlStr = "<p>亲爱的用户,";
+
+
+            TGreenZzZjzzmxExample tGreenZzZjzzmxExample = new TGreenZzZjzzmxExample();
+            TGreenZzZjzzmxExample.Criteria criteria = tGreenZzZjzzmxExample.createCriteria();
+            criteria.andCUseridEqualTo(plateUser.getcUserid());
+            criteria.andCSfjzEqualTo("0");
+            criteria.andCKjzEqualTo("0");
+            criteria.andCZtEqualTo("1");
+            List tGreenZzZjzzmxList = tGreenZzZjzzmxMapper.selectByExample(tGreenZzZjzzmxExample);
+            if (tGreenZzZjzzmxList.size() > 0){
+                //1.查询用户正在种植的种子
+                TGreenZzZjzzmx tGreenZzZjzzmx = (TGreenZzZjzzmx) tGreenZzZjzzmxList.get(0);
+                TGreenSpSpmx tGreenSpSpmx = tGreenSpSpmxMapper.selectByPrimaryKey(tGreenZzZjzzmx.getcSpbh());
+                retHtmlStr += "您本月种植的植物是"+tGreenSpSpmx.getcSpmc()+"，</p>";
+
+                //2.查询连续完成任务天数
+                int rwDay = countContinueAcomreplishRw(plateUser.getcUserid());
+                retHtmlStr += "<p>已经连续种植"+rwDay+"天，</p>";
+
+                //3.查询指定植物种植完成后的能量奖励
+                String nNljl = getDmzByDm("C_ZWJZJL_GOLD_"+tGreenSpSpmx.getcSpbh());
+                retHtmlStr += "<p>完成本次30天种植任务可获得总能量为：￥"+nNljl+"，</p>";
+
+                //4.查询账户等级额外奖励
+                if (Integer.parseInt(plateUser.getcRydj()) > 1){
+                    String cRydj = plateUser.getcRydj();//人员等级
+                    float cExtJlPer = Float.parseFloat(getDmzByDm("C_ZHDJ_EXTJL_"+cRydj));//等级奖励百分比
+                    float cSpjg = Float.parseFloat(tGreenSpSpmx.getnSpjg().toString());//种子价格
+
+                    float cExtJl = cExtJlPer*cSpjg;//等级奖励
+
+                    retHtmlStr += "<p>此外您的账户等级为"+cRydj+"级，完成本次种植还可额外获得￥"+cExtJl+"的奖励！</p>";
+                }
+            }else {
+                retHtmlStr += "您还没有种植植物，快去商店兑换吧!</p>";
+            }
+            System.out.println(retHtmlStr);
+            return ReturnModelHandler.success(retHtmlStr);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ReturnModelHandler.systemError();
+        }
     }
 
     /**
@@ -1741,7 +1938,7 @@ public class WebServiceImpl implements WebService {
 
 
     /**
-     * 获取当前日期的前几天或后几天
+     * 获取当前日期的前几天或后几天(返回年月日)
      * @param time
      * @return
      */
@@ -1759,6 +1956,130 @@ public class WebServiceImpl implements WebService {
             e.printStackTrace();
         }
         return sub;
+    }
+
+    /**
+     * 获取当前日期的前一天,返回(年月日:时分秒)
+     * @param time
+     * @param day
+     * @return
+     */
+    private String getPrevTimeOfCur(String time,int day){
+        String sub = null;
+        try {
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            java.util.Date timeNow = df.parse(time);
+            Calendar begin=Calendar.getInstance();
+            begin.setTime(timeNow);
+            begin.add(Calendar.DAY_OF_MONTH,day);
+            sub = df.format(begin.getTime());
+            //System.out.println(sub);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sub;
+    }
+
+    /*
+       是否完成指定日期的任务
+     */
+    private boolean isAccRwOfDay (String cRwDay,String cUserid){
+        TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
+        TGreenRwRwmxExample.Criteria criteria = tGreenRwRwmxExample.createCriteria();
+
+        criteria.andCZtEqualTo("1");
+        criteria.andCUseridEqualTo(cUserid);
+        criteria.andCRwdayEqualTo(cRwDay);
+
+        List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);//昨日任务
+
+        if (tGreenRwRwmxList.size() == 3){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 查询某一日某用户完成了几种任务
+     * @param cRwDay
+     * @param cUserid
+     * @return
+     */
+    private int cntRwOfDay(String cRwDay,String cUserid){
+        TGreenRwRwmxExample tGreenRwRwmxExample = new TGreenRwRwmxExample();
+        TGreenRwRwmxExample.Criteria criteria = tGreenRwRwmxExample.createCriteria();
+
+        criteria.andCZtEqualTo("1");
+        criteria.andCUseridEqualTo(cUserid);
+        criteria.andCRwdayEqualTo(cRwDay);
+
+        List tGreenRwRwmxList = tGreenRwRwmxMapper.selectByExample(tGreenRwRwmxExample);//昨日任务
+        System.out.println("cntRwOfDay:"+tGreenRwRwmxList.size());
+        return tGreenRwRwmxList.size();
+    }
+
+    /**
+     * 完成指定用户指定类别指定时间的任务
+     * @param cUserid
+     * @param cRwlb
+     * @param cRwsj
+     */
+    private void accomplishRwOfUser(String cUserid,String cRwlb,String cRwsj){
+        String localDateDay = (cRwsj.substring(0,10));
+        String localDateMonth = (cRwsj.substring(0,7));
+
+
+        TGreenRwRwmx tGreenRwRwmx = new TGreenRwRwmx();
+        //1.任务明细中增加一条记录
+        tGreenRwRwmx.setcUserid(cUserid);
+        tGreenRwRwmx.setcCjuser(cUserid);
+        tGreenRwRwmx.setcRwlb(cRwlb);
+        tGreenRwRwmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
+        tGreenRwRwmx.setcZt("1");
+        tGreenRwRwmx.setcRwmouth(localDateMonth);
+        tGreenRwRwmx.setcRwday(localDateDay);
+        tGreenRwRwmx.setdRwsj(TimeUtil.getTimestamp(new Date()));
+        tGreenRwRwmxMapper.insert(tGreenRwRwmx);
+
+        //2.修改任务汇总表
+        TGreenRwRwhz tGreenRwRwhz = tGreenRwRwhzMapper.selectByPrimaryKey(cUserid);
+
+        //2-1.如果任务累计次数为0则表示是第一次完成任务，则添加月任务开始时间字段值
+        if (tGreenRwRwhz.getnLjwccs() == 0){
+            tGreenRwRwhz.setdYrwQ(TimeUtil.getTimestamp(new Date()));
+        }
+        tGreenRwRwhz.setnLjwccs(tGreenRwRwhz.getnLjwccs() + 1);
+        tGreenRwRwhz.setdXgsj(TimeUtil.getTimestamp(new Date()));
+        tGreenRwRwhz.setcXguser(cUserid);
+        tGreenRwRwhzMapper.updateByPrimaryKey(tGreenRwRwhz);
+    }
+
+    /**
+     * 是否允许补任务
+     * @param cUserid
+     * @param cntCs
+     * @return
+     */
+    private boolean enableBrw(String cUserid,int cntCs){
+        //1.获取允许补任务次数基础代码
+        int rwBccs = cntCs;
+        //1-1.查询当前用户本月使用了几次补任务次数
+        TGreenRwRwhz tGreenRwRwhz = tGreenRwRwhzMapper.selectByPrimaryKey(cUserid);
+
+        TGreenRwRwmxReplenishExample tGreenRwRwmxReplenishExample = new TGreenRwRwmxReplenishExample();
+        TGreenRwRwmxReplenishExample.Criteria criteria1 = tGreenRwRwmxReplenishExample.createCriteria();
+        criteria1.andCUseridEqualTo(cUserid);
+        criteria1.andCZtEqualTo("1");
+        System.out.println("本月任务开始时间："+tGreenRwRwhz.getdYrwQ());
+        criteria1.andDCzsjBetween(tGreenRwRwhz.getdYrwQ(),TimeUtil.getTimestamp(new Date()));
+        List tGreenRwRwmxReplenishList = tGreenRwRwmxReplenishMapper.selectByExample(tGreenRwRwmxReplenishExample);
+
+        if (tGreenRwRwmxReplenishList.size() >= rwBccs){
+            return false;
+        }else {
+            return true;
+        }
     }
 
 

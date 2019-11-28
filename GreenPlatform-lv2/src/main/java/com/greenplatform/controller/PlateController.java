@@ -1,6 +1,8 @@
 package com.greenplatform.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.greenplatform.configer.MyHttpSessionListener;
 import com.greenplatform.model.*;
 import com.greenplatform.model.base.ReturnModel;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -56,14 +59,51 @@ public class PlateController {
     }
 
     @PostMapping(value = "/selectPlateuser")
-    public ReturnModel selectPlateuser(PlateUser plateUser){
+    public ReturnModel selectPlateuser(@RequestParam(defaultValue = "1") int pageNum,
+                                       @RequestParam(defaultValue = "10") int pageSize,
+                                       PlateUser plateUser){
+
+
+        if (0 >= pageNum){
+            pageNum = 1;
+        }
+        PageHelper.startPage(pageNum,pageSize);
+
         ReturnModel returnModel = plateService.selectPlateuser(plateUser);
+
+
+        PageInfo pageInfo=new PageInfo((List) returnModel.getObject());
+
+        Map retMap = new HashMap();
+        retMap.put("pages",pageInfo.getPages());
+        retMap.put("totalRows",pageInfo.getTotal());
+        retMap.put("retDatas",pageInfo.getList());
+
+        returnModel.setObject(retMap);
         return returnModel;
     }
 
     @PostMapping(value = "/selectWebUser")
-    public ReturnModel selectWebUser(PlateUser plateUser){
+    public ReturnModel selectWebUser(@RequestParam(defaultValue = "1") int pageNum,
+                                     @RequestParam(defaultValue = "10") int pageSize,
+                                     PlateUser plateUser){
+
+
+        if (0 >= pageNum){
+            pageNum = 1;
+        }
+        PageHelper.startPage(pageNum,pageSize);
+
         ReturnModel returnModel = plateService.selectWebUser(plateUser);
+
+        PageInfo pageInfo=new PageInfo((List) returnModel.getObject());
+
+        Map retMap = new HashMap();
+        retMap.put("pages",pageInfo.getPages());
+        retMap.put("totalRows",pageInfo.getTotal());
+        retMap.put("retDatas",pageInfo.getList());
+
+        returnModel.setObject(retMap);
         return returnModel;
     }
 
@@ -97,8 +137,25 @@ public class PlateController {
     }
 
     @PostMapping(value = "/selectTGreenSpSpmx")
-    public ReturnModel selectTGreenSpSpmx(TGreenSpSpmx tGreenSpSpmx){
+    public ReturnModel selectTGreenSpSpmx(@RequestParam(defaultValue = "1") int pageNum,
+                                          @RequestParam(defaultValue = "10") int pageSize,
+                                          TGreenSpSpmx tGreenSpSpmx){
+
+        if (0 >= pageNum){
+            pageNum = 1;
+        }
+        PageHelper.startPage(pageNum,pageSize);
+
         ReturnModel returnModel = plateService.selectTGreenSpSpmx(tGreenSpSpmx);
+
+        PageInfo pageInfo=new PageInfo((List) returnModel.getObject());
+
+        Map retMap = new HashMap();
+        retMap.put("pages",pageInfo.getPages());
+        retMap.put("totalRows",pageInfo.getTotal());
+        retMap.put("retDatas",pageInfo.getList());
+
+        returnModel.setObject(retMap);
         return returnModel;
     }
 
@@ -121,12 +178,31 @@ public class PlateController {
     }
 
     @PostMapping(value = "/selectTGreenRwRwmx")
-    public ReturnModel selectTGreenRwRwmx(@RequestParam("cUsername") String cUsername,
+    public ReturnModel selectTGreenRwRwmx(@RequestParam(defaultValue = "1") int pageNum,
+                                          @RequestParam(defaultValue = "10") int pageSize,
+                                          @RequestParam("cUsername") String cUsername,
                                           @RequestParam("cRwlb") String cRwlb){
+
+        if (0 >= pageNum){
+            pageNum = 1;
+        }
+        PageHelper.startPage(pageNum,pageSize);
+
         Map paramsMap = new HashMap();
         paramsMap.put("cUsername",cUsername);
         paramsMap.put("cRwlb",cRwlb);
         ReturnModel returnModel = plateService.selectTGreenRwRwmx(paramsMap);
+
+
+        PageInfo pageInfo=new PageInfo((List) returnModel.getObject());
+
+        Map retMap = new HashMap();
+        retMap.put("pages",pageInfo.getPages());
+        retMap.put("totalRows",pageInfo.getTotal());
+        retMap.put("retDatas",pageInfo.getList());
+
+        returnModel.setObject(retMap);
+
         return returnModel;
     }
 
@@ -137,12 +213,30 @@ public class PlateController {
     }
 
     @PostMapping(value = "/selectYwjcdm")
-    public ReturnModel selectYwjcdm(@RequestParam("cDmlb") String cDmlb,
+    public ReturnModel selectYwjcdm(@RequestParam(defaultValue = "1") int pageNum,
+                                    @RequestParam(defaultValue = "10") int pageSize,
+                                    @RequestParam("cDmlb") String cDmlb,
                                     @RequestParam("cDm") String cDm){
+
+
+        if (0 >= pageNum){
+            pageNum = 1;
+        }
+        PageHelper.startPage(pageNum,pageSize);
+
         Map params = new HashMap();
         params.put("cDmlb",cDmlb);
         params.put("cDm",cDm);
         ReturnModel returnModel = plateService.selectPlateCodeDmz(params);
+
+        PageInfo pageInfo=new PageInfo((List) returnModel.getObject());
+
+        Map retMap = new HashMap();
+        retMap.put("pages",pageInfo.getPages());
+        retMap.put("totalRows",pageInfo.getTotal());
+        retMap.put("retDatas",pageInfo.getList());
+
+        returnModel.setObject(retMap);
         return returnModel;
     }
 
@@ -159,8 +253,27 @@ public class PlateController {
     }
 
     @PostMapping(value = "/selectPlateUserRole")
-    public ReturnModel selectPlateUserRole(PlateUserRole plateUserRole){
+    public ReturnModel selectPlateUserRole(@RequestParam(defaultValue = "1") int pageNum,
+                                           @RequestParam(defaultValue = "10") int pageSize,
+                                           PlateUserRole plateUserRole){
+
+
+
+        if (0 >= pageNum){
+            pageNum = 1;
+        }
+        PageHelper.startPage(pageNum,pageSize);
+
         ReturnModel returnModel = plateService.selectPlateUserRole(plateUserRole);
+
+        PageInfo pageInfo=new PageInfo((List) returnModel.getObject());
+
+        Map retMap = new HashMap();
+        retMap.put("pages",pageInfo.getPages());
+        retMap.put("totalRows",pageInfo.getTotal());
+        retMap.put("retDatas",pageInfo.getList());
+
+        returnModel.setObject(retMap);
         return returnModel;
     }
 
@@ -182,8 +295,27 @@ public class PlateController {
     }
 
     @PostMapping(value = "/selectPlateYwLxMenu")
-    public ReturnModel selectPlateYwLxMenu(PlateYwLxMenu plateYwLxMenu){
+    public ReturnModel selectPlateYwLxMenu(@RequestParam(defaultValue = "1") int pageNum,
+                                           @RequestParam(defaultValue = "10") int pageSize,
+                                           PlateYwLxMenu plateYwLxMenu){
+
+
+
+
+        if (0 >= pageNum){
+            pageNum = 1;
+        }
+        PageHelper.startPage(pageNum,pageSize);
         ReturnModel returnModel = plateService.selectPlateYwLxMenu(plateYwLxMenu);
+
+        PageInfo pageInfo=new PageInfo((List) returnModel.getObject());
+
+        Map retMap = new HashMap();
+        retMap.put("pages",pageInfo.getPages());
+        retMap.put("totalRows",pageInfo.getTotal());
+        retMap.put("retDatas",pageInfo.getList());
+
+        returnModel.setObject(retMap);
         return returnModel;
     }
     @PostMapping(value = "/insertPlateYwLxMenu")
@@ -217,8 +349,32 @@ public class PlateController {
     }
     @PostMapping(value = "/selectTGreenNlHz")
     public ReturnModel selectTGreenNlHz(@RequestBody String jsonObject){
+
         JSONObject jsonParams = JSONObject.fromObject(jsonObject);
+
+        int pageNum = jsonParams.getInt("pageNum");
+        int pageSize = jsonParams.getInt("pageSize");
+
+        if (0 >= pageNum){
+            pageNum = 1;
+        }
+        System.out.println(pageNum);
+        System.out.println(pageSize);
+        PageHelper.startPage(pageNum,pageSize);
+
+
         ReturnModel returnModel = plateService.selectTGreenNlHz(jsonParams);
+
+        PageInfo pageInfo=new PageInfo((List) returnModel.getObject());
+
+        Map retMap = new HashMap();
+        retMap.put("pages",pageInfo.getPages());
+        retMap.put("totalRows",pageInfo.getTotal());
+        retMap.put("retDatas",pageInfo.getList());
+
+        returnModel.setObject(retMap);
+
+
         return returnModel;
     }
     @PostMapping(value = "/selectPlateCodeXtcs")

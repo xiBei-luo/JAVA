@@ -44,10 +44,10 @@ html,body{
     width: 50%;
     height: 90%;
 }
-.contentBoxWrap table h4{
+.contentBoxWrap>table h4{
     font-weight: bold;
 }
-.contentBoxWrap table tr td:nth-child(1){
+.contentBoxWrap>table tr td:nth-child(1){
     font-weight: bold;
 }
 

@@ -42,6 +42,13 @@
                     <td>沐浴阳光</td>
                     <td align="right"><span th:attr="class = (${loginuserAccountWdrw.retRw['3'] == false ? 'badge badge-warning' : 'badge'})" th:text="${loginuserAccountWdrw.retRw['3'] == false ? '未完成' : '已完成'}">未完成</span></td>
                 </tr>
+                <tr>
+                    <td colspan="2" align="center"><h4>昨日任务</h4></td>
+                </tr>
+                <tr>
+                    <td>昨日任务未完成！</td>
+                    <td align="right"><span class="btn btn-sm btn-danger" id="btnAccYesRw">立即补</span></td>
+                </tr>
             </table>
         </div>
     </div>
@@ -58,6 +65,6 @@
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
 <script src="/publicJs/SendRequest.js"></script>
 <script src="/publicJs/publicyw.js"></script>
-<script src="/js/web/nlRank.js"></script>
+<script src="/js/web/myAccount/wdrw.js"></script>
 </body>
 </html>

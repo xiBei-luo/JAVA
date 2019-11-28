@@ -59,9 +59,9 @@
                     <div class=" mission" id="mission">
                         <!--左侧三个指引手指-->
                         <div class="mission-hand">
-                            <img class="hand_1" src="/publicImg/home/hand.png" alt="">
-                            <img class="hand_2" src="/publicImg/home/hand.png" alt="">
-                            <img class="hand_3" src="/publicImg/home/hand.png" alt="">
+                            <img class="hand_1" src="/publicImg/home/hand.png" alt="" th:style="${loginuserHome.tGreenRwRwmx['1']} == true ? 'display: none':''">
+                            <img class="hand_2" src="/publicImg/home/hand.png" alt="" th:style="${loginuserHome.tGreenRwRwmx['2']} == true ? 'display: none':''">
+                            <img class="hand_3" src="/publicImg/home/hand.png" alt="" th:style="${loginuserHome.tGreenRwRwmx['3']} == true ? 'display: none':''">
                         </div>
 
                         <!--右侧三个任务图标-->
@@ -107,6 +107,9 @@
 
                     <!--植物形态-->
                     <div class="tree">
+                        <div class="lockBox">
+                            <img src="/publicImg/home/lock.png" alt="">
+                        </div>
                         <img th:attr="src=${tGreenSpSpmxList['c_imgurl']}" alt="">
                     </div>
 
@@ -168,8 +171,23 @@
 </div>
 
 
+<!-- 任务天数及奖励提示模态框 -->
+<div class="modal fade bs-example-modal-sm" id="rwDayModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/toucher.js"></script>
 <script src="/publicJs/SendRequest.js"></script>
 <script src="/publicJs/publicyw.js"></script>

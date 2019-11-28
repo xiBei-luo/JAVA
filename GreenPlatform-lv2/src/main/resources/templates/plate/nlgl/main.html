@@ -19,25 +19,31 @@
             flex-direction: column;
         }
         .search-box{
+            width: 100%;
             height: 10%;
             line-height: 100%;
             display: flex;
             align-items: center;
         }
         .grid-box{
-            height: 90%;
+            height: 82%;
+            overflow-y: scroll;
+        }
+        .pagebar{
+            height: 8%;
         }
     </style>
 </head>
 <body>
 <div class="search-box">
-    <form class="form-inline">
-        <div class="form-group">
-            <label for="cUsername">用户姓名：</label>
+    <div class="row">
+        <div class="col-md-10 col-xs-8">
             <input type="text" class="form-control" id="cUsername" placeholder="请输入姓名">
         </div>
-        <button type="button" class="btn btn-info" id="btnSearch">搜索</button>
-    </form>
+        <div class="col-md-2 col-xs-4">
+            <button type="button" class="btn btn-info" id="btnSearch">搜索</button>
+        </div>
+    </div>
 </div>
 
 
@@ -61,6 +67,10 @@
     </table>
 </div>
 
+<div class="pagebar">
+    <div id="pagerbar" style="text-align: left;"></div>
+</div>
+
 
 <script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
 <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
@@ -69,6 +79,8 @@
 <script src="/publicFrame/dhtmlx-4.5/dhtmlx.min.js"></script>
 <script src="/publicJs/StringBuffer.js"></script>
 <script src="/publicJs/publicCommon.js"></script>
+<script src="/publicJs/Page.js"></script>
+<script src="/publicJs/pagerbar_debug.js"></script>
 <script src="/publicJs/publicyw.js"></script>
 <script src="/publicJs/SendRequest.js"></script>
 <script src="/publicJs/MdiWindow.js"></script>

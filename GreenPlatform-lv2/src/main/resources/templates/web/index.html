@@ -62,6 +62,9 @@
             display: block;
             margin: 0 auto;
         }
+        .active{
+            color: #3e8f3e
+        }
     </style>
 </head>
 <body>
@@ -72,31 +75,31 @@
         <ul>
             <li>
                 <a href="#" data-targetUrl="home" id="home">
-                    <img src="/publicImg/icon/home.png" alt="">
+                    <img src="/publicImg/index/home-act.png" alt="">
                     <span>首页</span>
                 </a>
             </li>
             <li>
                 <a href="#" data-targetUrl="doLike" id="doLike">
-                    <img src="/publicImg/icon/doLike.png" width="30" height="30" alt="">
+                    <img src="/publicImg/index/doLike.png" width="30" height="30" alt="">
                     <span>点赞</span>
                 </a>
             </li>
             <li>
                 <a href="#" data-targetUrl="nlRank" id="nlRank">
-                    <img src="/publicImg/icon/nlRank.png" width="30" height="30" alt="">
+                    <img src="/publicImg/index/nlRank.png" width="30" height="30" alt="">
                     <span>能量</span>
                 </a>
             </li>
             <li>
                 <a href="#" data-targetUrl="shop" id="shop">
-                    <img src="/publicImg/icon/shop.png" width="30" height="30" alt="">
+                    <img src="/publicImg/index/shop.png" width="30" height="30" alt="">
                     <span>商店</span>
                 </a>
             </li>
             <li>
                 <a href="#" data-targetUrl="myAccount" id="myAccount">
-                    <img src="/publicImg/icon/my.png" width="30" height="30" alt="">
+                    <img src="/publicImg/index/myAccount.png" width="30" height="30" alt="">
                     <span>我的</span>
                 </a>
             </li>
@@ -111,10 +114,29 @@
     <script src="/publicJs/publicyw.js"></script>
     <script>
         $(function () {
+
             $(".nvaBar li a").click(function(){
+                var _thisId = $(this).attr("id");
+
+                //清除其余span颜色
+                $(".nvaBar li a span").removeClass("active");
+
+
+                $(".nvaBar li a").each(function(index,value){
+                    var _imgUrlId = $(value).attr("id");
+                    $("#"+_imgUrlId+" img").attr("src","/publicImg/index/"+_imgUrlId+".png");
+                });
+
+                //当前链接添加背景颜色
+                $("#"+_thisId+" span").addClass("active");
+                $("#"+_thisId+" img").attr("src","/publicImg/index/"+_thisId+"-act.png");
                 $("#iframe-page-content").attr("src","/base/"+$(this).attr("data-targetUrl"));
             });
-            $("#home").click();
+
+
+
+
+            $("#myAccount").click();
         });
     </script>
 </body>

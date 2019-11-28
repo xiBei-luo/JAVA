@@ -31,6 +31,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     /**
      * 注册添加拦截器
      * @param registry
+     *
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

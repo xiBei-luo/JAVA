@@ -16,6 +16,9 @@ public interface WebService {
     //完成任务业务
     ReturnModel accomplishRw(TGreenRwRwmx tGreenRwRwmx);
 
+    //补任务
+    ReturnModel accYesRw();
+
     //能量兑换种子业务
     ReturnModel buySeeds(TGreenZzZjzzmx tGreenZzZjzzmx);
 
@@ -68,6 +71,9 @@ public interface WebService {
 
     //查询我的账户-我的徒弟（）
     ReturnModel selectLoginuserAccountWdtd();
+
+    //查询任务日历提示
+    ReturnModel selectRwDayTips();
 
 
 

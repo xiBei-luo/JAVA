@@ -81,10 +81,10 @@ html,body{
     border: 1px solid #fff;
 }
 .goldDzRankContent{
+    background: #ffdc90;
     font-size: 16px;
     line-height: 32px;
     border-radius: 5px;
-    background: #f2b14d;
     width: 80%;
     margin: 5px auto;
     text-align: center;
@@ -104,6 +104,27 @@ html,body{
     font-weight: bold;
     color: #eea236;
 }
+
+
+/*排行榜前三背景*/
+#goldDzRankContent_1{
+    background: url("../../publicImg/doLike/1.png") no-repeat;
+}
+#goldDzRankContent_2{
+    background: url("../../publicImg/doLike/2.png") no-repeat;
+}
+#goldDzRankContent_3{
+    background: url("../../publicImg/doLike/3.png") no-repeat;
+}
+.goldDzRankContent_ower{
+    background: url("../../publicImg/doLike/wd.png") no-repeat;
+}
+
+#goldDzRankContent_1,#goldDzRankContent_2,#goldDzRankContent_3,.goldDzRankContent_ower{
+    background-size: 40px 40px;
+    background-position: center;
+}
+
 /*点赞排行榜end*/
 
 
