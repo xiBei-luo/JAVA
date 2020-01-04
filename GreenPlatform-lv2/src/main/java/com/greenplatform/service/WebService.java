@@ -75,6 +75,9 @@ public interface WebService {
     //查询任务日历提示
     ReturnModel selectRwDayTips();
 
+    //是否一个月未种植植物业务
+    ReturnModel noZz();
+
 
 
 

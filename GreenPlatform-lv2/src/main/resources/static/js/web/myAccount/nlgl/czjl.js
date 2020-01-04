@@ -1,9 +1,9 @@
 $(function(){
-    var currentYear = new Date().getFullYear();//当前年份
-    var currentMouth = new Date().getMonth()+1;//当前月份
+    //var currentYear = new Date().getFullYear();//当前年份
+    //var currentMouth = new Date().getMonth()+1;//当前月份
 
 
-    $("#cMonth").val(currentYear+"-"+currentMouth);
+    //$("#cMonth").val(currentYear+"-"+currentMouth);
     $("#loginoutBtn").click(function(){
         //window.parent.location整个页面跳转
         window.parent.location = "/base/loginout";
@@ -53,7 +53,6 @@ function loadGridData(reqUrl){
                             "<td>"+data[i].nFkje+"</td>" +
                             "<td>"+data[i].cFkzh+"</td>" +
                             "<td>"+(data[i].cFksfcg == '1' ? '成功' : '失败')+"</td>" +
-                            "<td>"+data[i].cBz+"</td>" +
                             "</tr>");
                     }
 

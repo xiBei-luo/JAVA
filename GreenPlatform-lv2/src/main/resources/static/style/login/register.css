@@ -60,6 +60,11 @@
 }
 
 
+.cVerification{
+    display: none;
+}
+
+
 /*终端尺寸适配*/
 @media screen and (max-width: 600px) {
     /*手机背景*/

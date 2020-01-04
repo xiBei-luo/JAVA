@@ -11,4 +11,6 @@ public interface OwerTGreenSpSpmxMapper {
     //当前登陆人未种植的种子
     List selectExaZz(Map paramsMap);
 
+    List selectNoZzSumDay(Map paramsMap);
+
 }

@@ -11,8 +11,7 @@
                 FROM
                     t_green_zz_zjzzmx A
                 WHERE
-                    A.c_kjz = '0'
-                AND A.c_sfjz = '0'
+                    A.c_sfjz = '0'
                 AND A.c_userid = #{C_USERID}
             ) X,
             t_green_sp_spmx X1
@@ -33,9 +32,18 @@
                 FROM
                     t_green_zz_zjzzmx A
                 WHERE
-                    A.c_kjz = '0'
-                AND A.c_sfjz = '0'
+                    A.c_sfjz = '0'
                 AND A.c_userid = #{C_USERID}
             )
+  </select>
+
+<select id="selectNoZzSumDay" parameterType="java.util.Map" resultType="java.util.Map">
+   SELECT
+        MAX(d_jzsj) lastJzzzsj,
+        DATEDIFF(now(), MAX(d_jzsj)) noZzSumDay
+    FROM
+        t_green_zz_jzjl
+    WHERE
+        c_userid = #{cUserid};
   </select>
 </mapper>

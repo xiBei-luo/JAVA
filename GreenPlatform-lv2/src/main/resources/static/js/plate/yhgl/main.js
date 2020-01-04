@@ -25,10 +25,10 @@ function initGrid(){
     $("#gridbox").attr({width:"100%",height:"100%"});
     grid = new dhtmlXGridObject('gridbox');
     grid.setImagePath("/publicFrame/dhtmlx-4.5/skins/web/imgs/");
-    grid.setHeader("操作,姓名,登录名,性别,证件号码,人员性质,人员状态,是否实名制,账户等级,电话号码,账户能量");
-    grid.setInitWidthsP("20,10,10,6,16,8,8,8,8,11,8");
-    grid.setColAlign("center,left,left,center,left,center,center,center,center,center,center");
-    grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
+    grid.setHeader("操作,姓名,登录名,性别,证件号码,人员性质,人员状态,是否实名制,账户等级,电话号码,账户能量,提现额度");
+    grid.setInitWidthsP("20,10,10,6,16,8,8,8,8,11,8,10");
+    grid.setColAlign("center,left,left,center,left,center,center,center,center,center,center,center");
+    grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");
     grid.enableMultiselect(false);
     grid.init();
 }
@@ -117,7 +117,8 @@ function initData(data){
             data[i].cIssmz == '1' ? '是' : '否',
             data[i].cRydj+'级',
             data[i].cPhone,
-            data[i].nNlhz
+            data[i].nNlhz,
+            data[i].n_zed
         ]);
         grid.setUserData(data[i].cUserid,'data',data[i]);
     }

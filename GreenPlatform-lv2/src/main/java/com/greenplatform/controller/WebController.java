@@ -150,6 +150,13 @@ public class WebController {
         return ReturnModelHandler.success(null);
     }
 
+    //是否一个月未种植植物业务
+    @RequestMapping(value = "/noZz",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnModel noZz(){
+        return webService.noZz();
+    }
+
     //获取邀请二维码
     @GetMapping(value = "/getInviteQrcode")
     public void getInviteQrcode(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){

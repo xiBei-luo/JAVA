@@ -73,11 +73,11 @@ function initEvent(){
 function countDownTime() {
     if (wait == 0) {
         $("#getVerificationCode").attr("disabled",false);
-        $("#getVerificationCode").val("重新获取");
+        $("#getVerificationCode").html("重新获取");
         wait = 60;
     } else {
         $("#getVerificationCode").attr("disabled",true);
-        $("#getVerificationCode").val("重新发送(" + wait + ")");
+        $("#getVerificationCode").html(wait + "S");
         wait--;
         setTimeout(function() {
             countDownTime()
@@ -149,6 +149,30 @@ function checkRegister(){
                     }*/
                 }
             },
+            cYqm: {
+                message: '邀请码验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '邀请码不能为空'
+                    },
+                    stringLength: {
+                        min: 3,
+                        max: 18,
+                        message: '邀请码长度必须在3到18位之间'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: '邀请码只能包含大写、小写、数字和下划线'
+                    }/*,
+                    remote: {
+                        url: '/checkForm/checkPhone',//验证地址
+                        data:{cPhone:$("#cPhone").val()},
+                        message: '手机号已被注册',//提示消息
+                        delay: 500,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
+                        type: 'POST'//请求方式
+                    }*/
+                }
+            },
             cLoginname: {
                 message: '用户名验证失败',
                 validators: {
@@ -205,13 +229,13 @@ function checkRegister(){
 
 function f_submitData(){
     var data = {
-        "cYqm":"-1",
-        "cPhone":$("#cPhone").val(),
-        "cLoginname":$("#cLoginname").val(),
-        "cPassword":$("#cPassword").val(),
-        "smsCode":$("#smsCode").val(),
-        "cRylb":'2'
-    }
+        "cYqm"       : $("#cYqm").val(),
+        "cPhone"     : $("#cPhone").val(),
+        "cLoginname" : $("#cLoginname").val(),
+        "cPassword"  : $("#cPassword").val(),
+        "smsCode"    : $("#smsCode").val(),
+        "cRylb"      : '2'
+    };
     var options = {
         url : '/login/register',
         type : 'post',
@@ -229,7 +253,7 @@ function f_submitData(){
                     closeable: true,
                     buttonLabel: "确定",
                     callback: function () {
-
+                        window.location.reload();
                     }
                 });
             }else{
@@ -243,7 +267,7 @@ function f_submitData(){
                     btnCancelLabel: "留在当前页面",
                     callback: function (ret) {
                         if(ret){
-                            window.location.href="/web/welcome";
+                            window.location.href="/web/index";
                         }
                     }
                 });

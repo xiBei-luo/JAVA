@@ -69,6 +69,12 @@ public class PlateServiceImpl implements PlateService {
     PlateUserBlacklistMapper plateUserBlacklistMapper;
     @Autowired
     OperateTableMapper operateTableMapper;
+    @Autowired
+    TGreenEdEdhzMapper tGreenEdEdhzMapper;
+    @Autowired
+    TGreenEdEdzjmxMapper tGreenEdEdzjmxMapper;
+    @Autowired
+    TGreenEdEdjsmxMapper tGreenEdEdjsmxMapper;
 
 
 
@@ -1341,6 +1347,16 @@ public class PlateServiceImpl implements PlateService {
 
     /**
      * 用户能量提现
+     * 业务说明：
+     *      约束：
+     *          1.能量不足，不允许提现
+     *          2.额度不足不允许提现
+     *      业务：
+ *              1.减少能量明细
+     *          2.修改能量汇总
+     *          3.新增提现记录
+     *          4.减少提现额度明细
+     *          5.修改提现额度汇总
      * @param jsonObject
      * @return
      */
@@ -1393,6 +1409,36 @@ public class PlateServiceImpl implements PlateService {
             }
 
             PlateUser plateUserCz = plateUser;//充值账户
+
+            //参数验证
+                //1.能量是否足够
+                //2.额度是否足够
+            TGreenNlHz tGreenNlHz1 = tGreenNlHzMapper.selectByPrimaryKey(plateUserCz.getcUserid());
+            BigDecimal nNlzl = tGreenNlHz1.getnNlhz();//充值账户能量总量
+            BigDecimal cTxzl = new BigDecimal(nFknl);//提现能量(提现金额)
+            if (nNlzl.compareTo(cTxzl) == -1){
+                return ReturnModelHandler.error("操作失败，用户能量不足！提现金额：【"+cTxzl+"】，用户账户能量总量：【"+nNlzl+"】");
+            }
+
+            //查询当前用户是否有额度汇总表记录
+            TGreenEdEdhz tGreenEdEdhz1 = tGreenEdEdhzMapper.selectByPrimaryKey(plateUser.getcUserid());
+            if (null == tGreenEdEdhz1 || "".equals(tGreenEdEdhz1.getcUserid())){
+                TGreenEdEdhz tGreenEdEdhz2 = new TGreenEdEdhz();
+                tGreenEdEdhz2.setcUserid(plateUser.getcUserid());
+                tGreenEdEdhz2.setnZed(new BigDecimal("0"));
+                tGreenEdEdhz2.setcZt("1");
+                tGreenEdEdhz2.setcCjuser(plateUser.getcUserid());
+                tGreenEdEdhz2.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                tGreenEdEdhzMapper.insert(tGreenEdEdhz2);
+            }
+
+            TGreenEdEdhz tGreenEdEdhz = tGreenEdEdhzMapper.selectByPrimaryKey(plateUserCz.getcUserid());
+            BigDecimal cEdzl = tGreenEdEdhz.getnZed();//用户总额度
+            if (cEdzl.compareTo(cTxzl) == -1){
+                return ReturnModelHandler.error("操作失败，用户提现额度不足！提现金额：【"+cTxzl+"】，用户提现额度：【"+cEdzl+"】");
+            }
+
+
 
             //减少能量明细
             TGreenNlJsnlmx tGreenNlJsnlmx = new TGreenNlJsnlmx();//减少能量明细表
@@ -1452,6 +1498,27 @@ public class PlateServiceImpl implements PlateService {
             tGreenNlTxjl.setcCjuser(plateUserOp.getcUserid());
             tGreenNlTxjl.setdCjsj(TimeUtil.getTimestamp(new Date()));
             tGreenNlTxjlMapper.insert(tGreenNlTxjl);
+
+            //额度减少明细
+            TGreenEdEdjsmx tGreenEdEdjsmx = new TGreenEdEdjsmx();
+            tGreenEdEdjsmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
+            tGreenEdEdjsmx.setcUserid(plateUserCz.getcUserid());
+            tGreenEdEdjsmx.setcJsyy("1");
+            tGreenEdEdjsmx.setdJssj(TimeUtil.getTimestamp(new Date()));
+            tGreenEdEdjsmx.setnJssl(cTxzl);
+            tGreenEdEdjsmx.setcZt("1");
+            tGreenEdEdjsmx.setcCjuser(plateUserOp.getcUserid());
+            tGreenEdEdjsmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
+            tGreenEdEdjsmxMapper.insert(tGreenEdEdjsmx);
+
+
+
+            //额度汇总修改
+            tGreenEdEdhz.setnZed(tGreenEdEdhz.getnZed().subtract(cTxzl));
+            tGreenEdEdhz.setdXgsj(TimeUtil.getTimestamp(new Date()));
+            tGreenEdEdhz.setcXguser(plateUserOp.getcUserid());
+            tGreenEdEdhzMapper.updateByPrimaryKey(tGreenEdEdhz);
+
 
             return ReturnModelHandler.success(null);
         }catch (Exception e){

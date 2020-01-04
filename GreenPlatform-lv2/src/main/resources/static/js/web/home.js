@@ -1,8 +1,12 @@
 $(function(){
     initEvent();
+
+    getTipsOfZz();
+
 });
 
 function initEvent() {
+
     //移动端滑动播放
     var myTouch = util.toucher(document.getElementById('carousel-example-generic'));
     myTouch.on('swipeLeft',function(e){
@@ -33,7 +37,6 @@ function f_selectRwDayTips(){
     });//构造请求参数
 
     sendRequest.sendRequest(function(ret){
-        console.log(ret);
         if("0" == ret.flag){
            /* $("#rwDayModal .modal-body").html("<p>亲爱的用户，您本次已种植【仙人掌】14天，</p>\n" +
                 "                    <p>完成本次30天任务种植可获得总能量为￥：112，</p>\n" +
@@ -52,9 +55,6 @@ function f_selectRwDayTips(){
  * @param sRwlb  任务类别，必传
  */
 function f_finishMission(sRwlb){
-    /*$(".rwlb_"+sRwlb).css("visibility","hidden");
-    $(".hand_"+sRwlb).css("visibility","hidden");
-    return;*/
     var sendRequest = new SendRequest("/web/accomplishRw","POST");//构造对象
     sendRequest.addParamObj({
         cRwlb:sRwlb
@@ -83,6 +83,27 @@ function f_finishMission(sRwlb){
                 closeable: true,
                 buttonLabel: "确定"
             });
+        }
+
+    });//发送请求并获取返回结果
+}
+
+/**
+ * 获取多少天未种植植物提示
+ */
+function getTipsOfZz(){
+    var sendRequest = new SendRequest("/web/noZz","POST");//构造对象
+    sendRequest.addParamObj({
+
+    });//构造请求参数
+
+    sendRequest.sendRequest(function(ret){
+        if("0" != ret.flag){
+            $(".carousel-indicators li:first-child").attr("class","active");
+            $(".carousel-inner .item:first-child").addClass("active");
+
+            $("#noZzModal #noZzContent").html(ret.msg);
+            $("#noZzModal").modal('show');
         }
 
     });//发送请求并获取返回结果

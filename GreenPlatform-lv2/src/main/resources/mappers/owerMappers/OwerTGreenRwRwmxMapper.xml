@@ -42,4 +42,14 @@
         WHERE c_userid = #{cUserid,jdbcType=TIMESTAMP}
           AND c_rwday != #{cRwday,jdbcType=VARCHAR}
     </update>
+
+    <select id="selectMinRwdayByUserid" parameterType="java.util.HashMap" resultType="java.lang.String">
+        SELECT
+            MIN(d_rwsj)
+        FROM
+            t_green_rw_rwmx
+        WHERE
+            c_userid = #{cUserid}
+        AND c_zt = '1'
+    </select>
 </mapper>

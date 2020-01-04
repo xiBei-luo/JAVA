@@ -2,47 +2,31 @@ package com.greenplatform.service.webImpl;
 
 import com.greenplatform.util.TimeUtil;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
-        String dBrwDay = getPrevTimeOfCur(TimeUtil.getLocalDate(new Date()),-1);
-        System.out.println(dBrwDay);
-        Timestamp ts = Timestamp.valueOf(dBrwDay);
-        System.out.println(ts);
-    }
-    private static String getPrevDayOfCur(String time,int day){
-        String sub = null;
-        try {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date timeNow = df.parse(time);
-            Calendar begin=Calendar.getInstance();
-            begin.setTime(timeNow);
-            begin.add(Calendar.DAY_OF_MONTH,day);
-            sub = df.format(begin.getTime());
-            //System.out.println(sub);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return sub;
+
+        String cYqm = "17322222222";
+        System.out.println(isPhone(cYqm));
+
     }
 
-    private static String getPrevTimeOfCur(String time,int day){
-        String sub = null;
-        try {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            java.util.Date timeNow = df.parse(time);
-            Calendar begin=Calendar.getInstance();
-            begin.setTime(timeNow);
-            begin.add(Calendar.DAY_OF_MONTH,day);
-            sub = df.format(begin.getTime());
-            //System.out.println(sub);
-        } catch (Exception e) {
-            e.printStackTrace();
+
+    public static boolean isPhone(String phone) {
+        String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
+        if (phone.length() != 11) {
+            return false;
+        } else {
+            Pattern p = Pattern.compile(regex);
+            Matcher m = p.matcher(phone);
+            return m.matches();
         }
-        return sub;
     }
 }

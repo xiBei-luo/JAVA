@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.sql.Time;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Transactional
@@ -104,17 +106,63 @@ public class LoginServiceImpl implements LoginService {
             JSONObject jsonParams = JSONObject.fromObject(jsonObject);
 
 
+            //邀请码判断
+            Object cYqrPhoneObj = jsonParams.get("cYqm");
+            if (null == cYqrPhoneObj){
+                return ReturnModelHandler.error("邀请码不能为空，请输入！");
+            }
+
+            //邀请人手机号码
+            String cYqm = jsonParams.getString("cYqm");
+            String cYqrPhone = "";
+            //手机号码正则
+            String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(166)|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
+
+            Pattern p = Pattern.compile(regex);
+            Matcher m = p.matcher(cYqm);
+            boolean isMatch = m.matches();//邀请码符合此规则认为是手机号，否则为登录名
+            //如果邀请码是用户登录名，需要根据用户登录名验证师傅账户是否存在，将查询的手机号赋值给邀请人手机号码
+            if(isMatch){
+                //验证邀请人手机号码是否存在
+                boolean isExist = checkUser("phone",cYqm);
+                if (isExist == true){
+                    return ReturnModelHandler.error("邀请人不存在，请检查输入是否正确！");
+                }
+                cYqrPhone = cYqm;
+            }else{
+                boolean isExist = checkUser("loginname",cYqm);
+                if (isExist == true){
+                    return ReturnModelHandler.error("邀请人不存在，请检查输入是否正确！");
+                }
+                PlateUserExample plateUserExample = new PlateUserExample();
+                PlateUserExample.Criteria criteria = plateUserExample.createCriteria();
+                criteria.andCLoginnameEqualTo(cYqm);
+                List plateUserList = plateUserMapper.selectByExample(plateUserExample);
+                if (plateUserList.size() > 1){
+                    return ReturnModelHandler.error("师傅账户异常，请联系平台客服！");
+                }else if (plateUserList.size() < 1){
+                    return ReturnModelHandler.error("师傅账户不存在，请检查输入是否正确！");
+                }
+                PlateUser plateUserFather = (PlateUser) plateUserList.get(0);
+                cYqrPhone = plateUserFather.getcPhone();
+            }
+
+
+
+
+
+
+            //手机号与验证码参数构造
             Map hashMap = new HashMap();
             hashMap.put("cPhone",jsonParams.getString("cPhone"));
             hashMap.put("smsCode",jsonParams.getString("smsCode"));
-
             //验证手机号码是否注册
             boolean isUse = checkUser("phone",jsonParams.getString("cPhone"));
             if (isUse == false){
                 return ReturnModelHandler.error("手机号已经被注册！");
             }
 
-            ReturnModel checkSmsCodeReturnModel = checkSmsCode(hashMap,session);
+            ReturnModel checkSmsCodeReturnModel = checkSmsCode(hashMap,session);//验证短信验证码是否输入正确
 
             if (!(0 == checkSmsCodeReturnModel.getFlag())){
                 return checkSmsCodeReturnModel;
@@ -126,71 +174,81 @@ public class LoginServiceImpl implements LoginService {
                 plateUser.setcLoginname(jsonParams.getString("cLoginname"));
                 plateUser.setcPassword(jsonParams.getString("cPassword"));
                 plateUser.setcRylb(jsonParams.getString("cRylb"));
+
+                //============师傅账户操作begin================
                 //如果是被邀请注册的用户（师傅表增加记录，师傅账户获得1000金币奖励）
-                if (!("-1".equals(jsonParams.getString("cYqm")))){
-                    String cUseridFather = jsonParams.getString("cYqm");//邀请码，用户id
-                    String[] exaUserArr = {"568a7b57165b4ac3aeb5046067e96f5a","6536e3dbd98645238249f986bd585f2e","f0d0b12a63ae4b4f9d45aff8bcbb3211", "f369e00fb903482e85ce3d55a663e857"};//不验证5个徒弟的用户
 
-                    PlateUserFatherExample plateUserFatherExample = new PlateUserFatherExample();
-                    PlateUserFatherExample.Criteria criteria = plateUserFatherExample.createCriteria();
-                    criteria.andCZtEqualTo("1");
-                    criteria.andCUseridEqualTo(cUseridFather);
-                    criteria.andCFxmouthEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,7));
-                    List fatherList = plateUserFatherMapper.selectByExample(plateUserFatherExample);
-                    System.out.println("注册时："+fatherList.size());
-
-                    //不限制指定的用户只收5个徒弟
-                    boolean flag = Arrays.asList(exaUserArr).contains(cUseridFather);
-                    if (flag == false &&fatherList.size() >= 5){
-                        return ReturnModelHandler.error("注册失败，邀请您注册的用户本月已邀请了五个人注册，不能再邀请！");
-                    }
-
-                    /*for (int i=0;i<exaUserArr.length;i++){
-                        if (!cUseridFather.equals(exaUserArr[i])){
-                            if (fatherList.size() >= 5){
-                                return ReturnModelHandler.error("注册失败，邀请您注册的用户本月已邀请了五个人注册，不能再邀请！");
-                            }
-                        }
-                    }*/
-
-
-                    plateUser.setcFatherid(cUseridFather);
-                    plateUser.setcYqm(cUseridFather);
-
-                    //师傅表增加记录
-                    PlateUserFather plateUserFather = new PlateUserFather();
-                    plateUserFather.setcUserid(cUseridFather);
-                    plateUserFather.setcSonid(majorKey);
-                    plateUserFather.setdFxsj(TimeUtil.getTimestamp(new Date()));
-                    plateUserFather.setcFxmouth(TimeUtil.getLocalDate(new Date()).substring(0,7));
-                    plateUserFather.setcZt("1");
-                    plateUserFather.setcCjuser(majorKey);
-                    plateUserFather.setdCjsj(TimeUtil.getTimestamp(new Date()));
-                    plateUserFatherMapper.insert(plateUserFather);
-
-                    //师傅账户获得1000金币奖励（金币金币增加表，金币汇总表）
-                    TGreenGoldZjmx tGreenGoldZjmx = new TGreenGoldZjmx();
-                    String nZjsj = getDmzByDm("C_GOLD_ZJYY_2");
-                    tGreenGoldZjmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
-                    tGreenGoldZjmx.setcUserid(cUseridFather);
-                    tGreenGoldZjmx.setnZjsl(new BigDecimal(nZjsj));
-                    tGreenGoldZjmx.setdZjsj(TimeUtil.getTimestamp(new Date()));
-                    tGreenGoldZjmx.setcZjyy("C_GOLD_ZJYY_2");
-                    tGreenGoldZjmx.setcZjyysm("平台分享好友");
-                    tGreenGoldZjmx.setcZt("1");
-                    tGreenGoldZjmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
-                    tGreenGoldZjmx.setcCjuser(majorKey);
-                    tGreenGoldZjmxMapper.insert(tGreenGoldZjmx);
-
-                    TGreenGoldHz tGreenGoldHz = tGreenGoldHzMapper.selectByPrimaryKey(cUseridFather);
-                    tGreenGoldHz.setnJbzl(tGreenGoldHz.getnJbzl().add(new BigDecimal(nZjsj)));
-                    tGreenGoldHz.setcXguser(majorKey);
-                    tGreenGoldHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
-                    tGreenGoldHzMapper.updateByPrimaryKey(tGreenGoldHz);
-
-
-
+                //根据邀请人手机号码查询邀请人信息(查询师傅账户信息)
+                String cUseridFather = "";//邀请码，用户id
+                PlateUserExample plateUserExample = new PlateUserExample();
+                PlateUserExample.Criteria criteria1 = plateUserExample.createCriteria();
+                criteria1.andCPhoneEqualTo(cYqrPhone);
+                criteria1.andCZtEqualTo("1");
+                criteria1.andCRylbEqualTo("2");
+                criteria1.andCRyztEqualTo("1");
+                criteria1.andCIssmzEqualTo("1");
+                criteria1.andCRyxzEqualTo("1");
+                List plateUserList = plateUserMapper.selectByExample(plateUserExample);
+                if (plateUserList.size() != 1){
+                    return ReturnModelHandler.error("师傅账户不存在或存在异常，请检查！");
+                }else{
+                    PlateUser plateUser1 = (PlateUser) plateUserList.get(0);
+                    cUseridFather = plateUser1.getcUserid();
                 }
+                System.out.println("邀请人手机号码："+cYqrPhone);
+                System.out.println("邀请人id："+cUseridFather);
+
+                //超级用户，不限制一个月只能收徒5个
+                String[] exaUserArr = {"568a7b57165b4ac3aeb5046067e96f5a","6536e3dbd98645238249f986bd585f2e","f0d0b12a63ae4b4f9d45aff8bcbb3211", "f369e00fb903482e85ce3d55a663e857"};//不验证5个徒弟的用户
+
+                PlateUserFatherExample plateUserFatherExample = new PlateUserFatherExample();
+                PlateUserFatherExample.Criteria criteria = plateUserFatherExample.createCriteria();
+                criteria.andCZtEqualTo("1");
+                criteria.andCUseridEqualTo(cUseridFather);
+                criteria.andCFxmouthEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,7));
+                List fatherList = plateUserFatherMapper.selectByExample(plateUserFatherExample);
+                System.out.println("注册时徒弟个数："+fatherList.size());
+                //不限制指定的用户只收5个徒弟
+                boolean flag = Arrays.asList(exaUserArr).contains(cUseridFather);
+                if (flag == false &&fatherList.size() >= 5){
+                    return ReturnModelHandler.error("注册失败，邀请您注册的用户本月已邀请了五个人注册，不能再邀请！");
+                }
+                plateUser.setcFatherid(cUseridFather);
+                plateUser.setcYqm(cUseridFather);
+
+                //师傅表增加记录
+                PlateUserFather plateUserFather = new PlateUserFather();
+                plateUserFather.setcUserid(cUseridFather);
+                plateUserFather.setcSonid(majorKey);
+                plateUserFather.setdFxsj(TimeUtil.getTimestamp(new Date()));
+                plateUserFather.setcFxmouth(TimeUtil.getLocalDate(new Date()).substring(0,7));
+                plateUserFather.setcZt("1");
+                plateUserFather.setcCjuser(majorKey);
+                plateUserFather.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                plateUserFatherMapper.insert(plateUserFather);
+
+                //师傅账户获得1000金币奖励（金币金币增加表，金币汇总表）
+                TGreenGoldZjmx tGreenGoldZjmx = new TGreenGoldZjmx();
+                String nZjsj = getDmzByDm("C_GOLD_ZJYY_2");
+                tGreenGoldZjmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
+                tGreenGoldZjmx.setcUserid(cUseridFather);
+                tGreenGoldZjmx.setnZjsl(new BigDecimal(nZjsj));
+                tGreenGoldZjmx.setdZjsj(TimeUtil.getTimestamp(new Date()));
+                tGreenGoldZjmx.setcZjyy("C_GOLD_ZJYY_2");
+                tGreenGoldZjmx.setcZjyysm("平台分享好友");
+                tGreenGoldZjmx.setcZt("1");
+                tGreenGoldZjmx.setdCjsj(TimeUtil.getTimestamp(new Date()));
+                tGreenGoldZjmx.setcCjuser(majorKey);
+                tGreenGoldZjmxMapper.insert(tGreenGoldZjmx);
+
+                TGreenGoldHz tGreenGoldHz = tGreenGoldHzMapper.selectByPrimaryKey(cUseridFather);
+                tGreenGoldHz.setnJbzl(tGreenGoldHz.getnJbzl().add(new BigDecimal(nZjsj)));
+                tGreenGoldHz.setcXguser(majorKey);
+                tGreenGoldHz.setdXgsj(TimeUtil.getTimestamp(new Date()));
+                tGreenGoldHzMapper.updateByPrimaryKey(tGreenGoldHz);
+                //=================师傅账户操作end=======================
+
+
 
                 //1.判断邮箱或用户名是否被注册
                 if (false == checkUser("phone",plateUser.getcPhone())){
@@ -222,7 +280,7 @@ public class LoginServiceImpl implements LoginService {
                 if (1 != insertRet){
                     return ReturnModelHandler.systemError();
                 }else{
-                    //平台用户注册成功则对应账户账户增加价值100能量的种子(注册成功，但还未实名制账户，实名制后将状态修改为有效1)
+                    //用户注册成功，平台用户注册成功则对应账户账户增加价值100能量的种子(注册成功，但还未实名制账户，实名制后将状态修改为有效1)
                     TGreenZzZjzzmx tGreenZzZjzzmx = new TGreenZzZjzzmx();
                     tGreenZzZjzzmx.setcLsh(UUID.randomUUID().toString().replaceAll("-", ""));
                     tGreenZzZjzzmx.setcUserid(plateUser.getcUserid());

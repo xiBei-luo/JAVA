@@ -12,6 +12,10 @@ function _init(args, mdi, layerIdx, parentWindow) {
 
         $(".cUsername").text(args.cUsername);
         $("#cUsername").val(args.cUsername);
+        $(".nNlhz").text("【￥"+args.nNlhz+"】");
+        $("#nNlhz").val(args.nNlhz);
+        $(".n_zed").text("【￥"+args.n_zed+"】");
+        $("#n_zed").val(args.n_zed);
         $(".cZjhm").text(args.cZjhm);
         $("#cZjhm").val(args.cZjhm);
         $(".cEmail").text(args.cEmail);

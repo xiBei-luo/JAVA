@@ -265,66 +265,6 @@ public class TGreenRwRwmxReplenishExample {
             return (Criteria) this;
         }
 
-        public Criteria andDCzsjIsNull() {
-            addCriterion("d_czsj is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDCzsjIsNotNull() {
-            addCriterion("d_czsj is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDCzsjEqualTo(Date value) {
-            addCriterion("d_czsj =", value, "dCzsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDCzsjNotEqualTo(Date value) {
-            addCriterion("d_czsj <>", value, "dCzsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDCzsjGreaterThan(Date value) {
-            addCriterion("d_czsj >", value, "dCzsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDCzsjGreaterThanOrEqualTo(Date value) {
-            addCriterion("d_czsj >=", value, "dCzsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDCzsjLessThan(Date value) {
-            addCriterion("d_czsj <", value, "dCzsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDCzsjLessThanOrEqualTo(Date value) {
-            addCriterion("d_czsj <=", value, "dCzsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDCzsjIn(List<Date> values) {
-            addCriterion("d_czsj in", values, "dCzsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDCzsjNotIn(List<Date> values) {
-            addCriterion("d_czsj not in", values, "dCzsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDCzsjBetween(Date value1, Date value2) {
-            addCriterion("d_czsj between", value1, value2, "dCzsj");
-            return (Criteria) this;
-        }
-
-        public Criteria andDCzsjNotBetween(Date value1, Date value2) {
-            addCriterion("d_czsj not between", value1, value2, "dCzsj");
-            return (Criteria) this;
-        }
-
         public Criteria andCBcdayIsNull() {
             addCriterion("c_bcday is null");
             return (Criteria) this;
@@ -392,6 +332,66 @@ public class TGreenRwRwmxReplenishExample {
 
         public Criteria andCBcdayNotBetween(String value1, String value2) {
             addCriterion("c_bcday not between", value1, value2, "cBcday");
+            return (Criteria) this;
+        }
+
+        public Criteria andDCzsjIsNull() {
+            addCriterion("d_czsj is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDCzsjIsNotNull() {
+            addCriterion("d_czsj is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDCzsjEqualTo(Date value) {
+            addCriterion("d_czsj =", value, "dCzsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDCzsjNotEqualTo(Date value) {
+            addCriterion("d_czsj <>", value, "dCzsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDCzsjGreaterThan(Date value) {
+            addCriterion("d_czsj >", value, "dCzsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDCzsjGreaterThanOrEqualTo(Date value) {
+            addCriterion("d_czsj >=", value, "dCzsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDCzsjLessThan(Date value) {
+            addCriterion("d_czsj <", value, "dCzsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDCzsjLessThanOrEqualTo(Date value) {
+            addCriterion("d_czsj <=", value, "dCzsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDCzsjIn(List<Date> values) {
+            addCriterion("d_czsj in", values, "dCzsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDCzsjNotIn(List<Date> values) {
+            addCriterion("d_czsj not in", values, "dCzsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDCzsjBetween(Date value1, Date value2) {
+            addCriterion("d_czsj between", value1, value2, "dCzsj");
+            return (Criteria) this;
+        }
+
+        public Criteria andDCzsjNotBetween(Date value1, Date value2) {
+            addCriterion("d_czsj not between", value1, value2, "dCzsj");
             return (Criteria) this;
         }
 

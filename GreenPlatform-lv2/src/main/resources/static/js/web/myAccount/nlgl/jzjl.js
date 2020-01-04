@@ -1,13 +1,13 @@
 $(function(){
-    var currentYear = new Date().getFullYear();//当前年份
-    var currentMouth = new Date().getMonth()+1;//当前月份
+    //var currentYear = new Date().getFullYear();//当前年份
+    //var currentMouth = new Date().getMonth()+1;//当前月份
 
 
-    $("#cMonth").val(currentYear+"-"+currentMouth);
-   $("#loginoutBtn").click(function(){
-       //window.parent.location整个页面跳转
-       window.parent.location = "/base/loginout";
-   });
+    //$("#cMonth").val(currentYear+"-"+currentMouth);
+    $("#loginoutBtn").click(function(){
+        //window.parent.location整个页面跳转
+        window.parent.location = "/base/loginout";
+    });
 
     $("#btnSearch").click(function(){
         loadGridData("/web/selectTGreenZzJzjl");
@@ -19,9 +19,8 @@ $(function(){
 function loadGridData(reqUrl){
     $(".table tbody tr").remove();
     var data = {
-        "cMonth":$("#cMonth").val()
+        "cMonth"  :  $("#cMonth").val()
     };
-
     var options = {
         url : reqUrl,
         type : 'post',
@@ -52,7 +51,6 @@ function loadGridData(reqUrl){
                             "<td>"+data[i].dJzsj+"</td>" +
                             "<td>"+data[i].cUsername+"</td>" +
                             "<td>"+data[i].cSpmc+"</td>" +
-                            "<td>"+data[i].cBz+"</td>" +
                             "</tr>");
                     }
 

@@ -39,7 +39,7 @@ function f_contributeSeed(cLsh,cSpbh){
                 buttonLabel: "确定",
                 callback: function(ret){
                     if (ret){
-                        $("#myAccountModel .close").trigger("click");
+                        location.reload();
                     }
                 }
             });

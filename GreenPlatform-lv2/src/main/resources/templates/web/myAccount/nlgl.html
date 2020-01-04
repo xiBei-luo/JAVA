@@ -27,7 +27,7 @@
                     <td>我的能量</td>
                     <td align="center"><span class="badge" th:text="'￥'+${loginuserAccountNlgl.n_nlhz}"></span></td>
                     <td align="right">
-                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#customModel">充值</button>
+                        <!--<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#customModel">充值</button>-->
                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#customModel">提现</button>
                     </td>
                 </tr>
@@ -46,11 +46,16 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>充值记录</td>
+                    <td>购买记录</td>
                     <td></td>
                     <td align="right">
                         <a id="czjlBtn" class="btn btn-success btn-sm">查询</a>
                     </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
         </div>
@@ -67,7 +72,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="customModelLabel">扫码加客服</h4>
+                <h4 class="modal-title" id="customModelLabel">下载"蝙蝠App"扫码加平台客服</h4>
             </div>
             <div class="modal-body">
                 <img src="/publicImg/customImg.jpg" id="customImg" alt="">

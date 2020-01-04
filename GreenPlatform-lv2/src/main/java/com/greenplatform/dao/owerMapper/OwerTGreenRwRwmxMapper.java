@@ -9,4 +9,5 @@ public interface OwerTGreenRwRwmxMapper {
     List selectTGreenRwRwmx(Map paramMap);
     int clearPlateUserRwmx(Map paramMap);
     int updateZtBycUserid(Map paramMap);
+    String selectMinRwdayByUserid(Map paramMap);
 }

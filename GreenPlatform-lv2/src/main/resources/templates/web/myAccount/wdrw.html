@@ -42,12 +42,16 @@
                     <td>沐浴阳光</td>
                     <td align="right"><span th:attr="class = (${loginuserAccountWdrw.retRw['3'] == false ? 'badge badge-warning' : 'badge'})" th:text="${loginuserAccountWdrw.retRw['3'] == false ? '未完成' : '已完成'}">未完成</span></td>
                 </tr>
-                <tr>
+                <tr th:if = "${loginuserAccountWdrw.brwShow} == true">
                     <td colspan="2" align="center"><h4>昨日任务</h4></td>
                 </tr>
-                <tr>
+                <tr th:if = "${loginuserAccountWdrw.brwShow} == true">
                     <td>昨日任务未完成！</td>
                     <td align="right"><span class="btn btn-sm btn-danger" id="btnAccYesRw">立即补</span></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
         </div>
