@@ -106,7 +106,7 @@ html,body{
 
 #goldDzRankContent_1,#goldDzRankContent_2,#goldDzRankContent_3,.goldDzRankContent_ower{
     background-size: 40px 40px;
-    background-position: center;
+    background-position: center -1px;
 }
 
 

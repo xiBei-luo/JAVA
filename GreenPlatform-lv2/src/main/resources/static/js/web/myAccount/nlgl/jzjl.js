@@ -17,6 +17,22 @@ $(function(){
 
 //检索数据
 function loadGridData(reqUrl){
+    if (null == $("#cMonth").val() || "" == $("#cMonth").val()){
+        BootstrapDialog.alert({
+            type: BootstrapDialog.TYPE_WARNING,
+            size: BootstrapDialog.SIZE_SMALL,
+            title: '提示',
+            message: "请选择查询月份！",
+            closeable: true,
+            buttonLabel: "确定",
+            callback: function () {
+                $("#cMonth").focus();
+            }
+        });
+        return;
+    }
+
+
     $(".table tbody tr").remove();
     var data = {
         "cMonth"  :  $("#cMonth").val()

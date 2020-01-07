@@ -48,6 +48,12 @@ html,body{
     font-weight: bold;
 }
 
+.contentBoxWrap table tr td img{
+    width: 25px;
+    height: 25px;
+    margin-right: 15px;
+}
+
 /*底部返回按钮*/
 .footerBtn{
     width: 50%;

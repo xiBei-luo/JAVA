@@ -17,13 +17,13 @@
 <!--我的账户-->
 <div id="myAccount">
     <div class="titleBox">
-        <h3>充值记录</h3>
+        <h3>购买记录</h3>
     </div>
     <div class="contentBox">
         <div class="contentBoxWrap">
             <div class="row">
                 <div class="col-md-8 col-xs-8">
-                    <input type="text" id="cMonth" class="form-control" placeholder="请选择需要查询的月份" onclick="WdatePicker({dateFmt:'yyyy-MM'})">
+                    <input type="month" id="cMonth" class="form-control" placeholder="请选择需要查询的月份" >
                 </div>
                 <div class="col-md-4 col-xs-4">
                     <button class="btn btn-success" id="btnSearch">查询</button>
@@ -39,16 +39,16 @@
                     <thead>
                     <tr>
                         <td>
-                            充值时间
+                            购买时间
                         </td>
                         <td>
-                            充值金额
+                            购买金额
                         </td>
                         <td>
-                            充值人
+                            购买人
                         </td>
                         <td>
-                            充值状态
+                            购买状态
                         </td>
                     </tr>
                     </thead>

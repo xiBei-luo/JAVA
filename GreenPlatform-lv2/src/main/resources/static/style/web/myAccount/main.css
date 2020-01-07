@@ -90,6 +90,11 @@ html,body{
     border-radius: 10px;
 }
 
+#footerBox button{
+    font-weight: bold;
+    color: #000000;
+}
+
 
 
 /*终端尺寸适配*/
