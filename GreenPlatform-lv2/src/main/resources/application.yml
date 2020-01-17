@@ -19,8 +19,8 @@ mybatis:
   type-aliases-package: com.greenplatform.model
 server:
   port: 80
-  servlet:
-    context-path: /GreenPlatform_war_exploded  #请求上下文
+   servlet:
+     context-path: /GreenPlatform_war_exploded  #请求上下文
 #logging:
 #  level:
 #    com:

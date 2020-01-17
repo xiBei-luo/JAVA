@@ -32,6 +32,24 @@ function _init(args, mdi, layerIdx, parentWindow) {
 
 
     function initEvent(){
+        //日期
+        $('#dFksj').datetimepicker({
+            format: 'yyyy-mm-dd hh:ii:ss',
+            autoclose: 1,
+            todayHighlight: 1,//今天高亮
+            todayBtn: true,
+            language:'zh-CN'
+        });
+        $('#dSksj').datetimepicker({
+            format: 'yyyy-mm-dd hh:ii:ss',
+            autoclose: 1,
+            todayHighlight: 1,//今天高亮
+            todayBtn: true,
+            language:'zh-CN'
+        });
+
+
+
         $("#cFkfs").change(function(){
             $(".fk_yhk input").val("");
             if ("3" == $("#cFkfs").val()){
