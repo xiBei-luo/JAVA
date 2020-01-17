@@ -127,23 +127,29 @@ public class QRCodeUtil {
         QRCodeUtil.encode(content, null, output, false);
     }
 
-    public static String decode(File file) throws Exception {
-        BufferedImage image;
-        image = ImageIO.read(file);
-        if (image == null) {
+    public static String decode(File file) {
+        try{
+            BufferedImage image;
+            image = ImageIO.read(file);
+            if (image == null) {
+                return null;
+            }
+            BufferedImageLuminanceSource source = new BufferedImageLuminanceSource(image);
+            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+            Result result;
+            Hashtable hints = new Hashtable();
+            hints.put(DecodeHintType.CHARACTER_SET, CHARSET);
+            result = new MultiFormatReader().decode(bitmap, hints);
+            String resultStr = result.getText();
+            return resultStr;
+        }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
-        BufferedImageLuminanceSource source = new BufferedImageLuminanceSource(image);
-        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-        Result result;
-        Hashtable hints = new Hashtable();
-        hints.put(DecodeHintType.CHARACTER_SET, CHARSET);
-        result = new MultiFormatReader().decode(bitmap, hints);
-        String resultStr = result.getText();
-        return resultStr;
+
     }
 
-    public static String decode(String path) throws Exception {
+    public static String decode(String path) {
         return QRCodeUtil.decode(new File(path));
     }
 

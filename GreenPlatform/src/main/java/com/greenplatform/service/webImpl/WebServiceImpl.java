@@ -839,12 +839,13 @@ public class WebServiceImpl implements WebService {
         //4.备份点赞汇总表
         String newTbleName = "t_green_gold_dzhz_"+(TimeUtil.getLocalDate(new Date()).substring(0,10).replace("-",""));//新备份表名称
         Map newTblMap = new HashMap();
-        newTblMap.put("tableName",newTbleName);
-        operateTableMapper.createDzhzNewTable(newTblMap);//创建新表
+        newTblMap.put("oldTable","t_green_gold_dzhz");
+        newTblMap.put("newTable",newTbleName);
+        operateTableMapper.createNewTable(newTblMap);//创建新表
         Map paramsMap = new HashMap();
         paramsMap.put("newTable",newTbleName);
         paramsMap.put("oldTable","t_green_gold_dzhz");
-        operateTableMapper.insert(paramsMap);//新表插入数据
+        operateTableMapper.insertNewTblData(paramsMap);//新表插入数据
 
 
 
@@ -929,6 +930,7 @@ public class WebServiceImpl implements WebService {
 
             float sysParamOfAddNl = Float.parseFloat(getDmzByDm("C_ZWJZJL_NL_"+cSpbh));//捐赠种子后得到的能量奖励
 
+            //System.out.println(sysParamOfAddNl);
 
             float sysParamOfUserLev = Float.parseFloat(getDmzByDm("C_ZHDJ_EXTJL_"+plateUser.getcRydj()));//账户等级对应的能量奖励百分比
 
@@ -959,7 +961,8 @@ public class WebServiceImpl implements WebService {
 
 
 
-            float sysParamOfGoldJl = 500;//植物捐赠后的金币奖励值，固定500
+            float sysParamOfGoldJl = Float.parseFloat(getDmzByDm("C_ZWJZJL_GOLD_"+cSpbh));//捐赠种子后得到的金币奖励
+            //float sysParamOfGoldJl = 500;//植物捐赠后的金币奖励值，固定500
 
             /*System.out.println("捐赠此植物的能量奖励"+sysParamOfAddNl);
             System.out.println("捐赠此植物的账户等级额外奖励百分比"+sysParamOfUserLev);
@@ -1414,34 +1417,39 @@ public class WebServiceImpl implements WebService {
             criteria.andCUseridEqualTo(GetcurrentLoginUser.getCurrentUser().getcUserid());
             criteria.andCFxmouthEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,7));
             List plateUserFatherList = plateUserFatherMapper.selectByExample(plateUserFatherExample);
+            System.out.println("徒弟数量："+plateUserFatherList.size());
             if (plateUserFatherList.size() >= 5){
+                System.out.println("收徒数量大于5");
                 return ReturnModelHandler.success("C:/Users/Administrator/greenplatformTmp/qrcode/error.png");
             }
 
 
-
-
+            System.out.println("1");
             PlateUser plateUser = GetcurrentLoginUser.getCurrentUser();
+            System.out.println("当前登陆人："+plateUser);
             //扫描后跳转路径（跳转至注册页面）
             String qrcodeUrl = "https://lhwlljnw.com/base/qrcodeRegister?user="+plateUser.getcUserid();//正式环境
             //String qrcodeUrl = "http://127.0.0.1/base/qrcodeRegister?user="+plateUser.getcUserid();//测试环境
+            System.out.println("2");
             // 嵌入二维码的图片路径
             String imgPath = "C:/Users/Administrator/greenplatformTmp/logo.png";//正式环境
             //String imgPath = "C:/Users/CDMCS/Desktop/logo.png";//测试环境
-
+            System.out.println("3");
             // 生成的二维码的路径及名称
             String destPath = "C:/Users/Administrator/greenplatformTmp/qrcode/"+plateUser.getcUserid()+".jpg";//正式环境
             //String destPath = "C:/Users/CDMCS/Desktop/qrcode/"+plateUser.getcUserid()+".jpg";//测试环境
-
+            System.out.println("4");
             //生成二维码
             QRCodeUtil.encode(qrcodeUrl, imgPath, destPath, true);
+            System.out.println("5");
             // 解析二维码
             String str = QRCodeUtil.decode(destPath);
             // 打印出解析出的内容
             System.out.println(str);
-
+            System.out.println(destPath);
             return ReturnModelHandler.success(destPath);
         }catch (Exception e){
+            System.out.println("异常");
             e.printStackTrace();
             return ReturnModelHandler.systemError();
         }

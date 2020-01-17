@@ -6,7 +6,7 @@
     <groupId>com.luo</groupId>
     <artifactId>GreenPlatform</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>GreenPlatform</name>
     <description>Green Platform</description>

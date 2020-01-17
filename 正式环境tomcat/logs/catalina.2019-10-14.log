@@ -1,0 +1,2 @@
+14-Oct-2019 13:39:39.935 严重 [ajp-nio-8009-exec-3] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature [18245]
+14-Oct-2019 17:42:46.709 严重 [ajp-nio-8009-exec-4] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature [18245]

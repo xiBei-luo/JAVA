@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绿沙平台</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/style/welcome/doLike.css">
+
+</head>
+<body>
+
+
+<!--点赞排行榜-->
+<div id="goldList" class="container-fluid">
+    <div class="goldListWrap">
+        <div class="goldListTitleBox">
+            <h3 class="text-center goldListTitle">金币点赞排行榜TOP10</h3>
+
+            <div class="btnLikeBox">
+                <span class="glyphicon glyphicon-thumbs-up" id="btnLike"></span>
+                <span id="jsGold">-50</span>
+            </div>
+        </div>
+        <div class="goldListContentBox">
+            <div class="borderShade">
+                <div class="littleSquare item-1"></div>
+                <div class="littleSquare item-2"></div>
+                <div class="littleSquare item-3"></div>
+                <div class="littleSquare item-4"></div>
+            </div>
+            <div class="goldListContentBoxWrap">
+                <div class="row goldDzRankTitle">
+                    <div class="col-md-4 col-xs-3">排名</div>
+                    <div class="col-md-4 col-xs-4">用户</div>
+                    <div class="col-md-4 col-xs-5">点赞数</div>
+                </div>
+                <div></div>
+                <div class="row goldDzRankContent" th:each="tGreenGoldDzhzList,tGreenGoldDzhzStatu : ${loginuserHome.tGreenGoldDzhzList}">
+                    <div class="col-md-4 col-xs-3" th:text=${tGreenGoldDzhzStatu.index+1} th:attr="id = 'goldDzRankContent_'+${tGreenGoldDzhzStatu.index+1}"></div>
+                    <div class="col-md-4 col-xs-4" th:text="${#strings.substring(tGreenGoldDzhzList.cUsername,0,1) + '**'}"></div>
+                    <div class="col-md-4 col-xs-5" th:text="${'M '+tGreenGoldDzhzList.nDzzl}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script>
+    $(function(){
+        $("#btnLike").click(function(){
+            f_gotoLogin();
+        });
+    });
+    function f_gotoLogin(){
+        BootstrapDialog.confirm({
+            type: BootstrapDialog.TYPE_WARNING,
+            size: BootstrapDialog.SIZE_SMALL,
+            title: '提示',
+            message: "请登录系统后操作，是否跳转到登录页？",
+            closeable: true,
+            btnOKLabel: "确定",
+            btnCancelLabel: "取消",
+            callback: function (ret) {
+                if(ret){
+                    window.parent.location = "/base/login";
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

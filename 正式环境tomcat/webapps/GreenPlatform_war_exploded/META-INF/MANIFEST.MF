@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: GreenPlatform
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: CDMCS
+Implementation-Vendor-Id: com.luo
+Created-By: Apache Maven 3.3.9
+Build-Jdk: 1.8.0_144
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/GreenPlatform
+

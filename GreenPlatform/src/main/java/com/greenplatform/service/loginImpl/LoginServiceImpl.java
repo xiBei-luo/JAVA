@@ -128,7 +128,32 @@ public class LoginServiceImpl implements LoginService {
                 plateUser.setcRylb(jsonParams.getString("cRylb"));
                 //如果是被邀请注册的用户（师傅表增加记录，师傅账户获得1000金币奖励）
                 if (!("-1".equals(jsonParams.getString("cYqm")))){
-                    String cUseridFather = jsonParams.getString("cYqm");
+                    String cUseridFather = jsonParams.getString("cYqm");//邀请码，用户id
+                    String[] exaUserArr = {"568a7b57165b4ac3aeb5046067e96f5a","6536e3dbd98645238249f986bd585f2e","f0d0b12a63ae4b4f9d45aff8bcbb3211", "f369e00fb903482e85ce3d55a663e857"};//不验证5个徒弟的用户
+
+                    PlateUserFatherExample plateUserFatherExample = new PlateUserFatherExample();
+                    PlateUserFatherExample.Criteria criteria = plateUserFatherExample.createCriteria();
+                    criteria.andCZtEqualTo("1");
+                    criteria.andCUseridEqualTo(cUseridFather);
+                    criteria.andCFxmouthEqualTo(TimeUtil.getLocalDate(new Date()).substring(0,7));
+                    List fatherList = plateUserFatherMapper.selectByExample(plateUserFatherExample);
+                    System.out.println("注册时："+fatherList.size());
+
+                    //不限制指定的用户只收5个徒弟
+                    boolean flag = Arrays.asList(exaUserArr).contains(cUseridFather);
+                    if (flag == false &&fatherList.size() >= 5){
+                        return ReturnModelHandler.error("注册失败，邀请您注册的用户本月已邀请了五个人注册，不能再邀请！");
+                    }
+
+                    /*for (int i=0;i<exaUserArr.length;i++){
+                        if (!cUseridFather.equals(exaUserArr[i])){
+                            if (fatherList.size() >= 5){
+                                return ReturnModelHandler.error("注册失败，邀请您注册的用户本月已邀请了五个人注册，不能再邀请！");
+                            }
+                        }
+                    }*/
+
+
                     plateUser.setcFatherid(cUseridFather);
                     plateUser.setcYqm(cUseridFather);
 

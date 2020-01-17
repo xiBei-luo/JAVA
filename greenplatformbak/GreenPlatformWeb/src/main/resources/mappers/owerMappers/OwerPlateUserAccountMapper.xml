@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greenplatform.dao.owerMapper.OwerPlateUserAccountMapper" >
+  <select id="selectLoginuserAccountJbxx" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+      SELECT
+            d.c_userid,
+            d.c_username,
+            d.c_loginname,
+            ROUND(a.n_jbzl, 2) n_jbzl,
+            ROUND(b.n_nlhz, 2) n_nlhz,
+            ROUND(c.n_dzzl, 2) n_dzzl
+       FROM
+            t_green_gold_hz a,
+            t_green_nl_hz b,
+            t_green_gold_dzhz c,
+            plate_user d
+      WHERE
+            a.c_userid = b.c_userid
+        AND b.c_userid = c.c_userid
+        AND c.c_userid = d.c_userid
+        AND a.c_userid = #{c_userid}
+  </select>
+  <select id="selectLoginuserAccountWdtd" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+  SELECT
+        x.*, x1.c_sfwcrw,
+        CASE
+        WHEN x1.c_sfwcrw = '3' THEN '已完成'
+        ELSE  '未完成'
+         END c_sfwcrwsm
+    FROM
+        (
+            SELECT
+                t.*, t1.c_spbh,
+                (
+                    SELECT
+                        a.c_spmc
+                    FROM
+                        t_green_sp_spmx a
+                    WHERE
+                        a.c_spbh = t1.c_spbh
+                ) c_spmc,
+                t2.n_ljwccs,
+                FLOOR(t2.n_ljwccs / 3) n_rwts
+            FROM
+                (
+                    SELECT
+                        a.c_userid,
+                        a.c_username,
+                        a.c_zt
+                    FROM
+                        plate_user a
+                    WHERE
+                        a.c_fatherId = #{c_userid}
+                ) t,
+                t_green_zz_zjzzmx t1,
+                t_green_rw_rwhz t2
+            WHERE
+                t.c_userid = t1.c_userid
+            AND t1.c_userid = t2.c_userid
+            AND t1.c_sfjz = '0'
+            AND t1.c_kjz = '0'
+            AND t1.c_zt = t2.c_zt
+            AND t2.c_zt = t.c_zt
+            AND t2.c_zt = '1'
+            ORDER BY
+                t.c_userid,
+                t2.n_ljwccs DESC
+        ) x
+    LEFT JOIN (
+        SELECT
+            x.c_userid,
+            count(x.c_userid) c_sfwcrw
+        FROM
+            (
+                SELECT
+                    a.c_userid,
+                    a.c_username,
+                    a.c_zt
+                FROM
+                    plate_user a
+                WHERE
+                    a.c_fatherId = #{c_userid}
+                AND a.c_zt = '1'
+            ) x,
+            t_green_rw_rwmx x1
+        WHERE
+            x.c_userid = x1.c_userid
+        AND x1.c_zt = '1'
+        AND x1.c_rwday = #{c_rwday}
+        GROUP BY
+            x.c_userid
+    ) x1 ON x.c_userid = x1.c_userid
+  </select>
+</mapper>

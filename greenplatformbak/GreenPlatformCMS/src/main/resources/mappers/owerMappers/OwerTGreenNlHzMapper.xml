@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenplatform.dao.owerMapper.OwerTGreenNlHzMapper">
+    <select id="selectTGreenNlHzRank"  parameterType="java.util.HashMap" resultType="java.util.HashMap">
+      SELECT
+            b.c_userid cUserid,
+            b.c_username cUsername,
+            b.c_loginname cLoginname,
+            ROUND(a.n_zjnl, 2) nNlhz
+        FROM
+            (
+                SELECT
+                    c_userid,
+                    sum(n_zjnl) n_zjnl
+                FROM
+                    t_green_nl_zjnlmx
+                where c_zjyy != '5'
+                GROUP BY
+                    c_userid
+                ORDER BY
+                    n_zjnl DESC
+            ) a,
+            plate_user b
+        WHERE
+            a.c_userid = b.c_userid
+        ORDER BY
+            a.n_zjnl DESC
+        LIMIT 0,10
+  </select>
+
+
+    <select id="selectTGreenNlHz" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        select b.c_username cUsername,b.c_loginname cLoginname,a.n_nlhz nNlhz,a.c_userid cUserid,a.c_bz cBz
+        from t_green_nl_hz a , plate_user b
+        where a.c_userid = b.c_userid
+        AND a.c_zt='1'
+        <if test='cUsername!=null and cUsername!="" '>
+            AND b.c_username LIKE "%" #{cUsername} "%"
+        </if>
+        <if test='nNlzlQ!=null and nNlzlQ!="" '>
+            AND a.n_nlhz >= #{nNlzlQ}
+        </if>
+        <if test='nNlzlZ!=null and nNlzlZ!="" '>
+            AND #{nNlzlZ} >= a.n_nlhz
+        </if>
+        order by a.n_nlhz,b.c_username desc
+    </select>
+
+
+    <select id="selectTGreenNlHzBycUserid" parameterType="java.lang.String" resultType="java.util.HashMap">
+        SELECT
+            x1.c_username,
+            x.c_userid,
+            ROUND(x.n_nlhz, 2) n_nlhz,
+            x.rank
+        FROM
+            (
+                SELECT
+                    t.*, ROUND(@rownum := @rownum + 1) AS 'rank'
+                FROM
+                    (SELECT @rownum := 0) r,
+                    (
+                        SELECT
+                            c_userid,
+                            sum(n_zjnl) n_nlhz
+                        FROM
+                            t_green_nl_zjnlmx
+                        WHERE
+                            c_zjyy != '5'
+                        GROUP BY
+                            c_userid
+                        ORDER BY
+                            n_nlhz DESC
+                    ) AS t
+            ) x,
+            plate_user x1
+        WHERE
+            x.c_userid = x1.c_userid
+        and x1.c_zt = '1'
+        and x.c_userid = #{c_userid}
+  </select>
+</mapper>

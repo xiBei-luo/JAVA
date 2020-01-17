@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greenplatform.dao.owerMapper.OwerTGreenZzZjzzmxMapper" >
+  <select id="selectTGreenZzZjzzmx" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT A.c_lsh cLsh,
+           A.c_userid cUserid,
+           A.c_spbh cSpbh,
+           A.c_zjyy cZjyy,
+           IFNULL(DATE_FORMAT(A.d_zjsj,'%Y-%m-%d %H:%i'),'') dZjsj,
+           IFNULL(DATE_FORMAT(A.d_jzsj,'%Y-%m-%d %H:%i'),'') dJzsj,
+           A.c_kjz cKjz,
+           A.c_sfjz cSfjz,
+           A.c_bz cBz,
+           B.c_spmc cSpmc,
+           B.n_spjg nSpjg,
+           B.c_spdw cSpdw
+      FROM t_green_zz_zjzzmx A,t_green_sp_spmx B
+     WHERE A.c_spbh = b.c_spbh
+       AND B.C_ZT = '1'
+       AND A.C_ZT = '1'
+       <if test='cSpbh!=null and cSpbh!=""'>
+           AND A.c_spbh = #{cSpbh}
+       </if>
+       <if test='cUserid!=null and cUserid!=""'>
+           AND A.c_userid = #{cUserid}
+       </if>
+       <if test='cSfjz!=null and cSfjz!=""'>
+           AND A.c_sfjz = #{cSfjz}
+       </if>
+  </select>
+</mapper>

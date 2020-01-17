@@ -1,0 +1,58 @@
+.loginHeader{
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    background-color: #d4f1d3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loginBox{
+    width: 90%;
+    height: 80%;
+    background: url("../../publicImg/login/bg.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.loginBox h1{
+    color: #333333;
+}
+.login-content{
+    width: 100%;
+    height: 100%;
+}
+.login-content input[type='text'],.login-content input[type='password'],.login-content button{
+    border: none;
+    background: none;
+    width: 100%;
+    height: 40px;
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+.login-content input[type='text'],.login-content input[type='password']{
+    padding-left: 25px;
+    font-size: 16px;
+}
+.login-content button{
+    background: #67b168;
+    color: #fff;
+    font-size: 16px;
+}
+#btnReturnHome{
+    background: #1e88cf;
+}
+
+/*终端尺寸适配*/
+@media screen and (max-width: 600px) {
+    /*手机背景*/
+
+
+
+}
+

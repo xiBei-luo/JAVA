@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的主页</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/style/web/myAccount/main.css">
+
+</head>
+<body>
+
+
+
+<!--我的账户-->
+<div id="myAccount">
+    <div class="titleBox">
+        <div class="titleBoxWrap">
+            <div class="headBox">
+                <div class="head"></div>
+                <div class="userLev" th:text="'LV'+${loginuserAccount[0].cRydj}">LV1</div>
+            </div>
+            <div class="usernameBox">
+                <strong th:text="'你好,'+${loginuserAccount[0].cUsername}"></strong>
+                <div class="usernameBoxDesc" th:attr="style=${loginuserAccount[0].cIssmz} == '1' ? 'display: none':''">
+                    您的账户还没有实名制,
+                    <a class="text-primary" id="certificationBtn">【实名制】</a>
+                </div>
+
+                <!--<div class="usernameBoxDesc" th:attr="style=${loginuserAccount[0].cIssmz} == '0' ? 'display: none':''">
+                    <a class="text-primary" id="btnInviteUser">【邀请好友】</a>
+                </div>-->
+
+
+            </div>
+        </div>
+    </div>
+    <div class="contentBox">
+        <ul>
+            <li>
+                <a href="/base/myAccount/jbxx">
+                    <span class="linkImg"><img src="/publicImg/myAccount/jbxx.png" alt="">基本信息</span>
+
+                    <span class="glyphicon glyphicon-chevron-right linkIcon"></span>
+                </a>
+            </li>
+            <li>
+                <a href="/base/myAccount/wdrw">
+                    <span class="linkImg"><img src="/publicImg/myAccount/wdrw.png" alt="">我的任务</span>
+
+                    <span class="glyphicon glyphicon-chevron-right linkIcon"></span>
+                </a>
+            </li>
+            <li>
+                <a href="/base/myAccount/wdzw">
+                    <span class="linkImg"><img src="/publicImg/myAccount/wdzw.png" alt="">我的植物</span>
+
+                    <span class="glyphicon glyphicon-chevron-right linkIcon"></span>
+                </a>
+            </li>
+            <li>
+                <a href="/base/myAccount/wdtd">
+                    <span class="linkImg"><img src="/publicImg/myAccount/wdtd.png" alt="">我的徒弟</span>
+
+                    <span class="glyphicon glyphicon-chevron-right linkIcon"></span>
+                </a>
+            </li>
+            <li>
+                <a href="/base/myAccount/nlgl">
+                    <span class="linkImg"><img src="/publicImg/myAccount/nlgl.png" alt="">能量管理</span>
+
+                    <span class="glyphicon glyphicon-chevron-right linkIcon"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="footerBox">
+        <div class="col-xs-12">
+            <button id="loginoutBtn" class="btn btn-lg btn-block btn-success">
+                退出登录
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!--邀请码-->
+<div class="modal fade" id="inviteUserModel" tabindex="-1" role="dialog" aria-labelledby="inviteUserLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="inviteUserLabel">邀请码</h4>
+            </div>
+            <div class="modal-body">
+                <img src="" id="inviteUserQrcode" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script src="/js/web/myAccount/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greenplatform.dao.owerMapper.OwerTGreenNlTxjlMapper" >
+  <select id="selectTGreenNlTxjl" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+      SELECT  A.c_lsh  cLsh,
+              A.c_userid  cUserid,
+              A.c_fkzh  cFkzh,
+              A.c_fkfs  cFkfs,
+              IFNULL(DATE_FORMAT(A.d_fksj,'%Y-%m-%d %H:%i'),'') dFksj,
+              A.c_fkyh  cFkyh,
+              A.c_fkkh  cFkkh,
+              A.c_fksfcg  cFksfcg,
+              A.c_fkdh  cFkdh,
+              A.n_fknl  nFknl,
+              A.c_skzh  cSkzh,
+              IFNULL(DATE_FORMAT(A.d_sksj,'%Y-%m-%d %H:%i'),'') dSksj,
+              A.c_skfs  cSkfs,
+              A.c_skyh  cSkyh,
+              A.c_skkh  cSkkh,
+              A.c_sksfcg  cSksfcg,
+              A.c_skdh  cSkdh,
+              A.n_skje  nSkje,
+              A.c_zt  cZt,
+              A.c_bz  cBz,
+              A.c_cjuser  cCjuser,
+              b.c_username  cUsername,
+              b.c_loginname cLoginname,
+              b.c_phone  cPhone
+      FROM t_green_nl_txjl A,plate_user B
+      WHERE A.c_userid = b.c_userid
+            AND A.c_zt = '1'
+            AND A.c_userid = #{cUserid}
+            AND A.d_sksj >= STR_TO_DATE(#{dKssj}, '%Y-%m-%d %H:%i:%s')
+      ORDER BY A.d_sksj,A.n_skje
+  </select>
+</mapper>

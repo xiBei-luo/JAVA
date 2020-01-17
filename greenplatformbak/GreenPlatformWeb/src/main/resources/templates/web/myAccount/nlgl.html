@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的主页-能量管理</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/style/web/myAccount/nlgl.css">
+
+</head>
+<body>
+
+
+
+<!--我的账户-->
+<div id="myAccount">
+    <div class="titleBox">
+        <h3>能量管理</h3>
+    </div>
+    <div class="contentBox">
+        <div class="contentBoxWrap">
+            <table class="table">
+                <tr>
+                    <td><img src="/publicImg/myAccount/nlgl/wdnl.png" alt="">我的能量</td>
+                    <td align="center"><span class="badge" th:text="'￥'+${loginuserAccountNlgl.n_nlhz}"></span></td>
+                    <td align="right">
+                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#customModel">提现</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="/publicImg/myAccount/nlgl/jzjl.png" alt="">捐赠记录</td>
+                    <td></td>
+                    <td align="right">
+                        <a id="jzjlBtn" class="btn btn-success btn-sm">查询</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="/publicImg/myAccount/nlgl/txjl.png" alt="">提现记录</td>
+                    <td></td>
+                    <td align="right">
+                        <a id="txjlBtn" class="btn btn-success btn-sm">查询</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="/publicImg/myAccount/nlgl/gmjl.png" alt="">购买记录</td>
+                    <td></td>
+                    <td align="right">
+                        <a id="czjlBtn" class="btn btn-success btn-sm">查询</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="footerBtn">
+        <a href="/base/myAccount" class="btn btn-success btn-lg">返回</a>
+    </div>
+</div>
+
+
+<!--加载客服二维码-->
+<div class="modal fade" id="customModel" tabindex="-1" role="dialog" aria-labelledby="customModelLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="customModelLabel">下载"蝙蝠App"扫码加平台客服</h4>
+            </div>
+            <div class="modal-body">
+                <img src="/publicImg/customImg.jpg" id="customImg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script src="/js/web/myAccount/nlgl.js"></script>
+</body>
+</html>

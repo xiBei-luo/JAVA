@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的主页</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/style/welcome/myAccount.css">
+
+</head>
+<body>
+
+
+
+<!--我的账户-->
+<div id="myAccount">
+    <div class="titleBox">
+        <div class="titleBoxWrap">
+            <div class="headBox">
+                <div class="head"></div>
+                <div class="userLev">LV0</div>
+            </div>
+            <div class="usernameBox">
+                <strong>你好,<a class="loginBtn" href="##">请先登陆！</a></strong>
+            </div>
+        </div>
+    </div>
+    <div class="contentBox">
+        <ul>
+            <li>
+                <a href="##">
+                    <span class="linkImg"><img src="/publicImg/myAccount/jbxx.png" alt="">基本信息</span>
+
+                    <span class="glyphicon glyphicon-chevron-right linkIcon"></span>
+                </a>
+            </li>
+            <li>
+                <a href="##">
+                    <span class="linkImg"><img src="/publicImg/myAccount/jbxx.png" alt="">我的任务</span>
+
+                    <span class="glyphicon glyphicon-chevron-right linkIcon"></span>
+                </a>
+            </li>
+            <li>
+                <a href="##">
+                    <span class="linkImg"><img src="/publicImg/myAccount/wdzw.png" alt="">我的植物</span>
+
+                    <span class="glyphicon glyphicon-chevron-right linkIcon"></span>
+                </a>
+            </li>
+            <li>
+                <a href="##">
+                    <span class="linkImg"><img src="/publicImg/myAccount/wdtd.png" alt="">我的徒弟</span>
+
+                    <span class="glyphicon glyphicon-chevron-right linkIcon"></span>
+                </a>
+            </li>
+            <li>
+                <a href="##">
+                    <span class="linkImg"><img src="/publicImg/myAccount/nlgl.png" alt="">能量管理</span>
+
+                    <span class="glyphicon glyphicon-chevron-right linkIcon"></span>
+                </a>
+            </li>
+            <li>
+                <a class="loginBtn">
+                    <span class="linkImg button">立即登录</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script>
+    $(function(){
+        $(".loginBtn").click(function(){
+            //window.parent.location整个页面跳转
+            window.parent.location = "/base/login";
+        });
+    });
+
+    function f_gotoLogin(){
+        BootstrapDialog.confirm({
+            type: BootstrapDialog.TYPE_WARNING,
+            size: BootstrapDialog.SIZE_SMALL,
+            title: '提示',
+            message: "请登录系统后操作，是否跳转到登录页？",
+            closeable: true,
+            btnOKLabel: "确定",
+            btnCancelLabel: "取消",
+            callback: function (ret) {
+                if(ret){
+                    window.parent.location = "/base/login";
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

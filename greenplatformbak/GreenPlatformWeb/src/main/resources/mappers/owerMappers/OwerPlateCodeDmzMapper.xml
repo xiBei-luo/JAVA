@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greenplatform.dao.owerMapper.OwerPlateCodeDmzMapper" >
+  <select id="selectPlateCodeDmz" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT A.c_dmlbmc cDmlbmc,
+           A.c_dmlb cDmlb,
+           B.c_dm cDm,
+           B.c_dmmc cDmmc,
+           B.c_dmz cDmz,
+           A.c_bz cBz,
+           B.c_sort cSort,
+           B.c_zt cZt,
+           CASE WHEN B.c_zt = '1' THEN '有效'
+           WHEN B.c_zt = '0' THEN '无效'
+           ELSE ''
+           END cZtsm
+    FROM plate_code_dmlb A,plate_code_dmz B
+    WHERE A.c_dmlb = b.c_dmlb
+    <if test='cDmlb!=null and cDmlb!=""'>
+      AND A.c_dmlb LIKE "%" #{cDmlb} "%"
+    </if>
+    <if test='cDm!=null and cDm!=""'>
+      AND B.c_dm = #{cDm}
+    </if>
+    ORDER BY A.c_dmlb,B.c_dm
+  </select>
+</mapper>

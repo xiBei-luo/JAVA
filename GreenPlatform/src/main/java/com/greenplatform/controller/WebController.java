@@ -140,7 +140,7 @@ public class WebController {
     @GetMapping(value = "/getInviteQrcode")
     public void getInviteQrcode(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
         ReturnModel returnModel = webService.getInviteQrcode(httpServletRequest);
-
+        System.out.println("controller return:"+returnModel);
         String filePath = returnModel.getObject().toString();
         try{
             byte data[] = ReadFileUtil.readFile(filePath);

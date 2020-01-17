@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>请登录!</title>
+
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/style/login/login.css">
+</head>
+<body>
+<header class="loginHeader">
+    <div class="loginBox">
+        <div class="login-title">
+            <h2>用户登陆</h2>
+        </div>
+        <div class="login-content" id="loginForm">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <input type="text" id="cLoginname" name="cLoginname" placeholder="请输入用户名/电话号码">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <input type="password" id="cPassword" name="cPassword" placeholder="请输入登陆密码">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button" id="btnLogin">登陆</button>
+                </div>
+            </div>
+            <div class="row elseLink">
+                <div class="col-sm-12">
+                    <a href="/base/register">免费注册</a>
+                    <a href="/base/getBackPassword">忘记密码</a>
+                    <a href="/base/loginAdmin">管理员登陆</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</header>
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrapValidator.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/js/login/login.js"></script>
+</body>
+</html>
