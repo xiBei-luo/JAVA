@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greenplatform.dao.owerMapper.OwerTGreenRwRwmxMapper" >
+  <select id="selectTGreenRwRwmx" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT B.c_username cUsername,
+           B.c_loginname cLoginname,
+           A.c_rwlb cRwlb,
+           IFNULL(DATE_FORMAT(A.d_rwsj,'%Y-%m-%d %H:%i'),'') dRwsj,
+           A.c_rwmouth cRwmouth,
+           A.c_rwday cRwday,
+           A.c_bz cBz,
+           CASE WHEN A.c_rwlb = '1' THEN '施肥'
+                WHEN A.c_rwlb = '2' THEN '浇水'
+                WHEN A.c_rwlb = '3' THEN '沐浴阳光'
+                ELSE ''
+                 END cRwlbsm
+      FROM t_green_rw_rwmx A,plate_user B
+     WHERE A.c_userid = b.c_userid
+       AND B.C_ZT = '1'
+       <if test='cUsername!=null and cUsername!=""'>
+           AND B.c_username LIKE "%" #{cUsername} "%"
+       </if>
+       <if test='cRwlb!=null and cRwlb!=""'>
+           AND A.c_rwlb = #{cRwlb}
+       </if>
+      ORDER BY A.c_userid,A.d_rwsj DESC,A.c_rwlb DESC
+  </select>
+
+    <update id="clearPlateUserRwmx" parameterType="java.util.HashMap">
+        UPDATE t_green_rw_rwmx
+           SET c_zt = #{cZt,jdbcType=VARCHAR},
+           c_xguser = #{cXguser,jdbcType=VARCHAR},
+           d_xgsj = #{dXgsj,jdbcType=TIMESTAMP}
+        WHERE c_userid = #{cUserid,jdbcType=TIMESTAMP}
+    </update>
+
+    <update id="updateZtBycUserid" parameterType="java.util.HashMap">
+        UPDATE t_green_rw_rwmx
+           SET c_zt = #{cZt,jdbcType=VARCHAR},
+           c_xguser = #{cXguser,jdbcType=VARCHAR},
+           d_xgsj = #{dXgsj,jdbcType=TIMESTAMP}
+        WHERE c_userid = #{cUserid,jdbcType=TIMESTAMP}
+          AND c_rwday != #{cRwday,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectMinRwdayByUserid" parameterType="java.util.HashMap" resultType="java.lang.String">
+        SELECT
+            MIN(d_rwsj)
+        FROM
+            t_green_rw_rwmx
+        WHERE
+            c_userid = #{cUserid}
+        AND c_zt = '1'
+    </select>
+</mapper>

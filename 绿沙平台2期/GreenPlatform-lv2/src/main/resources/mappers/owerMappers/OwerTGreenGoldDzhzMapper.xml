@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greenplatform.dao.owerMapper.OwerTGreenGoldDzhzMapper" >
+    <select id="selectSumGoldDzhz" resultType="java.lang.Integer">
+    SELECT IFNULL(SUM(T.N_DZZL), 0) Ndzhz
+      FROM t_green_gold_dzhz T
+     WHERE T.c_zt='1';
+  </select>
+
+    <select id="selectGreenGoldDzhzRank" resultType="java.util.HashMap">
+        SELECT
+            ROUND(a.n_dzzl,2) nDzzl,
+            b.c_username cUsername,
+            b.c_loginname cLoginname,
+            a.c_userid cUserid
+        FROM
+            t_green_gold_dzhz a,
+            plate_user b
+        WHERE
+            a.c_userid = b.c_userid
+     ORDER BY a.n_dzzl DESC ,a.d_xgsj
+        LIMIT 0,10
+    </select>
+
+    <select id="selectTGreenGoldDzhzBycUserid" parameterType="java.lang.String" resultType="java.util.HashMap">
+        SELECT
+            b.c_userid,
+            ROUND(b.n_dzzl,2) n_dzzl,
+            b.c_bz,
+            b.c_zt,
+            b.c_cjuser,
+            b.d_cjsj,
+            b.c_xguser,
+            b.d_xgsj,
+            b.rank
+        FROM
+            (
+                SELECT
+                    t.*, ROUND(@rownum := @rownum + 1) AS 'rank'
+                FROM
+                    (SELECT @rownum := 0) r,
+                    (
+                        SELECT
+                            *
+                        FROM
+                            t_green_gold_dzhz
+                    ORDER BY n_dzzl DESC ,d_xgsj
+                    ) AS t
+            ) AS b
+        WHERE
+            b.c_userid = #{cUserid}
+            and b.c_zt='1';
+    </select>
+
+    <select id="selectGreenGoldDzhzAllRank" resultType="java.util.HashMap">
+       SELECT
+            t.c_userid cUserid,
+            ROUND(@rownum := @rownum + 1) 'rank'
+        FROM
+            (SELECT @rownum := 0) r,
+            (
+                SELECT
+                    *
+                FROM
+                    t_green_gold_dzhz
+                WHERE
+                    c_zt = '1'
+              AND n_dzzl > 0
+                ORDER BY
+                    n_dzzl DESC,
+                    d_xgsj
+            ) AS t
+    </select>
+
+    <update id="clearAllGoldDzhz" parameterType="java.util.HashMap">
+        UPDATE t_green_gold_dzhz
+           SET n_dzzl = #{nDzzl,jdbcType=DECIMAL},
+           c_xguser = #{cXguser,jdbcType=VARCHAR},
+           d_xgsj = #{dXgsj,jdbcType=TIMESTAMP},
+           c_bz = #{cBz,jdbcType=VARCHAR}
+    </update>
+</mapper>

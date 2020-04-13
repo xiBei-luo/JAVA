@@ -1,0 +1,115 @@
+<view class="content-box">
+  <view class="sidebar-left">
+    <van-sidebar active-key="{{ activeKey }}" bind:change="onChange">
+      <van-sidebar-item title="小区业主" />
+      <van-sidebar-item title="小区物业" />
+      <van-sidebar-item title="三方人员" />
+      <van-sidebar-item title="管理员" />
+    </van-sidebar>
+  </view>
+
+  <view class="main-right">
+    <view class="page">
+      <view class="page__bd">
+          <view class="weui-cells__title">业主功能</view>
+          <view class="weui-cells weui-cells_checkbox weui-cells_after-title">
+              <checkbox-group bindchange="checkboxChange" data-obj="checkboxItems_hoseholder">
+                  <label class="weui-cell weui-check__label" wx:for="{{checkboxItems_hoseholder}}" wx:key="value">
+                      <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+                      <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+                      </view>
+                      <view class="weui-cell__bd">{{item.name}}</view>
+                  </label>
+              </checkbox-group>
+          </view>
+          <view class="weui-cells__title">用户中心</view>
+          <view class="weui-cells weui-cells_checkbox weui-cells_after-title">
+              <checkbox-group bindchange="checkboxChange" data-obj="checkboxItems_user_center">
+                  <label class="weui-cell weui-check__label" wx:for="{{checkboxItems_user_center}}" wx:key="value">
+                      <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+                      <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+                      </view>
+                      <view class="weui-cell__bd">{{item.name}}</view>
+                  </label>
+              </checkbox-group>
+          </view>
+          <view class="weui-cells__title">缴费中心</view>
+          <view class="weui-cells weui-cells_checkbox weui-cells_after-title">
+              <checkbox-group bindchange="checkboxChange" data-obj="checkboxItems_pay_center">
+                  <label class="weui-cell weui-check__label" wx:for="{{checkboxItems_pay_center}}" wx:key="value">
+                      <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+                      <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+                      </view>
+                      <view class="weui-cell__bd">{{item.name}}</view>
+                  </label>
+              </checkbox-group>
+          </view>
+          <view class="weui-cells__title">消息中心</view>
+          <view class="weui-cells weui-cells_checkbox weui-cells_after-title">
+              <checkbox-group bindchange="checkboxChange" data-obj="checkboxItems_msg_center">
+                  <label class="weui-cell weui-check__label" wx:for="{{checkboxItems_msg_center}}" wx:key="value">
+                      <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+                      <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+                      </view>
+                      <view class="weui-cell__bd">{{item.name}}</view>
+                  </label>
+              </checkbox-group>
+          </view>
+          <view class="weui-cells__title">维修中心</view>
+          <view class="weui-cells weui-cells_checkbox weui-cells_after-title">
+              <checkbox-group bindchange="checkboxChange" data-obj="checkboxItems_repair_center">
+                  <label class="weui-cell weui-check__label" wx:for="{{checkboxItems_repair_center}}" wx:key="value">
+                      <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+                      <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+                      </view>
+                      <view class="weui-cell__bd">{{item.name}}</view>
+                  </label>
+              </checkbox-group>
+          </view>
+          <view class="weui-cells__title">系统管理</view>
+          <view class="weui-cells weui-cells_checkbox weui-cells_after-title">
+              <checkbox-group bindchange="checkboxChange" data-obj="checkboxItems_system_center">
+                  <label class="weui-cell weui-check__label" wx:for="{{checkboxItems_system_center}}" wx:key="value">
+                      <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+                      <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+                      </view>
+                      <view class="weui-cell__bd">{{item.name}}</view>
+                  </label>
+              </checkbox-group>
+          </view>
+
+          <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" bindtap="showTopTips">确定授权</button>
+          </view>
+      </view>
+    </view>
+  </view>
+  
+
+  
+
+</view>
+
+
+
+
+
+

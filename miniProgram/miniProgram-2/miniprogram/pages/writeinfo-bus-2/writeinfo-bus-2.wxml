@@ -1,0 +1,83 @@
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell ">
+    <view class="weui-cell__hd">
+      <view class="weui-label">店铺名称</view>
+    </view>
+    <view class="weui-cell__bd">
+      <input class="weui-input" bindchange="bindNameChange" value="{{name}}" placeholder="请输入店铺名称"/>
+    </view>
+  </view>
+  <view class="weui-cell ">
+    <view class="weui-cell__hd">
+      <view class="weui-label">店铺地址</view>
+    </view>
+    <view class="weui-cell__bd">
+      <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+        <view class="weui-input">
+          {{region[0]}}，{{region[1]}}，{{region[2]}}
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="weui-cell ">
+    <view class="weui-cell__hd">
+      <view class="weui-label">详细地址</view>
+    </view>
+    <view class="weui-cell__bd">
+      <input class="weui-input" bindchange="bindAddressChange" value="{{address}}" placeholder="请输入楼层、门牌号等详细地址"/>
+    </view>
+  </view>
+
+  <view class="weui-cell ">
+    <view class="weui-cell__hd">
+      <view class="weui-label">联系方式</view>
+    </view>
+    <view class="weui-cell__bd">
+      <input class="weui-input" bindchange="bindPhoneChange" value="{{phone}}" placeholder="请输入联系方式"/>
+    </view>
+  </view>
+  <view class="weui-cell ">
+    <view class="weui-cell__hd">
+      <view class="weui-label">营业时间</view>
+    </view>
+    <view class="weui-cell__bd">
+      <picker mode="time" value="{{time_begin}}" start="00:00" end="24:00" bindchange="bindTimeBeginChange">
+        <view class="weui-input">{{time_begin}}</view>
+      </picker>
+    </view>
+    <view class="weui-cell__bd">
+      至
+    </view>
+    <view class="weui-cell__bd">
+      <picker mode="time" value="{{time_end}}" start="00:00" end="24:00" bindchange="bindTimeEndChange">
+        <view class="weui-input">{{time_end}}</view>
+      </picker>
+    </view>
+  </view>
+</view>
+  
+
+<view class="weui-cells__title">店铺说明</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell">
+    <view class="weui-cell__bd">
+      <textarea class="weui-textarea" bindinput="bindDescChange" value="{{declaration}}" placeholder="请输入店铺说明" style="height: 3.3em" />
+      <view class="weui-textarea-counter">0/200</view>
+    </view>
+  </view>
+</view>
+
+<view class="weui-btn-area">
+  <button class="weui-btn" type="primary" bindtap="gotoNext">下一步</button>
+</view>
+
+
+
+
+
+
+
+
+
+

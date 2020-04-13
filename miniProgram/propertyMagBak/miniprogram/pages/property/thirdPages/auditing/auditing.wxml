@@ -1,0 +1,70 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-cells__title font-sm">说明：若确认该用户数据正确请点击"允许入驻"，否则点击"拒绝入驻"</view>
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">入驻申请</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__desc">
+                      <view class="line">
+                        <view>
+                          <text>姓名：</text>
+                          <text>{{userData.username}}</text>
+                        </view>
+                        <view>
+                          <text>联系方式：</text>
+                          <text>{{userData.username}}</text>
+                        </view>
+                      </view>
+                      <view class="line" wx:if="{{userData.category == 4}}">
+                        <view>
+                          <text>住户住址：</text>
+                          <text>{{userData.roomnumber}}</text>
+                        </view>
+                      </view>
+                      <view class="line" wx:if="{{userData.category == 3}}">
+                        <view>
+                          <text>项目部名称：</text>
+                          <text>{{userData.subjectname}}</text>
+                        </view>
+                      </view>
+                      <view class="line" wx:if="{{userData.category == 2}}">
+                        <view>
+                          <text>物业名称：</text>
+                          <text>{{userData.companyname}}</text>
+                        </view>
+                      </view>
+                      <view class="line">
+                        <view>
+                          <text>申请时间：</text>
+                          <text>{{userData.creattime}}</text>
+                        </view>
+                      </view>
+                    </view>
+                </view>
+                <view wx:if="{{auditingResult == 2}}">
+                  <view class="weui-cells weui-cells_after-title">
+                      <view class="weui-cell">
+                          <view class="weui-cell__bd">
+                              <textarea class="weui-textarea" bindinput="inputReson" placeholder="请输入拒绝入驻原因" style="height: 3.3em" />
+                              <view class="weui-textarea-counter">0/200</view>
+                          </view>
+                      </view>
+                  </view>
+                </view>
+            </view>
+            <view class="weui-panel__ft panel-ft-btn">
+                <view class="button-sp-area" wx:if="{{auditingReson}}">
+                  <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="submitAuditing">确认</button>
+                </view>
+
+                
+                <view class="button-sp-area" wx:if="{{!auditingReson}}">
+                  <button class="weui-btn mini-btn" type="warn" size="mini" data-result="2" bindtap="doAuditing">拒绝入驻</button>
+                  <button class="weui-btn mini-btn" type="primary" size="mini" data-result="1" bindtap="submitAuditing">允许入驻</button>
+                </view>
+            </view>
+        </view>
+        
+    </view>
+</view>

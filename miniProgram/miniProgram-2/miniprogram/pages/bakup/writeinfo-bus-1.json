@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-button": "@vant/weapp/button",
+    "van-field": "@vant/weapp/field",
+    "van-uploader": "@vant/weapp/uploader",
+    "van-area": "@vant/weapp/area",
+    "van-datetime-picker": "@vant/weapp/datetime-picker"
+  }
+}

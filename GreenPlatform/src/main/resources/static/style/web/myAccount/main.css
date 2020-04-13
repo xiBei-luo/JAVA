@@ -1,0 +1,70 @@
+*{
+    list-style: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+    /*background: #67b168;*/
+}
+#myAccount{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+/*标题区*/
+.titleBox{
+    width: 100%;
+    height: 20%;
+    background: #67b168;
+    display: flex;
+    align-items: center;
+    border-bottom: 5px dashed #fff;
+}
+.titleBox .headBox .head{
+    width: 50px;
+    height: 50px;
+    background: #333333;
+    border-radius: 10px;
+}
+
+
+
+/*内容区*/
+.contentBox{
+    width: 100%;
+    height: 80%;
+}
+.contentBox ul li{
+    height: 50px;
+    line-height: 50px;
+}
+.contentBox ul li a{
+    height: 100%;
+    padding:0 5px;
+    display: flex;
+    justify-content: space-between;
+    color: #333333;
+    font-weight: bold;
+    font-size: 18px;
+}
+.contentBox .linkImg img{
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+}
+.contentBox .linkIcon{
+    line-height: 50px;
+}
+
+
+
+/*终端尺寸适配*/
+@media screen and (max-width: 600px) {
+
+
+}
+

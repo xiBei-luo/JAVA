@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="item-1">
+    <button class="weui-btn" type="primary" bindtap="gotoWriteInfo" data-url="../home/home">我是用户</button>
+  </view>
+
+  <view class="item-2">
+    <button class="weui-btn" type="default" bindtap="gotoWriteInfo" data-url="../writeinfo-bus-1/writeinfo-bus-1">我是商家</button>
+  </view>
+  
+
+  
+</view>

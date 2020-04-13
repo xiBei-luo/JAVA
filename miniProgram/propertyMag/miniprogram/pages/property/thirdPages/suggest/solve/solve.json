@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "诉求建议",
+  "usingComponents": {
+    "mp-gallery": "/miniprogram_npm/weui-miniprogram/gallery/gallery"
+  }
+}

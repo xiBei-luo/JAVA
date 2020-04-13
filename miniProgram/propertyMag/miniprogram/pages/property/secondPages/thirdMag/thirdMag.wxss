@@ -1,0 +1,6 @@
+.weui-cell-custom{
+  padding: 0 32rpx;
+}
+.font-sm{
+  font-size: 24rpx;
+}

@@ -1,0 +1,44 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                <image src="../../../../images/tmp.jpg" style="width: 50px; height: 50px; display: block"/>
+            </view>
+            <view class="weui-cell__bd">
+                <view>瑞晟物业</view>
+                <view style="font-size: 13px;color: #888888;">截止到2020年0401日 09：30</view>
+            </view>
+        </view>
+    </view>
+  </view>
+
+
+  <view class="page__hd">
+      <view class="page__title">你支持瑞升南园小区全面施行垃圾分类吗？</view>
+      <view class="page__desc">投票选项(单选)</view>
+  </view>
+
+
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_checkbox weui-cells_after-title">
+        <radio-group bindchange="checkboxChange" data-type="shortMsgCheckbox">
+            <label class="weui-cell weui-check__label" wx:for="{{shortMsgCheckbox}}" wx:key="value">
+                <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+                <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                    <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                    <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+                </view>
+                <view class="weui-cell__bd">{{item.name}}</view>
+            </label>
+        </radio-group>
+    </view>
+  </view>
+
+
+  <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="showTopTips">确认投票</button>
+  </view>
+
+</view>

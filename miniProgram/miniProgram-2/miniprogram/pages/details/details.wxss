@@ -1,0 +1,37 @@
+/* miniprogram/pages/details/details.wxss */
+.headerContainer{
+  width: 750rpx;
+  height:400rpx;
+}
+.headerImg{
+  width: 100%;
+  height: 100%;
+}
+.titleBig{
+  font-size: 42rpx;
+}
+.titleSm{
+  margin-top: 18rpx;
+  font-size: 32rpx;
+  color: #333
+}
+
+.contentBox{
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  font-size: 30rpx;
+  padding:20rpx 0;
+}
+
+.contentMain{
+  width: 100%;
+}
+
+.footerBox{
+  display: flex;
+  margin-top: 60rpx;
+  justify-content: center;
+  align-items: center;
+}

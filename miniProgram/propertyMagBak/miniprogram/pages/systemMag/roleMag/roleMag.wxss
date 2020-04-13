@@ -1,0 +1,31 @@
+/* miniprogram/pages/systemMag/powMag/powerMag.wxss */
+.content-box{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+.sidebar-left{
+  width: 23%;
+  height: 100%;
+  background: #fbfbfb;
+}
+.main-right{
+  width:77%;
+}
+
+
+
+
+/* 搜索框 */
+.searchbar-result{
+    margin-top: 0;
+    font-size: 14px;
+}
+.searchbar-result .weui-cell__bd{
+  padding: 2px 0 2px 20px;
+  color: #666;
+}
+.searchbar-result:before{
+    display: none;
+}

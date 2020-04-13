@@ -1,0 +1,135 @@
+<!--miniprogram/pages/public/home/home.wxml-->
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+      <view class="container">
+        <!-- 轮播图 -->
+        <view class='carousel'> 
+          <swiper class='carousel_swiper' indicator-dots="true" indicator-color="#f4f4f4" indicator-active-color="#4eb8b8" autoplay="true" interval='2000' circular='true'>
+            <block wx:for="{{carouselList}}" wx:key="key">
+              <swiper-item bindtap='chomeCarouselClick' data-url='{{item.url}}'>
+                <image class="carouselImg" src='{{host}}{{item.img}}' mode='aspectFill' ></image>
+              </swiper-item>
+            </block>
+          </swiper>
+        </view>
+        <!-- <image class="banner" src="../../../images/home/banner.jpg"></image> -->
+      </view>
+
+
+      <view class="container nav">
+        <view class="nav-top">
+          <navigator url="../secondPages/payPropertyFee/payPropertyFee" class="nav-top-item">
+            <image src="../../../images/icon/nav-1.png"></image>
+            <text>物业缴费</text>
+          </navigator>
+          <navigator url="../secondPages/repair/repair"  class="nav-top-item">
+            <image src="../../../images/icon/nav-2.png"></image>
+            <text>故障报修</text>
+          </navigator>
+          <navigator url="../secondPages/suggest/suggest"  class="nav-top-item">
+            <image src="../../../images/icon/nav-3.png"></image>
+            <text>诉求建议</text>
+          </navigator>
+          <navigator url="../secondPages/moreMenu/moreMenu"  class="nav-top-item">
+            <image src="../../../images/icon/nav-4.png"></image>
+            <text>更多</text>
+          </navigator>
+        </view>
+      </view>
+      
+
+
+
+      <view class="section-msg">
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="../secondPages/viewMsg/viewMsg" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                    <image src="../../../images/icon/envelope.png" style="margin-right: 16px;vertical-align: middle;width:55px; height: 40px;"></image>
+                </view>
+                <view class="weui-cell__bd"></view>
+                <text class="weui-badge weui-badge_dot" style="margin-left: 5px; margin-right: 5px;"></text>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">您有一条待查看的重要信息...</view>
+            </navigator>
+        </view>
+      </view>
+
+
+      <view class="section-vote">
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="../secondPages/publicVote/publicVote" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                    <image src="../../../images/icon/vote.png" style="margin-right: 16px;vertical-align: middle;width:55px; height: 40px;"></image>
+                </view>
+                <view class="weui-cell__bd vote-container">
+                  <view class="vote-title">小区全面施行垃圾分类</view>
+                  <view class="vote-body">
+                    <view class="vote-body-left">
+                      <view>
+                        <image src="../../../images/icon/agree.png" style="vertical-align: middle;width:30rpx; height: 30rpx;"></image>
+                      </view>
+                      <view class="font-sm">赞成</view>
+                    </view>
+                    <view class="vote-body-center font-lg">
+                      VS
+                    </view>
+                    <view class="vote-body-right">
+                      <view>
+                        <image src="../../../images/icon/oppose.png" style="vertical-align: middle;width:30rpx; height: 30rpx;"></image>
+                      </view>
+                      <view class="font-sm">反对</view>
+                    </view>
+                  </view>
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+        </view>
+      </view>
+
+
+      <view class="section-news">
+        <view class="weui-panel">
+            <view class="weui-panel__hd">物业公告</view>
+            <view class="weui-panel__bd">
+              <view class="weui-media-box weui-media-box_small-appmsg">
+                  <view class="weui-cells weui-cells_in-small-appmsg">
+                      <navigator url="../showNews/showNews" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
+                          <view class="weui-cell__bd weui-cell_primary">
+                              <view class="font-sm">意大利近8000名医生申请战疫...</view>
+                          </view>
+                          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                      </navigator>
+                      <navigator url="../showNews/showNews" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
+                          <view class="weui-cell__bd weui-cell_primary">
+                              <view class="font-sm">国家电网决心退出房地产业务...</view>
+                          </view>
+                          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                      </navigator>
+                      <navigator url="../showNews/showNews" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
+                          <view class="weui-cell__bd weui-cell_primary">
+                              <view class="font-sm">广州每周新增入境隔离上千人...</view>
+                          </view>
+                          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                      </navigator>
+                  </view>
+              </view>
+            </view>
+        </view>
+      </view>
+
+
+
+  </view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+

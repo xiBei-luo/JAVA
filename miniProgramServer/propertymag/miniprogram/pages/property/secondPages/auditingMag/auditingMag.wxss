@@ -1,0 +1,4 @@
+/* miniprogram/pages/property/secondPages/auditingMag/auditingMag.wxss */
+.font-sm{
+  font-size: 24rpx;
+}

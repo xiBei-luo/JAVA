@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
+
+    <style>
+        .container{
+            width: 1000px;
+            margin:30px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="btn btn-success" onclick="f_sentReq()">ajax发送请求</button>
+        <hr>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="password">
+            </div>
+            <button type="submit" class="btn btn-primary">form发送请求</button>
+        </form>
+    </div>
+
+    <div class="container" id="retData">
+
+    </div>
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        function f_sentReq(){
+            alert("开始发送请求");
+            $.ajax({
+                type:'POST', // 规定请求的类型（GET 或 POST）
+                url:"", // 请求的url地址
+                dataType:'json', //预期的服务器响应的数据类型
+                data:{
+                    "name": "admin",
+                    "password": "111111"
+                },//规定要发送到服务器的数据
+
+
+                beforeSend:function(){ //发送请求前运行的函数（发送之前就会进入这个函数）
+                    // ....
+                },
+                success: function(result){ // 当请求成功时运行的函数
+                    alert("success");
+                    console.log(result);
+                },
+                error:function(result){ //失败的函数
+                    alert("error");
+                    console.log(result);
+                },
+                complete:function(){ //请求完成时运行的函数（在请求成功或失败之后均调用，即在 success 和 error 函数之后，不管成功还是失败 都会进这个函数）
+                    // ...
+                }
+            });
+
+
+        }
+
+
+
+    </script>
+</body>
+</html>

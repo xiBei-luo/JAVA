@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greenplatform.dao.owerMapper.OperateTableMapper" >
+    <select id="existTable" parameterType="String" resultType="Integer">
+        select count(*)
+        from information_schema.TABLES
+        where LCASE(table_name)=#{tableName}
+    </select>
+
+    <update id="dropTable">
+        DROP TABLE IF EXISTS ${tableName}
+    </update>
+
+    <update id="createNewTable" parameterType="java.util.Map">
+        CREATE TABLE ${newTable} LIKE ${oldTable}
+        /*CREATE TABLE ${tableName}  (
+          c_userid varchar(255) NOT NULL,
+          n_dzzl decimal(19,4) DEFAULT NULL COMMENT '点赞总量',
+          c_bz varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
+          c_zt varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '状态(0无效1有效)',
+          c_cjuser varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '创建人',
+          d_cjsj datetime DEFAULT NULL COMMENT '创建时间',
+          c_xguser varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '修改人',
+          d_xgsj datetime DEFAULT NULL COMMENT '修改时间',
+          PRIMARY KEY (c_userid)
+        )*/
+    </update>
+
+    <insert id="insertNewTblData" parameterType="java.util.Map">
+        insert into ${newTable}(select * from ${oldTable})
+    </insert>
+</mapper>

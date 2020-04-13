@@ -1,0 +1,18 @@
+.weui-form-preview{
+    margin-bottom: 25px;
+}
+.font-sm{
+  font-size: 28rpx;
+}
+
+.pickDate{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.pickDate image{
+  width: 40rpx;
+  height: 40rpx;
+  margin-left:20rpx;
+}
+

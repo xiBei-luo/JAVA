@@ -1,0 +1,81 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-cell ">
+            <view class="weui-cell__bd pickDate">
+                <picker mode="date" value="{{date}}" fields="month" start="2015-09-01" end="2100-09-01" bindchange="bindDateChange">
+                    <view class="weui-input">{{date}}</view>
+                </picker>
+                <image src="/images/icon/arrow-down.png"></image>
+            </view>
+        </view>
+
+
+        <view class="weui-cells__title">一共支出2000.00</view>
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">-￥150.00</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
+            </navigator>
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">-￥150.00</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
+            </navigator>
+        </view>
+        
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">-￥150.00</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
+            </navigator>
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">-￥150.00</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
+            </navigator>
+        </view>
+        
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">-￥150.00</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
+            </navigator>
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">-￥150.00</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
+            </navigator>
+        </view>
+        
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">-￥150.00</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
+            </navigator>
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">-￥150.00</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
+            </navigator>
+        </view>
+        
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">-￥150.00</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
+            </navigator>
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">-￥150.00</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
+            </navigator>
+        </view>
+        
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">-￥150.00</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
+            </navigator>
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">-￥150.00</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
+            </navigator>
+        </view>
+
+    </view>
+</view>

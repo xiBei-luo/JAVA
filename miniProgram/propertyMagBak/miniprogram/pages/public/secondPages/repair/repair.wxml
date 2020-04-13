@@ -1,0 +1,75 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <view class="weui-cells__title">报修物品类别</view>
+    <view class="weui-cells weui-cells_checkbox weui-cells_after-title">
+      <radio-group bindchange="checkboxChange">
+          <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
+              <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+              <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                  <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                  <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+              </view>
+              <view class="weui-cell__bd">{{item.name}}</view>
+          </label>
+      </radio-group>
+    </view>
+
+
+    <view class="weui-cells__title">填写物品损坏地点</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+            <input class="weui-input" bindinput="getInputValue" data-type="repairaddress"  placeholder="请输入物品损坏地点"/>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="weui-cells__title">请上传清晰的图片，以便于物业快速解决问题</view>
+    <view class="page__bd">
+      <view class="weui-cells">
+          <view class="weui-cell">
+              <view class="weui-cell__bd">
+                  <view class="weui-uploader">
+                      <view class="weui-uploader__bd">
+                          <view class="weui-uploader__files" id="uploaderFiles">
+                              <block wx:for="{{files}}" wx:key="*this">
+                                  <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                  </view>
+                              </block>
+                          </view>
+                          <view class="weui-uploader__input-box">
+                              <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                          </view>
+                      </view>
+                  </view>
+              </view>
+          </view>
+      </view>
+    </view>
+
+
+
+
+    <view class="weui-cells__title">报修说明（备注）</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <textarea class="weui-textarea" bindinput="getInputValue" data-type="repaircontent"  placeholder="详细描述下您所遇到的问题。" style="height: 3.3em" />
+                <view class="weui-textarea-counter">0/200</view>
+            </view>
+        </view>
+    </view>
+
+
+
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="submitRepair">提交维修工单</button>
+    </view>
+    </view>
+
+
+    
+</view>

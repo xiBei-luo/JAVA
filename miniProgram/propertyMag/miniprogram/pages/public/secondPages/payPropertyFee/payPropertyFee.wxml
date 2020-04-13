@@ -1,0 +1,66 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">欠费缴纳</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__desc">
+                      <view class="line">
+                        <view>
+                          <text>欠费金额：</text>
+                          <text>1000.00元</text>
+                        </view>
+                        <view>
+                          <text>户主：</text>
+                          <text>张三三</text>
+                        </view>
+                      </view>
+                      <view class="line">
+                        <view>
+                          <text>欠费房间：</text>
+                          <text>瑞升南园2栋1单元401</text>
+                        </view>
+                      </view>
+                      <view class="line">
+                        <view>
+                          <text>收费单位：</text>
+                          <text>万科集团</text>
+                        </view>
+                      </view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-panel__ft panel-ft-btn">
+                <view class="button-sp-area">
+                  <button class="weui-btn mini-btn" type="default" size="mini">缴费历史</button>
+                  <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="doPayFee">缴费</button>
+              </view>
+            </view>
+        </view>
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">费用预存</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__desc">
+                      <view class="line">
+                        <view>
+                          <text>余额</text>
+                          <text>0.00元</text>
+                        </view>
+                      </view>
+                      <view class="line">
+                        <view>
+                          <text>每月预存物业费可享9折优惠！</text>
+                        </view>
+                      </view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-panel__ft panel-ft-btn">
+                <view class="button-sp-area">
+                  <button class="weui-btn mini-btn" type="primary" size="mini">费用预存</button>
+              </view>
+            </view>
+        </view>
+    </view>
+</view>

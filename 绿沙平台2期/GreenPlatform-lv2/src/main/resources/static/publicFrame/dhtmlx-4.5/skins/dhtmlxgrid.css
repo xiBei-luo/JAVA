@@ -1,0 +1,58 @@
+/***************dhtmlxgrid*******************/
+div.gridbox{
+	overflow:hidden;
+	text-align:left;
+}
+
+div.gridbox table.hdr td div.hdrcell{
+	overflow:hidden;
+	font-weight: 500;
+    font-size:12px;
+    font-family:"Microsoft yahei",Arial,Tahoma, SimSun, sans-serif;	
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+	margin: 0px;
+	padding: 0px;
+}
+
+div.gridbox table.row20px tr  td, div.gridbox_dhx_web.gridbox table.obj.row20px tr td{
+    white-space: nowrap;
+    text-overflow:ellipsis;/*不换行，显示不完则隐藏后面的*/
+    /*white-space: normal;*/
+    word-break:break-all;
+    word-wrap: break-word;
+	_min-height:30px;
+	min-height: 30px;
+	height: 30px;
+	line-height: 30px;
+	padding: 5px 1px;
+    font-size:12px;
+    font-family:"Microsoft yahei",Arial,Tahoma, SimSun, sans-serif;
+}
+
+/***************gridbox_dhx_web**************************/
+div.gridbox_dhx_web.gridbox table.obj tr.rowselected{
+	background-color:#85d3ff;color:#000;
+}
+
+div.gridbox_dhx_web.gridbox table.obj tr.rowselected td{
+	background-color:#85d3ff;color:#000;
+}
+
+div.gridbox_dhx_web.gridbox table.obj.row20px tr.rowselected td{
+	background-color:#85d3ff;border-right-color:#85d3ff;color:#000;
+}
+
+div.gridbox_dhx_web.gridbox table.obj tr td.cellselected{
+	background-color:#85d3ff;color:#000;
+}
+
+div.gridbox_dhx_web.gridbox .odd_dhx_web{
+	background-color:#f9f9f9;color:#000;
+}
+
+/***************dhx_sub_row******************************/
+div.gridbox_dhx_web.gridbox div.dhx_sub_row table.obj.row20px tr.rowselected td{
+	background-color:#ffffce;border-right-color:#ffffce;color:#000;
+}

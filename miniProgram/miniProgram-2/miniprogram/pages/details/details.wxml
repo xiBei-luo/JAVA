@@ -1,0 +1,42 @@
+<view class="headerContainer">
+  <image class="headerImg" src="../../images/bak/bak-1.jpg"></image>
+</view>
+
+
+<view class="contentBox">
+  <view class="titleBig">Cutman高新中海店</view>
+  <view class="titleSm">已被2000名用户光顾</view>
+</view>
+
+<view class="contentMain">
+  <view class="weui-cells weui-cells_after-title">
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="../../images/icon/address.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
+      </view>
+      <view class="weui-cell__bd">成都市高新区永丰大厦2号楼</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="../../images/icon/time.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
+      </view>
+      <view class="weui-cell__bd">10:00-22:00</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+    <navigator url="" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__hd">
+        <image src="../../images/icon/phone.png" style="margin-right: 16px;vertical-align: middle;width:20px; height: 20px;"></image>
+      </view>
+      <view class="weui-cell__bd">18322222222</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </view>
+</view>
+
+<view class="footerBox">
+  <button class="weui-btn" type="primary" bindtap="gotoHome">免费预约</button>
+</view>
+
+
+

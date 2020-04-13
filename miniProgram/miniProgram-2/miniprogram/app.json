@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/firstVisit/firstVisit",
+    "pages/myAccount/myAccount",
+    "pages/writeinfo-bus-1/writeinfo-bus-1",
+    "pages/writeinfo-bus-2/writeinfo-bus-2",
+    "pages/writeinfo-bus-3/writeinfo-bus-3",
+    "pages/details/details",
+    "pages/home/home"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "剪刀侠",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#fff"
+  },
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#3e8f3e",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/icon/home.png",
+        "selectedIconPath": "images/icon/home-act.png"
+      },
+      {
+        "pagePath": "pages/myAccount/myAccount",
+        "text": "我的",
+        "iconPath": "images/icon/myAccount.png",
+        "selectedIconPath": "images/icon/myAccount-act.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap-dialog.css">
+    <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrapValidator.min.css">
+    <style>
+        .table label{
+            line-height: 35px;
+        }
+        .edit-footer{
+            width: 95%;
+            height: 50px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .require{
+            color: #c9302c;
+        }
+        #insertPlateUserForm td span{
+            line-height: 35px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <form id="insertPlateUserForm">
+        <table class="table" >
+            <col width="20%">
+            <col width="30%">
+            <col width="20%">
+            <col />
+            <tbody>
+                <tr>
+                    <td align="right">
+                        <label for="cUsername" class="control-label">用户姓名:</label>
+                    </td>
+                    <td align="left">
+                        <span class="cUsername"></span>
+                        <input type="hidden" id="cUsername">
+                        <input type="hidden" id="cUserid">
+                    </td>
+                    <td align="right">
+                        <label for="cZjhm" class="control-label">身份证号码:</label>
+                    </td>
+                    <td align="left">
+                        <span class="cZjhm"></span>
+                        <input type="hidden" id="cZjhm">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="cEmail" class="control-label">电子邮箱:</label>
+                    </td>
+                    <td align="left">
+                        <span class="cEmail"></span>
+                        <input type="hidden" id="cEmail">
+                    </td>
+                    <td align="right">
+                        <label for="cPhone" class="control-label">电话号码:</label>
+                    </td>
+                    <td align="left">
+                        <span class="cPhone"></span>
+                        <input type="hidden" id="cPhone">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        <label for="cCzyy" class="control-label"><i class="require">*</i>操作原因:</label>
+                    </td>
+                    <td align="left" colspan="3">
+                        <textarea class="form-control" id="cCzyy" name="cCzyy" placeholder="请输入操作原因"></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <div class="edit-footer">
+        <button type="button" class="btn btn-primary" id="btnSave">确&nbsp&nbsp&nbsp&nbsp认</button>
+        <button type="button" class="btn btn-default" id="btnRet">关&nbsp&nbsp&nbsp&nbsp闭</button>
+    </div>
+</div>
+
+
+
+<script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap-dialog.js"></script>
+<script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrapValidator.min.js"></script>
+<script src="/publicJs/publicCommon.js"></script>
+<script src="/publicJs/publicyw.js"></script>
+<script src="/publicJs/SendRequest.js"></script>
+<script src="/js/plate/yhgl/hmd.js"></script>
+</body>
+</html>

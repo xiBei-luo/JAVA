@@ -1,0 +1,16 @@
+<view class="container">
+  <view class="item-1">
+    <button class="weui-btn" type="primary" data-targetURL="../../household/identify/identify" data-value="1" bindtap="gotoNext">我是业主</button>
+  </view>
+
+  <view class="item-2">
+    <button class="weui-btn" type="default" data-targetURL="../../household/identify/identify" data-value="2" bindtap="gotoNext">我是物业</button>
+  </view>
+
+  <view class="item-2">
+    <button class="weui-btn" type="default" data-targetURL="../../household/identify/identify" data-value="3" bindtap="gotoNext">第三方</button>
+  </view>
+  
+
+  
+</view>

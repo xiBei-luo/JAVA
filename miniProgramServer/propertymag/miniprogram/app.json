@@ -1,0 +1,71 @@
+{
+  "pages": [
+    "pages/public/home/home",
+    "pages/public/firstVisit/firstVisit",
+    "pages/household/identify/identify",
+    "pages/public/myAccount/myAccount",
+    "pages/public/secondPages/payPropertyFee/payPropertyFee",
+    "pages/public/secondPages/suggest/suggest",
+    "pages/public/secondPages/repair/repair",
+    "pages/public/secondPages/moreMenu/moreMenu",
+    "pages/public/thirdPages/doPay/doPay",
+    "pages/public/showNews/showNews",
+    "pages/public/authorize/authorize",
+    "pages/household/villageList/villageList",
+    "pages/household/members/members",
+    "pages/household/pay/pay",
+    "pages/household/repair/repair",
+    "pages/household/voteHis/voteHis",
+    "pages/household/contact/contact",
+    "pages/systemMag/powerMag/powerMag",
+    "pages/systemMag/roleMag/roleMag",
+    "pages/property/secondPages/householdMag/householdMag",
+    "pages/property/secondPages/auditingMag/auditingMag",
+    "pages/property/secondPages/feeMag/feeMag",
+    "pages/property/myAccountDemo/myAccountDemo",
+    "pages/property/secondPages/thirdMag/thirdMag",
+    "pages/property/secondPages/suggestMag/suggestMag",
+    "pages/property/secondPages/staffMag/staffMag",
+    "pages/property/secondPages/repairMag/repairMag",
+    "pages/property/thirdPages/fee/fee",
+    "pages/property/thirdPages/auditing/auditing",
+    "pages/property/thirdPages/household/household",
+    "pages/property/thirdPages/suggest/details/details",
+    "pages/property/thirdPages/repair/details/details",
+    "pages/property/thirdPages/suggest/solve/solve",
+    "pages/property/thirdPages/repair/solve/solve",
+    "pages/public/secondPages/publicVote/publicVote",
+    "pages/public/secondPages/viewMsg/viewMsg",
+    "pages/property/thirdPages/third/grand/grand",
+    "pages/property/thirdPages/third/setRole/setRole",
+    "pages/property/thirdPages/staff/grand/grand",
+    "pages/property/thirdPages/staff/setRole/setRole",
+    "pages/property/thirdPages/repair/solve/selectThirdPerson/selectThirdPerson"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0c8894",
+    "navigationBarTitleText": "物联管理",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#0c8894",
+    "list": [
+      {
+        "pagePath": "pages/public/home/home",
+        "text": "首页",
+        "iconPath": "images/icon/home.png",
+        "selectedIconPath": "images/icon/home-act.png"
+      },
+      {
+        "pagePath": "pages/property/myAccountDemo/myAccountDemo",
+        "text": "我的",
+        "iconPath": "images/icon/myAccount.png",
+        "selectedIconPath": "images/icon/myAccount-act.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap42.json"
+}

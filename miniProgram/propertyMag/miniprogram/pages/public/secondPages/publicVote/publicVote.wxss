@@ -1,0 +1,12 @@
+/* miniprogram/pages/public/secondPages/publicVote/publicVote.wxss */
+
+.page__hd{
+  margin: 50rpx 0 50rpx 20rpx;
+}
+.page__desc{
+  font-size: 28rpx;
+  color:#cccccc;
+}
+.page__title{
+  font-size: 36rpx;
+}

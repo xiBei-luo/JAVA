@@ -1,0 +1,481 @@
+html,body{
+    width: 100%;
+    height: 100%;
+}
+/*公共begin*/
+.mr-top-100{
+    margin-top:100px;
+}
+.mr-top-50{
+    margin-top: 50px;
+}
+.float-right{
+    float: right;
+}
+.badge-warning{
+    background-color: #f0ad4e;
+}
+.badge-primary{
+    background-color: #337ab7;
+}
+/*公共end*/
+
+
+/*banner*/
+#banner-bak{
+    position: relative;
+}
+#banner-bak .item>img{
+    width: 100%;
+    background-size: 1349px 500px;
+    overflow-x: hidden;
+}
+
+
+/*logo*/
+.logo{
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 5px;
+    margin-top: -10px;
+}
+.loginHeader{
+    height:100%;
+}
+#smallTitle{
+    font-family: 方正舒体;
+    background: #3e8f3e;
+    padding: 3px 8px;
+    font-size: 14px;
+    margin-left: 105px;
+    border-radius: 5px;
+    color: #ffffff;
+}
+#brandTitle{
+    font-weight: bold;
+    position: absolute;
+    top: 3px;
+    left: 60px;
+    height: 44px;
+    line-height: 28px;
+    font-size: 18px;
+    float: left;
+    padding-right: 5px;
+    border-right: 1px solid #555555;
+    margin: 0;
+    letter-spacing: 5px;
+}
+#brandSubttle{
+    font-weight: normal;
+    font-size: 12px;
+    letter-spacing: normal;
+    display: block;
+    margin-top: -5px;
+}
+#navbarBrand{
+    position: relative;
+}
+/*logo end*/
+
+/*banner下的三个任务begin*/
+.mission{
+    width: 1070px;
+    height: 350px;
+    position: relative;
+}
+.mission-js,.mission-sf,.mission-yg{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.mission-js{
+    top: 30%;
+}
+.mission-sf{
+    top: 55%;
+}
+.mission-yg{
+    top: 80%;
+}
+.mission img[class='center-block']{
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    border:2px solid;
+    border-radius: 50%;
+    padding:10px;
+}
+#js{
+    border-color: #2b542c;
+    background: #ffffff;
+}
+#sf{
+    border-color: #8a6d3b;
+    background: #c0a16b;
+}
+#yg{
+    border-color: #e38d13;
+    background: #f1586a;
+}
+
+/*攻略*/
+#method img{
+    position: absolute;
+    left: 0;
+    width: 80px;
+    height: 80px;
+}
+
+.tree img{
+    width: 350px;
+    height: 350px;
+    position: absolute;
+    left: 20%;
+    bottom: -20%;
+}
+
+
+@keyframes methodMove
+{
+    0%   {left:10px; top:0px;}
+    50%  {left:0px; top:10px;}
+    100% {left:10px; top:0px;}
+}
+
+@-webkit-keyframes methodMove /*Safari and Chrome*/
+{
+    0%   {left:10px; top:0px;}
+    50%  {left:0px; top:10px;}
+    100% {left:10px; top:0px;}
+}
+/*banner下的三个任务end*/
+
+/*点赞排行榜begin*/
+#goldList,#rankList{
+    padding-top: 50px;
+}
+.goldListWrap{
+    width: 80%;
+    background: #398439;
+    margin: 0px auto;
+    border-radius: 15px;
+    overflow: hidden;
+    padding-bottom: 30px;
+}
+.goldListTitle{
+    color: #ffffff;
+    line-height: 60px;
+    margin: 0;
+}
+.goldDzRankTitle{
+    width: 80%;
+    margin:0 auto;
+    text-align: center;
+    background: #ffffff;
+    font-size: 20px;
+    line-height: 32px;
+    border-radius: 5px;
+}
+.goldDzRankContent{
+    font-size: 16px;
+    line-height: 32px;
+    border-radius: 5px;
+    background: #419641;
+    width: 80%;
+    margin: 5px auto;
+    text-align: center;
+    color: #ffffff;
+}
+.btnLikeBox{
+    text-align: center;
+    margin: 0px 0 10px;
+    position: relative;
+}
+#btnLike{
+    font-size: 28px;
+    color:#b92c28;
+}
+#jsGold{
+    opacity: 0;
+    position: absolute;
+    font-weight: bold;
+    color: #eea236;
+}
+/*点赞排行榜end*/
+
+/*能量排行榜begin*/
+#rankList .row .rankListBg{
+    background: #419641;
+    margin-top: 10px;
+    height:50px;
+    line-height: 50px;
+    font-size: 18px;
+    color: #ffffff;
+    border-radius: 10px;
+    position: relative;
+}
+#rankList .row .rankListBg span:nth-child(2){
+    position: absolute;
+    right: 20px;
+}
+#goldDzRankContent_1{
+    background: url("../../publicImg/ranklist/first.png") no-repeat;
+    background-size: 40px 40px;
+    background-position: center;
+}
+#goldDzRankContent_2{
+    background: url("../../publicImg/ranklist/second.png") no-repeat;
+    background-size: 40px 40px;
+    background-position: center;
+}
+#goldDzRankContent_3{
+    background: url("../../publicImg/ranklist/third.png") no-repeat;
+    background-size: 40px 40px;
+    background-position: center;
+}
+.goldDzRankContent_ower{
+    background: url("../../publicImg/ranklist/ower.png") no-repeat;
+    background-size: 30px 30px;
+    background-position: center;
+}
+/*能量排行榜end*/
+
+/*返回顶部*/
+.sidebar-returnTop{
+    position: fixed;
+    right:0;
+    bottom:0;
+    width: 50px;
+    height: 50px;
+    background: #5cb85c;
+}
+.sidebar-returnTop span{
+    font-size: 22px;
+    color: #ffffff;
+    line-height: 50px;
+    padding-left: 13px;
+}
+/*底部版权声明*/
+.indexFooter{
+    height: 140px;
+    background: #333333;
+    color: #ffffff;
+    line-height: 30px;
+    text-align: center;
+}
+
+/*种子商店begin*/
+.market-title{
+    margin: 0;
+    padding:25px;
+    background: #419641;
+    color: #ffffff;
+}
+
+.popular-packages {
+    background: #ffffff;
+    padding: 50px 0;
+}
+.popular-packages .single-package {
+    border:3px solid #419641;
+    margin-bottom: 30px;
+    -webkit-transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.5s;
+    overflow: hidden;
+    position: relative;
+    -webkit-box-shadow: 0 0 20px 0 rgba(47, 47, 47, 0.05);
+    box-shadow: 0 0 20px 0 rgba(47, 47, 47, 0.05);
+    transition: all ease-in-out 0.5s;
+}
+.popular-packages .single-package:hover {
+    -webkit-box-shadow: 0 0 60px 0 rgba(47, 47, 47, 0.1);
+    box-shadow: 0 0 60px 0 rgba(47, 47, 47, 0.1);
+}
+.popular-packages .single-package:hover .package-image a img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.popular-packages .single-package:hover .package-calto-action {
+    padding: 0 20px 25px 0px;
+}
+.popular-packages .single-package:hover .package-calto-action .ct-action li:first-child a {
+    background: #f15b5c;
+}
+.popular-packages .single-package .package-image {
+    overflow: hidden;
+}
+.popular-packages .single-package .package-image a img {
+    display: block;
+    width: 100%;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: all ease-in-out 0.3s;
+    transition: all ease-in-out 0.3s;
+}
+.popular-packages .single-package .package-content {
+    padding: 10px;
+}
+.popular-packages .single-package .package-content h3{
+    display: inline-block;
+}
+.popular-packages .single-package .package-content h3 a {
+    font-weight: 600;
+    color: #2f2f2f;
+    font-size: 20px;
+    -webkit-transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.5s;
+}
+.popular-packages .single-package .package-content h3 a:hover {
+    color: #f15b5c;
+}
+.popular-packages .single-package .package-content p {
+    color: #727272;
+    font-size: 14px;
+    font-weight: 500;
+    width:100%;
+    height: 60px;
+    /*word-break:keep-all; 不换行 */
+    /*white-space:nowrap; 不换行 */
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.popular-packages .single-package .package-content #nSpjg {
+    background: #37b721;
+    padding:2px 6px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 600;
+}
+.popular-packages .single-package .package-calto-action {
+    padding: 0 20px 10px 0px;
+}
+.popular-packages .single-package .package-calto-action .ct-action {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.popular-packages .single-package .package-calto-action .ct-action li:first-child a {
+    cursor: pointer;
+    -webkit-transition: all ease-in-out 0.5s;
+    transition: all ease-in-out 0.5s;
+    overflow: hidden;
+}
+.travel-booking-btn {
+    display: inline-block;
+    background: #37b721;
+    padding: 9px 22px;
+    color: #fefefe;
+    font-weight: 500;
+    font-size: 15px;
+}
+.package-calto-action li{
+    list-style: none;
+}
+/*种子商店end*/
+
+/*客服微信二维码*/
+#customModel .modal-content{
+    width: 340px;
+    height: 420px;
+}
+#customModel .modal-body{
+    width: 300px;
+    height: 300px;
+}
+#customImg{
+    width: 300px;
+    height: 300px;
+}
+
+/**
+邀请二维码
+ */
+#inviteUserModel .modal-content{
+    width: 340px;
+}
+
+
+
+/*终端尺寸适配*/
+@media screen and (max-width: 600px) {
+    /*header左部*/
+    #brandTitle{
+        font-size: 16px;
+    }
+    #brandSubttle{
+        font-size: 12px;
+    }
+    #smallTitle{
+        padding: 3px 5px;
+    }
+
+    /*三个任务*/
+    .mission{
+        width: 350px;
+        height: 270px;
+        position: relative;
+    }
+    .mission-js,.mission-sf,.mission-yg{
+        width: 50px;
+        height: 50px;
+    }
+
+    /*树苗*/
+    .tree img{
+        width: 250px;
+        height: 250px;
+        left: 10%;
+    }
+
+
+    /*排行榜*/
+    .goldListWrap{
+        width: 98%;
+    }
+    .goldListTitle{
+        font-size: 18px;
+    }
+    #btnLike{
+        font-size: 22px;
+    }
+    .goldDzRankTitle,.goldDzRankContent {
+        width: 90%;
+        font-size: 14px;
+    }
+    .goldDzRankContent{
+        font-size: 12px;
+    }
+
+    /*种子商店*/
+    #market #cSpmc{
+        font-size: 18px;
+    }
+    #market #cSpms{
+        height: 120px;
+        font-size: 12px;
+    }
+    #market #nSpjg{
+        font-size: 10px;
+    }
+    #market .ct-action a{
+        font-size: 12px;
+    }
+
+    .indexFooter{
+        height: 180px;
+    }
+
+    #myAccountModel .nav li a{
+        padding:8px;
+    }
+}
+

@@ -1,0 +1,21 @@
+/* miniprogram/pages/firstVisit/firstVisit.wxss */
+.container{
+  width: 100%;
+  height: 100vh;
+  background-color: #2d5a6f; /* 不支持线性的时候显示 */
+  background-image: linear-gradient(to bottom right, #2d5a6f , #e0845f);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.item-2{
+  margin-top: 10%;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+/* miniprogram/pages/public/secondPages/viewMsg/viewMsg.wxss */
+.page__bd{
+  width: 95%;
+  margin: 20rpx auto;
+}
+.title-desc{
+  font-size: 26rpx;
+  vertical-align: center;
+  color: #ccc;
+  position: absolute;
+  right: 10rpx;
+}
+
+
+
+
+
+
+

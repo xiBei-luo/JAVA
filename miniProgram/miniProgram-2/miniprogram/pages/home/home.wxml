@@ -1,0 +1,17 @@
+
+
+<view class="container" wx:for="{{list}}" wx:key="{{index}}" bindtap="gotoDetails" data-id="1">
+<image class="containerBg" src="../../images/bak/bak-1.jpg"></image>
+  <view class="contentBox">
+    <view class="shopLogo">cutman</view>
+    <view class="containerBottom">
+      <view class="bottomLeft">
+        <view class="shopName">Cutman银泰城店</view>
+        <view class="shopAddress fontSm">成都市高新区益州大道银泰城悦方6栋1楼11号</view>
+      </view>
+      <view class="bottomRight">
+        <view class="shopDistance fontSm">22KM</view>
+      </view>
+    </view>
+  </view>
+</view>

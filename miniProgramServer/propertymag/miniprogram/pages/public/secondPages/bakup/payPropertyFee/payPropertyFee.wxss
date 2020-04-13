@@ -1,0 +1,29 @@
+/* miniprogram/pages/public/payPropertyFee/payPropertyFee.wxss */
+.infoBlock{
+  width: 90vw;
+  border-radius: 10rpx;
+  background: #ffffff;
+  margin: 20rpx auto 0;
+  padding: 20rpx;
+}
+.line{
+  display: flex;
+  justify-content: space-between;
+  line-height: 80rpx;
+}
+.text-gray{
+  color: #7e7e7e;
+}
+.icon-sm-red,.icon-sm-yellow{
+  font-size: 24rpx;
+  width: 40rpx;
+  height:40rpx;
+  border-radius: 10rpx;
+  background: red;
+  color:#ffffff;
+  text-align: center;
+  line-height: 40rpx;
+}
+.icon-sm-yellow{
+  background: #e9ba5f;
+}

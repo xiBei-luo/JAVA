@@ -1,0 +1,16 @@
+/* miniprogram/pages/public/myAccount/myAccount.wxss */
+.body{
+  width: 100vw;
+  height: 100vh;
+}
+.navigator-group{
+  margin-top: 20rpx;
+}
+.userinfo-box{
+  display: flex;
+  justify-content: space-between
+}
+
+
+
+

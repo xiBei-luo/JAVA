@@ -1,0 +1,43 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-cells__title font-sm">说明：若确认该住户是本小区住户请点击"允许入驻"，否则点击"拒绝入驻"</view>
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">小区住户入驻申请</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__desc">
+                      <view class="line">
+                        <view>
+                          <text>住户姓名：</text>
+                          <text>张三三</text>
+                        </view>
+                        <view>
+                          <text>住户电话：</text>
+                          <text>18322222222</text>
+                        </view>
+                      </view>
+                      <view class="line">
+                        <view>
+                          <text>住户住址：</text>
+                          <text>瑞升南园2栋1单元401</text>
+                        </view>
+                      </view>
+                      <view class="line">
+                        <view>
+                          <text>入驻申请时间：</text>
+                          <text>2020年03月27日</text>
+                        </view>
+                      </view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-panel__ft panel-ft-btn">
+                <view class="button-sp-area">
+                  <button class="weui-btn mini-btn" type="warn" size="mini">拒绝入驻</button>
+                  <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="doPayFee">允许入驻</button>
+              </view>
+            </view>
+        </view>
+        
+    </view>
+</view>

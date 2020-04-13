@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greenplatform.dao.owerMapper.OwerPlateUserMapper" >
+  <select id="selectWebUser" parameterType="com.greenplatform.model.PlateUser" resultType="java.util.HashMap">
+      SELECT
+          IFNULL(t1.n_zed, 0) n_zed,
+          t.*
+          FROM
+          (
+              SELECT
+                  A.c_userid cUserid,
+                  A.c_username cUsername,
+                  A.c_loginname cLoginname,
+                  A.c_zjhm cZjhm,
+                  A.c_sex cSex,
+                  A.c_ryzt cRyzt,
+                  A.c_rydj cRydj,
+                  A.c_ryxz cRyxz,
+                  A.c_phone cPhone,
+                  A.c_issmz cIssmz,
+                  B.n_nlhz nNlhz,
+                  A.c_zcfs cZcfs,
+                  A.c_jtzz cJtzz,
+                  A.c_email cEmail,
+                  CASE WHEN A.c_ryzt = '0' THEN '无效'
+                       WHEN A.c_ryzt = '1' THEN '有效'
+                       ELSE ''
+                  END cRyztsm,
+
+                  CASE  WHEN A.c_ryxz = '1' THEN '正常'
+                        WHEN A.c_ryxz = '-1' THEN '黑名单用户'
+                        ELSE ''
+                  END cRyxzsm,
+
+                  CASE WHEN A.c_zcfs = '1' THEN '手机号码'
+                       WHEN A.c_ryzt = '2' THEN '微信号'
+                       WHEN A.c_ryzt = '3' THEN 'QQ号'
+                       ELSE ''
+                  END cZcfssm
+              FROM plate_user A, t_green_nl_hz B
+              WHERE A.c_userid = b.c_userid
+                    AND A.c_rylb = '2'
+                    <if test='cUsername!=null and cUsername!=""'>
+                      AND A.c_username LIKE "%" #{cUsername} "%"
+                    </if>
+                    <if test='cZjhm!=null and cZjhm!=""'>
+                      AND A.c_zjhm = #{cZjhm}
+                    </if>
+                    <if test='cRydj!=null and cRydj!=""'>
+                      AND A.c_rydj = #{cRydj}
+                    </if>
+              ORDER BY A.c_userid, A.c_rydj DESC
+          ) t LEFT JOIN t_green_ed_edhz t1 ON t.cUserid = t1.c_userid
+  </select>
+</mapper>

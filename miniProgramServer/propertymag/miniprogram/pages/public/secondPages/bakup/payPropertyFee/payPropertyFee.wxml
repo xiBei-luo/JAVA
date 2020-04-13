@@ -1,0 +1,91 @@
+<view class="infoBlock">
+  <view class="line">
+    <view>
+      <text class="text-gray">业主：</text>
+      <text>张三</text>
+    </view>
+    <view>
+      <text class="text-gray">联系方式：</text>
+      <text>18328023251</text>
+    </view>
+  </view>
+  <view class="line">
+    <view>
+      <text class="text-gray">面积：</text>
+      <text>80平米</text>
+    </view>
+    <view>
+      <text class="text-gray">款项：</text>
+      <text>小高层物业费</text>
+    </view>
+  </view>
+  <view class="line">
+    <view>
+      <text class="text-gray">收费单位：</text>
+      <text>万科集团</text>
+    </view>
+  </view>
+</view>
+
+<view class="infoBlock">
+  <view class="line">
+    <view class="text-gray">缴费月数</view>
+    <view>6个月</view>
+  </view>
+  <view class="line">
+    <view class="text-gray">缴费周期</view>
+    <view>2020年4月-2020年10月</view>
+  </view>
+  <view class="line">
+    <view class="text-gray">单价</view>
+    <view>2元/平米</view>
+  </view>
+  <view class="line">
+    <view class="text-gray">每月</view>
+    <view>160元</view>
+  </view>
+</view>
+
+
+<view class="infoBlock">
+  <view class="line">
+    <view class="icon-sm-red">赠</view>
+    <text>赠送大米一袋</text>
+  </view>
+  <view class="line">
+    <view class="icon-sm-yellow">折</view>
+    <text>在线支付享9.5折优惠</text>
+  </view>
+  <view class="line">
+    <view class="text-gray">应付金额</view>
+    <view>960.00元</view>
+  </view>
+  <view class="line">
+    <view class="text-gray">优惠</view>
+    <view>48.00元</view>
+  </view>
+  <view class="line">
+    <view class="text-gray">实付</view>
+    <view>912.00元</view>
+  </view>
+</view>
+
+<view class="weui-cells__title">物业费由物业公司直接收取，如有疑问请咨询小区物业</view>
+<view class="weui-cells weui-cells_after-title">
+  <radio-group bindchange="radioChange">
+    <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="value">
+      <radio class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+      <view class="weui-cell__bd">{{item.name}}</view>
+      <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+        <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+      </view>
+    </label>
+  </radio-group>
+</view>
+
+
+
+<view class="weui-btn-area">
+  <button class="weui-btn" type="primary" bindtap="showTopTips">确认支付</button>
+</view>

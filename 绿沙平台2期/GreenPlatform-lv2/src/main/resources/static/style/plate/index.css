@@ -1,0 +1,34 @@
+/**
+顶部导航
+ */
+html,body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.page-box{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.title-box{
+    height: 50px;
+}
+/**
+主体内容
+ */
+.content-box{
+    width: 100%;
+    height: 92%;
+}
+
+
+
+/*终端尺寸适配*/
+@media screen and (max-width: 600px) {
+
+
+}
+

@@ -1,10 +1,8 @@
-/*公共begin*/
-header{
+html,body{
     width: 100%;
-    background: url("../../publicImg/systemBg.jpg");
-    background-size: 1349px 500px;
-    overflow-x: hidden;
+    height: 100%;
 }
+/*公共begin*/
 .mr-top-100{
     margin-top:100px;
 }
@@ -22,6 +20,18 @@ header{
 }
 /*公共end*/
 
+
+/*banner*/
+#banner-bak{
+    position: relative;
+}
+#banner-bak .item>img{
+    width: 100%;
+    background-size: 1349px 500px;
+    overflow-x: hidden;
+}
+
+
 /*logo*/
 .logo{
     width: 40px;
@@ -29,10 +39,6 @@ header{
     float: left;
     margin-right: 5px;
     margin-top: -10px;
-}
-
-.indexHeader{
-    height:500px;
 }
 .loginHeader{
     height:100%;
@@ -74,65 +80,25 @@ header{
 
 /*banner下的三个任务begin*/
 .mission{
-    margin-top:100px;
+    width: 1070px;
+    height: 350px;
     position: relative;
 }
 .mission-js,.mission-sf,.mission-yg{
-    width: 100px;
-    height: 100px;
-    position: relative;
-    animation:mymove 2s infinite;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 .mission-js{
-    margin-left: 80%;
-    -webkit-animation:jsMove 2s infinite; /*Safari and Chrome*/
+    top: 30%;
 }
 .mission-sf{
-    margin-left: 70%;
-    -webkit-animation:sfMove 2s infinite; /*Safari and Chrome*/
+    top: 55%;
 }
 .mission-yg{
-    margin-left: 70%;
-    -webkit-animation:ygMove 2s infinite; /*Safari and Chrome*/
-}
-@keyframes jsMove
-{
-    0%   {left:10px; top:0px;}
-    50%  {left:0px; top:10px;}
-    100% {left:10px; top:0px;}
-}
-
-@-webkit-keyframes jsMove /*Safari and Chrome*/
-{
-    0%   {left:10px; top:0px;}
-    50%  {left:0px; top:10px;}
-    100% {left:10px; top:0px;}
-}
-@keyframes sfMove
-{
-    0%   {left:0px; top:0px;}
-    50%  {left:0px; top:10px;}
-    100% {left:0px; top:0px;}
-}
-
-@-webkit-keyframes sfMove /*Safari and Chrome*/
-{
-    0%   {left:0px; top:0px;}
-    50%  {left:0px; top:10px;}
-    100% {left:0px; top:0px;}
-}
-@keyframes ygMove
-{
-    0%   {left:0px; top:10px;}
-    50%  {left:0px; top:0px;}
-    100% {left:0px; top:10px;}
-}
-
-@-webkit-keyframes ygMove /*Safari and Chrome*/
-{
-    0%   {left:0px; top:10px;}
-    50%  {left:0px; top:0px;}
-    100% {left:0px; top:10px;}
+    top: 80%;
 }
 .mission img[class='center-block']{
     width: 100%;
@@ -155,25 +121,22 @@ header{
     background: #f1586a;
 }
 
+/*攻略*/
+#method img{
+    position: absolute;
+    left: 0;
+    width: 80px;
+    height: 80px;
+}
+
 .tree img{
     width: 350px;
     height: 350px;
     position: absolute;
-    top: 0;
-    left: 35%;
+    left: 20%;
+    bottom: -20%;
 }
 
-
-/*攻略*/
-#method{
-    position: absolute;
-    -webkit-animation:methodMove 2s infinite; /*Safari and Chrome*/
-    margin-left: 300px;
-}
-#method img{
-    width: 80px;
-    height: 80px;
-}
 
 @keyframes methodMove
 {
@@ -317,6 +280,7 @@ header{
     padding: 50px 0;
 }
 .popular-packages .single-package {
+    border:3px solid #419641;
     margin-bottom: 30px;
     -webkit-transition: all ease-in-out 0.5s;
     transition: all ease-in-out 0.5s;
@@ -386,7 +350,7 @@ header{
     font-weight: 600;
 }
 .popular-packages .single-package .package-calto-action {
-    padding: 0 20px 25px 0px;
+    padding: 0 20px 10px 0px;
 }
 .popular-packages .single-package .package-calto-action .ct-action {
     display: -webkit-box;
@@ -418,6 +382,28 @@ header{
 }
 /*种子商店end*/
 
+/*客服微信二维码*/
+#customModel .modal-content{
+    width: 340px;
+    height: 420px;
+}
+#customModel .modal-body{
+    width: 300px;
+    height: 300px;
+}
+#customImg{
+    width: 300px;
+    height: 300px;
+}
+
+/**
+邀请二维码
+ */
+#inviteUserModel .modal-content{
+    width: 340px;
+}
+
+
 
 /*终端尺寸适配*/
 @media screen and (max-width: 600px) {
@@ -432,44 +418,22 @@ header{
         padding: 3px 5px;
     }
 
-
-    /*手机背景*/
-    header{
-        background: url("../../publicImg/telBg.jpg") no-repeat;
-        background-size: 420px 500px;
-    }
-
-    /*攻略*/
-    #method{
-        position: absolute;
-        -webkit-animation:methodMove 2s infinite; /*Safari and Chrome*/
-        margin-left: 80px;
-    }
-
     /*三个任务*/
-    .mission-js,.mission-sf,.mission-yg{
-        width: 80px;
-        height: 80px;
-    }
     .mission{
-        margin-top: 80px;
+        width: 350px;
+        height: 270px;
+        position: relative;
     }
-    .mission-js{
-        margin-left: 45%;
-        -webkit-animation:jsMove 2s infinite; /*Safari and Chrome*/
-    }
-    .mission-yg{
-        margin-left: 75%;
-        -webkit-animation:ygMove 2s infinite; /*Safari and Chrome*/
+    .mission-js,.mission-sf,.mission-yg{
+        width: 50px;
+        height: 50px;
     }
 
     /*树苗*/
     .tree img{
         width: 250px;
         height: 250px;
-        position: absolute;
-        top: 150px;
-        left:10%;
+        left: 10%;
     }
 
 
@@ -513,10 +477,9 @@ header{
     #myAccountModel .nav li a{
         padding:8px;
     }
-
-
 }
 
+<<<<<<< HEAD
 
 /*客服微信二维码*/
 #customModel .modal-content{
@@ -541,3 +504,5 @@ header{
 }
 
 
+=======
+>>>>>>> 88bb2517bb97dc29a343dfccdd5e47433d788a69
