@@ -35,7 +35,6 @@ Page({
       success(res) {
         wx.hideLoading();//关闭遮罩
         var retData = res.data.data;
-        console.log(retData);
         var chkArr = [];
         if (retData.length > 0) {
           for (var i = 0; i < retData.length; i++) {
@@ -56,8 +55,6 @@ Page({
   //获取input值
   getInputValue: function (e) {
     var type = e.target.dataset.type;
-    console.log(type);
-    console.log(e.detail.value);
     this.setData({
       [type]: e.detail.value
     });
@@ -65,9 +62,6 @@ Page({
 
 
   checkboxChange: function (e) {
-    console.log(e);
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value);
-
     var checkboxItems = this.data.checkboxItems, values = e.detail.value;
     for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
       checkboxItems[i].checked = checkboxItems[i].value == e.detail.value;
@@ -87,10 +81,12 @@ Page({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
+        console.log("wx upload res");
+        console.log(res);
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        that.setData({
-          files: that.data.files.concat(res.tempFilePaths)
-        });
+        // that.setData({
+        //   files: that.data.files.concat(res.tempFilePaths)
+        // });
         var tempFilePaths = res.tempFilePaths;
         wx.uploadFile({
           url: 'https://www.cloplex.com/property/index.php/RepairController/uploadImage', //仅为示例，非真实的接口地址
@@ -104,14 +100,27 @@ Page({
             "user": "test",
           },
           success: function (res) {
+            console.log(res.data);
             var imgData = JSON.parse(res.data);
-            console.log(imgData.data);
             if (imgData.status == 1){
               that.setData({
+                files: that.data.files.concat(tempFilePaths),
                 repairimg: that.data.repairimg.concat(imgData.data)
               });
+            }else{
+              wx.showToast({
+                title: '上传图片失败，'+imgData.msg,
+                icon: 'none',
+                duration: 3000
+              })
             }
-            console.log(that.data.repairimg);
+          },
+          fail: function(res){
+            wx.showToast({
+              title: '请求失败，'+JSON.stringify(res),
+              icon: 'none',
+              duration: 3000
+            })
           }
         })
 
@@ -125,11 +134,59 @@ Page({
     })
   },
 
+  //长按图片删除
+  deleteImage: function(e){
+    var that = this;
+    var imagesFiles = that.data.files;
+    var imagesSubmit = that.data.repairimg;
+    var index = e.currentTarget.dataset.index; //获取当前长按图片下标
+    wx.showModal({
+      title: '系统提醒',
+      content: '确定要删除此图片吗？',
+      success: function (res) {
+        if (res.confirm) {
+          imagesFiles.splice(index, 1);
+          imagesSubmit.splice(index, 1);
+        } else if (res.cancel) {
+          return false;
+        }
+        that.setData({
+          files: imagesFiles,
+          repairimg: imagesSubmit
+        });
+      }
+    })
+  },
+
 
   //提交维修单
   submitRepair: function(){
-
     var that = this;
+
+    if (that.data.repairtype == "" || that.data.repairtype == null) {
+      wx.showToast({
+        title: '请选择报修类别',
+        icon: 'none'
+      })
+      return false;
+    }
+
+    if (that.data.repairaddress == "" || that.data.repairaddress == null) {
+      wx.showToast({
+        title: '请输入物品损坏地点',
+        icon: 'none'
+      })
+      return false;
+    }
+
+    if (that.data.repaircontent == "" || that.data.repaircontent == null) {
+      wx.showToast({
+        title: '请详细描述下您所遇到的问题',
+        icon: 'none'
+      })
+      return false;
+    }
+    
 
     wx.showLoading({
       title: '请稍等',
@@ -149,18 +206,14 @@ Page({
       method: "POST",
       success(res) {
         wx.hideLoading();//关闭遮罩
-        console.log(res.data);
         if (res.data.status == 1) {
-
-          wx.showToast({
-            title: '成功',
-            icon: 'success',
-            duration: 3000
-          });
+          wx.reLaunch({
+            url: '/pages/public/secondPages/repair/successPage',
+          })
 
         } else {
           wx.showToast({
-            title: '出错了',
+            title: '出错了：错误信息'+JSON.stringify(res),
             icon: 'none',
             duration: 2000
           });
@@ -183,7 +236,6 @@ Page({
         confirmText: "立即认证",
         cancelText: "暂不认证",
         success: function (res) {
-          console.log(res);
           if (res.confirm) {
             wx.reLaunch({
               url: '/pages/public/firstVisit/firstVisit'
@@ -193,6 +245,7 @@ Page({
           }
         }
       });
+      return;
     } else if (2 == app.globalData.userStatus) {
       wx.showModal({
         title: '提示',
@@ -204,10 +257,11 @@ Page({
           });
         }
       });
+      return;
     } else if (!app.globalData.userStatus) {
       wx.showModal({
         title: '提示',
-        content: '出错了，请稍后再试！',
+        content: '出错了，未获取到用户状态',
         confirmText: "确定",
         success: function (res) {
           wx.navigateBack({
@@ -215,6 +269,23 @@ Page({
           });
         }
       });
+      return;
+    }
+
+
+    //category    管理员（1）、物业（2）、项目部（3），还是业主（4）
+    if (app.globalData.userInfoDesc.category == 2 || app.globalData.userInfoDesc.category == 3) {
+      wx.showModal({
+        title: '提示',
+        content: '抱歉，您暂无此功能使用权限！',
+        confirmText: "确定",
+        success: function (res) {
+          wx.navigateBack({
+
+          });
+        }
+      });
+      return;
     }
     this.loadData();
   },

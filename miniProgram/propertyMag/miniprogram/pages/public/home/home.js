@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userNewsList: [],
     //轮播图列表
     carouselList: [{
         "id": "101",
@@ -33,6 +34,7 @@ Page({
       }
     ],
   },
+
   //点击了轮播图
   chomeCarouselClick: function (event) {
     var urlStr = event.currentTarget.dataset.url;
@@ -42,11 +44,70 @@ Page({
     // })
   },
 
+
+  //查看公告详情
+  gotoShowNews: function(e){
+    //../showNews/showNews
+    var dataList = e.currentTarget.dataset.newslist;
+    console.log(dataList);
+    wx.navigateTo({
+      url: '../showNews/showNews?id=' + dataList.id,
+    })
+  },
+
+ 
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+
+    // setTimeout(function () {
+       
+    // }, 1000) //延迟时间 这里是1秒
+
+    console.log("用户状态："+app.globalData.userStatus);
+    if(app.globalData.userStatus == 1){
+      //请求公告列表——正式用户
+      wx.request({
+        url: 'https://www.cloplex.com/property/index.php/NewsController/getNewsList',
+        data: {
+          type: 1,
+          offset: 1
+        },
+        header: {
+          'content-type': "application/x-www-form-urlencoded", // 默认值
+          'cookie': wx.getStorageSync("sessionid")
+        },
+        method: "POST",
+        success(res) {
+          console.log(res.data.data);
+          that.setData({
+            userNewsList: res.data.data
+          })
+        }
+      })
+    }else{
+      //获取操作手册
+      wx.request({
+        url: 'https://www.cloplex.com/property/index.php/IndexController/selectNews',
+        data: {
+          id: ""
+        },
+        header: {
+          'content-type': "application/x-www-form-urlencoded", // 默认值
+          'cookie': wx.getStorageSync("sessionid")
+        },
+        method: "POST",
+        success(res) {
+          console.log(res.data.data);
+          that.setData({
+            userNewsList: res.data.data
+          })
+        }
+      })
+    }
   },
 
   /**

@@ -25,8 +25,6 @@ Page({
       id: that.data.userInfo.id,
     };
     console.log(params);
-
-
     wx.request({
       url: 'https://www.cloplex.com/property/index.php/UserController/findFamily', //仅为示例，并非真实的接口地址
       data: params,
@@ -36,17 +34,21 @@ Page({
       },
       method: "POST",
       success(res) {
-        console.log(res.data);
+        console.log(res);
         wx.hideLoading();//关闭遮罩
-
-        if (res.data.data){
-          that.setData({
-            dataList: res.data.data
-          });
+        if(res.data.status == 1){
+          if (res.data.data){
+            that.setData({
+              dataList: res.data.data
+            });
+          }
+        }else{
+          wx.showToast({
+            title: '出错了，错误信息：'+res.msg,
+            icon: 'none',
+            duration: 1000
+          })
         }
-
-        
-
       }
     })
 

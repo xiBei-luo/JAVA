@@ -1,0 +1,5 @@
+<view wx:for="{{listData}}" wx:key="index" class="item-view">
+  <view>{{item}}</view>
+</view>
+
+<view hidden="{{hiddenLoad}}">加载中。。。。。</view>

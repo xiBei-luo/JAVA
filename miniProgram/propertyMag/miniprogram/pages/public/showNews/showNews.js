@@ -1,17 +1,50 @@
 // miniprogram/pages/public/showNews/showNews.js
+var WxParse = require('../../../components/wxParse/wxParse.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    dataList: [],
+    newsContent: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    WxParse.wxParse('article', 'html', this.data.article, this, 5);
+
+
+    var that = this;
+    var parentDataId = JSON.parse(options.id);
+    var parentData = null;
+    console.log(parentDataId);
+
+    //请求新闻内容
+    wx.request({
+      url: 'https://www.cloplex.com/property/index.php/NewsController/getNews',
+      data: {
+        id: parentDataId
+      },
+      header: {
+        'content-type': "application/x-www-form-urlencoded", // 默认值
+        'cookie': wx.getStorageSync("sessionid")
+      },
+      method: "POST",
+      success(res) {
+        parentData = res.data.data;
+        console.log(parentData);
+        var article = parentData.content;
+        WxParse.wxParse('article', 'html', article, that, 5);
+        that.setData({
+          dataList: parentData,
+          newsContent: article
+        })
+
+      }
+    })
 
   },
 

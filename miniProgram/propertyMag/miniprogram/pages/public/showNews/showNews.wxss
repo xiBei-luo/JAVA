@@ -1,1 +1,2 @@
 /* miniprogram/pages/public/showNews/showNews.wxss */
+@import "/components/wxParse/wxParse.wxss";

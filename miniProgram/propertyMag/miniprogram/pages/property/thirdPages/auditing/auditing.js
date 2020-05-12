@@ -28,10 +28,9 @@ Page({
       id: that.data.userData.id,
       status: that.data.auditingResult,
       remark: that.data.auditingReson,
+      category: that.data.userData.category
     };
     console.log(params);
-
-
     wx.request({
       url: 'https://www.cloplex.com/property/index.php/UserController/updateUserStatus', //仅为示例，并非真实的接口地址
       data: params,
@@ -48,24 +47,48 @@ Page({
           if(that.data.userData.category != 4){
             wx.showModal({
               title: '提示',
-              content: '是否立即给该用户授权！',
+              content: '审核成功，是否立即给该用户授权！',
               confirmText: "立即授权",
               cancelText: "以后再说",
               success: function (res) {
                 if (res.confirm) {
+                  //parentPage为1，表示审核通过后直接授权
                   wx.navigateTo({
-                    url: '/pages/property/thirdPages/setRole/setRole?id=' + that.data.userData.id
+                    url: '/pages/property/thirdPages/setRole/setRole?id=' + that.data.userData.id+'&parentPage=1'
                   })
                 } else {
-                  wx.navigateBack({})
+                  setTimeout(function(){
+                    var t = getCurrentPages()[getCurrentPages().length - 2];
+                    t.loadInitData();
+                    wx.navigateBack({
+    
+                    })
+                  }, 1000);
                 }
               }
             });
           }else{
-            wx.navigateBack({
-              
-            })
+            wx.showToast({
+              title: '审核成功',
+              icon: 'success',
+              duration: 1000,
+              success: function(){
+                setTimeout(function(){
+                  var t = getCurrentPages()[getCurrentPages().length - 2];
+                  t.loadInitData();
+                  wx.navigateBack({
+  
+                  })
+                }, 1000);
+              }
+            });
           }
+        }else{
+          wx.showToast({
+            title: '出错了,错误信息：'+res.msg,
+            icon: 'none',
+            duration: 1000
+          });
         }
 
       }

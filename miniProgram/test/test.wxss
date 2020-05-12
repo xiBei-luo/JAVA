@@ -1,0 +1,14 @@
+page {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.item-view{
+  background: #aaa;
+  height: 100rpx;
+  margin: 30rpx 20rpx;
+}

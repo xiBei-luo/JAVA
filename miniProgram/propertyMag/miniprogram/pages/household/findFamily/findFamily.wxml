@@ -1,11 +1,20 @@
 <view class="page">
     <view class="page__bd">
-        <view class="weui-cells weui-cells_after-title" wx:for="{{dataList}}" wx:key="id">
+        
+        <view class="weui-cells weui-cells_after-title" wx:if="{{(!dataList) || dataList.length<=0}}">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">暂无</view>
+            </view>
+        </view>
+
+
+        <view class="weui-cells weui-cells_after-title" wx:for="{{dataList}}" wx:key="id" wx:if="{{dataList.length > 0}}">
             <view class="weui-cell">
                 <view class="weui-cell__bd">{{item.username}}</view>
                 <view class="weui-cell__ft">{{item.phone}}</view>
             </view>
         </view>
+
         
         
     </view>

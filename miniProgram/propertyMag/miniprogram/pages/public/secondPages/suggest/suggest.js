@@ -30,9 +30,9 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        that.setData({
-          files: that.data.files.concat(res.tempFilePaths)
-        });
+        // that.setData({
+        //   files: that.data.files.concat(res.tempFilePaths)
+        // });
 
         //上传图片
         var tempFilePaths = res.tempFilePaths;
@@ -48,14 +48,27 @@ Page({
             "user": "test",
           },
           success: function (res) {
+            console.log(res.data);
             var imgData = JSON.parse(res.data);
-            console.log(imgData.data);
             if (imgData.status == 1) {
               that.setData({
+                files: that.data.files.concat(tempFilePaths),
                 suggestimg: that.data.suggestimg.concat(imgData.data)
               });
+            }else{
+              wx.showToast({
+                title: '上传图片失败，'+imgData.msg,
+                icon: 'none',
+                duration: 3000
+              })
             }
-            console.log(that.data.suggestimg);
+          },
+          fail: function(res){
+            wx.showToast({
+              title: '请求失败，'+JSON.stringify(res),
+              icon: 'none',
+              duration: 3000
+            })
           }
         })
       }
@@ -68,17 +81,53 @@ Page({
     })
   },
 
+  //长按图片删除
+  deleteImage: function(e){
+    var that = this;
+    var imagesFiles = that.data.files;
+    var imagesSubmit = that.data.suggestimg;
+    var index = e.currentTarget.dataset.index; //获取当前长按图片下标
+    wx.showModal({
+      title: '系统提醒',
+      content: '确定要删除此图片吗？',
+      success: function (res) {
+        if (res.confirm) {
+          imagesFiles.splice(index, 1);
+          imagesSubmit.splice(index, 1);
+        } else if (res.cancel) {
+          return false;
+        }
+        that.setData({
+          files: imagesFiles,
+          suggestimg: imagesSubmit
+        });
+      }
+    })
+  },
+
   //提交诉求建议
   submitSuggest: function () {
     var that = this;
+
+    if (that.data.content == "" || that.data.content == null) {
+      wx.showToast({
+        title: '请详细描述下您所遇到的问题',
+        icon: 'none'
+      })
+      return false;
+    }
+
+
+
     wx.showLoading({
       title: '请稍等',
     });
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/RepairController/insertRepair', //仅为示例，并非真实的接口地址
+      url: 'https://www.cloplex.com/property/index.php/NewsController/insertNews', //仅为示例，并非真实的接口地址
       data: {
+        type: 2,//1 公告  2 诉求
         content: that.data.content,
-        suggestimg: JSON.stringify(that.data.suggestimg)
+        newsimg: JSON.stringify(that.data.suggestimg)
       },
       header: {
         'content-type': "application/x-www-form-urlencoded", // 默认值
@@ -90,15 +139,13 @@ Page({
         console.log(res.data);
         if (res.data.status == 1) {
 
-          wx.showToast({
-            title: '成功',
-            icon: 'success',
-            duration: 3000
-          });
+          wx.reLaunch({
+            url: '/pages/public/secondPages/suggest/successPage',
+          })
 
         } else {
           wx.showToast({
-            title: '出错了',
+            title: '出错了：错误信息'+JSON.stringify(res),
             icon: 'none',
             duration: 2000
           });
@@ -129,6 +176,7 @@ Page({
           }
         }
       });
+      return;
     } else if (2 == app.globalData.userStatus) {
       wx.showModal({
         title: '提示',
@@ -140,10 +188,11 @@ Page({
           });
         }
       });
+      return;
     } else if (!app.globalData.userStatus) {
       wx.showModal({
         title: '提示',
-        content: '出错了，请稍后再试！',
+        content: '出错了，错误信息：未获取到用户状态',
         confirmText: "确定",
         success: function (res) {
           wx.navigateBack({
@@ -151,6 +200,22 @@ Page({
           });
         }
       });
+      return;
+    }
+
+    //category    管理员（1）、物业（2）、项目部（3），还是业主（4）
+    if (app.globalData.userInfoDesc.category == 2 || app.globalData.userInfoDesc.category == 3) {
+      wx.showModal({
+        title: '提示',
+        content: '抱歉，您暂无此功能使用权限！',
+        confirmText: "确定",
+        success: function (res) {
+          wx.navigateBack({
+
+          });
+        }
+      });
+      return;
     }
   },
 

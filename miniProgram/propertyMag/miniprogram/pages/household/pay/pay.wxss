@@ -14,5 +14,6 @@
   width: 40rpx;
   height: 40rpx;
   margin-left:20rpx;
+  vertical-align: middle;
 }
 

@@ -1,10 +1,5 @@
 <view class="page">
     <view class="page__bd">
-      <!-- <view class="button-sp-area">
-        <navigator url="../../thirdPages/staff/add/add" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-          <button class="weui-btn" type="primary" size="mini">新增本物业公司员工</button>
-        </navigator>
-      </view> -->
       <view class="weui-cells__title font-sm">可以输入员工姓名关键字搜索，也可以输入职位关键字搜索</view>
       <view class="weui-search-bar">
           <view class="weui-search-bar__form">
@@ -22,46 +17,29 @@
           </view>
           <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
       </view>
-      <!-- <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
-          <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-              <view class="weui-cell__bd">
-                  <view>实时搜索文本</view>
-              </view>
-          </navigator>
-          <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-              <view class="weui-cell__bd">
-                  <view>实时搜索文本</view>
-              </view>
-          </navigator>
-          <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-              <view class="weui-cell__bd">
-                  <view>实时搜索文本</view>
-              </view>
-          </navigator>
-          <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-              <view class="weui-cell__bd">
-                  <view>实时搜索文本</view>
-              </view>
-          </navigator>
-      </view> -->
 
+      <scroll-view scroll-y="true" style = "height:100%;position: relative;" scroll-into-view="{{toView}}" scroll-with-animation = "true">
+          <view id = "top"></view>
+          <block wx:for="{{dataArray}}" wx:for-item="articles" wx:for-index="dataArrayIndex">
+            <block wx:for="{{articles}}" wx:for-item="item" wx:key="{{item.id}}" wx:for-index="index">
+              <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell-custom">
+                  <mp-slideview buttons="{{slideButtons}}" bindbuttontap="slideButtonTap"  data-userdata = "{{item}}">
+                    <mp-cell style="font-size:24rpx;" wx:if="{{item.category == 4}}" value="{{item.username}}" footer="{{item.roomnumber+'【'+item.rolename+'】'}}"></mp-cell>
+                    <mp-cell style="font-size:24rpx;" wx:if="{{item.category == 3}}" value="{{item.username}}" footer="{{item.companyname+'【'+item.rolename+'】'}}"></mp-cell>
+                    <mp-cell style="font-size:24rpx;" wx:if="{{item.category == 2}}" value="{{item.username}}" footer="{{item.companyname+'【'+item.rolename+'】'}}"></mp-cell>
+                    <mp-cell style="font-size:24rpx;" wx:if="{{item.category == 1}}" value="{{item.username}}" footer="管理员"></mp-cell>
+                  </mp-slideview>
+                </view>
+              </view>
+            </block>
+          </block>
+          <view id = "bottom"></view>
+      </scroll-view>
 
-      <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell-custom"  wx:for="{{dataList}}" wx:key="id">
-          <mp-slideview buttons="{{slideButtons}}" bindbuttontap="slideButtonTap"  data-userdata = "{{item}}">
-            <mp-cell wx:if="{{item.category == 4}}" value="{{item.username}}" footer="{{item.roomnumber+'【'+item.rolename+'】'}}"></mp-cell>
-            <mp-cell wx:if="{{item.category == 3}}" value="{{item.username}}" footer="{{item.companyname+'【'+item.rolename+'】'}}"></mp-cell>
-            <mp-cell wx:if="{{item.category == 2}}" value="{{item.username}}" footer="{{item.companyname+'【'+item.rolename+'】'}}"></mp-cell>
-            <mp-cell wx:if="{{item.category == 1}}" value="{{item.username}}" footer="管理员"></mp-cell>
-          </mp-slideview>
-        </view>
-        
-      
-        
+      <view bindtap = "loadMoreData" class = "hover-btn"  wx:if="{{showMoreBtn}}" style="margin-top:60rpx;float:right;padding-right:20rpx;">
+          <button class="weui-btn" type="primary" size="mini">加载更多</button>
       </view>
-
-
-
 
     </view>
 </view>

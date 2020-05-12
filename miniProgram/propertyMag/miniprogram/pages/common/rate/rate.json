@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "服务评分",
+  "usingComponents": {
+    "rate": "/components/wechat-miniprogram-rate/index"
+  }
+}

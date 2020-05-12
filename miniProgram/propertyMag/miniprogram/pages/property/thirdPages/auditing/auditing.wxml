@@ -13,7 +13,7 @@
                         </view>
                         <view>
                           <text>联系方式：</text>
-                          <text>{{userData.username}}</text>
+                          <text>{{userData.phone}}</text>
                         </view>
                       </view>
                       <view class="line" wx:if="{{userData.category == 4}}">

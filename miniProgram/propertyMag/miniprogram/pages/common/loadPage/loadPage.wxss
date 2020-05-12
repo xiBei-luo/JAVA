@@ -1,0 +1,60 @@
+
+/* 加载中遮罩 */
+/* 设置背景遮罩层样式 */
+.mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999 !important;
+}
+ 
+/* 设置遮罩内容样式 */
+ 
+.maskContent {
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  border-radius: 5px;
+  padding-top: 45%;
+  text-align: center;
+}
+ 
+/* 是图片可以旋转 */
+.closeImg_image {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 10rpx;
+  transform: rotate(360deg);
+  -ms-transform: rotate(360deg); /* IE 9 */
+  -moz-transform: rotate(360deg); /* Firefox */
+  -webkit-transform: rotate(360deg); /* Safari 和 Chrome */
+  -o-transform: rotate(360deg); /* Opera */
+  animation: rotation 3s linear infinite;
+  -moz-animation: rotation 3s linear infinite;
+  -webkit-animation: rotation 3s linear infinite;
+  -o-animation: rotation 3s linear infinite;
+}
+ 
+@keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+ 
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+ 
+.loadtext {
+  font-size: 32rpx;
+  margin-top: 30rpx;
+  color:#333333;
+}
+

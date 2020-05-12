@@ -13,13 +13,15 @@
             <view>
               <view>你好，<open-data type="userNickName" ></open-data></view>
               <!-- <view>你好，{{userInfo.nickName}}</view> -->
-              <view style="font-size: 13px;color: #888888;" wx:if="{{userStatus == 1}}">成都市高新区瑞升南园2栋1单元401</view>
+              <view style="font-size: 13px;color: #888888;" wx:if="{{userStatus == 1 && userInfoDesc.category == 4}}">{{userInfoDesc.roomnumber}}</view>
+              <view style="font-size: 13px;color: #888888;" wx:if="{{userStatus == 1 && userInfoDesc.category == 3}}">{{userInfoDesc.subjectname}}</view>
               <view style="font-size: 13px;color: #888888;" wx:if="{{userStatus == 2}}">业主信息审核中</view>
             </view>
 
             <view>
               <navigator url="/pages/public/firstVisit/firstVisit">
                 <button class="weui-btn mini-btn" type="primary" size="mini" wx:if="{{userStatus == 3}}">身份认证</button>
+                <!-- <button class="weui-btn mini-btn" type="primary" size="mini">身份认证</button> -->
               </navigator>
               <navigator url="" wx:if="{{userStatus == 2}}">
                 <button class="weui-btn mini-btn" type="primary" size="mini">审核中</button>

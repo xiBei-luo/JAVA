@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.plate.publicmag.dao.owerDao.SystemMagMapper" >
+  <select id="selectMenuByLoginUser" parameterType="java.util.Map" resultType="java.util.HashMap">
+      SELECT
+            c.*
+        FROM
+            public_menu c
+        WHERE
+            c.`status` = '1'
+        AND c.id IN (
+            SELECT
+                b.menuid
+            FROM
+                public_role_power b
+            WHERE
+                b.roleid IN (
+                    SELECT
+                        a.roleid
+                    FROM
+                        public_user_role a
+                    WHERE
+                        a.userid = '1'
+                )
+            AND b. STATUS = #{userid}
+        )
+        AND c.type_code = #{menuType}
+        ORDER BY
+            c.SORT
+  </select>
+</mapper>

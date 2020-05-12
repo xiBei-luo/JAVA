@@ -1,41 +1,57 @@
 <view class="page">
     <view class="page__bd">
-        <view class="weui-panel weui-panel_access">
-            <view class="weui-panel__hd">给水管道【2020年03月26日】</view>
-            <view class="weui-panel__bd">
-                <view class="weui-media-box weui-media-box_text">
-                    <view class="weui-media-box__desc">
-                      <view class="line">
-                        <view>
-                          <text>客户姓名：</text>
-                          <text>张三三</text>
+        <scroll-view scroll-y="true" style = "height:100%;position: relative;" scroll-into-view="{{toView}}" scroll-with-animation = "true">
+          <view id = "top"></view>
+          <block wx:for="{{dataArray}}" wx:for-item="articles" wx:for-index="dataArrayIndex">
+            <block wx:for="{{articles}}" wx:for-item="item" wx:key="{{item.id}}" wx:for-index="index">
+                <view class="weui-panel weui-panel_access">
+                    <view class="weui-panel__hd">{{item.repairtype}}【{{item.sendtime}}】</view>
+                    <view class="weui-panel__bd">
+                        <view class="weui-media-box weui-media-box_text">
+                            <view class="weui-media-box__desc">
+                              <view class="line">
+                                <view>
+                                  <text>客户姓名：</text>
+                                  <text>{{item.roomnumber}}   {{item.sendid}}</text>
+                                </view>
+                              </view>
+                              <view class="line">
+                                <view>
+                                  <text>客户电话：</text>
+                                  <text>{{item.userphone}}</text>
+                                </view>
+                              </view>
+                              <view class="line">
+                                <view>
+                                  <text>报修地点：</text>
+                                  <text>{{item.repairaddress}}</text>
+                                </view>
+                              </view>
+                              <view class="line">
+                                <view>
+                                  <text>报修内容：</text>
+                                  <text>{{item.repaircontent}}</text>
+                                </view>
+                              </view>
+                            </view>
                         </view>
-                        <view>
-                          <text>客户住址：</text>
-                          <text>2栋1单元402</text>
-                        </view>
-                      </view>
-                      <view class="line">
-                        <view>
-                          <text>客户电话：</text>
-                          <text>18322223333</text>
-                        </view>
-                      </view>
-                      <view class="line">
-                        <view>
-                          <text>报修内容：</text>
-                          <text>2栋1单元楼下水管爆裂</text>
-                        </view>
+                    </view>
+                    <view class="weui-panel__ft panel-ft-btn">
+                        <view class="button-sp-area">
+                          <button wx:if="{{item.status == 1}}" class="weui-btn mini-btn" type="primary" size="mini" bindtap="gotoSolve" data-dataList="{{item}}">立刻处理</button>
+                          <button wx:if="{{item.status == 2}}" class="weui-btn mini-btn" type="primary" size="mini" bindtap="gotoFinish" data-dataList="{{item}}">完成维修</button>
+                          <button wx:if="{{item.status == 3}}" class="weui-btn mini-btn" type="default" size="mini" bindtap="gotoViewDetails" data-dataList="{{item}}">已处理</button>
+                          <button wx:if="{{item.status == 4}}" class="weui-btn mini-btn" type="default" size="mini" bindtap="gotoViewDetails" data-dataList="{{item}}">已完成</button>
                       </view>
                     </view>
                 </view>
-            </view>
-            <view class="weui-panel__ft panel-ft-btn">
-                <view class="button-sp-area">
-                  <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="gotoSolve">立刻处理</button>
-                  <button class="weui-btn mini-btn" type="default" size="mini" bindtap="gotoViewDetails">已处理</button>
-              </view>
-            </view>
+            </block>
+          </block>
+          <view id = "bottom"></view>
+        </scroll-view>
+
+        <view bindtap = "loadMoreData" class = "hover-btn"  wx:if="{{showMoreBtn}}" style="margin-top:60rpx;float:right;padding-right:20rpx;">
+            <button class="weui-btn" type="primary" size="mini">加载更多</button>
         </view>
         
     </view>

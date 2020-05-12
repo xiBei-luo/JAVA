@@ -1,0 +1,10 @@
+<!--miniprogram/pages/public/home/home.wxml-->
+<view class="mask" hidden="{{flag}}">
+  <view class="maskContent">
+    <view class='loadContent'>
+        <image class='closeImg_image' src='/images/icon/load.png'></image>
+    </view> 
+    <view class='loadtext'>加载中,请稍后...</view>
+  </view>
+</view>
+

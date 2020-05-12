@@ -5,7 +5,7 @@
       <view class="page__bd">
           <view class="weui-cells__title">系统角色</view>
           <view class="weui-cells weui-cells_checkbox weui-cells_after-title">
-              <checkbox-group bindchange="checkboxChange" data-obj="checkboxItems_role">
+              <checkbox-group bindchange="checkboxChange"  data-obj="checkboxItems_role">
                   <label class="weui-cell weui-check__label" wx:for="{{checkboxItems_role}}" wx:key="value">
                       <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
 

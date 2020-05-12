@@ -16,12 +16,29 @@
             </view>
             <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
         </view>
-        <view class="weui-cells searchbar-result">
-            <view wx:for="{{companyList}}" data-targetindex="{{item.id}}" data-targettxt="{{item.companyname}}" wx:key="id" class="weui-cell" hover-class="weui-cell_active" bindtap="selectCompany">
-                <view class="weui-cell__bd">
-                    <view>{{item.companyname}}</view>
+
+        <scroll-view scroll-y="true" style = "height:100%;position: relative;" scroll-into-view="{{toView}}" scroll-with-animation = "true">
+          <view id = "top"></view>
+          <block wx:for="{{dataArray}}" wx:for-item="articles" wx:for-index="dataArrayIndex">
+            <block wx:for="{{articles}}" wx:for-item="item" wx:key="{{item.id}}" wx:for-index="index">
+                <view class="weui-cells searchbar-result">
+                    <view data-targetindex="{{item.id}}" data-targettxt="{{item.companyname}}" class="weui-cell" hover-class="weui-cell_active" bindtap="selectCompany">
+                        <view class="weui-cell__bd">
+                            <view>{{item.companyname}}</view>
+                        </view>
+                    </view>
                 </view>
-            </view>
+            </block>
+          </block>
+          <view id = "bottom"></view>
+        </scroll-view>
+
+        <view bindtap = "loadMoreData" class = "hover-btn"  wx:if="{{showMoreBtn}}" style="margin-top:60rpx;float:right;padding-right:20rpx;">
+            <button class="weui-btn" type="primary" size="mini">加载更多</button>
         </view>
+
+
+
+
     </view>
 </view>

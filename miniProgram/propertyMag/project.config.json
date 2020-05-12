@@ -4,8 +4,9 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
-		"enhance": true,
+		"enhance": false,
 		"postcss": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
@@ -22,11 +23,12 @@
 			"outputPath": ""
 		}
 	},
-	"appid": "wx1f7f8c4e553e4a7c",
+	"appid": "wxe24b85043f2ff4e7",
 	"projectname": "propertyMag",
 	"libVersion": "2.8.1",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+	"compileType": "miniprogram",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -43,13 +45,25 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 0,
 			"list": [
 				{
 					"id": -1,
 					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "pages/common/loadPage/loadPage",
+					"pathName": "pages/common/loadPage/loadPage",
+					"query": "",
+					"scene": 1011
 				}
 			]
 		}

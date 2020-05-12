@@ -1,81 +1,36 @@
 <view class="page">
     <view class="page__bd">
-        <view class="weui-cell ">
+        <view class="weui-cell " wx:if="{{!parentId}}">
             <view class="weui-cell__bd pickDate">
-                <picker mode="date" value="{{date}}" fields="month" start="2015-09-01" end="2100-09-01" bindchange="bindDateChange">
-                    <view class="weui-input">{{date}}</view>
+                <picker mode="date" value="{{date}}" fields="month" start="1900-09-01" end="2100-09-01" bindchange="bindDateChange">
+                    <view class="weui-input" style="display:inline-block">{{date}}</view>
+                    <image src="/images/icon/arrow-down.png"></image>
                 </picker>
-                <image src="/images/icon/arrow-down.png"></image>
+                
             </view>
         </view>
 
 
-        <view class="weui-cells__title">一共支出2000.00</view>
-        <view class="weui-cells weui-cells_after-title">
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">-￥150.00</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
-            </navigator>
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">-￥150.00</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
-            </navigator>
+        <scroll-view scroll-y="true" style = "height:100%;position: relative;" scroll-into-view="{{toView}}" scroll-with-animation = "true">
+            <view id = "top"></view>
+            <block wx:for="{{dataArray}}" wx:for-item="articles" wx:for-index="dataArrayIndex">
+            <block wx:for="{{articles}}" wx:for-item="item" wx:key="id" wx:for-index="index">
+                <view class="weui-cells weui-cells_after-title">
+                    <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="gotoViewDetails" data-dataList="{{item}}">
+                        <view class="weui-cell__bd">-￥{{item.fees}}</view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access font-sm">{{item.time}}</view>
+                    </navigator>
+                </view>
+            </block>
+            </block>
+            <view id = "bottom"></view>
+        </scroll-view>
+
+        <view bindtap = "loadMoreData" class = "hover-btn"  wx:if="{{showMoreBtn}}" style="margin-top:60rpx;float:right;padding-right:20rpx;">
+            <button class="weui-btn" type="primary" size="mini">加载更多</button>
         </view>
-        
-        <view class="weui-cells weui-cells_after-title">
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">-￥150.00</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
-            </navigator>
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">-￥150.00</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
-            </navigator>
-        </view>
-        
-        <view class="weui-cells weui-cells_after-title">
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">-￥150.00</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
-            </navigator>
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">-￥150.00</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
-            </navigator>
-        </view>
-        
-        <view class="weui-cells weui-cells_after-title">
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">-￥150.00</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
-            </navigator>
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">-￥150.00</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
-            </navigator>
-        </view>
-        
-        <view class="weui-cells weui-cells_after-title">
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">-￥150.00</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
-            </navigator>
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">-￥150.00</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
-            </navigator>
-        </view>
-        
-        <view class="weui-cells weui-cells_after-title">
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">-￥150.00</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
-            </navigator>
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">-￥150.00</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access font-sm">2020年02月01日</view>
-            </navigator>
-        </view>
+
+
 
     </view>
 </view>

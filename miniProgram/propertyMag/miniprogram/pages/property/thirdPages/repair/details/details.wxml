@@ -8,17 +8,35 @@
                 <view class="line">
                   <view>
                     <text>客户姓名：</text>
-                    <text>张三三</text>
+                    <text>{{dataList.sendid}}</text>
                   </view>
                   <view>
                     <text>客户住址：</text>
-                    <text>2栋1单元402</text>
+                    <text>{{dataList.roomnumber}}</text>
                   </view>
                 </view>
                 <view class="line">
                   <view>
                     <text>客户电话：</text>
-                    <text>18322223333</text>
+                    <text>{{dataList.userphone}}</text>
+                  </view>
+                </view>
+                <view class="line">
+                  <view>
+                    <text>报修地点：</text>
+                    <text>{{dataList.repairaddress}}</text>
+                  </view>
+                </view>
+                <view class="line">
+                  <view>
+                    <text>报修申请时间：</text>
+                    <text>{{dataList.sendtime}}</text>
+                  </view>
+                </view>
+                <view class="line">
+                  <view>
+                    <text>维修内容：</text>
+                    <text>【{{dataList.repairtype}}】{{dataList.repaircontent}}</text>
                   </view>
                 </view>
               </view>
@@ -28,30 +46,16 @@
         
         
 
-        <view class="weui-cells__title">图片说明</view>
-        <view class="weui-panel">
-          <view class="weui-panel__bd">
+        <view class="weui-cells__title" wx:if="{{files.length > 0}}">图片说明</view>
+        <view class="weui-panel" wx:if="{{files.length > 0}}">
+          <view class="weui-panel__bd" style="padding:20rpx 0;">
             <view class="weui-uploader__bd" style="padding-left: 60rpx">
               <view class="weui-uploader__files" id="uploaderFiles">
-                  <view class="weui-uploader__file">
-                      <image class="weui-uploader__img" src="../../../../../images/tmp.jpg" bindtap="showGallery" mode="aspectFill" />
-                  </view>
-                  <view class="weui-uploader__file">
-                      <image class="weui-uploader__img" src="../../../../../images/tmp.jpg" bindtap="showGallery" mode="aspectFill" />
-                  </view>
-                  <view class="weui-uploader__file">
-                      <image class="weui-uploader__img" src="../../../../../images/tmp.jpg" bindtap="showGallery" mode="aspectFill" />
-                  </view>
-                  <view class="weui-uploader__file">
-                      <image class="weui-uploader__img" src="../../../../../images/tmp.jpg" bindtap="showGallery" mode="aspectFill" />
-                  </view>
-                  <view class="weui-uploader__file">
-                      <image class="weui-uploader__img" src="../../../../../images/tmp.jpg" bindtap="showGallery" mode="aspectFill" />
-                  </view>
-                  <view class="weui-uploader__file">
-                      <image class="weui-uploader__img" src="../../../../../images/tmp.jpg" bindtap="showGallery" mode="aspectFill" />
-                  </view>
-                  
+                  <block wx:for="{{files}}" wx:key="*this">
+                      <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                          <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                      </view>
+                  </block>
               </view>
           </view>
 
@@ -59,19 +63,35 @@
         </view>
 
 
-        <view class="weui-cells__title">处理结果</view>
-        <view class="weui-panel weui-panel_access">
-          <view class="weui-panel__bd">
-            <view class="weui-cells weui-cells_after-title">
-                <view class="weui-cell">
-                    <view class="weui-cell__bd">
-                        <textarea class="weui-textarea" placeholder="请输入文本" style="height: 3.3em" />
-                        <view class="weui-textarea-counter">0/200</view>
-                    </view>
+        <view class="weui-cells__title" wx:if="{{dataList.estimate}}">用户评价</view>
+        <view class="bar"  wx:if="{{dataList.estimate}}">
+          <rate value="{{dataList.estimate}}" disabled="{{true}}" allow-half="{{false}}" bindchange="showResult"></rate>
+          <view class="bar--text">{{dataList.estimate}}星</view>
+        </view>
+
+
+        <!-- <view class="weui-cells weui-cells_after-title"  wx:if="{{1>5}}">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" bindinput="getInputValue" data-type="repaircontent"  placeholder="好评好评" style="height: 3.3em" />
+                    <view class="weui-textarea-counter">0/200</view>
                 </view>
             </view>
-          </view>
         </view>
+        <view class="weui-panel" wx:if="{{rateFiles.length > 0}}">
+          <view class="weui-panel__bd" style="padding:20rpx 0;">
+            <view class="weui-uploader__bd" style="padding-left: 60rpx">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                  <block wx:for="{{rateFiles}}" wx:key="*this">
+                      <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                          <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                      </view>
+                  </block>
+              </view>
+          </view>
+
+          </view>
+        </view> -->
 
 
 

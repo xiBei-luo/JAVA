@@ -1,0 +1,53 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-cells__title">费用详情</view>
+        <view class="weui-panel weui-panel_access">
+          <view class="weui-panel__bd">
+            <view class="weui-media-box weui-media-box_text">
+              <view class="weui-media-box__desc">
+                <view class="line">
+                  <view>
+                    <text>付款方：</text>
+                    <text>【{{dataList.roomnumber}}】{{dataList.sendid}}</text>
+                  </view>
+                </view>
+                <view class="line">
+                  <view>
+                    <text>收款方：</text>
+                    <text>{{dataList.companyid}}</text>
+                  </view>
+                </view>
+                <view class="line">
+                  <view>
+                    <text>付款金额：</text>
+                    <text>{{dataList.fees}}元</text>
+                  </view>
+                </view>
+                <view class="line">
+                  <view>
+                    <text>付款时间：</text>
+                    <text>{{dataList.time}}</text>
+                  </view>
+                </view>
+                <view class="line">
+                  <view>
+                    <text>付款状态：</text>
+                    <text wx:if="{{dataList.status == 1}}">缴费完成</text>
+                    <text wx:if="{{dataList.status == 2}}">待物业确认</text>
+                    <text wx:if="{{dataList.status == 3}}">缴费失败</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        
+        
+
+
+
+
+
+
+    </view>
+</view>

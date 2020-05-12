@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/firstVisit/firstVisit",
+    "pages/pageTest/pageTest",
     "pages/myAccount/myAccount",
     "pages/writeinfo-bus-1/writeinfo-bus-1",
     "pages/writeinfo-bus-2/writeinfo-bus-2",

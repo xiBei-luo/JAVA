@@ -36,10 +36,8 @@ public class WebConfigurer implements WebMvcConfigurer {
         List exclude = new ArrayList();//不拦截的列表
 
         //静态资源
-        exclude.add("/css/**");
+        exclude.add("/publicFrame/**");
         exclude.add("/images/**");
-        exclude.add("/font-awesome/**");
-        exclude.add("/js/**");
 
         //登录页与注册页
         exclude.add("/Plate/login");

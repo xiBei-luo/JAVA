@@ -11,6 +11,7 @@ Page({
     checkboxItems_role: [],
     setRoleUserId: "",
     selectRoleidArr: [],
+    parentPage: "",//parentPage为1，表示审核通过直接授权
   },
 
 
@@ -44,7 +45,7 @@ Page({
       title: '玩命加载中',
     });
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/RoleController/selectRole', //仅为示例，并非真实的接口地址
+      url: 'https://www.cloplex.com/property/index.php/IndexController/getRoleList', //仅为示例，并非真实的接口地址
       data: {
         
       },
@@ -55,12 +56,14 @@ Page({
       method: "POST",
       success(res) {
         wx.hideLoading();//关闭遮罩
+        //res.data.data = JSON.parse(JSON.stringify(res.data.data).trim());
         var retData = res.data.data;
+        console.log(retData);
         var chkArr = [];
         if (retData.length > 0){
           for (var i = 0; i < retData.length;i++){
             var tmpretObj = {};
-            console.log(that.data.selectRoleidArr + "===" + retData[i].id + "===" + that.data.selectRoleidArr.indexOf(retData[i].id));
+            //console.log(that.data.selectRoleidArr + "===" + retData[i].id + "===" + that.data.selectRoleidArr.indexOf(retData[i].id));
             if (that.data.selectRoleidArr.indexOf(retData[i].id) != -1){
               tmpretObj = {
                 "name": retData[i].rolename,
@@ -77,10 +80,8 @@ Page({
           }
           that.setData({
             checkboxItems_role: chkArr
-          });
+          })
         }
-
-        
       }
     })
   },
@@ -89,15 +90,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
     var that = this;
-    this.loadData();
-    console.log(options.roleid);
+    //parentPage为1，表示审核通过后直接授权,控制授权结束后刷新哪个父页面
+    if(options.parentPage){
+      that.setData({
+        parentPage: options.parentPage
+      });
+    }
 
     that.setData({
       setRoleUserId: options.id
     });
 
-    if(options.roleid){
+    if (options.roleid) {
       that.setData({
         selectRoleidArr: JSON.parse(options.roleid)
       })
@@ -115,10 +121,7 @@ Page({
         selected.push(checkboxItems[i].value);
       }
     }
-
     console.log(selected);
-
-    
     // 显示加载图标
     wx.showLoading({
       title: '请稍等',
@@ -143,14 +146,32 @@ Page({
           wx.showToast({
             title: '授权成功',
             icon: 'success',
-            duration: 3000
+            duration: 1000,
+            success: function(){
+              setTimeout(function(){
+                var t;
+                if(that.data.parentPage){
+                  //返回两级页面
+                  t = getCurrentPages()[getCurrentPages().length - 3];
+                  t.loadInitData();
+                  //跳两级
+                  wx.navigateBack({
+                    delta: 2
+                  })
+                }else{
+                  //返回一级
+                  t = getCurrentPages()[getCurrentPages().length - 2];
+                  t.loadInitData();
+                  wx.navigateBack({
+                    
+                  })
+                }
+              }, 1000);
+            }
           });
-          wx.navigateBack({
-
-          })
         }else{
           wx.showToast({
-            title: '授权失败',
+            title: '授权失败，错误信息：'+res.msg,
             icon: 'none',
             duration: 1000
           });
@@ -163,14 +184,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.loadData();
   },
 
   /**

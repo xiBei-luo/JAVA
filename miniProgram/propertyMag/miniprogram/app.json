@@ -1,17 +1,18 @@
 {
   "pages": [
+    "pages/common/loadPage/loadPage",
     "pages/public/home/home",
+    "pages/public/firstVisit/firstVisit",
+    "pages/household/repairRate/repairRate",
     "pages/property/secondPages/thirdMag/thirdMag",
     "pages/property/secondPages/repairMag/repairMag",
     "pages/household/identify/identify",
-    "pages/public/firstVisit/firstVisit",
     "pages/property/companyList/companyList",
     "pages/public/myAccount/myAccount",
     "pages/public/secondPages/payPropertyFee/payPropertyFee",
     "pages/public/secondPages/suggest/suggest",
     "pages/public/secondPages/repair/repair",
     "pages/public/secondPages/moreMenu/moreMenu",
-    "pages/public/thirdPages/doPay/doPay",
     "pages/public/showNews/showNews",
     "pages/public/authorize/authorize",
     "pages/household/villageList/villageList",
@@ -42,7 +43,16 @@
     "pages/property/secondPages/propertyMag/propertyMag",
     "pages/property/thirdPages/grand/grand",
     "pages/property/thirdPages/setRole/setRole",
-    "pages/household/findFamily/findFamily"
+    "pages/household/findFamily/findFamily",
+    "pages/utilPage/chargeSuccess/chargeSuccess",
+    "pages/public/secondPages/thirdPages/prestore/prestore",
+    "pages/public/secondPages/repair/successPage",
+    "pages/public/secondPages/thirdPages/doPay/doPay",
+    "pages/public/secondPages/thirdPages/doPay/successPage",
+    "pages/public/secondPages/suggest/successPage",
+    "pages/common/rate/rate",
+    "pages/common/pay/payDetails",
+    "pages/household/payDetails/payDetails"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

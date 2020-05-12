@@ -8,23 +8,23 @@
                       <view class="line">
                         <view>
                           <text>欠费金额：</text>
-                          <text>1000.00元</text>
+                          <text>{{houseCostList.money}}元</text>
                         </view>
                         <view>
                           <text>户主：</text>
-                          <text>张三三</text>
+                          <text>{{userInfoDesc.username}}</text>
                         </view>
                       </view>
                       <view class="line">
                         <view>
                           <text>欠费房间：</text>
-                          <text>瑞升南园2栋1单元401</text>
+                          <text>{{userInfoDesc.subjectname}}{{userInfoDesc.roomnumber}}</text>
                         </view>
                       </view>
                       <view class="line">
                         <view>
                           <text>收费单位：</text>
-                          <text>万科集团</text>
+                          <text>{{userInfoDesc.subjectname}}</text>
                         </view>
                       </view>
                     </view>
@@ -32,8 +32,8 @@
             </view>
             <view class="weui-panel__ft panel-ft-btn">
                 <view class="button-sp-area">
-                  <button class="weui-btn mini-btn" type="default" size="mini">缴费历史</button>
-                  <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="doPayFee">缴费</button>
+                  <button class="weui-btn mini-btn" type="default" size="mini" bindtap="gotoFeeHistory">缴费历史</button>
+                  <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="doPayFee" wx:if="{{houseCostList.money > 0}}">缴费</button>
               </view>
             </view>
         </view>
@@ -58,7 +58,9 @@
             </view>
             <view class="weui-panel__ft panel-ft-btn">
                 <view class="button-sp-area">
+                <navigator url="/pages/public/secondPages/thirdPages/prestore/prestore">
                   <button class="weui-btn mini-btn" type="primary" size="mini">费用预存</button>
+                </navigator>
               </view>
             </view>
         </view>

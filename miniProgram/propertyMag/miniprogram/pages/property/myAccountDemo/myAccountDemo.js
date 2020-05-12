@@ -15,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -31,10 +31,15 @@ Page({
   onShow: function () {
     this.setData({
       "userInfoDesc": app.globalData.userInfoDesc,
-      "userStatus": app.globalData.userStatus,
-      "powerList": app.globalData.userInfoDesc.powername,
+      "userStatus": app.globalData.userStatus
     });
-    console.log(app.globalData.userInfoDesc.powername);
+    console.log(this.data.userInfoDesc);
+    console.log(this.data.userStatus);
+    if (app.globalData.userInfoDesc && app.globalData.userInfoDesc.powername){
+      this.setData({
+        "powerList": app.globalData.userInfoDesc.powername,
+      });
+    }
 
     //console.log(app.globalData.userInfo);
   },

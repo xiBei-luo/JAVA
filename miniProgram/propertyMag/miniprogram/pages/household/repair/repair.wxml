@@ -1,2 +1,53 @@
-<!--miniprogram/pages/household/repair/repair.wxml-->
-<text>miniprogram/pages/household/repair/repair.wxml</text>
+<view class="page">
+    <view class="page__bd">
+        <scroll-view scroll-y="true" style = "height:100%;position: relative;" scroll-into-view="{{toView}}" scroll-with-animation = "true">
+          <view id = "top"></view>
+          <block wx:for="{{dataArray}}" wx:for-item="articles" wx:for-index="dataArrayIndex">
+            <block wx:for="{{articles}}" wx:for-item="item" wx:key="{{item.id}}" wx:for-index="index">
+                <view class="weui-panel weui-panel_access">
+                    <view class="weui-panel__hd">{{item.repairtype}}</view>
+                    <view class="weui-panel__bd">
+                        <view class="weui-media-box weui-media-box_text">
+                            <view class="weui-media-box__desc">
+                              <view class="line">
+                                <view>
+                                  <text>提交时间：</text>
+                                  <text>{{item.sendtime}}</text>
+                                </view>
+                              </view>
+                              <view class="line">
+                                <view>
+                                  <text>维修员：</text>
+                                  <text>{{item.receive}}</text>
+                                </view>
+                              </view>
+                              <view class="line">
+                                <view>
+                                  <text>维修内容：</text>
+                                  <text>{{item.repaircontent}}</text>
+                                </view>
+                              </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="weui-panel__ft panel-ft-btn">
+                        <view class="button-sp-area">
+                          <button wx:if="{{item.status == 1}}" class="weui-btn mini-btn" type="default" size="mini" >待处理</button>
+                          <button wx:if="{{item.status == 2}}" class="weui-btn mini-btn" type="primary" size="mini" bindtap=""  data-dataList="{{item}}">处理中</button>
+                          <button wx:if="{{item.status == 3}}" class="weui-btn mini-btn" type="primary" size="mini" bindtap="gotoRate"  data-dataList="{{item}}">去评分</button>
+                          <button wx:if="{{item.status == 4}}" class="weui-btn mini-btn" type="default" size="mini" bindtap=""  data-dataList="{{item}}">已完成</button>
+                      </view>
+                    </view>
+                </view>
+            </block>
+          </block>
+          <view id = "bottom"></view>
+        </scroll-view>
+
+
+        <view bindtap = "loadMoreData" class = "hover-btn"  wx:if="{{showMoreBtn}}" style="margin-top:60rpx;float:right;padding-right:20rpx;">
+            <button class="weui-btn" type="primary" size="mini">加载更多</button>
+        </view>
+        
+    </view>
+</view>

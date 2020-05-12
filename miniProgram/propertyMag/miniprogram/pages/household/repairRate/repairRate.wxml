@@ -1,0 +1,75 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__desc">
+            <view class="line">
+              <view>
+                <text>维修内容</text>
+                <text>{{dataList.repairtype}}</text>
+              </view>
+            </view>
+            <view class="line">
+              <view>
+                <text>提交时间：</text>
+                <text>{{dataList.sendtime}}</text>
+              </view>
+            </view>
+            <view class="line">
+              <view>
+                <text>维修员：</text>
+                <text>{{dataList.receive}}</text>
+              </view>
+            </view>
+          </view>
+      </view>
+    </view>
+
+    
+    <view class="bar">
+      <rate value="{{value}}" bindchange="setValue" allow-half="{{false}}"></rate>
+      <view class="bar--text">{{value}}星</view>
+    </view>
+
+
+    <!-- <view class="weui-cells__title">上传图片说明</view>
+    <view class="page__bd">
+      <view class="weui-cells">
+          <view class="weui-cell">
+              <view class="weui-cell__bd">
+                  <view class="weui-uploader">
+                      <view class="weui-uploader__bd">
+                          <view class="weui-uploader__files" id="uploaderFiles">
+                              <block wx:for="{{files}}" wx:key="*this">
+                                  <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                  </view>
+                              </block>
+                          </view>
+                          <view class="weui-uploader__input-box">
+                              <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                          </view>
+                      </view>
+                  </view>
+              </view>
+          </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">服务评价</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <textarea class="weui-textarea" bindinput="getInputValue" data-type="repaircontent"  placeholder="维修人员的服务是否满意？" style="height: 3.3em" />
+                <view class="weui-textarea-counter">0/200</view>
+            </view>
+        </view>
+    </view> -->
+
+    <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap="finishRate">发布</button>
+    </view>
+
+
+  </view>
+</view>

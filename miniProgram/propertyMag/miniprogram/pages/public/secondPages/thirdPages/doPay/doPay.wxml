@@ -1,72 +1,32 @@
-<!-- <view class="infoBlock">
-  <view class="line">
-    <view>
-      <text class="text-gray">业主：</text>
-      <text>张三</text>
-    </view>
-    <view>
-      <text class="text-gray">联系方式：</text>
-      <text>18328023251</text>
-    </view>
-  </view>
-  <view class="line">
-    <view>
-      <text class="text-gray">面积：</text>
-      <text>80平米</text>
-    </view>
-    <view>
-      <text class="text-gray">款项：</text>
-      <text>小高层物业费</text>
-    </view>
-  </view>
-  <view class="line">
-    <view>
-      <text class="text-gray">收费单位：</text>
-      <text>万科集团</text>
-    </view>
-  </view>
-</view>
 
 <view class="infoBlock">
-  <view class="line">
-    <view class="text-gray">缴费月数</view>
-    <view>6个月</view>
+  <view>      
+    <web-view src='https://www.cloplex.com/'>hhh</web-view>    
   </view>
-  <view class="line">
-    <view class="text-gray">缴费周期</view>
-    <view>2020年4月-2020年10月</view>
-  </view>
-  <view class="line">
-    <view class="text-gray">单价</view>
-    <view>2元/平米</view>
-  </view>
-  <view class="line">
-    <view class="text-gray">每月</view>
-    <view>160元</view>
-  </view>
-</view> -->
-
-
-<view class="infoBlock">
-  <view class="line">
+  <!-- <view class="line">
     <view class="icon-sm-red">赠</view>
     <text>赠送大米一袋</text>
   </view>
   <view class="line">
     <view class="icon-sm-yellow">折</view>
     <text>在线支付享9.5折优惠</text>
+  </view> -->
+  <view class="line" wx:for="{{costItemList}}" wx:key="id">
+    <view class="text-gray">{{item.costItemName}}</view>
+    <view>{{item.price}}元</view>
   </view>
+
   <view class="line">
     <view class="text-gray">应付金额</view>
-    <view>960.00元</view>
+    <view>{{houseCostList.money}}元</view>
   </view>
   <view class="line">
     <view class="text-gray">优惠</view>
-    <view>48.00元</view>
+    <view>0元</view>
   </view>
   <view class="line">
     <view class="text-gray">实付</view>
-    <view>912.00元</view>
+    <view>{{houseCostList.money}}元</view>
   </view>
 </view>
 
@@ -87,5 +47,5 @@
 
 
 <view class="weui-btn-area">
-  <button class="weui-btn" type="primary" bindtap="showTopTips">立即缴费</button>
+  <button class="weui-btn" type="primary" bindtap="chargeHouseCost">立即缴费</button>
 </view>

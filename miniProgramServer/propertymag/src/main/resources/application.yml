@@ -16,7 +16,7 @@ spring:
     url: jdbc:mysql://120.78.165.128:3306/web_company?useSSL=false
     username: lhs
     password: lhs123456
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   aop:
     auto: true
   devtools:
@@ -24,3 +24,16 @@ spring:
       enabled: true                      #设置开启热部署
       additional-paths: src/main/java        #重启目录
       exclude: WEB-INF/**
+
+#logging:
+#  level:
+#    com:
+#      plate:
+#        publicmag:
+#          dao: debug
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  pageSizeZero: false  #pageSize=0
+  params: count=countSql

@@ -5,14 +5,14 @@
         <view class="weui-cell">
             <view class="weui-cell__bd">
                 <textarea class="weui-textarea" bindinput="getInputValue" data-type="content"   placeholder="详细描述下您所遇到的问题。" style="height: 3.3em" />
-                <view class="weui-textarea-counter">0/200</view>
+                <view class="weui-textarea-counter">{{content.length}}/200</view>
             </view>
         </view>
     </view>
 
 
 
-    <view class="weui-cells__title">请提供相关问题的截图或图片</view>
+    <view class="weui-cells__title">请提供相关问题的截图或图片(长按删除图片)</view>
     <view class="page__bd">
       <view class="weui-cells">
           <view class="weui-cell">
@@ -21,7 +21,7 @@
                       <view class="weui-uploader__bd">
                           <view class="weui-uploader__files" id="uploaderFiles">
                               <block wx:for="{{files}}" wx:key="*this">
-                                  <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                  <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}" data-index="{{index}}" bindlongpress="deleteImage">
                                       <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
                                   </view>
                               </block>

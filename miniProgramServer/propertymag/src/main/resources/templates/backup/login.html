@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>胡歌老婆专用系统-登陆</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/publicFrame/bootstrap-3.3.7-dist/css/bootstrap.css">
+  <link rel="stylesheet" href="/publicFrame/font-awesome-4.7.0/css/font-awesome.min.css">
+  <style>
+    html,body{
+      width: 100%;
+      height: 100%;
+    }
+    .login-container{
+      width: 100%;
+      height: 100%;
+      background: #3e8f3e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container-left,.container-center,.container-right{
+      width: 33%;
+    }
+  </style>
+</head>
+<body>
+<div class="login-container">
+  <div class="container-left">
+
+  </div>
+  <div class="container-center">
+    <div class="panel panel-success">
+      <div class="panel-heading">用户登录</div>
+      <div class="panel-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputEmail3" placeholder="用户名/电话号码">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword3" placeholder="密码">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-2">
+              <button type="button" class="btn btn-link">忘记密码？</button>
+            </div>
+            <div class="col-sm-2">
+              <button type="button" class="btn btn-link">立即注册</button>
+            </div>
+            <div class="col-sm-3">
+              <button type="button" class="btn btn-link">手机验证码登录</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="button" id="btnLogin" class="btn btn-success btn-block">登陆</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="container-right">
+
+  </div>
+</div>
+
+
+  <script src="/publicFrame/jquery/jquery-3.4.0.min.js"></script>
+  <script src="/publicFrame/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+  <script>
+    $(function(){
+      $("#btnLogin").click(function(){
+        $.ajax({
+          //请求方式
+          type : "POST",
+          //请求地址
+          url : "http://localhost:8088/Login/login",
+          //数据，json字符串
+          data : {
+
+          },
+          //请求成功
+          success : function(result) {
+            console.log(result);
+            if (result.status == 1){
+              window.location.href="/RedirectURL/gotoHomePage";
+            }else{
+              alert(result.msg);
+            }
+          }
+        });
+
+
+      });
+    });
+
+  </script>
+
+</body>
+
+</html>

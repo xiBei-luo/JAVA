@@ -1,0 +1,478 @@
+
+<!--<div class="alert alert-info">
+  <button class="close" data-dismiss="alert">
+    <i class="ace-icon fa fa-times"></i>
+  </button>
+
+  <i class="ace-icon fa fa-hand-o-right"></i>
+  Please note that demo server is not configured to save the changes, therefore you may see an error message.
+</div>-->
+
+<table id="grid-table"></table>
+
+<div id="grid-pager"></div>
+
+
+<!-- 修改弹出层 -->
+<div id="modal-table" class="modal fade" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header no-padding">
+        <div class="table-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+          </button>
+          修改用户信息
+        </div>
+      </div>
+
+      <div class="modal-body no-padding">
+        <div class="hr hr-dotted"></div>
+        <form class="form-horizontal" id="validation-form" method="get" novalidate="novalidate">
+          <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="text">用户名:</label>
+
+            <div class="col-xs-12 col-sm-9">
+              <div class="clearfix">
+                <input name="name" id="name" class="col-xs-12 col-sm-6" type="text">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-2"></div>
+
+          <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password">密码:</label>
+
+            <div class="col-xs-12 col-sm-9">
+              <div class="clearfix">
+                <input name="password" id="password" class="col-xs-12 col-sm-4" type="text">
+              </div>
+            </div>
+          </div>
+
+          <div class="hr hr-dotted"></div>
+
+          <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">邮箱:</label>
+
+            <div class="col-xs-12 col-sm-9">
+              <div class="clearfix">
+                <input id="mail" name="mail" class="col-xs-12 col-sm-5" type="email">
+              </div>
+            </div>
+          </div>
+
+          <div class="space-2"></div>
+
+          <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">电话号码:</label>
+
+            <div class="col-xs-12 col-sm-9">
+              <div class="input-group">
+								<span class="input-group-addon">
+									<i class="ace-icon fa fa-phone"></i>
+								</span>
+
+                <input id="phone" name="phone" type="tel">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="hr hr-dotted"></div>
+
+          <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-3 no-padding-right">性别:</label>
+
+            <div class="col-xs-12 col-sm-9">
+              <div>
+                <label class="line-height-1 blue">
+                  <input name="gender" value="1" class="ace" type="radio">
+                  <span class="lbl"> 男</span>
+                </label>
+              </div>
+
+              <div>
+                <label class="line-height-1 blue">
+                  <input name="gender" value="2" class="ace" type="radio">
+                  <span class="lbl"> 女</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="hr hr-dotted"></div>
+
+
+          <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="comment">地址:</label>
+
+            <div class="col-xs-12 col-sm-9">
+              <div class="clearfix">
+                <textarea class="input-xlarge" name="address" id="address"></textarea>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+        </form>
+
+
+      </div>
+
+      <div class="modal-footer no-margin-top">
+        <button class="btn btn-success btn-next" data-last="Finish">
+          提交
+        </button>
+        <button class="btn btn-danger pull-left" data-dismiss="modal">
+          关闭
+        </button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+<script type="text/javascript">
+  var grid_data =
+    [
+      {id:"1",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
+      {id:"2",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
+      {id:"3",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+      {id:"4",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
+      {id:"5",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
+      {id:"6",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+      {id:"7",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
+      {id:"8",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+      {id:"9",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+      {id:"10",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
+      {id:"11",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
+      {id:"12",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+      {id:"13",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
+      {id:"14",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
+      {id:"15",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+      {id:"16",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
+      {id:"17",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+      {id:"18",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+      {id:"19",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
+      {id:"20",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
+      {id:"21",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
+      {id:"22",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
+      {id:"23",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"}
+    ];
+  //展开二级表格
+  var subgrid_data =
+    [
+      {id:"1", name:"sub grid item 1", qty: 11},
+      {id:"2", name:"sub grid item 2", qty: 3},
+      {id:"3", name:"sub grid item 3", qty: 12},
+      {id:"4", name:"sub grid item 4", qty: 5},
+      {id:"5", name:"sub grid item 5", qty: 2},
+      {id:"6", name:"sub grid item 6", qty: 9},
+      {id:"7", name:"sub grid item 7", qty: 3},
+      {id:"8", name:"sub grid item 8", qty: 8}
+    ];
+
+  jQuery(function($) {
+    var grid_selector = "#grid-table";
+    var pager_selector = "#grid-pager";
+
+
+    var parent_column = $(grid_selector).closest('[class*="col-"]');
+    //resize to fit page size
+    $(window).on('resize.jqGrid', function () {
+      $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+    });
+
+    //resize on sidebar collapse/expand
+    $(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
+      if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+        //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+        setTimeout(function() {
+          $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+        }, 20);
+      }
+    });
+
+
+    //配置表格
+    jQuery(grid_selector).jqGrid({
+      //direction: "rtl",
+
+      //subgrid options
+      subGrid : false,//二级表格，表格展开
+      //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
+      //datatype: "xml",
+      subGridOptions : {
+        plusicon : "ace-icon fa fa-plus center bigger-110 blue",
+        minusicon  : "ace-icon fa fa-minus center bigger-110 blue",
+        openicon : "ace-icon fa fa-chevron-right center orange"
+      },
+      //for this example we are using local data   数据展开
+      subGridRowExpanded: function (subgridDivId, rowId) {
+        var subgridTableId = subgridDivId + "_t";
+        $("#" + subgridDivId).html("<table id='" + subgridTableId + "'></table>");
+        $("#" + subgridTableId).jqGrid({
+          datatype: 'local',
+          data: subgrid_data,
+          colNames: ['No','Item Name','Qty'],
+          colModel: [
+            { name: 'id', width: 50 },
+            { name: 'name', width: 150 },
+            { name: 'qty', width: 50 }
+          ]
+        });
+      },
+
+      data: grid_data,
+      datatype: "local",
+      height: 320,
+      colNames:[' ', 'ID','注册日期','姓名', '账号锁定', '注册方式','备注'],
+      colModel:[
+        {name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
+          formatter:'actions',
+          formatoptions:{
+            keys:true,
+            //delbutton: false,//disable delete button
+
+            delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
+            editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+          }
+        },
+        //数据显示
+        {name:'id',index:'id', width:60, sorttype:"int", editable: true},
+        {name:'sdate',index:'sdate',width:90, editable:true, sorttype:"date",unformat: pickDate},
+        {name:'name',index:'name', width:150,editable: true,editoptions:{size:"20",maxlength:"30"}},
+        {name:'stock',index:'stock', width:70, editable: true,edittype:"checkbox",editoptions: {value:"Yes:No"},unformat: aceSwitch},
+        {name:'ship',index:'ship', width:90, editable: true,edittype:"select",editoptions:{value:"FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}},
+        {name:'note',index:'note', width:150, sortable:false,editable: true,edittype:"textarea", editoptions:{rows:"2",cols:"10"}}
+      ],
+
+      viewrecords : true,
+      rowNum:10,
+      rowList:[10,20,30],
+      pager : pager_selector,
+      altRows: true,
+      //toppager: true,
+
+      multiselect: true,
+      //multikey: "ctrlKey",
+      multiboxonly: true,
+
+      loadComplete : function() {
+        var table = this;
+        setTimeout(function(){
+          styleCheckbox(table);//自定义checkbox样式
+
+          updateActionIcons(table);//更新操作图标样式
+          updatePagerIcons(table);//pagebar图标
+          enableTooltips(table);//
+        }, 0);
+      },
+
+      editurl: "./dummy.php",//nothing is saved, 行操作请求URL
+      caption: "系统用户列表"
+      //,autowidth: true,
+    });
+
+
+
+
+    $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+
+
+
+    // 编辑,删除等操作
+    $("#grid-table").jqGrid('navGrid', '#grid-pager', {
+      edit: false,
+      editicon : 'ace-icon fa fa-pencil blue',
+      add: true,
+      addicon : 'ace-icon fa fa-plus-circle purple',
+      del: true,
+      delicon : 'ace-icon fa fa-trash-o red',
+      search: true,
+      searchicon : 'ace-icon fa fa-search orange',
+      refresh: true,
+      refreshicon : 'ace-icon fa fa-refresh green',
+      view: true,
+      viewicon : 'ace-icon fa fa-search-plus grey',
+
+
+      position : 'left',
+      editfunc : function(){},
+      //多行删除
+      delfunc : function(e){
+        alert(e);
+        del(e);
+      },
+      addfunc : function(){
+        $("#modal-table").modal("show");
+      },
+      searchfunc : function(){
+        alert("search");
+      },
+      refreshfunc : function(){
+        alert("refresh");
+      },
+      viewfunc : function(){
+        alert("view");
+      },
+      alerttext : "请选择需要操作的数据行!"  // 当未选中任何行而点击编辑、删除，弹出的提示信息
+    });
+
+
+
+    //enable search/filter toolbar
+    //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true});
+    //jQuery(grid_selector).filterToolbar({});
+
+
+    //switch element when editing inline
+    //编辑单行数据  开关
+    function aceSwitch( cellvalue, options, cell ) {
+      setTimeout(function(){
+        $(cell) .find('input[type=checkbox]')
+          .addClass('ace ace-switch ace-switch-5')
+          .after('<span class="lbl"></span>');
+      }, 0);
+    }
+    //enable datepicker
+    //编辑单行数据  日期选择器
+    function pickDate( cellvalue, options, cell ) {
+      setTimeout(function(){
+        $(cell) .find('input[type=text]')
+          .datepicker({format:'yyyy-mm-dd' , autoclose:true});
+      }, 0);
+    }
+
+
+    //单一删除
+    function beforeDeleteCallback(e) {
+      $("#delmodgrid-table").remove();
+      var ids=$('#grid-table').jqGrid('getGridParam','selarrrow');
+
+      //alert(ids);
+      //del(ids);
+    }
+
+    //修改
+    function beforeEditCallback(e) {
+      $("#editmodgrid-table").remove();//去掉ace原始弹出框样式
+      var ids=$('#grid-table').jqGrid('getGridParam','selarrrow');
+      //根ID据获的行的数据
+      var rowData = $('#grid-table').jqGrid('getRowData',ids);
+      edit(rowData);
+    }
+
+    //修改页面赋值
+    function edit(rowData){
+      //修改页面赋值
+      $('#name').val(rowData.name);
+      $('#password').val(rowData.password);
+      $('#mail').val(rowData.mail);
+      $('#phone').val(rowData.phone);
+      if(rowData.gender=='男'){
+        $('input[name=gender][value="1"]').prop('checked',true);
+      }else{
+        $('input[name=gender][value="2"]').prop('checked',true);
+      }
+      $('#address').val(rowData.address);
+      $("#modal-table").modal("show");
+    }
+
+    //执行删除
+    function del(rowData){
+      $.confirm({
+        title: '删除',
+        content: '确定要删除选中的记录吗',
+        icon: 'fa fa-question-circle',
+        animation: 'scale',
+        closeAnimation: 'scale',
+        opacity: 0.5,
+        buttons: {
+          'confirm': {
+            text: '确定',
+            btnClass: 'btn-blue',
+            action: function () {
+              $.alert('删除操作成功！');
+            }
+          },
+          cancel:{
+            text:'取消',
+            action: function () {
+              //$.alert('取消当前操作！');
+            }
+          }
+        }
+      });
+    }
+
+
+
+
+    //it causes some flicker when reloading or navigating grid
+    //it may be possible to have some custom formatter to do this as the grid is being created to prevent this
+    //or go back to default browser checkbox styles for the grid
+    //自定义checkbox样式
+    function styleCheckbox(table) {
+
+       /*$(table).find('input:checkbox').addClass('ace')
+       .wrap('<label />')
+       .after('<span class="lbl align-top" />');
+
+
+       $('.ui-jqgrid-labels th[id*="_cb"]:first-child')
+       .find('input.cbox[type=checkbox]').addClass('ace')
+       .wrap('<label />').after('<span class="lbl align-top" />');*/
+
+    }
+
+
+    //unlike navButtons icons, action icons in rows seem to be hard-coded
+    //you can change them like this in here if you want
+    function updateActionIcons(table) {
+      /*
+       var replacement =
+       {
+						'ui-ace-icon fa fa-pencil' : 'ace-icon fa fa-pencil blue',
+						'ui-ace-icon fa fa-trash-o' : 'ace-icon fa fa-trash-o red',
+						'ui-icon-disk' : 'ace-icon fa fa-check green',
+						'ui-icon-cancel' : 'ace-icon fa fa-times red'
+					};
+       $(table).find('.ui-pg-div span.ui-icon').each(function(){
+						var icon = $(this);
+						var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+						if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+					})
+*/    }
+
+    //replace icons with FontAwesome icons like above
+    function updatePagerIcons(table) {
+      var replacement =
+        {
+          'ui-icon-seek-first' : 'ace-icon fa fa-angle-double-left bigger-140',
+          'ui-icon-seek-prev' : 'ace-icon fa fa-angle-left bigger-140',
+          'ui-icon-seek-next' : 'ace-icon fa fa-angle-right bigger-140',
+          'ui-icon-seek-end' : 'ace-icon fa fa-angle-double-right bigger-140'
+        };
+      $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
+        var icon = $(this);
+        var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+
+        if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+      })
+    }
+
+    function enableTooltips(table) {
+      $('.navtable .ui-pg-button').tooltip({container:'body'});
+      $(table).find('.ui-pg-div').tooltip({container:'body'});
+    }
+
+    //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
+
+    $(document).one('ajaxloadstart.page', function(e) {
+      $.jgrid.gridDestroy(grid_selector);
+      $('.ui-jqdialog').remove();
+    });
+  });
+</script>

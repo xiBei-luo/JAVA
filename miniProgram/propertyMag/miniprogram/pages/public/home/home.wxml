@@ -1,6 +1,10 @@
 <!--miniprogram/pages/public/home/home.wxml-->
+
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
   <view class="page__bd">
+      <view style="width:100%;">
+        <official-account></official-account>
+      </view>
       <view class="container">
         <!-- 轮播图 -->
         <view class='carousel'> 
@@ -30,7 +34,8 @@
             <image src="../../../images/icon/nav-3.png"></image>
             <text>诉求建议</text>
           </navigator>
-          <navigator url="../secondPages/moreMenu/moreMenu"  class="nav-top-item">
+          <!-- <navigator url="../secondPages/moreMenu/moreMenu"  class="nav-top-item"> -->
+          <navigator url=""  class="nav-top-item">
             <image src="../../../images/icon/nav-4.png"></image>
             <text>更多</text>
           </navigator>
@@ -40,9 +45,10 @@
 
 
 
-      <view class="section-msg">
+      <!--<view class="section-msg">
         <view class="weui-cells weui-cells_after-title">
             <navigator url="../secondPages/viewMsg/viewMsg" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__hd">
                     <image src="../../../images/icon/envelope.png" style="margin-right: 16px;vertical-align: middle;width:55px; height: 40px;"></image>
                 </view>
@@ -51,10 +57,10 @@
                 <view class="weui-cell__ft weui-cell__ft_in-access font-sm">您有一条待查看的重要信息...</view>
             </navigator>
         </view>
-      </view>
+      </view>-->
 
 
-      <view class="section-vote">
+      <!-- <view class="section-vote">
         <view class="weui-cells weui-cells_after-title">
             <navigator url="../secondPages/publicVote/publicVote" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__hd">
@@ -83,30 +89,18 @@
                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>
             </navigator>
         </view>
-      </view>
+      </view> -->
 
 
       <view class="section-news">
         <view class="weui-panel">
-            <view class="weui-panel__hd">物业公告</view>
+            <view class="weui-panel__hd">通知公告</view>
             <view class="weui-panel__bd">
               <view class="weui-media-box weui-media-box_small-appmsg">
                   <view class="weui-cells weui-cells_in-small-appmsg">
-                      <navigator url="../showNews/showNews" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
+                      <navigator bindtap="gotoShowNews" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active" wx:for="{{userNewsList}}" wx:key="id" data-newsList="{{item}}">
                           <view class="weui-cell__bd weui-cell_primary">
-                              <view class="font-sm">意大利近8000名医生申请战疫...</view>
-                          </view>
-                          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                      </navigator>
-                      <navigator url="../showNews/showNews" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
-                          <view class="weui-cell__bd weui-cell_primary">
-                              <view class="font-sm">国家电网决心退出房地产业务...</view>
-                          </view>
-                          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-                      </navigator>
-                      <navigator url="../showNews/showNews" class="weui-cell weui-cell_example weui-cell_access" hover-class="weui-cell_active">
-                          <view class="weui-cell__bd weui-cell_primary">
-                              <view class="font-sm">广州每周新增入境隔离上千人...</view>
+                              <view class="font-sm">{{item.title}}</view>
                           </view>
                           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
                       </navigator>

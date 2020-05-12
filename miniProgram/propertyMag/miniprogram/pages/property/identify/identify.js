@@ -22,6 +22,7 @@ Page({
 
   //选择所属部门
   checkboxChange: function (e) {
+    var that = this;
     console.log('checkbox发生change事件，携带value值为：', e.detail.value);
     var selectVal = e.detail.value;
 
@@ -35,9 +36,13 @@ Page({
     });
 
     if (selectVal == 2) {
-      
       wx.navigateTo({
         url: "/pages/household/villageList/villageList?region=" + this.data.region + "&companyid=" + this.data.companyid,
+      });
+    }else if(selectVal == 1){
+      that.setData({
+        subjectname:"",
+        subjectid:""
       });
     }
   },
@@ -58,6 +63,25 @@ Page({
   //提交认证
   gotoVillage: function () {
     var that = this;
+
+    if (that.data.username == "" || that.data.username == null) {
+      wx.showToast({
+        title: '请输入姓名',
+        icon: 'none'
+      })
+      return false;
+    }
+    if (that.data.phone == "" || that.data.phone == null) {
+      wx.showToast({
+        title: '请输入手机号码',
+        icon: 'none'
+      })
+      return false;
+    }
+
+
+
+
     wx.showLoading({
       title: '请稍等',
     });
@@ -94,7 +118,7 @@ Page({
         console.log(res.data);
 
         if (res.data.status == 1) {
-          app.globalData.userStatus = 2;
+          app.globalData.userStatus = 2;//修改全局用户状态参数
           //页面跳转
           wx.switchTab({
             url: "../../public/home/home",
