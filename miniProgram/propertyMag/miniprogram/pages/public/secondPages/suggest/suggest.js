@@ -37,7 +37,7 @@ Page({
         //上传图片
         var tempFilePaths = res.tempFilePaths;
         wx.uploadFile({
-          url: 'https://www.cloplex.com/property/index.php/RepairController/uploadImage', //仅为示例，非真实的接口地址
+          url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/RepairController/uploadImage', //仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: "file",
           header: {
@@ -123,7 +123,7 @@ Page({
       title: '请稍等',
     });
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/NewsController/insertNews', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/NewsController/insertNews', //仅为示例，并非真实的接口地址
       data: {
         type: 2,//1 公告  2 诉求
         content: that.data.content,

@@ -1,5 +1,6 @@
 // miniprogram/pages/public/payPropertyFee/payPropertyFee.js
 var loadDataHelper = require("../../../../utils/loadDataAndPage.js");
+var app = getApp();
 Page({
 
   /**
@@ -21,7 +22,7 @@ Page({
       title: '请稍等',
     })
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/NewsController/updateSendNews', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/NewsController/updateSendNews', //仅为示例，并非真实的接口地址
       data: {
         id: dataList.id
       },
@@ -100,7 +101,7 @@ Page({
     })
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/NewsController/getNewsList',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/NewsController/getNewsList',
       data: {
         type: 2,
         offset: currentPage
@@ -168,7 +169,7 @@ Page({
     })
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/NewsController/getNewsList',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/NewsController/getNewsList',
       data: {
         type: 2,
         offset: currentPage

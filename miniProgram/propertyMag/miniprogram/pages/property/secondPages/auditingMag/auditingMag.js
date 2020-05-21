@@ -1,4 +1,5 @@
 // miniprogram/pages/property/secondPages/auditingMag/auditingMag.js
+var app = getApp();
 Page({
 
   /**
@@ -74,7 +75,7 @@ Page({
     })
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/UserController/selectUser',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/UserController/selectUser',
       data: {
         offset: currentPage,
         searchKey: that.data.inputVal,
@@ -141,7 +142,7 @@ Page({
     })
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/UserController/selectUser',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/UserController/selectUser',
       data: {
         offset: currentPage,
         searchKey: that.data.inputVal

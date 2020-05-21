@@ -18,13 +18,9 @@
     line-height: 1.8;
 }
 view{
-    word-break:break-all; overflow:auto;
+    word-break:break-all; 
 }
-.wxParse-inline{
-    display: inline;
-    margin: 0;
-    padding: 0;
-}
+
 /*//标题 */
 .wxParse-div{margin: 0;padding: 0;}
 .wxParse-h1{ font-size:2em; margin: .67em 0 }
@@ -172,6 +168,7 @@ view{
 }
 .WxEmojiView{
     align-items: center;
+    height: 100%;
 }
 .wxEmoji{
     width: 16px;

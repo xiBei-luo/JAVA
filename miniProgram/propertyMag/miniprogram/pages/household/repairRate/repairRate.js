@@ -1,3 +1,4 @@
+var app = getApp();
 Page({
   data: {
     value: 5.0,//评分
@@ -29,7 +30,7 @@ Page({
       title: '请稍等',
     })
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/RepairController/updateRepairRead', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/RepairController/updateRepairRead', //仅为示例，并非真实的接口地址
       data: {
         id: that.data.dataList.id,
         estimate: parseInt(that.data.value)
@@ -84,7 +85,7 @@ Page({
         });
         var tempFilePaths = res.tempFilePaths;
         wx.uploadFile({
-          url: 'https://www.cloplex.com/property/index.php/RepairController/uploadImage', //仅为示例，非真实的接口地址
+          url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/RepairController/uploadImage', //仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: "file",
           header: {

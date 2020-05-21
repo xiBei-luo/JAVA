@@ -23,7 +23,7 @@ Page({
       title: '玩命加载中',
     });
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/IndexController/assetsList', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/IndexController/assetsList', //仅为示例，并非真实的接口地址
       data: {
 
       },
@@ -89,7 +89,7 @@ Page({
         // });
         var tempFilePaths = res.tempFilePaths;
         wx.uploadFile({
-          url: 'https://www.cloplex.com/property/index.php/RepairController/uploadImage', //仅为示例，非真实的接口地址
+          url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/RepairController/uploadImage', //仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: "file",
           header: {
@@ -192,7 +192,7 @@ Page({
       title: '请稍等',
     });
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/RepairController/insertRepair', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/RepairController/insertRepair', //仅为示例，并非真实的接口地址
       data: {
         repairtype: that.data.repairtype,
         repairaddress: that.data.repairaddress,

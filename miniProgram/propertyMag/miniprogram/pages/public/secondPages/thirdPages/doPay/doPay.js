@@ -1,4 +1,5 @@
 // miniprogram/pages/public/payPropertyFee/payPropertyFee.js
+var app = getApp();
 Page({
 
   /**
@@ -66,7 +67,7 @@ Page({
     
     var that = this;
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/FuniController/chargeHouseCost', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/FuniController/chargeHouseCost', //仅为示例，并非真实的接口地址
       data: {
         orderNo: that.data.houseCostList.orderNo,
         money: that.data.houseCostList.money,

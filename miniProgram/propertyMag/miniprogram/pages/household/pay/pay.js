@@ -1,5 +1,6 @@
 // miniprogram/pages/household/pay/pay.js
 var util = require('../../../utils/util.js');
+var app = getApp();
 Page({
 
   /**
@@ -77,7 +78,7 @@ Page({
     }
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/FuniController/getRechargeList',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/FuniController/getRechargeList',
       data: reqParams,
       header: {
         'content-type': "application/x-www-form-urlencoded", // 默认值
@@ -150,7 +151,7 @@ Page({
     }
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/FuniController/getRechargeList',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/FuniController/getRechargeList',
       data: reqParams,
       header: {
         'content-type': "application/x-www-form-urlencoded", // 默认值

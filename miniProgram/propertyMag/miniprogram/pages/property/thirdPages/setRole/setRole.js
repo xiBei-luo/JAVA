@@ -1,4 +1,5 @@
 // miniprogram/pages/systemMag/powMag/powerMag.js
+var app = getApp();
 Page({
 
   /**
@@ -45,7 +46,7 @@ Page({
       title: '玩命加载中',
     });
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/IndexController/getRoleList', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/IndexController/getRoleList', //仅为示例，并非真实的接口地址
       data: {
         
       },
@@ -128,7 +129,7 @@ Page({
     });
 
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/UserController/updateUserStatus', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/UserController/updateUserStatus', //仅为示例，并非真实的接口地址
       data: {
         id: that.data.setRoleUserId,
         roleid: JSON.stringify(selected),

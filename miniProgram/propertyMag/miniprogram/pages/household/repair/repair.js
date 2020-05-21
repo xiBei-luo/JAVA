@@ -1,4 +1,5 @@
 // miniprogram/pages/public/payPropertyFee/payPropertyFee.js
+var app = getApp();
 Page({
 
   /**
@@ -16,10 +17,7 @@ Page({
   //评分
   gotoRate: function(e){
     var dataList = e.currentTarget.dataset.datalist;
-    console.log(dataList);
-    wx.showLoading({
-      title: '加载中',
-    });
+ 
 
     wx.navigateTo({
       url: "/pages/household/repairRate/repairRate?dataList=" + JSON.stringify(dataList),
@@ -56,7 +54,7 @@ Page({
     })
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/RepairController/getRepairList',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/RepairController/getRepairList',
       data: {
         offset: currentPage
       },
@@ -123,7 +121,7 @@ Page({
     })
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/RepairController/getRepairList',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/RepairController/getRepairList',
       data: {
         offset: currentPage
       },

@@ -1,4 +1,5 @@
 // miniprogram/pages/property/thirdPages/suggest/solve/solve.js
+var app = getApp();
 Page({
 
   /**
@@ -24,7 +25,7 @@ Page({
 
     //根据id请求数据
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/NewsController/getNews',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/NewsController/getNews',
       data: {
         id: parentDataId
       },
@@ -38,15 +39,18 @@ Page({
         console.log(parentData);
 
 
-        var contextUrl = "https://www.cloplex.com";
+        var contextUrl = app.globalData.HTTP_REQUEST_URL;
         var parentDataImgTmp = JSON.parse(parentData.newsimg);
         var parentDataImg = [];
 
         for (var i = 0; i < parentDataImgTmp.length; i++) {
-          var absolutPathStr = parentDataImgTmp[i].substring(13);
+          console.log(app.globalData.imgRelativePathLen);
+          var absolutPathStr = parentDataImgTmp[i].substring(app.globalData.imgRelativePathLen);
+
+
 
           var imgPath = contextUrl + absolutPathStr;
-
+          console.log(imgPath);
           parentDataImg.push(imgPath);
         }
 

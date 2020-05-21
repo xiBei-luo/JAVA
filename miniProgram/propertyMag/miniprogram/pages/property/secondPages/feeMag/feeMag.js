@@ -1,4 +1,5 @@
 // miniprogram/pages/public/payPropertyFee/payPropertyFee.js
+var app = getApp();
 Page({
 
   /**
@@ -18,7 +19,7 @@ Page({
       title: '请稍等',
     })
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/FuniController/updateFeesStatus', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/FuniController/updateFeesStatus', //仅为示例，并非真实的接口地址
       data: {
         id: that.data.dataList.id,
         status: code
@@ -59,7 +60,7 @@ Page({
     var parentData = [];
     //根据id请求数据
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/FuniController/findRecharge',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/FuniController/findRecharge',
       data: {
         id: parentDataId
       },

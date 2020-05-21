@@ -1,4 +1,4 @@
-
+var app = getApp();
 Page({
   data: {
     region: "",
@@ -93,7 +93,7 @@ Page({
     })
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/IndexController/selectCompany',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/IndexController/selectCompany',
       data: {
         offset: currentPage,
         region: that.data.region,
@@ -160,7 +160,7 @@ Page({
     })
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/IndexController/selectCompany',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/IndexController/selectCompany',
       data: {
         offset: currentPage,
         region: that.data.region,

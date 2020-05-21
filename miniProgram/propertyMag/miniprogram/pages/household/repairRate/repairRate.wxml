@@ -5,7 +5,7 @@
           <view class="weui-media-box__desc">
             <view class="line">
               <view>
-                <text>维修内容</text>
+                <text>维修内容：</text>
                 <text>{{dataList.repairtype}}</text>
               </view>
             </view>

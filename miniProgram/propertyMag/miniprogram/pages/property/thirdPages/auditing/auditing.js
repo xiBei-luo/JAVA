@@ -1,4 +1,5 @@
 // miniprogram/pages/property/thirdPages/auditing/auditing.js
+var app = getApp();
 Page({
 
   /**
@@ -32,7 +33,7 @@ Page({
     };
     console.log(params);
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/UserController/updateUserStatus', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/UserController/updateUserStatus', //仅为示例，并非真实的接口地址
       data: params,
       header: {
         "Content-Type": "application/x-www-form-urlencoded",

@@ -72,7 +72,7 @@ Page({
     
 
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/IndexController/insertUser', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/IndexController/insertUser', //仅为示例，并非真实的接口地址
       data: {
         //region: that.data.region,
         openid: that.data.openid,
@@ -148,7 +148,7 @@ Page({
       data.multiIndex[e.detail.column] = e.detail.value;
 
       wx.request({
-        url: "https://www.cloplex.com/property/index.php/FuniController/houseList",
+        url: app.globalData.HTTP_REQUEST_URL+"/property/index.php/FuniController/houseList",
         method: "POST",
         data: {
           interfaceid: that.data.interfaceid,
@@ -172,7 +172,7 @@ Page({
       data.multiIndex[e.detail.column] = e.detail.value;
 
       wx.request({
-        url: "https://www.cloplex.com/property/index.php/FuniController/houseList",
+        url: app.globalData.HTTP_REQUEST_URL+"/property/index.php/FuniController/houseList",
         method: "POST",
         data: {
           interfaceid: that.data.interfaceid,
@@ -195,7 +195,7 @@ Page({
   getHouseNumber: function(){
     let that = this;
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/FuniController/houseList',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/FuniController/houseList',
       method: "POST",
       data: {
         interfaceid: that.data.interfaceid,

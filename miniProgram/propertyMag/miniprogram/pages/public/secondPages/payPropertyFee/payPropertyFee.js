@@ -112,7 +112,7 @@ Page({
   getCostItemList: function(){
     var that = this;
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/FuniController/costItemList', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/FuniController/costItemList', //仅为示例，并非真实的接口地址
       data: {
         
       },
@@ -151,7 +151,7 @@ Page({
     console.log(costItemListP);
     var that = this;
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/FuniController/houseCostList', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/FuniController/houseCostList', //仅为示例，并非真实的接口地址
       data: {
         costitemlist: costItemListP
       },

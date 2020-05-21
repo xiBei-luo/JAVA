@@ -1,5 +1,6 @@
 // miniprogram/pages/public/showNews/showNews.js
 var WxParse = require('../../../components/wxParse/wxParse.js');
+var app = getApp();
 Page({
 
   /**
@@ -24,7 +25,7 @@ Page({
 
     //请求新闻内容
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/NewsController/getNews',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/NewsController/getNews',
       data: {
         id: parentDataId
       },

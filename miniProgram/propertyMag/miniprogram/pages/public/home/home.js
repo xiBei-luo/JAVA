@@ -71,7 +71,7 @@ Page({
     if(app.globalData.userStatus == 1){
       //请求公告列表——正式用户
       wx.request({
-        url: 'https://www.cloplex.com/property/index.php/NewsController/getNewsList',
+        url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/NewsController/getNewsList',
         data: {
           type: 1,
           offset: 1
@@ -91,7 +91,7 @@ Page({
     }else{
       //获取操作手册
       wx.request({
-        url: 'https://www.cloplex.com/property/index.php/IndexController/selectNews',
+        url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/IndexController/selectNews',
         data: {
           id: ""
         },

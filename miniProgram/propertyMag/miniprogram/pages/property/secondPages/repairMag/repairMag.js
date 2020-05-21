@@ -1,4 +1,5 @@
 // miniprogram/pages/public/payPropertyFee/payPropertyFee.js
+var app = getApp();
 Page({
 
   /**
@@ -20,7 +21,7 @@ Page({
       title: '请稍等',
     })
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/RepairController/updateRepairRead', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/RepairController/updateRepairRead', //仅为示例，并非真实的接口地址
       data: {
         id: dataList.id,
         readtime: 1
@@ -58,9 +59,7 @@ Page({
   //去完成维修
   gotoFinish:function(e){
     var dataList = e.currentTarget.dataset.datalist;
-    wx.showLoading({
-      title: '加载中',
-    });
+
 
     wx.navigateTo({
       url: "../../thirdPages/repair/solve/solve?dataList=" + JSON.stringify(dataList),
@@ -70,9 +69,7 @@ Page({
   //查看详情
   gotoViewDetails: function (e) {
     var dataList = e.currentTarget.dataset.datalist
-    wx.showLoading({
-      title: '加载中',
-    });
+
 
     wx.navigateTo({
       url: "../../thirdPages/repair/details/details?id=" +dataList.id,
@@ -109,7 +106,7 @@ Page({
     })
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/RepairController/getRepairList',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/RepairController/getRepairList',
       data: {
         offset: currentPage
       },
@@ -176,7 +173,7 @@ Page({
     })
     // 请封装自己的网络请求接口，这里作为示例就直接使用了wx.request.
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/RepairController/getRepairList',
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/RepairController/getRepairList',
       data: {
         offset: currentPage
       },

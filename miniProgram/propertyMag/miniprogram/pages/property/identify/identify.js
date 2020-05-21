@@ -98,7 +98,7 @@ Page({
     });
 
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/IndexController/insertUser', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/IndexController/insertUser', //仅为示例，并非真实的接口地址
       //url: 'http://localhost:8088/User/insertUser',
       data: {
         //region: that.data.region,

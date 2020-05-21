@@ -1,4 +1,5 @@
 // miniprogram/pages/property/thirdPages/suggest/solve/solve.js
+var app = getApp();
 Page({
 
   /**
@@ -27,14 +28,14 @@ Page({
     var that = this;
 
 
-    var contextUrl = "https://www.cloplex.com";
+    var contextUrl = app.globalData.HTTP_REQUEST_URL;
     var parentData = JSON.parse(options.dataList);
     var parentDataImgTmp = JSON.parse(parentData.repairimg);
     var parentDataImg = [];
 
     for (var i = 0; i < parentDataImgTmp.length; i++) {
       if (parentDataImgTmp[i]){
-        var absolutPathStr = parentDataImgTmp[i].substring(13);
+        var absolutPathStr = parentDataImgTmp[i].substring(app.globalData.imgRelativePathLen);
 
         var imgPath = contextUrl + absolutPathStr;
 
@@ -57,7 +58,7 @@ Page({
       title: '请稍等',
     })
     wx.request({
-      url: 'https://www.cloplex.com/property/index.php/RepairController/updateRepairRead', //仅为示例，并非真实的接口地址
+      url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/RepairController/updateRepairRead', //仅为示例，并非真实的接口地址
       data: {
         id: that.data.dataList.id,
         completime: 1
