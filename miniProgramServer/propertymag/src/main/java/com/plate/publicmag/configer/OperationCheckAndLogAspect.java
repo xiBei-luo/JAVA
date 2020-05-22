@@ -1,12 +1,12 @@
 package com.plate.publicmag.configer;
 
 import com.alibaba.fastjson.JSON;
-import com.plate.publicmag.dao.PublicLogMapper;
-import com.plate.publicmag.model.PublicLog;
-import com.plate.publicmag.model.PublicUser;
+import com.plate.publicmag.dao.TSystemLogMapper;
+import com.plate.publicmag.model.TSystemAdmin;
+import com.plate.publicmag.model.TSystemLog;
 import com.plate.publicmag.model.baseModel.ReturnModel;
 import com.plate.publicmag.util.CusAccessObjectUtil;
-import com.plate.publicmag.util.GetcurrentLoginUser;
+import com.plate.publicmag.util.GetCurrentLoginUser;
 import com.plate.publicmag.util.TimeUtil;
 import com.plate.publicmag.util.returnUtil.ReturnModelHandler;
 import org.aspectj.lang.JoinPoint;
@@ -35,7 +35,7 @@ import java.util.UUID;
 @Order(1)
 public class OperationCheckAndLogAspect {
     @Autowired
-    private PublicLogMapper publicLogMapper;
+    private TSystemLogMapper tSystemLogMapper;
 
 
     @Pointcut("@annotation( com.plate.publicmag.configer.OperationCheckAndLog )")
@@ -51,7 +51,7 @@ public class OperationCheckAndLogAspect {
         try {
             //前端用户注册时不用验证是否实名制
             if(!(proceedingJoinPoint.getSignature().getName().equals("doRegister"))){
-                PublicUser publicUser = GetcurrentLoginUser.getCurrentUser();
+                TSystemAdmin tSystemAdmin = GetCurrentLoginUser.getCurrentUser();
                 //1.前端用户未实名制不能进行操作
                 /*if ("2".equals(publicUser.getcRylb()) && !(("1").equals(publicUser.getcIssmz()))){
                     return ReturnModelHandler.error("请先完成实名制再进行业务操作！");
@@ -91,7 +91,7 @@ public class OperationCheckAndLogAspect {
      */
     private void saveSysLog(JoinPoint proceedingJoinPoint){
         //保存日志
-        PublicLog publicLog = new PublicLog();
+        TSystemLog tSystemLog = new TSystemLog();
 
         //从切面织入点处通过反射机制获取织入点处的方法
         MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
@@ -126,7 +126,7 @@ public class OperationCheckAndLogAspect {
 
 
         //调用service保存plateLog实体类到数据库
-        publicLogMapper.insert(publicLog);
+        tSystemLogMapper.insert(tSystemLog);
     }
 
 

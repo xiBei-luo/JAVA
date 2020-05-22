@@ -1,6 +1,6 @@
 package com.plate.publicmag.interceptor;
 
-import com.plate.publicmag.model.PublicUser;
+import com.plate.publicmag.model.TSystemAdmin;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,10 +34,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         //2.用户登陆及权限验证
         //System.out.println("preHandle被调用！");
-        PublicUser publicUser = (PublicUser) request.getSession().getAttribute("loginUser");
+        TSystemAdmin tSystemAdmin = (TSystemAdmin) request.getSession().getAttribute("curLoginUser");
 
-        //System.out.println("当前登陆用户--"+publicUser);
-        if(publicUser == null){
+        //System.out.println("当前登陆用户--"+tSystemAdmin);
+        if(tSystemAdmin == null){
             //2-1未登陆，返回登陆页面
             response.sendRedirect(request.getContextPath()+"/Plate/login");  //未登录自动跳转界面
             return false;

@@ -13,9 +13,9 @@ spring:
     mode: HTML5
     encoding: utf-8
   datasource:
-    url: jdbc:mysql://120.78.165.128:3306/web_company?useSSL=false
-    username: lhs
-    password: lhs123456
+    url: jdbc:mysql://localhost:3306/web_common?useSSL=false
+    username: root
+    password: luo820
     driver-class-name: com.mysql.cj.jdbc.Driver
   aop:
     auto: true

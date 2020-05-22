@@ -3,7 +3,6 @@ package com.plate.publicmag.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.JsonObject;
-import com.plate.publicmag.model.PublicUser;
 import com.plate.publicmag.model.baseModel.ReturnModel;
 import com.plate.publicmag.service.UserService;
 import com.plate.publicmag.util.returnUtil.ReturnModelHandler;

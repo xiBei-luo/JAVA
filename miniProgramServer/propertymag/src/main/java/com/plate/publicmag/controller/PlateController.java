@@ -1,7 +1,8 @@
 package com.plate.publicmag.controller;
 
-import com.plate.publicmag.dao.PublicMenuMapper;
-import com.plate.publicmag.model.PublicMenu;
+import com.plate.publicmag.dao.TSystemAdminMapper;
+import com.plate.publicmag.dao.TSystemMenuMapper;
+import com.plate.publicmag.model.TSystemMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/Plate")
 public class PlateController {
     @Autowired
-    PublicMenuMapper publicMenuMapper;
+    TSystemMenuMapper tSystemMenuMapper;
 
     @ResponseBody
     @RequestMapping("/index")
@@ -27,8 +28,8 @@ public class PlateController {
 
     @RequestMapping(value = "/getMenu",method = RequestMethod.POST)
     @ResponseBody
-    public PublicMenu getMenu(){
+    public TSystemMenu getMenu(){
 
-        return publicMenuMapper.selectByPrimaryKey(1);
+        return tSystemMenuMapper.selectByPrimaryKey(1);
     }
 }

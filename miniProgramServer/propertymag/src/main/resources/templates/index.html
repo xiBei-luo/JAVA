@@ -54,7 +54,7 @@
   <![endif]-->
 </head>
 <body class="no-skin">
-<div id="navbar" class="navbar navbar-default          ace-save-state">
+<div id="navbar" class="navbar navbar-default ace-save-state">
   <div class="navbar-container ace-save-state" id="navbar-container">
     <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
       <span class="sr-only">Toggle sidebar</span>
@@ -378,15 +378,14 @@
     try{ace.settings.loadState('main-container')}catch(e){}
   </script>
 
-  <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+  <div id="sidebar" class="sidebar responsive ace-save-state">
     <script type="text/javascript">
       try{ace.settings.loadState('sidebar')}catch(e){}
     </script>
 
 
-    <ul class="nav nav-list">
-
-      <li class="nav-first-level"  th:each="itemOuter : ${pageMenu}">
+    <!--<ul class="nav nav-list">
+      <li class="nav-first-level"  th:each="itemOuter : ${userMenuList}">
         <a href="#" class="dropdown-toggle" th:attr="data-targetUrl = (${itemOuter.menuList.size()} > 0 ? '' : '')">
           <i class="menu-icon fa" th:classappend="${itemOuter.menuTypeIcon}"></i>
           <span class="menu-text" th:text="${itemOuter.menuTypeName}"> </span>
@@ -405,7 +404,10 @@
           </li>
         </ul>
       </li>
-    </ul><!-- /.nav-list -->
+    </ul>--><!-- /.nav-list -->
+
+    <div class="nav nav-list" th:insert="~{commonTemplates/menuTree :: row(${userMenuList},1)}"></div>
+
 
     <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
       <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
@@ -573,12 +575,12 @@
 
       $("#breadcrumb-1").html(navFirstLevel);
       $("#breadcrumb-2").html(navSecondLevel);
-      var targetUrl = $(this).attr("data-targetUrl");
+      var targetUrl = $(this).attr("data-targeturl");
 
       //页面内容显示
       $.ajax({
 
-        url: "/RedirectURL/"+targetUrl,
+        url: "/RedirectURL"+targetUrl,
 
         type:"get",
 
@@ -592,6 +594,9 @@
 
       })
     });
+
+
+
   });
 
 

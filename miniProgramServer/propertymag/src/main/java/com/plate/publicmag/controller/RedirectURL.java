@@ -1,12 +1,15 @@
 package com.plate.publicmag.controller;
 
 import com.plate.publicmag.service.SystemMagService;
+import com.plate.publicmag.util.GetCurrentLoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/RedirectURL")
@@ -16,8 +19,8 @@ public class RedirectURL {
 
     @RequestMapping("/gotoHomePage")
     public String gotoHomePage(HttpSession session, Model model){
-
-        model.addAttribute("pageMenu",systemMagService.selectMenuByLoginUser(session).getData());
+        model.addAttribute("curLoginUser",GetCurrentLoginUser.getCurrentUser());//当前登陆用户
+        model.addAttribute("userMenuList",systemMagService.selectMenuByLoginUser(session).getData());//用户权限
         return "/index";
     }
 

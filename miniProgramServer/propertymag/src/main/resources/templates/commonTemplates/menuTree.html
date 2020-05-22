@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<!--局部模板-->
+<th:block th:fragment="row(permissions,lv)">
+  <th:block th:each="p : ${permissions}">
+      <li class=""  th:attr="class = ${lv} == 1 ? 'nav-first-level' : ''">
+        <a class="dropdown-toggle" th:attr="data-targeturl = ${p.children.size()} > 0 ? '#' : ${p.menu_action}">
+          <i  th:attr="class = ${lv} == 1 ? 'menu-icon fa '+${p.menu_icon} : 'menu-icon fa fa-caret-right'"></i>
+          <span class="menu-text" th:text="${p.menu_name}"> </span>
+          <b class="arrow fa fa-angle-down" th:if="${p.children.size()} > 0"></b>
+        </a>
+        <b class="arrow"></b>
+        <ul class="submenu" th:unless="${#lists.isEmpty(p.children)}">
+          <th:block th:unless="${#lists.isEmpty(p.children)}" th:include="this::row(${p.children},${lv+1})"/>
+        </ul>
+      </li>
+  </th:block>
+</th:block>
+
+<!--局部模板-->
+<!--<th:block th:fragment="row(permissions,lv)">
+  <th:block th:each="p : ${permissions}">
+    <ul class="ul">
+      <li th:text="${p.menu_name}" th:style="|padding-left:${15*lv}px|">名称</li>
+      &lt;!&ndash;<li th:text="${p.id}">标识</li>&ndash;&gt;
+      <li style="text-align: center;">
+        <div class="btn-group">
+          <a class="btn btn-mini"><i class="fa-pencil"></i></a>
+          <a class="btn btn-danger btn-mini"><i class="fa-phone"></i></a>
+        </div>
+      </li>
+    </ul>
+    <th:block th:unless="${#lists.isEmpty(p.children)}" th:include="this::row(${p.children},${lv+1})"/>
+  </th:block>
+</th:block>-->
+
+</body>
+</html>
