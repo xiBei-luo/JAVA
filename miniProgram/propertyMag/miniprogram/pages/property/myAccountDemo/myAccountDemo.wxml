@@ -20,7 +20,7 @@
 
             <view>
               <navigator url="/pages/public/firstVisit/firstVisit">
-                <button class="weui-btn mini-btn" type="primary" size="mini" wx:if="{{userStatus == 3}}">身份认证</button>
+                <button class="weui-btn mini-btn" type="primary" size="mini" wx:if="{{userStatus == 3 || userStatus == 5}}">身份认证</button>
                 <!-- <button class="weui-btn mini-btn" type="primary" size="mini">身份认证</button> -->
               </navigator>
               <navigator url="" wx:if="{{userStatus == 2}}">

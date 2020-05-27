@@ -1,0 +1,12 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-cell" style="background:#ffffff">
+        <view class="weui-cell__bd">联系楼道长</view>
+        <view class="weui-cell__ft"><button type="primary" bindtap="callPhone" size="mini" data-type="1" data-number="{{corridorPhone}}">拨打电话</button></view>
+    </view>
+    <view class="weui-cell" style="background:#ffffff">
+        <view class="weui-cell__bd">联系客服</view>
+        <view class="weui-cell__ft"><button type="primary" bindtap="callPhone" size="mini" data-type="2" data-number="{{peopertyPhone}}">拨打电话</button></view>
+    </view>
+  </view>
+</view>

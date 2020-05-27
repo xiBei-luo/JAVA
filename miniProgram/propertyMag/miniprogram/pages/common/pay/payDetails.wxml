@@ -32,6 +32,11 @@
               <button class="weui-btn mini-btn" type="warn" size="mini" wx:if="{{dataList.status == 2}}" bindtap="gotoSolve" data-code="3">未收款</button>
               <button class="weui-btn mini-btn" type="warn" size="mini" wx:if="{{dataList.status == 3}}">物业确认收款有误</button>
               <button class="weui-btn mini-btn" type="default" size="mini" wx:if="{{dataList.status == 1}}">已确认收费</button>
+
+              <button class="weui-btn mini-btn" type="primary" size="mini" wx:if="{{dataList.status == 7}}" bindtap="gotoSolve" data-code="5">拒收违约金</button>
+              <button class="weui-btn mini-btn" type="warn" size="mini" wx:if="{{dataList.status == 7}}" bindtap="gotoSolve" data-code="6">收取违约金</button>
+
+              <button class="weui-btn mini-btn" type="default" size="mini" wx:if="{{dataList.status == 5 || dataList.status == 6}}">允许缴费</button>
           </view>
         </view>
     </view>

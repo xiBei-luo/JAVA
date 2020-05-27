@@ -1,0 +1,49 @@
+<view class="page">
+    <view class="page__head" style="position:relative;margin-bottom:10rpx;height:120rpx;">
+      <view class="weui-cell " style="background:#ffffff">
+          <view class="weui-cell__bd">
+              <input class="weui-input" style="text-align:right;width:30%;display:inline-block " type="number" maxlength='9' value="{{inputValMin}}" bindinput="inputTyping" data-target="1"  placeholder="欠费最小值" />
+              <text style="margin: 0 20rpx;">——</text>
+              <input class="weui-input" style="text-align:left;width:30%;display:inline-block " type="number" maxlength='9' value="{{inputValMax}}" bindinput="inputTyping" data-target="2"  placeholder="欠费最大值" />
+          </view>
+          <view class="weui-cell__ft">
+              <button class="weui-btn" type="primary" size="mini" bindtap="loadInitData">查询</button>
+          </view>
+      </view>
+    </view>
+    <view class="page__bd" style="position:relative;bottom:120rpx;margin-top:120rpx;">
+        <view class="weui-cells weui-cells_checkbox weui-cells_after-title">
+            <checkbox-group bindchange="checkboxChange">
+                <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="id">
+                    <checkbox class="weui-check" value="{{item.roomnumber}}" checked="{{item.checked}}"/>
+
+                    <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                        <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                        <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+                    </view>
+                    <view class="weui-cell__bd">
+                        <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="" data-dataList="{{item}}">
+                            <view class="weui-cell__bd  font-sm">【{{item.roomnumber}}】{{item.mastername}}</view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access font-sm">-￥{{item.money}}</view>
+                        </navigator>
+                    </view>
+                </label>
+            </checkbox-group>
+        </view>
+
+    </view>
+
+    <view class="page__ft">
+      <view class="footer-left">
+        <checkbox-group bindchange="checkAll">
+            <label class="checkbox">
+                <checkbox value="{{isCheckAll}}" />
+                <text class="checkbox-text fs30">全选  {{checkedItem.length}}/{{checkboxItems.length}}</text>
+            </label>
+        </checkbox-group>
+      </view>
+      <view class="footer-center">
+        <button class="weui-btn" type="primary" bindtap="f_levyFee" disabled="{{checkedItem.length <= 0}}">催缴费用</button>
+      </view>
+    </view>
+</view>

@@ -19,10 +19,6 @@ Page({
       icon: 'none',
       duration: 5000
     })
-    // var that = this;
-    // wx.navigateTo({
-    //   url: "../thirdPages/doPay/doPay?userInfoDesc=" + JSON.stringify(that.data.userInfoDesc) + "&houseCostList=" + JSON.stringify(that.data.houseCostList),
-    // })
   },
 
   //查看缴费历史

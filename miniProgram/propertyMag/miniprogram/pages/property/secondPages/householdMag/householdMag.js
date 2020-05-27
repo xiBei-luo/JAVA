@@ -7,6 +7,8 @@ Page({
     currentPage: 0,
     articles: [], // 存放所有的数据
     showMoreBtn: false,
+    slideButtons1: [],//设置楼道长滑块
+    slideButtons2: [],//取消楼道长滑块
   },
   showInput: function () {
     this.setData({
@@ -36,12 +38,87 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
+    var that = this;
+
+    //左滑功能块
+    that.setData({
+      //icon: base64.icon20,
+      slideButtons1: [{
+        text: '设为楼道长',
+        src: '/page/weui/cell/icon_love.svg', // icon的路径
+      }],
+
+      slideButtons2: [
+        {
+          type: 'warn',
+          text: '取消楼道长',
+          src: '/page/weui/cell/icon_star.svg', // icon的路径
+        }
+      ]
+
+    });
 
     // 加载页面初始化时需要的数据
     setTimeout(function () {
       that.loadInitData();
     }, 1000) //延迟时间 这里是1秒
+  },
+
+
+  //点击功能项
+  slideButtonTap(e) {
+    var that = this;
+    var userData = e.currentTarget.dataset.userdata;
+    var code = e.currentTarget.dataset.code;
+    var operationIndex = e.detail.index;
+    var tmpTXT = '确认设置【' + userData.username+'】为楼道长吗？';
+    if (code == "not_corridor") {
+      tmpTXT = '确认取消【' + userData.username+'】的楼道长身份吗？';
+    }
+
+    //设为楼道长
+    wx.showModal({
+      title: '提示',
+      content: tmpTXT,
+      confirmText: "确认",
+      cancelText: "放弃",
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            url: app.globalData.HTTP_REQUEST_URL+'/property/index.php/UserController/updateUserStatus', //仅为示例，并非真实的接口地址
+            data: {
+              corridor: code,
+              id: userData.id
+            },
+            header: {
+              'content-type': "application/x-www-form-urlencoded", // 默认值
+              'cookie': wx.getStorageSync("sessionid")
+            },
+            method: "POST",
+            success(res) {
+              wx.hideLoading();//关闭遮罩
+              if (res.data.status == 1) {
+                wx.showToast({
+                  title: '设置成功',
+                  duration: 2000,
+                  success: function(){
+                    setTimeout(function () {
+                      that.loadInitData();
+                    }, 2000) //延迟时间 这里是1秒
+                  }
+                });
+              } else {
+                wx.showToast({
+                  title: '出错了：错误信息'+JSON.stringify(res),
+                  icon: 'none',
+                  duration: 2000
+                });
+              }
+            }
+          })
+        }
+      }
+    });
   },
 
 

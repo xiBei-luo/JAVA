@@ -23,8 +23,12 @@
             <block wx:for="{{dataArray}}" wx:for-item="articles" wx:for-index="dataArrayIndex">
                 <block wx:for="{{articles}}" wx:for-item="item" wx:key="{{item.id}}" wx:for-index="index" class="weui-cells weui-cells_after-title">
                     <view class="weui-cell"  wx:if="{{item.category == 4}}">
-                        <view class="weui-cell__bd">{{item.username}}</view>
-                        <view class="weui-cell__ft">{{item.roomnumber}}</view>
+                        <mp-slideview  wx:if="{{!item.remark || item.remark == 'not_corridor'}}" buttons="{{slideButtons1}}" bindbuttontap="slideButtonTap" data-code="is_corridor"  data-userdata = "{{item}}">
+                            <mp-cell style="font-size:24rpx;" value="{{item.username}}" footer="{{item.roomnumber}}"></mp-cell>
+                        </mp-slideview>
+                        <mp-slideview  wx:if="{{item.remark == 'is_corridor'}}" buttons="{{slideButtons2}}" bindbuttontap="slideButtonTap" data-code="not_corridor"  data-userdata = "{{item}}">
+                            <mp-cell style="font-size:24rpx;" value="{{item.username}}" footer="{{item.roomnumber}}"></mp-cell>
+                        </mp-slideview>
                     </view>
                 </block>
             </block>

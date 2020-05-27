@@ -53,6 +53,7 @@ Page({
 
   //加载数据
   loadInitData: function(parentDataId){
+    //var parentDataId = 35;
     var that = this;
     that.setData({
       dataList: []

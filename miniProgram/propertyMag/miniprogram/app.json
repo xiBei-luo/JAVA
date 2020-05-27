@@ -52,7 +52,10 @@
     "pages/public/secondPages/suggest/successPage",
     "pages/common/rate/rate",
     "pages/common/pay/payDetails",
-    "pages/household/payDetails/payDetails"
+    "pages/household/payDetails/payDetails",
+    "pages/property/secondPages/levyFees/levyFees",
+    "pages/property/secondPages/contactProperty/contactProperty",
+    "pages/common/levyFeesNews/levyFeesNews"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

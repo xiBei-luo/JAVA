@@ -1,0 +1,30 @@
+.weui-form-preview{
+  margin-bottom: 25px;
+}
+.font-sm{
+font-size: 28rpx;
+}
+
+.page__ft{
+  display: flex;
+  height:120rpx;
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background: #ffffff;
+  justify-content: space-around;
+  align-items: center;
+  align-self: center;
+  padding: 0 20rpx;
+}
+.footer-left{
+  width: 30%;
+}
+
+.footer-center{
+  width:70%;
+}
+.footer-center button{
+  width: 70%;
+}
+

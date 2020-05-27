@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "物业管理",
+  "navigationBarTitleText": "公司员工列表",
   "usingComponents": {
     "mp-cells": "/miniprogram_npm/weui-miniprogram/cells/cells",
     "mp-cell": "/miniprogram_npm/weui-miniprogram/cell/cell",

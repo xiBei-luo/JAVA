@@ -24,7 +24,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(that.data.IsAuthorization);
+    //console.log(that.data.IsAuthorization);
     app.watch(that.watchBack);
 
     
@@ -39,7 +39,7 @@ Page({
 
   //监听是否成功获取openid
   watchBack: function (value){
-    console.log("=========="+value+"=========");
+    console.log("==========是否成功获取用户信息："+value+"=========");
     this.setData({
       IsAuthorization: value
     });

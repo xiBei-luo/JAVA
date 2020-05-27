@@ -65,11 +65,18 @@ Page({
           for (var i = 0; i < retData.length;i++){
             var tmpretObj = {};
             //console.log(that.data.selectRoleidArr + "===" + retData[i].id + "===" + that.data.selectRoleidArr.indexOf(retData[i].id));
-            if (that.data.selectRoleidArr.indexOf(retData[i].id) != -1){
-              tmpretObj = {
-                "name": retData[i].rolename,
-                "value": retData[i].id,
-                "checked": true
+            if(that.data.selectRoleidArr && that.data.selectRoleidArr.length > 0){
+              if (that.data.selectRoleidArr.indexOf(retData[i].id) != -1){
+                tmpretObj = {
+                  "name": retData[i].rolename,
+                  "value": retData[i].id,
+                  "checked": true
+                }
+              }else{
+                tmpretObj = {
+                  "name": retData[i].rolename,
+                  "value": retData[i].id
+                }
               }
             }else{
               tmpretObj = {
@@ -77,6 +84,7 @@ Page({
                 "value": retData[i].id
               }
             }
+            
             chkArr.push(tmpretObj);
           }
           that.setData({

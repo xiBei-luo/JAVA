@@ -49,6 +49,7 @@ watch: function (method) {
             method: "GET",
             success(res) {
               if(res.status == 0){
+                console.log("===获取用户信息失败，status为0===");
                 wx.showToast({
                   title: '获取openid失败：'+res.msg,
                   icon: 'none',
@@ -58,7 +59,8 @@ watch: function (method) {
                 var status = res.data.status;//status表示，0是获取openid失败，1是成功并返回用户信息，2是用户未审核，3是新用户
                 that.globalData.userStatus = status; 
                 that.globalData.userInfoDesc = res.data.data;
-                console.log(res.data);
+                console.log("===获取用户信息成功===");
+                console.log("获取用户状态成功:"+status);
                 wx.removeStorageSync('sessionid') //必须先清除，否则res.header['Set-Cookie']会报错
                 // 注意：Set-Cookie（开发者工具中调试全部小写）（远程调试和线上首字母大写）
                 wx.setStorageSync("sessionid", res.header["Set-Cookie"]);
@@ -82,7 +84,8 @@ watch: function (method) {
             }
           })
         } else {
-          console.log('登录失败！' + res.errMsg);
+          console.log('获取临时code值失败');
+          console.log(res.errMsg);
           wx.showToast({
             title: '获取code值失败：'+JSON.stringify(res),
             icon: 'none',

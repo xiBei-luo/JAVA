@@ -38,7 +38,7 @@ Page({
   //点击了轮播图
   chomeCarouselClick: function (event) {
     var urlStr = event.currentTarget.dataset.url;
-    console.log("点击了轮播图：" + urlStr);
+    //console.log("点击了轮播图：" + urlStr);
     // wx.navigateTo({
     //   url: 'test?id=1'
     // })
@@ -49,7 +49,7 @@ Page({
   gotoShowNews: function(e){
     //../showNews/showNews
     var dataList = e.currentTarget.dataset.newslist;
-    console.log(dataList);
+    //console.log(dataList);
     wx.navigateTo({
       url: '../showNews/showNews?id=' + dataList.id,
     })
@@ -67,7 +67,7 @@ Page({
        
     // }, 1000) //延迟时间 这里是1秒
 
-    console.log("用户状态："+app.globalData.userStatus);
+    //console.log("用户状态："+app.globalData.userStatus);
     if(app.globalData.userStatus == 1){
       //请求公告列表——正式用户
       wx.request({
