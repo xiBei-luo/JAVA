@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List selectAllUser() {
         TSystemAdminExample tSystemAdminExample = new TSystemAdminExample();
-        tSystemAdminExample.setOrderByClause("id");
+        tSystemAdminExample.setOrderByClause("user_id");
         List userList = tSystemAdminMapper.selectByExample(tSystemAdminExample);
         return userList;
     }

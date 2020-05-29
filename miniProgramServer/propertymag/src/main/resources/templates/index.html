@@ -440,7 +440,7 @@
         </div>--><!-- /.nav-search -->
       </div>
 
-      <div class="page-content">
+      <div class="page-content" style="padding-bottom: 0;padding-top: 40px;padding-left: 10px;padding-right: 10px;overflow: hidden">
         <div class="ace-settings-container" id="ace-settings-container">
           <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
             <i class="ace-icon fa fa-cog bigger-130"></i>
@@ -503,12 +503,10 @@
           </div><!-- /.ace-settings-box -->
         </div><!-- /.ace-settings-container -->
 
-
-
         <div class="row">
-          <div class="col-xs-12" id="main-content">
+          <div class="col-xs-12" id="main-content" style="width: 100%;margin: 0;padding: 0;">
             <!-- PAGE CONTENT BEGINS   主内容区 -->
-
+            <iframe id="iframe-page-content" src="" width="100%" height="100%" frameborder="0" style="margin: 0;padding: 0;"></iframe>
 
 
             <!-- PAGE CONTENT ENDS -->
@@ -550,6 +548,9 @@
 <!--  bootstrap表单验证-->
 <script src="/publicFrame/bootstrapValidator/js/bootstrapValidator.js"></script>
 
+<!--tree-->
+<script src="/publicFrame/aceAdmin/assets/js/tree.min.js"></script>
+
 <!-- jquery-ui  page specific plugin scripts -->
 <script src="/publicFrame/aceAdmin/assets/js/jquery-ui.min.js"></script>
 <script src="/publicFrame/aceAdmin/assets/js/jquery.ui.touch-punch.min.js"></script>
@@ -560,25 +561,37 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+
+
   $(function(){
+    $("#main-content").height($(window).height()-85);
     $(".submenu a").click(function(){
       //样式
       $(".submenu a").parent().removeClass("active");//去除所有li的样式
-      $(this).parent().addClass("active");//为当前li添加active样式
+      //如果当前点击对象是根节点才设置样式为active
+      if ($(this).attr("data-targeturl")){
+          $(this).parent().addClass("active");//为当前li添加active样式
+      }
 
       $(".submenu a").parents(".nav-first-level").removeClass("active");//去除所有父li的样式
       $(this).parents(".nav-first-level").addClass("active");//为当前父li添加active样式
 
 
+
+
+
       var navFirstLevel = $(this).parents(".nav-first-level").find("span").html();//第一级菜单的名称
       var navSecondLevel = $(this).find("span").html();//第二级菜单的名称
-
       $("#breadcrumb-1").html(navFirstLevel);
       $("#breadcrumb-2").html(navSecondLevel);
       var targetUrl = $(this).attr("data-targeturl");
+      if(!targetUrl){
+          return;
+      }
+      $("#iframe-page-content").attr("src","/RedirectURL" + ($(this).attr("data-targetUrl")));
 
       //页面内容显示
-      $.ajax({
+      /*$.ajax({
 
         url: "/RedirectURL"+targetUrl,
 
@@ -592,7 +605,7 @@
 
         }
 
-      })
+      })*/
     });
 
 

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta charset="utf-8" />
+  <title>竟成智云后台管理系统</title>
+
+  <meta name="description" content="Dynamic tables and grids using jqGrid plugin" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+  <!-- bootstrap & fontawesome -->
+  <link rel="stylesheet" href="/publicFrame/aceAdmin/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/publicFrame/aceAdmin/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+  <!--dhtmlx-->
+  <link rel="stylesheet" href="/publicFrame/dhtmlx-5.0/codebase/dhtmlx.css" />
+  <link rel="stylesheet" href="/publicFrame/dhtmlx-5.0/skins/web/dhtmlx.css" />
+  <link rel="stylesheet" href="/publicFrame/dhtmlx-5.0/skins/material/dhtmlx.css" />
+  <link rel="stylesheet" href="/publicFrame/dhtmlx-5.0/skins/skyblue/dhtmlx.css" />
+  <link rel="stylesheet" href="/publicFrame/dhtmlx-5.0/skins/terrace/dhtmlx.css" />
+  <link rel="stylesheet" href="/publicFrame/dhtmlx-5.0/skins/web/dhtmlx.css" />
+
+
+
+  <style>
+    html,body{
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      padding: 0;
+      margin: 0;
+    }
+    .dhxlayout_base_dhx_web div.dhx_cell_layout div.dhx_cell_hdr{
+      background: #f5f5f5;
+    }
+  </style>
+</head>
+<body class="no-skin">
+
+
+<div id="leftTopDiv" style="width: 100%;height:100%;">
+  <div id="tree" style="width: 100%;height:100%;"></div>
+</div>
+<div id="leftBottomDiv" >
+  <div id="btnBox" style="width: 100%;height:100%;">
+    <div class="row">
+      <div class="col-xs-4 text-center">
+        <button class="btn btn-default btn-xs"><i class="fa fa-plus"></i> 新增分类</button>
+      </div>
+      <div class="col-xs-4 text-center">
+        <button class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> 修改分类</button>
+      </div>
+      <div class="col-xs-4 text-center">
+        <button class="btn btn-default btn-xs"><i class="fa fa-trash"></i> 删除分类</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 text-center">
+        <button class="btn btn-default btn-xs"><i class="fa fa-arrow-up"></i> 上&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp移</button>
+      </div>
+      <div class="col-xs-4 text-center"></div>
+      <div class="col-xs-4 text-center ">
+        <button class="btn btn-default btn-xs"><i class="fa fa-arrow-up"></i> 下&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp移</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="rightTopDiv" style="width: 100%;height:100%;">
+  <div id="grid" style="width: 100%;height:100%;border:0"></div>
+</div>
+
+
+
+
+<!-- basic scripts -->
+
+<script src="/publicFrame/aceAdmin/assets/js/jquery-2.1.4.min.js"></script>
+<script src="/publicFrame/aceAdmin/assets/js/bootstrap.min.js"></script>
+<!--dhtmlx-->
+<script src="/publicFrame/dhtmlx-5.0/codebase/dhtmlx.js"></script>
+
+
+
+
+<script>
+    var allLayout = null;
+    var treeObj = null;
+    var grid = null;
+    var DHTMLX_TREE_IMAGE_PATH = "/publicFrame/dhtmlx-5.0/skins/terrace/imgs/dhxtree_terrace/";
+
+
+
+    function initLayout(){
+        if (allLayout != null) allLayout.unload();
+        // 创建总布局布局
+        allLayout = new dhtmlXLayoutObject(document.body, "3J");
+        // 设置皮肤
+        allLayout.setSkin("dhx_terrace");
+        // 设置分隔栏宽度
+        allLayout.setSeparatorSize(0, 3);//(index,size)
+        allLayout.setSeparatorSize(1, 3);
+        // 设置指定栏宽度
+        allLayout.cells("a").setWidth(350);
+        allLayout.cells("a").fixSize(true, false);
+        allLayout.cells("c").setHeight(50);
+        // 设置自动大小
+        allLayout.setAutoSize("b", "a;b");
+        // 隐藏右侧编辑区的缩进按键
+        allLayout.cells("a").hideArrow();
+        allLayout.cells("b").hideArrow();
+        allLayout.cells("c").hideArrow();
+        allLayout.cells("c").hideHeader();
+        // 设置标题
+        allLayout.cells("a").setText("<span style='font-family: 微软雅黑;color:#888;'>系统功能</span>");
+        allLayout.cells("b").setText("<span style='font-family: 微软雅黑;color:#888;'>编辑</span>");
+        // 绑定区域对象
+        allLayout.cells("a").attachObject("leftTopDiv");
+        allLayout.cells("b").attachObject("rightTopDiv");
+        allLayout.cells("c").attachObject("leftBottomDiv");
+    }
+    function initTree(){
+        if (treeObj) treeObj.destructor();
+        treeObj = new dhtmlXTreeObject("tree", "100%", "100%", "0");
+        treeObj.setSkin('dhx_terrace');
+        treeObj.setImagePath(DHTMLX_TREE_IMAGE_PATH);
+
+        $.ajax({
+            url: "/Plate/getAllMenu",
+            type:"POST",
+            data:{},
+            success:function(ret){
+                console.log(ret.data);
+
+                var jsonObj ={
+                    id: 0,
+                    item: ret.data.data
+                }
+                console.log(jsonObj);
+                treeObj.loadJSONObject(jsonObj, function(){
+                    var rootid = treeObj.getItemIdByIndex(0,0);
+                    treeObj.selectItem(rootid, true);
+                });
+            }
+        });
+
+        // 添加树的点击事件
+        treeObj.attachEvent("onClick", function(id) {
+            var data = treeObj.getUserData(id, "data");
+            console.log(data);
+        });
+    }
+    function initGrid(){
+        grid = new dhtmlXGridObject('grid', "100%", "100%", "0");
+        grid.setImagePath("/publicFrame/dhtmlx-5.0/skins/skyblue/imgs/");
+        grid.setHeader("客户编码,客户名称,用友编码,开户行,需方地址,邮政编码,账号,纳税号,纳税号");
+        grid.setInitWidthsP("10,20,10,15,16,8,10,10,10");
+        grid.setColAlign("center,left,center,left,left,center,center,center,center");
+        grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro");
+        grid.enableMultiselect(false);
+        //全部列可移动
+        grid.init();
+    }
+
+
+    $(function(){
+        initLayout();
+        initTree();
+        initGrid();
+        $(window).resize(function(){
+            allLayout.setSizes();
+            $("#rightTopDiv").width(allLayout.cells("b").getWidth());
+            grid.setSizes();
+        });
+    })
+</script>

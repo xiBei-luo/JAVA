@@ -1,7 +1,331 @@
-<button class="btn btn-success" id="btnSave">角色成功</button>
+    <div class="form-horizontal col-xs-6">
+      <div class="form-group" style="margin-bottom: 8px;">
+        <label class="col-sm-2 control-label no-padding-right" for="searchKey"> 登录名 ：</label>
+        <div class="col-sm-5">
+          <input type="text" id="searchKey" name="searchKey" placeholder="输入关键字查询" class="col-xs-12" />
+        </div>
+        <div class="col-sm-5">
+          <button class="btn btn-success btn-sm" id="btnSearch">查询</button>
+        </div>
+      </div>
+    </div>
+    <div class="btn-group pull-right">
+      <button id="btnRefresh" class="btn btn-white btn-info btn-round btn-sm">
+        <i class="ace-icon fa fa-refresh blue"></i>
+        刷新
+      </button>
+      <button id="btn_add" class="btn btn-white btn-info btn-round btn-sm" data-toggle="modal" data-target="#editModal">
+        <i class="ace-icon fa fa-plus blue"></i>
+        新增
+      </button>
+      <button id="btn_edit" class="btn btn-white btn-success btn-round btn-sm" style="display: none" data-toggle="modal" data-target="#editModal">
+        <i class="ace-icon fa fa-pencil green"></i>
+        修改
+      </button>
+      <button id="btn_grand" class="btn btn-white btn-success btn-round btn-sm" style="display: none" data-toggle="modal" data-target="#grandModal">
+        <i class="ace-icon fa fa-check green"></i>
+        授权
+      </button>
+      <button id="btn_delete" class="btn btn-white btn-danger btn-round btn-sm" style="display: none">
+        <i class="ace-icon fa fa-trash-o red2"></i>
+        删除
+      </button>
+    </div>
+
+<table id="mytab" class="table table-hover text-nowrap"></table>
+
+
+
+
+<!-- 新增/修改 Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">新增用户</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <form id="dataForm" name="dataForm" class="form-horizontal">
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="loginName"> 登录名 ：</label>
+                <div class="col-sm-9">
+                  <input type="text" id="loginName" name="loginName" placeholder="输入登录名" class="col-xs-5" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="loginName"> 电话号码 ：</label>
+                <div class="col-sm-9">
+                  <input type="text" id="mobilephone" name="mobilephone" placeholder="输入电话号码" class="col-xs-10" />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="btnSave">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--授权model-->
+<div class="modal fade" id="grandModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="grandModalLabel">用户授权</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="btnGrand">确认授权</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-  $("#btnSave").click(function () {
-    alert("成功")
-  })
+    //根据窗口调整表格高度
+    $(window).resize(function() {
+        $('#mytab').bootstrapTable('resetView', {
+            height: tableHeight()
+        })
+    });
+
+    //生成用户数据
+    $('#mytab').bootstrapTable({
+        method: 'get',
+        contentType: "application/x-www-form-urlencoded",//必须要有！！！！
+        url:"/UserController/selectAllUser",//要请求数据的文件路径
+        height:tableHeight(),//高度调整
+        //toolbar: '#toolbar',//指定工具栏
+        cache: false,     //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        striped: true, //是否显示行间隔色
+        //search: true,//搜索,客户端分页常用，服务器端分页不常用
+        dataField: "rows",//bootstrap table 可以前端分页也可以后端分页，这里
+        //我们使用的是后端分页，后端分页时需返回含有total：总记录数,这个键值好像是固定的
+        //rows： 记录集合 键值可以修改  dataField 自己定义成自己想要的就好
+        pageNumber: 1, //初始化加载第一页，默认第一页
+        pagination:true,//是否分页
+        queryParamsType:'',//查询参数组织方式
+        queryParams:queryParams,//请求服务器时所传的参数
+        uniqueId: "id",     //每一行的唯一标识，一般为主键列
+        sidePagination:'server',//指定服务器端分页
+        pageSize:10,//单页记录数
+        pageList:[5,10,20,30],//分页步进值
+        //showRefresh:true,//刷新按钮
+        //showColumns:true,//是否显示所有的列
+        clickToSelect: true,//是否启用点击选中行
+        //toolbarAlign:'right',//工具栏对齐方式
+        //buttonsAlign:'right',//按钮对齐方式
+        columns:[
+            {
+                title:'全选',
+                field:'select',
+                //复选框
+                checkbox:true,
+                width:25,
+                align:'center',
+                valign:'middle'
+            },
+            {
+                title:'ID',
+                field:'id',
+                visible:false
+            },
+            {
+                title:'登录名',
+                field:'loginname',
+                sortable:false
+            },
+            {
+                title:'姓名',
+                field:'username',
+                sortable:false
+            },
+            {
+                title:'手机号',
+                field:'Tel'
+            },
+            {
+                title:'邮箱',
+                field:'mobilephone'
+            },
+            {
+                title:'注册日期',
+                field:'create_time',
+                sortable:false
+            },
+            {
+                title:'状态',
+                field:'status',
+                align:'center',
+                //列数据格式化
+                formatter:operateFormatter
+            }
+        ],
+        locale:'zh-CN',//中文支持,
+        responseHandler:function(res){
+            //在ajax获取到数据，渲染表格之前，修改数据源
+            return {
+                "total": res.data.totalCount,
+                "rows": res.data.retDatas
+            };
+
+        }
+    });
+
+    //三个参数，value代表该列的值
+    function operateFormatter(value,row,index){
+        if(value==2){
+            return '<i class="fa fa-lock" style="color:red"></i>'
+        }else if(value==1){
+            return '<i class="fa fa-unlock" style="color:green"></i>'
+        }else{
+            return '数据错误'
+        }
+    }
+
+    //删除按钮与修改按钮的出现与消失
+    $('.bootstrap-table').change(function(){
+        var dataArr=$('#mytab .selected');
+        if(dataArr.length==1){
+            $('#btn_edit').css('display','block').removeClass('fadeOutRight').addClass('animated fadeInRight');
+        }else{
+            $('#btn_edit').addClass('fadeOutRight');
+            setTimeout(function(){
+                $('#btn_edit').css('display','none');
+            },400);
+        }
+        if(dataArr.length>=1){
+            $('#btn_delete,#btn_grand').css('display','block').removeClass('fadeOutRight').addClass('animated fadeInRight');
+        }else{
+            $('#btn_delete,#btn_grand').addClass('fadeOutRight');
+            setTimeout(function(){
+                $('#btn_delete,#btn_grand').css('display','none');
+            },400);
+        }
+    });
+
+    //请求服务数据时所传参数
+    function queryParams(params){
+        return {
+            //每页多少条数据
+            rows: params.pageSize,
+            //请求第几页
+            page:params.pageNumber,
+            searchKey: $("#searchKey").val()
+        };
+    }
+    //查询按钮事件
+    $('#btnSearch').click(function(){
+        $("#btnRefresh").click();
+    });
+    //tableHeight函数
+    function tableHeight(){
+        //可以根据自己页面情况进行调整
+        return $(window).height()-150;
+    }
+
+    //删除事件
+    $("#btn_delete").click(function(){
+        var dataArr=$('#mytab').bootstrapTable('getSelections');
+        console.log(dataArr);
+
+        $.confirm({
+            title: '删除',
+            content: '确定要删除选中的记录吗',
+            icon: 'fa fa-question-circle',
+            animation: 'scale',
+            closeAnimation: 'scale',
+            opacity: 0.5,
+            buttons: {
+                'confirm': {
+                    text: '确定',
+                    btnClass: 'btn-blue',
+                    action: function () {
+                        $.alert('删除操作成功！');
+                    }
+                },
+                cancel:{
+                    text:'取消',
+                    action: function () {
+                        //$.alert('取消当前操作！');
+                    }
+                }
+            }
+        });
+    });
+
+    //授权
+    $("#btn_grand").click(function(){
+        var dataArr=$('#mytab').bootstrapTable('getSelections');
+        console.log(dataArr);
+    });
+
+
+    //刷新表格
+    $("#btnRefresh").click(function(){
+        $('#mytab').bootstrapTable('refresh');
+    });
+
+
+    //=====================================新增/删除/修改==================================
+    $('#dataForm').bootstrapValidator({
+        message: '验证失败',
+        fields: {
+            loginName: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入'
+                    },
+                    stringLength: {
+                        min: 3,
+                        max: 18,
+                        message: '用户名长度必须在3到18位之间'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: '用户名只能包含大写、小写、数字和下划线'
+                    }
+                }
+            },
+            mobilephone: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入'
+                    },
+                    regexp: {
+                        regexp: /^1[3456789]\d{9}$/,
+                        message: '格式有误'
+                    }
+                }
+            }
+        }
+    });
+
+
+
+    $("#btnSave").on("click", function(){
+        $('#dataForm').bootstrapValidator('validate');
+        //console.log($("#dataForm").data('bootstrapValidator'));
+        if ($("#dataForm").data('bootstrapValidator').isValid()){
+            alert("pass")
+        }
+    });
+
+
 </script>

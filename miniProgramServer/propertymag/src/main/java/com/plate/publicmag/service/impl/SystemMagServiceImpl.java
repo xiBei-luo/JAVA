@@ -43,10 +43,12 @@ public class SystemMagServiceImpl implements SystemMagService {
         for (Map menuMap : menuList){
             Map retMap = new HashMap();
             retMap.put("id",menuMap.get("id"));
+            retMap.put("text",menuMap.get("menu_name"));//tree使用
             retMap.put("menu_name",menuMap.get("menu_name"));
             retMap.put("menu_icon",menuMap.get("menu_icon"));
             retMap.put("menu_action",menuMap.get("menu_action"));
             retMap.put("children",getChildren(Integer.parseInt(menuMap.get("id").toString())));
+            retMap.put("item",retMap.get("children"));//tree使用
             retList.add(retMap);
         }
         System.out.println(retList);
@@ -55,15 +57,42 @@ public class SystemMagServiceImpl implements SystemMagService {
 
 
     /**
-     * 查询子节点
+     * 查询所有菜单,组装菜单树
+     * @return
+     */
+    @Override
+    public ReturnModel selectAllMenu() {
+        List retList = new ArrayList();
+        //1.查出第一级菜单（无父级）
+        TSystemMenuExample tSystemMenuExample  =new TSystemMenuExample();
+        TSystemMenuExample.Criteria criteria = tSystemMenuExample.createCriteria();
+        criteria.andParentIdIsNull();
+        tSystemMenuExample.setOrderByClause("menu_sort");
+        List<TSystemMenu> notParentList = tSystemMenuMapper.selectByExample(tSystemMenuExample);
+
+
+        for(TSystemMenu tSystemMenu : notParentList){
+            Map retMap = new HashMap();
+            retMap.put("id",tSystemMenu.getId());
+            retMap.put("text",tSystemMenu.getMenuName());
+            retMap.put("open",1);
+            retMap.put("item",getChildren(tSystemMenu.getId()));
+            retMap.put("userdata",getTreeUserData(tSystemMenu));
+
+            retList.add(retMap);
+        }
+        System.out.println(retList);
+        return ReturnModelHandler.success(retList);
+    }
+
+
+    /**
+     * 递归查询子节点
      * @param parentId
      * @return
      */
     private List<Map> getChildren(Integer parentId){
-        System.out.println(parentId);
-
-
-        List retList = new ArrayList();
+        List<Map> retList = new ArrayList<Map>();
         TSystemMenuExample tSystemMenuExample = new TSystemMenuExample();
         TSystemMenuExample.Criteria criteria = tSystemMenuExample.createCriteria();
         criteria.andParentIdEqualTo(parentId);
@@ -71,15 +100,33 @@ public class SystemMagServiceImpl implements SystemMagService {
         for(TSystemMenu tSystemMenu : childList){
             Map retMap = new HashMap();
             retMap.put("id",tSystemMenu.getId());
+            retMap.put("text",tSystemMenu.getMenuName());//tree使用
+            retMap.put("open",1);//tree使用
             retMap.put("menu_name",tSystemMenu.getMenuName());
             retMap.put("menu_icon",tSystemMenu.getMenuIcon());
             retMap.put("menu_action",tSystemMenu.getMenuAction());
             retMap.put("children",getChildren(tSystemMenu.getId()));
+            retMap.put("item",retMap.get("children"));//tree使用
+            retMap.put("userdata",getTreeUserData(tSystemMenu));//tree使用
             retList.add(retMap);
         }
 
-
-
         return retList;
+    }
+
+
+    /**
+     * 组装树结构userdata对象
+     * @param tSystemMenu
+     * @return
+     */
+    private List<Map> getTreeUserData(TSystemMenu tSystemMenu){
+        //组装userdata
+        List<Map> userdataList = new ArrayList<Map>();
+        Map userdataMap = new HashMap();
+        userdataMap.put("name","data");
+        userdataMap.put("content",tSystemMenu);
+        userdataList.add(userdataMap);
+        return userdataList;
     }
 }

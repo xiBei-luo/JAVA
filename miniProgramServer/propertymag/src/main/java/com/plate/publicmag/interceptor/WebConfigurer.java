@@ -40,8 +40,10 @@ public class WebConfigurer implements WebMvcConfigurer {
         exclude.add("/images/**");
 
         //登录页与注册页
-        exclude.add("/Plate/login");
-        exclude.add("/Login/login");
+        exclude.add("/RedirectURL/gotoLogin");
+        exclude.add("/Login/doLogin");
+        exclude.add("/RedirectURL/gotoRegister");
+        exclude.add("/Login/doRegister");
 
 
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(exclude);

@@ -39,7 +39,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         //System.out.println("当前登陆用户--"+tSystemAdmin);
         if(tSystemAdmin == null){
             //2-1未登陆，返回登陆页面
-            response.sendRedirect(request.getContextPath()+"/Plate/login");  //未登录自动跳转界面
+            response.sendRedirect(request.getContextPath()+"/RedirectURL/gotoLogin");  //未登录自动跳转界面
             return false;
         }else{
             //2-2已登陆，判断用户权限

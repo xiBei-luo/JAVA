@@ -6,7 +6,7 @@
 <th:block th:fragment="row(permissions,lv)">
   <th:block th:each="p : ${permissions}">
       <li class=""  th:attr="class = ${lv} == 1 ? 'nav-first-level' : ''">
-        <a class="dropdown-toggle" th:attr="data-targeturl = ${p.children.size()} > 0 ? '#' : ${p.menu_action}">
+        <a class="dropdown-toggle" th:attr="data-targeturl = ${p.children.size()} > 0 ? '' : ${p.menu_action}">
           <i  th:attr="class = ${lv} == 1 ? 'menu-icon fa '+${p.menu_icon} : 'menu-icon fa fa-caret-right'"></i>
           <span class="menu-text" th:text="${p.menu_name}"> </span>
           <b class="arrow fa fa-angle-down" th:if="${p.children.size()} > 0"></b>

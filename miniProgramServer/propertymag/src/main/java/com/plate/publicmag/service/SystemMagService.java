@@ -6,4 +6,6 @@ import javax.servlet.http.HttpSession;
 
 public interface SystemMagService {
     ReturnModel selectMenuByLoginUser(HttpSession httpSession);
+
+    ReturnModel selectAllMenu();
 }
